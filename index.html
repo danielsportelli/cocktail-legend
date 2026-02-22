@@ -9,10 +9,10 @@
   <meta name="keywords" content="ricette cocktail pdf, ebook bartender, ricettario cocktail, schede cocktail, miscelazione professionale, bartender, cocktail classici, Daniel Sportelli, cocktail legend"/>
   <meta name="robots" content="index, follow"/>
   <meta name="theme-color" content="#0a0f1e"/>
-  <link rel="canonical" href="https://daniel-sportelli.systeme.io/cocktail_legend"/>
+ <link rel="canonical" href="https://danielsportelli.github.io/cocktail-legend/"/>
   <!-- Open Graph -->
   <meta property="og:type" content="product"/>
-  <meta property="og:url" content="https://daniel-sportelli.systeme.io/cocktail_legend"/>
+<meta property="og:image" content="https://danielsportelli.github.io/cocktail-legend/og.jpg"/>
   <meta property="og:title" content="Cocktail Legend — 200 Ricette Cocktail in PDF | Daniel Sportelli"/>
   <meta property="og:description" content="Il ricettario PDF interattivo per bartender: 200 schede cocktail complete, 36 varianti, risorse utili e sconti esclusivi. Aggiornamenti gratuiti a vita. Solo 19,99€."/>
   <meta property="og:image" content="https://daniel-sportelli.systeme.io/og-cocktail-legend.jpg"/>
@@ -27,7 +27,7 @@
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Cocktail Legend — Il ricettario definitivo per bartender"/>
   <meta name="twitter:description" content="200 schede cocktail complete in PDF interattivo. 36 varianti, risorse utili, aggiornamenti gratuiti a vita. Solo 19,99€."/>
-  <meta name="twitter:image" content="https://daniel-sportelli.systeme.io/og-cocktail-legend.jpg"/>
+<meta name="twitter:image" content="https://danielsportelli.github.io/cocktail-legend/og.jpg"/>
   <meta name="twitter:image:alt" content="Cocktail Legend eBook PDF — Daniel Sportelli"/>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230f172a' stroke='url(%23g)' stroke-width='3'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232563eb'/><stop offset='1' stop-color='%23f59e0b'/></linearGradient></defs><text x='50' y='67' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='42' fill='%23f59e0b'>CL</text></svg>"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -512,18 +512,6 @@
       position: relative;
       overflow: hidden;
     }
-    .why-section::after {
-      content: '01';
-      position: absolute;
-      right: 4%;
-      bottom: -4rem;
-      font-size: 20rem;
-      font-weight: 900;
-      color: rgba(255,255,255,0.012);
-      letter-spacing: -0.05em;
-      pointer-events: none;
-      user-select: none;
-    }
     .why-top {
       display: grid;
       grid-template-columns: 1fr 1.6fr;
@@ -803,17 +791,22 @@
 
     /* ─── RESPONSIVE ─── */
 
-    /* ── Desktop large (1280px+): tutto ok di default ── */
+   /* ── Desktop large (1280px+): tutto ok di default ── */
+    @media (min-width: 1280px) {
+      .hero-right-mockup { padding: 2rem 8% 2rem 2%; }
+.book-badge { position: absolute; right: 220px; top: 3rem; }
+    }
 
     /* ── Desktop / Laptop (1024px–1279px) ── */
     @media (max-width: 1279px) {
       .hero-left { padding: 2.5rem 2.5rem 2.5rem 6%; }
-      .hero-right-mockup { padding: 2rem 4% 2rem 2%; }
+      .hero-right-mockup { padding: 2rem 8% 2rem 2%; }
       .book-scene { width: 240px; height: 326px; }
       .includes-layout { gap: 4rem; }
       .faq-layout { gap: 4rem; }
       .cta-left { padding: 5rem 3rem 5rem 6%; }
       .cta-right { padding: 5rem 6% 5rem 3rem; }
+.book-badge { position: absolute; right: 220px; top: 3rem; }
     }
 
     /* ── Tablet (768px–1023px) ── */
@@ -866,7 +859,7 @@
       .hero-price { font-size: 2.2rem; }
       .hero-right-mockup { padding: 0.5rem 5% 3rem; }
       .book-scene { width: 230px; height: 312px; }
-      .book-badge { right: calc(50% - 140px); }
+    .book-badge { right: calc(50% - 140px); top: 1rem; }
       /* Stats */
       .hero-cards { grid-template-columns: repeat(2, 1fr); }
       .hero-card { padding: 1.25rem 5%; }
@@ -903,7 +896,7 @@
       .btn-primary, .btn-ghost { font-size: 0.84rem; padding: 0.75rem 1.2rem; }
       .hero-right-mockup { padding: 0.25rem 6% 2.5rem; }
       .book-scene { width: 200px; height: 272px; }
-      .book-badge { right: calc(50% - 122px); font-size: 0.44rem; padding: 5px 8px; }
+     .book-badge { right: calc(50% - 122px); font-size: 0.44rem; padding: 5px 8px; top: 1rem; }
       .book-title { font-size: 1.35rem; }
       .book-glass-svg { width: 70px; height: 70px; }
       .hero-cards { grid-template-columns: repeat(2, 1fr); }
@@ -920,7 +913,14 @@
       footer { padding: 2rem 6% 1.5rem; }
       .footer-divider { width: 100%; }
     }
-  </style>
+@keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
+      50%       { box-shadow: 0 0 0 10px rgba(245,158,11,0); }
+    }
+    .btn-primary {
+      animation: ctaPulse 2.5s ease-in-out infinite;
+    }
+</style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -989,7 +989,7 @@
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <span>Oltre 100 persone hanno gi&#224; scelto Cocktail Legend</span>
+<span style="font-size:0.7rem;">Oltre 100 persone hanno già scelto Cocktail Legend</span>
       </div>
     </div>
 
@@ -1074,7 +1074,7 @@
   <div class="why-top">
     <div>
       <div class="section-eyebrow">Il problema</div>
-      <div class="section-h2">Perché nasce<br/><em>Cocktail Legend</em></div>
+      <div class="section-h2">Perché nasce<br/><em>Cocktail Legend?</em></div>
     </div>
     <p class="why-intro">Online le ricette sono frammentate, poco affidabili e spesso incomplete. Cocktail Legend risolve tutto questo con un unico riferimento professionale, sempre aggiornato, sempre con te.</p>
   </div>
@@ -1102,6 +1102,69 @@
       <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
       <h3>Sempre a portata di mano</h3>
       <p>PDF universale: iPhone, Android, tablet, computer. Funziona anche offline, anche al bancone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NON È PER TE SE -->
+<section style="padding:5rem 6%;background:#0f172a;">
+<div>
+    <div class="section-eyebrow">Chiarezza</div>
+    <h2 class="section-h2" style="margin-bottom:1rem;">Non è per <em>tutti.</em><br/>Ed è giusto così.</h2>
+    <p style="font-size:1.05rem;color:var(--text-muted);line-height:1.8;margin-bottom:4rem;max-width:520px;">
+      Cocktail Legend è uno strumento professionale. Prima di acquistare, voglio essere diretto con te.
+    </p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+
+      <!-- COLONNA SINISTRA -->
+      <div style="background:var(--surface);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:1.5rem 1.25rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem;">
+          <div style="width:26px;height:26px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#ef4444;">Non è per te se...</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1.25rem;">
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;">
+            <span style="color:rgba(239,68,68,0.5);font-weight:700;flex-shrink:0;font-size:0.6rem;margin-top:2px;">—</span>
+            <p style="font-size:0.78rem;color:var(--text-muted);line-height:1.7;margin:0;">Pensi che il prezzo sia troppo eccessivo per un ebook unico nel suo genere.</p>
+          </div>
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;">
+            <span style="color:rgba(239,68,68,0.5);font-weight:700;flex-shrink:0;font-size:0.6rem;margin-top:2px;">—</span>
+            <p style="font-size:0.78rem;color:var(--text-muted);line-height:1.7;margin:0;">Non vuoi avere una guida con oltre 200 ricette in continuo aggiornamento.</p>
+          </div>
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;">
+            <span style="color:rgba(239,68,68,0.5);font-weight:700;flex-shrink:0;font-size:0.6rem;margin-top:2px;">—</span>
+            <p style="font-size:0.78rem;color:var(--text-muted);line-height:1.7;margin:0;">Pensi di sapere tutte le ricette a memoria.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLONNA DESTRA -->
+      <div style="background:var(--surface);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:1.5rem 1.25rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.5rem;">
+          <div style="width:26px;height:26px;border-radius:50%;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);">È per te se...</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1.25rem;">
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;">
+            <span style="color:rgba(245,158,11,0.5);font-weight:700;flex-shrink:0;font-size:0.6rem;margin-top:2px;">—</span>
+            <p style="font-size:0.78rem;color:var(--text-muted);line-height:1.7;margin:0;">Sei un bartender professionista e non vuoi più fare figure coi clienti.</p>
+          </div>
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;">
+            <span style="color:rgba(245,158,11,0.5);font-weight:700;flex-shrink:0;font-size:0.6rem;margin-top:2px;">—</span>
+            <p style="font-size:0.78rem;color:var(--text-muted);line-height:1.7;margin:0;">Sei agli inizi e vuoi uno strumento affidabile su cui costruire le tue basi.</p>
+          </div>
+          <div style="display:flex;gap:0.5rem;align-items:flex-start;">
+            <span style="color:rgba(245,158,11,0.5);font-weight:700;flex-shrink:0;font-size:0.6rem;margin-top:2px;">—</span>
+            <p style="font-size:0.78rem;color:var(--text-muted);line-height:1.7;margin:0;">Vuoi smettere di cercare ricette su google.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1151,6 +1214,50 @@
   </div>
 </section>
 
+<!-- MICRO-URGENZA -->
+<section style="padding:5rem 6%;background:#0f172a;">
+  <div style="max-width:700px;margin:0 auto;">
+    <div style="background:linear-gradient(135deg,#1a2744 0%,#0d1a36 100%);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:4rem;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,0.07) 0%,transparent 70%);pointer-events:none;"></div>
+      <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:2rem;">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;"></div>
+        <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);">Progetto in crescita</span>
+      </div>
+      <h2 class="section-h2" style="margin-bottom:1.25rem;">Il prezzo sale<br/>nel <em>tempo.</em></h2>
+      <p style="font-size:1.05rem;color:var(--text-muted);line-height:1.8;margin-bottom:3rem;max-width:500px;">
+        Ogni aggiornamento aggiunge schede e risorse. Chi entra oggi blocca il prezzo attuale 
+        e riceve tutti gli aggiornamenti futuri senza pagare un centesimo in più.
+      </p>
+<div style="display:flex;gap:2rem;flex-wrap:wrap;align-items:center;margin-bottom:3rem;">
+        <div>
+          <span style="display:block;font-size:2.5rem;font-weight:800;color:var(--accent);letter-spacing:-0.04em;line-height:1;">v1.0</span>
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-top:0.3rem;display:block;">150 ricette — 9,99€</span>
+        </div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <div>
+          <span style="display:block;font-size:2.5rem;font-weight:800;color:var(--accent);letter-spacing:-0.04em;line-height:1;">v2.0</span>
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-top:0.3rem;display:block;">175 ricette — 14,99€</span>
+        </div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <div>
+          <span style="display:block;font-size:2.5rem;font-weight:800;color:var(--accent);letter-spacing:-0.04em;line-height:1;">v3.0</span>
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-top:0.3rem;display:block;">200 ricette — 19,99€</span>
+        </div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <div>
+          <span style="display:block;font-size:2.5rem;font-weight:800;color:rgba(255,255,255,0.2);letter-spacing:-0.04em;line-height:1;">vX.0</span>
+         <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--disclaimer);margin-top:0.3rem;display:block;white-space:nowrap;">350 ricette — prezzo futuro</span>
+        </div>
+      </div>
+      <a href="https://daniel-sportelli.systeme.io/lista-attesa" class="btn-primary">
+        Entra ora a 19,99€
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <p style="font-size:0.76rem;color:var(--disclaimer);margin-top:1rem;">Pagamento unico · Aggiornamenti a vita inclusi · Accesso immediato</p>
+    </div>
+  </div>
+</section>
+
 <!-- ROADMAP -->
 <section class="roadmap-section" id="roadmap">
   <div class="roadmap-header">
@@ -1170,7 +1277,7 @@
       <div class="r-dot done">✓</div>
       <div class="r-content">
         <span class="r-tag r-live">30 giugno 2025</span>
-        <h4>Prima espansione</h4>
+        <h4>Prima espansione — v2.0</h4>
         <p>Aggiunte 25 nuove schede cocktail e inserite le prime risorse utili.</p>
       </div>
     </div>
@@ -1178,6 +1285,7 @@
       <div class="r-dot now">◉</div>
       <div class="r-content">
         <span class="r-tag r-now">31 ottobre 2025</span>
+        <h4>Ultimo aggiornamento — v3.0</h4>
         <p>Aggiunte 25 nuove schede cocktail, ampliate le risorse utili e avviata la partnership esclusiva con Lumian Luxury Tools.</p>
       </div>
     </div>
@@ -1280,12 +1388,14 @@
       <h2>Tutto ciò di cui hai bisogno in un unico eBook</h2>
       <p>Aggiornamenti gratuiti a vita · PDF interattivo · Funziona su tutti i dispositivi</p>
       <div class="cta-proof-row">
-        <svg width="12" height="12" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="12" height="12" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="12" height="12" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="12" height="12" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg width="12" height="12" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <span>Oltre 100 persone hanno già scelto Cocktail Legend</span>
+        <div style="display:flex;gap:2px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <span style="font-size:0.72rem;">Oltre 100 persone hanno già scelto Cocktail Legend</span>
       </div>
       <a href="https://daniel-sportelli.systeme.io/lista-attesa" class="cta-btn">
         Acquista Cocktail Legend
@@ -1313,7 +1423,7 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer style="padding-bottom:3rem;">
   <div class="footer-logo">Cocktail Legend</div>
   <div class="footer-address">
     Daniel Sportelli<br/>
@@ -1322,7 +1432,7 @@
   </div>
   <div class="footer-disclaimer">Questo sito non fa parte dei siti web di Facebook, Meta Inc., Google LLC o TikTok. Questo sito NON è approvato da Facebook, Google o TikTok in alcun modo. Facebook è un marchio registrato di Meta Inc. Google è un marchio registrato di Google LLC. TikTok è un marchio registrato di ByteDance Ltd.</div>
   <div class="footer-divider"></div>
-  <div class="footer-copy">© 2026 Daniel Sportelli — Tutti i diritti riservati</div>
+  <div class="footer-copy">© 2026 Daniel Sportelli — Tutti i diritti riservati.</div>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
