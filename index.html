@@ -4,6 +4,14 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cocktail Legend — Ricettario PDF per Bartender | 200 Cocktail</title>
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F7T6WNL4MY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-F7T6WNL4MY');
+</script>
   <meta name="description" content="Cocktail Legend è il ricettario PDF interattivo con 200 schede cocktail complete e 36 varianti. Ingredienti, metodo, storia e garnish per ogni drink. Aggiornamenti gratuiti a vita. Solo 19,99€."/>
   <meta name="author" content="Daniel Sportelli"/>
   <meta name="keywords" content="ricette cocktail pdf, ebook bartender, ricettario cocktail, schede cocktail, miscelazione professionale, bartender, cocktail classici, Daniel Sportelli, cocktail legend"/>
@@ -1458,7 +1466,7 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   /* FAQ gestite via CSS checkbox */
   var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
@@ -1466,3 +1474,31 @@
         e.target.style.opacity = '1';
         e.target.style.animation = 'fadeUp 0.6s ease both';
         obs.unobserve(e.target);
+      }
+    });
+  });
+  document.querySelectorAll('[data-obs]').forEach(function(el) {
+    el.style.opacity = '0';
+    obs.observe(el);
+  });
+</script>
+<script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var utm_source = params.get('utm_source');
+    var utm_medium = params.get('utm_medium');
+    if (!utm_source) return;
+    var links = document.querySelectorAll('a[href]');
+    links.forEach(function(link) {
+      var href = link.getAttribute('href');
+      if (!href || href === '#' || href.startsWith('mailto:')) return;
+      var url = new URL(href, window.location.href);
+      if (utm_source) url.searchParams.set('utm_source', utm_source);
+      if (utm_medium) url.searchParams.set('utm_medium', utm_medium);
+      url.searchParams.set('utm_content', 'cocktail-legend');
+      link.setAttribute('href', url.toString());
+    });
+  })();
+</script>
+</body>
+</html>
