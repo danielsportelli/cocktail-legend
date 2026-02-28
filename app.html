@@ -1171,11 +1171,5 @@ document.addEventListener('contextmenu',function(e){e.preventDefault();return fa
  if(e.ctrlKey&&e.keyCode===85){e.preventDefault();return false;}
  }
  document.addEventListener('keydown',block);
- var t=new Date();
- setInterval(function(){
- var s=new Date();
- if(s-t>200){document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0f1e;color:#64748b;font-family:sans-serif;font-size:1rem;">Accesso non consentito</div>';}
- t=new Date();
- },100);
 })();
 </script></body></html>
