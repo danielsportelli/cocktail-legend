@@ -1,0 +1,1374 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230f172a' stroke='url(%23g)' stroke-width='3'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232563eb'/><stop offset='1' stop-color='%23f59e0b'/></linearGradient></defs><text x='50' y='67' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='42' fill='%23f59e0b'>CL</text></svg>"/>
+<title>Cocktail Legend - Daniel Sportelli</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2563eb;--blue-l:#60a5fa;--amber:#f59e0b;
+  --bg:#0a0f1e;--surf:#1e293b;--surf2:#334155;
+  --txt:#f1f5f9;--txt2:#cbd5e1;--brd:rgba(255,255,255,.08);--dim:#64748b
+}
+body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.hdr{position:relative;padding:2rem 5% 1.75rem;border-bottom:1px solid var(--brd);
+  background:linear-gradient(135deg,rgba(37,99,235,.10),rgba(245,158,11,.04));
+  text-align:center;overflow:hidden}
+.hdr::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
+  pointer-events:none}
+.hdr-inner{position:relative;z-index:1}
+.hdr-lbl{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:.35rem}
+.hdr h1{font-size:clamp(2.2rem,6vw,3.2rem);font-weight:900;letter-spacing:-.04em;
+  background:linear-gradient(135deg,var(--blue-l),var(--amber));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem}
+.hdr p{font-size:.88rem;color:var(--txt2);margin-bottom:.4rem}
+
+/* ═══ BARRA FILTRI — layout orizzontale fisso in cima ═══ */
+.filter-bar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(10,15,30,.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--brd);
+  padding:1.1rem 5% .4rem calc(5% + 36px);
+  padding:.6rem 5% .6rem calc(5% + 36px);
+}
+
+/* Riga superiore: search + pulsante filtri + reset */
+.filter-top{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:.6rem;
+}
+
+.srch-wrap{position:relative;flex:1;}
+.srch-ico{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--dim);pointer-events:none}
+.srch-inp{display:block;width:100%;box-sizing:border-box;background:var(--surf);border:1px solid var(--brd);border-radius:9px;
+  padding:.55rem .7rem .55rem 2.1rem;font-size:.85rem;font-family:inherit;
+  color:var(--txt);outline:none;transition:all .2s}
+.srch-inp::placeholder{color:var(--dim)}
+.srch-inp:focus{border-color:rgba(37,99,235,.5);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+
+/* Bottone apri/chiudi filtri */
+.btn-toggle-filters{
+  flex-shrink:0;
+  display:flex;align-items:center;gap:.4rem;
+  background:var(--surf);border:1px solid var(--brd);
+  color:var(--txt2);padding:.52rem .85rem;border-radius:9px;
+  font-size:.78rem;font-weight:600;font-family:inherit;cursor:pointer;
+  transition:all .2s;white-space:nowrap;
+}
+.btn-toggle-filters:hover,.btn-toggle-filters.open{
+  border-color:rgba(37,99,235,.5);color:var(--blue-l);background:rgba(37,99,235,.08)
+}
+.btn-toggle-filters .arrow{transition:transform .25s;display:inline-block;font-size:.7rem}
+.btn-toggle-filters.open .arrow{transform:rotate(180deg)}
+
+/* Badge filtri attivi */
+.active-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--blue);color:#fff;
+  font-size:.6rem;font-weight:800;
+  display:none
+}
+.active-badge.show{display:inline-flex}
+
+/* Pannello filtri a tendina */
+.filter-panel{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .28s ease;
+  overflow:hidden;
+}
+.filter-panel.open{grid-template-rows:1fr}
+.filter-panel-inner{
+  overflow:hidden;
+  padding-top:.65rem;
+}
+
+/* Filtri in riga orizzontale */
+.filter-groups{
+  display:flex;
+  gap:.5rem;
+  flex-wrap:wrap;
+  align-items:flex-start;
+}
+
+/* Ogni gruppo filtro = dropdown */
+.fg{position:relative}
+.fg-btn{
+  display:flex;align-items:center;gap:.4rem;
+  background:var(--surf);border:1px solid var(--brd);
+  color:var(--txt2);padding:.4rem .75rem;border-radius:8px;
+  font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer;
+  transition:all .2s;white-space:nowrap
+}
+.fg-btn:hover,.fg-btn.open{border-color:rgba(37,99,235,.4);color:var(--blue-l);background:rgba(37,99,235,.06)}
+.fg-btn .cnt{
+  background:var(--blue);color:#fff;border-radius:10px;
+  padding:0 5px;font-size:.6rem;font-weight:800;
+  display:none
+}
+.fg-btn .cnt.show{display:inline-block}
+.fg-arrow{font-size:.6rem;transition:transform .2s}
+.fg-btn.open .fg-arrow{transform:rotate(180deg)}
+
+.fg-dropdown{
+  position:absolute;top:calc(100% + 6px);left:0;
+  background:var(--surf);border:1px solid rgba(37,99,235,.2);
+  border-radius:11px;padding:.5rem;
+  min-width:160px;max-height:220px;overflow-y:auto;
+  z-index:200;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+  display:none
+}
+.fg-dropdown.open{display:block;animation:fdrop .18s ease}
+@keyframes fdrop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.fg-dropdown::-webkit-scrollbar{width:3px}
+.fg-dropdown::-webkit-scrollbar-thumb{background:var(--surf2);border-radius:3px}
+
+/* Reset link */
+.btn-reset-sm{
+  flex-shrink:0;
+  background:transparent;border:none;color:var(--dim);
+  font-size:.75rem;font-weight:600;font-family:inherit;
+  cursor:pointer;padding:.4rem .5rem;border-radius:7px;
+  transition:all .2s;white-space:nowrap;flex-shrink:0
+}
+.btn-reset-sm:hover{color:#f87171}
+
+/* Checkbox item */
+.ci{display:flex;align-items:center;gap:7px;padding:5px 7px;border-radius:7px;
+  cursor:pointer;transition:all .15s;user-select:none}
+.ci:hover{background:rgba(37,99,235,.1)}
+.ci.on{background:rgba(37,99,235,.08)}
+.cb{width:15px;height:15px;border:1.5px solid var(--surf2);border-radius:3px;
+  display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.cb.on{background:var(--blue);border-color:var(--blue)}
+.ck{width:9px;height:9px;opacity:0;transition:opacity .15s}
+.cb.on .ck{opacity:1}
+.ci-lbl{font-size:.78rem;color:var(--txt2);transition:color .15s}
+.ci:hover .ci-lbl,.ci.on .ci-lbl{color:var(--txt)}
+.ci-n{margin-left:auto;font-size:.63rem;color:var(--dim);font-weight:600}
+
+/* Tag filtri attivi visibili */
+.active-tags{
+  display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;
+}
+.active-tag{
+  display:flex;align-items:center;gap:.3rem;
+  background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.3);
+  color:var(--blue-l);border-radius:20px;
+  padding:.18rem .55rem;font-size:.65rem;font-weight:700;
+  cursor:pointer;transition:all .2s
+}
+.active-tag:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.3);color:#f87171}
+.active-tag .x{font-size:.7rem;opacity:.7}
+
+/* MAIN */
+.main{padding:1.25rem 5%}
+.rbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:.5rem}
+.rcnt{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;
+  background:linear-gradient(135deg,var(--blue-l),var(--amber));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.rlbl{font-size:.83rem;color:var(--txt2);font-weight:500;margin-left:.3rem}
+.sort-wrap{position:relative;display:flex;align-items:center;}
+.sort-lbl{
+  position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
+  display:flex;align-items:center;justify-content:center;gap:.35rem;
+  font-size:.78rem;font-weight:600;color:var(--txt2);
+  pointer-events:none;white-space:nowrap;
+}
+.sort-sel{
+  background:var(--surf);border:1px solid var(--brd);border-radius:9px;
+  color:transparent;font-family:inherit;font-size:.78rem;
+  padding:.42rem .75rem;
+  outline:none;cursor:pointer;
+  appearance:none;-webkit-appearance:none;
+  width:100%;
+}
+.sort-sel option{color:var(--txt);background:var(--surf);}
+.rbar-right{display:flex;flex-direction:column;align-items:stretch;gap:.4rem;width:calc(35% - .43rem)}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.85rem}
+
+/* CARD */
+.card{background:var(--surf);border:1px solid var(--brd);border-radius:13px;
+  overflow:hidden;transition:all .3s;cursor:pointer;display:flex;flex-direction:column;
+  animation:fu .3s ease both}
+.card:hover{transform:translateY(-4px);border-color:rgba(37,99,235,.4);
+  box-shadow:0 12px 32px rgba(37,99,235,.18)}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.card-img{width:100%;aspect-ratio:1/1;overflow:hidden;position:relative;background:var(--surf2)}
+.card-badge{position:absolute;top:.45rem;right:.45rem;z-index:3;}
+.card-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:.2;z-index:0}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block;position:relative;z-index:1}
+.card:hover .card-img img{transform:scale(1.07)}
+.sap-strip{position:absolute;bottom:0;left:0;right:0;z-index:2;
+  background:linear-gradient(to top,rgba(0,0,0,.82) 0%,transparent 100%);
+  padding:.5rem .4rem .4rem;display:flex;gap:.12rem;flex-wrap:nowrap;align-items:center;overflow:hidden;justify-content:center;}
+.sap-t{font-size:.42rem;font-weight:700;letter-spacing:0;text-transform:uppercase;color:rgba(255,255,255,.9);white-space:nowrap;}
+.sap-d{color:rgba(255,255,255,.35);font-size:.44rem}
+
+.card-body{padding:.75rem;flex:1;display:flex;flex-direction:column;text-align:left;align-items:flex-start}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.3rem;margin-bottom:.4rem}
+.card-name{font-size:.86rem;font-weight:700;color:var(--txt);letter-spacing:-.01em;line-height:1.2;text-align:left}
+.badge{flex-shrink:0;font-size:.52rem;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;padding:.16rem .44rem;border-radius:20px;white-space:nowrap}
+.b-pre{background:rgba(37,99,235,.75);color:#fff}
+.b-after{background:rgba(180,100,0,.85);color:#fff}
+.b-all{background:rgba(21,128,61,.8);color:#fff}
+.card-badge{text-shadow:0 1px 2px rgba(0,0,0,.4);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.card-meta{display:flex;flex-direction:column;gap:.25rem;margin-top:.2rem;align-items:flex-start;width:100%}
+.mrow{display:flex;align-items:center;justify-content:flex-start;gap:.3rem;font-size:.72rem;color:var(--txt2)}
+.abv-row{margin-top:.4rem;padding-top:.4rem;border-top:1px solid var(--brd);width:100%;text-align:left;
+  display:flex;align-items:center;justify-content:space-between}
+.abv-lbl{font-size:.57rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.abv-v{font-size:.69rem;font-weight:700}
+.c-m{color:#4ade80}.c-ma{color:var(--blue-l)}.c-a{color:var(--amber)}.c-va{color:#f87171}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);
+  z-index:100;display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .25s}
+.overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--surf);border:1px solid rgba(37,99,235,.2);border-radius:20px;
+  max-width:520px;width:100%;max-height:90vh;overflow-y:auto;
+  transform:translateY(20px) scale(.97);transition:transform .25s}
+.overlay.open .modal{transform:translateY(0) scale(1)}
+.modal::-webkit-scrollbar{width:4px}
+.modal::-webkit-scrollbar-thumb{background:var(--surf2);border-radius:4px}
+.m-img{width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;border-radius:20px 20px 0 0;background:var(--bg)}
+.m-img img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
+.m-img-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:.2;z-index:0}
+.m-sap{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem 1.2rem .85rem;
+  background:linear-gradient(to top,rgba(0,0,0,.88) 0%,transparent 100%)}
+.m-sap-tags{display:flex;gap:.45rem;flex-wrap:wrap;align-items:center;justify-content:center}
+.m-st{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.92)}
+.m-sd{color:rgba(255,255,255,.35);font-size:.48rem}
+.m-body{padding:1.4rem}
+.m-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.9rem}
+.m-name{font-size:1.45rem;font-weight:900;letter-spacing:-.03em;line-height:1.1}
+/* ─── STICKY BAR MODAL ─── */
+.m-sticky-bar{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.55rem .7rem;
+  background:rgba(30,41,59,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  border-radius:20px 20px 0 0;
+}
+.m-sticky-title{
+  font-size:.82rem;font-weight:700;color:var(--txt2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  flex:1;text-align:center;padding:0 .5rem;opacity:.75;
+}
+.m-sticky-heart{
+  width:34px;height:34px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  border-radius:9px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1rem;line-height:1;flex-shrink:0;
+  transition:background .2s,transform .15s;
+}
+.m-sticky-heart:hover{transform:scale(1.1);}
+.m-sticky-heart.on{background:rgba(239,68,68,.18);border-color:rgba(239,68,68,.3);}
+.m-sticky-close{
+  width:34px;height:34px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  border-radius:9px;color:var(--txt2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .2s;font-size:1rem;font-family:inherit;
+}
+.m-sticky-close:hover{background:rgba(239,68,68,.2);color:#f87171;border-color:rgba(239,68,68,.3);}
+/* ─── CUORICINO CARD ─── */
+.fav-heart{
+  position:absolute;top:.45rem;left:.45rem;z-index:5;
+  width:28px;height:28px;
+  background:rgba(10,15,30,.65);border:none;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:.9rem;line-height:1;
+  transition:transform .15s,background .2s;
+  backdrop-filter:blur(4px);
+}
+.fav-heart:hover{transform:scale(1.15);}
+.fav-heart.on{background:rgba(239,68,68,.2);}
+/* ─── BOTTONE PREFERITI ─── */
+.btn-favonly{
+  display:flex;align-items:center;gap:.35rem;
+  background:var(--surf);border:1px solid var(--brd);
+  color:var(--txt2);padding:.42rem .75rem;border-radius:9px;
+  font-size:.78rem;font-weight:600;font-family:inherit;cursor:pointer;
+  transition:border-color .2s,color .2s,background .2s;
+  white-space:nowrap;flex-shrink:0;
+}
+.btn-favonly:not(.active):hover{border-color:rgba(239,68,68,.3);color:#fca5a5;}
+.btn-favonly.active{border-color:rgba(239,68,68,.55);color:#f87171;background:rgba(239,68,68,.09);}
+.btn-favonly:not(.active){border-color:var(--brd) !important;color:var(--txt2) !important;background:var(--surf) !important;}
+.btn-favonly:not(.active):focus,.btn-favonly:not(.active):active{border-color:var(--brd) !important;color:var(--txt2) !important;background:var(--surf) !important;outline:none;}
+.unit-toggle{display:flex;align-items:center;gap:0;background:var(--surf2);border-radius:8px;padding:3px;margin-bottom:1.1rem}
+.unit-btn{flex:1;text-align:center;padding:.3rem .6rem;border-radius:6px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;color:var(--txt2);border:none;background:transparent;font-family:inherit}
+.unit-btn.active{background:var(--blue);color:#fff}
+.m-badges{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.m-badge{font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.28rem .7rem;border-radius:20px;border:1px solid currentColor}
+.m-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.65rem;margin-bottom:1.1rem}
+.mi{background:rgba(255,255,255,.03);border:1px solid var(--brd);border-radius:9px;padding:.7rem}
+.mi-lbl{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:.22rem}
+.mi-val{font-size:.8rem;font-weight:600;color:var(--txt);line-height:1.3}
+.sec{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:.55rem}
+.ing-list{display:flex;flex-direction:column;margin-bottom:1.1rem}
+.ing-row{display:flex;align-items:center;gap:.7rem;font-size:.85rem;padding:.42rem 0;border-bottom:1px solid var(--brd)}
+.ing-row:last-child{border-bottom:none}
+.ing-q{font-weight:700;color:var(--blue-l);min-width:65px;font-size:.78rem}
+.ing-n{color:var(--txt);flex:1}
+.prep-list{display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.1rem}
+.prep-row{display:flex;gap:.7rem;font-size:.83rem;color:var(--txt2);align-items:flex-start}
+.prep-num{width:19px;height:19px;background:rgba(37,99,235,.2);color:var(--blue-l);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.storia{background:rgba(255,255,255,.02);border:1px solid var(--brd);border-radius:9px;padding:.9rem;font-size:.78rem;color:var(--txt2);line-height:1.8}
+.empty{grid-column:1/-1;text-align:center;padding:4rem 2rem}
+.empty .ico{font-size:3rem;margin-bottom:1rem;opacity:.4}
+.empty h3{font-size:1.05rem;font-weight:700;margin-bottom:.35rem}
+.empty p{font-size:.85rem;color:var(--txt2)}
+
+@media(max-width:600px){
+  .filter-groups{gap:.4rem}
+  .fg-dropdown{position:fixed;left:5%;right:5%;top:auto;min-width:unset;width:auto}
+  .grid{grid-template-columns:1fr 1fr}
+  .main{padding:1rem 4%}
+  .m-grid{grid-template-columns:1fr 1fr}
+  .srch-wrap{flex:3;}
+  .btn-toggle-filters,.btn-reset-sm,.btn-favonly{flex-shrink:0;}
+}
+@media(max-width:360px){.grid{grid-template-columns:1fr}}
+
+.corso-btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  margin-top:1.3rem;
+  background:linear-gradient(135deg,var(--amber),#e8890a);
+  color:#0a0f1e;
+  padding:.42rem .95rem;
+  border-radius:30px;
+  font-size:.74rem;font-weight:800;
+  letter-spacing:.04em;
+  text-decoration:none;
+  transition:all .25s;
+  box-shadow:0 4px 18px rgba(245,158,11,.35);
+}
+.corso-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(245,158,11,.5);
+  background:linear-gradient(135deg,#fbbf24,var(--amber));
+}
+
+/* LOGIN SCREEN */
+.login-overlay{
+  position:fixed;inset:0;z-index:999;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+}
+.login-box{
+  background:var(--surf);
+  border:1px solid rgba(37,99,235,.2);
+  border-radius:20px;
+  padding:2.5rem 2rem;
+  width:100%;max-width:360px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.login-logo{
+  font-size:.65rem;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:.5rem;
+}
+.login-title{
+  font-size:1.9rem;font-weight:900;letter-spacing:-.04em;
+  background:linear-gradient(135deg,var(--blue-l),var(--amber));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;margin-bottom:.35rem;
+}
+.login-sub{
+  font-size:.82rem;color:var(--txt2);margin-bottom:1.8rem;line-height:1.5;
+}
+.login-input-wrap{position:relative;margin-bottom:.85rem}
+.login-input{
+  width:100%;background:#0a0f1e;border:1px solid var(--brd);
+  border-radius:10px;padding:.7rem 2.8rem .7rem .9rem;
+  font-size:.9rem;font-family:inherit;color:var(--txt);
+  outline:none;transition:border-color .2s,box-shadow .2s;
+  letter-spacing:.12em;
+}
+.login-input::placeholder{color:var(--dim);letter-spacing:0}
+.login-input:focus{border-color:rgba(37,99,235,.5);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.login-eye{
+  position:absolute;right:4px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--dim);cursor:pointer;
+  padding:10px;line-height:1;
+  font-size:1.1rem;
+  z-index:10;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.login-btn{
+  width:100%;
+  background:linear-gradient(135deg,var(--amber),#e8890a);
+  color:#0a0f1e;border:none;border-radius:10px;
+  padding:.75rem;font-size:.88rem;font-weight:800;
+  font-family:inherit;cursor:pointer;letter-spacing:.04em;
+  transition:all .25s;
+  box-shadow:0 4px 18px rgba(245,158,11,.3);
+}
+.login-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(245,158,11,.45)}
+.login-err{
+  font-size:.75rem;color:#f87171;margin-top:.6rem;
+  min-height:1.1rem;
+}
+.login-note{
+  font-size:.7rem;color:var(--dim);margin-top:1.2rem;line-height:1.5;
+}
+
+.pdf-btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:linear-gradient(135deg,var(--blue-l),var(--blue));
+  color:#fff;
+  padding:.42rem .95rem;
+  border-radius:30px;
+  font-size:.74rem;font-weight:800;
+  letter-spacing:.04em;
+  text-decoration:none;
+  transition:all .25s;
+  box-shadow:0 4px 18px rgba(37,99,235,.35);
+}
+.pdf-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(37,99,235,.5);
+}
+.hdr-actions{
+  display:flex;align-items:center;justify-content:center;
+  gap:.75rem;flex-wrap:wrap;margin-top:1.1rem;
+}
+
+.sg-banner{
+  background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(96,165,250,.06));
+  border-bottom:1px solid rgba(37,99,235,.15);
+  padding:.55rem 5%;
+  display:flex;align-items:center;justify-content:center;gap:.7rem;
+  text-decoration:none;
+  transition:background .2s;
+}
+.sg-banner:hover{background:linear-gradient(135deg,rgba(37,99,235,.2),rgba(96,165,250,.1));}
+.sg-banner-ico{
+  width:28px;height:28px;border-radius:7px;
+  background:rgba(37,99,235,.2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.sg-banner-text{display:flex;flex-direction:column;gap:.1rem}
+.sg-banner-title{font-size:.78rem;font-weight:800;color:var(--blue-l);letter-spacing:.02em}
+.sg-banner-sub{font-size:.65rem;color:var(--dim);font-weight:500}
+.sg-banner-dl{
+  margin-left:auto;flex-shrink:0;
+  display:flex;align-items:center;gap:.3rem;
+  font-size:.68rem;font-weight:700;color:var(--blue-l);
+  background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.25);
+  padding:.22rem .6rem;border-radius:20px;
+}
+
+/* ═══ BOTTOM TAB BAR ═══ */
+.tab-bar{
+  position:fixed;bottom:0;left:0;right:0;
+  z-index:300;
+  background:rgba(18,24,40,.96);
+  backdrop-filter:blur(16px);
+  border-top:1px solid var(--brd);
+  display:flex;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.tab-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.2rem;padding:.55rem .3rem .45rem;
+  background:none;border:none;cursor:pointer;
+  color:var(--dim);font-family:inherit;
+  transition:color .2s;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.tab-btn:hover,.tab-btn.active{color:var(--amber);}
+.tab-btn-ico{font-size:1.15rem;line-height:1;}
+.tab-btn-lbl{font-size:.58rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+
+/* Drawer (sale dal basso) */
+.drawer{
+  position:fixed;left:0;right:0;bottom:-100%;
+  z-index:250;
+  background:var(--surf);
+  border-top:1px solid rgba(37,99,235,.15);
+  border-radius:18px 18px 0 0;
+  max-height:82vh;
+  overflow-y:auto;
+  transition:bottom .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 -8px 40px rgba(0,0,0,.5);
+  transform:translateZ(0);
+  will-change:transform;
+}
+.drawer.open{bottom:56px;}
+.drawer.keyboard-open{
+  bottom:0 !important;
+  max-height:50vh;
+  border-radius:0;
+}
+.drawer-handle{
+  display:flex;justify-content:center;padding:.7rem 0 .3rem;
+  position:sticky;top:0;background:var(--surf);z-index:2;
+}
+.drawer-handle::before{
+  content:'';width:36px;height:4px;
+  background:rgba(255,255,255,.15);border-radius:2px;
+}
+.drawer-inner{padding:0 1.2rem 2rem;}
+.drawer-header{
+  font-size:.65rem;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--dim);
+  margin-bottom:1.2rem;padding-bottom:.7rem;
+  border-bottom:1px solid var(--brd);
+}
+/* overlay scuro dietro drawer */
+.drawer-overlay{
+  position:fixed;inset:0;z-index:249;
+  background:rgba(0,0,0,.45);
+  opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.drawer-overlay.show{opacity:1;pointer-events:auto;}
+
+/* padding body per non finire sotto la tab bar */
+body{padding-bottom:56px;}
+
+/* mantieni vnt-item, vnt-code etc invariati */
+
+.vnt-header{
+  font-size:.65rem;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--dim);
+  margin-bottom:1.2rem;padding-bottom:.7rem;
+  border-bottom:1px solid var(--brd);
+}
+.vnt-item{
+  background:var(--bg);
+  border:1px solid var(--brd);
+  border-radius:12px;
+  padding:1rem;
+  margin-bottom:.8rem;
+}
+.vnt-item-title{
+  font-size:.8rem;font-weight:800;color:var(--txt);
+  margin-bottom:.3rem;
+}
+.vnt-item-desc{
+  font-size:.68rem;color:var(--txt2);line-height:1.5;
+  margin-bottom:.7rem;
+}
+.vnt-code{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(245,158,11,.12);
+  border:1px dashed rgba(245,158,11,.4);
+  border-radius:7px;
+  padding:.3rem .6rem;
+  font-size:.72rem;font-weight:800;
+  font-family:monospace;letter-spacing:.08em;
+  color:var(--amber);cursor:pointer;
+  transition:background .2s;
+  margin-bottom:.6rem;
+}
+.vnt-code:hover{background:rgba(245,158,11,.2);}
+.vnt-code-copy{font-size:.6rem;color:var(--dim);font-family:inherit;font-weight:600;}
+.vnt-link{
+  display:flex;align-items:center;gap:.35rem;
+  font-size:.7rem;font-weight:700;color:var(--blue-l);
+  text-decoration:none;
+  transition:opacity .2s;
+}
+.vnt-link:hover{opacity:.7;}
+.vnt-note{
+  font-size:.6rem;color:var(--dim);
+  line-height:1.4;margin-top:.5rem;
+  font-style:italic;
+}
+.vnt-close{
+  position:absolute;top:.7rem;right:.7rem;
+  background:none;border:none;color:var(--dim);
+  cursor:pointer;font-size:1rem;line-height:1;
+  padding:4px;
+}
+.vnt-close:hover{color:var(--txt);}
+.copied-toast{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);
+  background:var(--amber);color:#0a0f1e;
+  padding:.4rem 1rem;border-radius:20px;
+  font-size:.75rem;font-weight:800;
+  opacity:0;transition:opacity .2s;
+  z-index:500;pointer-events:none;
+}
+.copied-toast.show{opacity:1;}
+</style>
+</head>
+<body>
+
+
+<header class="hdr">
+  <div class="hdr-inner">
+    <div class="hdr-lbl">Daniel Sportelli</div>
+    <h1>Cocktail Legend</h1>
+    <p>Trova il drink perfetto in meno di 10 secondi</p>
+    <a href="#" id="btn-acquista-header" class="corso-btn" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Acquista la versione completa
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- BARRA FILTRI STICKY -->
+<div class="sg-banner" style="cursor:default;opacity:.7;">
+  <div class="sg-banner-ico">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+  </div>
+  <div class="sg-banner-text">
+    <span class="sg-banner-title">Spirits Genesis</span>
+    <span class="sg-banner-sub">Disponibile solo nella versione completa</span>
+  </div>
+  <div class="sg-banner-dl" style="color:var(--dim);">
+    🔒 Bloccato
+  </div>
+</div>
+<!-- BOTTOM TAB BAR -->
+<div class="tab-bar" id="tab-bar">
+  <button class="tab-btn" id="tbtn-vnt" onclick="openDrawer('vnt')">
+    <span class="tab-btn-ico">⭐</span>
+    <span class="tab-btn-lbl">Vantaggi</span>
+  </button>
+  <button class="tab-btn" id="tbtn-tmp" onclick="openDrawer('tmp')">
+    <span class="tab-btn-ico">🌡️</span>
+    <span class="tab-btn-lbl">Temperature</span>
+  </button>
+  <button class="tab-btn" id="tbtn-bic" onclick="openDrawer('bic')">
+    <span class="tab-btn-ico">📖</span>
+    <span class="tab-btn-lbl">Glossario</span>
+  </button>
+  <button class="tab-btn" id="tbtn-abv" onclick="openDrawer('abv')">
+    <span class="tab-btn-ico">🔢</span>
+    <span class="tab-btn-lbl">Calc. ABV</span>
+  </button>
+</div>
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeAllDrawers()"></div>
+<div class="filter-bar">
+  <div class="filter-top">
+    <div class="srch-wrap">
+      <svg class="srch-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="srch-inp" id="srch" placeholder="Cerca...">
+    </div>
+    <button class="btn-toggle-filters" id="btn-filters">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+      Filtri
+      <span class="active-badge" id="active-badge">0</span>
+      <span class="arrow">&#9660;</span>
+    </button>
+    <button class="btn-favonly" id="btn-favonly">❤️</button>
+    <button class="btn-reset-sm" id="btn-reset">Reset</button>
+  </div>
+</div>
+
+<!-- Pannello a tendina -->
+<div class="filter-panel" id="filter-panel">
+    <div class="filter-panel-inner">
+      <div class="filter-groups">
+        <div class="fg">
+          <button class="fg-btn" data-fg="cat">
+            Categoria <span class="cnt" id="cnt-cat">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-cat"></div>
+        </div>
+        <div class="fg">
+          <button class="fg-btn" data-fg="dis">
+            Ingredienti <span class="cnt" id="cnt-dis">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-dis"></div>
+        </div>
+        <div class="fg">
+          <button class="fg-btn" data-fg="abv">
+            Tenore ABV <span class="cnt" id="cnt-abv">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-abv"></div>
+        </div>
+        <div class="fg">
+          <button class="fg-btn" data-fg="sap">
+            Sapore <span class="cnt" id="cnt-sap">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-sap"></div>
+        </div>
+        <div class="fg">
+          <button class="fg-btn" data-fg="frz">
+            Frizzante <span class="cnt" id="cnt-frz">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-frz"></div>
+        </div>
+        <div class="fg">
+          <button class="fg-btn" data-fg="bic">
+            Bicchiere <span class="cnt" id="cnt-bic">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-bic"></div>
+        </div>
+      </div>
+      <!-- Tag filtri attivi -->
+      <div class="active-tags" id="active-tags"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="rbar">
+    <div>
+      <span class="rcnt" id="rcnt">0</span>
+      <span class="rlbl">cocktail trovati</span>
+    </div>
+    <div class="rbar-right">
+      <div class="sort-wrap" style="width:100%">
+        <div class="sort-lbl">
+          ⇅ Ordina per
+        </div>
+        <select class="sort-sel" id="srt">
+          <option value="az">A → Z</option>
+          <option value="za">Z → A</option>
+          <option value="abv+">ABV crescente</option>
+          <option value="abv-">ABV decrescente</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<!-- MODAL -->
+<div class="overlay" id="ov">
+  <div class="modal">
+    <div class="m-sticky-bar">
+      <button class="m-sticky-heart" id="m-fav-heart" title="Preferito">🤍</button>
+      <div class="m-sticky-title" id="m-sticky-title"></div>
+      <button class="m-sticky-close" id="m-close">&#x2715;</button>
+    </div>
+    <div class="m-img">
+      <div class="m-img-ph">&#127864;</div>
+      <img id="m-img" src="" alt="">
+      <div class="m-sap"><div class="m-sap-tags" id="m-sap"></div></div>
+    </div>
+    <div class="m-body">
+      <div class="m-hdr">
+        <div class="m-name" id="m-name"></div>
+      </div>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="btn-ml">ml</button>
+        <button class="unit-btn" id="btn-oz">oz</button>
+      </div>
+      <div class="m-badges" id="m-badges"></div>
+      <div class="m-grid" id="m-grid"></div>
+      <div class="sec">Ingredienti</div>
+      <div class="ing-list" id="m-ing"></div>
+      <div class="sec">Preparazione</div>
+      <div class="prep-list" id="m-prep"></div>
+      <div class="sec" style="margin-top:1.1rem">Storia</div>
+      <div class="storia" id="m-stor"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+// ═══════════════════════════════════
+// PASSWORD — cambia il valore qui sotto quando vuoi
+
+
+var DATA = [
+// ═══════════════════════════════════════════
+// COCKTAIL DATABASE — aggiungi nuovi drink QUI
+// Copia il blocco generato da Claude PRIMA della
+// riga che dice: // ← FINE DATABASE
+// ═══════════════════════════════════════════
+{"name":"20th Century","distillato":["Gin"],"categoria":"Pre dinner","abv":"Alto","sapori":["Agrumato","Setoso","Raffinato"],"garnish":"Zest di limone","ingredienti":[["45 ml","Gin"],["15 ml","Lillet blanc"],["15 ml","Liquore al cacao bianco"],["15 ml","Succo di limone"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"Il 20th Century Cocktail nasce nei primi anni \u201930 come omaggio al celebre treno \u201cTwentieth Century Limited\u201d, simbolo del lusso e dell\u2019efficienza ferroviaria americana che collegava New York a Chicago e trasportava personalit\u00e0 di spicco dell\u2019epoca. Ideato da C.A. Tuck e pubblicato nel Caf\u00e9 Royal Cocktail Book del 1937, rappresentava l\u2019eleganza e la raffinatezza dei viaggi di quel periodo. Dopo un lungo oblio, \u00e8 stato riscoperto nei primi anni 2000, tornando a essere apprezzato nei cocktail bar d\u2019autore. Curiosa la differenza tra il Lillet originale, pi\u00f9 amaro, e quello odierno, che ne ha modificato leggermente il profilo nel tempo, senza intaccarne il fascino storico.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Abbey","distillato":["Gin"],"categoria":"Pre dinner","abv":"Alto","sapori":["Agrumato","Fruttato","Morbido"],"garnish":"Twist di arancia","ingredienti":[["45 ml","Gin"],["22,5 ml","Succo d\u2019arancia"],["15 ml","Vermouth rosso"],["2 dash","Angostura bitters"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Abbey nasce tra le due guerre e compare per la prima volta nel Savoy Cocktail Book del 1930 di Harry Craddock, icona della mixology classica. Legato al prestigioso Savoy Hotel di Londra, rappresenta un esempio di eleganza minimalista e versatilit\u00e0, apprezzato tanto come aperitivo quanto come drink da brunch. Il suo nome resta avvolto nel mistero, forse legato a un riferimento londinese, mentre nel tempo \u00e8 stato spesso confuso con il Bronx, da cui si distingue per carattere pi\u00f9 morbido. Pur rimasto a lungo in secondo piano, oggi \u00e8 riscoperto come piccola gemma dimenticata, capace di unire fascino storico e semplicit\u00e0 raffinata.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Adonis","distillato":["Sherry"],"categoria":"Pre dinner","abv":"Medio","sapori":["Elegante","Secco","Aromatico"],"garnish":"Zest di arancia","ingredienti":[["45 ml","Sherry fino"],["45 ml","Vermouth rosso"],["2 dash","Orange bitters"]],"prep":["Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo","Mescolare delicatamente per circa 20 secondi","Filtrare in una coppetta raffreddata"],"storia":"L\u2019Adonis nacque negli anni \u201980 dell\u2019Ottocento per celebrare un\u2019opera teatrale di successo a Broadway, divenendo presto simbolo di eleganza e cultura. Gi\u00e0 apprezzato prima della Proibizione, \u00e8 uno dei pochi cocktail storici sopravvissuti al tempo, tornato in auge nel revival contemporaneo come scelta raffinata e legata al mondo artistico newyorkese. Considerato audace per l\u2019epoca grazie all\u2019uso dello sherry con vermouth, rappresenta un precursore della mixology moderna e, con il suo basso tenore alcolico, resta un esempio di sobriet\u00e0 e fascino senza tempo.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Affinity","distillato":["Scotch Whisky"],"categoria":"Pre dinner","abv":"Molto alto","sapori":["Intenso","Raffinato","Speziato"],"garnish":"Zest di arancia","ingredienti":[["45 ml","Scotch Whisky"],["22,5 ml","Vermouth rosso"],["22,5 ml","Vermouth dry"],["2 dash","Angostura bitters"]],"prep":["Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo","Mescolare delicatamente per circa 20 secondi","Filtrare in una coppetta raffreddata"],"storia":"L\u2019Affinity nacque nei primi decenni del Novecento durante l\u2019epoca d\u2019oro della mixology classica. Composto da Scotch whisky, vermouth dolce e secco e Angostura bitters, \u00e8 un\u2019elegante alternativa al Manhattan con carattere distintivo. Il nome riflette la perfetta sintonia tra ingredienti. Comparso in libri iconici di Harry Craddock e Hugo Ensslin, era apprezzato nei club privati e cene eleganti. Diffuso nei circoli londinesi e newyorkesi degli anni \u201930, considerato \u201ccugino\u201d del Rob Roy, fu riscoperto nel revival mixology anni 2000. Perfetto per serate invernali e degustazioni, simboleggia la classicit\u00e0 senza tempo e la raffinatezza del whisky in un drink bilanciato.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Airmail","distillato":["Rum"],"categoria":"All day","abv":"Medio","sapori":["Rinfrescante","Esotico","Frizzante"],"garnish":"Nessuna","ingredienti":[["30 ml","Rum scuro"],["22,5 ml","Succo di lime"],["15 ml","Honey mix"],["60 ml","Prosecco"]],"prep":["Shakerare tutto con ghiaccio (tranne il prosecco)","Filtrare (double strain) in una coppetta raffreddata","Completare con il prosecco"],"storia":"L\u2019Airmail \u00e8 un cocktail classico nato negli anni \u201940 nei bar tiki, pensato per evocare l\u2019emozione del volo e l\u2019esotismo dei viaggi internazionali. Composto da rum (bianco o agricole), lime fresco, sciroppo di zucchero o miele e completato con Champagne, unisce il calore caraibico al lusso delle bollicine. Il nome richiama il servizio postale aereo, simbolo di velocit\u00e0 e modernit\u00e0. Diventato icona di eleganza, fu servito in eventi esclusivi celebrando l\u2019era dell\u2019aviazione. La sua versatilit\u00e0 permette varianti con diversi rum e spumanti. Perfetto come aperitivo sofisticato, \u00e8 apprezzato in feste tropicali e competizioni di mixology, dove continua a ispirare bartender moderni mantenendo vivo il legame con la tradizione esotica.","frizzante":true,"bicchiere":"Coppetta"},
+{"name":"Alabama Slammer","distillato":["Southern Comfort"],"categoria":"All day","abv":"Medio alto","sapori":["Dolce","Fruttato","Avvolgente"],"garnish":"Fetta d\u2019arancia e ciliegina","ingredienti":[["30 ml","Southern Comfort"],["30 ml","Liquore all\u2019amaretto"],["30 ml","Sloe Gin"],["60 ml","Succo d\u2019arancia"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"],"storia":"L\u2019Alabama Slammer nacque negli anni \u201970 nei bar dei campus universitari americani, probabilmente in Alabama, come drink semplice e potente per serate studentesche. Riflette la tendenza dell\u2019epoca per cocktail dolci e colorati. Negli anni \u201970-\u201980 divenne simbolo della mixology retr\u00f2 grazie al sapore accessibile e ai colori vivaci. Il nome \u201cSlammer\u201d deriva dalla facilit\u00e0 con cui si beve. Il Southern Comfort, liquore a base whisky con note dolci e fruttate, ne \u00e8 il cuore. Versatile, si serve lungo, short o come shot. Il mix con succo d\u2019arancia crea un vibrante colore arancione-rosso. Classico delle vacanze estive, \u00e8 ideale per feste e barbecue. Nelle serate a tema anni \u201970-\u201980 evoca l\u2019energia di quell\u2019epoca.","frizzante":false,"bicchiere":"Highball"},
+{"name":"Alabazam","distillato":["Brandy"],"categoria":"After dinner","abv":"Alto","sapori":["Agrumato","Speziato","Robusto"],"garnish":"Twist di arancia","ingredienti":[["45 ml","Brandy"],["15 ml","Orange Cura\u00e7ao"],["15 ml","Succo di limone"],["7,5 ml","Sciroppo di zucchero"],["2 dash","Angostura bitters"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Alabazam \u00e8 un cocktail dell\u2019epoca vittoriana apparso nel 1903 nel libro Louis\u2019 Mixed Drinks di Louis Muckensturm, uno dei primi volumi a catalogare i cocktail. Il nome richiama formule magiche, suggerendo un drink deciso e ricco. Con struttura secca e alto tenore alcolico, era perfetto per i gentlemen club di inizio \u201900. Considerato una variazione speziata del Brandy Cocktail, combina brandy, orange Cura\u00e7ao che bilancia con note aggrumate, e Angostura per profondit\u00e0 e finale speziato. Recentemente riscoperto da bartender in cerca di ricette dimenticate dal forte impatto. Perfetto come after dinner da meditazione, \u00e8 poco conosciuto ma amato dagli appassionati di mixology classica per equilibrio e intensit\u00e0.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Alaska","distillato":["Gin"],"categoria":"Pre dinner","abv":"Molto alto","sapori":["Erbaceo","Fresco","Aromatico"],"garnish":"Twist di limone","ingredienti":[["45 ml","Gin"],["15 ml","Chartreuse gialla"],["1 dash","Orange bitters"]],"prep":["Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo","Mescolare delicatamente per circa 20 secondi","Filtrare in una coppetta raffreddata"],"storia":"L\u2019Alaska \u00e8 un cocktail classico nato negli anni \u201920-\u201930, citato nel The Savoy Cocktail Book di Harry Craddock (1930). Il nome deriva dal colore dorato che ricorda l\u2019oro della corsa all\u2019oro, non dallo stato americano. Combina gin e Chartreuse Gialla, liquore francese dei monaci certosini con ricetta segreta, pi\u00f9 orange bitters, creando un profilo erbaceo e complesso. Popolare nei primi del \u201900, ha vissuto un revival nei bar di alta classe. Si distingue per l\u2019uso del Chartreuse Gialla rispetto alla versione verde. Perfetto come aperitivo sofisticato per serate eleganti, \u00e8 un drink da meditazione da gustare lentamente, ideale per palati esigenti che amano i classici vintage.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Alexander","distillato":["Cognac"],"categoria":"After dinner","abv":"Medio alto","sapori":["Ricco","Cremoso","Goloso"],"garnish":"Noce moscata","ingredienti":[["30 ml","Cognac"],["30 ml","Liquore cacao scuro"],["30 ml","Panna fresca"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata","Grattugiare noce moscata sulla superficie"],"storia":"L\u2019Alexander \u00e8 un cocktail elegante nato agli inizi del XX secolo, debuttando in un ristorante di New York durante un ricevimento di nozze. Combina gin, crema di cacao e panna fresca per un gusto vellutato. Con il tempo il gin fu sostituito dal cognac, creando una variante pi\u00f9 morbida. Divenne popolare negli anni \u201920 durante la Proibizione americana e conquist\u00f2 Hollywood, diventando il preferito di star come John Lennon e Mick Jagger. Si narra fosse stato ideato per un evento nobiliare, simbolo di esclusivit\u00e0. Il perfetto equilibrio tra dolcezza della crema di cacao e calore del distillato lo rende unico. Spesso servito come dessert alcolico durante le festivit\u00e0 natalizie.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Americano","distillato":["Bitter Rosso"],"categoria":"Pre dinner","abv":"Medio","sapori":["Amaro","Frizzante","Classico"],"garnish":"Zest di limone + fetta di arancia","ingredienti":[["30 ml","Bitter rosso"],["30 ml","Vermouth rosso"],["30 ml","Soda"]],"prep":["Versare tutto in un bicchiere old fashioned riempito di ghiaccio","Mescolare delicatamente con un bar spoon"],"storia":"L\u2019Americano incarna lo spirito dell\u2019aperitivo italiano, nato nel 1860 quando Gaspare Campari serv\u00ec un drink chiamato Milano-Torino nel suo bar di Milano. Il nome derivava dall\u2019origine degli ingredienti principali: Milano e Torino. Divenne popolare tra i viaggiatori americani negli anni \u201920-\u201930 durante il Proibizionismo, tanto da essere ribattezzato \u201cAmericano\u201d in loro onore. \u00c8 considerato il precursore del Negroni, creato successivamente con l\u2019aggiunta di gin. James Bond lo ordina in Casino Royale di Ian Fleming, definendolo perfetto per calde serate estive. Tra i primi cocktail inclusi nella lista ufficiale dell\u2019IBA, consolid\u00f2 il suo status di classico mondiale. La bassa gradazione alcolica lo rende ideale come aperitivo, perfetto per stuzzicare l\u2019appetito senza sovrastarlo, celebrato durante l\u2019International Vermouth Day.","frizzante":true,"bicchiere":"Old Fashioned"},
+{"name":"Angel Face","distillato":["Gin"],"categoria":"All day","abv":"Molto alto","sapori":["Fruttato","Intenso","Raffinato"],"garnish":"Fetta di mela","ingredienti":[["30 ml","Gin"],["30 ml","Apricot Brandy"],["30 ml","Calvados"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Angel Face \u00e8 un cocktail affascinante e misterioso nato negli anni del Proibizionismo negli Stati Uniti. Il nome \u201cfaccia d\u2019angelo\u201d \u00e8 un\u2019allusione ironica al carattere forte e seducente che maschera la sua intensit\u00e0 con sapori armoniosi. Riflette l\u2019influenza europea e il desiderio di sperimentare durante un\u2019epoca in cui gli alcolici di qualit\u00e0 erano difficili da reperire negli USA. Divenne popolare grazie ai barman emigrati in Europa che portarono la creativit\u00e0 della mixology americana. Incluso nel leggendario Savoy Cocktail Book di Harry Craddock del 1930, il nome stesso poteva essere una metafora per un drink dal gusto proibito ma irresistibile. Il nome romantico e i sapori fruttati evocano fascino e delicatezza, perfetti per serate speciali.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Apple Martini","distillato":["Vodka"],"categoria":"All day","abv":"Alto","sapori":["Fresco","Fruttato","Vivace"],"garnish":"Fetta di mela","ingredienti":[["45 ml","Vodka"],["15 ml","Liquore mela verde"],["22,5 ml","Succo di limone"],["15 ml","Sciroppo di zucchero"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Apple Martini, o Appletini, \u00e8 un cocktail nato negli anni \u201990, periodo in cui i drink fruttati e dolci dominavano i bar mondiali. L\u2019origine \u00e8 attribuita al celebre Lola\u2019s West Hollywood, pioniere nel lanciare cocktail innovativi e glamour. Creato come variante fruttata del Martini per una nuova generazione in cerca di alternative meno secche ai classici. Divenne simbolo della mixology anni \u201990 quando i cocktail dolci e colorati dominavano la scena. L\u2019Appletini apparve in numerosi show televisivi e film, diventando il preferito di personaggi iconici come J.D. nella serie Scrubs. Esistono moltissime versioni, alcune con succo di mela fresco o sidro. Il caratteristico colore verde brillante \u00e8 dovuto al liquore alla mela verde. Nonostante le radici americane, \u00e8 oggi apprezzato in tutto il mondo per il gusto accessibile e l\u2019appeal visivo.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Army and Navy","distillato":["Gin"],"categoria":"Pre dinner","abv":"Medio alto","sapori":["Agrumato","Mandorlato","Rotondo"],"garnish":"Nessuna","ingredienti":[["50 ml","Gin"],["22,5 ml","Succo di limone"],["15 ml","Sciroppo di orzata"],["2 dash","Angostura bitters"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Army & Navy compare per la prima volta nel Caf\u00e9 Royal Cocktail Book del 1937, pubblicato a Londra da William J. Tarling, bartender e figura centrale del movimento di codifica della mixology dell\u2019epoca. Il drink prende il nome dall\u2019Army & Navy Club, esclusivo circolo privato di Washington D.C. frequentato da ufficiali di alto rango. Nonostante non sia attribuibile a una singola persona, il contesto militare e la diffusione in ambienti elitari ne definiscono l\u2019identit\u00e0: un cocktail per celebrare rigore, classe e senso dell\u2019onore. Presente nei menu di circoli ufficiali come simbolo di prestigio, rappresenta un esempio classico di gin sour rivisitato. Fedele allo spirito militare, \u00e8 essenziale e diretto, senza fronzoli. Ha vissuto una rinascita contemporanea nei cocktail bar moderni attenti alla miscelazione storica.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Aviation","distillato":["Gin"],"categoria":"Pre dinner","abv":"Molto alto","sapori":["Floreale","Elegante","Raffinato"],"garnish":"Ciliegina","ingredienti":[["45 ml","Gin"],["15 ml","Maraschino"],["15 ml","Succo di limone"],["7,5 ml","Liquore alla violetta"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Aviation nasce agli albori del XX secolo, quando l\u2019aviazione catturava l\u2019immaginazione collettiva come simbolo di innovazione e libert\u00e0. Creato nel 1916 dal barman Hugo Ensslin al Wallick Hotel di New York, il cocktail deve il nome al suo colore unico: un delicato blu-violaceo evocativo del cielo al tramonto. Durante gli anni \u201920 era simbolo di eleganza e modernit\u00e0 nei salotti newyorkesi. Con il Proibizionismo e il declino della Cr\u00e8me de Violette, cadde nel dimenticatoio per decenni. Negli anni 2000 la riscoperta della ricetta originale da parte di bartender appassionati lo riport\u00f2 allo status di classico senza tempo. La prima apparizione fu nel libro Recipes for Mixed Drinks di Ensslin, rendendolo uno dei primi cocktail documentati con precisione. Perfetto per serate raffinate e eventi vintage anni \u201920-\u201930.","frizzante":false,"bicchiere":"Coppetta"},
+// ← FINE DATABASE
+];
+var AF = {cat:[], dis:[], abv:[], sap:[], frz:[], bic:[]};
+var Q = "";
+var RES = [];
+var USE_OZ = false;
+var LAST_IDX = 0;
+var AO = {"Medio":0,"Medio alto":1,"Alto":2,"Molto alto":3};
+var FMAP = {cat:"categoria", dis:"distillato", abv:"abv"};
+var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", sap:"Sapore", frz:"Frizzante", bic:"Bicchiere"};
+
+// ═══════════ PREFERITI ═══════════
+var FAVS_KEY = "cl_favs";
+var FAV_ONLY = false;
+function loadFavs(){try{return JSON.parse(localStorage.getItem(FAVS_KEY)||"[]");}catch(e){return[];}}
+function saveFavs(arr){try{localStorage.setItem(FAVS_KEY,JSON.stringify(arr));}catch(e){}}
+function isFav(name){return loadFavs().indexOf(name)!==-1;}
+function toggleFav(name){var f=loadFavs();var i=f.indexOf(name);if(i===-1)f.push(name);else f.splice(i,1);saveFavs(f);return i===-1;}
+function refreshAllHearts(){
+  document.querySelectorAll(".fav-heart").forEach(function(b){
+    var n=b.dataset.name;
+    if(isFav(n)){b.classList.add("on");b.textContent="\u2764\uFE0F";}
+    else{b.classList.remove("on");b.textContent="\uD83E\uDD0D";}
+  });
+}
+// ═════════════════════════════════
+
+function bclass(b){return b==="Pre dinner"?"b-pre":b==="After dinner"?"b-after":"b-all";}
+function aclass(a){if(a==="Molto alto")return "c-va";if(a==="Alto")return "c-a";if(a==="Medio alto")return "c-ma";return "c-m";}
+
+function mlToOz(qty) {
+  var norm = qty.replace(",",".");
+  var m = norm.match(/^(\d+(?:\.\d+)?)\s*ml$/i);
+  if (!m) return qty;
+  var ml = parseFloat(m[1]);
+  if (ml===5)    return "1/4 oz";
+  if (ml===7.5)  return "1/4 oz";
+  if (ml===10)   return "1/2 oz";
+  if (ml===15)   return "1/2 oz";
+  if (ml===22.5) return "3/4 oz";
+  if (ml===30)   return "1 oz";
+  if (ml===37.5) return "1 1/4 oz";
+  if (ml===45)   return "1 1/2 oz";
+  if (ml===50)   return "1 3/4 oz";
+  if (ml===60)   return "2 oz";
+  return ml + " ml";
+}
+function fmtQty(qty){return USE_OZ ? mlToOz(qty) : qty;}
+
+function uniq(key) {
+  var s = {};
+  for (var i=0;i<DATA.length;i++){
+    var c=DATA[i];
+    if(key==="sap"){for(var j=0;j<c.sapori.length;j++)s[c.sapori[j]]=1;}
+    else if(key==="dis"){
+      for(var j=0;j<c.distillato.length;j++)s[c.distillato[j]]=1;
+      for(var j=0;j<c.ingredienti.length;j++)s[c.ingredienti[j][1]]=1;
+    }
+    else if(key==="frz"){s[c.frizzante?"Si":"No"]=1;}
+    else if(key==="bic"){s[c.bicchiere]=1;}
+    else{s[c[key]]=1;}
+  }
+  return Object.keys(s).sort();
+}
+
+function countFor(key, val) {
+  if(key==="sap") return DATA.filter(function(c){return c.sapori.indexOf(val)!==-1;}).length;
+  if(key==="dis") return DATA.filter(function(c){return c.distillato.indexOf(val)!==-1||c.ingredienti.some(function(i){return i[1]===val;});}).length;
+  if(key==="frz") return DATA.filter(function(c){return (c.frizzante?"Si":"No")===val;}).length;
+  if(key==="bic") return DATA.filter(function(c){return c.bicchiere===val;}).length;
+  var field = FMAP[key] || key;
+  return DATA.filter(function(c){return c[field]===val;}).length;
+}
+
+function buildDropdown(id, key, items) {
+  var el = document.getElementById(id);
+  el.innerHTML = "";
+  for(var i=0;i<items.length;i++){
+    var v = items[i];
+    var div = document.createElement("div");
+    div.className = "ci";
+    div.dataset.key = key;
+    div.dataset.val = v;
+    var cnt = countFor(key, v);
+    div.innerHTML =
+      '<div class="cb"><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>'+
+      '<span class="ci-lbl">'+v+'</span>'+
+      '<span class="ci-n">'+cnt+'</span>';
+    div.addEventListener("click", function(e){
+      e.stopPropagation();
+      var k=this.dataset.key, vv=this.dataset.val;
+      var arr=AF[k], idx=arr.indexOf(vv);
+      var cb=this.querySelector(".cb");
+      if(idx===-1){arr.push(vv);cb.classList.add("on");this.classList.add("on");}
+      else{arr.splice(idx,1);cb.classList.remove("on");this.classList.remove("on");}
+      updateBadges();
+      render();
+    });
+    el.appendChild(div);
+  }
+}
+
+function initF() {
+  buildDropdown("dd-cat","cat",uniq("categoria"));
+  buildDropdown("dd-dis","dis",uniq("distillato"));
+  buildDropdown("dd-abv","abv",["Medio","Medio alto","Alto","Molto alto"]);
+  buildDropdown("dd-sap","sap",uniq("sap"));
+  buildDropdown("dd-frz","frz",["Si","No"]);
+  buildDropdown("dd-bic","bic",uniq("bic"));
+}
+
+// Dropdown toggle per ogni fg-btn
+document.querySelectorAll(".fg-btn").forEach(function(btn){
+  btn.addEventListener("click", function(e){
+    e.stopPropagation();
+    var key = this.dataset.fg;
+    var dd = document.getElementById("dd-"+key);
+    var isOpen = dd.classList.contains("open");
+    // chiudi tutti
+    document.querySelectorAll(".fg-dropdown").forEach(function(d){d.classList.remove("open");});
+    document.querySelectorAll(".fg-btn").forEach(function(b){b.classList.remove("open");});
+    if(!isOpen){dd.classList.add("open");this.classList.add("open");}
+  });
+});
+
+// Chiudi dropdown cliccando fuori
+document.addEventListener("click", function(){
+  document.querySelectorAll(".fg-dropdown").forEach(function(d){d.classList.remove("open");});
+  document.querySelectorAll(".fg-btn").forEach(function(b){b.classList.remove("open");});
+});
+
+// Toggle pannello filtri
+document.getElementById("btn-filters").addEventListener("click", function(e){
+  e.stopPropagation();
+  var panel = document.getElementById("filter-panel");
+  var open = panel.classList.toggle("open");
+  this.classList.toggle("open", open);
+});
+
+function updateBadges() {
+  var total = AF.cat.length + AF.dis.length + AF.abv.length + AF.sap.length + AF.frz.length + AF.bic.length;
+  var badge = document.getElementById("active-badge");
+  badge.textContent = total;
+  badge.classList.toggle("show", total > 0);
+
+  // contatori sui singoli btn
+  ["cat","dis","abv","sap","frz","bic"].forEach(function(k){
+    var cnt = document.getElementById("cnt-"+k);
+    cnt.textContent = AF[k].length;
+    cnt.classList.toggle("show", AF[k].length > 0);
+  });
+
+  // tag rimovibili
+  var tagsEl = document.getElementById("active-tags");
+  tagsEl.innerHTML = "";
+  var allKeys = ["cat","dis","abv","sap"];
+  for(var ki=0;ki<allKeys.length;ki++){
+    var k=allKeys[ki];
+    for(var vi=0;vi<AF[k].length;vi++){
+      var v=AF[k][vi];
+      var tag=document.createElement("div");
+      tag.className="active-tag";
+      tag.innerHTML='<span>'+v+'</span><span class="x">&#x2715;</span>';
+      tag.dataset.key=k;
+      tag.dataset.val=v;
+      tag.addEventListener("click",function(){
+        var kk=this.dataset.key, vv=this.dataset.val;
+        var idx=AF[kk].indexOf(vv);
+        if(idx!==-1) AF[kk].splice(idx,1);
+        // aggiorna checkbox visiva
+        var cbs=document.querySelectorAll("#dd-"+kk+" .ci");
+        cbs.forEach(function(ci){
+          if(ci.dataset.val===vv){ci.classList.remove("on");ci.querySelector(".cb").classList.remove("on");}
+        });
+        updateBadges();
+        render();
+      });
+      tagsEl.appendChild(tag);
+    }
+  }
+}
+
+function render() {
+  var res=DATA.slice();
+  var q=Q.toLowerCase().trim();
+  if(q){res=res.filter(function(c){
+    var dis=Array.isArray(c.distillato)?c.distillato.join(" "):c.distillato;
+    var ing=c.ingredienti.map(function(i){return i[1];}).join(" ");
+    return c.name.toLowerCase().indexOf(q)!==-1||
+           dis.toLowerCase().indexOf(q)!==-1||
+           ing.toLowerCase().indexOf(q)!==-1||
+           (c.garnish||"").toLowerCase().indexOf(q)!==-1||
+           c.sapori.join(" ").toLowerCase().indexOf(q)!==-1;
+  });}
+  if(AF.cat.length){res=res.filter(function(c){return AF.cat.indexOf(c.categoria)!==-1;});}
+  if(AF.dis.length){res=res.filter(function(c){return AF.dis.some(function(d){return c.distillato.indexOf(d)!==-1||c.ingredienti.some(function(i){return i[1]===d;});});});}
+  if(AF.abv.length){res=res.filter(function(c){return AF.abv.indexOf(c.abv)!==-1;});}
+  if(AF.frz.length){res=res.filter(function(c){return AF.frz.indexOf(c.frizzante?"Si":"No")!==-1;});}  
+  if(AF.bic.length){res=res.filter(function(c){return AF.bic.indexOf(c.bicchiere)!==-1;});}
+  if(AF.sap.length){res=res.filter(function(c){return AF.sap.some(function(s){return c.sapori.indexOf(s)!==-1;});});}
+  if(FAV_ONLY){var favs=loadFavs();res=res.filter(function(c){return favs.indexOf(c.name)!==-1;});}
+  var s=document.getElementById("srt").value;
+  if(s==="az")res.sort(function(a,b){return a.name.localeCompare(b.name);});
+  else if(s==="za")res.sort(function(a,b){return b.name.localeCompare(a.name);});
+  else if(s==="abv+")res.sort(function(a,b){return(AO[a.abv]||0)-(AO[b.abv]||0);});
+  else if(s==="abv-")res.sort(function(a,b){return(AO[b.abv]||0)-(AO[a.abv]||0);});
+  RES=res;
+  showCards();
+}
+
+function showCards(){
+  var g=document.getElementById("grid");
+  document.getElementById("rcnt").textContent=RES.length;
+  g.innerHTML="";
+  if(!RES.length){
+    var em=document.createElement("div");em.className="empty";
+    if(FAV_ONLY){
+      em.innerHTML='<div class="ico">❤️</div><h3>Lista preferiti vuota</h3><p>Tocca il cuore su un cocktail per aggiungerlo ai tuoi preferiti</p>';
+    } else {
+      em.innerHTML='<div class="ico">&#128269;</div><h3>Nessun cocktail trovato</h3><p>Modifica i filtri per ampliare la ricerca</p>';
+    }
+    g.appendChild(em);return;
+  }
+  for(var i=0;i<RES.length;i++){
+    var c=RES[i];
+    var card=document.createElement("div");
+    card.className="card";card.style.animationDelay=Math.min(i*35,450)+"ms";
+    if(!c.img)c.img='https://danielsportelli.github.io/cocktail-legend/'+encodeURIComponent(c.name.toLowerCase())+'.JPG';
+    var sapHtml="";
+    for(var si=0;si<c.sapori.length;si++){
+      sapHtml+='<span class="sap-t">'+c.sapori[si]+'</span>';
+      if(si<c.sapori.length-1)sapHtml+='<span class="sap-d">&#8226;</span>';
+    }
+    card.innerHTML=
+      '<div class="card-img"><div class="card-ph">&#127864;</div>'+
+      '<img data-src="'+c.img+'" alt="'+c.name+'">'+
+      '<button class="fav-heart" data-name="'+c.name.replace(/"/g,"&quot;")+'">'+(isFav(c.name)?"\u2764\uFE0F":"\uD83E\uDD0D")+'</button>'+
+      '<span class="badge card-badge '+bclass(c.categoria)+'">'+c.categoria+'</span>'+
+      '<div class="sap-strip">'+sapHtml+'</div></div>'+
+      '<div class="card-body">'+
+      '<div class="card-top"><div class="card-name">'+c.name+'</div></div>'+
+      '<div class="card-meta">'+
+      '<div class="mrow">🥃&nbsp;'+(Array.isArray(c.distillato)?c.distillato[0]:c.distillato)+'</div>'+
+      '<div class="mrow">🌿&nbsp;'+c.garnish+'</div>'+
+      '</div>'+
+      '<div class="abv-row"><span class="abv-lbl">ABV</span>'+
+      '<span class="abv-v '+aclass(c.abv)+'">'+c.abv+'</span></div>'+
+      '</div>';
+    var img=card.querySelector("img");
+    img.onerror=function(){this.style.display="none";};
+    img.src=c.img;
+    // cuoricino card — stopPropagation per non aprire il modal
+    (function(name,card){
+      card.querySelector(".fav-heart").addEventListener("click",function(e){
+        e.stopPropagation();
+        toggleFav(name);
+        if(isFav(name)){this.classList.add("on");this.textContent="\u2764\uFE0F";}
+        else{this.classList.remove("on");this.textContent="\uD83E\uDD0D";}
+        // aggiorna cuoricino modal se aperto sullo stesso drink
+        var mh=document.getElementById("m-fav-heart");
+        if(mh && mh.dataset.name===name){
+          if(isFav(name)){mh.classList.add("on");mh.textContent="\u2764\uFE0F";}
+          else{mh.classList.remove("on");mh.textContent="\uD83E\uDD0D";}
+        }
+        if(FAV_ONLY)render();
+      });
+    })(c.name, card);
+    card.addEventListener("click",(function(idx){return function(){openM(idx);};})(i));
+    g.appendChild(card);
+  }
+}
+
+function openM(i){
+  var st=document.getElementById("tab-bar");if(st)st.style.display="none";
+  var c=RES[i];if(!c)return;LAST_IDX=i;
+  var img=document.getElementById("m-img");
+  img.onerror=function(){this.style.display="none";};
+  img.style.display="block";img.src="";img.src=c.img;img.alt=c.name;
+  var sapHtml="";
+  for(var si=0;si<c.sapori.length;si++){
+    sapHtml+='<span class="m-st">'+c.sapori[si]+'</span>';
+    if(si<c.sapori.length-1)sapHtml+='<span class="m-sd">&#8226;</span>';
+  }
+  document.getElementById("m-sap").innerHTML=sapHtml;
+  document.getElementById("m-name").textContent=c.name;
+  var stTitle=document.getElementById("m-sticky-title");
+  if(stTitle)stTitle.textContent=c.name;
+  document.getElementById("m-badges").innerHTML=
+    '<span class="m-badge '+bclass(c.categoria)+'">'+c.categoria+'</span>'+
+    '<span class="m-badge '+aclass(c.abv)+'">ABV: '+c.abv+'</span>';
+  document.getElementById("m-grid").innerHTML=
+    '<div class="mi"><div class="mi-lbl">Distillato</div><div class="mi-val">'+(Array.isArray(c.distillato)?c.distillato.join(' + '):c.distillato)+'</div></div>'+
+    '<div class="mi"><div class="mi-lbl">Garnish</div><div class="mi-val">'+c.garnish+'</div></div>'+
+    '<div class="mi"><div class="mi-lbl">Categoria</div><div class="mi-val">'+c.categoria+'</div></div>'+
+    '<div class="mi"><div class="mi-lbl">Bicchiere</div><div class="mi-val">'+(c.bicchiere||'-')+'</div></div>';
+  var ingHtml="";
+  for(var ii=0;ii<c.ingredienti.length;ii++){
+    ingHtml+='<div class="ing-row"><span class="ing-q">'+fmtQty(c.ingredienti[ii][0])+'</span><span class="ing-n">'+c.ingredienti[ii][1]+'</span></div>';
+  }
+  document.getElementById("m-ing").innerHTML=ingHtml;
+  var prepHtml="";
+  for(var pi=0;pi<c.prep.length;pi++){
+    prepHtml+='<div class="prep-row"><span class="prep-num">'+(pi+1)+'</span><span>'+c.prep[pi]+'</span></div>';
+  }
+  document.getElementById("m-prep").innerHTML=prepHtml;
+  document.getElementById("m-stor").textContent=c.storia;
+  document.getElementById("ov").classList.add("open");
+  document.body.style.overflow="hidden";
+  // aggiorna cuoricino sticky bar
+  var mh=document.getElementById("m-fav-heart");
+  if(mh){
+    mh.dataset.name=c.name;
+    if(isFav(c.name)){mh.classList.add("on");mh.textContent="\u2764\uFE0F";}
+    else{mh.classList.remove("on");mh.textContent="\uD83E\uDD0D";}
+  }
+}
+
+function closeModal(){var st=document.getElementById("tab-bar");if(st)st.style.display="";
+  document.getElementById("ov").classList.remove("open");document.body.style.overflow="";}
+
+document.getElementById("m-close").addEventListener("click",closeModal);
+document.getElementById("ov").addEventListener("click",function(e){if(e.target===this)closeModal();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal();});
+
+// cuoricino sticky modal
+document.getElementById("m-fav-heart").addEventListener("click",function(){
+  var name=this.dataset.name;if(!name)return;
+  toggleFav(name);
+  if(isFav(name)){this.classList.add("on");this.textContent="\u2764\uFE0F";}
+  else{this.classList.remove("on");this.textContent="\uD83E\uDD0D";}
+  refreshAllHearts();
+  if(FAV_ONLY)render();
+});
+
+// bottone preferiti
+document.getElementById("btn-favonly").addEventListener("click",function(){
+  FAV_ONLY=!FAV_ONLY;
+  this.classList.toggle("active",FAV_ONLY);
+  if(!FAV_ONLY){this.blur();}
+  render();
+});
+document.getElementById("srch").addEventListener("input",function(e){Q=e.target.value;render();});
+document.getElementById("srt").addEventListener("change",render);
+document.getElementById("btn-reset").addEventListener("click",function(){
+  AF={cat:[],dis:[],abv:[],sap:[],frz:[],bic:[]};
+  document.querySelectorAll(".cb").forEach(function(el){el.classList.remove("on");});
+  document.querySelectorAll(".ci").forEach(function(el){el.classList.remove("on");});
+  document.getElementById("srch").value="";Q="";
+  updateBadges();render();
+});
+document.getElementById("btn-ml").addEventListener("click",function(){
+  USE_OZ=false;
+  document.getElementById("btn-ml").classList.add("active");
+  document.getElementById("btn-oz").classList.remove("active");
+  openM(LAST_IDX);
+});
+document.getElementById("btn-oz").addEventListener("click",function(){
+  USE_OZ=true;
+  document.getElementById("btn-oz").classList.add("active");
+  document.getElementById("btn-ml").classList.remove("active");
+  openM(LAST_IDX);
+});
+
+initF();
+render();
+</script>
+
+
+<!-- DRAWER: VANTAGGI -->
+<div class="drawer" id="drawer-vnt">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">⭐ Vantaggi esclusivi</div>
+    <p style="font-size:.72rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Acquista Cocktail Legend per sbloccare i tuoi codici coupon esclusivi.</p>
+    <div class="vnt-item">
+      <div class="vnt-item-title">🎓 I miei corsi di Mixology</div>
+      <div class="vnt-item-desc">-20% sui singoli corsi. Non valido sulla promo Bundle.</div>
+      <div class="vnt-code" style="letter-spacing:.2em;color:var(--dim);">••••••••</div>
+    </div>
+    <div class="vnt-item">
+      <div class="vnt-item-title">🍸 Lumian Bar Tools</div>
+      <div class="vnt-item-desc">-20% con minimo d&rsquo;ordine 50&euro;. Non valido durante alcuni periodi dell&rsquo;anno (es. Black Friday, Natale, ecc.).</div>
+      <div class="vnt-code" style="letter-spacing:.2em;color:var(--dim);">••••••••</div>
+    </div>
+    <a href="#" id="btn-acquista-vnt" class="corso-btn" style="display:flex;justify-content:center;margin-top:1rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;padding:.5rem 1.2rem;font-size:.72rem;" target="_blank" rel="noopener">
+      🛒 Acquista ora
+    </a>
+  </div>
+</div>
+
+<!-- DRAWER: TEMPERATURE -->
+<div class="drawer" id="drawer-tmp">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">🌡️ Temperatura &amp; Sentori</div>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1rem;text-align:center;gap:1rem;">
+      <div style="font-size:2.5rem;">🔒</div>
+      <div style="font-size:.9rem;font-weight:800;color:var(--txt);">Disponibile nella versione completa</div>
+      <div style="font-size:.72rem;color:var(--txt2);line-height:1.6;max-width:280px;">Guida completa alle temperature di servizio per ogni categoria di distillato, con sentori, note di degustazione e principi chiave per una degustazione professionale.</div>
+      <a href="#" id="btn-acquista-tmp" class="corso-btn" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;margin-top:.5rem;" target="_blank" rel="noopener">
+        🛒 Acquista ora
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER: GLOSSARIO --><!-- DRAWER: GLOSSARIO -->
+<div class="drawer" id="drawer-bic">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">📖 Glossario</div>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1rem;text-align:center;gap:1rem;">
+      <div style="font-size:2.5rem;">🔒</div>
+      <div style="font-size:.9rem;font-weight:800;color:var(--txt);">Disponibile nella versione completa</div>
+      <div style="font-size:.72rem;color:var(--txt2);line-height:1.6;max-width:280px;">Glossario completo dalla A alla Z con tutti i termini essenziali del mondo bar: tecniche, attrezzature, stili di servizio e molto altro.</div>
+      <a href="#" id="btn-acquista-gls" class="corso-btn" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;margin-top:.5rem;" target="_blank" rel="noopener">
+        🛒 Acquista ora
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER: CALCOLATORE ABV --><!-- DRAWER: CALCOLATORE ABV -->
+<div class="drawer" id="drawer-abv">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">🔢 Calcolatore ABV%</div>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1rem;text-align:center;gap:1rem;">
+      <div style="font-size:2.5rem;">🔒</div>
+      <div style="font-size:.9rem;font-weight:800;color:var(--txt);">Disponibile nella versione completa</div>
+      <div style="font-size:.72rem;color:var(--txt2);line-height:1.6;max-width:280px;">Calcola la gradazione alcolica stimata del tuo cocktail inserendo gli ingredienti con le relative quantità in ml e le gradazioni alcoliche.</div>
+      <a href="#" id="btn-acquista-abv" class="corso-btn" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;margin-top:.5rem;" target="_blank" rel="noopener">
+        🛒 Acquista ora
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST<!-- TOAST COPIA -->
+<div class="copied-toast" id="copied-toast">Codice copiato! ✓</div>
+
+<script>
+// ═══ KEYBOARD DETECTION — evita lampeggio drawer ═══
+(function(){
+  var initialHeight = window.innerHeight;
+  window.addEventListener('resize', function(){
+    var drawers = document.querySelectorAll('.drawer');
+    if (window.innerHeight < initialHeight * 0.85) {
+      // tastiera aperta
+      drawers.forEach(function(d){ if(d.classList.contains('open')) d.classList.add('keyboard-open'); });
+    } else {
+      // tastiera chiusa
+      drawers.forEach(function(d){ d.classList.remove('keyboard-open'); });
+      initialHeight = window.innerHeight;
+    }
+  });
+})();
+
+// ═══ DRAWER SYSTEM ═══
+var CURRENT_DRAWER = null;
+
+function openDrawer(id) {
+  var drawer = document.getElementById('drawer-' + id);
+  var overlay = document.getElementById('drawer-overlay');
+  var btn = document.getElementById('tbtn-' + id);
+  if (!drawer) return;
+  // se già aperto, chiudi
+  if (CURRENT_DRAWER === id) {
+    closeAllDrawers();
+    return;
+  }
+  closeAllDrawers(true);
+  CURRENT_DRAWER = id;
+  drawer.classList.add('open');
+  overlay.classList.add('show');
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+
+function closeAllDrawers(silent) {
+  document.querySelectorAll('.drawer').forEach(function(d){ d.classList.remove('open'); });
+  document.getElementById('drawer-overlay').classList.remove('show');
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (!silent) CURRENT_DRAWER = null;
+}
+
+// Swipe down per chiudere
+document.querySelectorAll('.drawer-handle').forEach(function(handle) {
+  var startY = 0;
+  handle.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
+  handle.addEventListener('touchend', function(e){
+    if (e.changedTouches[0].clientY - startY > 40) closeAllDrawers();
+  }, {passive:true});
+});
+
+// ═══ [DEMO: copia codice, temperature e calcolatore ABV rimossi] ═══
+</script>
+
+<script>
+// ═══ UTM TRACKING — salva la sorgente originale ═══
+(function(){
+  var LANDING = 'https://danielsportelli.github.io/cocktail-legend/';
+
+  // Leggi UTM dalla URL corrente
+  function getUTM(){
+    var params = new URLSearchParams(window.location.search);
+    var utmKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+    var out = {};
+    utmKeys.forEach(function(k){ if(params.get(k)) out[k]=params.get(k); });
+    return out;
+  }
+
+  // Salva UTM nel localStorage (solo se arriva con UTM valida)
+  var incoming = getUTM();
+  if(Object.keys(incoming).length > 0){
+    localStorage.setItem('cl_utm', JSON.stringify(incoming));
+  }
+
+  // Costruisce URL landing con UTM preserved
+  function buildURL(){
+    var saved = {};
+    try{ saved = JSON.parse(localStorage.getItem('cl_utm')||'{}'); }catch(e){}
+    // Aggiungi content=app-demo per sapere che viene dalla demo
+    saved['utm_content'] = 'app-demo';
+    var url = new URL(LANDING);
+    Object.keys(saved).forEach(function(k){ url.searchParams.set(k, saved[k]); });
+    return url.toString();
+  }
+
+  // Collega tutti i bottoni acquista
+  function linkAcquista(){
+    var ids = ['btn-acquista-header','btn-acquista-vnt','btn-acquista-tmp','btn-acquista-gls','btn-acquista-abv'];
+    ids.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el){ el.href = buildURL(); }
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', linkAcquista);
+  } else {
+    linkAcquista();
+  }
+})();
+</script>
+</body>
+</html>
