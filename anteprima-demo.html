@@ -34,10 +34,8 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 
 /* ═══ BARRA FILTRI — layout orizzontale fisso in cima ═══ */
 .filter-bar{
-  position:sticky;top:0;z-index:50;
-  background:rgba(10,15,30,.92);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--brd);
+  position:sticky;top:0;z-index:1000;
+  background:rgba(10,15,30,.97);
   padding:1.1rem 5% .4rem calc(5% + 36px);
   padding:.6rem 5% .6rem calc(5% + 36px);
 }
@@ -85,15 +83,17 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 
 /* Pannello filtri a tendina */
 .filter-panel{
-  display:grid;
-  grid-template-rows:0fr;
-  transition:grid-template-rows .28s ease;
   overflow:hidden;
+  max-height:0;
+  transition:max-height .28s ease;
 }
-.filter-panel.open{grid-template-rows:1fr}
+.filter-panel.open{
+  max-height:200px;
+}
 .filter-panel-inner{
-  overflow:hidden;
+  overflow:visible;
   padding-top:.65rem;
+  padding-bottom:.4rem;
 }
 
 /* Filtri in riga orizzontale */
@@ -124,15 +124,15 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .fg-btn.open .fg-arrow{transform:rotate(180deg)}
 
 .fg-dropdown{
-  position:absolute;top:calc(100% + 6px);left:0;
+  position:fixed;z-index:2000;
   background:var(--surf);border:1px solid rgba(37,99,235,.2);
   border-radius:11px;padding:.5rem;
   min-width:160px;max-height:220px;overflow-y:auto;
-  z-index:200;
   box-shadow:0 8px 32px rgba(0,0,0,.4);
   display:none
 }
 .fg-dropdown.open{display:block;animation:fdrop .18s ease}
+.fg-dropdown.repositioning{animation:none !important;}
 @keyframes fdrop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .fg-dropdown::-webkit-scrollbar{width:3px}
 .fg-dropdown::-webkit-scrollbar-thumb{background:var(--surf2);border-radius:3px}
@@ -148,6 +148,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .btn-reset-sm:hover{color:#f87171}
 
 /* Checkbox item */
+.ci-disabled{cursor:default !important;}
 .ci{display:flex;align-items:center;gap:7px;padding:5px 7px;border-radius:7px;
   cursor:pointer;transition:all .15s;user-select:none}
 .ci:hover{background:rgba(37,99,235,.1)}
@@ -176,8 +177,17 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .active-tag .x{font-size:.7rem;opacity:.7}
 
 /* MAIN */
-.main{padding:1.25rem 5%}
-.rbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;gap:.5rem}
+.main{padding:.75rem 5% 1.25rem}
+.rbar{
+  position:sticky;
+  top:var(--fb-h, 56px);
+  z-index:95;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.5rem 5%;
+  border-bottom:1px solid var(--brd);
+  gap:.5rem;
+}
 .rcnt{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;
   background:linear-gradient(135deg,var(--blue-l),var(--amber));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -227,30 +237,34 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .card-name{font-size:.86rem;font-weight:700;color:var(--txt);letter-spacing:-.01em;line-height:1.2;text-align:left}
 .badge{flex-shrink:0;font-size:.52rem;font-weight:700;letter-spacing:.05em;
   text-transform:uppercase;padding:.16rem .44rem;border-radius:20px;white-space:nowrap}
-.b-pre{background:rgba(37,99,235,.75);color:#fff}
-.b-after{background:rgba(180,100,0,.85);color:#fff}
-.b-all{background:rgba(21,128,61,.8);color:#fff}
+.b-pre{background:rgba(37,99,235,.15);color:#60a5fa;border-color:rgba(96,165,250,.4)}
+.b-after{background:rgba(234,88,12,.15);color:#fb923c;border-color:rgba(251,146,60,.4)}
+.b-all{background:rgba(21,128,61,.15);color:#4ade80;border-color:rgba(74,222,128,.4)}
 .card-badge{text-shadow:0 1px 2px rgba(0,0,0,.4);box-shadow:0 1px 4px rgba(0,0,0,.3)}
 .card-meta{display:flex;flex-direction:column;gap:.25rem;margin-top:.2rem;align-items:flex-start;width:100%}
+.mrow-garnish{min-height:2.2em;align-items:flex-start;display:flex;}
 .mrow{display:flex;align-items:center;justify-content:flex-start;gap:.3rem;font-size:.72rem;color:var(--txt2)}
 .abv-row{margin-top:.4rem;padding-top:.4rem;border-top:1px solid var(--brd);width:100%;text-align:left;
   display:flex;align-items:center;justify-content:space-between}
 .abv-lbl{font-size:.57rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
 .abv-v{font-size:.69rem;font-weight:700}
-.c-m{color:#4ade80}.c-ma{color:var(--blue-l)}.c-a{color:var(--amber)}.c-va{color:#f87171}
+.cat-row{margin-top:.3rem;width:100%;display:flex;align-items:center;justify-content:space-between}
+.cat-lbl{font-size:.57rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.cat-v{font-size:.69rem;font-weight:500;color:var(--txt2)}
+.c-an{color:#c084fc}.c-b{color:#818cf8}.c-mb{color:#38bdf8}.c-m{color:#34d399}.c-ma{color:#facc15}.c-a{color:#fb923c}.c-va{color:#f87171}
 
 /* MODAL */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);
   z-index:100;display:flex;align-items:center;justify-content:center;
   padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .25s}
 .overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--surf);border:1px solid rgba(37,99,235,.2);border-radius:20px;
+.modal{background:var(--surf);border:1px solid rgba(37,99,235,.2);border-radius:16px;
   max-width:520px;width:100%;max-height:90vh;overflow-y:auto;
   transform:translateY(20px) scale(.97);transition:transform .25s}
 .overlay.open .modal{transform:translateY(0) scale(1)}
-.modal::-webkit-scrollbar{width:4px}
-.modal::-webkit-scrollbar-thumb{background:var(--surf2);border-radius:4px}
-.m-img{width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;border-radius:20px 20px 0 0;background:var(--bg)}
+.modal::-webkit-scrollbar{display:none}
+.modal{-ms-overflow-style:none;scrollbar-width:none;}
+.m-img{width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;border-radius:0;background:var(--bg)}
 .m-img img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
 .m-img-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:.2;z-index:0}
 .m-sap{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem 1.2rem .85rem;
@@ -266,10 +280,9 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   position:sticky;top:0;z-index:20;
   display:flex;align-items:center;justify-content:space-between;
   padding:.55rem .7rem;
-  background:rgba(30,41,59,.92);
-  backdrop-filter:blur(12px);
+  background:rgb(30,41,59);
   border-bottom:1px solid rgba(255,255,255,.07);
-  border-radius:20px 20px 0 0;
+  border-radius:16px 16px 0 0;
 }
 .m-sticky-title{
   font-size:.82rem;font-weight:700;color:var(--txt2);
@@ -322,7 +335,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .unit-btn{flex:1;text-align:center;padding:.3rem .6rem;border-radius:6px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;color:var(--txt2);border:none;background:transparent;font-family:inherit}
 .unit-btn.active{background:var(--blue);color:#fff}
 .m-badges{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.1rem}
-.m-badge{font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.28rem .7rem;border-radius:20px;border:1px solid currentColor}
+.m-badge{font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.28rem .7rem;border-radius:20px;border:1px solid}
 .m-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.65rem;margin-bottom:1.1rem}
 .mi{background:rgba(255,255,255,.03);border:1px solid var(--brd);border-radius:9px;padding:.7rem}
 .mi-lbl{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:.22rem}
@@ -337,7 +350,35 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .prep-row{display:flex;gap:.7rem;font-size:.83rem;color:var(--txt2);align-items:flex-start}
 .prep-num{width:19px;height:19px;background:rgba(37,99,235,.2);color:var(--blue-l);border-radius:50%;
   display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;flex-shrink:0;margin-top:2px}
-.storia{background:rgba(255,255,255,.02);border:1px solid var(--brd);border-radius:9px;padding:.9rem;font-size:.78rem;color:var(--txt2);line-height:1.8}
+.storia{background:rgba(255,255,255,.02);border:1px solid var(--brd);border-radius:9px;padding:.9rem;font-size:.78rem;color:var(--txt2);line-height:1.8;text-align:justify}
+
+/* ── VARIANTI ── */
+.varianti-btn{
+  display:flex;align-items:center;gap:.5rem;
+  width:100%;margin:.9rem 0 0;
+  background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.25);
+  border-radius:10px;padding:.6rem .9rem;
+  font-size:.78rem;font-weight:600;color:var(--blue-l);
+  font-family:inherit;cursor:pointer;transition:all .2s;
+}
+.varianti-btn:hover{background:rgba(37,99,235,.14);border-color:rgba(37,99,235,.45);}
+.varianti-btn svg{flex-shrink:0}
+.varianti-popup{
+  display:none;
+  margin-top:.5rem;
+  margin-bottom:.9rem;
+  background:rgba(37,99,235,.05);
+  border:1px solid rgba(37,99,235,.2);
+  border-radius:10px;overflow:hidden;
+}
+.varianti-popup.open{display:block;}
+.varianti-row{
+  display:flex;flex-direction:column;gap:.15rem;
+  padding:.55rem .9rem;border-bottom:1px solid rgba(255,255,255,.05);
+}
+.varianti-row:last-child{border-bottom:none}
+.varianti-nome{font-size:.8rem;font-weight:700;color:var(--txt)}
+.varianti-note{font-size:.72rem;color:var(--txt2)}
 .empty{grid-column:1/-1;text-align:center;padding:4rem 2rem}
 .empty .ico{font-size:3rem;margin-bottom:1rem;opacity:.4}
 .empty h3{font-size:1.05rem;font-weight:700;margin-bottom:.35rem}
@@ -355,13 +396,13 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 @media(max-width:360px){.grid{grid-template-columns:1fr}}
 
 .corso-btn{
-  display:inline-flex;align-items:center;gap:.55rem;
-  margin-top:1.3rem;
+  display:inline-flex;align-items:center;gap:.4rem;
+  margin-top:1rem;
   background:linear-gradient(135deg,var(--amber),#e8890a);
   color:#0a0f1e;
-  padding:.42rem .95rem;
+  padding:.32rem .75rem;
   border-radius:30px;
-  font-size:.74rem;font-weight:800;
+  font-size:.65rem;font-weight:800;
   letter-spacing:.04em;
   text-decoration:none;
   transition:all .25s;
@@ -373,71 +414,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   background:linear-gradient(135deg,#fbbf24,var(--amber));
 }
 
-/* LOGIN SCREEN */
-.login-overlay{
-  position:fixed;inset:0;z-index:999;
-  background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  padding:1.5rem;
-}
-.login-box{
-  background:var(--surf);
-  border:1px solid rgba(37,99,235,.2);
-  border-radius:20px;
-  padding:2.5rem 2rem;
-  width:100%;max-width:360px;
-  text-align:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-}
-.login-logo{
-  font-size:.65rem;font-weight:700;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--amber);margin-bottom:.5rem;
-}
-.login-title{
-  font-size:1.9rem;font-weight:900;letter-spacing:-.04em;
-  background:linear-gradient(135deg,var(--blue-l),var(--amber));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;margin-bottom:.35rem;
-}
-.login-sub{
-  font-size:.82rem;color:var(--txt2);margin-bottom:1.8rem;line-height:1.5;
-}
-.login-input-wrap{position:relative;margin-bottom:.85rem}
-.login-input{
-  width:100%;background:#0a0f1e;border:1px solid var(--brd);
-  border-radius:10px;padding:.7rem 2.8rem .7rem .9rem;
-  font-size:.9rem;font-family:inherit;color:var(--txt);
-  outline:none;transition:border-color .2s,box-shadow .2s;
-  letter-spacing:.12em;
-}
-.login-input::placeholder{color:var(--dim);letter-spacing:0}
-.login-input:focus{border-color:rgba(37,99,235,.5);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-.login-eye{
-  position:absolute;right:4px;top:50%;transform:translateY(-50%);
-  background:none;border:none;color:var(--dim);cursor:pointer;
-  padding:10px;line-height:1;
-  font-size:1.1rem;
-  z-index:10;
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
-}
-.login-btn{
-  width:100%;
-  background:linear-gradient(135deg,var(--amber),#e8890a);
-  color:#0a0f1e;border:none;border-radius:10px;
-  padding:.75rem;font-size:.88rem;font-weight:800;
-  font-family:inherit;cursor:pointer;letter-spacing:.04em;
-  transition:all .25s;
-  box-shadow:0 4px 18px rgba(245,158,11,.3);
-}
-.login-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(245,158,11,.45)}
-.login-err{
-  font-size:.75rem;color:#f87171;margin-top:.6rem;
-  min-height:1.1rem;
-}
-.login-note{
-  font-size:.7rem;color:var(--dim);margin-top:1.2rem;line-height:1.5;
-}
+
 
 .pdf-btn{
   display:inline-flex;align-items:center;gap:.55rem;
@@ -489,7 +466,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 /* ═══ BOTTOM TAB BAR ═══ */
 .tab-bar{
   position:fixed;bottom:0;left:0;right:0;
-  z-index:300;
+  z-index:600;
   background:rgba(18,24,40,.96);
   backdrop-filter:blur(16px);
   border-top:1px solid var(--brd);
@@ -506,13 +483,18 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   touch-action:manipulation;
 }
 .tab-btn:hover,.tab-btn.active{color:var(--amber);}
-.tab-btn-ico{font-size:1.15rem;line-height:1;}
+.tab-btn-ico{line-height:1;display:flex;align-items:center;justify-content:center;}
+.tab-btn-ico svg{transition:all .2s;}
+.tab-btn.active .tab-btn-ico svg{stroke:var(--amber);}
+.tab-btn.active .tab-btn-ico svg rect,.tab-btn.active .tab-btn-ico svg polygon{fill:var(--amber);fill-opacity:0.2;}
+.tab-btn.active .tab-btn-ico svg circle{fill:var(--amber);}
+.tab-btn.active .tab-btn-ico svg .filled-circle{fill:var(--amber);}
 .tab-btn-lbl{font-size:.58rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
 
 /* Drawer (sale dal basso) */
 .drawer{
   position:fixed;left:0;right:0;bottom:-100%;
-  z-index:250;
+  z-index:500;
   background:var(--surf);
   border-top:1px solid rgba(37,99,235,.15);
   border-radius:18px 18px 0 0;
@@ -523,7 +505,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   transform:translateZ(0);
   will-change:transform;
 }
-.drawer.open{bottom:56px;}
+.drawer.open{bottom:calc(var(--tab-bar-h, 56px) - 6px);}
 .drawer.keyboard-open{
   bottom:0 !important;
   max-height:50vh;
@@ -546,7 +528,9 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 /* overlay scuro dietro drawer */
 .drawer-overlay{
-  position:fixed;inset:0;z-index:249;
+  position:fixed;inset:0;
+  bottom:var(--tab-bar-h, 56px);
+  z-index:499;
   background:rgba(0,0,0,.45);
   opacity:0;pointer-events:none;
   transition:opacity .3s;
@@ -626,13 +610,15 @@ body{padding-bottom:56px;}
 <body>
 
 
+
+
 <header class="hdr">
   <div class="hdr-inner">
     <div class="hdr-lbl">Daniel Sportelli</div>
     <h1>Cocktail Legend</h1>
     <p>Trova il drink perfetto in meno di 10 secondi</p>
-    <a href="#" id="btn-acquista-header" class="corso-btn" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;" target="_blank" rel="noopener">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    <a href="https://danielsportelli.github.io/cocktail-legend/" target="_blank" rel="noopener" class="corso-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
       Acquista la versione completa
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
@@ -640,39 +626,37 @@ body{padding-bottom:56px;}
 </header>
 
 <!-- BARRA FILTRI STICKY -->
-<div class="sg-banner" style="cursor:default;opacity:.7;">
+<div class="sg-banner">
   <div class="sg-banner-ico">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
   </div>
   <div class="sg-banner-text">
     <span class="sg-banner-title">Spirits Genesis</span>
     <span class="sg-banner-sub">Disponibile solo nella versione completa</span>
   </div>
-  <div class="sg-banner-dl" style="color:var(--dim);">
-    🔒 Bloccato
-  </div>
+  <div class="sg-banner-dl">🔒 Bloccato</div>
 </div>
 <!-- BOTTOM TAB BAR -->
 <div class="tab-bar" id="tab-bar">
   <button class="tab-btn" id="tbtn-vnt" onclick="openDrawer('vnt')">
-    <span class="tab-btn-ico">⭐</span>
+    <span class="tab-btn-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><polygon points="12,3 15.09,8.26 21,9.27 16.5,13.64 17.62,19.64 12,16.73 6.38,19.64 7.5,13.64 3,9.27 8.91,8.26"/></svg></span>
     <span class="tab-btn-lbl">Vantaggi</span>
   </button>
   <button class="tab-btn" id="tbtn-tmp" onclick="openDrawer('tmp')">
-    <span class="tab-btn-ico">🌡️</span>
+    <span class="tab-btn-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="10" y="3" width="4" height="11" rx="2"/><circle cx="12" cy="17" r="3.5"/><line x1="12" y1="14" x2="12" y2="9"/></svg></span>
     <span class="tab-btn-lbl">Temperature</span>
   </button>
   <button class="tab-btn" id="tbtn-bic" onclick="openDrawer('bic')">
-    <span class="tab-btn-ico">📖</span>
+    <span class="tab-btn-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7a1 1 0 0 1 1 1v14a1 1 0 0 0-1-1H4z"/><path d="M20 4h-7a1 1 0 0 0-1 1v14a1 1 0 0 1 1-1h7z"/></svg></span>
     <span class="tab-btn-lbl">Glossario</span>
   </button>
   <button class="tab-btn" id="tbtn-abv" onclick="openDrawer('abv')">
-    <span class="tab-btn-ico">🔢</span>
+    <span class="tab-btn-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><rect x="7" y="5" width="10" height="4" rx="1"/><circle cx="8" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="8" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1" fill="currentColor" stroke="none"/></svg></span>
     <span class="tab-btn-lbl">Calc. ABV</span>
   </button>
 </div>
-<div class="drawer-overlay" id="drawer-overlay" onclick="closeAllDrawers()"></div>
-<div class="filter-bar">
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="filter-bar" id="filter-bar">
   <div class="filter-top">
     <div class="srch-wrap">
       <svg class="srch-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -687,10 +671,9 @@ body{padding-bottom:56px;}
     <button class="btn-favonly" id="btn-favonly">❤️</button>
     <button class="btn-reset-sm" id="btn-reset">Reset</button>
   </div>
-</div>
 
-<!-- Pannello a tendina -->
-<div class="filter-panel" id="filter-panel">
+  <!-- Pannello a tendina -->
+  <div class="filter-panel" id="filter-panel">
     <div class="filter-panel-inner">
       <div class="filter-groups">
         <div class="fg">
@@ -736,33 +719,33 @@ body{padding-bottom:56px;}
           <div class="fg-dropdown" id="dd-bic"></div>
         </div>
       </div>
-      <!-- Tag filtri attivi -->
-      <div class="active-tags" id="active-tags"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="rbar" id="rbar">
+  <div>
+    <span class="rcnt" id="rcnt">0</span>
+    <span class="rlbl">cocktail trovati</span>
+  </div>
+  <div class="rbar-right">
+    <div class="sort-wrap" style="width:100%">
+      <div class="sort-lbl">⇅ Ordina per</div>
+      <select class="sort-sel" id="srt">
+        <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
+        <option value="abv+">ABV crescente</option>
+        <option value="abv-">ABV decrescente</option>
+      </select>
     </div>
   </div>
 </div>
 
 <!-- MAIN -->
 <main class="main">
-  <div class="rbar">
-    <div>
-      <span class="rcnt" id="rcnt">0</span>
-      <span class="rlbl">cocktail trovati</span>
-    </div>
-    <div class="rbar-right">
-      <div class="sort-wrap" style="width:100%">
-        <div class="sort-lbl">
-          ⇅ Ordina per
-        </div>
-        <select class="sort-sel" id="srt">
-          <option value="az">A → Z</option>
-          <option value="za">Z → A</option>
-          <option value="abv+">ABV crescente</option>
-          <option value="abv-">ABV decrescente</option>
-        </select>
-      </div>
-    </div>
-  </div>
+  <div class="active-tags" id="active-tags" style="margin-bottom:.5rem"></div>
   <div class="grid" id="grid"></div>
 </main>
 
@@ -770,7 +753,7 @@ body{padding-bottom:56px;}
 <div class="overlay" id="ov">
   <div class="modal">
     <div class="m-sticky-bar">
-      <button class="m-sticky-heart" id="m-fav-heart" title="Preferito">🤍</button>
+      <button class="m-sticky-heart" id="m-fav-heart" title="Preferito"></button>
       <div class="m-sticky-title" id="m-sticky-title"></div>
       <button class="m-sticky-close" id="m-close">&#x2715;</button>
     </div>
@@ -791,6 +774,7 @@ body{padding-bottom:56px;}
       <div class="m-grid" id="m-grid"></div>
       <div class="sec">Ingredienti</div>
       <div class="ing-list" id="m-ing"></div>
+      <div id="m-varianti-wrap"></div>
       <div class="sec">Preparazione</div>
       <div class="prep-list" id="m-prep"></div>
       <div class="sec" style="margin-top:1.1rem">Storia</div>
@@ -801,44 +785,35 @@ body{padding-bottom:56px;}
 
 <script>
 
-// ═══════════════════════════════════
-// PASSWORD — cambia il valore qui sotto quando vuoi
-
-
 var DATA = [
-// ═══════════════════════════════════════════
-// COCKTAIL DATABASE — aggiungi nuovi drink QUI
-// Copia il blocco generato da Claude PRIMA della
-// riga che dice: // ← FINE DATABASE
-// ═══════════════════════════════════════════
-{"name":"20th Century","distillato":["Gin"],"categoria":"Pre dinner","abv":"Alto","sapori":["Agrumato","Setoso","Raffinato"],"garnish":"Zest di limone","ingredienti":[["45 ml","Gin"],["15 ml","Lillet blanc"],["15 ml","Liquore al cacao bianco"],["15 ml","Succo di limone"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"Il 20th Century Cocktail nasce nei primi anni \u201930 come omaggio al celebre treno \u201cTwentieth Century Limited\u201d, simbolo del lusso e dell\u2019efficienza ferroviaria americana che collegava New York a Chicago e trasportava personalit\u00e0 di spicco dell\u2019epoca. Ideato da C.A. Tuck e pubblicato nel Caf\u00e9 Royal Cocktail Book del 1937, rappresentava l\u2019eleganza e la raffinatezza dei viaggi di quel periodo. Dopo un lungo oblio, \u00e8 stato riscoperto nei primi anni 2000, tornando a essere apprezzato nei cocktail bar d\u2019autore. Curiosa la differenza tra il Lillet originale, pi\u00f9 amaro, e quello odierno, che ne ha modificato leggermente il profilo nel tempo, senza intaccarne il fascino storico.","frizzante":false,"bicchiere":"Coppetta"},
-{"name":"Abbey","distillato":["Gin"],"categoria":"Pre dinner","abv":"Alto","sapori":["Agrumato","Fruttato","Morbido"],"garnish":"Twist di arancia","ingredienti":[["45 ml","Gin"],["22,5 ml","Succo d\u2019arancia"],["15 ml","Vermouth rosso"],["2 dash","Angostura bitters"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Abbey nasce tra le due guerre e compare per la prima volta nel Savoy Cocktail Book del 1930 di Harry Craddock, icona della mixology classica. Legato al prestigioso Savoy Hotel di Londra, rappresenta un esempio di eleganza minimalista e versatilit\u00e0, apprezzato tanto come aperitivo quanto come drink da brunch. Il suo nome resta avvolto nel mistero, forse legato a un riferimento londinese, mentre nel tempo \u00e8 stato spesso confuso con il Bronx, da cui si distingue per carattere pi\u00f9 morbido. Pur rimasto a lungo in secondo piano, oggi \u00e8 riscoperto come piccola gemma dimenticata, capace di unire fascino storico e semplicit\u00e0 raffinata.","frizzante":false,"bicchiere":"Coppetta"},
-{"name":"Adonis","distillato":["Sherry"],"categoria":"Pre dinner","abv":"Medio","sapori":["Elegante","Secco","Aromatico"],"garnish":"Zest di arancia","ingredienti":[["45 ml","Sherry fino"],["45 ml","Vermouth rosso"],["2 dash","Orange bitters"]],"prep":["Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo","Mescolare delicatamente per circa 20 secondi","Filtrare in una coppetta raffreddata"],"storia":"L\u2019Adonis nacque negli anni \u201980 dell\u2019Ottocento per celebrare un\u2019opera teatrale di successo a Broadway, divenendo presto simbolo di eleganza e cultura. Gi\u00e0 apprezzato prima della Proibizione, \u00e8 uno dei pochi cocktail storici sopravvissuti al tempo, tornato in auge nel revival contemporaneo come scelta raffinata e legata al mondo artistico newyorkese. Considerato audace per l\u2019epoca grazie all\u2019uso dello sherry con vermouth, rappresenta un precursore della mixology moderna e, con il suo basso tenore alcolico, resta un esempio di sobriet\u00e0 e fascino senza tempo.","frizzante":false,"bicchiere":"Coppetta"},
-{"name":"Affinity","distillato":["Scotch Whisky"],"categoria":"Pre dinner","abv":"Molto alto","sapori":["Intenso","Raffinato","Speziato"],"garnish":"Zest di arancia","ingredienti":[["45 ml","Scotch Whisky"],["22,5 ml","Vermouth rosso"],["22,5 ml","Vermouth dry"],["2 dash","Angostura bitters"]],"prep":["Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo","Mescolare delicatamente per circa 20 secondi","Filtrare in una coppetta raffreddata"],"storia":"L\u2019Affinity nacque nei primi decenni del Novecento durante l\u2019epoca d\u2019oro della mixology classica. Composto da Scotch whisky, vermouth dolce e secco e Angostura bitters, \u00e8 un\u2019elegante alternativa al Manhattan con carattere distintivo. Il nome riflette la perfetta sintonia tra ingredienti. Comparso in libri iconici di Harry Craddock e Hugo Ensslin, era apprezzato nei club privati e cene eleganti. Diffuso nei circoli londinesi e newyorkesi degli anni \u201930, considerato \u201ccugino\u201d del Rob Roy, fu riscoperto nel revival mixology anni 2000. Perfetto per serate invernali e degustazioni, simboleggia la classicit\u00e0 senza tempo e la raffinatezza del whisky in un drink bilanciato.","frizzante":false,"bicchiere":"Coppetta"},
-{"name":"Airmail","distillato":["Rum"],"categoria":"All day","abv":"Medio","sapori":["Rinfrescante","Esotico","Frizzante"],"garnish":"Nessuna","ingredienti":[["30 ml","Rum scuro"],["22,5 ml","Succo di lime"],["15 ml","Honey mix"],["60 ml","Prosecco"]],"prep":["Shakerare tutto con ghiaccio (tranne il prosecco)","Filtrare (double strain) in una coppetta raffreddata","Completare con il prosecco"],"storia":"L\u2019Airmail \u00e8 un cocktail classico nato negli anni \u201940 nei bar tiki, pensato per evocare l\u2019emozione del volo e l\u2019esotismo dei viaggi internazionali. Composto da rum (bianco o agricole), lime fresco, sciroppo di zucchero o miele e completato con Champagne, unisce il calore caraibico al lusso delle bollicine. Il nome richiama il servizio postale aereo, simbolo di velocit\u00e0 e modernit\u00e0. Diventato icona di eleganza, fu servito in eventi esclusivi celebrando l\u2019era dell\u2019aviazione. La sua versatilit\u00e0 permette varianti con diversi rum e spumanti. Perfetto come aperitivo sofisticato, \u00e8 apprezzato in feste tropicali e competizioni di mixology, dove continua a ispirare bartender moderni mantenendo vivo il legame con la tradizione esotica.","frizzante":true,"bicchiere":"Coppetta"},
-{"name":"Alabama Slammer","distillato":["Southern Comfort"],"categoria":"All day","abv":"Medio alto","sapori":["Dolce","Fruttato","Avvolgente"],"garnish":"Fetta d\u2019arancia e ciliegina","ingredienti":[["30 ml","Southern Comfort"],["30 ml","Liquore all\u2019amaretto"],["30 ml","Sloe Gin"],["60 ml","Succo d\u2019arancia"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"],"storia":"L\u2019Alabama Slammer nacque negli anni \u201970 nei bar dei campus universitari americani, probabilmente in Alabama, come drink semplice e potente per serate studentesche. Riflette la tendenza dell\u2019epoca per cocktail dolci e colorati. Negli anni \u201970-\u201980 divenne simbolo della mixology retr\u00f2 grazie al sapore accessibile e ai colori vivaci. Il nome \u201cSlammer\u201d deriva dalla facilit\u00e0 con cui si beve. Il Southern Comfort, liquore a base whisky con note dolci e fruttate, ne \u00e8 il cuore. Versatile, si serve lungo, short o come shot. Il mix con succo d\u2019arancia crea un vibrante colore arancione-rosso. Classico delle vacanze estive, \u00e8 ideale per feste e barbecue. Nelle serate a tema anni \u201970-\u201980 evoca l\u2019energia di quell\u2019epoca.","frizzante":false,"bicchiere":"Highball"},
-{"name":"Alabazam","distillato":["Brandy"],"categoria":"After dinner","abv":"Alto","sapori":["Agrumato","Speziato","Robusto"],"garnish":"Twist di arancia","ingredienti":[["45 ml","Brandy"],["15 ml","Orange Cura\u00e7ao"],["15 ml","Succo di limone"],["7,5 ml","Sciroppo di zucchero"],["2 dash","Angostura bitters"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Alabazam \u00e8 un cocktail dell\u2019epoca vittoriana apparso nel 1903 nel libro Louis\u2019 Mixed Drinks di Louis Muckensturm, uno dei primi volumi a catalogare i cocktail. Il nome richiama formule magiche, suggerendo un drink deciso e ricco. Con struttura secca e alto tenore alcolico, era perfetto per i gentlemen club di inizio \u201900. Considerato una variazione speziata del Brandy Cocktail, combina brandy, orange Cura\u00e7ao che bilancia con note aggrumate, e Angostura per profondit\u00e0 e finale speziato. Recentemente riscoperto da bartender in cerca di ricette dimenticate dal forte impatto. Perfetto come after dinner da meditazione, \u00e8 poco conosciuto ma amato dagli appassionati di mixology classica per equilibrio e intensit\u00e0.","frizzante":false,"bicchiere":"Coppetta"},
-{"name":"Alaska","distillato":["Gin"],"categoria":"Pre dinner","abv":"Molto alto","sapori":["Erbaceo","Fresco","Aromatico"],"garnish":"Twist di limone","ingredienti":[["45 ml","Gin"],["15 ml","Chartreuse gialla"],["1 dash","Orange bitters"]],"prep":["Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo","Mescolare delicatamente per circa 20 secondi","Filtrare in una coppetta raffreddata"],"storia":"L\u2019Alaska \u00e8 un cocktail classico nato negli anni \u201920-\u201930, citato nel The Savoy Cocktail Book di Harry Craddock (1930). Il nome deriva dal colore dorato che ricorda l\u2019oro della corsa all\u2019oro, non dallo stato americano. Combina gin e Chartreuse Gialla, liquore francese dei monaci certosini con ricetta segreta, pi\u00f9 orange bitters, creando un profilo erbaceo e complesso. Popolare nei primi del \u201900, ha vissuto un revival nei bar di alta classe. Si distingue per l\u2019uso del Chartreuse Gialla rispetto alla versione verde. Perfetto come aperitivo sofisticato per serate eleganti, \u00e8 un drink da meditazione da gustare lentamente, ideale per palati esigenti che amano i classici vintage.","frizzante":false,"bicchiere":"Coppetta"},
-{"name":"Alexander","distillato":["Cognac"],"categoria":"After dinner","abv":"Medio alto","sapori":["Ricco","Cremoso","Goloso"],"garnish":"Noce moscata","ingredienti":[["30 ml","Cognac"],["30 ml","Liquore cacao scuro"],["30 ml","Panna fresca"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata","Grattugiare noce moscata sulla superficie"],"storia":"L\u2019Alexander \u00e8 un cocktail elegante nato agli inizi del XX secolo, debuttando in un ristorante di New York durante un ricevimento di nozze. Combina gin, crema di cacao e panna fresca per un gusto vellutato. Con il tempo il gin fu sostituito dal cognac, creando una variante pi\u00f9 morbida. Divenne popolare negli anni \u201920 durante la Proibizione americana e conquist\u00f2 Hollywood, diventando il preferito di star come John Lennon e Mick Jagger. Si narra fosse stato ideato per un evento nobiliare, simbolo di esclusivit\u00e0. Il perfetto equilibrio tra dolcezza della crema di cacao e calore del distillato lo rende unico. Spesso servito come dessert alcolico durante le festivit\u00e0 natalizie.","frizzante":false,"bicchiere":"Coppetta"},
-{"name":"Americano","distillato":["Bitter Rosso"],"categoria":"Pre dinner","abv":"Medio","sapori":["Amaro","Frizzante","Classico"],"garnish":"Zest di limone + fetta di arancia","ingredienti":[["30 ml","Bitter rosso"],["30 ml","Vermouth rosso"],["30 ml","Soda"]],"prep":["Versare tutto in un bicchiere old fashioned riempito di ghiaccio","Mescolare delicatamente con un bar spoon"],"storia":"L\u2019Americano incarna lo spirito dell\u2019aperitivo italiano, nato nel 1860 quando Gaspare Campari serv\u00ec un drink chiamato Milano-Torino nel suo bar di Milano. Il nome derivava dall\u2019origine degli ingredienti principali: Milano e Torino. Divenne popolare tra i viaggiatori americani negli anni \u201920-\u201930 durante il Proibizionismo, tanto da essere ribattezzato \u201cAmericano\u201d in loro onore. \u00c8 considerato il precursore del Negroni, creato successivamente con l\u2019aggiunta di gin. James Bond lo ordina in Casino Royale di Ian Fleming, definendolo perfetto per calde serate estive. Tra i primi cocktail inclusi nella lista ufficiale dell\u2019IBA, consolid\u00f2 il suo status di classico mondiale. La bassa gradazione alcolica lo rende ideale come aperitivo, perfetto per stuzzicare l\u2019appetito senza sovrastarlo, celebrato durante l\u2019International Vermouth Day.","frizzante":true,"bicchiere":"Old Fashioned"},
-{"name":"Angel Face","distillato":["Gin"],"categoria":"All day","abv":"Molto alto","sapori":["Fruttato","Intenso","Raffinato"],"garnish":"Fetta di mela","ingredienti":[["30 ml","Gin"],["30 ml","Apricot Brandy"],["30 ml","Calvados"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Angel Face \u00e8 un cocktail affascinante e misterioso nato negli anni del Proibizionismo negli Stati Uniti. Il nome \u201cfaccia d\u2019angelo\u201d \u00e8 un\u2019allusione ironica al carattere forte e seducente che maschera la sua intensit\u00e0 con sapori armoniosi. Riflette l\u2019influenza europea e il desiderio di sperimentare durante un\u2019epoca in cui gli alcolici di qualit\u00e0 erano difficili da reperire negli USA. Divenne popolare grazie ai barman emigrati in Europa che portarono la creativit\u00e0 della mixology americana. Incluso nel leggendario Savoy Cocktail Book di Harry Craddock del 1930, il nome stesso poteva essere una metafora per un drink dal gusto proibito ma irresistibile. Il nome romantico e i sapori fruttati evocano fascino e delicatezza, perfetti per serate speciali.","frizzante":false,"bicchiere":"Coppetta"},
-{"name":"Apple Martini","distillato":["Vodka"],"categoria":"All day","abv":"Alto","sapori":["Fresco","Fruttato","Vivace"],"garnish":"Fetta di mela","ingredienti":[["45 ml","Vodka"],["15 ml","Liquore mela verde"],["22,5 ml","Succo di limone"],["15 ml","Sciroppo di zucchero"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Apple Martini, o Appletini, \u00e8 un cocktail nato negli anni \u201990, periodo in cui i drink fruttati e dolci dominavano i bar mondiali. L\u2019origine \u00e8 attribuita al celebre Lola\u2019s West Hollywood, pioniere nel lanciare cocktail innovativi e glamour. Creato come variante fruttata del Martini per una nuova generazione in cerca di alternative meno secche ai classici. Divenne simbolo della mixology anni \u201990 quando i cocktail dolci e colorati dominavano la scena. L\u2019Appletini apparve in numerosi show televisivi e film, diventando il preferito di personaggi iconici come J.D. nella serie Scrubs. Esistono moltissime versioni, alcune con succo di mela fresco o sidro. Il caratteristico colore verde brillante \u00e8 dovuto al liquore alla mela verde. Nonostante le radici americane, \u00e8 oggi apprezzato in tutto il mondo per il gusto accessibile e l\u2019appeal visivo.","frizzante":false,"bicchiere":"Coppetta"},
-{"name":"Army and Navy","distillato":["Gin"],"categoria":"Pre dinner","abv":"Medio alto","sapori":["Agrumato","Mandorlato","Rotondo"],"garnish":"Nessuna","ingredienti":[["50 ml","Gin"],["22,5 ml","Succo di limone"],["15 ml","Sciroppo di orzata"],["2 dash","Angostura bitters"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Army & Navy compare per la prima volta nel Caf\u00e9 Royal Cocktail Book del 1937, pubblicato a Londra da William J. Tarling, bartender e figura centrale del movimento di codifica della mixology dell\u2019epoca. Il drink prende il nome dall\u2019Army & Navy Club, esclusivo circolo privato di Washington D.C. frequentato da ufficiali di alto rango. Nonostante non sia attribuibile a una singola persona, il contesto militare e la diffusione in ambienti elitari ne definiscono l\u2019identit\u00e0: un cocktail per celebrare rigore, classe e senso dell\u2019onore. Presente nei menu di circoli ufficiali come simbolo di prestigio, rappresenta un esempio classico di gin sour rivisitato. Fedele allo spirito militare, \u00e8 essenziale e diretto, senza fronzoli. Ha vissuto una rinascita contemporanea nei cocktail bar moderni attenti alla miscelazione storica.","frizzante":false,"bicchiere":"Coppetta"},
-{"name":"Aviation","distillato":["Gin"],"categoria":"Pre dinner","abv":"Molto alto","sapori":["Floreale","Elegante","Raffinato"],"garnish":"Ciliegina","ingredienti":[["45 ml","Gin"],["15 ml","Maraschino"],["15 ml","Succo di limone"],["7,5 ml","Liquore alla violetta"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"L\u2019Aviation nasce agli albori del XX secolo, quando l\u2019aviazione catturava l\u2019immaginazione collettiva come simbolo di innovazione e libert\u00e0. Creato nel 1916 dal barman Hugo Ensslin al Wallick Hotel di New York, il cocktail deve il nome al suo colore unico: un delicato blu-violaceo evocativo del cielo al tramonto. Durante gli anni \u201920 era simbolo di eleganza e modernit\u00e0 nei salotti newyorkesi. Con il Proibizionismo e il declino della Cr\u00e8me de Violette, cadde nel dimenticatoio per decenni. Negli anni 2000 la riscoperta della ricetta originale da parte di bartender appassionati lo riport\u00f2 allo status di classico senza tempo. La prima apparizione fu nel libro Recipes for Mixed Drinks di Ensslin, rendendolo uno dei primi cocktail documentati con precisione. Perfetto per serate raffinate e eventi vintage anni \u201920-\u201930.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Whiskey Sour","distillato":["Bourbon whisky"],"categoria":"All day","abv":"Alto","sapori":["Ricco","Cremoso","Agrumato"],"garnish":"Zest di arancia + amarena","ingredienti":[["50 ml","Bourbon whiskey"],["30 ml","Succo di limone"],["20 ml","Sciroppo di zucchero"],["","Albume d'uovo o foamer"]],"prep":["Shakerare tutti gli ingredienti senza ghiaccio (dry shake)","Aggiungere ghiaccio e shakerare nuovamente","Filtrare (double strain) in un tumbler basso riempito di ghiaccio (meglio se con chunk)"],"storia":"Il Whiskey Sour è un pilastro della mixology, nato a metà Ottocento come soluzione semplice ed efficace per i marinai britannici e menzionato per la prima volta nel 1862 nel celebre manuale di Jerry Thomas. La sua forza risiede nell'equilibrio perfetto tra elementi contrastanti, capace di offrire un sorso fresco e armonioso, che ha conquistato generazioni di appassionati. Con il tempo, il cocktail si è evoluto in varianti eleganti e raffinate, diventando simbolo della 'golden age' dei cocktail americani e punto di riferimento per il revival della mixology classica degli anni '90. La sua versatilità lo rende adatto a molteplici contesti, dagli aperitivi raffinati alle serate formali, permettendo a chi lo gusta di scoprire la maestria di un equilibrio senza tempo. Ancora oggi il Whiskey Sour rimane un'icona di semplicità e classe.","frizzante":false,"bicchiere":"Tumbler basso"},
+{"name":"Spritz","distillato":["Aperol"],"categoria":"Pre dinner","abv":"Medio basso","sapori":["Amaro","Rinfrescante","Effervescente"],"garnish":"Fetta di arancia","ingredienti":[["90 ml","Prosecco"],["60 ml","Aperol"],["30 ml","Soda"]],"prep":["Versare tutto in un bicchiere highball riempito di ghiaccio","Mescolare delicatamente con un bar spoon dal basso verso l'alto"],"storia":"Lo Spritz nasce nel XIX secolo in Veneto, quando i funzionari austriaci diluivano i vini locali con acqua frizzante, dando origine al termine 'Spritz'. Nel Novecento, l'aggiunta di un bitter come Aperol o Campari ne consolidò l'identità italiana, e dagli anni 2000 lo Spritz Aperol divenne un fenomeno globale, simbolo di convivialità e aperitivo estivo. Originario di città come Venezia e Padova, il cocktail si è diffuso in tutto il mondo, dai bar di New York a quelli di Tokyo, mantenendo un legame con la tradizione regionale. Le infinite varianti, la semplicità della preparazione e il caratteristico colore arancione lo rendono versatile e fotografabile. Oggi lo Spritz è un rito quotidiano e sociale, protagonista di momenti condivisi tra amici, incarnando un equilibrio perfetto tra storia, freschezza e modernità.","frizzante":true,"bicchiere":"Highball","varianti":[{"nome":"Al posto dell'Aperol:","note":"Campari, Select oppure Cynar"}]},
+{"name": "Bee's Knees", "distillato": ["Gin"], "categoria": "All day", "abv": "Alto", "sapori": ["Fresco", "Agrumato", "Morbido"], "garnish": "Zest di limone", "ingredienti": [["50 ml", "Gin"], ["22,5 ml", "Succo di limone"], ["15 ml", "Honey mix"]], "prep": ["Shakerare tutto con ghiaccio", "Filtrare (double strain) in una coppetta raffreddata"], "storia": "Il Bee’s Knees nasce negli anni ’20 durante il Proibizionismo americano, epoca in cui la qualità degli alcolici era scarsa. Per mascherare i difetti del gin clandestino si combinarono miele e limone, creando un mix perfetto. Il nome, “le ginocchia delle api”, era un’espressione idiomatica dell’epoca che indicava qualcosa di straordinario. Uno dei molti cocktail nati per migliorare il sapore del gin distillato in casa, dimostrando come le difficoltà stimolassero l’ingegno. Recentemente riscoperto come tributo alla semplicità, molti bar lo propongono con miele locale o biologico. Molti cocktail bar lo servono per promuovere la salvaguardia delle api, collegandolo a campagne ambientali. Il 20 settembre è il “Bee’s Knees Day”, giornata dedicata al cocktail e alla protezione delle api.", "frizzante": false, "bicchiere": "Coppetta"},
+{"name":"Bramble","distillato":["Gin"],"categoria":"All day","abv":"Alto","sapori":["Agrumato","Dolce","Fruttato"],"garnish":"More","ingredienti":[["50 ml","Gin"],["22,5 ml","Succo di limone"],["15 ml","Sciroppo di zucchero"],["15 ml","Liquore alle more"]],"prep":["Shakerare tutto con ghiaccio (tranne il liquore alle more)","Filtrare in un bicchiere riempito di ghiaccio tritato","Infine versare delicatamente il liquore alle more (float) per creare un effetto visivo"],"storia":"Il Bramble nasce nel cuore di Londra negli anni '80, creato da Dick Bradsell, uno dei padri della moderna mixology britannica. L'ispirazione venne dalle passeggiate d'infanzia sull'Isola di Wight, dove raccoglieva more dai rovi. L'intento era creare un cocktail che unisse tradizione e modernità, affermandosi rapidamente come classico contemporaneo fresco e raffinato. Riconosciuto per semplicità ed equilibrio, ha trovato posto nei migliori menu internazionali come firma di stile. Il nome deriva dalla parola inglese per 'rovo', pianta simbolo della campagna britannica. La tecnica di versare il liquore di more sopra crea un effetto sfumato unico come un dipinto. Rappresenta uno dei contributi di Bradsell alla mixology insieme all'Espresso Martini, incarnando equilibrio tra tradizione e innovazione.","frizzante":false,"bicchiere":"Tumbler basso"},
+{"name":"Daiquiri","distillato":["Rum"],"categoria":"All day","abv":"Medio alto","sapori":["Fresco","Agrumato","Morbido"],"garnish":"Rondella di lime","ingredienti":[["50 ml","Rum"],["22,5 ml","Succo di lime"],["15 ml","Sciroppo di zucchero"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"Il Daiquiri prende il nome da una spiaggia vicino a Santiago de Cuba, inventato nei primi anni del '900 da Jennings Cox, ingegnere americano. Ernest Hemingway lo rese celebre frequentando El Floridita a L'Avana, dove il barman Constantino Ribalaigua Vert perfezionò la variante 'Hemingway Special' senza zucchero e con pompelmo. Era uno dei preferiti di John F. Kennedy. Negli anni '40-'50, con l'ascesa della cultura tiki e il boom del rum, divenne pilastro nei bar mondiali. Con soli tre ingredienti è considerato uno dei cocktail più difficili da bilanciare perfettamente. La spiaggia di Daiquiri era punto strategico nella guerra ispano-americana. Celebrato il 19 luglio nella Giornata internazionale del Daiquiri, in onore del legame con la cultura cubana.","frizzante":false,"bicchiere":"Coppetta","varianti":[{"nome":"Daiquiri Frozen","note":"Frullare tutto con ghiaccio ed eventualmente frutta fresca a scelta"}]},
+{"name":"Gin Basil Smash","distillato":["Gin"],"categoria":"All day","abv":"Medio alto","sapori":["Fresco","Mentolato","Agrumato"],"garnish":"Ciuffo di basilico","ingredienti":[["60 ml","Gin"],["22,5 ml","Succo di limone"],["15 ml","Sciroppo di zucchero"],["6/8","Foglie di basilico"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in un tumbler basso riempito di ghiaccio"],"storia":"Il Gin Basil Smash nasce nel 2008 ad Amburgo per mano di Jörg Meyer, al bar Le Lion, e si afferma rapidamente come icona della mixology moderna grazie alla sua freschezza e semplicità. La combinazione di gin, basilico fresco e succo di limone crea un profilo erbaceo e vivace, immediatamente riconoscibile anche per il suo verde brillante. Il cocktail ha conquistato i bar europei e internazionali, ottenendo premi e diventando simbolo della tendenza a valorizzare ingredienti naturali e sapori autentici. La sua ricetta semplice lo rende perfetto anche per la preparazione domestica, ideale per i mesi estivi e adatto ad accompagnare piatti leggeri. Con la sua versatilità e il fascino contemporaneo, il Gin Basil Smash unisce innovazione e equilibrio, regalando un'esperienza rinfrescante e raffinata.","frizzante":false,"bicchiere":"Tumbler basso"},
+{"name":"Hanky Panky","distillato":["Gin"],"categoria":"Pre dinner","abv":"Molto alto","sapori":["Amaro","Aromatico","Ricco"],"garnish":"Zest di arancia","ingredienti":[["45 ml","Gin"],["45 ml","Vermouth rosso"],["1 bspoon","Fernet"]],"prep":["Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo","Mescolare delicatamente per circa 20 secondi","Filtrare in una coppetta raffreddata"],"storia":"Il Hanky Panky nasce nei primi anni del '900 grazie a Ada Coleman, celebre barlady e capo bartender del Savoy Hotel di Londra, come omaggio all'attore Sir Charles Hawtrey, che desiderava un drink dal gusto 'che colpisse come un pugno'. La sua combinazione unica di gin, vermouth dolce e un tocco di Fernet-Branca conferisce al cocktail complessità, equilibrio e raffinatezza, distinguendolo come una creazione sofisticata e memorabile. Entrato nel celebre Savoy Cocktail Book del 1930, il Hanky Panky divenne presto simbolo della mixology europea, apprezzato dai viaggiatori e durante il proibizionismo americano per la sua eleganza senza tempo. Oggi è celebrato in cocktail week, competizioni internazionali e serate a tema, rappresentando un ponte tra storia e innovazione.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Last Word","distillato":["Gin"],"categoria":"After dinner","abv":"Molto alto","sapori":["Erbaceo","Agrumato","Aromatico"],"garnish":"Ciliegia","ingredienti":[["22,5 ml","Gin"],["22,5 ml","Chartreuse verde"],["22,5 ml","Maraschino"],["22,5 ml","Succo di lime"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in una coppetta raffreddata"],"storia":"Il Last Word nasce negli anni '20, nel pieno del proibizionismo americano, e si distingue come cocktail sofisticato e misterioso, capace di unire eleganza e complessità. Dopo la sua prima apparizione documentata a Detroit, il drink cadde nell'oblio per decenni, fino alla rinascita negli anni 2000, che lo consacrò come icona della mixology moderna. Apprezzato per il perfetto equilibrio tra aromi e intensità, il Last Word ha ispirato numerose varianti e continua a sorprendere per la sua armonia unica. Celebre nei festival e nei menu dei bartender contemporanei, rappresenta un ponte tra tradizione e innovazione, incarnando fascino, mistero e raffinatezza senza tempo, capace di trasportare chi lo gusta in un viaggio nella storia dei cocktail classici.","frizzante":false,"bicchiere":"Coppetta"},
+{"name":"Mint Julep","distillato":["Bourbon whiskey"],"categoria":"After dinner","abv":"Molto alto","sapori":["Mentolato","Rinfrescante","Vivace"],"garnish":"Ciuffo di menta","ingredienti":[["60 ml","Bourbon whiskey"],["2 bspoon","Zucchero bianco"],["10 ml","Acqua"],["10","Foglie di menta"]],"prep":["Direttamente nella julep cup, sciogliere lo zucchero nell'acqua","Aggiungere la menta, il whiskey e mescolare bene col barspoon fino a raggiungere l'aromatizzazione desiderata","Aggiungere un po di ghiaccio tritato e miscelare bene","Infine aggiungere altro ghiaccio tritato per colmare","Servire con cannuccia o un julep strainer"],"storia":"Il Mint Julep ha origini come tonico medicinale. Il nome deriva dall'arabo julab, che significa 'acqua di rose'. I coloni americani sostituirono l'acqua di rose con il bourbon e aggiunsero menta fresca, trasformando la ricetta in un drink rinfrescante. La fama raggiunse l'apice nel 1938 quando fu dichiarato cocktail ufficiale del Kentucky Derby, iconica corsa di cavalli che ancora oggi lo celebra. Ogni anno vengono serviti più di 120.000 Mint Julep durante l'evento, consolidando il suo ruolo di simbolo. F. Scott Fitzgerald e altre figure letterarie del XX secolo lo hanno immortalato nei loro scritti, associandolo a lusso e raffinatezza. La qualità della menta influenza significativamente il sapore; tradizionalmente si utilizza la varietà spearmint, conosciuta come 'Kentucky Colonel'.","frizzante":false,"bicchiere":"Julep cup"},
+{"name":"Old Cuban","distillato":["Rum"],"categoria":"All day","abv":"Medio alto","sapori":["Fresco","Rinfrescante","Frizzante"],"garnish":"Ciuffo di menta","ingredienti":[["45 ml","Rum scuro"],["22,5 ml","Succo di lime"],["15 ml","Sciroppo di zucchero"],["6","Foglie di menta"],["60 ml","Spumante"]],"prep":["Shakerare tutto con ghiaccio (tranne lo spumante)","Filtrare (double strain) in una coppetta raffreddata","Completare con lo spumante"],"storia":"L'Old Cuban nasce nei primi anni 2000 grazie a Audrey Saunders, celebre bartender e fondatrice del bar Pegu Club a New York. Il cocktail è un'interpretazione sofisticata del Mojito, con un tocco di champagne al posto della soda e l'aggiunta di rum invecchiato per un sapore più ricco e complesso. Il nome richiama l'atmosfera di un'epoca d'oro cubana, dove il lusso e il gusto per i cocktail raffinati si incontravano nei club esclusivi dell'Havana. Il cocktail evoca l'immagine glamour dei bar cubani degli anni '30, un'epoca in cui il rum e il jazz dominavano la scena. Da New York a Londra è diventato un classico immancabile nei menu grazie alla sua versatilità. La creazione di Saunders ha ridefinito i canoni della mixology moderna, mostrando come un drink possa essere elegante e accessibile allo stesso tempo.","frizzante":true,"bicchiere":"Coppetta"},
+{"name":"Pisco Punch","distillato":["Pisco"],"categoria":"All day","abv":"Medio alto","sapori":["Agrumato","Esotico","Dolce"],"garnish":"Ananas","ingredienti":[["60 ml","Pisco"],["40 ml","Succo di limone"],["30 ml","Sciroppo d'ananas"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"],"storia":"Il Pisco Punch nacque a San Francisco verso la fine dell'Ottocento, quando la città viveva un periodo di fervore economico e culturale legato alla corsa all'oro e al commercio marittimo. Fu ideato da Duncan Nicol, proprietario del rinomato Bank Exchange Saloon, che ne custodiva gelosamente la ricetta originale. Il drink, preparato con pisco peruviano e un misterioso 'pineapple gum syrup', univa freschezza, dolcezza e una sorprendente intensità, conquistando l'élite americana dell'epoca. Rudyard Kipling lo descrisse come un cocktail 'che va giù come limonata ma ha la forza per uccidere un uomo', a testimonianza del suo fascino ingannevole. Con il Proibizionismo e la chiusura del locale, la ricetta andò perduta, ma il Pisco Punch è stato riscoperto negli anni '90 come uno dei grandi classici dimenticati.","frizzante":false,"bicchiere":"Highball"},
+{"name":"Long Beach Iced Tea","distillato":["Vodka","Gin","Rum"],"categoria":"All day","abv":"Medio","sapori":["Fresco","Fruttato","Agrumato"],"garnish":"Fetta di lime","ingredienti":[["15 ml","Vodka"],["15 ml","Gin"],["15 ml","Rum"],["15 ml","Triple sec"],["22,5 ml","Succo di limone"],["15 ml","Sciroppo di zucchero"],["30 ml","Succo di cranberry"]],"prep":["Shakerare tutto con ghiaccio","Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"],"storia":"Il Long Beach Iced Tea nasce come variante del celebre Long Island Iced Tea, negli Stati Uniti tra gli anni '70 e '80, con l'obiettivo di offrire una versione più fruttata e leggermente più morbida per gli amanti del drink classico. Originariamente concepito per il pubblico giovane delle coste californiane, ha rapidamente conquistato notorietà grazie al suo colore vivace e alla freschezza immediata, diventando simbolo dei locali sulla spiaggia e della cultura americana da aperitivo estivo. Sebbene sia spesso confuso con il Long Island, il Long Beach si distingue per il carattere più fruttato e brillante, incarnando l'idea di un drink divertente e versatile, perfetto per momenti di socialità spensierata.","frizzante":false,"bicchiere":"Highball"},
 // ← FINE DATABASE
-];
+]
 var AF = {cat:[], dis:[], abv:[], sap:[], frz:[], bic:[]};
 var Q = "";
 var RES = [];
 var USE_OZ = false;
 var LAST_IDX = 0;
-var AO = {"Medio":0,"Medio alto":1,"Alto":2,"Molto alto":3};
+var AO = {"Analcolico":0,"Basso":1,"Medio basso":2,"Medio":3,"Medio alto":4,"Alto":5,"Molto alto":6};
 var FMAP = {cat:"categoria", dis:"distillato", abv:"abv"};
 var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", sap:"Sapore", frz:"Frizzante", bic:"Bicchiere"};
 
 // ═══════════ PREFERITI ═══════════
 var FAVS_KEY = "cl_favs";
 var FAV_ONLY = false;
+var HEART_OFF = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
+var HEART_ON  = '<svg width="15" height="15" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
 function loadFavs(){try{return JSON.parse(localStorage.getItem(FAVS_KEY)||"[]");}catch(e){return[];}}
 function saveFavs(arr){try{localStorage.setItem(FAVS_KEY,JSON.stringify(arr));}catch(e){}}
 function isFav(name){return loadFavs().indexOf(name)!==-1;}
@@ -846,30 +821,49 @@ function toggleFav(name){var f=loadFavs();var i=f.indexOf(name);if(i===-1)f.push
 function refreshAllHearts(){
   document.querySelectorAll(".fav-heart").forEach(function(b){
     var n=b.dataset.name;
-    if(isFav(n)){b.classList.add("on");b.textContent="\u2764\uFE0F";}
-    else{b.classList.remove("on");b.textContent="\uD83E\uDD0D";}
+    if(isFav(n)){b.classList.add("on");b.innerHTML=HEART_ON;}
+    else{b.classList.remove("on");b.innerHTML=HEART_OFF;}
   });
 }
 // ═════════════════════════════════
 
 function bclass(b){return b==="Pre dinner"?"b-pre":b==="After dinner"?"b-after":"b-all";}
-function aclass(a){if(a==="Molto alto")return "c-va";if(a==="Alto")return "c-a";if(a==="Medio alto")return "c-ma";return "c-m";}
+function aclass(a){if(a==="Molto alto")return "c-va";if(a==="Alto")return "c-a";if(a==="Medio alto")return "c-ma";if(a==="Medio basso")return "c-mb";if(a==="Basso")return "c-b";if(a==="Analcolico")return "c-an";return "c-m";}
 
 function mlToOz(qty) {
   var norm = qty.replace(",",".");
   var m = norm.match(/^(\d+(?:\.\d+)?)\s*ml$/i);
   if (!m) return qty;
   var ml = parseFloat(m[1]);
-  if (ml===5)    return "1/4 oz";
-  if (ml===7.5)  return "1/4 oz";
-  if (ml===10)   return "1/2 oz";
-  if (ml===15)   return "1/2 oz";
-  if (ml===22.5) return "3/4 oz";
+  // Eccezioni barman (arrotondamento freepour)
+  if (ml===5)    return "¼ oz";
+  if (ml===10)   return "½ oz";
+  if (ml===20)   return "¾ oz";
+  if (ml===25)   return "¾ oz";
+  // Tabella standard (multipli di 7,5 ml)
+  if (ml===7.5)  return "¼ oz";
+  if (ml===15)   return "½ oz";
+  if (ml===22.5) return "¾ oz";
   if (ml===30)   return "1 oz";
-  if (ml===37.5) return "1 1/4 oz";
-  if (ml===45)   return "1 1/2 oz";
-  if (ml===50)   return "1 3/4 oz";
+  if (ml===37.5) return "1¼ oz";
+  if (ml===45)   return "1½ oz";
+  if (ml===50)   return "1¾ oz";
+  if (ml===52.5) return "1¾ oz";
   if (ml===60)   return "2 oz";
+  if (ml===90)   return "3 oz";
+  if (ml===105)  return "3½ oz";
+  if (ml===120)  return "4 oz";
+  // Calcolo automatico per altri valori
+  var oz = ml / 30;
+  var whole = Math.floor(oz);
+  var frac = oz - whole;
+  var fracStr = "";
+  if (Math.abs(frac - 0.25) < 0.05) fracStr = "¼";
+  else if (Math.abs(frac - 0.5)  < 0.05) fracStr = "½";
+  else if (Math.abs(frac - 0.75) < 0.05) fracStr = "¾";
+  if (whole > 0 && fracStr) return whole + fracStr + " oz";
+  if (whole > 0) return whole + " oz";
+  if (fracStr) return fracStr + " oz";
   return ml + " ml";
 }
 function fmtQty(qty){return USE_OZ ? mlToOz(qty) : qty;}
@@ -891,12 +885,23 @@ function uniq(key) {
 }
 
 function countFor(key, val) {
-  if(key==="sap") return DATA.filter(function(c){return c.sapori.indexOf(val)!==-1;}).length;
-  if(key==="dis") return DATA.filter(function(c){return c.distillato.indexOf(val)!==-1||c.ingredienti.some(function(i){return i[1]===val;});}).length;
-  if(key==="frz") return DATA.filter(function(c){return (c.frizzante?"Si":"No")===val;}).length;
-  if(key==="bic") return DATA.filter(function(c){return c.bicchiere===val;}).length;
+  // Filtra con tutti i filtri attivi TRANNE quello della stessa chiave
+  var base = DATA.filter(function(c){
+    if(AF.cat.length && key!=="cat" && AF.cat.indexOf(c.categoria)===-1) return false;
+    if(AF.dis.length && key!=="dis"){var vl2;var ok=AF.dis.some(function(d){vl2=d.toLowerCase();return c.distillato.some(function(x){return x.toLowerCase()===vl2;})||c.ingredienti.some(function(i){return i[1].toLowerCase()===vl2;});});if(!ok)return false;}
+    if(AF.abv.length && key!=="abv" && AF.abv.indexOf(c.abv)===-1) return false;
+    if(AF.sap.length && key!=="sap" && !AF.sap.some(function(s){return c.sapori.indexOf(s)!==-1;})) return false;
+    if(AF.frz.length && key!=="frz" && AF.frz.indexOf(c.frizzante?"Si":"No")===-1) return false;
+    if(AF.bic.length && key!=="bic" && AF.bic.indexOf(c.bicchiere)===-1) return false;
+    if(FAV_ONLY){var favs=loadFavs();if(favs.indexOf(c.name)===-1)return false;}
+    return true;
+  });
+  if(key==="sap") return base.filter(function(c){return c.sapori.indexOf(val)!==-1;}).length;
+  if(key==="dis"){var vl=val.toLowerCase();return base.filter(function(c){return c.distillato.some(function(x){return x.toLowerCase()===vl;})||c.ingredienti.some(function(i){return i[1].toLowerCase()===vl;});}).length;}
+  if(key==="frz") return base.filter(function(c){return (c.frizzante?"Si":"No")===val;}).length;
+  if(key==="bic") return base.filter(function(c){return c.bicchiere===val;}).length;
   var field = FMAP[key] || key;
-  return DATA.filter(function(c){return c[field]===val;}).length;
+  return base.filter(function(c){return c[field]===val;}).length;
 }
 
 function buildDropdown(id, key, items) {
@@ -915,6 +920,7 @@ function buildDropdown(id, key, items) {
       '<span class="ci-n">'+cnt+'</span>';
     div.addEventListener("click", function(e){
       e.stopPropagation();
+      if(this.classList.contains("ci-disabled")) return;
       var k=this.dataset.key, vv=this.dataset.val;
       var arr=AF[k], idx=arr.indexOf(vv);
       var cb=this.querySelector(".cb");
@@ -922,21 +928,72 @@ function buildDropdown(id, key, items) {
       else{arr.splice(idx,1);cb.classList.remove("on");this.classList.remove("on");}
       updateBadges();
       render();
+      updateAllCounts();
+      if(_activeBtn){
+        positionDropdown(_activeBtn.btn, _activeBtn.dd);
+      }
     });
     el.appendChild(div);
   }
 }
 
+function updateAllCounts() {
+  document.querySelectorAll(".ci").forEach(function(div){
+    var k = div.dataset.key, v = div.dataset.val;
+    var cnt = countFor(k, v);
+    var el = div.querySelector(".ci-n");
+    if(el) el.textContent = cnt;
+    // Grigio se 0 e non selezionato
+    if(cnt === 0 && !div.classList.contains("on")){
+      div.style.opacity = "0.4";
+      div.classList.add("ci-disabled");
+    } else {
+      div.style.opacity = "";
+      div.classList.remove("ci-disabled");
+    }
+  });
+}
+
 function initF() {
   buildDropdown("dd-cat","cat",uniq("categoria"));
-  buildDropdown("dd-dis","dis",uniq("distillato"));
-  buildDropdown("dd-abv","abv",["Medio","Medio alto","Alto","Molto alto"]);
+  (function(){
+    var ing = {};
+    DATA.forEach(function(c){
+      c.ingredienti.forEach(function(row){
+        var name = row[1];
+        if(name && name.trim()){
+          var n = name.trim();
+          n = n.charAt(0).toUpperCase() + n.slice(1);
+          ing[n] = true;
+        }
+      });
+    });
+    var list = Object.keys(ing).sort(function(a,b){return a.localeCompare(b,"it");});
+    buildDropdown("dd-dis","dis",list);
+  })();
+  buildDropdown("dd-abv","abv",["Analcolico","Basso","Medio basso","Medio","Medio alto","Alto","Molto alto"]);
   buildDropdown("dd-sap","sap",uniq("sap"));
   buildDropdown("dd-frz","frz",["Si","No"]);
   buildDropdown("dd-bic","bic",uniq("bic"));
 }
 
 // Dropdown toggle per ogni fg-btn
+var _activeBtn = null;
+
+function positionDropdown(btn, dd) {
+  var rect = btn.getBoundingClientRect();
+  var top = rect.bottom + 6;
+  var left = rect.left;
+  // Assicura che non esca dallo schermo a destra
+  var maxLeft = window.innerWidth - 210;
+  if(left > maxLeft) left = maxLeft;
+  dd.style.position = "fixed";
+  dd.style.top = top + "px";
+  dd.style.left = left + "px";
+  dd.style.minWidth = Math.max(rect.width, 200) + "px";
+  dd.classList.remove("repositioning");
+}
+
 document.querySelectorAll(".fg-btn").forEach(function(btn){
   btn.addEventListener("click", function(e){
     e.stopPropagation();
@@ -946,9 +1003,21 @@ document.querySelectorAll(".fg-btn").forEach(function(btn){
     // chiudi tutti
     document.querySelectorAll(".fg-dropdown").forEach(function(d){d.classList.remove("open");});
     document.querySelectorAll(".fg-btn").forEach(function(b){b.classList.remove("open");});
-    if(!isOpen){dd.classList.add("open");this.classList.add("open");}
+    _activeBtn = null;
+    if(!isOpen){
+      dd.classList.add("open");
+      this.classList.add("open");
+      _activeBtn = { btn: this, dd: dd };
+      positionDropdown(this, dd);
+    }
   });
 });
+
+window.addEventListener("scroll", function(){
+  if(_activeBtn){
+    positionDropdown(_activeBtn.btn, _activeBtn.dd);
+  }
+}, {passive:true});
 
 // Chiudi dropdown cliccando fuori
 document.addEventListener("click", function(){
@@ -962,6 +1031,11 @@ document.getElementById("btn-filters").addEventListener("click", function(e){
   var panel = document.getElementById("filter-panel");
   var open = panel.classList.toggle("open");
   this.classList.toggle("open", open);
+  // Chiudi tutte le tendine aperte
+  if (!open) {
+    document.querySelectorAll(".fg-btn.open").forEach(function(btn){ btn.classList.remove("open"); });
+    document.querySelectorAll(".fg-dropdown.open").forEach(function(dd){ dd.classList.remove("open"); });
+  }
 });
 
 function updateBadges() {
@@ -1020,7 +1094,7 @@ function render() {
            c.sapori.join(" ").toLowerCase().indexOf(q)!==-1;
   });}
   if(AF.cat.length){res=res.filter(function(c){return AF.cat.indexOf(c.categoria)!==-1;});}
-  if(AF.dis.length){res=res.filter(function(c){return AF.dis.some(function(d){return c.distillato.indexOf(d)!==-1||c.ingredienti.some(function(i){return i[1]===d;});});});}
+  if(AF.dis.length){res=res.filter(function(c){return AF.dis.some(function(d){var dl=d.toLowerCase();return c.distillato.some(function(x){return x.toLowerCase()===dl;})||c.ingredienti.some(function(i){return i[1].toLowerCase()===dl;});});});}
   if(AF.abv.length){res=res.filter(function(c){return AF.abv.indexOf(c.abv)!==-1;});}
   if(AF.frz.length){res=res.filter(function(c){return AF.frz.indexOf(c.frizzante?"Si":"No")!==-1;});}  
   if(AF.bic.length){res=res.filter(function(c){return AF.bic.indexOf(c.bicchiere)!==-1;});}
@@ -1052,7 +1126,10 @@ function showCards(){
     var c=RES[i];
     var card=document.createElement("div");
     card.className="card";card.style.animationDelay=Math.min(i*35,450)+"ms";
-    if(!c.img)c.img='https://danielsportelli.github.io/cocktail-legend/'+encodeURIComponent(c.name.toLowerCase())+'.JPG';
+    if(!c.img){
+      var imgName=(function(s){var m={};m["\u00e0"]=m["\u00e1"]=m["\u00e2"]=m["\u00e3"]="a";m["\u00e8"]=m["\u00e9"]=m["\u00ea"]=m["\u00eb"]="e";m["\u00ec"]=m["\u00ed"]=m["\u00ee"]=m["\u00ef"]="i";m["\u00f2"]=m["\u00f3"]=m["\u00f4"]=m["\u00f5"]="o";m["\u00f9"]=m["\u00fa"]=m["\u00fb"]=m["\u00fc"]="u";m["\u00e7"]="c";m["\u00f1"]="n";return s.toLowerCase().split("").map(function(c){return m[c]||c;}).join("").replace(/[\u2019\u0027]/g,"").replace(/-/g," ");})(c.name);
+      c.img='https://danielsportelli.github.io/cocktail-legend/'+encodeURIComponent(imgName)+'.JPG';
+    }
     var sapHtml="";
     for(var si=0;si<c.sapori.length;si++){
       sapHtml+='<span class="sap-t">'+c.sapori[si]+'</span>';
@@ -1061,17 +1138,18 @@ function showCards(){
     card.innerHTML=
       '<div class="card-img"><div class="card-ph">&#127864;</div>'+
       '<img data-src="'+c.img+'" alt="'+c.name+'">'+
-      '<button class="fav-heart" data-name="'+c.name.replace(/"/g,"&quot;")+'">'+(isFav(c.name)?"\u2764\uFE0F":"\uD83E\uDD0D")+'</button>'+
-      '<span class="badge card-badge '+bclass(c.categoria)+'">'+c.categoria+'</span>'+
+      '<button class="fav-heart" data-name="'+c.name.replace(/"/g,"&quot;")+'">'+(isFav(c.name)?HEART_ON:HEART_OFF)+'</button>'+
       '<div class="sap-strip">'+sapHtml+'</div></div>'+
       '<div class="card-body">'+
       '<div class="card-top"><div class="card-name">'+c.name+'</div></div>'+
       '<div class="card-meta">'+
       '<div class="mrow">🥃&nbsp;'+(Array.isArray(c.distillato)?c.distillato[0]:c.distillato)+'</div>'+
-      '<div class="mrow">🌿&nbsp;'+c.garnish+'</div>'+
+      '<div class="mrow mrow-garnish">🌿&nbsp;'+c.garnish+'</div>'+
       '</div>'+
       '<div class="abv-row"><span class="abv-lbl">ABV</span>'+
       '<span class="abv-v '+aclass(c.abv)+'">'+c.abv+'</span></div>'+
+      '<div class="cat-row"><span class="cat-lbl">Cat</span>'+
+      '<span class="cat-v">'+c.categoria+'</span></div>'+
       '</div>';
     var img=card.querySelector("img");
     img.onerror=function(){this.style.display="none";};
@@ -1081,13 +1159,13 @@ function showCards(){
       card.querySelector(".fav-heart").addEventListener("click",function(e){
         e.stopPropagation();
         toggleFav(name);
-        if(isFav(name)){this.classList.add("on");this.textContent="\u2764\uFE0F";}
-        else{this.classList.remove("on");this.textContent="\uD83E\uDD0D";}
+        if(isFav(name)){this.classList.add("on");this.innerHTML=HEART_ON;}
+        else{this.classList.remove("on");this.innerHTML=HEART_OFF;}
         // aggiorna cuoricino modal se aperto sullo stesso drink
         var mh=document.getElementById("m-fav-heart");
         if(mh && mh.dataset.name===name){
-          if(isFav(name)){mh.classList.add("on");mh.textContent="\u2764\uFE0F";}
-          else{mh.classList.remove("on");mh.textContent="\uD83E\uDD0D";}
+          if(isFav(name)){mh.classList.add("on");mh.innerHTML=HEART_ON;}
+          else{mh.classList.remove("on");mh.innerHTML=HEART_OFF;}
         }
         if(FAV_ONLY)render();
       });
@@ -1125,6 +1203,31 @@ function openM(i){
     ingHtml+='<div class="ing-row"><span class="ing-q">'+fmtQty(c.ingredienti[ii][0])+'</span><span class="ing-n">'+c.ingredienti[ii][1]+'</span></div>';
   }
   document.getElementById("m-ing").innerHTML=ingHtml;
+
+  // Varianti
+  var vwrap = document.getElementById("m-varianti-wrap");
+  vwrap.innerHTML = "";
+  vwrap.style.marginBottom = (c.varianti && c.varianti.length > 0) ? "1.4rem" : "";
+  if(c.varianti && c.varianti.length > 0){
+    var vbtn = document.createElement("button");
+    vbtn.className = "varianti-btn";
+    vbtn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/><circle cx="12" cy="12" r="3"/></svg> Varianti famose ('+c.varianti.length+')';
+    var vpop = document.createElement("div");
+    vpop.className = "varianti-popup";
+    c.varianti.forEach(function(v){
+      var row = document.createElement("div");
+      row.className = "varianti-row";
+      row.innerHTML = '<div class="varianti-nome">'+v.nome+'</div><div class="varianti-note">'+v.note+'</div>';
+      vpop.appendChild(row);
+    });
+    vbtn.addEventListener("click", function(){
+      vpop.classList.toggle("open");
+      vbtn.style.borderBottomLeftRadius = vpop.classList.contains("open") ? "0" : "";
+      vbtn.style.borderBottomRightRadius = vpop.classList.contains("open") ? "0" : "";
+    });
+    vwrap.appendChild(vbtn);
+    vwrap.appendChild(vpop);
+  }
   var prepHtml="";
   for(var pi=0;pi<c.prep.length;pi++){
     prepHtml+='<div class="prep-row"><span class="prep-num">'+(pi+1)+'</span><span>'+c.prep[pi]+'</span></div>';
@@ -1133,17 +1236,19 @@ function openM(i){
   document.getElementById("m-stor").textContent=c.storia;
   document.getElementById("ov").classList.add("open");
   document.body.style.overflow="hidden";
+  var fb=document.getElementById("filter-bar");if(fb)fb.style.zIndex="0";
   // aggiorna cuoricino sticky bar
   var mh=document.getElementById("m-fav-heart");
   if(mh){
     mh.dataset.name=c.name;
-    if(isFav(c.name)){mh.classList.add("on");mh.textContent="\u2764\uFE0F";}
-    else{mh.classList.remove("on");mh.textContent="\uD83E\uDD0D";}
+    if(isFav(c.name)){mh.classList.add("on");mh.innerHTML=HEART_ON;}
+    else{mh.classList.remove("on");mh.innerHTML=HEART_OFF;}
   }
 }
 
 function closeModal(){var st=document.getElementById("tab-bar");if(st)st.style.display="";
-  document.getElementById("ov").classList.remove("open");document.body.style.overflow="";}
+  document.getElementById("ov").classList.remove("open");document.body.style.overflow="";
+  var fb=document.getElementById("filter-bar");if(fb)fb.style.zIndex="";}
 
 document.getElementById("m-close").addEventListener("click",closeModal);
 document.getElementById("ov").addEventListener("click",function(e){if(e.target===this)closeModal();});
@@ -1153,8 +1258,8 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal()
 document.getElementById("m-fav-heart").addEventListener("click",function(){
   var name=this.dataset.name;if(!name)return;
   toggleFav(name);
-  if(isFav(name)){this.classList.add("on");this.textContent="\u2764\uFE0F";}
-  else{this.classList.remove("on");this.textContent="\uD83E\uDD0D";}
+  if(isFav(name)){this.classList.add("on");this.innerHTML=HEART_ON;}
+  else{this.classList.remove("on");this.innerHTML=HEART_OFF;}
   refreshAllHearts();
   if(FAV_ONLY)render();
 });
@@ -1165,6 +1270,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   this.classList.toggle("active",FAV_ONLY);
   if(!FAV_ONLY){this.blur();}
   render();
+  updateAllCounts();
 });
 document.getElementById("srch").addEventListener("input",function(e){Q=e.target.value;render();});
 document.getElementById("srt").addEventListener("change",render);
@@ -1173,7 +1279,7 @@ document.getElementById("btn-reset").addEventListener("click",function(){
   document.querySelectorAll(".cb").forEach(function(el){el.classList.remove("on");});
   document.querySelectorAll(".ci").forEach(function(el){el.classList.remove("on");});
   document.getElementById("srch").value="";Q="";
-  updateBadges();render();
+  updateBadges();render();updateAllCounts();
 });
 document.getElementById("btn-ml").addEventListener("click",function(){
   USE_OZ=false;
@@ -1190,100 +1296,22 @@ document.getElementById("btn-oz").addEventListener("click",function(){
 
 initF();
 render();
-</script>
 
+function setFbH(){
+  var h = document.getElementById("filter-bar").getBoundingClientRect().height;
+  document.documentElement.style.setProperty("--fb-h", h + "px");
+}
+setFbH();
+window.addEventListener("resize", setFbH);
+document.getElementById("filter-panel").addEventListener("transitionend", setFbH);
 
-<!-- DRAWER: VANTAGGI -->
-<div class="drawer" id="drawer-vnt">
-  <div class="drawer-handle"></div>
-  <div class="drawer-inner">
-    <div class="drawer-header">⭐ Vantaggi esclusivi</div>
-    <p style="font-size:.72rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Acquista Cocktail Legend per sbloccare i tuoi codici coupon esclusivi.</p>
-    <div class="vnt-item">
-      <div class="vnt-item-title">🎓 I miei corsi di Mixology</div>
-      <div class="vnt-item-desc">-20% sui singoli corsi. Non valido sulla promo Bundle.</div>
-      <div class="vnt-code" style="letter-spacing:.2em;color:var(--dim);">••••••••</div>
-    </div>
-    <div class="vnt-item">
-      <div class="vnt-item-title">🍸 Lumian Bar Tools</div>
-      <div class="vnt-item-desc">-20% con minimo d&rsquo;ordine 50&euro;. Non valido durante alcuni periodi dell&rsquo;anno (es. Black Friday, Natale, ecc.).</div>
-      <div class="vnt-code" style="letter-spacing:.2em;color:var(--dim);">••••••••</div>
-    </div>
-    <a href="#" id="btn-acquista-vnt" class="corso-btn" style="display:flex;justify-content:center;margin-top:1rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;padding:.5rem 1.2rem;font-size:.72rem;" target="_blank" rel="noopener">
-      🛒 Acquista ora
-    </a>
-  </div>
-</div>
-
-<!-- DRAWER: TEMPERATURE -->
-<div class="drawer" id="drawer-tmp">
-  <div class="drawer-handle"></div>
-  <div class="drawer-inner">
-    <div class="drawer-header">🌡️ Temperatura &amp; Sentori</div>
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1rem;text-align:center;gap:1rem;">
-      <div style="font-size:2.5rem;">🔒</div>
-      <div style="font-size:.9rem;font-weight:800;color:var(--txt);">Disponibile nella versione completa</div>
-      <div style="font-size:.72rem;color:var(--txt2);line-height:1.6;max-width:280px;">Guida completa alle temperature di servizio per ogni categoria di distillato, con sentori, note di degustazione e principi chiave per una degustazione professionale.</div>
-      <a href="#" id="btn-acquista-tmp" class="corso-btn" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;margin-top:.5rem;" target="_blank" rel="noopener">
-        🛒 Acquista ora
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- DRAWER: GLOSSARIO --><!-- DRAWER: GLOSSARIO -->
-<div class="drawer" id="drawer-bic">
-  <div class="drawer-handle"></div>
-  <div class="drawer-inner">
-    <div class="drawer-header">📖 Glossario</div>
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1rem;text-align:center;gap:1rem;">
-      <div style="font-size:2.5rem;">🔒</div>
-      <div style="font-size:.9rem;font-weight:800;color:var(--txt);">Disponibile nella versione completa</div>
-      <div style="font-size:.72rem;color:var(--txt2);line-height:1.6;max-width:280px;">Glossario completo dalla A alla Z con tutti i termini essenziali del mondo bar: tecniche, attrezzature, stili di servizio e molto altro.</div>
-      <a href="#" id="btn-acquista-gls" class="corso-btn" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;margin-top:.5rem;" target="_blank" rel="noopener">
-        🛒 Acquista ora
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- DRAWER: CALCOLATORE ABV --><!-- DRAWER: CALCOLATORE ABV -->
-<div class="drawer" id="drawer-abv">
-  <div class="drawer-handle"></div>
-  <div class="drawer-inner">
-    <div class="drawer-header">🔢 Calcolatore ABV%</div>
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1rem;text-align:center;gap:1rem;">
-      <div style="font-size:2.5rem;">🔒</div>
-      <div style="font-size:.9rem;font-weight:800;color:var(--txt);">Disponibile nella versione completa</div>
-      <div style="font-size:.72rem;color:var(--txt2);line-height:1.6;max-width:280px;">Calcola la gradazione alcolica stimata del tuo cocktail inserendo gli ingredienti con le relative quantità in ml e le gradazioni alcoliche.</div>
-      <a href="#" id="btn-acquista-abv" class="corso-btn" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;margin-top:.5rem;" target="_blank" rel="noopener">
-        🛒 Acquista ora
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST<!-- TOAST COPIA -->
-<div class="copied-toast" id="copied-toast">Codice copiato! ✓</div>
-
-<script>
-// ═══ KEYBOARD DETECTION — evita lampeggio drawer ═══
-(function(){
-  var initialHeight = window.innerHeight;
-  window.addEventListener('resize', function(){
-    var drawers = document.querySelectorAll('.drawer');
-    if (window.innerHeight < initialHeight * 0.85) {
-      // tastiera aperta
-      drawers.forEach(function(d){ if(d.classList.contains('open')) d.classList.add('keyboard-open'); });
-    } else {
-      // tastiera chiusa
-      drawers.forEach(function(d){ d.classList.remove('keyboard-open'); });
-      initialHeight = window.innerHeight;
-    }
-  });
-})();
-
-// ═══ DRAWER SYSTEM ═══
+// Altezza reale tab-bar per drawer
+function setTabBarH(){
+  var tb = document.querySelector(".tab-bar");
+  if(tb) document.documentElement.style.setProperty("--tab-bar-h", tb.offsetHeight + "px");
+}
+setTabBarH();
+window.addEventListener("resize", setTabBarH);
 var CURRENT_DRAWER = null;
 
 function openDrawer(id) {
@@ -1291,17 +1319,15 @@ function openDrawer(id) {
   var overlay = document.getElementById('drawer-overlay');
   var btn = document.getElementById('tbtn-' + id);
   if (!drawer) return;
-  // se già aperto, chiudi
-  if (CURRENT_DRAWER === id) {
-    closeAllDrawers();
-    return;
-  }
+  if (CURRENT_DRAWER === id) { closeAllDrawers(); return; }
   closeAllDrawers(true);
   CURRENT_DRAWER = id;
   drawer.classList.add('open');
   overlay.classList.add('show');
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
+  var fb=document.getElementById('filter-bar');if(fb)fb.style.zIndex='40';
+  var rb=document.getElementById('rbar');if(rb)rb.style.zIndex='40';
 }
 
 function closeAllDrawers(silent) {
@@ -1309,9 +1335,12 @@ function closeAllDrawers(silent) {
   document.getElementById('drawer-overlay').classList.remove('show');
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   if (!silent) CURRENT_DRAWER = null;
+  if (!silent) {
+    var fb=document.getElementById('filter-bar');if(fb)fb.style.zIndex='';
+    var rb=document.getElementById('rbar');if(rb)rb.style.zIndex='';
+  }
 }
 
-// Swipe down per chiudere
 document.querySelectorAll('.drawer-handle').forEach(function(handle) {
   var startY = 0;
   handle.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
@@ -1320,55 +1349,65 @@ document.querySelectorAll('.drawer-handle').forEach(function(handle) {
   }, {passive:true});
 });
 
-// ═══ [DEMO: copia codice, temperature e calcolatore ABV rimossi] ═══
+document.getElementById('drawer-overlay').addEventListener('click', function(){
+  setTimeout(closeAllDrawers, 50);
+});
+
 </script>
 
-<script>
-// ═══ UTM TRACKING — salva la sorgente originale ═══
-(function(){
-  var LANDING = 'https://danielsportelli.github.io/cocktail-legend/';
 
-  // Leggi UTM dalla URL corrente
-  function getUTM(){
-    var params = new URLSearchParams(window.location.search);
-    var utmKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
-    var out = {};
-    utmKeys.forEach(function(k){ if(params.get(k)) out[k]=params.get(k); });
-    return out;
-  }
+<!-- DRAWER: VANTAGGI -->
+<div class="drawer" id="drawer-vnt">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">Vantaggi esclusivi</div>
+    <p style="font-size:.72rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Acquista Cocktail Legend per sbloccare i tuoi codici coupon esclusivi.</p>
+    <div class="vnt-item">
+      <div class="vnt-item-title">🎓 I miei corsi di Mixology</div>
+      <div class="vnt-item-desc">-20% sui singoli corsi. Non valido sulla promo Bundle.</div>
+      <div class="vnt-code" style="letter-spacing:.35em;color:var(--dim);">• • • • • • • •</div>
+    </div>
+    <div class="vnt-item">
+      <div class="vnt-item-title">🍸 Lumian Bar Tools</div>
+      <div class="vnt-item-desc">-20% con minimo d&rsquo;ordine 50&euro;. Non valido durante alcuni periodi dell&rsquo;anno (es. Black Friday, Natale, ecc.).</div>
+      <div class="vnt-code" style="letter-spacing:.35em;color:var(--dim);">• • • • • • • •</div>
+    </div>
+    <a href="https://danielsportelli.github.io/cocktail-legend/" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--amber);color:#000;font-weight:800;font-size:.9rem;padding:.75rem 1.8rem;border-radius:50px;text-decoration:none;margin-top:1.2rem;">🛒 Acquista ora</a>
+  </div>
+</div>
 
-  // Salva UTM nel localStorage (solo se arriva con UTM valida)
-  var incoming = getUTM();
-  if(Object.keys(incoming).length > 0){
-    localStorage.setItem('cl_utm', JSON.stringify(incoming));
-  }
 
-  // Costruisce URL landing con UTM preserved
-  function buildURL(){
-    var saved = {};
-    try{ saved = JSON.parse(localStorage.getItem('cl_utm')||'{}'); }catch(e){}
-    // Aggiungi content=app-demo per sapere che viene dalla demo
-    saved['utm_content'] = 'app-demo';
-    var url = new URL(LANDING);
-    Object.keys(saved).forEach(function(k){ url.searchParams.set(k, saved[k]); });
-    return url.toString();
-  }
+<!-- DRAWER: TEMPERATURE -->
+<div class="drawer" id="drawer-tmp">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;padding:2rem 1.5rem;">
+    <div style="font-size:3.5rem;margin-bottom:1.2rem;">🔒</div>
+    <div style="font-size:1.15rem;font-weight:700;color:var(--txt);margin-bottom:.8rem;">Disponibile nella versione completa</div>
+    <p style="font-size:.78rem;color:var(--txt2);line-height:1.6;max-width:280px;margin-bottom:1.8rem;">Guida completa alle temperature di servizio per ogni categoria di distillato, con sentori, note di degustazione e principi chiave per una degustazione professionale.</p>
+    <a href="https://danielsportelli.github.io/cocktail-legend/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--amber);color:#000;font-weight:800;font-size:.9rem;padding:.75rem 1.8rem;border-radius:50px;text-decoration:none;">🛒 Acquista ora</a>
+  </div>
+</div>
 
-  // Collega tutti i bottoni acquista
-  function linkAcquista(){
-    var ids = ['btn-acquista-header','btn-acquista-vnt','btn-acquista-tmp','btn-acquista-gls','btn-acquista-abv'];
-    ids.forEach(function(id){
-      var el = document.getElementById(id);
-      if(el){ el.href = buildURL(); }
-    });
-  }
+<!-- DRAWER: GLOSSARIO -->
+<div class="drawer" id="drawer-bic">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;padding:2rem 1.5rem;">
+    <div style="font-size:3.5rem;margin-bottom:1.2rem;">🔒</div>
+    <div style="font-size:1.15rem;font-weight:700;color:var(--txt);margin-bottom:.8rem;">Disponibile nella versione completa</div>
+    <p style="font-size:.78rem;color:var(--txt2);line-height:1.6;max-width:280px;margin-bottom:1.8rem;">Glossario completo dalla A alla Z con tutti i termini essenziali del mondo bar: tecniche, attrezzature, stili di servizio e molto altro.</p>
+    <a href="https://danielsportelli.github.io/cocktail-legend/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--amber);color:#000;font-weight:800;font-size:.9rem;padding:.75rem 1.8rem;border-radius:50px;text-decoration:none;">🛒 Acquista ora</a>
+  </div>
+</div>
 
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', linkAcquista);
-  } else {
-    linkAcquista();
-  }
-})();
-</script>
+<!-- DRAWER: CALCOLATORE ABV -->
+<div class="drawer" id="drawer-abv">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;padding:2rem 1.5rem;">
+    <div style="font-size:3.5rem;margin-bottom:1.2rem;">🔒</div>
+    <div style="font-size:1.15rem;font-weight:700;color:var(--txt);margin-bottom:.8rem;">Disponibile nella versione completa</div>
+    <p style="font-size:.78rem;color:var(--txt2);line-height:1.6;max-width:280px;margin-bottom:1.8rem;">Calcola la gradazione alcolica stimata del tuo cocktail inserendo gli ingredienti con le relative quantità in ml e le gradazioni alcoliche.</p>
+    <a href="https://danielsportelli.github.io/cocktail-legend/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--amber);color:#000;font-weight:800;font-size:.9rem;padding:.75rem 1.8rem;border-radius:50px;text-decoration:none;">🛒 Acquista ora</a>
+  </div>
+</div>
 </body>
 </html>
