@@ -814,15 +814,15 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     .cta-contact a:hover { color: var(--accent); }
 
     /* ─── FOOTER ─── */
-    footer {
-      background: #0a0f1e; border-top: 1px solid var(--border);
-      padding: 3.5rem 6% 2.5rem; text-align: center;
-    }
-    .footer-logo { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
-    .footer-address { font-size: 0.78rem; color: var(--text); line-height: 1.8; margin-bottom: 2rem; }
-    .footer-divider { width: 300px; height: 1px; background: var(--border); margin: 0 auto 2rem; }
-    .footer-disclaimer { font-size: 0.68rem; color: var(--disclaimer); max-width: 600px; margin: 0 auto 2rem; line-height: 1.7; }
-    .footer-copy { font-size: 0.72rem; color: var(--text); }
+footer {
+  background: #0a0f1e; border-top: 1px solid var(--border);
+  padding: 4rem 6% 6rem; text-align: center;
+}
+.footer-logo { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; color: var(--accent); margin-bottom: 0.4rem; }
+.footer-address { font-size: 0.9rem; font-weight: 400; color: var(--text); line-height: 1.7; margin-bottom: 1rem; }
+.footer-divider { width: 300px; height: 1px; background: var(--border); margin: 0 auto 2rem; }
+.footer-disclaimer { font-size: 0.6rem; font-weight: 300; color: #64748b; max-width: 900px; margin: 0 auto 1.5rem; line-height: 1.7; opacity: 0.8; }
+.footer-copy { font-size: 0.8rem; font-weight: 400; color: var(--text); padding-top: 2rem; border-top: 1px solid var(--border); max-width: 600px; margin: 0 auto; }
 
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
@@ -925,6 +925,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       .faq-q { font-size: 0.86rem; }
       /* Footer */
       footer { padding: 2.5rem 5% 2rem; }
+.footer-disclaimer { font-size: 0.5rem; }
     }
 
     /* ── Mobile piccolo (max 479px) ── */
@@ -953,6 +954,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       .cta-right { padding: 3rem 6%; }
       footer { padding: 2rem 6% 1.5rem; }
       .footer-divider { width: 100%; }
+.footer-disclaimer { font-size: 0.5rem; }
     }
 @keyframes ctaPulse {
       0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
@@ -1349,7 +1351,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
         </div>        
         <div>
           <span style="display:block;font-size:2.5rem;font-weight:800;color:rgba(255,255,255,0.2);letter-spacing:-0.04em;line-height:1;">Soon</span>
-          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--disclaimer);margin-top:0.3rem;display:block;white-space:nowrap;">Sempre più ricette — prezzo in aumento</span>
+          <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--disclaimer);margin-top:0.3rem;display:block;white-space:nowrap;">Più ricette e risorse — xx,xx€</span>
         </div>
       </div>
       <a href="https://daniel-sportelli.systeme.io/lista-attesa" class="btn-primary">
@@ -1560,14 +1562,18 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 
 <!-- FOOTER -->
 <footer style="padding-bottom:3rem;">
-  <div class="footer-logo">Cocktail Legend</div>
+  <div class="footer-logo">COCKTAIL LEGEND</div>
   <div class="footer-address">
     Daniel Sportelli<br/>
     Via Circonvallazione Nord, 77<br/>
     24040 Ciserano (BG)
   </div>
-  <div class="footer-disclaimer">Questo sito non fa parte dei siti web di Facebook, Meta Inc., Google LLC o TikTok. Questo sito NON è approvato da Facebook, Google o TikTok in alcun modo. Facebook è un marchio registrato di Meta Inc. Google è un marchio registrato di Google LLC. TikTok è un marchio registrato di ByteDance Ltd.</div>
-  <div class="footer-divider"></div>
+<p class="footer-disclaimer">
+    Questo sito non fa parte dei siti web di Facebook, Meta Inc., Google LLC o TikTok.<br>
+    Inoltre, questo sito NON &egrave; approvato da Facebook, Google o TikTok in alcun modo.<br>
+    Facebook &egrave; un marchio registrato di Meta Inc. Google &egrave; un marchio registrato di Google LLC.<br>
+    TikTok &egrave; un marchio registrato di ByteDance Ltd.
+  </p>
 <div class="footer-copy">© <span id="year"></span> Daniel Sportelli — Tutti i diritti riservati.</div>
 </footer>
 <script>
