@@ -391,9 +391,7 @@ function showCards(){
     var c=RES[i];
     var card=document.createElement("div");
     card.className="card";card.style.animationDelay=Math.min(i*35,450)+"ms";
-    if(!c.img){
-      var imgName=(function(s){var m={};m["\u00e0"]=m["\u00e1"]=m["\u00e2"]=m["\u00e3"]="a";m["\u00e8"]=m["\u00e9"]=m["\u00ea"]=m["\u00eb"]="e";m["\u00ec"]=m["\u00ed"]=m["\u00ee"]=m["\u00ef"]="i";m["\u00f2"]=m["\u00f3"]=m["\u00f4"]=m["\u00f5"]="o";m["\u00f9"]=m["\u00fa"]=m["\u00fb"]=m["\u00fc"]="u";m["\u00e7"]="c";m["\u00f1"]="n";return s.toLowerCase().split("").map(function(c){return m[c]||c;}).join("").replace(/[\u2019\u0027]/g,"").replace(/-/g," ");})(c.name);
-      c.img='https://danielsportelli.github.io/cocktail-legend/immagini/'+encodeURIComponent(imgName)+'.JPG';
+    if(!c.img){ c.img='https://danielsportelli.github.io/cocktail-legend/immagini/'+c.id+'.JPG';
     }
     var sapHtml="";
     for(var si=0;si<c.sapori.length;si++){
@@ -418,6 +416,7 @@ function showCards(){
       '</div>';
     var img=card.querySelector("img");
     img.onerror=function(){this.style.display="none";};
+    img.loading="lazy";
     img.src=c.img;
     // cuoricino card — stopPropagation per non aprire il modal
     (function(name,card){
@@ -445,7 +444,8 @@ function openM(i){
   var c=RES[i];if(!c)return;LAST_IDX=i;
   var img=document.getElementById("m-img");
   img.onerror=function(){this.style.display="none";};
-  img.style.display="block";img.src="";img.src=c.img;img.alt=c.name;
+  img.style.display="block";img.src="";img.loading="lazy";
+    img.src=c.img;img.alt=c.name;
   var sapHtml="";
   for(var si=0;si<c.sapori.length;si++){
     sapHtml+='<span class="m-st">'+c.sapori[si]+'</span>';
