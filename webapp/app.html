@@ -402,6 +402,193 @@
 <!-- TOAST COPIA -->
 <div class="copied-toast" id="copied-toast">Codice copiato! ✓</div>
 
+<script>
+// ═══ KEYBOARD DETECTION — evita lampeggio drawer ═══
+(function(){
+  var initialHeight = window.innerHeight;
+  window.addEventListener('resize', function(){
+    var drawers = document.querySelectorAll('.drawer');
+    if (window.innerHeight < initialHeight * 0.85) {
+      // tastiera aperta
+      drawers.forEach(function(d){ if(d.classList.contains('open')) d.classList.add('keyboard-open'); });
+    } else {
+      // tastiera chiusa
+      drawers.forEach(function(d){ d.classList.remove('keyboard-open'); });
+      initialHeight = window.innerHeight;
+    }
+  });
+})();
+
+// ═══ DRAWER SYSTEM ═══
+var CURRENT_DRAWER = null;
+
+function openDrawer(id) {
+  var drawer = document.getElementById('drawer-' + id);
+  var overlay = document.getElementById('drawer-overlay');
+  var btn = document.getElementById('tbtn-' + id);
+  if (!drawer) return;
+  if (CURRENT_DRAWER === id) {
+    closeAllDrawers();
+    return;
+  }
+  closeAllDrawers(true);
+  CURRENT_DRAWER = id;
+  drawer.classList.add('open');
+  overlay.classList.add('show');
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  // Nascondi filter-bar e rbar sotto il drawer
+  var fb=document.getElementById('filter-bar');if(fb)fb.style.zIndex='40';
+  var rb=document.getElementById('rbar');if(rb)rb.style.zIndex='40';
+}
+
+function closeAllDrawers(silent) {
+  document.querySelectorAll('.drawer').forEach(function(d){ d.classList.remove('open'); });
+  document.getElementById('drawer-overlay').classList.remove('show');
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (!silent) CURRENT_DRAWER = null;
+  // Ripristina z-index solo se chiusura definitiva
+  if (!silent) {
+    var fb=document.getElementById('filter-bar');if(fb)fb.style.zIndex='';
+    var rb=document.getElementById('rbar');if(rb)rb.style.zIndex='';
+  }
+}
+
+// Swipe down per chiudere
+document.querySelectorAll('.drawer-handle').forEach(function(handle) {
+  var startY = 0;
+  handle.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
+  handle.addEventListener('touchend', function(e){
+    if (e.changedTouches[0].clientY - startY > 40) closeAllDrawers();
+  }, {passive:true});
+});
+
+// Overlay click — delay per dare precedenza al click sulle tab
+document.getElementById('drawer-overlay').addEventListener('click', function(){
+  setTimeout(closeAllDrawers, 50);
+});
+
+// ═══ COPIA CODICE (Vantaggi drawer) ═══
+(function(){
+  var toast = document.getElementById('copied-toast');
+  function copyCode(id, code) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', function(){
+      var inp = document.createElement('input');
+      inp.value = code;
+      inp.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+      document.body.appendChild(inp);
+      inp.focus(); inp.setSelectionRange(0, code.length);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch(e){}
+      document.body.removeChild(inp);
+      if (!ok && navigator.clipboard) navigator.clipboard.writeText(code).catch(function(){});
+      toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); }, 2000);
+    });
+  }
+  copyCode('copy-corsi',  'LEGEND20');
+  copyCode('copy-lumian', 'LEGEND20');
+})();
+
+// ═══ TEMPERATURE DRAWER ═══
+(function(){
+  var zonesEl = document.getElementById('tmp-zones-drawer');
+  if (!zonesEl) return;
+  var ZONES = [
+    { range:'< 0\u00b0C',    name:'Sotto Zero',       color:'#4a7acc', sentori:'Percezione quasi nulla. Solo note mentolate ed eucaliptolici resistono.', dist:'Non consigliato per distillati di qualit\u00e0' },
+    { range:'0\u20135\u00b0C',  name:'Freddo da frigo',  color:'#3ab8d4', sentori:'Agrumato, mentolato. Note leggere e volatili ancora percepibili.',        dist:'Vodka ghiacciata' },
+    { range:'4\u20138\u00b0C',  name:'Servizio freddo',  color:'#2da89a', sentori:'Erbe fresche, agrumi, fiori bianchi leggeri. Calore alcolico ridotto.',   dist:'Gin \u00b7 Vodka' },
+    { range:'8\u201313\u00b0C', name:'Fresco temperato', color:'#4db86a', sentori:'Verdi: fico, basilico, erba tagliata. Fruttate fresche: mela verde, pera. Floreali leggeri.', dist:'Grappa giovane \u00b7 Acquaviti bianche \u00b7 Pisco' },
+    { range:'13\u201315\u00b0C',name:'Temperato',        color:'#88bb2a', sentori:'Floreali leggeri, lavanda, spezie dolci. Buon equilibrio freschezza e aroma.', dist:'Rum bianco \u00b7 Tequila blanco \u00b7 Mezcal \u00b7 Sotol \u00b7 Cacha\u00e7a' },
+    { range:'16\u201318\u00b0C',name:'Caldo moderato',   color:'#d4a020', sentori:'Caramello, fruttato maturo, spezie calde, note cerealicole. Complessit\u00e0 emergente.', dist:'Bourbon \u00b7 Rye Whiskey \u00b7 Irish Whiskey \u00b7 Scotch blended \u00b7 Japanese Whisky \u00b7 Tequila reposado \u00b7 Rum a\u00f1ejo \u00b7 Grappa barricata' },
+    { range:'18\u201322\u00b0C',name:'Caldo espressivo', color:'#e8701a', sentori:'Torba, cuoio, frutta secca, spezie intense. Massima espressione aromatica.', dist:'Scotch single malt \u00b7 Whisky torbato \u00b7 Tequila a\u00f1ejo \u00b7 Cognac VS-VSOP \u00b7 Armagnac \u00b7 Calvados' },
+    { range:'20\u201324\u00b0C',name:'Caldo profondo',   color:'#c83820', sentori:'Legnoso, resinoso, balsamico, ambra, vaniglia, cacao. Aromi ricchi e persistenti.', dist:'Cognac XO \u00b7 Armagnac millesimato \u00b7 Rum XO \u00b7 Brandy Riserva-XO' }
+  ];
+  ZONES.forEach(function(z){
+    var d = document.createElement('div');
+    d.className = 'vnt-item';
+    d.style.borderLeft = '3px solid ' + z.color;
+    d.innerHTML = '<div class="vnt-item-title" style="color:' + z.color + '">' + z.range + ' \u2014 ' + z.name + '</div>'
+      + '<div class="vnt-item-desc" style="font-style:italic">' + z.sentori + '</div>'
+      + '<div style="font-size:.68rem;font-weight:600;color:' + z.color + '">' + z.dist + '</div>';
+    zonesEl.appendChild(d);
+  });
+})();
+
+// ═══ CALCOLATORE ABV ═══
+(function(){
+  var wrap = document.getElementById('abv-ingredients');
+  var result = document.getElementById('abv-result');
+  var desc = document.getElementById('abv-desc');
+  var rowIdx = 1;
+
+  function addRow() {
+    var row = document.createElement('div');
+    row.className = 'abv-row-calc';
+    row.style.cssText = 'display:flex;align-items:center;gap:.4rem;margin-top:.5rem;';
+    row.innerHTML = '<input type="number" class="abv-ml" placeholder="ml" min="0" max="500" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
+      + '<span style="color:var(--dim);font-size:.75rem;">ml</span>'
+      + '<input type="number" class="abv-pct" placeholder="%" min="0" max="100" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
+      + '<span style="color:var(--dim);font-size:.75rem;">%</span>'
+      + '<button onclick="this.parentElement.remove();debouncedCalc();" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:.9rem;padding:0 .2rem;">✕</button>';
+    wrap.appendChild(row);
+    row.querySelectorAll('input').forEach(function(i){ i.addEventListener('input', debouncedCalc); });
+  }
+
+  // Style prima riga
+  var firstRow = wrap.querySelector('.abv-row-calc');
+  if (firstRow) firstRow.style.cssText = 'display:flex;align-items:center;gap:.4rem;';
+
+  document.getElementById('abv-add-row').addEventListener('click', addRow);
+  document.getElementById('abv-reset').addEventListener('click', function(){
+    wrap.innerHTML = '';
+    addRow(); addRow();
+    result.textContent = '\u2014';
+    desc.textContent = '';
+    var ae=document.getElementById('abv-alcol');if(ae)ae.textContent='';
+  });
+
+  wrap.querySelectorAll('input').forEach(function(i){ i.addEventListener('input', debouncedCalc); });
+
+  // Aggiungi una seconda riga di default
+  addRow();
+})();
+
+var _abvTimer = null;
+function debouncedCalc(){ clearTimeout(_abvTimer); _abvTimer = setTimeout(calcABV, 400); }
+
+function calcABV() {
+  var rows = document.querySelectorAll('#abv-ingredients .abv-row-calc');
+  var totalVol = 0, totalAlc = 0;
+  rows.forEach(function(row){
+    var ml = parseFloat(row.querySelector('.abv-ml').value) || 0;
+    var pct = parseFloat(row.querySelector('.abv-pct').value) || 0;
+    totalVol += ml;
+    totalAlc += ml * (pct / 100);
+  });
+  var result = document.getElementById('abv-result');
+  var desc = document.getElementById('abv-desc');
+  if (totalVol <= 0) {
+    result.textContent = '\u2014';
+    desc.textContent = '';
+    var ae=document.getElementById('abv-alcol');if(ae)ae.textContent='';
+    return;
+  }
+  var abv = (totalAlc / totalVol * 100).toFixed(1);
+  var label = abv < 10 ? 'Basso' : abv < 20 ? 'Medio' : abv < 30 ? 'Medio-alto' : 'Alto';
+  // Aggiorna solo se il valore è cambiato, evita repaint inutili
+  var newText = abv + '%';
+  var newDesc = label + ' \u2014 ' + totalVol.toFixed(0) + ' ml totali';
+  var newAlcol = 'Alcol etilico puro: ' + totalAlc.toFixed(1) + ' ml';
+  if (result.textContent !== newText) result.textContent = newText;
+  if (desc.textContent !== newDesc) desc.textContent = newDesc;
+  var alcolEl = document.getElementById('abv-alcol');
+  if (alcolEl) alcolEl.textContent = newAlcol;
+
+</script>
+
 <script src="js/js.js"></script>
 </body>
 </html>
