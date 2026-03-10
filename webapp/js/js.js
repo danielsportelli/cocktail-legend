@@ -559,9 +559,6 @@ document.getElementById("btn-oz").addEventListener("click",function(){
   openM(LAST_IDX);
 });
 
-initF();
-render();
-
 function setFbH(){
   var h = document.getElementById("filter-bar").getBoundingClientRect().height;
   document.documentElement.style.setProperty("--fb-h", h + "px");
