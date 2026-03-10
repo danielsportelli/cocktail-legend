@@ -6,10 +6,9 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230f172a' stroke='url(%23g)' stroke-width='3'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232563eb'/><stop offset='1' stop-color='%23f59e0b'/></linearGradient></defs><text x='50' y='67' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='42' fill='%23f59e0b'>CL</text></svg>"/>
 <title>Cocktail Legend - Daniel Sportelli</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/css.css">
 </head>
 <body>
-
 
 <div class="login-overlay" id="login-overlay">
   <div class="login-box">
@@ -200,6 +199,211 @@
   </div>
 </div>
 
-<script src="js/app.js"></script>
+<!-- DRAWER: VANTAGGI -->
+<div class="drawer" id="drawer-vnt">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">Vantaggi esclusivi</div>
+    <p style="font-size:.72rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Ecco i tuoi codici coupon esclusivi riservati agli acquirenti di Cocktail Legend.</p>
+    <div class="vnt-item">
+      <div class="vnt-item-title">🎓 I miei corsi di Mixology</div>
+      <div class="vnt-item-desc">-20% sui singoli corsi. Non valido sulla promo Bundle.</div>
+      <div class="vnt-code" id="copy-corsi">LEGEND20<span class="vnt-code-copy">copia</span></div>
+      <a href="https://danielsportelli.github.io/academy" target="_blank" rel="noopener" class="vnt-link">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        Vai ai corsi
+      </a>
+    </div>
+    <div class="vnt-item">
+      <div class="vnt-item-title">🍸 Lumian Bar Tools</div>
+      <div class="vnt-item-desc">-20% con minimo d&rsquo;ordine 50&euro;. Non valido durante alcuni periodi dell&rsquo;anno (es. Black Friday, Natale, ecc.).</div>
+      <div class="vnt-code" id="copy-lumian">LEGEND20<span class="vnt-code-copy">copia</span></div>
+      <a href="https://www.lumianbartools.com/" target="_blank" rel="noopener" class="vnt-link">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        Vai su Lumian
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER: TEMPERATURE -->
+<div class="drawer" id="drawer-tmp">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">Temperatura &amp; Sentori</div>
+    <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Come la temperatura influenza la percezione aromatica. Pi&#xF9; il distillato &egrave; complesso, pi&#xF9; calore serve per esprimersi.</p>
+    <div id="tmp-zones-drawer"></div>
+    <div style="margin-top:.8rem;padding:.75rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;font-size:.65rem;color:var(--dim);line-height:1.7;">
+      <strong style="color:var(--txt2);display:block;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.1em;">Principi chiave</strong>
+      &#x2744;&#xFE0F; Freddo &rarr; meno molecole aromatiche &rarr; profumo debole<br>
+      &#x1F525; Calore &rarr; aromi si liberano, ma troppo fa dominare l&rsquo;alcol<br>
+      &#x1F943; Pi&#xF9; il distillato &egrave; complesso, pi&#xF9; richiede temperatura elevata
+    </div>
+
+    <div style="margin-top:.8rem;padding:.85rem;background:var(--bg);border:1px solid rgba(201,151,42,.2);border-radius:10px;font-size:.65rem;color:var(--dim);line-height:1.75;">
+      <strong style="color:var(--txt2);display:block;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.1em;">Note di degustazione</strong>
+      <strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Lascia respirare il distillato</strong>
+      Dopo aver versato, lascia riposare il bicchiere senza agitarlo &mdash; in inglese si chiama <em>letting it breathe</em>. La regola empirica: <strong style="color:var(--txt)">1 minuto per ogni anno di invecchiamento</strong>. Un 12 anni &rarr; 12 minuti. Serve a far evaporare le note alcoliche pi&ugrave; pungenti e lasciar emergere la complessit&agrave;.<br><br>
+      <strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Non agitare</strong>
+      A differenza del vino, i distillati vanno tenuti fermi. Agitare il bicchiere disperde gli aromi pi&ugrave; fini e accentua la percezione alcolica.<br><br>
+      <strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Poche gocce d&rsquo;acqua</strong>
+      Aggiungi 2&ndash;3 gocce di acqua fredda direttamente nel bicchiere. Servono a rompere i <em>cluster molecolari</em> che si formano tra etanolo e acqua nel distillato: i composti aromatici intrappolati in queste strutture vengono liberati, diventando pi&ugrave; percepibili al naso e al palato. Questo serve ad aprire il distillato.<br><br>
+      <strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Acqua a parte per il palato</strong>
+      Un bicchiere d&rsquo;acqua fredda tra un assaggio e l&rsquo;altro resetta il palato, evitando che l&rsquo;alcol del sorso precedente copra le note del successivo.<br><br>
+      <strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Il primo sorso non conta</strong>
+      Il palato ha bisogno di scaldarsi. Il primo sorso prepara le mucose: &egrave; il secondo quello in cui percepisci davvero il distillato.
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER: GLOSSARIO -->
+<div class="drawer" id="drawer-bic">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">Glossario</div>
+    <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Tutti i termini essenziali del mondo bar, dalla A alla Z.</p>
+
+    <!-- A -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.4rem 0 .5rem;">A</div>
+    <div class="vnt-item"><div class="vnt-item-title">ABV (Alcohol by Volume)</div><div class="vnt-item-desc">Percentuale di alcol presente in una bevanda.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Aging</div><div class="vnt-item-desc">Invecchiamento di distillati o cocktail in botti o contenitori.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Aromatizzanti</div><div class="vnt-item-desc">Ingredienti come bitter o liquori usati per aggiungere complessità aromatica.</div></div>
+
+    <!-- B -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">B</div>
+    <div class="vnt-item"><div class="vnt-item-title">Barback</div><div class="vnt-item-desc">Assistente del bartender che si occupa di rifornire il banco bar, oltre a mantenere l'area di lavoro organizzata e pulita.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Batching</div><div class="vnt-item-desc">Preparazione anticipata di cocktail in grandi quantità.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Bitters</div><div class="vnt-item-desc">Estratti concentrati di erbe, spezie e radici, usati in piccole dosi.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Blended</div><div class="vnt-item-desc">Ha due significati: nel mondo dei distillati indica una bottiglia composta da distillati provenienti da diversi produttori o distillerie (es. Blended Whisky). Nel mondo della miscelazione indica i drink frullati con ghiaccio, come i Frozen e le Coladas.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Bouncer</div><div class="vnt-item-desc">Tecnica per interrompere il flusso del liquido abbassando la bottiglia durante la versata.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Build</div><div class="vnt-item-desc">Tecnica di preparazione in cui si versano direttamente gli ingredienti nel bicchiere, senza l'utilizzo di shaker o mixing glass.</div></div>
+
+    <!-- C -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">C</div>
+    <div class="vnt-item"><div class="vnt-item-title">Chiarificazione</div><div class="vnt-item-desc">Tecniche per rendere limpido un cocktail.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Cocktail Glass</div><div class="vnt-item-desc">Coppetta per servire cocktail "straight up".</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Colada</div><div class="vnt-item-desc">Come i frozen ma con consistenza simile al frappé.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Crusta</div><div class="vnt-item-desc">Decorazione del bordo del bicchiere.</div></div>
+
+    <!-- D -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">D</div>
+    <div class="vnt-item"><div class="vnt-item-title">Dash</div><div class="vnt-item-desc">Piccolissima quantità di un ingrediente (es. bitters).</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Diluizione</div><div class="vnt-item-desc">Quantità di acqua che si incorpora in un drink tramite ghiaccio o miscelazione.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Dirty Dump</div><div class="vnt-item-desc">Tecnica di servizio in cui tutto il contenuto dello shaker viene versato direttamente nel bicchiere senza filtrare.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Double Strain</div><div class="vnt-item-desc">Filtrazione doppia con l'utilizzo del Fine Strainer per eliminare residui solidi e ghiaccio.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Drop</div><div class="vnt-item-desc">Micro quantità di un liquido, dosata goccia a goccia.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Dry Shake</div><div class="vnt-item-desc">Tecnica per emulsionare albume o aquafaba senza ghiaccio prima di shakerare con ghiaccio.</div></div>
+
+    <!-- F -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">F</div>
+    <div class="vnt-item"><div class="vnt-item-title">Fast Shake</div><div class="vnt-item-desc">Shakerata rapida usata con ghiaccio pilé, spesso in abbinata alla tecnica Dirty Dump.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Fat Washing</div><div class="vnt-item-desc">Tecnica per infondere sapori grassi (es. burro, bacon) in distillati.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Fine Strainer</div><div class="vnt-item-desc">Colino a maglia fine utilizzato per effettuare la double strain.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Flair Bartending</div><div class="vnt-item-desc">Tecniche acrobatiche di bartending con lanci di bottiglie e attrezzi.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Float</div><div class="vnt-item-desc">Tecnica con cui un ingrediente viene versato delicatamente sopra al drink finito, creando uno strato galleggiante. Lo si può versare utilizzando la stessa tecnica con cui vengono creati i drink layered, versando lentamente il liquido sul dorso del bar spoon.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Free Pouring</div><div class="vnt-item-desc">Tecnica di versata senza l'uso del jigger, basata sul conteggio mentale del tempo. È alla base dell'American bartending e garantisce velocità e precisione allo stesso tempo.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Frozen</div><div class="vnt-item-desc">Cocktail frullato con ghiaccio fino a ottenere una consistenza simile a un sorbetto.</div></div>
+
+    <!-- G -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">G</div>
+    <div class="vnt-item"><div class="vnt-item-title">Garnish</div><div class="vnt-item-desc">Decorazione che completa e arricchisce il cocktail.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Ghiaccio Pilé</div><div class="vnt-item-desc">Ghiaccio tritato a scaglie irregolari, ottenuto frantumando cubetti di ghiaccio.</div></div>
+
+    <!-- H -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">H</div>
+    <div class="vnt-item"><div class="vnt-item-title">Hard Shake</div><div class="vnt-item-desc">Shakerata vigorosa usata per creare una texture cremosa. Tecnica codificata e resa famosa dal leggendario bartender giapponese Kazuo Uyeda del Tender Bar di Tokyo.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Highball</div><div class="vnt-item-desc">Ha due significati: il bicchiere alto e stretto usato per i long drink, e una tipologia di cocktail composta da un distillato allungato con acqua gassata o soda (es. Whisky Highball, Tequila Highball), servita in bicchiere alto con ghiaccio.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Homemade</div><div class="vnt-item-desc">Preparazioni fatte in casa (sciroppi, premix ecc).</div></div>
+
+    <!-- I -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">I</div>
+    <div class="vnt-item"><div class="vnt-item-title">Infusione</div><div class="vnt-item-desc">Tecnica per aromatizzare alcolici o per creare alcolati, estraendo aromi e proprietà organolettiche da frutta, erbe e spezie mediante macerazione.</div></div>
+
+    <!-- J -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">J</div>
+    <div class="vnt-item"><div class="vnt-item-title">Jigger</div><div class="vnt-item-desc">Strumento di precisione per dosare i liquidi.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Julep Strainer</div><div class="vnt-item-desc">Strainer a forma di cucchiaio forato usato per filtrare cocktail stir &amp; strain. Nato originariamente come accessorio per bere il Mint Julep — veniva appoggiato sopra il ghiaccio pilé per permettere di sorseggiare il drink senza ingerire il ghiaccio.</div></div>
+
+    <!-- L -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">L</div>
+    <div class="vnt-item"><div class="vnt-item-title">Layered</div><div class="vnt-item-desc">Cocktail composto da strati di liquidi con densità diverse, ottenuti versando lentamente ogni ingrediente sul dorso del bar spoon.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Long Drink</div><div class="vnt-item-desc">Cocktail con grande quantità di parte analcolica, servito in bicchiere alto.</div></div>
+
+    <!-- M -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">M</div>
+    <div class="vnt-item"><div class="vnt-item-title">Mixing Glass</div><div class="vnt-item-desc">Contenitore di vetro o acciaio usato per miscelare cocktail con ghiaccio tramite bar spoon, mediante la tecnica dello stir &amp; strain.</div></div>
+
+    <!-- N -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">N</div>
+    <div class="vnt-item"><div class="vnt-item-title">Naked</div><div class="vnt-item-desc">Cocktail servito senza garnish o decorazioni.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Neat</div><div class="vnt-item-desc">Distillato, amaro o liquore servito liscio, a temperatura ambiente, senza ghiaccio o acqua.</div></div>
+
+    <!-- O -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">O</div>
+    <div class="vnt-item"><div class="vnt-item-title">Old Fashioned</div><div class="vnt-item-desc">Bicchiere basso in stile vintage, usato generalmente per i drink spirit forward.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">On the Rocks</div><div class="vnt-item-desc">Bevanda o cocktail servito con ghiaccio.</div></div>
+
+    <!-- P -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">P</div>
+    <div class="vnt-item"><div class="vnt-item-title">Premix</div><div class="vnt-item-desc">Miscela analcolica (generalmente con frutta fresca) già pronta usata per velocizzare il servizio.</div></div>
+
+    <!-- R -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">R</div>
+    <div class="vnt-item"><div class="vnt-item-title">Rinse</div><div class="vnt-item-desc">Tecnica che consiste nel versare poche gocce o uno spruzzo di un liquido — solitamente un liquore o bitter aromatico — nel bicchiere, ruotarlo per rivestirne le pareti e scartare l'eccesso. Serve ad aromatizzare il bicchiere prima di costruire il drink. Esempio classico: il Sazerac con l'assenzio.</div></div>
+
+    <!-- S -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">S</div>
+    <div class="vnt-item"><div class="vnt-item-title">Shake &amp; Strain</div><div class="vnt-item-desc">Tecnica in cui si shakera il cocktail con ghiaccio e in seguito si filtra con l'utilizzo di uno strainer direttamente nel bicchiere.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Short Drink</div><div class="vnt-item-desc">Cocktail con minor volume di liquido rispetto a un long drink, generalmente servito in un bicchiere piccolo o coppetta, a gradazione più alta. Es. Margarita, Daiquiri.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Spirit Forward</div><div class="vnt-item-desc">Tipologia di short drink in cui il distillato è l'elemento predominante sia a livello di gusto che di struttura. Composto da sola parte alcolica, senza succhi, sciroppi o componenti analcoliche (es. Negroni, Manhattan, Old Fashioned).</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Straight Up</div><div class="vnt-item-desc">Cocktail raffreddato mediante tecnica shake &amp; strain o stir &amp; strain e servito senza ghiaccio, generalmente in coppetta.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Sweet &amp; Sour</div><div class="vnt-item-desc">Premix solitamente composto da succo di limone e sciroppo di zucchero, che costituisce la base dei drink bilanciati tra acidità e dolcezza.</div></div>
+
+    <!-- T -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">T</div>
+    <div class="vnt-item"><div class="vnt-item-title">Throwing</div><div class="vnt-item-desc">Tecnica elegante e scenica per miscelare e ossigenare il drink, versandolo più volte tra due contenitori. Viene utilizzata prevalentemente per il Bloody Mary.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Twist on Classic</div><div class="vnt-item-desc">Versione modificata di un cocktail classico, senza stravolgerne la struttura di base. Altrimenti non si parla più di un twist sul classico.</div></div>
+
+    <!-- Z -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">Z</div>
+    <div class="vnt-item"><div class="vnt-item-title">Zest</div><div class="vnt-item-desc">Scorza di agrume usata come garnish per il drink, e a volte anche per aromatizzarlo sprizzandone gli oli essenziali direttamente sulla superficie (questa tecnica di sprizzare gli oli essenziali si chiama fare il twist).</div></div>
+  </div>
+</div>
+
+<!-- DRAWER: CALCOLATORE ABV -->
+<div class="drawer" id="drawer-abv">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">Calcolatore ABV%</div>
+    <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Calcola la gradazione alcolica stimata del tuo cocktail in base agli ingredienti.</p>
+    <div id="abv-ingredients">
+      <div class="abv-row-calc" data-idx="0">
+        <input type="number" class="abv-ml" placeholder="ml" min="0" max="500" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+        <span style="color:var(--dim);font-size:.75rem;">ml</span>
+        <input type="number" class="abv-pct" placeholder="%" min="0" max="100" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+        <span style="color:var(--dim);font-size:.75rem;">%</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:.6rem;margin-top:.8rem;">
+      <button id="abv-add-row" style="flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem;color:var(--txt2);font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer;">+ Aggiungi ingrediente</button>
+      <button id="abv-reset" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem .8rem;color:var(--dim);font-size:.75rem;font-family:inherit;cursor:pointer;">Reset</button>
+    </div>
+    <div style="margin-top:1rem;padding:1rem;background:var(--bg);border:1px solid rgba(245,158,11,.2);border-radius:12px;text-align:center;will-change:contents;transform:translateZ(0);">
+      <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem;">ABV stimato</div>
+      <div id="abv-result" style="font-size:2.2rem;font-weight:900;color:var(--amber);line-height:1;">—</div>
+      <div id="abv-desc" style="font-size:.68rem;color:var(--txt2);margin-top:.3rem;"></div>
+      <div id="abv-alcol" style="font-size:.72rem;color:var(--dim);margin-top:.4rem;"></div>
+    </div>
+    <div style="margin-top:.85rem;padding:.75rem 1rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;font-size:.65rem;color:var(--dim);line-height:1.6;">
+      <span style="color:var(--txt2);font-weight:700;">💡 ABV vs Alcol etilico</span><br>
+      L'ABV indica la <em>percentuale</em> di alcol sul volume totale del drink — non quanto alcol hai ingerito. Uno shot da 50ml di Gin 40° e un Gin Tonic con gli stessi 50ml di Gin hanno <strong style="color:var(--txt)">identici ml di alcol etilico (20ml)</strong>, ma ABV diverso (40% vs ~10%). Ai fini del tasso alcolemico ciò che conta è la quantità assoluta di alcol etilico, non l'ABV del drink.
+    </div>
+  </div>
+</div>
+
+<!-- TOAST COPIA -->
+<div class="copied-toast" id="copied-toast">Codice copiato! ✓</div>
+
+<script src="js/js.js"></script>
 </body>
 </html>
