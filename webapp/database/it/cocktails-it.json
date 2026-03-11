@@ -52,7 +52,7 @@
     "sapori": [
       "Speziato",
       "Intenso",
-      "Originale"
+      "Classico"
     ],
     "garnish": "Zest di limone",
     "ingredienti": [
@@ -185,7 +185,7 @@
     "sapori": [
       "Speziato",
       "Agrumato",
-      "Sapido"
+      "Deciso"
     ],
     "garnish": "Fetta di lime",
     "ingredienti": [
@@ -363,7 +363,7 @@
     "sapori": [
       "Fresco",
       "Agrumato",
-      "Equilibrato"
+      "Bilanciato"
     ],
     "garnish": "Zest di limone",
     "ingredienti": [
@@ -443,7 +443,7 @@
     "sapori": [
       "Cremoso",
       "Dolce",
-      "Equilibrato"
+      "Bilanciato"
     ],
     "garnish": "Chicchi di caffè",
     "ingredienti": [
@@ -698,7 +698,7 @@
     "sapori": [
       "Fruttato",
       "Fresco",
-      "Armonioso"
+      "Bilanciato"
     ],
     "garnish": "Fetta di arancia + ciliegia",
     "ingredienti": [
@@ -749,7 +749,7 @@
       ],
       [
         "30 ml",
-        "Sherry pedro xinémez"
+        "Sherry pedro ximénez"
       ],
       [
         "10 ml",
@@ -777,7 +777,7 @@
     "sapori": [
       "Dolce",
       "Agrumato",
-      "Frizzante"
+      "Effervescente"
     ],
     "garnish": "Fetta di arancia + ciliegia",
     "ingredienti": [
@@ -814,7 +814,7 @@
     "sapori": [
       "Agrumato",
       "Ricco",
-      "Equilibrato"
+      "Bilanciato"
     ],
     "garnish": "Zest di arancia",
     "ingredienti": [
@@ -1387,7 +1387,7 @@
     "sapori": [
       "Esotico",
       "Avvolgente",
-      "Frizzante"
+      "Effervescente"
     ],
     "garnish": "Mezzo maracuja",
     "ingredienti": [
@@ -1409,7 +1409,7 @@
       ],
       [
         "q.b.",
-        "Polpa di 1/2 passion fruit"
+        "Polpa di passion fruit"
       ],
       [
         "1 shot",
@@ -1696,7 +1696,7 @@
     "abv": "Basso",
     "sapori": [
       "Speziato",
-      "Saporito",
+      "Deciso",
       "Rinfrescante"
     ],
     "garnish": "Nessuna",
@@ -1979,7 +1979,7 @@
       "Vivace",
       "Elegante"
     ],
-    "garnish": "Mora",
+    "garnish": "More",
     "ingredienti": [
       [
         "30 ml",
@@ -2347,7 +2347,7 @@
     "sapori": [
       "Rinfrescante",
       "Esotico",
-      "Frizzante"
+      "Effervescente"
     ],
     "garnish": "Nessuna",
     "ingredienti": [
@@ -2391,7 +2391,7 @@
       "Fruttato",
       "Avvolgente"
     ],
-    "garnish": "Fetta d’arancia e ciliegina",
+    "garnish": "Fetta di arancia + ciliegia",
     "ingredienti": [
       [
         "30 ml",
@@ -2523,7 +2523,7 @@
       ],
       [
         "30 ml",
-        "Liquore cacao scuro"
+        "Liquore al cacao scuro"
       ],
       [
         "30 ml",
@@ -2556,7 +2556,7 @@
     "abv": "Medio",
     "sapori": [
       "Amaro",
-      "Frizzante",
+      "Effervescente",
       "Classico"
     ],
     "garnish": "Zest di limone + fetta di arancia",
@@ -2715,7 +2715,7 @@
       "Elegante",
       "Raffinato"
     ],
-    "garnish": "Ciliegina",
+    "garnish": "Ciliegia",
     "ingredienti": [
       [
         "45 ml",
@@ -2753,7 +2753,7 @@
     "abv": "Medio basso",
     "sapori": [
       "Speziato",
-      "Frizzante",
+      "Effervescente",
       "Rinfrescante"
     ],
     "garnish": "Zest di limone",
@@ -2846,11 +2846,11 @@
       "Fruttato",
       "Speziato"
     ],
-    "garnish": "Ciuffo di menta + mix frutta",
+    "garnish": "Ciuffo di menta + mix di frutta",
     "ingredienti": [
       [
         "50 ml",
-        "Pimm’s No.1"
+        "Pimm's No.1"
       ],
       [
         "120 ml",
@@ -2877,7 +2877,7 @@
     "sapori": [
       "Fresco",
       "Rinfrescante",
-      "Aggressivo"
+      "Potente"
     ],
     "garnish": "Ciuffo di menta",
     "ingredienti": [
@@ -3001,7 +3001,7 @@
     "abv": "Alto",
     "sapori": [
       "Fresco",
-      "Equilibrato",
+      "Bilanciato",
       "Intenso"
     ],
     "garnish": "Rondella di lime",
@@ -3043,7 +3043,7 @@
     "abv": "Medio alto",
     "sapori": [
       "Fresco",
-      "Fiorito",
+      "Floreale",
       "Cremoso"
     ],
     "garnish": "Zest di limone + uva",
@@ -3257,7 +3257,7 @@
     "sapori": [
       "Fresco",
       "Fruttato",
-      "Equilibrato"
+      "Bilanciato"
     ],
     "garnish": "Rondella di lime",
     "ingredienti": [
@@ -3335,7 +3335,7 @@
     "abv": "Medio",
     "sapori": [
       "Esotico",
-      "Frizzante",
+      "Effervescente",
       "Avvolgente"
     ],
     "garnish": "Fetta di ananas + ciliegia",
@@ -3382,8 +3382,8 @@
     "abv": "Medio basso",
     "sapori": [
       "Fresco",
-      "Frizzante",
-      "Popolare"
+      "Effervescente",
+      "Classico"
     ],
     "garnish": "Spicchio di lime",
     "ingredienti": [
@@ -3617,7 +3617,7 @@
     "categoria": "Pre dinner",
     "abv": "Medio basso",
     "sapori": [
-      "Saporito",
+      "Deciso",
       "Speziato",
       "Rinfrescante"
     ],
@@ -3743,7 +3743,7 @@
     "abv": "Alto",
     "sapori": [
       "Morbido",
-      "Caloroso",
+      "Caldo",
       "Raffinato"
     ],
     "garnish": "Zest di arancia",
@@ -3827,7 +3827,7 @@
     "abv": "Alto",
     "sapori": [
       "Agrumato",
-      "Pungente",
+      "Deciso",
       "Secco"
     ],
     "garnish": "Oliva verde",
@@ -3965,7 +3965,7 @@
     "sapori": [
       "Fresco",
       "Aromatico",
-      "Equilibrato"
+      "Bilanciato"
     ],
     "garnish": "Zest di arancia",
     "ingredienti": [
@@ -4006,7 +4006,7 @@
     "sapori": [
       "Aromatico",
       "Secco",
-      "Equilibrato"
+      "Bilanciato"
     ],
     "garnish": "Zest di arancia",
     "ingredienti": [
@@ -4295,7 +4295,7 @@
     "categoria": "Pre dinner",
     "abv": "Medio",
     "sapori": [
-      "Frizzante",
+      "Effervescente",
       "Elegante",
       "Complesso"
     ],
@@ -4422,7 +4422,7 @@
     "abv": "Alto",
     "sapori": [
       "Floreale",
-      "Erbale",
+      "Erbaceo",
       "Raffinato"
     ],
     "garnish": "Zest di arancia",
@@ -4588,7 +4588,7 @@
     "abv": "Medio basso",
     "sapori": [
       "Fresco",
-      "Frizzante",
+      "Effervescente",
       "Rinfrescante"
     ],
     "garnish": "Fetta di lime",
@@ -4748,9 +4748,9 @@
     "categoria": "Pre dinner",
     "abv": "Molto alto",
     "sapori": [
-      "Sapido",
       "Deciso",
-      "Iconico"
+      "Deciso",
+      "Classico"
     ],
     "garnish": "Olive verdi",
     "ingredienti": [
@@ -4788,7 +4788,7 @@
     "sapori": [
       "Tropicale",
       "Speziato",
-      "Revitalizzante"
+      "Rinfrescante"
     ],
     "garnish": "Fetta di lime",
     "ingredienti": [
@@ -4965,7 +4965,7 @@
     "sapori": [
       "Fresco",
       "Fruttato",
-      "Equilibrato"
+      "Bilanciato"
     ],
     "garnish": "Zest di arancia",
     "ingredienti": [
@@ -5006,7 +5006,7 @@
     "sapori": [
       "Fresco",
       "Agrumato",
-      "Originale"
+      "Classico"
     ],
     "garnish": "Uva verde",
     "ingredienti": [
@@ -5052,7 +5052,7 @@
     "sapori": [
       "Intenso",
       "Dolce",
-      "Stimolante"
+      "Caffeinico"
     ],
     "garnish": "Chicchi di caffè",
     "ingredienti": [
@@ -5093,7 +5093,7 @@
     "sapori": [
       "Amaro",
       "Erbaceo",
-      "Frizzante"
+      "Effervescente"
     ],
     "garnish": "Fetta di limone",
     "ingredienti": [
@@ -5125,7 +5125,7 @@
     "abv": "Medio alto",
     "sapori": [
       "Agrumato",
-      "Frizzante",
+      "Effervescente",
       "Floreale"
     ],
     "garnish": "Fiore edibile",
@@ -5319,7 +5319,7 @@
     "sapori": [
       "Fresco",
       "Agrumato",
-      "Frizzante"
+      "Effervescente"
     ],
     "garnish": "Zest di limone",
     "ingredienti": [
@@ -5464,8 +5464,8 @@
     "abv": "Molto alto",
     "sapori": [
       "Secco",
-      "Pulito",
-      "Iconico"
+      "Secco",
+      "Classico"
     ],
     "garnish": "Cipolle sotto aceto",
     "ingredienti": [
@@ -5499,7 +5499,7 @@
     "sapori": [
       "Fresco",
       "Agrumato",
-      "Equilibrato"
+      "Bilanciato"
     ],
     "garnish": "Rondella di lime",
     "ingredienti": [
@@ -5632,7 +5632,7 @@
     "sapori": [
       "Agrumato",
       "Secco",
-      "Vibrante"
+      "Vivace"
     ],
     "garnish": "Zest di limone",
     "ingredienti": [
@@ -5787,7 +5787,7 @@
       ],
       [
         "30 ml",
-        "Liquore cacao bianco"
+        "Liquore al cacao bianco"
       ],
       [
         "30 ml",
@@ -5907,7 +5907,7 @@
       ],
       [
         "30 ml",
-        "Liquore cacao bianco"
+        "Liquore al cacao bianco"
       ],
       [
         "30 ml",
@@ -6088,7 +6088,7 @@
     "sapori": [
       "Floreale",
       "Dolce",
-      "Frizzante"
+      "Effervescente"
     ],
     "garnish": "Ciuffo di menta + lime",
     "ingredienti": [
@@ -6851,7 +6851,7 @@
     "categoria": "All day",
     "abv": "Medio alto",
     "sapori": [
-      "Forte",
+      "Potente",
       "Agrumato",
       "Rinfrescante"
     ],
@@ -7050,7 +7050,7 @@
     "abv": "Molto alto",
     "sapori": [
       "Intenso",
-      "Equilibrato",
+      "Bilanciato",
       "Rinfrescante"
     ],
     "garnish": "Rondella di lime",
@@ -7464,7 +7464,7 @@
     "sapori": [
       "Fresco",
       "Agrumato",
-      "Spumeggiante"
+      "Effervescente"
     ],
     "garnish": "Nessuna",
     "ingredienti": [
@@ -8004,7 +8004,7 @@
     "sapori": [
       "Fresco",
       "Rinfrescante",
-      "Frizzante"
+      "Effervescente"
     ],
     "garnish": "Ciuffo di menta",
     "ingredienti": [
@@ -8499,9 +8499,9 @@
     "sapori": [
       "Rinfrescante",
       "Fresco",
-      "Equilibrato"
+      "Bilanciato"
     ],
-    "garnish": "3 dash Peychaud's bitters",
+    "garnish": "3 dash Peychaud's Bitters",
     "ingredienti": [
       [
         "50 ml",
@@ -8674,7 +8674,7 @@
     "categoria": "All day",
     "abv": "Basso",
     "sapori": [
-      "Fragrante",
+      "Aromatico",
       "Agrumato",
       "Morbido"
     ],
@@ -8710,7 +8710,7 @@
     "sapori": [
       "Intenso",
       "Fruttato",
-      "Vibrante"
+      "Vivace"
     ],
     "garnish": "Uva fragola",
     "ingredienti": [
@@ -8811,7 +8811,7 @@
     "sapori": [
       "Secco",
       "Potente",
-      "Essenziale"
+      "Elegante"
     ],
     "garnish": "Zest di arancia",
     "ingredienti": [
@@ -8847,7 +8847,7 @@
     "categoria": "All day",
     "abv": "Medio basso",
     "sapori": [
-      "Equilibrato",
+      "Bilanciato",
       "Agrumato",
       "Rinfrescante"
     ],
