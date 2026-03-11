@@ -391,7 +391,7 @@ function showCards(){
     var c=RES[i];
     var card=document.createElement("div");
     card.className="card";card.style.animationDelay=Math.min(i*35,450)+"ms";
-    if(!c.img){ c.img='https://danielsportelli.github.io/cocktail-legend/immagini/'+c.id+'.JPG';
+    if(!c.img){ c.img='https://danielsportelli.github.io/cocktail-legend/immagini/'+c.id+'.webp';
     }
     var sapHtml="";
     for(var si=0;si<c.sapori.length;si++){
