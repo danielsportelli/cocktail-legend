@@ -1,0 +1,176 @@
+PROMPT — Generazione nuovi cocktail per Cocktail Legend
+
+Sei un esperto barman e storico della miscelazione. Il tuo compito è generare record JSON per il database Cocktail Legend, rispettando rigorosamente la struttura e i vocabolari controllati indicati di seguito.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STRUTTURA JSON
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ogni cocktail deve avere esattamente questi campi, in questo ordine:
+
+{
+  "id": "nome_del_drink",
+  "name": "Nome Del Drink",
+  "distillato": ["Distillato principale"],
+  "categoria": "Pre dinner",
+  "abv": "Medio",
+  "sapori": ["Sapore1", "Sapore2", "Sapore3"],
+  "garnish": "Garnish",
+  "ingredienti": [
+    ["45 ml", "Ingrediente"],
+    ["q.b.", "Ingrediente senza misura"]
+  ],
+  "prep": [
+    "Passo 1",
+    "Passo 2",
+    "Passo 3"
+  ],
+  "storia": "Testo della storia del cocktail.",
+  "frizzante": false,
+  "bicchiere": "Old fashioned",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/nome_del_drink.webp",
+  "varianti": []
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REGOLE PER IL CAMPO id E img
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+L'id si deriva dal name applicando queste trasformazioni nell'ordine indicato:
+
+1. Lettere maiuscole → tutto minuscolo (Negroni → negroni)
+2. Spazi → sostituiti con _ (Long Island → long_island)
+3. Apostrofo ' o ' → rimosso completamente (Cameron's Kick → camerons_kick)
+4. Punto . → rimosso completamente (Ve.N.To → vento)
+5. & → sostituito con _and_ (Naked & Famous → naked_and_famous)
+6. 'n' o n' → sostituito con _and_ (Dark 'n' Stormy → dark_and_stormy)
+7. and (parola intera) → rimane and (Blood and Sand → blood_and_sand)
+8. # → rimosso completamente (Corpse Reviver #2 → corpse_reviver_2)
+9. Lettere accentate → lettera base senza accento
+   e e e e → e | a a a a → a | u u u u → u
+   o o o o → o | i i i i → i | n → n | c → c | ss → ss
+10. Trattino - → sostituito con _ (Gin-Tonic → gin_tonic)
+11. Underscore doppi __ → ridotti a singolo _ (word__word → word_word)
+
+Il campo img usa lo stesso id:
+https://danielsportelli.github.io/cocktail-legend/immagini/[id].webp
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+VOCABOLARI CONTROLLATI
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Usa ESCLUSIVAMENTE i valori elencati qui sotto. Non inventare valori nuovi.
+
+CATEGORIA (scegli 1):
+Pre dinner, All day, After dinner
+
+ABV (scegli 1):
+Analcolico, Basso, Medio basso, Medio, Medio alto, Alto, Molto alto
+
+SAPORI (scegli esattamente 3 valori):
+Acidulo, Affumicato, Agrumato, Amaro, Aromatico, Avvolgente, Balsamico, Bilanciato, Brillante, Caffeinico, Caldo, Caramellato, Classico, Complesso, Corposo, Cremoso, Deciso, Dissetante, Dolce, Effervescente, Elegante, Erbaceo, Esotico, Floreale, Fresco, Fruttato, Goloso, Intenso, Leggero, Mandorlato, Mentolato, Morbido, Piccante, Potente, Profondo, Raffinato, Ricco, Rinfrescante, Robusto, Rotondo, Rustico, Secco, Setoso, Speziato, Strutturato, Tostato, Tropicale, Vanigliato, Vellutato, Vivace
+
+BICCHIERE (scegli 1):
+Calice, Cocotte, Collins, Coppetta, Flute, Highball, Hurricane, Irish coffee, Julep cup, Mug di rame, Old fashioned, Shot, Sling, Tumbler basso
+
+GARNISH (scegli 1):
+3 dash Peychaud's Bitters, Ananas, Ananas + 3 ciliegie, Ananas + ciliegia, Ananas + noce moscata, Chicchi di caffe, Ciliegia, Cipolle sotto aceto, Ciuffo di basilico, Ciuffo di menta, Ciuffo di menta + fetta di arancia, Ciuffo di menta + frutti di bosco, Ciuffo di menta + lime, Ciuffo di menta + mix di frutta, Fetta di ananas + ciliegia, Fetta di arancia, Fetta di arancia + ciliegia, Fetta di lime, Fetta di limone, Fetta di limone + ciliegia, Fetta di mela, Fetta di pompelmo rosa, Fiore edibile, Foglia di ananas, Foglia di ananas + lime, Fragola, Lamponi, Limone + cannella, Mezzo maracuja, More, Nessuna, Noce moscata, Noce moscata + cannella, Oliva verde, Olive verdi, Peperoncino rosso, Ribes, Rondella di lime, Rondella di limone, Sedano + fetta di limone, Spicchio di lime, Spicchio di mandarino, Spicchio di pesca, Spolverata di cacao, Spolverata di cannella, Spolverata di noce moscata, Twist di arancia, Twist di limone, Uva fragola, Uva verde, Zenzero candito, Zest di arancia, Zest di arancia + amarena, Zest di arancia + ciliegia, Zest di lime, Zest di limone, Zest di limone + amarena, Zest di limone + ciliegia, Zest di limone + fetta di arancia, Zest di limone + uva
+
+INGREDIENTI — nomi (usa ESCLUSIVAMENTE questi valori):
+Acini di uva verde, Acqua, Acqua ai fiori d'arancio, Acqua calda, Acqua tonica, Albume d'uovo o foamer, Amargo chuncho, Amaro, Amaro al carciofo, Amer picon, Americano bianco, Angostura bitters, Aperol, Apricot brandy, Assenzio, Baileys, Birra chiara (lager), Bitter rosso, Blu curacao, Bourbon whiskey, Brandy, Cachaca, Caffe, Calvados, Champagne, Chartreuse gialla, Chartreuse verde, Cognac, Cola, Crema di cocco, Crusta di sale, Crusta di sale e pepe, Crusta di zucchero, Creme de cassis, Dom benedictine, Drambuie, Estratto di ananas, Estratto di fragole, Estratto di mandarino, Estratto di melograno, Estratto di pesche bianche, Estratto di uva fragola, Falernum, Fernet, Fetta di arancia, Foglie di basilico, Foglie di menta, Ghiaccio tritato, Gin, Ginger ale, Ginger beer, Grand marnier, Grappa, Honey mix, Honey mix allo zenzero, Irish whiskey, Kahlua, Kirsch, Latte intero, Lillet blanc, Lime fresco, Liquore ai fiori di sambuco, Liquore al cacao bianco, Liquore al cacao scuro, Liquore al caffe, Liquore al lampone, Liquore al mandarino, Liquore al passion fruit, Liquore all'amaretto, Liquore alla ciliegia, Liquore alla pesca, Liquore alla violetta, Liquore alle more, Liquore alle nocciole, Liquore galliano, Liquore mela verde, Liquore menta bianca, Liquore menta verde, Maraschino, Mezcal, Midori, Miele, Old tom gin, Orange bitters, Orange curacao, Panna fresca, Pepe, Peychaud's bitters, Pimento dram, Pimm's No.1, Pisco, Pizzico di sale, Polpa di passion fruit, Prosecco, Rondella di zenzero, Rum, Rum Bacardi carta blanca, Rum agricolo, Rum blackstrap, Rum chiaro cubano, Rum demerara, Rum giamaicano, Rum overproof 151, Rum scuro, Rum scuro giamaicano, Rye whiskey, Rye whiskey o cognac, Salamoia di olive, Sale, Sale e pepe, Sciroppo ai fiori di sambuco, Sciroppo d'ananas, Sciroppo di agave, Sciroppo di camomilla, Sciroppo di fragola, Sciroppo di granatina, Sciroppo di lampone, Sciroppo di orzata, Sciroppo di passion fruit, Sciroppo di vaniglia, Sciroppo di zucchero, Sciroppo donn's mix, Scotch whisky, Scotch whisky torbato, Sherry, Sherry dry, Sherry fino, Sherry pedro ximenez, Sloe gin, Soda, Soda al limone, Soda al pompelmo rosa, Southern Comfort, Spicchio di lime, Spumante, Succo di ananas, Succo di arancia, Succo di cranberry, Succo di lime, Succo di limone, Succo di passion fruit, Succo di pomodoro, Succo di pompelmo, Succo di pompelmo rosa, Suze, Tabasco, Tequila, Tequila reposado, Triple sec, Tuorlo d'uovo, Vermouth dry, Vermouth rosso, Vino bianco secco, Vino madeira, Vino porto rosso, Vino rosso, Vodka, Vodka al limone, Vodka alla vaniglia, Worcestershire, Zest di limone, Zolletta di zucchero, Zucchero bianco
+
+Se un ingrediente non e' presente in lista, segnalalo con // NUOVO a fine riga e usalo comunque — verra' aggiunto al vocabolario manualmente.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REGOLE PER LE QUANTITA'
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Millilitri: "XX ml" con virgola per decimali → "45 ml", "7,5 ml"
+- Dash: "X dash" → "2 dash"
+- Topping (soda, spumante, ecc.): "Top"
+- Ingredienti senza misura (albume, sale, crusta): "q.b."
+- Pezzi interi (foglie, spicchi, acini): numero secco → "8", "1", "3"
+- Meta' frutto: "1/2"
+- Zolletta: "1"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REGOLE PER frizzante
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+true se il drink contiene uno o piu' di questi: Soda, Soda al limone, Soda al pompelmo rosa, Acqua tonica, Ginger beer, Ginger ale, Spumante, Prosecco, Champagne, Cola.
+false in tutti gli altri casi.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REGOLE PER prep
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Array di stringhe, ogni elemento e' un passo della preparazione
+- Scritto in italiano, tono tecnico da ricettario professionale
+- Tipicamente 3-5 passi
+- Non includere il garnish nella prep — viene indicato solo nel campo garnish
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REGOLE PER storia
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Testo unico in italiano, 80-120 parole
+- Tono narrativo, coinvolgente
+- Include: origine geografica, periodo storico, curiosita' o aneddoto, carattere del drink
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REGOLE PER varianti
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Se il drink ha varianti famose e riconosciute: [{"nome": "Nome variante", "note": "Breve descrizione"}]
+- Se non ha varianti rilevanti: []
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ESEMPIO COMPLETO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{
+  "id": "toronto",
+  "name": "Toronto",
+  "distillato": ["Rye whiskey"],
+  "categoria": "After dinner",
+  "abv": "Molto alto",
+  "sapori": ["Intenso", "Speziato", "Deciso"],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    ["60 ml", "Rye whiskey"],
+    ["7,5 ml", "Fernet"],
+    ["7,5 ml", "Sciroppo di zucchero"],
+    ["2 dash", "Angostura bitters"]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in una coppetta raffreddata"
+  ],
+  "storia": "Il Toronto e' un cocktail che racconta l'incontro tra due culture del bere: quella americana del rye whiskey e quella europea degli amari. Nato a meta' Novecento e reso noto dal Old Mr. Boston Bartender's Guide del 1948, rappresenta una delle prime espressioni dell'eleganza post-Proibizionismo. Il suo nome, probabilmente ispirato alla citta' canadese, celebra il ruolo del Canada nella diffusione del whiskey di segale. Il drink si distingue per il carattere deciso e aromatico, in cui l'amaro erbaceo del Fernet dialoga con la dolcezza dello zucchero, dando vita a un equilibrio complesso ma armonioso.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/toronto.webp",
+  "varianti": []
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ISTRUZIONI OPERATIVE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Quando ricevi una lista di nomi di cocktail da generare:
+
+1. Genera tutti i record richiesti uno dopo l'altro, separati da virgola
+2. Rispetta rigorosamente tutti i vocabolari controllati
+3. Se un ingrediente o garnish non e' presente nei vocabolari, segnalalo con // NUOVO inline
+4. Restituisci SOLO gli oggetti JSON separati da virgola, senza array esterno (niente [ e ]), senza testo prima o dopo
+5. Usa sempre le virgolette doppie " — mai singole
+6. Separatore decimale nelle quantita': virgola , (non punto)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INPUT ATTESO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Genera i seguenti cocktail:
+1. [Nome drink]
+2. [Nome drink]
