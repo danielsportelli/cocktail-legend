@@ -3077,7 +3077,7 @@
     "storia": "Il VE.N.TO nasce come un tributo al Veneto e alla tradizione del mezzo e mezzo, reinterpretata con eleganza dal bartender Samuele Ambrosi per raccontare i sapori autentici del territorio italiano. Il cocktail coniuga semplicità e armonia, offrendo un’esperienza raffinata che valorizza ingredienti locali e aromi distintivi, portando freschezza e leggerezza in ogni sorso. La sua struttura bilanciata, insieme all’eleganza della presentazione, lo ha reso un simbolo della mixology contemporanea, capace di rappresentare il meglio della tradizione italiana con un tocco innovativo. Inserito tra i Contemporary Classics dell’IBA, il VE.N.TO celebra il patrimonio gastronomico del Veneto e si presta a momenti conviviali, aperitivi estivi o occasioni in cui la qualità e l’identità territoriale sono protagoniste.",
     "frizzante": false,
     "bicchiere": "Tumbler basso",
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/ve.n.to.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vento.webp"
   },
   {
     "id": "vieux_carre",
@@ -3124,7 +3124,7 @@
     "storia": "Il Vieux Carré nasce come celebrazione liquida del French Quarter di New Orleans, catturando in ogni sorso la ricchezza culturale e storica della città. Ideato negli anni ’30 al Carousel Bar dell’Hotel Monteleone da Walter Bergeron, questo cocktail fonde tradizioni americane, europee e francesi in un equilibrio raffinato di aromi e intensità. Ancora oggi, rimane un punto di riferimento per gli appassionati di mixologia, evocando la vivace atmosfera del jazz, le strade storiche e le contaminazioni culturali del quartiere. La sua complessità lo rende perfetto per momenti di riflessione, after-dinner o celebrazioni come il Mardi Gras, mentre il nome stesso ricorda l’identità storica di New Orleans. Gustare un Vieux Carré significa vivere un’esperienza sensoriale completa, in cui storia, eleganza e carattere si incontrano.",
     "frizzante": false,
     "bicchiere": "Old fashioned",
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vieux_carré.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vieux_carre.webp"
   },
   {
     "id": "bees_knees",
@@ -3206,7 +3206,7 @@
     "storia": "Il Champs Élysées è un cocktail sofisticato che prende il nome dall’iconico viale parigino, simbolo di eleganza e savoir-faire. Apparso per la prima volta nel 1930 nel Savoy Cocktail Book di Harry Craddock, barman tra i più influenti dell’epoca, nasce con l’intento di offrire un’alternativa più complessa ai classici a base di cognac. In piena epoca Art Déco, la mixology cercava di fondere tradizione e innovazione. L’uso del Chartreuse verde, liquore erboristico francese prodotto dai monaci certosini, conferisce profondità aromatica senza precedenti. Si inserisce tra quei drink “austero-eleganti” che incarnano lo spirito della Parigi intellettuale, sofisticata e misteriosa. Non esiste connessione ufficiale con il viale parigino ma il richiamo all’eleganza è evidente.",
     "frizzante": false,
     "bicchiere": "Coppetta",
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/champs-elysées.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/champs_elysees.webp"
   },
   {
     "id": "b_52",
@@ -3244,7 +3244,7 @@
     "storia": "Il B-52 è uno dei cocktail più famosi per la sua estetica spettacolare con tre strati distinti di liquore. Prende il nome dal bombardiere americano Boeing B-52 Stratofortress della Guerra Fredda, anche se alcuni sostengono sia ispirato alla rock band The B-52's. La creazione risale agli anni '70 ed è attribuita a Peter Fich, bartender del Banff Springs Hotel in Canada, noto per dedicare i suoi drink a cose che lo ispiravano. Divenne particolarmente popolare durante la cultura dei cocktail 'visivi' degli anni '70-'80, quando l'estetica giocava un ruolo fondamentale. La capacità di creare gli strati perfetti lo rese una sfida tecnica nelle competizioni di bartending. Negli anni '80 si diffuse una variante 'Flambé' spettacolare dove l'ultimo strato veniva infiammato. Esistono molte versioni come il B-53 e B-54.",
     "frizzante": false,
     "bicchiere": "Shot",
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/b-52.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/b_52.webp"
   },
   {
     "id": "bacardi_cocktail",
@@ -4172,7 +4172,7 @@
     "storia": "La Canchánchara è uno dei cocktail più antichi di Cuba, risalente al XIX secolo. Veniva preparato dai mambises, i guerriglieri cubani che lottarono per l'indipendenza durante le guerre contro il dominio coloniale spagnolo. Semplice e nutriente, era pensato per fornire energia e proteggere dal freddo delle notti di guerriglia. Il fascino rustico e l'autenticità lo rendono simbolo della resistenza e dello spirito cubano, incarnando storia e identità di un popolo. Durante le guerre d'indipendenza rappresentava fonte di sostentamento e medicina improvvisata per i mambises. Negli anni recenti è stato riportato alla ribalta nei bar di Trinidad, città cubana ricca di storia, servito in bicchieri di terracotta che richiamano le origini. Considerato precursore dei Daiquiri e altri cocktail cubani.",
     "frizzante": false,
     "bicchiere": "Cocotte",
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/canchánchara.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/canchanchara.webp"
   },
   {
     "id": "cape_codder",
@@ -4737,7 +4737,7 @@
     "storia": "Il Dark 'n' Stormy nasce all'inizio del XX secolo nelle Bermuda, patria del rum Gosling's Black Seal. Si racconta sia stato inventato da marinai della Marina Reale Britannica che mescolavano rum con ginger beer per combattere il mal di mare. Il nome deriva dal colore scuro del rum che galleggia sopra la ginger beer, evocando acque agitate durante una tempesta tropicale. Oggi è considerato il cocktail nazionale delle Bermuda, emblema della cultura locale e del legame con il mare. La ricetta è ufficialmente brevettata dalla Gosling's, che ne detiene i diritti: solo il loro rum Black Seal può essere utilizzato per un autentico Dark 'n' Stormy. Pochissimi cocktail hanno un marchio registrato. La ginger beer, originariamente prodotta dai marinai britannici, aggiunge una nota speziata che ricorda le avventure in mare.",
     "frizzante": true,
     "bicchiere": "Highball",
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/dark_n_stormy.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/dark_and_stormy.webp"
   },
   {
     "id": "dirty_martini",
@@ -8449,7 +8449,7 @@
     "storia": "La Piña Colada nasce nella suggestiva cornice di Porto Rico, terra di spiagge dorate e palme ondeggianti. Sebbene ci siano diverse teorie sulla sua creazione, la versione più accreditata attribuisce l'invenzione a Ramón 'Monchito' Marrero, bartender dell'hotel Caribe Hilton, nel 1954. Dal 1978 è riconosciuta come il cocktail ufficiale di Porto Rico, simbolo di ospitalità e dello spirito rilassato dei Caraibi. Negli anni '70 divenne un fenomeno globale grazie anche alla canzone 'Escape (The Piña Colada Song)' di Rupert Holmes, che consolidò il suo status di cocktail 'da vacanza'. Porto Rico celebra il 10 luglio come il giorno nazionale della Piña Colada. Prima dell'invenzione della crema di cocco commerciale (Coco López), la preparazione era molto più complessa e richiedeva la spremitura manuale del cocco.",
     "frizzante": false,
     "bicchiere": "Hurricane",
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/piña_colada.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pina_colada.webp"
   },
   {
     "id": "pisco_punch",
