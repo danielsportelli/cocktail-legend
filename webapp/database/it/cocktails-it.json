@@ -8976,5 +8976,31 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tia_mia.webp"
+  },
+  {
+    "id": "corn_and_oil",
+    "name": "Corn 'n' Oil",
+    "distillato": ["Rum"],
+    "categoria": "After dinner",
+    "abv": "Medio alto",
+    "sapori": ["Speziato", "Dolce", "Rotondo"],
+    "garnish": "Spicchio di lime",
+    "ingredienti": [
+      ["45 ml", "Rum scuro giamaicano"],
+      ["15 ml", "Rum blackstrap"],
+      ["15 ml", "Falernum"],
+      ["3 dash", "Angostura bitters"]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio (tranne il Rum blackstrap) in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una tumbler basso riempito di ghiaccio tritato",
+      "Versare il rum blackstrap lasciandolo galleggiare in superficie (float) senza mescolare"
+    ],
+    "storia": "Il Corn 'n' Oil è un cocktail tradizionale delle isole Barbados, dove affonda le radici nel folklore del rum caraibico. Il nome evoca un'immagine visiva del drink: il rum scuro che galleggia sul falernum chiaro come olio sul mais. Bevanda popolare tra i pescatori e i lavoratori dei campi da canna, è diventata col tempo un simbolo dell'identità mixologica barbadiana. Il falernum, liquore speziato a base di mandorle, lime e spezie locali, conferisce al drink una complessità aromatica unica, mentre il rum pesante porta corpo e calore caraibico.",
+    "frizzante": false,
+    "bicchiere": "Tumbler basso",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/corn_and_oil.webp",
+    "varianti": []
   }
 ]
