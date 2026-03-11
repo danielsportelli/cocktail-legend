@@ -657,6 +657,6 @@ body{padding-bottom:56px;}
   padding:.4rem 1rem;border-radius:20px;
   font-size:.75rem;font-weight:800;
   opacity:0;transition:opacity .2s;
-  z-index:500;pointer-events:none;
+  z-index:9999;pointer-events:none;
 }
 .copied-toast.show{opacity:1;}
