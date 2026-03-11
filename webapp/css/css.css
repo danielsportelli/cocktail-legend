@@ -524,7 +524,8 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   z-index:600;
   background:rgba(18,24,40,.96);
   backdrop-filter:blur(16px);
-  border-top:1px solid var(--brd);
+  border-top:1px solid rgba(245,158,11,.3);
+  box-shadow:0 -4px 20px rgba(0,0,0,.45);
   display:flex;
   padding-bottom:env(safe-area-inset-bottom);
 }
@@ -537,7 +538,8 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
 }
-.tab-btn:hover,.tab-btn.active{color:var(--amber);}
+.tab-btn:hover{color:var(--txt2);}
+.tab-btn.active{color:var(--amber);}
 .tab-btn-ico{line-height:1;display:flex;align-items:center;justify-content:center;}
 .tab-btn-ico svg{transition:all .2s;}
 .tab-btn.active .tab-btn-ico svg{stroke:var(--amber);}
