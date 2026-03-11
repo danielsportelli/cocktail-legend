@@ -218,28 +218,25 @@ function updateAllCounts() {
     }
   });
 }
-
 function initF() {
-  buildDropdown("dd-cat","cat",uniq("categoria"));
-  (function(){
-    var ing = {};
-    DATA.forEach(function(c){
-      c.ingredienti.forEach(function(row){
-        var name = row[1];
-        if(name && name.trim()){
-          var n = name.trim();
-          n = n.charAt(0).toUpperCase() + n.slice(1);
-          ing[n] = true;
-        }
-      });
-    });
-    var list = Object.keys(ing).sort(function(a,b){return a.localeCompare(b,"it");});
-    buildDropdown("dd-dis","dis",list);
-  })();
-  buildDropdown("dd-abv","abv",["Analcolico","Basso","Medio basso","Medio","Medio alto","Alto","Molto alto"]);
-  buildDropdown("dd-sap","sap",uniq("sap"));
-  buildDropdown("dd-frz","frz",["Si","No"]);
-  buildDropdown("dd-bic","bic",uniq("bic"));
+  Promise.all([
+    fetch("database/it/categorie-it.json").then(function(r){ return r.json(); }),
+    fetch("database/it/ingredienti-it.json").then(function(r){ return r.json(); }),
+    fetch("database/it/sapori-it.json").then(function(r){ return r.json(); }),
+    fetch("database/it/bicchieri-it.json").then(function(r){ return r.json(); })
+  ]).then(function(results){
+    var cats  = results[0].sort(function(a,b){ return a.localeCompare(b,"it"); });
+    var ings  = results[1].sort(function(a,b){ return a.localeCompare(b,"it"); });
+    var saps  = results[2].sort(function(a,b){ return a.localeCompare(b,"it"); });
+    var bics  = results[3].sort(function(a,b){ return a.localeCompare(b,"it"); });
+
+    buildDropdown("dd-cat","cat", cats);
+    buildDropdown("dd-dis","dis", ings);
+    buildDropdown("dd-sap","sap", saps);
+    buildDropdown("dd-frz","frz", ["Si","No"]);
+    buildDropdown("dd-bic","bic", bics);
+    buildDropdown("dd-abv","abv", ["Analcolico","Basso","Medio basso","Medio","Medio alto","Alto","Molto alto"]);
+  });
 }
 
 // Dropdown toggle per ogni fg-btn
