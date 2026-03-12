@@ -56,15 +56,72 @@ var SECRET = "legend2025";
 })();
 
 var DATA = [];
-fetch("database/it/cocktails-it.json")
-  .then(function(res){ return res.json(); })
-  .then(function(json){
-    DATA = json;
+var SYNONYMS = {}; // mappa brand → [categorie generiche]
 
-    initF();        // crea i filtri
-    render();       // mostra i cocktail
-    updateAllCounts();
-  });
+// Carica tutti i file sinonimi dalla cartella database/it/sinonimi/
+var SYNONYM_FILES = [
+  "sinonimi-rum.json",
+  "sinonimi-gin.json",
+  "sinonimi-vodka.json",
+  "sinonimi-tequila-mezcal.json",
+  "sinonimi-scotch-whisky.json",
+  "sinonimi-bourbon-whiskey.json",
+  "sinonimi-rye-whiskey.json",
+  "sinonimi-japanese-whisky.json",
+  "sinonimi-irish-whiskey.json",
+  "sinonimi-tennessee-whiskey.json",
+  "sinonimi-cognac-armagnac-brandy.json",
+  "sinonimi-pisco.json",
+  "sinonimi-grappa.json",
+  "sinonimi-acquavite.json",
+  "sinonimi-sake-soju-baijiu.json",
+  "sinonimi-anice-liquirizia.json",
+  "sinonimi-liquori-amari.json",
+  "sinonimi-bitter-aperitivi.json",
+  "sinonimi-vermouth.json",
+  "sinonimi-spumanti.json",
+  "sinonimi-sciroppi-mixer.json"
+];
+
+// Espande una query testuale tramite sinonimi.
+// Restituisce un array di termini da cercare (query originale + categorie mappate).
+function expandQuery(q) {
+  var key = q.toLowerCase().trim();
+  var terms = [key];
+  if (SYNONYMS[key]) {
+    for (var i = 0; i < SYNONYMS[key].length; i++) {
+      var cat = SYNONYMS[key][i].toLowerCase();
+      if (terms.indexOf(cat) === -1) terms.push(cat);
+    }
+  }
+  return terms;
+}
+
+// Carica cocktails + tutti i file sinonimi in parallelo
+Promise.all([
+  fetch("database/it/cocktails-it.json").then(function(res){ return res.json(); }),
+  Promise.all(SYNONYM_FILES.map(function(f){
+    return fetch("database/it/sinonimi/" + f)
+      .then(function(r){ return r.ok ? r.json() : {}; })
+      .catch(function(){ return {}; }); // se un file manca non blocca tutto
+  }))
+]).then(function(results){
+  DATA = results[0];
+
+  // Unisce tutti i file sinonimi in un'unica mappa SYNONYMS
+  var synFiles = results[1];
+  for (var fi = 0; fi < synFiles.length; fi++) {
+    var obj = synFiles[fi];
+    var keys = Object.keys(obj);
+    for (var ki = 0; ki < keys.length; ki++) {
+      SYNONYMS[keys[ki]] = obj[keys[ki]];
+    }
+  }
+
+  initF();        // crea i filtri
+  render();       // mostra i cocktail
+  updateAllCounts();
+});
 var AF = {cat:[], dis:[], abv:[], sap:[], frz:[], bic:[]};
 var Q = "";
 var RES = [];
@@ -178,9 +235,21 @@ function countFor(key, val) {
     if(FAV_ONLY){var favs=loadFavs();if(favs.indexOf(c.name)===-1)return false;}
     // applica anche il filtro testuale
     if(Q){var q=Q.toLowerCase().trim();
+      var terms=expandQuery(q);
       var dis=Array.isArray(c.distillato)?c.distillato.join(" "):c.distillato;
-      var ing=c.ingredienti.map(function(i){return i[1];}).join(" ");
-      if(c.name.toLowerCase().indexOf(q)===-1&&dis.toLowerCase().indexOf(q)===-1&&ing.toLowerCase().indexOf(q)===-1&&(c.garnish||"").toLowerCase().indexOf(q)===-1&&c.sapori.join(" ").toLowerCase().indexOf(q)===-1)return false;
+      var ingNames=c.ingredienti.map(function(i){return i[1].toLowerCase();});
+      var ingStr=ingNames.join(" ");
+      var matched=false;
+      for(var ti=0;ti<terms.length;ti++){
+        var t=terms[ti];
+        if(ingNames.some(function(n){return n===t;})){matched=true;break;}
+        if(c.name.toLowerCase().indexOf(t)!==-1){matched=true;break;}
+        if(dis.toLowerCase().indexOf(t)!==-1){matched=true;break;}
+        if(ingStr.indexOf(t)!==-1){matched=true;break;}
+        if((c.garnish||"").toLowerCase().indexOf(t)!==-1){matched=true;break;}
+        if(c.sapori.join(" ").toLowerCase().indexOf(t)!==-1){matched=true;break;}
+      }
+      if(!matched)return false;
     }
     return true;
   });
@@ -379,15 +448,27 @@ function updateBadges() {
 function render() {
   var res=DATA.slice();
   var q=Q.toLowerCase().trim();
-  if(q){res=res.filter(function(c){
-    var dis=Array.isArray(c.distillato)?c.distillato.join(" "):c.distillato;
-    var ing=c.ingredienti.map(function(i){return i[1];}).join(" ");
-    return c.name.toLowerCase().indexOf(q)!==-1||
-           dis.toLowerCase().indexOf(q)!==-1||
-           ing.toLowerCase().indexOf(q)!==-1||
-           (c.garnish||"").toLowerCase().indexOf(q)!==-1||
-           c.sapori.join(" ").toLowerCase().indexOf(q)!==-1;
-  });}
+  if(q){
+    var terms=expandQuery(q);
+    res=res.filter(function(c){
+      var dis=Array.isArray(c.distillato)?c.distillato.join(" "):c.distillato;
+      var ingNames=c.ingredienti.map(function(i){return i[1].toLowerCase();});
+      var ingStr=ingNames.join(" ");
+      var garnish=(c.garnish||"").toLowerCase();
+      var sapori=c.sapori.join(" ").toLowerCase();
+      var nome=c.name.toLowerCase();
+      for(var ti=0;ti<terms.length;ti++){
+        var t=terms[ti];
+        if(ingNames.some(function(n){return n===t;})) return true;
+        if(nome.indexOf(t)!==-1) return true;
+        if(dis.toLowerCase().indexOf(t)!==-1) return true;
+        if(ingStr.indexOf(t)!==-1) return true;
+        if(garnish.indexOf(t)!==-1) return true;
+        if(sapori.indexOf(t)!==-1) return true;
+      }
+      return false;
+    });
+  }
   if(AF.cat.length){res=res.filter(function(c){return AF.cat.indexOf(c.categoria)!==-1;});}
   if(AF.dis.length){res=res.filter(function(c){return AF.dis.some(function(d){var dl=d.toLowerCase();return c.distillato.some(function(x){return x.toLowerCase()===dl;})||c.ingredienti.some(function(i){return i[1].toLowerCase()===dl;});});});}
   if(AF.abv.length){res=res.filter(function(c){return AF.abv.indexOf(c.abv)!==-1;});}
