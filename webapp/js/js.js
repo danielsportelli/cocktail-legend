@@ -606,3 +606,165 @@ function setTabBarH(){
 }
 setTabBarH();
 window.addEventListener("resize", setTabBarH);
+
+(function(){
+  var WORKER_URL = 'https://cocktail-legend-ai.daniel-sportelli.workers.dev';
+  var USAGE_KEY = 'cl_ai_usage';
+  var USAGE_MONTH = 'cl_ai_month';
+  var MAX = 50;
+  var ingredients = [];
+
+  function getUsage(){
+    var now = new Date();
+    var month = now.getFullYear()+'-'+now.getMonth();
+    if(localStorage.getItem(USAGE_MONTH)!==month){
+      localStorage.setItem(USAGE_MONTH,month);
+      localStorage.setItem(USAGE_KEY,'0');
+      return 0;
+    }
+    return parseInt(localStorage.getItem(USAGE_KEY)||'0',10);
+  }
+
+  function incUsage(){
+    var u=getUsage()+1;
+    localStorage.setItem(USAGE_KEY,String(u));
+    return u;
+  }
+
+  function renderUsage(){
+    var u=getUsage();
+    var pct=Math.min(100,(u/MAX)*100);
+    var fill=document.getElementById('crea-usage-fill');
+    if(fill){fill.style.width=pct+'%';fill.style.background=pct>=80?'#ef4444':'var(--amber)';}
+    var txt=document.getElementById('crea-usage-txt');
+    if(txt)txt.textContent=u+'/'+MAX;
+    if(u>=MAX)showExhausted();
+  }
+
+  function showExhausted(){
+    var b=document.getElementById('crea-exhausted');
+    var btn=document.getElementById('crea-btn');
+    if(b)b.style.display='block';
+    if(btn)btn.disabled=true;
+    var now=new Date();
+    var next=new Date(now.getFullYear(),now.getMonth()+1,1);
+    var d=document.getElementById('crea-reset-date');
+    if(d)d.textContent='Si resetterà il '+next.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'});
+  }
+
+  function filterDB(){
+    var list=document.getElementById('crea-db-list');
+    var count=document.getElementById('crea-db-count');
+    if(!ingredients.length){
+      if(list)list.innerHTML='<span style="font-style:italic;">Inserisci un ingrediente…</span>';
+      if(count)count.innerHTML='<span style="color:var(--amber);">0</span> trovati';
+      return [];
+    }
+    var matches=(window.DATA||[]).filter(function(d){
+      var names=d.ingredienti.map(function(i){return i[1].toLowerCase();});
+      return ingredients.some(function(q){return names.some(function(n){return n.includes(q);});});
+    }).slice(0,10);
+    if(count)count.innerHTML='<span style="color:var(--amber);">'+matches.length+'</span> trovati';
+    if(list){
+      if(!matches.length){list.innerHTML='<span style="font-style:italic;">Nessun match — chiedi comunque!</span>';}
+      else{list.innerHTML=matches.map(function(d){return '<div style="padding:2px 0;color:var(--txt2);">• '+d.name+'</div>';}).join('');}
+    }
+    return matches;
+  }
+
+  function renderTags(){
+    var box=document.getElementById('crea-tags');
+    if(!box)return;
+    box.innerHTML='';
+    ingredients.forEach(function(ing){
+      var t=document.createElement('div');
+      t.style.cssText='display:flex;align-items:center;gap:6px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.35);color:var(--amber);font-size:.72rem;padding:4px 10px;border-radius:99px;';
+      t.innerHTML=ing+'<button data-v="'+ing+'" style="background:none;border:none;color:rgba(245,158,11,.5);cursor:pointer;font-size:14px;padding:0;line-height:1;">×</button>';
+      t.querySelector('button').addEventListener('click',function(){
+        ingredients=ingredients.filter(function(i){return i!==this.dataset.v;}.bind(this));
+        renderTags();filterDB();updateBtn();
+      });
+      box.appendChild(t);
+    });
+  }
+
+  function updateBtn(){
+    var btn=document.getElementById('crea-btn');
+    if(!btn)return;
+    var exhausted=getUsage()>=MAX;
+    btn.disabled=ingredients.length===0||exhausted;
+    btn.style.opacity=btn.disabled?'.45':'1';
+    btn.style.cursor=btn.disabled?'not-allowed':'pointer';
+  }
+
+  function addIng(raw){
+    raw.split(',').forEach(function(v){
+      v=v.trim().toLowerCase();
+      if(v&&!ingredients.includes(v))ingredients.push(v);
+    });
+    renderTags();filterDB();updateBtn();
+  }
+
+  function mdToHtml(md){
+    return md
+      .replace(/^## (.+)$/gm,'<strong style="display:block;color:var(--amber);margin:12px 0 4px;font-size:.82rem;">$1</strong>')
+      .replace(/^### (.+)$/gm,'<strong style="display:block;color:var(--txt);margin:8px 0 3px;">$1</strong>')
+      .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--amber);">$1</strong>')
+      .replace(/\*(.+?)\*/g,'<em>$1</em>')
+      .replace(/^- (.+)$/gm,'<div style="padding:2px 0 2px 10px;border-left:2px solid var(--brd);">$1</div>')
+      .replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--brd);margin:10px 0;">')
+      .replace(/\n\n/g,'<br><br>');
+  }
+
+  async function askBarman(){
+    if(getUsage()>=MAX){showExhausted();return;}
+    var btn=document.getElementById('crea-btn');
+    var resp=document.getElementById('crea-response');
+    var body=document.getElementById('crea-body');
+    var err=document.getElementById('crea-error');
+    if(btn){btn.disabled=true;btn.textContent='...';}
+    if(err)err.style.display='none';
+    if(resp)resp.style.display='block';
+    if(body)body.innerHTML='<span style="color:var(--dim);">Il barman sta pensando…</span>';
+
+    var matches=filterDB();
+    var dbCtx=matches.length
+      ?'Nel database Cocktail Legend ho trovato:\n'+matches.map(function(d){return '- '+d.name+' ('+d.ingredienti.map(function(i){return i.join(' ');}).join(', ')+')';}).join('\n')+'\n\n'
+      :'Nessun match diretto nel database.\n\n';
+
+    var prompt=dbCtx+'L\'utente ha: **'+ingredients.join(', ')+'**.\n\nSuggerisci 2-3 cocktail realizzabili con questi ingredienti (con ricetta sintetica), proponi 1-2 twist creativi originali, e dai un consiglio pratico da barman esperto su come valorizzarli insieme. Tono da collega professionista, non da professore.';
+
+    try{
+      var res=await fetch(WORKER_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'claude-sonnet-4-20250514',
+          max_tokens:1000,
+          system:'Sei un barman esperto di fama internazionale. Parli sempre in italiano. Tono professionale e diretto, da collega a collega. Usi ## per titoli principali, **grassetto** per enfasi, - per liste.',
+          messages:[{role:'user',content:prompt}]
+        })
+      });
+      var data=await res.json();
+      var text=data?.content?.[0]?.text||'';
+      if(!text)throw new Error(data?.error?.message||'Risposta vuota');
+      if(body)body.innerHTML=mdToHtml(text);
+      incUsage();renderUsage();
+    }catch(e){
+      if(resp)resp.style.display='none';
+      if(err){err.style.display='block';err.textContent='⚠️ '+( e.message||'Errore. Riprova.');}
+    }finally{
+      if(btn){btn.disabled=getUsage()>=MAX||ingredients.length===0;btn.textContent='✦ Chiedi al Barman';btn.style.opacity=btn.disabled?'.45':'1';}
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){
+    renderUsage();
+    var addBtn=document.getElementById('crea-add');
+    var input=document.getElementById('crea-input');
+    var askBtn=document.getElementById('crea-btn');
+    if(addBtn)addBtn.addEventListener('click',function(){if(input&&input.value.trim()){addIng(input.value);input.value='';input.focus();}});
+    if(input)input.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===','){e.preventDefault();if(input.value.trim()){addIng(input.value);input.value='';}}} );
+    if(askBtn)askBtn.addEventListener('click',askBarman);
+  });
+})();
