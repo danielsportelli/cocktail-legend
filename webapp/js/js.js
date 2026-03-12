@@ -161,7 +161,7 @@ function uniqFromRes(key) {
     }
     else if (key === "frz") { s[c.frizzante ? "Si" : "No"] = 1; }
     else if (key === "bic") { s[c.bicchiere] = 1; }
-    else { s[c[key]] = 1; }
+    else { var f2 = key==="cat" ? "categoria" : key==="abv" ? "abv" : key; s[c[f2]] = 1; }
   }
   return s; // set di valori presenti nei risultati correnti
 }
