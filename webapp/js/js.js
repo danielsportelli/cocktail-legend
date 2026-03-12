@@ -656,7 +656,7 @@ window.addEventListener("resize", setTabBarH);
     var list=document.getElementById('crea-db-list');
     var count=document.getElementById('crea-db-count');
     if(!ingredients.length){
-      if(list)list.innerHTML='<span style="font-style:italic;">Inserisci un ingrediente…</span>';
+      if(list)list.innerHTML='<span style="font-style:italic;">Inserisci uno o più ingredienti…</span>';
       if(count)count.innerHTML='<span style="color:var(--amber);">0</span> trovati';
       return [];
     }
@@ -692,9 +692,14 @@ window.addEventListener("resize", setTabBarH);
     var btn=document.getElementById('crea-btn');
     if(!btn)return;
     var exhausted=getUsage()>=MAX;
-    btn.disabled=ingredients.length===0||exhausted;
-    btn.style.opacity=btn.disabled?'.45':'1';
-    btn.style.cursor=btn.disabled?'not-allowed':'pointer';
+    var active=ingredients.length>0&&!exhausted;
+    btn.disabled=!active;
+    btn.style.background=active?'#2563eb':'var(--surf)';
+    btn.style.color=active?'#fff':'var(--dim)';
+    btn.style.border=active?'none':'1px solid var(--brd)';
+    btn.style.cursor=active?'pointer':'not-allowed';
+    btn.style.opacity='1';
+    btn.style.boxShadow=active?'0 4px 16px rgba(37,99,235,.4)':'none';
   }
 
   function addIng(raw){
