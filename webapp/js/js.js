@@ -813,12 +813,7 @@ window.addEventListener("resize", setTabBarH);
     if(resp)resp.style.display='block';
     if(body)body.innerHTML='<span style="color:var(--dim);">Il barman sta pensando…</span>';
 
-    var matches=filterDB();
-    var dbCtx=matches.length
-      ?'Nel database Cocktail Legend ho trovato:\n'+matches.map(function(d){return '- '+d.name+' ('+d.ingredienti.map(function(i){return i.join(' ');}).join(', ')+')';}).join('\n')+'\n\n'
-      :'Nessun match diretto nel database.\n\n';
-
-    var prompt=dbCtx+'L\'utente ha: **'+ingredients.join(', ')+'**.\n\nSuggerisci 2-3 cocktail realizzabili con questi ingredienti (con ricetta sintetica), proponi 1-2 twist creativi originali, e dai un consiglio pratico da barman esperto su come valorizzarli insieme. Tono da collega professionista, non da professore.';
+    var prompt='Ho questi ingredienti: **'+ingredients.join(', ')+'**.\n\nCrea per me:\n1. 2-3 cocktail originali realizzabili con questi ingredienti, con ricetta sintetica (dosi indicative, tecnica, bicchiere).\n2. 1-2 twist creativi inediti, anche non convenzionali.\n3. Un consiglio pratico su come valorizzare al meglio questi ingredienti insieme.\n\nRicorda: le ricette sono un punto di partenza creativo, da assaggiare e bilanciare sul momento.';
 
     try{
       var res=await fetch(WORKER_URL,{
@@ -827,7 +822,7 @@ window.addEventListener("resize", setTabBarH);
         body:JSON.stringify({
           model:'claude-sonnet-4-20250514',
           max_tokens:1000,
-          system:'Sei un barman esperto di fama internazionale. Parli sempre in italiano. Tono professionale e diretto, da collega a collega. Usi ## per titoli principali, **grassetto** per enfasi, - per liste.',
+          system:'Sei un barman creativo di fama internazionale. Il tuo compito è generare idee di cocktail originali partendo dagli ingredienti che ti vengono forniti. Parli sempre in italiano. Tono diretto e professionale, da collega a collega. Non citare mai database o fonti esterne. Usi ## per titoli sezione, **grassetto** per nomi drink e ingredienti chiave, - per liste. Precisa sempre che le ricette sono un punto di partenza da assaggiare e bilanciare.',
           messages:[{role:'user',content:prompt}]
         })
       });
