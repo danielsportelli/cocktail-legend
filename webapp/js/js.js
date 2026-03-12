@@ -291,11 +291,12 @@ document.querySelectorAll(".fg-btn").forEach(function(btn){
     document.querySelectorAll(".fg-dropdown").forEach(function(d){d.classList.remove("open");});
     document.querySelectorAll(".fg-btn").forEach(function(b){b.classList.remove("open");});
     _activeBtn = null;
-    if(!isOpen){
+  if(!isOpen){
       dd.classList.add("open");
       this.classList.add("open");
       _activeBtn = { btn: this, dd: dd };
       positionDropdown(this, dd);
+      updateAllCounts();
     }
   });
 });
