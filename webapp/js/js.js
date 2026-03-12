@@ -705,16 +705,16 @@ window.addEventListener("resize", setTabBarH);
     renderTags();filterDB();updateBtn();
   }
 
-  function mdToHtml(md){
-    return md
-      .replace(/^## (.+)$/gm,'<strong style="display:block;color:var(--amber);margin:12px 0 4px;font-size:.82rem;">$1</strong>')
-      .replace(/^### (.+)$/gm,'<strong style="display:block;color:var(--txt);margin:8px 0 3px;">$1</strong>')
-      .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--amber);">$1</strong>')
-      .replace(/\*(.+?)\*/g,'<em>$1</em>')
-      .replace(/^- (.+)$/gm,'<div style="padding:2px 0 2px 10px;border-left:2px solid var(--brd);">$1</div>')
-      .replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--brd);margin:10px 0;">')
-      .replace(/\n\n/g,'<br><br>');
-  }
+ function mdToHtml(md){
+  return md
+    .replace(/^## (.+)$/gm,'<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">$1</div>')
+    .replace(/^### (.+)$/gm,'<div style="font-size:.82rem;font-weight:700;color:var(--txt);margin:12px 0 3px;">$1</div>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--amber);font-weight:700;">$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em style="color:var(--txt2);">$1</em>')
+    .replace(/^- (.+)$/gm,'<div style="padding:3px 0 3px 10px;border-left:2px solid rgba(96,165,250,.25);color:var(--txt2);font-size:.78rem;">$1</div>')
+    .replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--brd);margin:12px 0;">')
+    .replace(/\n\n/g,'<br><br>');
+}
 
   async function askBarman(){
     if(getUsage()>=MAX){showExhausted();return;}
