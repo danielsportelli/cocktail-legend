@@ -148,7 +148,23 @@ function uniq(key) {
   }
   return Object.keys(s).sort();
 }
-
+function uniqFromRes(key) {
+  var src = Q ? RES : null; // usa RES solo se c'è testo nella search bar
+  if (!src) return null;    // nessun filtraggio → comportamento normale
+  var s = {};
+  for (var i = 0; i < src.length; i++) {
+    var c = src[i];
+    if (key === "sap") { for (var j = 0; j < c.sapori.length; j++) s[c.sapori[j]] = 1; }
+    else if (key === "dis") {
+      for (var j = 0; j < c.distillato.length; j++) s[c.distillato[j]] = 1;
+      for (var j = 0; j < c.ingredienti.length; j++) s[c.ingredienti[j][1]] = 1;
+    }
+    else if (key === "frz") { s[c.frizzante ? "Si" : "No"] = 1; }
+    else if (key === "bic") { s[c.bicchiere] = 1; }
+    else { s[c[key]] = 1; }
+  }
+  return s; // set di valori presenti nei risultati correnti
+}
 function countFor(key, val) {
   // Filtra con tutti i filtri attivi TRANNE quello della stessa chiave
   var base = DATA.filter(function(c){
@@ -207,14 +223,23 @@ function updateAllCounts() {
     var k = div.dataset.key, v = div.dataset.val;
     var cnt = countFor(k, v);
     var el = div.querySelector(".ci-n");
-    if(el) el.textContent = cnt;
-    // Grigio se 0 e non selezionato
-    if(cnt === 0 && !div.classList.contains("on")){
-      div.style.opacity = "0.4";
-      div.classList.add("ci-disabled");
+    if (el) el.textContent = cnt;
+
+    // Se c'è una query attiva, nascondi le voci non presenti nei risultati correnti
+    var resSet = uniqFromRes(k);
+    var inRes = !resSet || resSet.hasOwnProperty(v);
+
+    if (!inRes && !div.classList.contains("on")) {
+      div.style.display = "none";
     } else {
-      div.style.opacity = "";
-      div.classList.remove("ci-disabled");
+      div.style.display = "";
+      if (cnt === 0 && !div.classList.contains("on")) {
+        div.style.opacity = "0.4";
+        div.classList.add("ci-disabled");
+      } else {
+        div.style.opacity = "";
+        div.classList.remove("ci-disabled");
+      }
     }
   });
 }
@@ -535,6 +560,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   updateAllCounts();
 });
 document.getElementById("srch").addEventListener("input",function(e){Q=e.target.value;render();});
+document.getElementById("srch").addEventListener("keydown",function(e){if(e.key==="Enter")this.blur();});
 document.getElementById("srt").addEventListener("change",render);
 document.getElementById("btn-reset").addEventListener("click",function(){
   AF={cat:[],dis:[],abv:[],sap:[],frz:[],bic:[]};
