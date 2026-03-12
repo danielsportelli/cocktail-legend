@@ -166,6 +166,11 @@ Quando ricevi una lista di nomi di cocktail da generare:
 4. Restituisci SOLO gli oggetti JSON separati da virgola, senza array esterno (niente [ e ]), senza testo prima o dopo
 5. Usa sempre le virgolette doppie " — mai singole
 6. Separatore decimale nelle quantita': virgola , (non punto)
+7. Se dopo il nome del drink vengono specificati bicchiere e/o garnish, 
+   usa esattamente quei valori nei rispettivi campi, ignorando quelli 
+   che genereresti di default. Normalizzali per corrispondere esattamente 
+   al vocabolario controllato. Se non esiste corrispondenza, usalo comunque 
+   e segnala con // NUOVO.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 INPUT ATTESO
