@@ -167,6 +167,7 @@ function uniqFromRes(key) {
 }
 function countFor(key, val) {
   // Filtra con tutti i filtri attivi TRANNE quello della stessa chiave
+  // e rispetta anche la query testuale corrente
   var base = DATA.filter(function(c){
     if(AF.cat.length && key!=="cat" && AF.cat.indexOf(c.categoria)===-1) return false;
     if(AF.dis.length && key!=="dis"){var vl2;var ok=AF.dis.some(function(d){vl2=d.toLowerCase();return c.distillato.some(function(x){return x.toLowerCase()===vl2;})||c.ingredienti.some(function(i){return i[1].toLowerCase()===vl2;});});if(!ok)return false;}
@@ -175,6 +176,12 @@ function countFor(key, val) {
     if(AF.frz.length && key!=="frz" && AF.frz.indexOf(c.frizzante?"Si":"No")===-1) return false;
     if(AF.bic.length && key!=="bic" && AF.bic.indexOf(c.bicchiere)===-1) return false;
     if(FAV_ONLY){var favs=loadFavs();if(favs.indexOf(c.name)===-1)return false;}
+    // applica anche il filtro testuale
+    if(Q){var q=Q.toLowerCase().trim();
+      var dis=Array.isArray(c.distillato)?c.distillato.join(" "):c.distillato;
+      var ing=c.ingredienti.map(function(i){return i[1];}).join(" ");
+      if(c.name.toLowerCase().indexOf(q)===-1&&dis.toLowerCase().indexOf(q)===-1&&ing.toLowerCase().indexOf(q)===-1&&(c.garnish||"").toLowerCase().indexOf(q)===-1&&c.sapori.join(" ").toLowerCase().indexOf(q)===-1)return false;
+    }
     return true;
   });
   if(key==="sap") return base.filter(function(c){return c.sapori.indexOf(val)!==-1;}).length;
