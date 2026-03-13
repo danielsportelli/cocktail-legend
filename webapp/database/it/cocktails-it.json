@@ -548,7 +548,7 @@
       ],
       [
         "15 ml",
-        "Sciroppo donn's mix"
+        "Sciroppo Donn's mix"
       ],
       [
         "15 ml",
@@ -3758,7 +3758,7 @@
       ],
       [
         "15 ml",
-        "Vino madeira"
+        "Vino Madeira"
       ],
       [
         "7,5 ml",
@@ -3834,7 +3834,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Old tom gin"
+        "Old Tom gin"
       ],
       [
         "45 ml",
@@ -5283,7 +5283,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Old tom gin"
+        "Old Tom gin"
       ],
       [
         "45 ml",
@@ -8980,16 +8980,34 @@
   {
     "id": "corn_and_oil",
     "name": "Corn 'n' Oil",
-    "distillato": ["Rum"],
+    "distillato": [
+      "Rum"
+    ],
     "categoria": "After dinner",
     "abv": "Medio alto",
-    "sapori": ["Speziato", "Dolce", "Rotondo"],
+    "sapori": [
+      "Speziato",
+      "Dolce",
+      "Rotondo"
+    ],
     "garnish": "Spicchio di lime",
     "ingredienti": [
-      ["45 ml", "Rum scuro giamaicano"],
-      ["15 ml", "Rum blackstrap"],
-      ["15 ml", "Falernum"],
-      ["3 dash", "Angostura bitters"]
+      [
+        "45 ml",
+        "Rum scuro giamaicano"
+      ],
+      [
+        "15 ml",
+        "Rum blackstrap"
+      ],
+      [
+        "15 ml",
+        "Falernum"
+      ],
+      [
+        "3 dash",
+        "Angostura bitters"
+      ]
     ],
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio (tranne il Rum blackstrap) in un mixing glass freddo",
