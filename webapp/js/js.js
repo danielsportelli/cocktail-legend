@@ -237,6 +237,8 @@ function uniqFromRes(key) {
   return s; // set di valori presenti nei risultati correnti
 }
 function countFor(key, val) {
+  // Pre-calcola i termini di ricerca una sola volta (ottimizzazione mobile)
+  var _terms = Q ? expandQuery(Q.toLowerCase().trim()) : null;
   // Filtra con tutti i filtri attivi TRANNE quello della stessa chiave
   // e rispetta anche la query testuale corrente
   var base = DATA.filter(function(c){
@@ -248,8 +250,7 @@ function countFor(key, val) {
     if(AF.bic.length && key!=="bic" && AF.bic.indexOf(c.bicchiere)===-1) return false;
     if(FAV_ONLY){var favs=loadFavs();if(favs.indexOf(c.name)===-1)return false;}
     // applica anche il filtro testuale
-    if(Q){var q=Q.toLowerCase().trim();
-      var terms=expandQuery(q);
+    if(_terms){var terms=_terms;
       var dis=Array.isArray(c.distillato)?c.distillato.join(" "):c.distillato;
       var ingNames=c.ingredienti.map(function(i){return i[1].toLowerCase();});
       var ingStr=ingNames.join(" ");
@@ -309,6 +310,9 @@ function buildDropdown(id, key, items) {
 }
 
 function updateAllCounts() {
+  // Pre-calcola i resSet per chiave una sola volta
+  var _resSets = {};
+  ["cat","dis","abv","sap","frz","bic"].forEach(function(k){ _resSets[k] = uniqFromRes(k); });
   document.querySelectorAll(".ci").forEach(function(div){
     var k = div.dataset.key, v = div.dataset.val;
     var cnt = countFor(k, v);
@@ -316,7 +320,7 @@ function updateAllCounts() {
     if (el) el.textContent = cnt;
 
     // Se c'è una query attiva, nascondi le voci non presenti nei risultati correnti
-    var resSet = uniqFromRes(k);
+    var resSet = _resSets[k];
     var inRes = !resSet || resSet.hasOwnProperty(v);
 
     if (!inRes && !div.classList.contains("on")) {
