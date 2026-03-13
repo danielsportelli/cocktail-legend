@@ -565,155 +565,59 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 });
 // ═══════════ AUTOCOMPLETE RICERCA ═══════════
 (function(){
-  var inp = document.getElementById("srch");
-  var box = document.getElementById("srch-suggestions");
-  var _activeIdx = -1;
-
-  function buildSuggestions(q) {
-    box.innerHTML = "";
-    _activeIdx = -1;
-    if (!q || q.length < 1) { box.classList.remove("open"); return; }
-    var ql = q.toLowerCase();
-    // Prima i drink che iniziano con la query, poi quelli che la contengono
-    var starts = [], contains = [];
-    for (var i = 0; i < DATA.length; i++) {
-      var n = DATA[i].name;
-      var nl = n.toLowerCase();
-      if (nl.indexOf(ql) === 0) starts.push(DATA[i]);
-      else if (nl.indexOf(ql) !== -1) contains.push(DATA[i]);
-    }
-    var results = starts.concat(contains).slice(0, 8);
-    if (!results.length) { box.classList.remove("open"); return; }
-    for (var j = 0; j < results.length; j++) {
-      (function(cocktail){
-        var item = document.createElement("div");
-        item.className = "srch-sug-item";
-        // Evidenzia la parte matchata
-        var name = cocktail.name;
-        var idx = name.toLowerCase().indexOf(ql);
-        item.innerHTML = name.slice(0, idx) +
-          "<strong>" + name.slice(idx, idx + q.length) + "</strong>" +
-          name.slice(idx + q.length);
-        item.addEventListener("mousedown", function(e){
-          e.preventDefault(); // evita blur sull'input
-          closeSuggestions();
-          inp.value = "";
-          Q = "";
-          render();
-          // Trova indice in RES e apri modal
-          var ridx = -1;
-          for (var k = 0; k < RES.length; k++) {
-            if (RES[k].name === cocktail.name) { ridx = k; break; }
-          }
-          // Se non è in RES (filtri attivi), carica tutto e poi apri
-          if (ridx === -1) {
-            var didx = -1;
-            for (var d = 0; d < DATA.length; d++) {
-              if (DATA[d].name === cocktail.name) { didx = d; break; }
-            }
-            if (didx !== -1) {
-              RES = DATA.slice();
-              ridx = didx;
-            }
-          }
-          if (ridx !== -1) openM(ridx);
-          inp.blur();
-        });
-        box.appendChild(item);
-      })(results[j]);
-    }
-    box.classList.add("open");
-  }
-
-  function closeSuggestions() {
-    box.classList.remove("open");
-    box.innerHTML = "";
-    _activeIdx = -1;
-  }
-
-  inp.addEventListener("input", function(e){
-    Q = e.target.value;
-    clearTimeout(window._renderTimer);
-    window._renderTimer = setTimeout(render, 300);
-    buildSuggestions(e.target.value);
-  });
-
-  inp.addEventListener("keydown", function(e){
-    var items = box.querySelectorAll(".srch-sug-item");
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      _activeIdx = Math.min(_activeIdx + 1, items.length - 1);
-      items.forEach(function(el, i){ el.classList.toggle("active", i === _activeIdx); });
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      _activeIdx = Math.max(_activeIdx - 1, -1);
-      items.forEach(function(el, i){ el.classList.toggle("active", i === _activeIdx); });
-    } else if (e.key === "Enter") {
-      if (_activeIdx >= 0 && items[_activeIdx]) {
-        items[_activeIdx].dispatchEvent(new MouseEvent("mousedown"));
-      } else {
-        this.blur();
-      }
-      closeSuggestions();
-    } else if (e.key === "Escape") {
-      closeSuggestions();
-      this.blur();
-    }
-  });
-
-  inp.addEventListener("blur", function(){
-    setTimeout(closeSuggestions, 150);
-  });
-
-  // Chiudi cliccando fuori
-  document.addEventListener("click", function(e){
-    if (!inp.contains(e.target) && !box.contains(e.target)) closeSuggestions();
-  });
-})();
-// ═════════════════════════════════════════
-document.getElementById("srt").addEventListener("change",render);
-document.getElementById("btn-reset").addEventListener("click",function(){
-  AF={cat:[],dis:[],abv:[],sap:[],frz:[],bic:[]};
-  document.querySelectorAll(".cb").forEach(function(el){el.classList.remove("on");});
-  document.querySelectorAll(".ci").forEach(function(el){el.classList.remove("on");});
-  document.getElementById("srch").value="";Q="";
-  updateBadges();render();updateAllCounts();
-});
-document.getElementById("btn-ml").addEventListener("click",function(){
-  USE_OZ=false;
-  document.getElementById("btn-ml").classList.add("active");
-  document.getElementById("btn-oz").classList.remove("active");
-  openM(LAST_IDX);
-});
-document.getElementById("btn-oz").addEventListener("click",function(){
-  USE_OZ=true;
-  document.getElementById("btn-oz").classList.add("active");
-  document.getElementById("btn-ml").classList.remove("active");
-  openM(LAST_IDX);
-});
-
-function setFbH(){
-  var h = document.getElementById("filter-bar").getBoundingClientRect().height;
-  document.documentElement.style.setProperty("--fb-h", h + "px");
-}
-setFbH();
-window.addEventListener("resize", setFbH);
-document.getElementById("filter-panel").addEventListener("transitionend", setFbH);
-
-// Altezza reale tab-bar per drawer
-function setTabBarH(){
-  var tb = document.querySelector(".tab-bar");
-  if(tb) document.documentElement.style.setProperty("--tab-bar-h", tb.offsetHeight + "px");
-}
-setTabBarH();
-window.addEventListener("resize", setTabBarH);
-
-(function(){
   var WORKER_URL = 'https://cocktail-legend-ai.daniel-sportelli.workers.dev';
   var USAGE_KEY = 'cl_ai_usage';
   var USAGE_MONTH = 'cl_ai_month';
   var MAX = 50;
-  var ingredients = [];
+  var currentCmd = null;
+
+  var PROMPTS = {
+    crea: {
+      label: 'Ingredienti che hai',
+      placeholder: 'es. gin, lime, menta, zenzero...',
+      build: function(v){ return 'Ho questi ingredienti: '+v+'.
+
+Crea per me:
+1. 2-3 cocktail originali con ricetta sintetica (dosi, tecnica, bicchiere).
+2. 1-2 twist creativi inediti.
+3. Un consiglio pratico su come valorizzarli insieme.
+
+Ricorda: punto di partenza da assaggiare e bilanciare.'; }
+    },
+    chiedi: {
+      label: 'La tua domanda',
+      placeholder: 'es. Qual è la differenza tra Negroni e Americano?',
+      build: function(v){ return v; }
+    },
+    bilancia: {
+      label: 'Descrivi il problema',
+      placeholder: 'es. Il mio Margarita è troppo dolce, ho usato 20ml Triple Sec...',
+      build: function(v){ return 'Ho un problema di bilanciamento: '+v+'
+
+Dammi consigli pratici per correggerlo al banco.'; }
+    },
+    sostituisci: {
+      label: 'Cosa non hai?',
+      placeholder: 'es. Non ho Aperol, sto facendo uno Spritz...',
+      build: function(v){ return 'Non ho questo ingrediente: '+v+'
+
+Suggerisci 2-3 alternative concrete con note su come cambia il risultato finale.'; }
+    },
+    menu: {
+      label: 'Stagione o tema',
+      placeholder: 'es. Menu estivo per un beach bar, 5 cocktail...',
+      build: function(v){ return 'Crea un menu cocktail per: '+v+'
+
+Dammi 4-5 drink con nome, ingredienti chiave e concept del drink. Tono professionale.'; }
+    },
+    tecnica: {
+      label: 'Cosa vuoi sapere?',
+      placeholder: 'es. Come si fa un ghiaccio cristallino? Differenza dry shake / wet shake?',
+      build: function(v){ return 'Domanda tecnica: '+v+'
+
+Rispondi in modo pratico e diretto, da barman esperto a barman.'; }
+    }
+  };
 
   function getUsage(){
     var now = new Date();
@@ -753,88 +657,82 @@ window.addEventListener("resize", setTabBarH);
     if(d)d.textContent='Si resetterà il '+next.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'});
   }
 
-  function filterDB(){
-    var list=document.getElementById('crea-db-list');
-    var count=document.getElementById('crea-db-count');
-    if(!ingredients.length){
-      if(list)list.innerHTML='<span style="font-style:italic;">Inserisci uno o più ingredienti…</span>';
-      if(count)count.innerHTML='<span style="color:var(--amber);">0</span> trovati';
-      return [];
-    }
-    var matches=(window.DATA||[]).filter(function(d){
-      var names=d.ingredienti.map(function(i){return i[1].toLowerCase();});
-      return ingredients.some(function(q){return names.some(function(n){return n.includes(q);});});
-    }).slice(0,10);
-    if(count)count.innerHTML='<span style="color:var(--amber);">'+matches.length+'</span> trovati';
-    if(list){
-      if(!matches.length){list.innerHTML='<span style="font-style:italic;">Nessun match — chiedi comunque!</span>';}
-      else{list.innerHTML=matches.map(function(d){return '<div style="padding:2px 0;color:var(--txt2);">• '+d.name+'</div>';}).join('');}
-    }
-    return matches;
+  function showCmds(){
+    currentCmd=null;
+    var cmds=document.getElementById('crea-cmds');
+    var area=document.getElementById('crea-input-area');
+    var btn=document.getElementById('crea-btn');
+    var resp=document.getElementById('crea-response');
+    var err=document.getElementById('crea-error');
+    if(cmds)cmds.style.display='grid';
+    if(area)area.style.display='none';
+    if(btn)btn.style.display='none';
+    if(resp)resp.style.display='none';
+    if(err)err.style.display='none';
+    var inp=document.getElementById('crea-input');
+    if(inp)inp.value='';
   }
 
-  function renderTags(){
-    var box=document.getElementById('crea-tags');
-    if(!box)return;
-    box.innerHTML='';
-    ingredients.forEach(function(ing){
-      var t=document.createElement('div');
-      t.style.cssText='display:flex;align-items:center;gap:6px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.35);color:var(--amber);font-size:.72rem;padding:4px 10px;border-radius:99px;';
-      t.innerHTML=ing+'<button data-v="'+ing+'" style="background:none;border:none;color:rgba(245,158,11,.5);cursor:pointer;font-size:14px;padding:0;line-height:1;">×</button>';
-      t.querySelector('button').addEventListener('click',function(){
-        ingredients=ingredients.filter(function(i){return i!==this.dataset.v;}.bind(this));
-        renderTags();filterDB();updateBtn();
-      });
-      box.appendChild(t);
-    });
+  function selectCmd(cmd){
+    if(getUsage()>=MAX){showExhausted();return;}
+    currentCmd=cmd;
+    var cfg=PROMPTS[cmd];
+    var cmds=document.getElementById('crea-cmds');
+    var area=document.getElementById('crea-input-area');
+    var label=document.getElementById('crea-input-label');
+    var inp=document.getElementById('crea-input');
+    var btn=document.getElementById('crea-btn');
+    if(cmds)cmds.style.display='none';
+    if(area)area.style.display='block';
+    if(label)label.textContent=cfg.label;
+    if(inp){inp.placeholder=cfg.placeholder;inp.value='';inp.focus();}
+    if(btn){btn.style.display='block';updateBtn();}
   }
 
   function updateBtn(){
     var btn=document.getElementById('crea-btn');
+    var inp=document.getElementById('crea-input');
     if(!btn)return;
+    var hasText=inp&&inp.value.trim().length>0;
     var exhausted=getUsage()>=MAX;
-    var active=ingredients.length>0&&!exhausted;
+    var active=hasText&&!exhausted&&currentCmd;
     btn.disabled=!active;
     btn.style.background=active?'#2563eb':'var(--surf)';
     btn.style.color=active?'#fff':'var(--dim)';
     btn.style.border=active?'none':'1px solid var(--brd)';
     btn.style.cursor=active?'pointer':'not-allowed';
-    btn.style.opacity='1';
     btn.style.boxShadow=active?'0 4px 16px rgba(37,99,235,.4)':'none';
   }
 
-  function addIng(raw){
-    raw.split(',').forEach(function(v){
-      v=v.trim().toLowerCase();
-      if(v&&!ingredients.includes(v))ingredients.push(v);
-    });
-    renderTags();filterDB();updateBtn();
-  }
+  function mdToHtml(md){
+    return md
+      .replace(/^## (.+)$/gm,'<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);"></div>')
+      .replace(/^### (.+)$/gm,'<div style="font-size:.82rem;font-weight:700;color:var(--txt);margin:12px 0 3px;"></div>')
+      .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--amber);font-weight:700;"></strong>')
+      .replace(/\*(.+?)\*/g,'<em style="color:var(--txt2);"></em>')
+      .replace(/^- (.+)$/gm,'<div style="padding:3px 0 3px 10px;border-left:2px solid rgba(96,165,250,.25);color:var(--txt2);font-size:.78rem;"></div>')
+      .replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--brd);margin:12px 0;">')
+      .replace(/
 
- function mdToHtml(md){
-  return md
-    .replace(/^## (.+)$/gm,'<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">$1</div>')
-    .replace(/^### (.+)$/gm,'<div style="font-size:.82rem;font-weight:700;color:var(--txt);margin:12px 0 3px;">$1</div>')
-    .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--amber);font-weight:700;">$1</strong>')
-    .replace(/\*(.+?)\*/g,'<em style="color:var(--txt2);">$1</em>')
-    .replace(/^- (.+)$/gm,'<div style="padding:3px 0 3px 10px;border-left:2px solid rgba(96,165,250,.25);color:var(--txt2);font-size:.78rem;">$1</div>')
-    .replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--brd);margin:12px 0;">')
-    .replace(/\n\n/g,'<br><br>');
-}
+/g,'<br><br>');
+  }
 
   async function askBarman(){
     if(getUsage()>=MAX){showExhausted();return;}
+    var inp=document.getElementById('crea-input');
+    var val=inp?inp.value.trim():'';
+    if(!val||!currentCmd)return;
     var btn=document.getElementById('crea-btn');
     var resp=document.getElementById('crea-response');
     var body=document.getElementById('crea-body');
     var err=document.getElementById('crea-error');
+    var area=document.getElementById('crea-input-area');
     if(btn){btn.disabled=true;btn.textContent='...';}
     if(err)err.style.display='none';
+    if(area)area.style.display='none';
     if(resp)resp.style.display='block';
     if(body)body.innerHTML='<span style="color:var(--dim);">Il barman sta pensando…</span>';
-
-    var prompt='Ho questi ingredienti: **'+ingredients.join(', ')+'**.\n\nCrea per me:\n1. 2-3 cocktail originali realizzabili con questi ingredienti, con ricetta sintetica (dosi indicative, tecnica, bicchiere).\n2. 1-2 twist creativi inediti, anche non convenzionali.\n3. Un consiglio pratico su come valorizzare al meglio questi ingredienti insieme.\n\nRicorda: le ricette sono un punto di partenza creativo, da assaggiare e bilanciare sul momento.';
-
+    var prompt=PROMPTS[currentCmd].build(val);
     try{
       var res=await fetch(WORKER_URL,{
         method:'POST',
@@ -842,7 +740,7 @@ window.addEventListener("resize", setTabBarH);
         body:JSON.stringify({
           model:'claude-sonnet-4-20250514',
           max_tokens:1000,
-          system:'Sei un barman creativo di fama internazionale. Il tuo compito è generare idee di cocktail originali partendo dagli ingredienti che ti vengono forniti. Parli sempre in italiano. Tono diretto e professionale, da collega a collega. Non citare mai database o fonti esterne. Usi ## per titoli sezione, **grassetto** per nomi drink e ingredienti chiave, - per liste. Precisa sempre che le ricette sono un punto di partenza da assaggiare e bilanciare.',
+          system:'Sei un barman creativo di fama internazionale. Parli sempre in italiano. Tono diretto e professionale, da collega a collega. Non citare mai database o fonti esterne. Usi ## per titoli sezione, **grassetto** per nomi drink e ingredienti chiave, - per liste. Le ricette sono sempre punti di partenza da assaggiare e bilanciare.',
           messages:[{role:'user',content:prompt}]
         })
       });
@@ -851,21 +749,39 @@ window.addEventListener("resize", setTabBarH);
       if(!text)throw new Error(data?.error?.message||'Risposta vuota');
       if(body)body.innerHTML=mdToHtml(text);
       incUsage();renderUsage();
+      if(btn){btn.style.display='none';}
     }catch(e){
       if(resp)resp.style.display='none';
-      if(err){err.style.display='block';err.textContent='⚠️ '+( e.message||'Errore. Riprova.');}
-    }finally{
-      if(btn){btn.disabled=getUsage()>=MAX||ingredients.length===0;btn.textContent='✦ Chiedi al Barman';btn.style.opacity=btn.disabled?'.45':'1';}
+      if(area)area.style.display='block';
+      if(err){err.style.display='block';err.textContent='⚠️ '+(e.message||'Errore. Riprova.');}
+      if(btn){btn.disabled=false;btn.textContent='✦ Chiedi al Barman';}
     }
   }
 
   document.addEventListener('DOMContentLoaded',function(){
     renderUsage();
-    var addBtn=document.getElementById('crea-add');
-    var input=document.getElementById('crea-input');
-    var askBtn=document.getElementById('crea-btn');
-    if(addBtn)addBtn.addEventListener('click',function(){if(input&&input.value.trim()){addIng(input.value);input.value='';input.focus();}});
-    if(input)input.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===','){e.preventDefault();if(input.value.trim()){addIng(input.value);input.value='';}}} );
-    if(askBtn)askBtn.addEventListener('click',askBarman);
+
+    // Bottoni comando
+    document.querySelectorAll('.crea-cmd-btn').forEach(function(b){
+      b.addEventListener('click',function(){ selectCmd(this.dataset.cmd); });
+      b.addEventListener('mouseenter',function(){ this.style.borderColor='rgba(37,99,235,.4)'; this.style.background='rgba(37,99,235,.05)'; });
+      b.addEventListener('mouseleave',function(){ this.style.borderColor='var(--brd)'; this.style.background='var(--bg)'; });
+    });
+
+    // Input testo
+    var inp=document.getElementById('crea-input');
+    if(inp)inp.addEventListener('input',updateBtn);
+
+    // Bottone invio
+    var btn=document.getElementById('crea-btn');
+    if(btn)btn.addEventListener('click',askBarman);
+
+    // Torna ai comandi
+    var back=document.getElementById('crea-back');
+    if(back)back.addEventListener('click',showCmds);
+
+    // Nuova domanda
+    var newBtn=document.getElementById('crea-new');
+    if(newBtn)newBtn.addEventListener('click',showCmds);
   });
 })();
