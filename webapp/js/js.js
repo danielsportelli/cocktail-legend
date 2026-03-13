@@ -563,12 +563,114 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   render();
   updateAllCounts();
 });
-document.getElementById("srch").addEventListener("input",function(e){
-  Q=e.target.value;
-  clearTimeout(window._renderTimer);
-  window._renderTimer = setTimeout(render, 300);
-});
-document.getElementById("srch").addEventListener("keydown",function(e){if(e.key==="Enter")this.blur();});
+// ═══════════ AUTOCOMPLETE RICERCA ═══════════
+(function(){
+  var inp = document.getElementById("srch");
+  var box = document.getElementById("srch-suggestions");
+  var _activeIdx = -1;
+
+  function buildSuggestions(q) {
+    box.innerHTML = "";
+    _activeIdx = -1;
+    if (!q || q.length < 1) { box.classList.remove("open"); return; }
+    var ql = q.toLowerCase();
+    // Prima i drink che iniziano con la query, poi quelli che la contengono
+    var starts = [], contains = [];
+    for (var i = 0; i < DATA.length; i++) {
+      var n = DATA[i].name;
+      var nl = n.toLowerCase();
+      if (nl.indexOf(ql) === 0) starts.push(DATA[i]);
+      else if (nl.indexOf(ql) !== -1) contains.push(DATA[i]);
+    }
+    var results = starts.concat(contains).slice(0, 8);
+    if (!results.length) { box.classList.remove("open"); return; }
+    for (var j = 0; j < results.length; j++) {
+      (function(cocktail){
+        var item = document.createElement("div");
+        item.className = "srch-sug-item";
+        // Evidenzia la parte matchata
+        var name = cocktail.name;
+        var idx = name.toLowerCase().indexOf(ql);
+        item.innerHTML = name.slice(0, idx) +
+          "<strong>" + name.slice(idx, idx + q.length) + "</strong>" +
+          name.slice(idx + q.length);
+        item.addEventListener("mousedown", function(e){
+          e.preventDefault(); // evita blur sull'input
+          closeSuggestions();
+          inp.value = "";
+          Q = "";
+          render();
+          // Trova indice in RES e apri modal
+          var ridx = -1;
+          for (var k = 0; k < RES.length; k++) {
+            if (RES[k].name === cocktail.name) { ridx = k; break; }
+          }
+          // Se non è in RES (filtri attivi), carica tutto e poi apri
+          if (ridx === -1) {
+            var didx = -1;
+            for (var d = 0; d < DATA.length; d++) {
+              if (DATA[d].name === cocktail.name) { didx = d; break; }
+            }
+            if (didx !== -1) {
+              RES = DATA.slice();
+              ridx = didx;
+            }
+          }
+          if (ridx !== -1) openM(ridx);
+          inp.blur();
+        });
+        box.appendChild(item);
+      })(results[j]);
+    }
+    box.classList.add("open");
+  }
+
+  function closeSuggestions() {
+    box.classList.remove("open");
+    box.innerHTML = "";
+    _activeIdx = -1;
+  }
+
+  inp.addEventListener("input", function(e){
+    Q = e.target.value;
+    clearTimeout(window._renderTimer);
+    window._renderTimer = setTimeout(render, 300);
+    buildSuggestions(e.target.value);
+  });
+
+  inp.addEventListener("keydown", function(e){
+    var items = box.querySelectorAll(".srch-sug-item");
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      _activeIdx = Math.min(_activeIdx + 1, items.length - 1);
+      items.forEach(function(el, i){ el.classList.toggle("active", i === _activeIdx); });
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      _activeIdx = Math.max(_activeIdx - 1, -1);
+      items.forEach(function(el, i){ el.classList.toggle("active", i === _activeIdx); });
+    } else if (e.key === "Enter") {
+      if (_activeIdx >= 0 && items[_activeIdx]) {
+        items[_activeIdx].dispatchEvent(new MouseEvent("mousedown"));
+      } else {
+        this.blur();
+      }
+      closeSuggestions();
+    } else if (e.key === "Escape") {
+      closeSuggestions();
+      this.blur();
+    }
+  });
+
+  inp.addEventListener("blur", function(){
+    setTimeout(closeSuggestions, 150);
+  });
+
+  // Chiudi cliccando fuori
+  document.addEventListener("click", function(e){
+    if (!inp.contains(e.target) && !box.contains(e.target)) closeSuggestions();
+  });
+})();
+// ═════════════════════════════════════════
 document.getElementById("srt").addEventListener("change",render);
 document.getElementById("btn-reset").addEventListener("click",function(){
   AF={cat:[],dis:[],abv:[],sap:[],frz:[],bic:[]};
