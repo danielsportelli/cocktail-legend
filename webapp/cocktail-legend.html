@@ -554,7 +554,7 @@
     <!-- RISPOSTA -->
     <div id="crea-response" style="display:none;margin-top:1rem;border-top:1px solid var(--brd);padding-top:1rem;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:.75rem;font-size:.68rem;color:var(--dim);">
-        <span style="width:24px;height:24px;background:var(--amber);border-radius:50%;display:grid;place-items:center;color:#0a0f1e;flex-shrink:0;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8H6L4 14h16L18 8z"/><path d="M4 14c0 3 3.6 5 8 5s8-2 8-5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="9" y1="22" x2="15" y2="22"/></svg></span>
+        <span style="width:24px;height:24px;background:var(--amber);border-radius:50%;display:grid;place-items:center;color:#0a0f1e;flex-shrink:0;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg></span>
         Il barman risponde
       </div>
       <div id="crea-body" style="font-size:.78rem;line-height:1.75;color:var(--txt);"></div>
@@ -583,27 +583,29 @@
         </div>
       </div>
 
-      <!-- SE NO -->
+      <!-- SE NO: scelta azione -->
       <div id="fu-no-opts" style="display:none;margin-top:.85rem;">
         <div style="font-size:.68rem;color:var(--dim);margin-bottom:.5rem;">Cosa vuoi fare?</div>
         <div style="display:flex;gap:.45rem;">
           <button id="fu-modifica" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .4rem;font-size:.68rem;font-weight:600;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;">Modifichiamo<br>questo</button>
           <button id="fu-altro" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .4rem;font-size:.68rem;font-weight:600;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;">Proponi<br>qualcos'altro</button>
         </div>
-        <!-- modifica: chat libera -->
-        <div id="fu-mod-area" style="display:none;margin-top:.75rem;">
-          <div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.4rem;">Dimmi cosa vuoi modificare</div>
-          <textarea id="fu-mod-inp" rows="2" placeholder="es. rendilo più fresco, cambia il distillato con il rum..."
-            style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
-          <button id="fu-mod-send" disabled style="margin-top:.5rem;width:100%;padding:.65rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">✦ Modifica</button>
-        </div>
-        <!-- proponi altro: stessi ingredienti o nuovi -->
-        <div id="fu-altro-area" style="display:none;margin-top:.75rem;">
-          <div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.4rem;">Stessi ingredienti o ne aggiungi?</div>
-          <textarea id="fu-altro-inp" rows="2" placeholder="Lascia vuoto per gli stessi ingredienti, oppure aggiungi o cambia..."
-            style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
-          <button id="fu-altro-send" style="margin-top:.5rem;width:100%;padding:.65rem;background:var(--amber);color:#0a0f1e;border:none;border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(245,158,11,.35);">✦ Proponi</button>
-        </div>
+      </div>
+
+      <!-- modifica chat — fuori da fu-no-opts -->
+      <div id="fu-mod-area" style="display:none;margin-top:.75rem;">
+        <div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.4rem;">Dimmi cosa vuoi modificare</div>
+        <textarea id="fu-mod-inp" rows="2" placeholder="es. rendilo più fresco, cambia il distillato con il rum..."
+          style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
+        <button id="fu-mod-send" disabled style="margin-top:.5rem;width:100%;padding:.65rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">✦ Modifica</button>
+      </div>
+
+      <!-- proponi altro — fuori da fu-no-opts -->
+      <div id="fu-altro-area" style="display:none;margin-top:.75rem;">
+        <div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.4rem;">Stessi ingredienti o ne aggiungi?</div>
+        <textarea id="fu-altro-inp" rows="2" placeholder="Lascia vuoto per gli stessi ingredienti, oppure aggiungi o cambia..."
+          style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
+        <button id="fu-altro-send" style="margin-top:.5rem;width:100%;padding:.65rem;background:var(--amber);color:#0a0f1e;border:none;border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(245,158,11,.35);">✦ Proponi</button>
       </div>
 
       <button id="crea-new" style="margin-top:1rem;display:inline-flex;align-items:center;gap:.35rem;background:var(--bg);border:1px solid var(--brd);border-radius:7px;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:.3rem .65rem;transition:all .2s;">

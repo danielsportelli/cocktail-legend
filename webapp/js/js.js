@@ -953,10 +953,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var active=hasText&&getUsage()<MAX;
     btn.disabled=!active;
     btn.style.background=active?'var(--amber)':'var(--surf)';
-    btn.style.color=active?'#fff':'var(--dim)';
+    btn.style.color=active?'#0a0f1e':'var(--dim)';
     btn.style.border=active?'none':'1px solid var(--brd)';
     btn.style.cursor=active?'pointer':'not-allowed';
     btn.style.boxShadow=active?'0 4px 16px rgba(245,158,11,.35)':'none';
+    btn.style.opacity=active?'1':'.5';
   }
 
   // ─── BOTTONE INVIO (altri comandi) ────────────────────────────────
@@ -970,7 +971,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var active=hasVal&&getUsage()<MAX;
     btn.disabled=!active;
     btn.style.background=active?'var(--amber)':'var(--surf)';
-    btn.style.color=active?'#fff':'var(--dim)';
+    btn.style.color=active?'#0a0f1e':'var(--dim)';
     btn.style.border=active?'none':'1px solid var(--brd)';
     btn.style.cursor=active?'pointer':'not-allowed';
     btn.style.boxShadow=active?'0 4px 16px rgba(245,158,11,.35)':'none';
@@ -985,7 +986,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       .replace(/\*(.+?)\*/g,'<em style="color:var(--txt2);">$1</em>')
       .replace(/^- (.+)$/gm,'<div style="padding:3px 0 3px 10px;border-left:2px solid rgba(96,165,250,.25);color:var(--txt2);font-size:.78rem;">$1</div>')
       .replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--brd);margin:12px 0;">')
-      .replace(/\n\n/g,'<br><br>');
+      .replace(/\n/g,'<br>')
+      .replace(/<br><br>/g,'<br><br>');
   }
 
   // ─── FETCH ────────────────────────────────────────────────────────
@@ -1015,7 +1017,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         body:JSON.stringify({
           model:'claude-sonnet-4-20250514',
           max_tokens:1000,
-          system:'Sei un barman creativo di fama internazionale. Parli sempre in italiano. Tono diretto e professionale, da collega a collega. Non citare mai database o fonti esterne. Usi ## per titoli sezione, **grassetto** per nomi drink e ingredienti chiave, - per liste. Le ricette sono sempre punti di partenza da assaggiare e bilanciare.',
+          system:'Sei un barman creativo di fama internazionale. Parli sempre in italiano. Tono diretto e professionale, da collega a collega. Non citare mai database o fonti esterne. Usi ## per titoli sezione, **grassetto** per nomi drink e ingredienti chiave, - per liste. Tecnica, Bicchiere e Garnish vanno sempre su righe separate, mai sulla stessa riga. Le ricette sono sempre punti di partenza da assaggiare e bilanciare.',
           messages:[{role:'user',content:prompt}]
         })
       });
@@ -1147,7 +1149,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var active=this.value.trim().length>0&&getUsage()<MAX;
         btn.disabled=!active;
         btn.style.background=active?'var(--amber)':'var(--surf)';
-        btn.style.color=active?'#fff':'var(--dim)';
+        btn.style.color=active?'#0a0f1e':'var(--dim)';
         btn.style.border=active?'none':'1px solid var(--brd)';
         btn.style.cursor=active?'pointer':'not-allowed';
         btn.style.boxShadow=active?'0 4px 16px rgba(245,158,11,.35)':'none';
