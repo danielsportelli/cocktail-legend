@@ -1028,6 +1028,61 @@ footer {
   box-shadow: 0 4px 12px rgba(245,158,11,0.4);
   z-index: 20;
 }
+
+/* ── Phone Duo Mockup ── */
+.phone-duo-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: 480px;
+  margin: 0 auto;
+}
+
+.phone-duo-back,
+.phone-duo-front {
+  position: absolute;
+  background: #0a0a0a;
+  border-radius: 40px;
+  padding: 12px;
+  box-shadow:
+    0 0 0 2px #2a2a2a,
+    0 0 0 4px #111,
+    0 32px 80px rgba(0,0,0,0.7);
+  overflow: hidden;
+}
+
+.phone-duo-back {
+  width: 220px;
+  left: 20px;
+  top: 50px;
+  transform: rotate(-7deg);
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.phone-duo-front {
+  width: 240px;
+  right: 20px;
+  top: 10px;
+  transform: rotate(5deg);
+  z-index: 2;
+}
+
+.phone-duo-screen {
+  border-radius: 28px;
+  overflow: hidden;
+  background: #0f172a;
+  aspect-ratio: 9/19.5;
+}
+
+.phone-duo-screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
 </style>
   <script type="application/ld+json">
   {
@@ -1439,56 +1494,22 @@ footer {
    onmouseout="this.style.background='var(--accent)'">
   Prova la demo gratuita →
 </a>  
-<div class="phone-mockup-wrapper" style="
-  position: relative;
-  width: 100%;
-  max-width: 600px;
-  height: 460px;
-  margin: 0 auto;
-">
-  <!-- Telefono dietro (inclinato a sinistra) -->
-  <div style="
-    position: absolute;
-    left: 0;
-    top: 40px;
-    width: 220px;
-    background: #1e293b;
-    border-radius: 28px;
-    border: 2px solid rgba(255,255,255,0.08);
-    box-shadow: -8px 16px 48px rgba(0,0,0,0.5);
-    overflow: hidden;
-    transform: rotate(-8deg) translateX(20px);
-    z-index: 1;
-  ">
-    <div style="background:#0f172a; padding: 10px 10px 0; border-radius: 28px 28px 0 0;">
-      <div style="width:60px;height:8px;background:#0f172a;border-radius:4px;margin:0 auto 8px;"></div>
+<div class="phone-duo-wrapper">
+
+  <!-- Telefono dietro -->
+  <div class="phone-duo-back">
+    <div class="phone-duo-screen">
+      <img src="data:image/jpeg;base64,//9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAMbAZADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD5zPWlo70V6JzBRRRQAUUUUgCjtRR2oGJRS0UAFFFFIAoopKBijrSUo60lABRRRSAKKKKACiiigANFKetJQAUUUlIAooooGFL2pKXsaAEooooAKKKKQBRRRSGA6iigdRRQAUUUUAFFFJQAUUUUgFPakpewpKACiiikAUUUUDJD1pKU9TSV0GQUUUUgCikooGLR2pKXtQAUUUUgCiiigYlFFFACjrSUo60lIAoore0zwpqWpWFvdWrWZFyzpBC9yqSzMhwwVT1NZ1a0KK5qjsi4U5Tdoq5g0Vq6BoGoa9dT22nRK0sKGRxI2zHOMc9yTgD1pui6Hf60L3+zohI1pCZ5ELYbaDj5R3PtUyxFKN+aS0tfyvt941Sm7WW5mUVr2/h6/uLvSraJYjLqcPn2+ZMAr83U9vumjT9AuL3S/wC0PtWn2tqZTAGu7kRbnABIGevBFJ4mkldyX9X/AMn9wKjN9DJPWkq4+nXC6SupEJ9lac2wO7neF3dPTHeq9pby3d1DbW0ZknmcRxovVmJwB+daKpFptPYnladrEVFbGpeHr3T5YEle0l86UwBre5WULICAUbHQjI60/XPDV/o0Ly3LWssSTm2ka2nWXy5QM7GxyDwayWKoyaSktdi3RqK91sYlFb174U1WxsprmeO3/cKrzwpOrTQK3QugOVHI+meaIfCupTaXFfRG0dZbdrpIBcL5zRKSGYIeSBg/lU/W6FubnVr276j9hUvblZg0vY1t6Z4autR0x7+G80tLeMAy+ddqjR5JC7hjjJHFMsPD9xd6V/aButOtrUzNCrXVyItzqASBnrwRTeKoq95bO3z7AqM3bTcxqKuPp1wmkR6kQn2WSdrdTu+beqhjx6YI5pJtOuIdLtdQcJ9muZJIoyG53JjdkdvvCtPaw79bfMjkl2KlFW7nTri20+yvZQggvPM8o" alt="Anteprima Cocktail Legend" />
     </div>
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..." 
-         alt="Anteprima Cocktail Legend"
-         style="width:100%;display:block;border-radius:0 0 26px 26px;" />
   </div>
 
-  <!-- Telefono davanti (frontale, più a destra) -->
-  <div style="
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 240px;
-    background: #1e293b;
-    border-radius: 32px;
-    border: 2px solid rgba(255,255,255,0.12);
-    box-shadow: 16px 24px 64px rgba(0,0,0,0.6);
-    overflow: hidden;
-    transform: rotate(4deg);
-    z-index: 2;
-  ">
-    <div style="background:#0f172a; padding: 10px 10px 0; border-radius: 32px 32px 0 0;">
-      <div style="width:60px;height:8px;background:#0f172a;border-radius:4px;margin:0 auto 8px;"></div>
+  <!-- Telefono davanti -->
+  <div class="phone-duo-front">
+    <div class="phone-duo-screen">
+      <img src="data:image/jpeg;base64,//9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAMbAZADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD5zPWlo70V6JzBRRRQAUUUUgCjtRR2oGJRS0UAFFFFIAoopKBijrSUo60lABRRRSAKKKKACiiigANFKetJQAUUUlIAooooGFL2pKXsaAEooooAKKKKQBRRRSGA6iigdRRQAUUUUAFFFJQAUUUUgFPakpewpKACiiikAUUUUDJD1pKU9TSV0GQUUUUgCikooGLR2pKXtQAUUUUgCiiigYlFFFACjrSUo60lIAoore0zwpqWpWFvdWrWZFyzpBC9yqSzMhwwVT1NZ1a0KK5qjsi4U5Tdoq5g0Vq6BoGoa9dT22nRK0sKGRxI2zHOMc9yTgD1pui6Hf60L3+zohI1pCZ5ELYbaDj5R3PtUyxFKN+aS0tfyvt941Sm7WW5mUVr2/h6/uLvSraJYjLqcPn2+ZMAr83U9vumjT9AuL3S/wC0PtWn2tqZTAGu7kRbnABIGevBFJ4mkldyX9X/AMn9wKjN9DJPWkq4+nXC6SupEJ9lac2wO7neF3dPTHeq9pby3d1DbW0ZknmcRxovVmJwB+daKpFptPYnladrEVFbGpeHr3T5YEle0l86UwBre5WULICAUbHQjI60/XPDV/o0Ly3LWssSTm2ka2nWXy5QM7GxyDwayWKoyaSktdi3RqK91sYlFb174U1WxsprmeO3/cKrzwpOrTQK3QugOVHI+meaIfCupTaXFfRG0dZbdrpIBcL5zRKSGYIeSBg/lU/W6FubnVr276j9hUvblZg0vY1t6Z4autR0x7+G80tLeMAy+ddqjR5JC7hjjJHFMsPD9xd6V/aButOtrUzNCrXVyItzqASBnrwRTeKoq95bO3z7AqM3bTcxqKuPp1wmkR6kQn2WSdrdTu+beqhjx6YI5pJtOuIdLtdQcJ9muZJIoyG53JjdkdvvCtPaw79bfMjkl2KlFW7nTri20+yvZQggvPM8o" alt="Anteprima Cocktail Legend" />
     </div>
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..." 
-         alt="Anteprima Cocktail Legend"
-         style="width:100%;display:block;border-radius:0 0 30px 30px;" />
   </div>
+
 </div>
 </section>
 
