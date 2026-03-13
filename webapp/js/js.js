@@ -88,10 +88,22 @@ var SYNONYM_FILES = [
 function expandQuery(q) {
   var key = q.toLowerCase().trim();
   var terms = [key];
+  // Match esatto
   if (SYNONYMS[key]) {
     for (var i = 0; i < SYNONYMS[key].length; i++) {
       var cat = SYNONYMS[key][i].toLowerCase();
       if (terms.indexOf(cat) === -1) terms.push(cat);
+    }
+  }
+  // Match parziale: cerca tutte le chiavi che CONTENGONO la query
+  var allKeys = Object.keys(SYNONYMS);
+  for (var k = 0; k < allKeys.length; k++) {
+    if (allKeys[k] !== key && allKeys[k].indexOf(key) !== -1) {
+      var vals = SYNONYMS[allKeys[k]];
+      for (var v = 0; v < vals.length; v++) {
+        var cat2 = vals[v].toLowerCase();
+        if (terms.indexOf(cat2) === -1) terms.push(cat2);
+      }
     }
   }
   return terms;
