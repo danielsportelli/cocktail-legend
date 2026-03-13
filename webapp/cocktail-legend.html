@@ -421,65 +421,117 @@
       <span id="crea-usage-txt">0/50</span>
     </div>
 
-    <!-- STEP 1: BOTTONI COMANDO -->
+    <!-- GRIGLIA 6 COMANDI -->
     <div id="crea-step-cmds">
       <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.6rem;">Cosa vuoi fare?</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:.55rem;">
-        <button class="crea-cmd-btn" data-cmd="signature"
-          style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
-          <span style="font-size:.95rem;">🍸</span>
+        <button class="crea-cmd-btn" data-cmd="signature" style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 22v-7"/><path d="M3 3l7 9h4l7-9z"/></svg>
           <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Crea un signature</span>
           <span style="font-size:.6rem;color:var(--dim);">Da uno o più ingredienti</span>
         </button>
-        <button class="crea-cmd-btn" data-cmd="consiglio"
-          style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
-          <span style="font-size:.95rem;">💬</span>
+        <button class="crea-cmd-btn" data-cmd="consiglio" style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Chiedi un consiglio</span>
           <span style="font-size:.6rem;color:var(--dim);">Domanda libera al barman</span>
         </button>
-        <button class="crea-cmd-btn" data-cmd="ribilancia"
-          style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
-          <span style="font-size:.95rem;">⚖️</span>
+        <button class="crea-cmd-btn" data-cmd="ribilancia" style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Ribilancia un drink</span>
           <span style="font-size:.6rem;color:var(--dim);">Troppo dolce, acido o forte</span>
         </button>
-        <button class="crea-cmd-btn" data-cmd="twist"
-          style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
-          <span style="font-size:.95rem;">🔄</span>
+        <button class="crea-cmd-btn" data-cmd="twist" style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
           <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Twist on classic</span>
           <span style="font-size:.6rem;color:var(--dim);">Reinterpreta un classico</span>
         </button>
-        <button class="crea-cmd-btn" data-cmd="pairing"
-          style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
-          <span style="font-size:.95rem;">🍽️</span>
+        <button class="crea-cmd-btn" data-cmd="pairing" style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
           <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Food pairing</span>
           <span style="font-size:.6rem;color:var(--dim);">Abbina un drink al piatto</span>
         </button>
-        <button class="crea-cmd-btn" data-cmd="giorno"
-          style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
-          <span style="font-size:.95rem;">📅</span>
+        <button class="crea-cmd-btn" data-cmd="giorno" style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="16" r="2" fill="var(--amber)" stroke="none"/></svg>
           <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Cocktail del giorno</span>
           <span style="font-size:.6rem;color:var(--dim);">Stagionale, pensato per oggi</span>
         </button>
       </div>
     </div>
 
-    <!-- STEP 2: INPUT CONTESTUALE -->
-    <div id="crea-step-input" style="display:none;">
-      <button id="crea-back" style="background:none;border:none;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:0;margin-bottom:.75rem;">← Torna ai comandi</button>
-      <div id="crea-input-label" style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;"></div>
+    <!-- SIGNATURE MULTI-STEP -->
+    <div id="crea-step-signature" style="display:none;">
+      <button class="crea-back-btn" data-target="cmds" style="display:inline-flex;align-items:center;gap:.35rem;background:var(--bg);border:1px solid var(--brd);border-radius:7px;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:.3rem .65rem;margin-bottom:.85rem;transition:all .2s;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Torna ai comandi
+      </button>
 
-      <!-- Pills per cocktail del giorno -->
+      <!-- Step 1: tipo -->
+      <div id="sig-step-1">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Che tipo di drink?</div>
+        <div style="display:flex;gap:.45rem;">
+          <button class="sig-pill" data-step="1" data-val="alcolico" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.75rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">🍹 Alcolico</button>
+          <button class="sig-pill" data-step="1" data-val="analcolico" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.75rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">🫧 Analcolico</button>
+        </div>
+      </div>
+
+      <!-- Step 2a: momento (solo alcolico) -->
+      <div id="sig-step-2a" style="display:none;margin-top:.8rem;">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Quando viene servito?</div>
+        <div style="display:flex;gap:.45rem;">
+          <button class="sig-pill" data-step="2a" data-val="pre dinner" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Pre dinner</button>
+          <button class="sig-pill" data-step="2a" data-val="after dinner" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">After dinner</button>
+          <button class="sig-pill" data-step="2a" data-val="all day" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">All day</button>
+        </div>
+      </div>
+
+      <!-- Step 2b: profilo gusto (solo analcolico) -->
+      <div id="sig-step-2b" style="display:none;margin-top:.8rem;">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Profilo gusto</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;">
+          <button class="sig-pill" data-step="2b" data-val="dolce" style="background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Dolce</button>
+          <button class="sig-pill" data-step="2b" data-val="aspro" style="background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Aspro</button>
+          <button class="sig-pill" data-step="2b" data-val="amaro" style="background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Amaro</button>
+          <button class="sig-pill" data-step="2b" data-val="fresco" style="background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Fresco</button>
+        </div>
+      </div>
+
+      <!-- Step 3: tenore alcolico (solo alcolico) -->
+      <div id="sig-step-3" style="display:none;margin-top:.8rem;">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Tenore alcolico</div>
+        <div style="display:flex;gap:.45rem;">
+          <button class="sig-pill" data-step="3" data-val="basso" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Basso</button>
+          <button class="sig-pill" data-step="3" data-val="medio" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Medio</button>
+          <button class="sig-pill" data-step="3" data-val="alto" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Alto</button>
+        </div>
+      </div>
+
+      <!-- Step 4: ingredienti + invio -->
+      <div id="sig-step-4" style="display:none;margin-top:.8rem;">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Ingredienti che hai</div>
+        <textarea id="sig-input" rows="2"
+          style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"
+          placeholder="es. gin, lime, rosmarino... aggiungi note se vuoi: frizzante, secco, cremoso"></textarea>
+        <button id="sig-btn" disabled
+          style="margin-top:.65rem;width:100%;padding:.75rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">
+          ✦ Chiedi al Barman
+        </button>
+      </div>
+    </div>
+
+    <!-- INPUT ALTRI 5 COMANDI -->
+    <div id="crea-step-input" style="display:none;">
+      <button class="crea-back-btn" data-target="cmds" style="display:inline-flex;align-items:center;gap:.35rem;background:var(--bg);border:1px solid var(--brd);border-radius:7px;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:.3rem .65rem;margin-bottom:.85rem;transition:all .2s;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Torna ai comandi
+      </button>
+      <div id="crea-input-label" style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;"></div>
       <div id="crea-pills" style="display:none;flex-wrap:wrap;gap:.45rem;margin-bottom:.75rem;">
         <button class="crea-pill" data-val="pre dinner" style="background:var(--bg);border:1px solid var(--brd);border-radius:99px;padding:.35rem .85rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Pre dinner</button>
         <button class="crea-pill" data-val="after dinner" style="background:var(--bg);border:1px solid var(--brd);border-radius:99px;padding:.35rem .85rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">After dinner</button>
         <button class="crea-pill" data-val="all day" style="background:var(--bg);border:1px solid var(--brd);border-radius:99px;padding:.35rem .85rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">All day</button>
       </div>
-
-      <!-- Textarea per gli altri comandi -->
       <textarea id="crea-input" rows="2" placeholder=""
         style="display:none;width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
-
       <button id="crea-btn" disabled
         style="margin-top:.75rem;width:100%;padding:.75rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">
         ✦ Chiedi al Barman
@@ -499,7 +551,10 @@
         Il barman risponde
       </div>
       <div id="crea-body" style="font-size:.78rem;line-height:1.75;color:var(--txt);"></div>
-      <button id="crea-new" style="margin-top:1rem;background:none;border:1px solid var(--brd);border-radius:8px;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:.4rem .8rem;transition:all .2s;">← Nuova domanda</button>
+      <button id="crea-new" style="margin-top:1rem;display:inline-flex;align-items:center;gap:.35rem;background:var(--bg);border:1px solid var(--brd);border-radius:7px;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:.3rem .65rem;transition:all .2s;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Nuova domanda
+      </button>
     </div>
 
     <div id="crea-error" style="display:none;margin-top:.75rem;padding:.65rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;font-size:.72rem;color:#f87171;"></div>

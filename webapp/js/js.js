@@ -572,15 +572,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   var currentCmd = null;
   var selectedPill = null;
 
+  // Stato multi-step signature
+  var sig = { tipo: null, momento: null, gusto: null, tenore: null };
+
+  // ─── PROMPTS per i 5 comandi semplici ───────────────────────────
   var PROMPTS = {
-    signature: {
-      label: 'Ingredienti che hai',
-      placeholder: 'es. gin, lime, basilico, pepe rosa...',
-      usePills: false,
-      build: function(v){
-        return 'Ho questi ingredienti: ' + v + '.\n\nCrea un signature drink originale:\n1. Nome del drink e concept.\n2. Ricetta completa (dosi, tecnica, bicchiere, garnish).\n3. Note su come bilanciare e personalizzare.\n\nRicorda: punto di partenza da assaggiare e bilanciare sul momento.';
-      }
-    },
     consiglio: {
       label: 'La tua domanda',
       placeholder: 'es. Come gestisco un cliente che vuole un drink analcolico interessante?',
@@ -626,6 +622,30 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     }
   };
 
+  // ─── BUILD PROMPT SIGNATURE ──────────────────────────────────────
+  function buildSignaturePrompt(ingredienti){
+    var tipo = sig.tipo;
+    var lines = [];
+    if(tipo === 'alcolico'){
+      lines.push('Crea un signature drink ALCOLICO con queste caratteristiche:');
+      lines.push('- Momento: ' + sig.momento);
+      lines.push('- Tenore alcolico: ' + sig.tenore);
+    } else {
+      lines.push('Crea un signature drink ANALCOLICO (zero alcol) con queste caratteristiche:');
+      lines.push('- Profilo gusto: ' + sig.gusto);
+    }
+    lines.push('- Ingredienti disponibili: ' + ingredienti);
+    lines.push('');
+    lines.push('Dammi:');
+    lines.push('1. Nome del drink e concept in 1 riga.');
+    lines.push('2. Ricetta completa: dosi precise, tecnica, bicchiere, garnish.');
+    lines.push('3. Una nota su come personalizzarlo o bilanciarlo sul momento.');
+    lines.push('');
+    lines.push('Punto di partenza da assaggiare e bilanciare sul momento.');
+    return lines.join('\n');
+  }
+
+  // ─── USAGE ───────────────────────────────────────────────────────
   function getUsage(){
     var now = new Date();
     var month = now.getFullYear()+'-'+now.getMonth();
@@ -636,13 +656,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     }
     return parseInt(localStorage.getItem(USAGE_KEY)||'0',10);
   }
-
   function incUsage(){
     var u=getUsage()+1;
     localStorage.setItem(USAGE_KEY,String(u));
     return u;
   }
-
   function renderUsage(){
     var u=getUsage();
     var pct=Math.min(100,(u/MAX)*100);
@@ -652,73 +670,142 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(txt)txt.textContent=u+'/'+MAX;
     if(u>=MAX)showExhausted();
   }
-
   function showExhausted(){
     var b=document.getElementById('crea-exhausted');
     var btn=document.getElementById('crea-btn');
+    var sigBtn=document.getElementById('sig-btn');
     if(b)b.style.display='block';
     if(btn)btn.disabled=true;
+    if(sigBtn)sigBtn.disabled=true;
     var now=new Date();
     var next=new Date(now.getFullYear(),now.getMonth()+1,1);
     var d=document.getElementById('crea-reset-date');
     if(d)d.textContent='Si resetterà il '+next.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'});
   }
 
+  // ─── NAVIGAZIONE PRINCIPALE ───────────────────────────────────────
   function showCmds(){
-    currentCmd=null;
-    selectedPill=null;
-    var stepCmds=document.getElementById('crea-step-cmds');
-    var stepInput=document.getElementById('crea-step-input');
-    var resp=document.getElementById('crea-response');
-    var err=document.getElementById('crea-error');
-    var exhausted=document.getElementById('crea-exhausted');
-    if(stepCmds)stepCmds.style.display='block';
-    if(stepInput)stepInput.style.display='none';
-    if(resp)resp.style.display='none';
-    if(err)err.style.display='none';
-    if(exhausted)exhausted.style.display='none';
+    currentCmd=null; selectedPill=null;
+    sig={tipo:null,momento:null,gusto:null,tenore:null};
+    setVisible('crea-step-cmds',true);
+    setVisible('crea-step-signature',false);
+    setVisible('crea-step-input',false);
+    setVisible('crea-response',false);
+    setVisible('crea-error',false);
+    setVisible('crea-exhausted',false);
     var inp=document.getElementById('crea-input');
     if(inp)inp.value='';
+    var sigInp=document.getElementById('sig-input');
+    if(sigInp)sigInp.value='';
+  }
+
+  function setVisible(id, show){
+    var el=document.getElementById(id);
+    if(el)el.style.display=show?'block':'none';
   }
 
   function selectCmd(cmd){
     if(getUsage()>=MAX){showExhausted();return;}
     currentCmd=cmd;
-    selectedPill=null;
-    var cfg=PROMPTS[cmd];
-    var stepCmds=document.getElementById('crea-step-cmds');
-    var stepInput=document.getElementById('crea-step-input');
-    var label=document.getElementById('crea-input-label');
-    var pills=document.getElementById('crea-pills');
-    var inp=document.getElementById('crea-input');
-    var btn=document.getElementById('crea-btn');
-    if(stepCmds)stepCmds.style.display='none';
-    if(stepInput)stepInput.style.display='block';
-    if(label)label.textContent=cfg.label;
-    if(cfg.usePills){
-      if(pills)pills.style.display='flex';
-      if(inp)inp.style.display='none';
-      // reset pills
-      document.querySelectorAll('.crea-pill').forEach(function(p){
-        p.style.background='var(--bg)';
-        p.style.borderColor='var(--brd)';
-        p.style.color='var(--txt2)';
-      });
+    setVisible('crea-step-cmds',false);
+    setVisible('crea-response',false);
+    setVisible('crea-error',false);
+
+    if(cmd==='signature'){
+      // reset stato sig
+      sig={tipo:null,momento:null,gusto:null,tenore:null};
+      setVisible('crea-step-signature',true);
+      setVisible('sig-step-1',true);
+      setVisible('sig-step-2a',false);
+      setVisible('sig-step-2b',false);
+      setVisible('sig-step-3',false);
+      setVisible('sig-step-4',false);
+      // reset tutte le pill signature
+      document.querySelectorAll('.sig-pill').forEach(function(p){ pillOff(p); });
     } else {
-      if(pills)pills.style.display='none';
-      if(inp){inp.style.display='block';inp.placeholder=cfg.placeholder;inp.value='';inp.focus();}
+      var cfg=PROMPTS[cmd];
+      setVisible('crea-step-input',true);
+      var label=document.getElementById('crea-input-label');
+      if(label)label.textContent=cfg.label;
+      var pills=document.getElementById('crea-pills');
+      var inp=document.getElementById('crea-input');
+      selectedPill=null;
+      if(cfg.usePills){
+        if(pills)pills.style.display='flex';
+        if(inp)inp.style.display='none';
+        document.querySelectorAll('.crea-pill').forEach(function(p){ pillOff(p); });
+      } else {
+        if(pills)pills.style.display='none';
+        if(inp){inp.style.display='block';inp.placeholder=cfg.placeholder;inp.value='';setTimeout(function(){inp.focus();},100);}
+      }
+      updateBtn();
     }
-    updateBtn();
   }
 
-  function updateBtn(){
-    var btn=document.getElementById('crea-btn');
-    var inp=document.getElementById('crea-input');
-    if(!btn||!currentCmd)return;
-    var cfg=PROMPTS[currentCmd];
-    var hasVal=cfg.usePills ? selectedPill!==null : (inp&&inp.value.trim().length>0);
-    var exhausted=getUsage()>=MAX;
-    var active=hasVal&&!exhausted;
+  // ─── SIGNATURE MULTI-STEP ─────────────────────────────────────────
+  function pillOn(el){
+    el.style.background='#2563eb';
+    el.style.borderColor='#2563eb';
+    el.style.color='#fff';
+  }
+  function pillOff(el){
+    el.style.background='var(--bg)';
+    el.style.borderColor='var(--brd)';
+    el.style.color='var(--txt2)';
+  }
+
+  function onSigPill(btn){
+    var step=btn.dataset.step;
+    var val=btn.dataset.val;
+    // deseleziona le altre pill dello stesso step
+    document.querySelectorAll('.sig-pill[data-step="'+step+'"]').forEach(function(p){ pillOff(p); });
+    pillOn(btn);
+
+    if(step==='1'){
+      sig.tipo=val;
+      if(val==='alcolico'){
+        setVisible('sig-step-2a',true);
+        setVisible('sig-step-2b',false);
+        setVisible('sig-step-3',false);
+        setVisible('sig-step-4',false);
+        sig.momento=null; sig.tenore=null;
+        document.querySelectorAll('.sig-pill[data-step="2a"]').forEach(function(p){ pillOff(p); });
+      } else {
+        setVisible('sig-step-2b',true);
+        setVisible('sig-step-2a',false);
+        setVisible('sig-step-3',false);
+        setVisible('sig-step-4',false);
+        sig.gusto=null;
+        document.querySelectorAll('.sig-pill[data-step="2b"]').forEach(function(p){ pillOff(p); });
+      }
+    } else if(step==='2a'){
+      sig.momento=val;
+      setVisible('sig-step-3',true);
+      setVisible('sig-step-4',false);
+      sig.tenore=null;
+      document.querySelectorAll('.sig-pill[data-step="3"]').forEach(function(p){ pillOff(p); });
+    } else if(step==='2b'){
+      sig.gusto=val;
+      // analcolico: vai diretto a ingredienti
+      setVisible('sig-step-4',true);
+      var si=document.getElementById('sig-input');
+      if(si){si.value='';setTimeout(function(){si.focus();},100);}
+      updateSigBtn();
+    } else if(step==='3'){
+      sig.tenore=val;
+      setVisible('sig-step-4',true);
+      var si=document.getElementById('sig-input');
+      if(si){si.value='';setTimeout(function(){si.focus();},100);}
+      updateSigBtn();
+    }
+  }
+
+  function updateSigBtn(){
+    var btn=document.getElementById('sig-btn');
+    var inp=document.getElementById('sig-input');
+    if(!btn)return;
+    var hasText=inp&&inp.value.trim().length>0;
+    var active=hasText&&getUsage()<MAX;
     btn.disabled=!active;
     btn.style.background=active?'#2563eb':'var(--surf)';
     btn.style.color=active?'#fff':'var(--dim)';
@@ -727,6 +814,24 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     btn.style.boxShadow=active?'0 4px 16px rgba(37,99,235,.4)':'none';
   }
 
+  // ─── BOTTONE INVIO (altri comandi) ────────────────────────────────
+  function updateBtn(){
+    var btn=document.getElementById('crea-btn');
+    var inp=document.getElementById('crea-input');
+    if(!btn||!currentCmd)return;
+    var cfg=PROMPTS[currentCmd];
+    if(!cfg)return;
+    var hasVal=cfg.usePills ? selectedPill!==null : (inp&&inp.value.trim().length>0);
+    var active=hasVal&&getUsage()<MAX;
+    btn.disabled=!active;
+    btn.style.background=active?'#2563eb':'var(--surf)';
+    btn.style.color=active?'#fff':'var(--dim)';
+    btn.style.border=active?'none':'1px solid var(--brd)';
+    btn.style.cursor=active?'pointer':'not-allowed';
+    btn.style.boxShadow=active?'0 4px 16px rgba(37,99,235,.4)':'none';
+  }
+
+  // ─── MARKDOWN → HTML ──────────────────────────────────────────────
   function mdToHtml(md){
     return md
       .replace(/^## (.+)$/gm,'<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">$1</div>')
@@ -738,23 +843,16 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       .replace(/\n\n/g,'<br><br>');
   }
 
-  async function askBarman(){
-    if(getUsage()>=MAX){showExhausted();return;}
-    var inp=document.getElementById('crea-input');
-    var cfg=PROMPTS[currentCmd];
-    var val=cfg.usePills ? selectedPill : (inp?inp.value.trim():'');
-    if(!val||!currentCmd)return;
-    var btn=document.getElementById('crea-btn');
+  // ─── FETCH ────────────────────────────────────────────────────────
+  async function doFetch(prompt){
     var resp=document.getElementById('crea-response');
     var body=document.getElementById('crea-body');
     var err=document.getElementById('crea-error');
-    var stepInput=document.getElementById('crea-step-input');
-    if(btn){btn.disabled=true;btn.textContent='...';}
+    setVisible('crea-step-input',false);
+    setVisible('crea-step-signature',false);
     if(err)err.style.display='none';
-    if(stepInput)stepInput.style.display='none';
     if(resp)resp.style.display='block';
     if(body)body.innerHTML='<span style="color:var(--dim);">Il barman sta pensando…</span>';
-    var prompt=cfg.build(val);
     try{
       var res=await fetch(WORKER_URL,{
         method:'POST',
@@ -770,53 +868,93 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var text=data&&data.content&&data.content[0]?data.content[0].text:'';
       if(!text)throw new Error((data&&data.error&&data.error.message)||'Risposta vuota');
       if(body)body.innerHTML=mdToHtml(text);
-      incUsage();renderUsage();
-      if(btn)btn.textContent='✦ Chiedi al Barman';
+      incUsage(); renderUsage();
     }catch(e){
       if(resp)resp.style.display='none';
-      if(stepInput)stepInput.style.display='block';
       if(err){err.style.display='block';err.textContent='⚠️ '+(e.message||'Errore. Riprova.');}
-      if(btn){btn.disabled=false;btn.textContent='✦ Chiedi al Barman';}
+      // ripristina il pannello precedente
+      if(currentCmd==='signature'){
+        setVisible('crea-step-signature',true);
+        var sigBtn=document.getElementById('sig-btn');
+        if(sigBtn){sigBtn.disabled=false;sigBtn.textContent='✦ Chiedi al Barman';}
+      } else {
+        setVisible('crea-step-input',true);
+        var btn=document.getElementById('crea-btn');
+        if(btn){btn.disabled=false;btn.textContent='✦ Chiedi al Barman';}
+      }
     }
   }
 
+  async function askSignature(){
+    if(getUsage()>=MAX){showExhausted();return;}
+    var inp=document.getElementById('sig-input');
+    var val=inp?inp.value.trim():'';
+    if(!val)return;
+    var sigBtn=document.getElementById('sig-btn');
+    if(sigBtn){sigBtn.disabled=true;sigBtn.textContent='...';}
+    await doFetch(buildSignaturePrompt(val));
+    if(sigBtn)sigBtn.textContent='✦ Chiedi al Barman';
+  }
+
+  async function askBarman(){
+    if(getUsage()>=MAX){showExhausted();return;}
+    var inp=document.getElementById('crea-input');
+    var cfg=PROMPTS[currentCmd];
+    var val=cfg.usePills ? selectedPill : (inp?inp.value.trim():'');
+    if(!val||!currentCmd)return;
+    var btn=document.getElementById('crea-btn');
+    if(btn){btn.disabled=true;btn.textContent='...';}
+    await doFetch(cfg.build(val));
+    if(btn)btn.textContent='✦ Chiedi al Barman';
+  }
+
+  // ─── INIT ─────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded',function(){
     renderUsage();
 
-    // Bottoni comando
+    // Bottoni comando principali
     document.querySelectorAll('.crea-cmd-btn').forEach(function(b){
       b.addEventListener('click',function(){ selectCmd(this.dataset.cmd); });
-      b.addEventListener('mouseenter',function(){ this.style.borderColor='rgba(37,99,235,.4)'; this.style.background='rgba(37,99,235,.05)'; });
+      b.addEventListener('mouseenter',function(){ this.style.borderColor='rgba(37,99,235,.4)'; this.style.background='rgba(37,99,235,.06)'; });
       b.addEventListener('mouseleave',function(){ this.style.borderColor='var(--brd)'; this.style.background='var(--bg)'; });
     });
 
-    // Pills
+    // Pill signature (multi-step)
+    document.querySelectorAll('.sig-pill').forEach(function(p){
+      p.addEventListener('click',function(){ onSigPill(this); });
+    });
+
+    // Pill giorno (altri comandi)
     document.querySelectorAll('.crea-pill').forEach(function(p){
       p.addEventListener('click',function(){
         selectedPill=this.dataset.val;
-        document.querySelectorAll('.crea-pill').forEach(function(x){
-          x.style.background='var(--bg)';
-          x.style.borderColor='var(--brd)';
-          x.style.color='var(--txt2)';
-        });
-        this.style.background='#2563eb';
-        this.style.borderColor='#2563eb';
-        this.style.color='#fff';
+        document.querySelectorAll('.crea-pill').forEach(function(x){ pillOff(x); });
+        pillOn(this);
         updateBtn();
       });
     });
 
-    // Input textarea
+    // Textarea altri comandi
     var inp=document.getElementById('crea-input');
     if(inp)inp.addEventListener('input',updateBtn);
 
-    // Bottone invio
+    // Textarea signature
+    var sigInp=document.getElementById('sig-input');
+    if(sigInp)sigInp.addEventListener('input',updateSigBtn);
+
+    // Bottoni invio
     var btn=document.getElementById('crea-btn');
     if(btn)btn.addEventListener('click',askBarman);
+    var sigBtn=document.getElementById('sig-btn');
+    if(sigBtn)sigBtn.addEventListener('click',askSignature);
 
-    // Torna ai comandi
-    var back=document.getElementById('crea-back');
-    if(back)back.addEventListener('click',showCmds);
+    // Bottoni back (tutti quelli con .crea-back-btn)
+    document.querySelectorAll('.crea-back-btn').forEach(function(b){
+      b.addEventListener('click',function(){
+        var target=this.dataset.target;
+        if(target==='cmds') showCmds();
+      });
+    });
 
     // Nuova domanda
     var newBtn=document.getElementById('crea-new');
