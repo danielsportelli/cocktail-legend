@@ -1,566 +1,1987 @@
 {
-  "hendrick's": ["gin floreale"],
-  "hendricks": ["gin floreale"],
-  "hendrick's gin": ["gin floreale"],
-  "hendricks gin": ["gin floreale"],
-  "hendrick's original": ["gin floreale"],
-  "hendricks original": ["gin floreale"],
-  "hendrick's orbium": ["gin floreale"],
-  "hendricks orbium": ["gin floreale"],
-  "hendrick's lunar": ["gin floreale"],
-  "hendricks lunar": ["gin floreale"],
-  "hendrick's midsummer solstice": ["gin floreale"],
-  "hendricks midsummer solstice": ["gin floreale"],
-  "hendrick's flora adora": ["gin floreale"],
-  "hendricks flora adora": ["gin floreale"],
-  "hendrick's neptunia": ["gin floreale"],
-  "hendricks neptunia": ["gin floreale"],
-  "hendrick's amazonia": ["gin floreale"],
-  "hendricks amazonia": ["gin floreale"],
-  "hendrick's grand cabaret": ["gin floreale"],
-  "hendricks grand cabaret": ["gin floreale"],
-  "hendrick's limited edition": ["gin floreale"],
-  "hendricks limited edition": ["gin floreale"],
-  "tanqueray": ["gin"],
-  "tanqueray gin": ["gin"],
-  "tanqueray london dry": ["gin"],
-  "tanqueray london dry gin": ["gin"],
-  "tanqueray no. 10": ["gin floreale"],
-  "tanqueray no 10": ["gin floreale"],
-  "tanqueray numero 10": ["gin floreale"],
-  "tanqueray n10": ["gin floreale"],
-  "tanqueray ten": ["gin floreale"],
-  "tanqueray rangpur": ["gin speziato"],
-  "tanqueray rangpur lime": ["gin speziato"],
-  "tanqueray sevilla": ["gin"],
-  "tanqueray flor de sevilla": ["gin"],
-  "tanqueray blackcurrant royale": ["gin"],
-  "tanqueray lovage": ["gin speziato"],
-  "tanqueray malacca": ["gin speziato"],
-  "tanqueray export strength": ["gin"],
-  "tanqueray export": ["gin"],
-  "tanqueray 47.3": ["gin"],
-  "tanqueray old tom": ["gin"],
-  "bombay": ["gin"],
-  "bombay gin": ["gin"],
-  "bombay sapphire": ["gin"],
-  "bombay sapphire gin": ["gin"],
-  "bombay sapphire east": ["gin speziato"],
-  "bombay sapphire london dry": ["gin"],
-  "bombay original": ["gin"],
-  "bombay dry gin": ["gin"],
-  "bombay bramble": ["gin"],
-  "bombay sapphire bramble": ["gin"],
-  "bombay citron presse": ["gin"],
-  "bombay sapphire citron presse": ["gin"],
-  "bombay premier cru": ["gin floreale"],
-  "bombay sapphire premier cru": ["gin floreale"],
-  "bombay sapphire star of bombay": ["gin floreale"],
-  "star of bombay": ["gin floreale"],
-  "beefeater": ["gin"],
-  "beefeater gin": ["gin"],
-  "beefeater london dry": ["gin"],
-  "beefeater london dry gin": ["gin"],
-  "beefeater 24": ["gin"],
-  "beefeater london garden": ["gin floreale"],
-  "beefeater pink": ["gin floreale"],
-  "beefeater pink strawberry": ["gin floreale"],
-  "beefeater blood orange": ["gin"],
-  "beefeater peach": ["gin"],
-  "beefeater peach and raspberry": ["gin"],
-  "beefeater crown jewel": ["gin"],
-  "beefeater burrough's reserve": ["gin"],
-  "burroughs reserve": ["gin"],
-  "beefeater winter edition": ["gin speziato"],
-  "beefeater limited edition": ["gin"],
-  "gordon's": ["gin"],
-  "gordons": ["gin"],
-  "gordon's gin": ["gin"],
-  "gordons gin": ["gin"],
-  "gordon's london dry": ["gin"],
-  "gordons london dry": ["gin"],
-  "gordon's london dry gin": ["gin"],
-  "gordons london dry gin": ["gin"],
-  "gordon's pink": ["gin"],
-  "gordons pink": ["gin"],
-  "gordon's pink gin": ["gin"],
-  "gordons pink gin": ["gin"],
-  "gordon's sicilian lemon": ["gin"],
-  "gordons sicilian lemon": ["gin"],
-  "gordon's white peach": ["gin"],
-  "gordons white peach": ["gin"],
-  "gordon's mediterranean orange": ["gin"],
-  "gordons mediterranean orange": ["gin"],
-  "gordon's tropical": ["gin"],
-  "gordons tropical": ["gin"],
-  "gordon's crisp cucumber": ["gin"],
-  "gordons crisp cucumber": ["gin"],
-  "gordon's export": ["gin"],
-  "gordons export": ["gin"],
-  "gordon's 0.0": ["gin"],
-  "gordons alcohol free": ["gin"],
-  "monkey 47": ["gin speziato"],
-  "monkey47": ["gin speziato"],
-  "monkey 47 gin": ["gin speziato"],
-  "monkey 47 schwarzwald dry gin": ["gin speziato"],
-  "monkey 47 sloe gin": ["gin speziato"],
-  "monkey 47 distiller's cut": ["gin speziato"],
-  "monkey 47 distillers cut": ["gin speziato"],
-  "the botanist": ["gin floreale"],
-  "botanist": ["gin floreale"],
-  "botanist gin": ["gin floreale"],
-  "the botanist islay dry gin": ["gin floreale"],
-  "botanist islay dry gin": ["gin floreale"],
-  "the botanist 22": ["gin floreale"],
-  "sipsmith": ["gin"],
-  "sipsmith gin": ["gin"],
-  "sipsmith london dry": ["gin"],
-  "sipsmith london dry gin": ["gin"],
-  "sipsmith vjop": ["gin"],
-  "sipsmith v.j.o.p.": ["gin"],
-  "sipsmith very junipery over proof": ["gin"],
-  "sipsmith lemon drizzle": ["gin"],
-  "sipsmith orange and eucalyptus": ["gin"],
-  "sipsmith sloe gin": ["gin"],
-  "sipsmith summer cup": ["gin"],
-  "sipsmith barley edition": ["gin"],
-  "sipsmith limited edition": ["gin"],
-  "roku": ["gin speziato"],
-  "roku gin": ["gin speziato"],
-  "roku japanese gin": ["gin speziato"],
-  "suntory roku": ["gin speziato"],
-  "suntory roku gin": ["gin speziato"],
-  "ki no bi": ["gin floreale"],
-  "kinobi": ["gin floreale"],
-  "ki no bi gin": ["gin floreale"],
-  "ki no bi kyoto dry gin": ["gin floreale"],
-  "kyoto distillery ki no bi": ["gin floreale"],
-  "ki no bi sei": ["gin floreale"],
-  "ki no tea": ["gin floreale"],
-  "malfy": ["gin"],
-  "malfy gin": ["gin"],
-  "malfy originale": ["gin"],
-  "malfy con limone": ["gin"],
-  "malfy con arancia": ["gin"],
-  "malfy con rosa": ["gin floreale"],
-  "malfy gin con limone": ["gin"],
-  "malfy gin con arancia": ["gin"],
-  "malfy gin con rosa": ["gin floreale"],
-  "malfy gin originale": ["gin"],
-  "citadelle": ["gin"],
-  "citadelle gin": ["gin"],
-  "citadelle original": ["gin"],
-  "citadelle reserve": ["gin"],
-  "citadelle no mistake old tom": ["gin"],
-  "citadelle jardin d'ete": ["gin floreale"],
-  "citadelle jardin d'automne": ["gin speziato"],
-  "citadelle terroir": ["gin"],
-  "nginious": ["gin speziato"],
-  "nginious gin": ["gin speziato"],
-  "nginious swiss blended": ["gin speziato"],
-  "nginious barrel aged": ["gin speziato"],
-  "nginious smoked": ["gin speziato"],
-  "oxley": ["gin"],
-  "oxley gin": ["gin"],
-  "oxley cold distilled london dry gin": ["gin"],
-  "oxley cold distilled": ["gin"],
-  "portobello road": ["gin"],
-  "portobello road gin": ["gin"],
-  "portobello road no. 171": ["gin"],
-  "portobello road no 171": ["gin"],
-  "portobello road 171": ["gin"],
-  "portobello road autumn gin": ["gin speziato"],
-  "portobello road sloe gin": ["gin"],
-  "whitley neill": ["gin"],
-  "whitley neil": ["gin"],
-  "whitley neill gin": ["gin"],
-  "whitley neill original": ["gin"],
-  "whitley neill handcrafted dry gin": ["gin"],
-  "whitley neill rhubarb and ginger": ["gin speziato"],
-  "whitley neill raspberry": ["gin"],
-  "whitley neill blood orange": ["gin"],
-  "whitley neill parma violet": ["gin floreale"],
-  "whitley neill mango and lime": ["gin"],
-  "whitley neill blackberry": ["gin"],
-  "whitley neill peach and violet": ["gin floreale"],
-  "whitley neill watermelon and kiwi": ["gin"],
-  "whitley neill pineapple": ["gin"],
-  "whitley neill aloe and cucumber": ["gin"],
-  "whitley neill lemongrass and ginger": ["gin speziato"],
-  "whitley neill coconut and pineapple": ["gin"],
-  "whitley neill gooseberry": ["gin"],
-  "whitley neill quince": ["gin"],
-  "aviation": ["gin floreale"],
-  "aviation gin": ["gin floreale"],
-  "aviation american gin": ["gin floreale"],
-  "aviation gin ryan reynolds": ["gin floreale"],
-  "bulldog": ["gin"],
-  "bulldog gin": ["gin"],
-  "bulldog london dry gin": ["gin"],
-  "bulldog reserve": ["gin"],
-  "martin miller's": ["gin"],
-  "martin millers": ["gin"],
-  "martin miller's gin": ["gin"],
-  "martin millers gin": ["gin"],
-  "martin miller's westbourne strength": ["gin"],
-  "martin millers westbourne strength": ["gin"],
-  "martin miller's 9 moons": ["gin"],
-  "nolet's": ["gin floreale"],
-  "nolets": ["gin floreale"],
-  "nolet's gin": ["gin floreale"],
-  "nolets gin": ["gin floreale"],
-  "nolet's silver": ["gin floreale"],
-  "nolets silver": ["gin floreale"],
-  "nolet's reserve": ["gin floreale"],
-  "nolets reserve": ["gin floreale"],
-  "four pillars": ["gin"],
-  "four pillars gin": ["gin"],
-  "four pillars rare dry gin": ["gin"],
-  "four pillars navy strength": ["gin"],
-  "four pillars bloody shiraz": ["gin"],
-  "four pillars spiced negroni": ["gin speziato"],
-  "four pillars christmas gin": ["gin speziato"],
-  "four pillars olive leaf": ["gin"],
-  "four pillars fresh yuzu": ["gin"],
-  "four pillars gin laboratory": ["gin"],
-  "four pillars australian dry gin": ["gin"],
-  "ink gin": ["gin floreale"],
-  "ink": ["gin floreale"],
-  "ink australian gin": ["gin floreale"],
-  "ink butterfly pea flower gin": ["gin floreale"],
-  "caorunn": ["gin speziato"],
-  "caorunn gin": ["gin speziato"],
-  "caorunn small batch scottish gin": ["gin speziato"],
-  "caorunn highland strength": ["gin speziato"],
-  "caorunn rose": ["gin floreale"],
-  "drumshanbo gunpowder": ["gin speziato"],
-  "gunpowder gin": ["gin speziato"],
-  "drumshanbo gunpowder irish gin": ["gin speziato"],
-  "drumshanbo gunpowder gin": ["gin speziato"],
-  "drumshanbo gunpowder sardinian citrus": ["gin speziato"],
-  "drumshanbo gunpowder californian orange": ["gin speziato"],
-  "the shed distillery gunpowder": ["gin speziato"],
-  "dingle": ["gin"],
-  "dingle gin": ["gin"],
-  "dingle original batch": ["gin"],
-  "dingle irish gin": ["gin"],
-  "dingle pot still gin": ["gin"],
-  "bertha's revenge": ["gin speziato"],
-  "berthas revenge": ["gin speziato"],
-  "bertha's revenge gin": ["gin speziato"],
-  "berthas revenge gin": ["gin speziato"],
-  "bertha's revenge irish milk whey gin": ["gin speziato"],
-  "saffron boudier": ["gin speziato"],
-  "saffron gin": ["gin speziato"],
-  "boudier saffron gin": ["gin speziato"],
-  "gabriel boudier saffron gin": ["gin speziato"],
-  "gin allo zafferano": ["gin speziato"],
-  "nordes": ["gin floreale"],
-  "nordés": ["gin floreale"],
-  "nordes gin": ["gin floreale"],
-  "nordés gin": ["gin floreale"],
-  "nordes atlantic galician gin": ["gin floreale"],
-  "nordés atlantic galician gin": ["gin floreale"],
-  "gin mare": ["gin speziato"],
-  "gin mare gin": ["gin speziato"],
-  "gin mare mediterranean gin": ["gin speziato"],
-  "gin mare capri": ["gin speziato"],
-  "gin mare amass": ["gin speziato"],
-  "gin 209": ["gin"],
-  "209 gin": ["gin"],
-  "distillery no. 209": ["gin"],
-  "distillery no 209": ["gin"],
-  "no. 209 gin": ["gin"],
-  "no 209 gin": ["gin"],
-  "gin 209 keoki barrel reserve": ["gin"],
-  "st george": ["gin"],
-  "st. george": ["gin"],
-  "st george gin": ["gin"],
-  "st. george gin": ["gin"],
-  "st george spirits": ["gin"],
-  "st. george spirits": ["gin"],
-  "st george terroir gin": ["gin speziato"],
-  "st george botanivore": ["gin floreale"],
-  "st george dry rye": ["gin"],
-  "hayman's": ["gin"],
-  "haymans": ["gin"],
-  "hayman's gin": ["gin"],
-  "haymans gin": ["gin"],
-  "hayman's london dry": ["gin"],
-  "haymans london dry": ["gin"],
-  "hayman's london dry gin": ["gin"],
-  "haymans london dry gin": ["gin"],
-  "hayman's old tom": ["gin speziato"],
-  "haymans old tom": ["gin speziato"],
-  "hayman's royal dock navy strength": ["gin"],
-  "haymans royal dock navy strength": ["gin"],
-  "hayman's sloe gin": ["gin"],
-  "haymans sloe gin": ["gin"],
-  "hayman's 1820": ["gin"],
-  "haymans 1820": ["gin"],
-  "hayman's family reserve": ["gin"],
-  "haymans family reserve": ["gin"],
-  "hayman's peach and rose cup": ["gin floreale"],
-  "brockmans": ["gin floreale"],
-  "brockmans gin": ["gin floreale"],
-  "brockmans intensely smooth gin": ["gin floreale"],
-  "brockmans orange kiss": ["gin floreale"],
-  "daffy's": ["gin"],
-  "daffys": ["gin"],
-  "daffy's gin": ["gin"],
-  "daffys gin": ["gin"],
-  "daffy's highland gin": ["gin"],
-  "edinburgh gin": ["gin floreale"],
-  "edinburgh gin original": ["gin floreale"],
-  "edinburgh gin classic": ["gin floreale"],
-  "edinburgh gin rhubarb and ginger": ["gin speziato"],
-  "edinburgh gin raspberry": ["gin floreale"],
-  "edinburgh gin elderflower": ["gin floreale"],
-  "edinburgh gin cannonball": ["gin"],
-  "edinburgh gin navy strength": ["gin"],
-  "edinburgh seaside gin": ["gin"],
-  "pickering's": ["gin speziato"],
-  "pickerings": ["gin speziato"],
-  "pickering's gin": ["gin speziato"],
-  "pickerings gin": ["gin speziato"],
-  "pickering's 1947": ["gin speziato"],
-  "pickerings 1947": ["gin speziato"],
-  "pickering's navy strength": ["gin speziato"],
-  "pickerings navy strength": ["gin speziato"],
-  "the sassenach": ["gin speziato"],
-  "sassenach": ["gin speziato"],
-  "the sassenach gin": ["gin speziato"],
-  "sassenach gin": ["gin speziato"],
-  "sam heughan sassenach": ["gin speziato"],
-  "isle of harris": ["gin"],
-  "harris gin": ["gin"],
-  "isle of harris gin": ["gin"],
-  "the isle of harris distillery gin": ["gin"],
-  "isle of harris hebridean gin": ["gin"],
-  "tarquin's": ["gin"],
-  "tarquins": ["gin"],
-  "tarquin's gin": ["gin"],
-  "tarquins gin": ["gin"],
-  "tarquin's cornish gin": ["gin"],
-  "tarquins cornish gin": ["gin"],
-  "tarquin's dry gin": ["gin"],
-  "tarquin's blackberry": ["gin"],
-  "tarquin's strawberry and lime": ["gin"],
-  "tarquin's rhubarb and raspberry": ["gin"],
-  "tarquin's navy strength": ["gin"],
-  "jawbox": ["gin speziato"],
-  "jawbox gin": ["gin speziato"],
-  "jawbox small batch belfast gin": ["gin speziato"],
-  "jawbox pineapple and ginger": ["gin speziato"],
-  "jawbox clementine and ginger": ["gin speziato"],
-  "shortcross": ["gin floreale"],
-  "shortcross gin": ["gin floreale"],
-  "shortcross fine and rare": ["gin floreale"],
-  "shortcross rhubarb and rose": ["gin floreale"],
-  "boatyard": ["gin"],
-  "boatyard gin": ["gin"],
-  "boatyard double gin": ["gin"],
-  "boatyard old tom": ["gin speziato"],
-  "glendalough": ["gin floreale"],
-  "glendalough gin": ["gin floreale"],
-  "glendalough wild botanical gin": ["gin floreale"],
-  "glendalough rose gin": ["gin floreale"],
-  "glendalough wild spring gin": ["gin floreale"],
-  "glendalough wild summer gin": ["gin floreale"],
-  "glendalough wild autumn gin": ["gin speziato"],
-  "glendalough wild winter gin": ["gin speziato"],
-  "darnley's": ["gin floreale"],
-  "darnleys": ["gin floreale"],
-  "darnley's gin": ["gin floreale"],
-  "darnleys gin": ["gin floreale"],
-  "darnley's view": ["gin floreale"],
-  "darnley's spiced": ["gin speziato"],
-  "darnleys spiced": ["gin speziato"],
-  "darnley's navy strength": ["gin"],
-  "boe violet": ["gin floreale"],
-  "boe gin": ["gin floreale"],
-  "boe violet gin": ["gin floreale"],
-  "boe superior scottish gin": ["gin floreale"],
-  "boe peach and hibiscus": ["gin floreale"],
-  "nb gin": ["gin"],
-  "nb": ["gin"],
-  "north berwick gin": ["gin"],
-  "nb navy strength": ["gin"],
-  "nb london dry gin": ["gin"],
-  "williams chase": ["gin"],
-  "chase gin": ["gin"],
-  "williams chase gin": ["gin"],
-  "chase elegant gin": ["gin"],
-  "chase extra dry gin": ["gin"],
-  "chase seville orange gin": ["gin"],
-  "chase pink grapefruit gin": ["gin"],
-  "chase rhubarb gin": ["gin speziato"],
-  "chase elderflower gin": ["gin floreale"],
-  "slingsby": ["gin floreale"],
-  "slingsby gin": ["gin floreale"],
-  "slingsby harrogate gin": ["gin floreale"],
-  "slingsby london dry gin": ["gin floreale"],
-  "slingsby navy strength": ["gin"],
-  "slingsby rhubarb": ["gin floreale"],
-  "slingsby rose": ["gin floreale"],
-  "oxford dry": ["gin"],
-  "oxford dry gin": ["gin"],
-  "oxford artisan distillery gin": ["gin"],
-  "oxford rye gin": ["gin"],
-  "oxford dry gin no. 1": ["gin"],
-  "silent pool": ["gin floreale"],
-  "silent pool gin": ["gin floreale"],
-  "silent pool surrey hills gin": ["gin floreale"],
-  "silent pool rare citrus": ["gin floreale"],
-  "cotswolds": ["gin"],
-  "cotswolds gin": ["gin"],
-  "cotswolds dry gin": ["gin"],
-  "cotswolds distillery gin": ["gin"],
-  "cotswolds wildflower gin": ["gin floreale"],
-  "opihr": ["gin speziato"],
-  "opihr gin": ["gin speziato"],
-  "opihr oriental spiced gin": ["gin speziato"],
-  "opihr spiced gin": ["gin speziato"],
-  "opihr far east edition": ["gin speziato"],
-  "opihr european edition": ["gin speziato"],
-  "opihr arabian edition": ["gin speziato"],
-  "opihr american edition": ["gin speziato"],
-  "opihr round the world editions": ["gin speziato"],
-  "opihr navy strength": ["gin speziato"],
-  "plymouth": ["gin"],
-  "plymouth gin": ["gin"],
-  "plymouth navy strength": ["gin"],
-  "plymouth navy strength gin": ["gin"],
-  "plymouth original": ["gin"],
-  "perry's tot": ["gin"],
-  "perrys tot": ["gin"],
-  "perry's tot gin": ["gin"],
-  "perrys tot gin": ["gin"],
-  "new york distilling perry's tot": ["gin"],
-  "few": ["gin speziato"],
-  "few gin": ["gin speziato"],
-  "few american gin": ["gin speziato"],
-  "few barrel aged gin": ["gin speziato"],
-  "few spirits gin": ["gin speziato"],
-  "bluecoat": ["gin"],
-  "bluecoat gin": ["gin"],
-  "bluecoat american dry gin": ["gin"],
-  "bluecoat barrel reserve": ["gin"],
-  "bluecoat elderflower gin": ["gin floreale"],
-  "barrister": ["gin"],
-  "barrister gin": ["gin"],
-  "barrister dry gin": ["gin"],
-  "barrister orange gin": ["gin"],
-  "barrister old tom": ["gin speziato"],
-  "bloom": ["gin floreale"],
-  "bloom gin": ["gin floreale"],
-  "bloom london dry gin": ["gin floreale"],
-  "bloom jasmine and rose gin": ["gin floreale"],
-  "bloom premium london dry gin": ["gin floreale"],
-  "bloom passionfruit and vanilla vine": ["gin floreale"],
-  "herno": ["gin floreale"],
-  "hernö": ["gin floreale"],
-  "herno gin": ["gin floreale"],
-  "hernö gin": ["gin floreale"],
-  "herno swedish excellence gin": ["gin floreale"],
-  "hernö swedish excellence gin": ["gin floreale"],
-  "herno navy strength": ["gin"],
-  "hernö navy strength": ["gin"],
-  "herno old tom": ["gin speziato"],
-  "hernö old tom": ["gin speziato"],
-  "herno juniper cask": ["gin"],
-  "hernö juniper cask": ["gin"],
-  "procera": ["gin"],
-  "procera gin": ["gin"],
-  "procera african dry gin": ["gin"],
-  "procera blue dot": ["gin"],
-  "procera red dot": ["gin speziato"],
-  "inverroche": ["gin floreale"],
-  "inverroche gin": ["gin floreale"],
-  "inverroche classic": ["gin floreale"],
-  "inverroche verdant": ["gin floreale"],
-  "inverroche amber": ["gin speziato"],
-  "tiger gin": ["gin speziato"],
-  "tiger gin singapore": ["gin speziato"],
-  "tiger white gin": ["gin speziato"],
-  "tiger black gin": ["gin speziato"],
-  "hapusa": ["gin speziato"],
-  "hapusa gin": ["gin speziato"],
-  "hapusa himalayan dry gin": ["gin speziato"],
-  "nao spirits hapusa": ["gin speziato"],
-  "amrut naarangi": ["gin speziato"],
-  "naarangi": ["gin speziato"],
-  "amrut naarangi gin": ["gin speziato"],
-  "naarangi gin": ["gin speziato"],
-  "amrut naarangi indian gin": ["gin speziato"],
-  "ferdinand's": ["gin floreale"],
-  "ferdinands": ["gin floreale"],
-  "ferdinand's gin": ["gin floreale"],
-  "ferdinands gin": ["gin floreale"],
-  "ferdinand's saar dry gin": ["gin floreale"],
-  "ferdinands saar dry gin": ["gin floreale"],
-  "ferdinand's quince gin": ["gin floreale"],
-  "ferdinands quince gin": ["gin floreale"],
-  "ferdinand's gold cap": ["gin floreale"],
-  "ferdinands gold cap": ["gin floreale"],
-  "schwarzwald": ["gin speziato"],
-  "schwarzwald gin": ["gin speziato"],
-  "black forest gin": ["gin speziato"],
-  "gin foresta nera": ["gin speziato"],
-  "gin": ["gin"],
-  "london dry gin": ["gin"],
-  "london dry": ["gin"],
-  "dry gin": ["gin"],
-  "gin secco": ["gin"],
-  "gin inglese": ["gin"],
-  "gin scozzese": ["gin"],
-  "gin irlandese": ["gin"],
-  "gin americano": ["gin"],
-  "gin australiano": ["gin"],
-  "gin giapponese": ["gin"],
-  "gin spagnolo": ["gin speziato"],
-  "gin indiano": ["gin speziato"],
-  "gin sudafricano": ["gin floreale"],
-  "gin africano": ["gin floreale"],
-  "gin botanico": ["gin floreale"],
-  "gin artigianale": ["gin"],
-  "craft gin": ["gin"],
-  "small batch gin": ["gin"],
-  "gin premium": ["gin"],
-  "gin ultra premium": ["gin"],
-  "navy strength gin": ["gin"],
-  "old tom gin": ["gin speziato"],
-  "sloe gin": ["gin"],
-  "gin alla frutta": ["gin"],
-  "gin floreale": ["gin floreale"],
-  "gin speziato": ["gin speziato"],
-  "gin contemporaneo": ["gin floreale"],
-  "new western gin": ["gin floreale"],
-  "new wave gin": ["gin floreale"],
-  "gin barrel aged": ["gin speziato"],
-  "barrel aged gin": ["gin speziato"],
-  "gin invecchiato": ["gin speziato"],
-  "gin mediterraneo": ["gin speziato"],
-  "gin scozzese dry": ["gin"],
-  "gin di malto": ["gin"],
-  "gin di segale": ["gin"],
-  "gin di patate": ["gin"],
-  "gin di grano": ["gin"],
-  "gin al tè": ["gin speziato"],
-  "gin allo zenzero": ["gin speziato"],
-  "gin alla rosa": ["gin floreale"],
-  "gin all'ibisco": ["gin floreale"],
-  "gin al sambuco": ["gin floreale"],
-  "gin alla lavanda": ["gin floreale"],
-  "gin al pompelmo": ["gin"],
-  "gin all'arancia": ["gin"],
-  "gin al limone": ["gin"],
-  "gin alla prugna": ["gin"],
-  "gin al pepe": ["gin speziato"],
-  "gin al cardamomo": ["gin speziato"],
-  "gin alla cannella": ["gin speziato"],
-  "genever": ["gin speziato"],
-  "jenever": ["gin speziato"],
-  "gin olandese": ["gin speziato"],
-  "gin belga": ["gin speziato"]
+  "hendrick's": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendricks": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendrick's gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendricks gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendrick's original": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendricks original": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendrick's orbium": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendricks orbium": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendrick's lunar": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendricks lunar": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendrick's midsummer solstice": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendricks midsummer solstice": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendrick's flora adora": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendricks flora adora": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendrick's neptunia": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendricks neptunia": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendrick's amazonia": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendricks amazonia": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendrick's grand cabaret": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendricks grand cabaret": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendrick's limited edition": [
+    "gin",
+    "gin floreale"
+  ],
+  "hendricks limited edition": [
+    "gin",
+    "gin floreale"
+  ],
+  "tanqueray": [
+    "gin"
+  ],
+  "tanqueray gin": [
+    "gin"
+  ],
+  "tanqueray london dry": [
+    "gin"
+  ],
+  "tanqueray london dry gin": [
+    "gin"
+  ],
+  "tanqueray no. 10": [
+    "gin",
+    "gin floreale"
+  ],
+  "tanqueray no 10": [
+    "gin",
+    "gin floreale"
+  ],
+  "tanqueray numero 10": [
+    "gin",
+    "gin floreale"
+  ],
+  "tanqueray n10": [
+    "gin",
+    "gin floreale"
+  ],
+  "tanqueray ten": [
+    "gin",
+    "gin floreale"
+  ],
+  "tanqueray rangpur": [
+    "gin",
+    "gin speziato"
+  ],
+  "tanqueray rangpur lime": [
+    "gin",
+    "gin speziato"
+  ],
+  "tanqueray sevilla": [
+    "gin"
+  ],
+  "tanqueray flor de sevilla": [
+    "gin"
+  ],
+  "tanqueray blackcurrant royale": [
+    "gin"
+  ],
+  "tanqueray lovage": [
+    "gin",
+    "gin speziato"
+  ],
+  "tanqueray malacca": [
+    "gin",
+    "gin speziato"
+  ],
+  "tanqueray export strength": [
+    "gin"
+  ],
+  "tanqueray export": [
+    "gin"
+  ],
+  "tanqueray 47.3": [
+    "gin"
+  ],
+  "tanqueray old tom": [
+    "gin"
+  ],
+  "bombay": [
+    "gin"
+  ],
+  "bombay gin": [
+    "gin"
+  ],
+  "bombay sapphire": [
+    "gin"
+  ],
+  "bombay sapphire gin": [
+    "gin"
+  ],
+  "bombay sapphire east": [
+    "gin",
+    "gin speziato"
+  ],
+  "bombay sapphire london dry": [
+    "gin"
+  ],
+  "bombay original": [
+    "gin"
+  ],
+  "bombay dry gin": [
+    "gin"
+  ],
+  "bombay bramble": [
+    "gin"
+  ],
+  "bombay sapphire bramble": [
+    "gin"
+  ],
+  "bombay citron presse": [
+    "gin"
+  ],
+  "bombay sapphire citron presse": [
+    "gin"
+  ],
+  "bombay premier cru": [
+    "gin",
+    "gin floreale"
+  ],
+  "bombay sapphire premier cru": [
+    "gin",
+    "gin floreale"
+  ],
+  "bombay sapphire star of bombay": [
+    "gin",
+    "gin floreale"
+  ],
+  "star of bombay": [
+    "gin",
+    "gin floreale"
+  ],
+  "beefeater": [
+    "gin"
+  ],
+  "beefeater gin": [
+    "gin"
+  ],
+  "beefeater london dry": [
+    "gin"
+  ],
+  "beefeater london dry gin": [
+    "gin"
+  ],
+  "beefeater 24": [
+    "gin"
+  ],
+  "beefeater london garden": [
+    "gin",
+    "gin floreale"
+  ],
+  "beefeater pink": [
+    "gin",
+    "gin floreale"
+  ],
+  "beefeater pink strawberry": [
+    "gin",
+    "gin floreale"
+  ],
+  "beefeater blood orange": [
+    "gin"
+  ],
+  "beefeater peach": [
+    "gin"
+  ],
+  "beefeater peach and raspberry": [
+    "gin"
+  ],
+  "beefeater crown jewel": [
+    "gin"
+  ],
+  "beefeater burrough's reserve": [
+    "gin"
+  ],
+  "burroughs reserve": [
+    "gin"
+  ],
+  "beefeater winter edition": [
+    "gin",
+    "gin speziato"
+  ],
+  "beefeater limited edition": [
+    "gin"
+  ],
+  "gordon's": [
+    "gin"
+  ],
+  "gordons": [
+    "gin"
+  ],
+  "gordon's gin": [
+    "gin"
+  ],
+  "gordons gin": [
+    "gin"
+  ],
+  "gordon's london dry": [
+    "gin"
+  ],
+  "gordons london dry": [
+    "gin"
+  ],
+  "gordon's london dry gin": [
+    "gin"
+  ],
+  "gordons london dry gin": [
+    "gin"
+  ],
+  "gordon's pink": [
+    "gin"
+  ],
+  "gordons pink": [
+    "gin"
+  ],
+  "gordon's pink gin": [
+    "gin"
+  ],
+  "gordons pink gin": [
+    "gin"
+  ],
+  "gordon's sicilian lemon": [
+    "gin"
+  ],
+  "gordons sicilian lemon": [
+    "gin"
+  ],
+  "gordon's white peach": [
+    "gin"
+  ],
+  "gordons white peach": [
+    "gin"
+  ],
+  "gordon's mediterranean orange": [
+    "gin"
+  ],
+  "gordons mediterranean orange": [
+    "gin"
+  ],
+  "gordon's tropical": [
+    "gin"
+  ],
+  "gordons tropical": [
+    "gin"
+  ],
+  "gordon's crisp cucumber": [
+    "gin"
+  ],
+  "gordons crisp cucumber": [
+    "gin"
+  ],
+  "gordon's export": [
+    "gin"
+  ],
+  "gordons export": [
+    "gin"
+  ],
+  "gordon's 0.0": [
+    "gin"
+  ],
+  "gordons alcohol free": [
+    "gin"
+  ],
+  "monkey 47": [
+    "gin",
+    "gin speziato"
+  ],
+  "monkey47": [
+    "gin",
+    "gin speziato"
+  ],
+  "monkey 47 gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "monkey 47 schwarzwald dry gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "monkey 47 sloe gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "monkey 47 distiller's cut": [
+    "gin",
+    "gin speziato"
+  ],
+  "monkey 47 distillers cut": [
+    "gin",
+    "gin speziato"
+  ],
+  "the botanist": [
+    "gin",
+    "gin floreale"
+  ],
+  "botanist": [
+    "gin",
+    "gin floreale"
+  ],
+  "botanist gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "the botanist islay dry gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "botanist islay dry gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "the botanist 22": [
+    "gin",
+    "gin floreale"
+  ],
+  "sipsmith": [
+    "gin"
+  ],
+  "sipsmith gin": [
+    "gin"
+  ],
+  "sipsmith london dry": [
+    "gin"
+  ],
+  "sipsmith london dry gin": [
+    "gin"
+  ],
+  "sipsmith vjop": [
+    "gin"
+  ],
+  "sipsmith v.j.o.p.": [
+    "gin"
+  ],
+  "sipsmith very junipery over proof": [
+    "gin"
+  ],
+  "sipsmith lemon drizzle": [
+    "gin"
+  ],
+  "sipsmith orange and eucalyptus": [
+    "gin"
+  ],
+  "sipsmith sloe gin": [
+    "gin"
+  ],
+  "sipsmith summer cup": [
+    "gin"
+  ],
+  "sipsmith barley edition": [
+    "gin"
+  ],
+  "sipsmith limited edition": [
+    "gin"
+  ],
+  "roku": [
+    "gin",
+    "gin speziato"
+  ],
+  "roku gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "roku japanese gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "suntory roku": [
+    "gin",
+    "gin speziato"
+  ],
+  "suntory roku gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "ki no bi": [
+    "gin",
+    "gin floreale"
+  ],
+  "kinobi": [
+    "gin",
+    "gin floreale"
+  ],
+  "ki no bi gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "ki no bi kyoto dry gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "kyoto distillery ki no bi": [
+    "gin",
+    "gin floreale"
+  ],
+  "ki no bi sei": [
+    "gin",
+    "gin floreale"
+  ],
+  "ki no tea": [
+    "gin",
+    "gin floreale"
+  ],
+  "malfy": [
+    "gin"
+  ],
+  "malfy gin": [
+    "gin"
+  ],
+  "malfy originale": [
+    "gin"
+  ],
+  "malfy con limone": [
+    "gin"
+  ],
+  "malfy con arancia": [
+    "gin"
+  ],
+  "malfy con rosa": [
+    "gin",
+    "gin floreale"
+  ],
+  "malfy gin con limone": [
+    "gin"
+  ],
+  "malfy gin con arancia": [
+    "gin"
+  ],
+  "malfy gin con rosa": [
+    "gin",
+    "gin floreale"
+  ],
+  "malfy gin originale": [
+    "gin"
+  ],
+  "citadelle": [
+    "gin"
+  ],
+  "citadelle gin": [
+    "gin"
+  ],
+  "citadelle original": [
+    "gin"
+  ],
+  "citadelle reserve": [
+    "gin"
+  ],
+  "citadelle no mistake old tom": [
+    "gin"
+  ],
+  "citadelle jardin d'ete": [
+    "gin",
+    "gin floreale"
+  ],
+  "citadelle jardin d'automne": [
+    "gin",
+    "gin speziato"
+  ],
+  "citadelle terroir": [
+    "gin"
+  ],
+  "nginious": [
+    "gin",
+    "gin speziato"
+  ],
+  "nginious gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "nginious swiss blended": [
+    "gin",
+    "gin speziato"
+  ],
+  "nginious barrel aged": [
+    "gin",
+    "gin speziato"
+  ],
+  "nginious smoked": [
+    "gin",
+    "gin speziato"
+  ],
+  "oxley": [
+    "gin"
+  ],
+  "oxley gin": [
+    "gin"
+  ],
+  "oxley cold distilled london dry gin": [
+    "gin"
+  ],
+  "oxley cold distilled": [
+    "gin"
+  ],
+  "portobello road": [
+    "gin"
+  ],
+  "portobello road gin": [
+    "gin"
+  ],
+  "portobello road no. 171": [
+    "gin"
+  ],
+  "portobello road no 171": [
+    "gin"
+  ],
+  "portobello road 171": [
+    "gin"
+  ],
+  "portobello road autumn gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "portobello road sloe gin": [
+    "gin"
+  ],
+  "whitley neill": [
+    "gin"
+  ],
+  "whitley neil": [
+    "gin"
+  ],
+  "whitley neill gin": [
+    "gin"
+  ],
+  "whitley neill original": [
+    "gin"
+  ],
+  "whitley neill handcrafted dry gin": [
+    "gin"
+  ],
+  "whitley neill rhubarb and ginger": [
+    "gin",
+    "gin speziato"
+  ],
+  "whitley neill raspberry": [
+    "gin"
+  ],
+  "whitley neill blood orange": [
+    "gin"
+  ],
+  "whitley neill parma violet": [
+    "gin",
+    "gin floreale"
+  ],
+  "whitley neill mango and lime": [
+    "gin"
+  ],
+  "whitley neill blackberry": [
+    "gin"
+  ],
+  "whitley neill peach and violet": [
+    "gin",
+    "gin floreale"
+  ],
+  "whitley neill watermelon and kiwi": [
+    "gin"
+  ],
+  "whitley neill pineapple": [
+    "gin"
+  ],
+  "whitley neill aloe and cucumber": [
+    "gin"
+  ],
+  "whitley neill lemongrass and ginger": [
+    "gin",
+    "gin speziato"
+  ],
+  "whitley neill coconut and pineapple": [
+    "gin"
+  ],
+  "whitley neill gooseberry": [
+    "gin"
+  ],
+  "whitley neill quince": [
+    "gin"
+  ],
+  "aviation": [
+    "gin",
+    "gin floreale"
+  ],
+  "aviation gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "aviation american gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "aviation gin ryan reynolds": [
+    "gin",
+    "gin floreale"
+  ],
+  "bulldog": [
+    "gin"
+  ],
+  "bulldog gin": [
+    "gin"
+  ],
+  "bulldog london dry gin": [
+    "gin"
+  ],
+  "bulldog reserve": [
+    "gin"
+  ],
+  "martin miller's": [
+    "gin"
+  ],
+  "martin millers": [
+    "gin"
+  ],
+  "martin miller's gin": [
+    "gin"
+  ],
+  "martin millers gin": [
+    "gin"
+  ],
+  "martin miller's westbourne strength": [
+    "gin"
+  ],
+  "martin millers westbourne strength": [
+    "gin"
+  ],
+  "martin miller's 9 moons": [
+    "gin"
+  ],
+  "nolet's": [
+    "gin",
+    "gin floreale"
+  ],
+  "nolets": [
+    "gin",
+    "gin floreale"
+  ],
+  "nolet's gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "nolets gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "nolet's silver": [
+    "gin",
+    "gin floreale"
+  ],
+  "nolets silver": [
+    "gin",
+    "gin floreale"
+  ],
+  "nolet's reserve": [
+    "gin",
+    "gin floreale"
+  ],
+  "nolets reserve": [
+    "gin",
+    "gin floreale"
+  ],
+  "four pillars": [
+    "gin"
+  ],
+  "four pillars gin": [
+    "gin"
+  ],
+  "four pillars rare dry gin": [
+    "gin"
+  ],
+  "four pillars navy strength": [
+    "gin"
+  ],
+  "four pillars bloody shiraz": [
+    "gin"
+  ],
+  "four pillars spiced negroni": [
+    "gin",
+    "gin speziato"
+  ],
+  "four pillars christmas gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "four pillars olive leaf": [
+    "gin"
+  ],
+  "four pillars fresh yuzu": [
+    "gin"
+  ],
+  "four pillars gin laboratory": [
+    "gin"
+  ],
+  "four pillars australian dry gin": [
+    "gin"
+  ],
+  "ink gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "ink": [
+    "gin",
+    "gin floreale"
+  ],
+  "ink australian gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "ink butterfly pea flower gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "caorunn": [
+    "gin",
+    "gin speziato"
+  ],
+  "caorunn gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "caorunn small batch scottish gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "caorunn highland strength": [
+    "gin",
+    "gin speziato"
+  ],
+  "caorunn rose": [
+    "gin",
+    "gin floreale"
+  ],
+  "drumshanbo gunpowder": [
+    "gin",
+    "gin speziato"
+  ],
+  "gunpowder gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "drumshanbo gunpowder irish gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "drumshanbo gunpowder gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "drumshanbo gunpowder sardinian citrus": [
+    "gin",
+    "gin speziato"
+  ],
+  "drumshanbo gunpowder californian orange": [
+    "gin",
+    "gin speziato"
+  ],
+  "the shed distillery gunpowder": [
+    "gin",
+    "gin speziato"
+  ],
+  "dingle": [
+    "gin"
+  ],
+  "dingle gin": [
+    "gin"
+  ],
+  "dingle original batch": [
+    "gin"
+  ],
+  "dingle irish gin": [
+    "gin"
+  ],
+  "dingle pot still gin": [
+    "gin"
+  ],
+  "bertha's revenge": [
+    "gin",
+    "gin speziato"
+  ],
+  "berthas revenge": [
+    "gin",
+    "gin speziato"
+  ],
+  "bertha's revenge gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "berthas revenge gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "bertha's revenge irish milk whey gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "saffron boudier": [
+    "gin",
+    "gin speziato"
+  ],
+  "saffron gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "boudier saffron gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "gabriel boudier saffron gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin allo zafferano": [
+    "gin",
+    "gin speziato"
+  ],
+  "nordes": [
+    "gin",
+    "gin floreale"
+  ],
+  "nordés": [
+    "gin",
+    "gin floreale"
+  ],
+  "nordes gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "nordés gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "nordes atlantic galician gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "nordés atlantic galician gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "gin mare": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin mare gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin mare mediterranean gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin mare capri": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin mare amass": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin 209": [
+    "gin"
+  ],
+  "209 gin": [
+    "gin"
+  ],
+  "distillery no. 209": [
+    "gin"
+  ],
+  "distillery no 209": [
+    "gin"
+  ],
+  "no. 209 gin": [
+    "gin"
+  ],
+  "no 209 gin": [
+    "gin"
+  ],
+  "gin 209 keoki barrel reserve": [
+    "gin"
+  ],
+  "st george": [
+    "gin"
+  ],
+  "st. george": [
+    "gin"
+  ],
+  "st george gin": [
+    "gin"
+  ],
+  "st. george gin": [
+    "gin"
+  ],
+  "st george spirits": [
+    "gin"
+  ],
+  "st. george spirits": [
+    "gin"
+  ],
+  "st george terroir gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "st george botanivore": [
+    "gin",
+    "gin floreale"
+  ],
+  "st george dry rye": [
+    "gin"
+  ],
+  "hayman's": [
+    "gin"
+  ],
+  "haymans": [
+    "gin"
+  ],
+  "hayman's gin": [
+    "gin"
+  ],
+  "haymans gin": [
+    "gin"
+  ],
+  "hayman's london dry": [
+    "gin"
+  ],
+  "haymans london dry": [
+    "gin"
+  ],
+  "hayman's london dry gin": [
+    "gin"
+  ],
+  "haymans london dry gin": [
+    "gin"
+  ],
+  "hayman's old tom": [
+    "gin",
+    "gin speziato"
+  ],
+  "haymans old tom": [
+    "gin",
+    "gin speziato"
+  ],
+  "hayman's royal dock navy strength": [
+    "gin"
+  ],
+  "haymans royal dock navy strength": [
+    "gin"
+  ],
+  "hayman's sloe gin": [
+    "gin"
+  ],
+  "haymans sloe gin": [
+    "gin"
+  ],
+  "hayman's 1820": [
+    "gin"
+  ],
+  "haymans 1820": [
+    "gin"
+  ],
+  "hayman's family reserve": [
+    "gin"
+  ],
+  "haymans family reserve": [
+    "gin"
+  ],
+  "hayman's peach and rose cup": [
+    "gin",
+    "gin floreale"
+  ],
+  "brockmans": [
+    "gin",
+    "gin floreale"
+  ],
+  "brockmans gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "brockmans intensely smooth gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "brockmans orange kiss": [
+    "gin",
+    "gin floreale"
+  ],
+  "daffy's": [
+    "gin"
+  ],
+  "daffys": [
+    "gin"
+  ],
+  "daffy's gin": [
+    "gin"
+  ],
+  "daffys gin": [
+    "gin"
+  ],
+  "daffy's highland gin": [
+    "gin"
+  ],
+  "edinburgh gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "edinburgh gin original": [
+    "gin",
+    "gin floreale"
+  ],
+  "edinburgh gin classic": [
+    "gin",
+    "gin floreale"
+  ],
+  "edinburgh gin rhubarb and ginger": [
+    "gin",
+    "gin speziato"
+  ],
+  "edinburgh gin raspberry": [
+    "gin",
+    "gin floreale"
+  ],
+  "edinburgh gin elderflower": [
+    "gin",
+    "gin floreale"
+  ],
+  "edinburgh gin cannonball": [
+    "gin"
+  ],
+  "edinburgh gin navy strength": [
+    "gin"
+  ],
+  "edinburgh seaside gin": [
+    "gin"
+  ],
+  "pickering's": [
+    "gin",
+    "gin speziato"
+  ],
+  "pickerings": [
+    "gin",
+    "gin speziato"
+  ],
+  "pickering's gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "pickerings gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "pickering's 1947": [
+    "gin",
+    "gin speziato"
+  ],
+  "pickerings 1947": [
+    "gin",
+    "gin speziato"
+  ],
+  "pickering's navy strength": [
+    "gin",
+    "gin speziato"
+  ],
+  "pickerings navy strength": [
+    "gin",
+    "gin speziato"
+  ],
+  "the sassenach": [
+    "gin",
+    "gin speziato"
+  ],
+  "sassenach": [
+    "gin",
+    "gin speziato"
+  ],
+  "the sassenach gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "sassenach gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "sam heughan sassenach": [
+    "gin",
+    "gin speziato"
+  ],
+  "isle of harris": [
+    "gin"
+  ],
+  "harris gin": [
+    "gin"
+  ],
+  "isle of harris gin": [
+    "gin"
+  ],
+  "the isle of harris distillery gin": [
+    "gin"
+  ],
+  "isle of harris hebridean gin": [
+    "gin"
+  ],
+  "tarquin's": [
+    "gin"
+  ],
+  "tarquins": [
+    "gin"
+  ],
+  "tarquin's gin": [
+    "gin"
+  ],
+  "tarquins gin": [
+    "gin"
+  ],
+  "tarquin's cornish gin": [
+    "gin"
+  ],
+  "tarquins cornish gin": [
+    "gin"
+  ],
+  "tarquin's dry gin": [
+    "gin"
+  ],
+  "tarquin's blackberry": [
+    "gin"
+  ],
+  "tarquin's strawberry and lime": [
+    "gin"
+  ],
+  "tarquin's rhubarb and raspberry": [
+    "gin"
+  ],
+  "tarquin's navy strength": [
+    "gin"
+  ],
+  "jawbox": [
+    "gin",
+    "gin speziato"
+  ],
+  "jawbox gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "jawbox small batch belfast gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "jawbox pineapple and ginger": [
+    "gin",
+    "gin speziato"
+  ],
+  "jawbox clementine and ginger": [
+    "gin",
+    "gin speziato"
+  ],
+  "shortcross": [
+    "gin",
+    "gin floreale"
+  ],
+  "shortcross gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "shortcross fine and rare": [
+    "gin",
+    "gin floreale"
+  ],
+  "shortcross rhubarb and rose": [
+    "gin",
+    "gin floreale"
+  ],
+  "boatyard": [
+    "gin"
+  ],
+  "boatyard gin": [
+    "gin"
+  ],
+  "boatyard double gin": [
+    "gin"
+  ],
+  "boatyard old tom": [
+    "gin",
+    "gin speziato"
+  ],
+  "glendalough": [
+    "gin",
+    "gin floreale"
+  ],
+  "glendalough gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "glendalough wild botanical gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "glendalough rose gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "glendalough wild spring gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "glendalough wild summer gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "glendalough wild autumn gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "glendalough wild winter gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "darnley's": [
+    "gin",
+    "gin floreale"
+  ],
+  "darnleys": [
+    "gin",
+    "gin floreale"
+  ],
+  "darnley's gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "darnleys gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "darnley's view": [
+    "gin",
+    "gin floreale"
+  ],
+  "darnley's spiced": [
+    "gin",
+    "gin speziato"
+  ],
+  "darnleys spiced": [
+    "gin",
+    "gin speziato"
+  ],
+  "darnley's navy strength": [
+    "gin"
+  ],
+  "boe violet": [
+    "gin",
+    "gin floreale"
+  ],
+  "boe gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "boe violet gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "boe superior scottish gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "boe peach and hibiscus": [
+    "gin",
+    "gin floreale"
+  ],
+  "nb gin": [
+    "gin"
+  ],
+  "nb": [
+    "gin"
+  ],
+  "north berwick gin": [
+    "gin"
+  ],
+  "nb navy strength": [
+    "gin"
+  ],
+  "nb london dry gin": [
+    "gin"
+  ],
+  "williams chase": [
+    "gin"
+  ],
+  "chase gin": [
+    "gin"
+  ],
+  "williams chase gin": [
+    "gin"
+  ],
+  "chase elegant gin": [
+    "gin"
+  ],
+  "chase extra dry gin": [
+    "gin"
+  ],
+  "chase seville orange gin": [
+    "gin"
+  ],
+  "chase pink grapefruit gin": [
+    "gin"
+  ],
+  "chase rhubarb gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "chase elderflower gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "slingsby": [
+    "gin",
+    "gin floreale"
+  ],
+  "slingsby gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "slingsby harrogate gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "slingsby london dry gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "slingsby navy strength": [
+    "gin"
+  ],
+  "slingsby rhubarb": [
+    "gin",
+    "gin floreale"
+  ],
+  "slingsby rose": [
+    "gin",
+    "gin floreale"
+  ],
+  "oxford dry": [
+    "gin"
+  ],
+  "oxford dry gin": [
+    "gin"
+  ],
+  "oxford artisan distillery gin": [
+    "gin"
+  ],
+  "oxford rye gin": [
+    "gin"
+  ],
+  "oxford dry gin no. 1": [
+    "gin"
+  ],
+  "silent pool": [
+    "gin",
+    "gin floreale"
+  ],
+  "silent pool gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "silent pool surrey hills gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "silent pool rare citrus": [
+    "gin",
+    "gin floreale"
+  ],
+  "cotswolds": [
+    "gin"
+  ],
+  "cotswolds gin": [
+    "gin"
+  ],
+  "cotswolds dry gin": [
+    "gin"
+  ],
+  "cotswolds distillery gin": [
+    "gin"
+  ],
+  "cotswolds wildflower gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "opihr": [
+    "gin",
+    "gin speziato"
+  ],
+  "opihr gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "opihr oriental spiced gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "opihr spiced gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "opihr far east edition": [
+    "gin",
+    "gin speziato"
+  ],
+  "opihr european edition": [
+    "gin",
+    "gin speziato"
+  ],
+  "opihr arabian edition": [
+    "gin",
+    "gin speziato"
+  ],
+  "opihr american edition": [
+    "gin",
+    "gin speziato"
+  ],
+  "opihr round the world editions": [
+    "gin",
+    "gin speziato"
+  ],
+  "opihr navy strength": [
+    "gin",
+    "gin speziato"
+  ],
+  "plymouth": [
+    "gin"
+  ],
+  "plymouth gin": [
+    "gin"
+  ],
+  "plymouth navy strength": [
+    "gin"
+  ],
+  "plymouth navy strength gin": [
+    "gin"
+  ],
+  "plymouth original": [
+    "gin"
+  ],
+  "perry's tot": [
+    "gin"
+  ],
+  "perrys tot": [
+    "gin"
+  ],
+  "perry's tot gin": [
+    "gin"
+  ],
+  "perrys tot gin": [
+    "gin"
+  ],
+  "new york distilling perry's tot": [
+    "gin"
+  ],
+  "few": [
+    "gin",
+    "gin speziato"
+  ],
+  "few gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "few american gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "few barrel aged gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "few spirits gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "bluecoat": [
+    "gin"
+  ],
+  "bluecoat gin": [
+    "gin"
+  ],
+  "bluecoat american dry gin": [
+    "gin"
+  ],
+  "bluecoat barrel reserve": [
+    "gin"
+  ],
+  "bluecoat elderflower gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "barrister": [
+    "gin"
+  ],
+  "barrister gin": [
+    "gin"
+  ],
+  "barrister dry gin": [
+    "gin"
+  ],
+  "barrister orange gin": [
+    "gin"
+  ],
+  "barrister old tom": [
+    "gin",
+    "gin speziato"
+  ],
+  "bloom": [
+    "gin",
+    "gin floreale"
+  ],
+  "bloom gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "bloom london dry gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "bloom jasmine and rose gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "bloom premium london dry gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "bloom passionfruit and vanilla vine": [
+    "gin",
+    "gin floreale"
+  ],
+  "herno": [
+    "gin",
+    "gin floreale"
+  ],
+  "hernö": [
+    "gin",
+    "gin floreale"
+  ],
+  "herno gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "hernö gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "herno swedish excellence gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "hernö swedish excellence gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "herno navy strength": [
+    "gin"
+  ],
+  "hernö navy strength": [
+    "gin"
+  ],
+  "herno old tom": [
+    "gin",
+    "gin speziato"
+  ],
+  "hernö old tom": [
+    "gin",
+    "gin speziato"
+  ],
+  "herno juniper cask": [
+    "gin"
+  ],
+  "hernö juniper cask": [
+    "gin"
+  ],
+  "procera": [
+    "gin"
+  ],
+  "procera gin": [
+    "gin"
+  ],
+  "procera african dry gin": [
+    "gin"
+  ],
+  "procera blue dot": [
+    "gin"
+  ],
+  "procera red dot": [
+    "gin",
+    "gin speziato"
+  ],
+  "inverroche": [
+    "gin",
+    "gin floreale"
+  ],
+  "inverroche gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "inverroche classic": [
+    "gin",
+    "gin floreale"
+  ],
+  "inverroche verdant": [
+    "gin",
+    "gin floreale"
+  ],
+  "inverroche amber": [
+    "gin",
+    "gin speziato"
+  ],
+  "tiger gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "tiger gin singapore": [
+    "gin",
+    "gin speziato"
+  ],
+  "tiger white gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "tiger black gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "hapusa": [
+    "gin",
+    "gin speziato"
+  ],
+  "hapusa gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "hapusa himalayan dry gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "nao spirits hapusa": [
+    "gin",
+    "gin speziato"
+  ],
+  "amrut naarangi": [
+    "gin",
+    "gin speziato"
+  ],
+  "naarangi": [
+    "gin",
+    "gin speziato"
+  ],
+  "amrut naarangi gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "naarangi gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "amrut naarangi indian gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "ferdinand's": [
+    "gin",
+    "gin floreale"
+  ],
+  "ferdinands": [
+    "gin",
+    "gin floreale"
+  ],
+  "ferdinand's gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "ferdinands gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "ferdinand's saar dry gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "ferdinands saar dry gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "ferdinand's quince gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "ferdinands quince gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "ferdinand's gold cap": [
+    "gin",
+    "gin floreale"
+  ],
+  "ferdinands gold cap": [
+    "gin",
+    "gin floreale"
+  ],
+  "schwarzwald": [
+    "gin",
+    "gin speziato"
+  ],
+  "schwarzwald gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "black forest gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin foresta nera": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin": [
+    "gin"
+  ],
+  "london dry gin": [
+    "gin"
+  ],
+  "london dry": [
+    "gin"
+  ],
+  "dry gin": [
+    "gin"
+  ],
+  "gin secco": [
+    "gin"
+  ],
+  "gin inglese": [
+    "gin"
+  ],
+  "gin scozzese": [
+    "gin"
+  ],
+  "gin irlandese": [
+    "gin"
+  ],
+  "gin americano": [
+    "gin"
+  ],
+  "gin australiano": [
+    "gin"
+  ],
+  "gin giapponese": [
+    "gin"
+  ],
+  "gin spagnolo": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin indiano": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin sudafricano": [
+    "gin",
+    "gin floreale"
+  ],
+  "gin africano": [
+    "gin",
+    "gin floreale"
+  ],
+  "gin botanico": [
+    "gin",
+    "gin floreale"
+  ],
+  "gin artigianale": [
+    "gin"
+  ],
+  "craft gin": [
+    "gin"
+  ],
+  "small batch gin": [
+    "gin"
+  ],
+  "gin premium": [
+    "gin"
+  ],
+  "gin ultra premium": [
+    "gin"
+  ],
+  "navy strength gin": [
+    "gin"
+  ],
+  "old tom gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "sloe gin": [
+    "gin"
+  ],
+  "gin alla frutta": [
+    "gin"
+  ],
+  "gin floreale": [
+    "gin",
+    "gin floreale"
+  ],
+  "gin speziato": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin contemporaneo": [
+    "gin",
+    "gin floreale"
+  ],
+  "new western gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "new wave gin": [
+    "gin",
+    "gin floreale"
+  ],
+  "gin barrel aged": [
+    "gin",
+    "gin speziato"
+  ],
+  "barrel aged gin": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin invecchiato": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin mediterraneo": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin scozzese dry": [
+    "gin"
+  ],
+  "gin di malto": [
+    "gin"
+  ],
+  "gin di segale": [
+    "gin"
+  ],
+  "gin di patate": [
+    "gin"
+  ],
+  "gin di grano": [
+    "gin"
+  ],
+  "gin al tè": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin allo zenzero": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin alla rosa": [
+    "gin",
+    "gin floreale"
+  ],
+  "gin all'ibisco": [
+    "gin",
+    "gin floreale"
+  ],
+  "gin al sambuco": [
+    "gin",
+    "gin floreale"
+  ],
+  "gin alla lavanda": [
+    "gin",
+    "gin floreale"
+  ],
+  "gin al pompelmo": [
+    "gin"
+  ],
+  "gin all'arancia": [
+    "gin"
+  ],
+  "gin al limone": [
+    "gin"
+  ],
+  "gin alla prugna": [
+    "gin"
+  ],
+  "gin al pepe": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin al cardamomo": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin alla cannella": [
+    "gin",
+    "gin speziato"
+  ],
+  "genever": [
+    "gin",
+    "gin speziato"
+  ],
+  "jenever": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin olandese": [
+    "gin",
+    "gin speziato"
+  ],
+  "gin belga": [
+    "gin",
+    "gin speziato"
+  ]
 }

@@ -1,384 +1,2125 @@
 {
-  "bulleit rye": ["rye whiskey", "whiskey americano"],
-  "bulleit rye whiskey": ["rye whiskey", "whiskey americano"],
-  "bulleit 95 rye": ["rye whiskey", "whiskey americano"],
-  "bulleit frontier whiskey rye": ["rye whiskey", "whiskey americano"],
-  "bulleit rye 12": ["rye whiskey", "whiskey americano"],
-  "bulleit rye 12 anni": ["rye whiskey", "whiskey americano"],
-  "bulleit rye barrel strength": ["rye whiskey", "whiskey americano"],
-  "bulleit rye cask strength": ["rye whiskey", "whiskey americano"],
-  "bulleit rye blenders select": ["rye whiskey", "whiskey americano"],
-  "bulleit rye blender's select": ["rye whiskey", "whiskey americano"],
-  "bulleit straight rye": ["rye whiskey", "whiskey americano"],
-
-  "woodford reserve rye": ["rye whiskey", "whiskey americano"],
-  "woodford rye": ["rye whiskey", "whiskey americano"],
-  "woodford reserve straight rye": ["rye whiskey", "whiskey americano"],
-  "woodford reserve distiller's select rye": ["rye whiskey", "whiskey americano"],
-  "woodford reserve distillers select rye": ["rye whiskey", "whiskey americano"],
-  "woodford reserve rye whiskey": ["rye whiskey", "whiskey americano"],
-  "woodford reserve master's collection rye": ["rye whiskey", "whiskey americano"],
-  "woodford reserve masters collection rye": ["rye whiskey", "whiskey americano"],
-  "woodford reserve double double oaked rye": ["rye whiskey", "whiskey americano"],
-
-  "knob creek rye": ["rye whiskey", "whiskey americano"],
-  "knob creek straight rye": ["rye whiskey", "whiskey americano"],
-  "knob creek rye whiskey": ["rye whiskey", "whiskey americano"],
-  "knob creek smoked maple rye": ["rye whiskey", "whiskey americano"],
-  "knob creek limited edition rye": ["rye whiskey", "whiskey americano"],
-  "knob creek cask strength rye": ["rye whiskey", "whiskey americano"],
-  "kc rye": ["rye whiskey", "whiskey americano"],
-
-  "whistlepig": ["rye whiskey", "whiskey americano"],
-  "whistle pig": ["rye whiskey", "whiskey americano"],
-  "whistlepig rye": ["rye whiskey", "whiskey americano"],
-  "whistle pig rye": ["rye whiskey", "whiskey americano"],
-  "whistlepig rye whiskey": ["rye whiskey", "whiskey americano"],
-  "whistle pig rye whiskey": ["rye whiskey", "whiskey americano"],
-  "whistlepig 10": ["rye whiskey", "whiskey americano"],
-  "whistle pig 10": ["rye whiskey", "whiskey americano"],
-  "whistlepig 10 anni": ["rye whiskey", "whiskey americano"],
-  "whistle pig 10 anni": ["rye whiskey", "whiskey americano"],
-  "whistlepig 10 year": ["rye whiskey", "whiskey americano"],
-  "whistle pig 10 year": ["rye whiskey", "whiskey americano"],
-  "whistlepig 12": ["rye whiskey", "whiskey americano"],
-  "whistle pig 12": ["rye whiskey", "whiskey americano"],
-  "whistlepig 12 anni": ["rye whiskey", "whiskey americano"],
-  "whistle pig 12 anni": ["rye whiskey", "whiskey americano"],
-  "whistlepig 12 year": ["rye whiskey", "whiskey americano"],
-  "whistle pig 12 year": ["rye whiskey", "whiskey americano"],
-  "whistlepig 12 old world": ["rye whiskey", "whiskey americano"],
-  "whistle pig 12 old world": ["rye whiskey", "whiskey americano"],
-  "whistlepig old world": ["rye whiskey", "whiskey americano"],
-  "whistle pig old world": ["rye whiskey", "whiskey americano"],
-  "whistlepig 15": ["rye whiskey", "whiskey americano"],
-  "whistle pig 15": ["rye whiskey", "whiskey americano"],
-  "whistlepig 15 anni": ["rye whiskey", "whiskey americano"],
-  "whistle pig 15 anni": ["rye whiskey", "whiskey americano"],
-  "whistlepig 15 year": ["rye whiskey", "whiskey americano"],
-  "whistle pig 15 year": ["rye whiskey", "whiskey americano"],
-  "whistlepig boss hog": ["rye whiskey", "whiskey americano"],
-  "whistle pig boss hog": ["rye whiskey", "whiskey americano"],
-  "whistlepig boss hog rye": ["rye whiskey", "whiskey americano"],
-  "whistle pig boss hog rye": ["rye whiskey", "whiskey americano"],
-  "whistlepig farmstock": ["rye whiskey", "whiskey americano"],
-  "whistle pig farmstock": ["rye whiskey", "whiskey americano"],
-  "whistlepig farmstock rye": ["rye whiskey", "whiskey americano"],
-  "whistle pig farmstock rye": ["rye whiskey", "whiskey americano"],
-  "whistlepig farmstock beyond bonded": ["rye whiskey", "whiskey americano"],
-  "whistle pig farmstock beyond bonded": ["rye whiskey", "whiskey americano"],
-  "whistlepig farmstock crop": ["rye whiskey", "whiskey americano"],
-  "whistle pig farmstock crop": ["rye whiskey", "whiskey americano"],
-  "whistlepig piggyback": ["rye whiskey", "whiskey americano"],
-  "whistle pig piggyback": ["rye whiskey", "whiskey americano"],
-  "whistlepig piggyback rye": ["rye whiskey", "whiskey americano"],
-  "whistle pig piggyback rye": ["rye whiskey", "whiskey americano"],
-  "whistlepig piggyback 6": ["rye whiskey", "whiskey americano"],
-  "whistle pig piggyback 6": ["rye whiskey", "whiskey americano"],
-  "whistlepig piggyback 6 anni": ["rye whiskey", "whiskey americano"],
-  "whistle pig piggyback 6 year": ["rye whiskey", "whiskey americano"],
-  "whistlepig smokestock": ["rye whiskey", "whiskey americano"],
-  "whistle pig smokestock": ["rye whiskey", "whiskey americano"],
-  "whistlepig limited edition": ["rye whiskey", "whiskey americano"],
-  "whistle pig limited edition": ["rye whiskey", "whiskey americano"],
-  "wp rye": ["rye whiskey", "whiskey americano"],
-  "wp10": ["rye whiskey", "whiskey americano"],
-  "wp15": ["rye whiskey", "whiskey americano"],
-
-  "sazerac rye": ["rye whiskey", "whiskey americano"],
-  "sazerac straight rye": ["rye whiskey", "whiskey americano"],
-  "sazerac 6": ["rye whiskey", "whiskey americano"],
-  "sazerac 6 anni": ["rye whiskey", "whiskey americano"],
-  "sazerac 6 year": ["rye whiskey", "whiskey americano"],
-  "sazerac 18": ["rye whiskey", "whiskey americano"],
-  "sazerac 18 anni": ["rye whiskey", "whiskey americano"],
-  "sazerac 18 year": ["rye whiskey", "whiskey americano"],
-  "sazerac rye 18": ["rye whiskey", "whiskey americano"],
-  "sazerac rye btac": ["rye whiskey", "whiskey americano"],
-  "sazerac rye antique collection": ["rye whiskey", "whiskey americano"],
-  "buffalo trace sazerac rye": ["rye whiskey", "whiskey americano"],
-  "thomas h. handy sazerac": ["rye whiskey", "whiskey americano"],
-  "thomas h handy sazerac": ["rye whiskey", "whiskey americano"],
-  "thomas handy sazerac": ["rye whiskey", "whiskey americano"],
-  "thomas handy rye": ["rye whiskey", "whiskey americano"],
-  "thomas h. handy rye": ["rye whiskey", "whiskey americano"],
-  "thomas h handy rye": ["rye whiskey", "whiskey americano"],
-  "thh rye": ["rye whiskey", "whiskey americano"],
-
-  "rittenhouse rye": ["rye whiskey", "whiskey americano"],
-  "rittenhouse straight rye": ["rye whiskey", "whiskey americano"],
-  "rittenhouse rye whiskey": ["rye whiskey", "whiskey americano"],
-  "rittenhouse bottled in bond": ["rye whiskey", "whiskey americano"],
-  "rittenhouse bib": ["rye whiskey", "whiskey americano"],
-  "rittenhouse 100": ["rye whiskey", "whiskey americano"],
-  "rittenhouse 100 proof": ["rye whiskey", "whiskey americano"],
-  "rittenhouse rye 100": ["rye whiskey", "whiskey americano"],
-  "rittenhouse rye 100 proof": ["rye whiskey", "whiskey americano"],
-  "rittenhouse rye bib": ["rye whiskey", "whiskey americano"],
-  "heaven hill rittenhouse": ["rye whiskey", "whiskey americano"],
-
-  "high west double rye": ["rye whiskey", "whiskey americano"],
-  "high west rye": ["rye whiskey", "whiskey americano"],
-  "high west double rye whiskey": ["rye whiskey", "whiskey americano"],
-  "high west double rye!": ["rye whiskey", "whiskey americano"],
-  "high west distillery double rye": ["rye whiskey", "whiskey americano"],
-  "high west american prairie": ["rye whiskey", "whiskey americano"],
-  "high west rendezvous rye": ["rye whiskey", "whiskey americano"],
-  "high west rendezvous": ["rye whiskey", "whiskey americano"],
-  "high west campfire": ["rye whiskey", "whiskey americano"],
-  "high west yippee ki-yay": ["rye whiskey", "whiskey americano"],
-  "high west yippee ki yay": ["rye whiskey", "whiskey americano"],
-  "high west midwinter night's dram": ["rye whiskey", "whiskey americano"],
-  "high west midwinter nights dram": ["rye whiskey", "whiskey americano"],
-  "high west a midwinter night's dram": ["rye whiskey", "whiskey americano"],
-  "high west distillery": ["rye whiskey", "whiskey americano"],
-  "hw double rye": ["rye whiskey", "whiskey americano"],
-  "hw rye": ["rye whiskey", "whiskey americano"],
-
-  "michter's rye": ["rye whiskey", "whiskey americano"],
-  "michters rye": ["rye whiskey", "whiskey americano"],
-  "michter's us1 rye": ["rye whiskey", "whiskey americano"],
-  "michters us1 rye": ["rye whiskey", "whiskey americano"],
-  "michter's us*1 rye": ["rye whiskey", "whiskey americano"],
-  "michters us*1 rye": ["rye whiskey", "whiskey americano"],
-  "michter's single barrel rye": ["rye whiskey", "whiskey americano"],
-  "michters single barrel rye": ["rye whiskey", "whiskey americano"],
-  "michter's straight rye": ["rye whiskey", "whiskey americano"],
-  "michters straight rye": ["rye whiskey", "whiskey americano"],
-  "michter's toasted barrel rye": ["rye whiskey", "whiskey americano"],
-  "michters toasted barrel rye": ["rye whiskey", "whiskey americano"],
-  "michter's 10 rye": ["rye whiskey", "whiskey americano"],
-  "michters 10 rye": ["rye whiskey", "whiskey americano"],
-  "michter's 10 anni rye": ["rye whiskey", "whiskey americano"],
-  "michter's barrel strength rye": ["rye whiskey", "whiskey americano"],
-  "michters barrel strength rye": ["rye whiskey", "whiskey americano"],
-
-  "angel's envy rye": ["rye whiskey", "whiskey americano"],
-  "angels envy rye": ["rye whiskey", "whiskey americano"],
-  "angel's envy rye whiskey": ["rye whiskey", "whiskey americano"],
-  "angels envy rye whiskey": ["rye whiskey", "whiskey americano"],
-  "angel's envy caribbean rum cask rye": ["rye whiskey", "whiskey americano"],
-  "angels envy caribbean rum cask rye": ["rye whiskey", "whiskey americano"],
-  "angel's envy rum cask rye": ["rye whiskey", "whiskey americano"],
-  "angels envy rum cask rye": ["rye whiskey", "whiskey americano"],
-  "angel's envy finished rye": ["rye whiskey", "whiskey americano"],
-  "angels envy finished rye": ["rye whiskey", "whiskey americano"],
-  "ae rye": ["rye whiskey", "whiskey americano"],
-
-  "basil hayden dark rye": ["rye whiskey", "whiskey americano"],
-  "basil hayden's dark rye": ["rye whiskey", "whiskey americano"],
-  "basil haydens dark rye": ["rye whiskey", "whiskey americano"],
-  "basil hayden dark rye whiskey": ["rye whiskey", "whiskey americano"],
-  "basil hayden's dark rye whiskey": ["rye whiskey", "whiskey americano"],
-  "dark rye basil hayden": ["rye whiskey", "whiskey americano"],
-  "bh dark rye": ["rye whiskey", "whiskey americano"],
-
-  "jack daniel's rye": ["rye whiskey", "whiskey americano"],
-  "jack daniels rye": ["rye whiskey", "whiskey americano"],
-  "jack daniel's tennessee rye": ["rye whiskey", "whiskey americano"],
-  "jack daniels tennessee rye": ["rye whiskey", "whiskey americano"],
-  "jack daniel's straight rye": ["rye whiskey", "whiskey americano"],
-  "jack daniels straight rye": ["rye whiskey", "whiskey americano"],
-  "jack daniel's tennessee straight rye": ["rye whiskey", "whiskey americano"],
-  "jack daniels tennessee straight rye": ["rye whiskey", "whiskey americano"],
-  "jd rye": ["rye whiskey", "whiskey americano"],
-  "jack rye": ["rye whiskey", "whiskey americano"],
-
-  "jim beam rye": ["rye whiskey", "whiskey americano"],
-  "jim beam pre-prohibition rye": ["rye whiskey", "whiskey americano"],
-  "jim beam pre prohibition rye": ["rye whiskey", "whiskey americano"],
-  "jim beam straight rye": ["rye whiskey", "whiskey americano"],
-  "jim beam rye whiskey": ["rye whiskey", "whiskey americano"],
-  "beam rye": ["rye whiskey", "whiskey americano"],
-
-  "new riff rye": ["rye whiskey", "whiskey americano"],
-  "new riff straight rye": ["rye whiskey", "whiskey americano"],
-  "new riff rye whiskey": ["rye whiskey", "whiskey americano"],
-  "new riff bottled in bond rye": ["rye whiskey", "whiskey americano"],
-  "new riff bib rye": ["rye whiskey", "whiskey americano"],
-  "new riff single barrel rye": ["rye whiskey", "whiskey americano"],
-  "new riff distilling rye": ["rye whiskey", "whiskey americano"],
-  "new riff malted rye": ["rye whiskey", "whiskey americano"],
-  "new riff winter rye": ["rye whiskey", "whiskey americano"],
-
-  "wilderness trail rye": ["rye whiskey", "whiskey americano"],
-  "wilderness trail straight rye": ["rye whiskey", "whiskey americano"],
-  "wilderness trail rye whiskey": ["rye whiskey", "whiskey americano"],
-  "wilderness trail single barrel rye": ["rye whiskey", "whiskey americano"],
-  "wilderness trail bottled in bond rye": ["rye whiskey", "whiskey americano"],
-  "wilderness trail settlers select rye": ["rye whiskey", "whiskey americano"],
-  "wilderness trail high rye": ["rye whiskey", "whiskey americano"],
-
-  "redemption rye": ["rye whiskey", "whiskey americano"],
-  "redemption straight rye": ["rye whiskey", "whiskey americano"],
-  "redemption rye whiskey": ["rye whiskey", "whiskey americano"],
-  "redemption high rye": ["rye whiskey", "whiskey americano"],
-  "redemption 10 barrel rye": ["rye whiskey", "whiskey americano"],
-  "redemption barrel proof rye": ["rye whiskey", "whiskey americano"],
-  "redemption cask strength rye": ["rye whiskey", "whiskey americano"],
-  "redemption aged rye": ["rye whiskey", "whiskey americano"],
-
-  "templeton rye": ["rye whiskey", "whiskey americano"],
-  "templeton rye whiskey": ["rye whiskey", "whiskey americano"],
-  "templeton straight rye": ["rye whiskey", "whiskey americano"],
-  "templeton rye 4": ["rye whiskey", "whiskey americano"],
-  "templeton rye 4 anni": ["rye whiskey", "whiskey americano"],
-  "templeton rye 4 year": ["rye whiskey", "whiskey americano"],
-  "templeton rye 6": ["rye whiskey", "whiskey americano"],
-  "templeton rye 6 anni": ["rye whiskey", "whiskey americano"],
-  "templeton rye 6 year": ["rye whiskey", "whiskey americano"],
-  "templeton rye 10": ["rye whiskey", "whiskey americano"],
-  "templeton rye 10 anni": ["rye whiskey", "whiskey americano"],
-  "templeton rye 10 year": ["rye whiskey", "whiskey americano"],
-  "templeton rye barrel strength": ["rye whiskey", "whiskey americano"],
-  "templeton rye cask strength": ["rye whiskey", "whiskey americano"],
-  "templeton rye prohibition era recipe": ["rye whiskey", "whiskey americano"],
-  "templeton small batch rye": ["rye whiskey", "whiskey americano"],
-  "templeton rye small batch": ["rye whiskey", "whiskey americano"],
-  "templeton spirits": ["rye whiskey", "whiskey americano"],
-  "the good stuff templeton": ["rye whiskey", "whiskey americano"],
-
-  "few rye": ["rye whiskey", "whiskey americano"],
-  "few spirits rye": ["rye whiskey", "whiskey americano"],
-  "few straight rye": ["rye whiskey", "whiskey americano"],
-  "few rye whiskey": ["rye whiskey", "whiskey americano"],
-  "few barrel rye": ["rye whiskey", "whiskey americano"],
-  "few spirits straight rye": ["rye whiskey", "whiskey americano"],
-  "few distillery rye": ["rye whiskey", "whiskey americano"],
-
-  "corsair rye": ["rye whiskey", "whiskey americano"],
-  "corsair ryemageddon": ["rye whiskey", "whiskey americano"],
-  "corsair triple smoke rye": ["rye whiskey", "whiskey americano"],
-  "corsair rye whiskey": ["rye whiskey", "whiskey americano"],
-  "corsair wry moon rye": ["rye whiskey", "whiskey americano"],
-  "corsair artisan rye": ["rye whiskey", "whiskey americano"],
-  "corsair distillery rye": ["rye whiskey", "whiskey americano"],
-
-  "laws four grain": ["rye whiskey", "whiskey americano"],
-  "laws four grain straight bourbon": ["rye whiskey", "whiskey americano"],
-  "laws four grain rye": ["rye whiskey", "whiskey americano"],
-  "laws whiskey four grain": ["rye whiskey", "whiskey americano"],
-  "laws whiskey house four grain": ["rye whiskey", "whiskey americano"],
-  "a.d. laws four grain": ["rye whiskey", "whiskey americano"],
-  "ad laws four grain": ["rye whiskey", "whiskey americano"],
-  "laws san luis valley rye": ["rye whiskey", "whiskey americano"],
-  "laws straight rye": ["rye whiskey", "whiskey americano"],
-  "laws rye whiskey": ["rye whiskey", "whiskey americano"],
-  "laws henry road rye": ["rye whiskey", "whiskey americano"],
-
-  "mgp rye": ["rye whiskey", "whiskey americano"],
-  "mgp straight rye": ["rye whiskey", "whiskey americano"],
-  "mgp rye whiskey": ["rye whiskey", "whiskey americano"],
-  "mgp 95 rye": ["rye whiskey", "whiskey americano"],
-  "mgp 95": ["rye whiskey", "whiskey americano"],
-  "mgp indiana rye": ["rye whiskey", "whiskey americano"],
-  "lawrenceburg rye": ["rye whiskey", "whiskey americano"],
-  "mgp ingredients rye": ["rye whiskey", "whiskey americano"],
-  "mgp distillery rye": ["rye whiskey", "whiskey americano"],
-  "midwest grain products rye": ["rye whiskey", "whiskey americano"],
-  "midwest grain products": ["rye whiskey", "whiskey americano"],
-  "indiana rye": ["rye whiskey", "whiskey americano"],
-  "mgp sourced rye": ["rye whiskey", "whiskey americano"],
-
-  "col. e.h. taylor rye": ["rye whiskey", "whiskey americano"],
-  "col e.h. taylor rye": ["rye whiskey", "whiskey americano"],
-  "colonel e.h. taylor rye": ["rye whiskey", "whiskey americano"],
-  "colonel eh taylor rye": ["rye whiskey", "whiskey americano"],
-  "e.h. taylor rye": ["rye whiskey", "whiskey americano"],
-  "eh taylor rye": ["rye whiskey", "whiskey americano"],
-  "e.h. taylor straight rye": ["rye whiskey", "whiskey americano"],
-  "eh taylor straight rye": ["rye whiskey", "whiskey americano"],
-  "colonel e.h. taylor straight rye": ["rye whiskey", "whiskey americano"],
-  "eht rye": ["rye whiskey", "whiskey americano"],
-  "taylor rye": ["rye whiskey", "whiskey americano"],
-
-  "old overholt": ["rye whiskey", "whiskey americano"],
-  "old overholt rye": ["rye whiskey", "whiskey americano"],
-  "old overholt straight rye": ["rye whiskey", "whiskey americano"],
-  "old overholt rye whiskey": ["rye whiskey", "whiskey americano"],
-  "old overholt 86": ["rye whiskey", "whiskey americano"],
-  "old overholt 86 proof": ["rye whiskey", "whiskey americano"],
-  "old overholt bottled in bond": ["rye whiskey", "whiskey americano"],
-  "old overholt bib": ["rye whiskey", "whiskey americano"],
-  "old overholt 114": ["rye whiskey", "whiskey americano"],
-  "old overholt 114 proof": ["rye whiskey", "whiskey americano"],
-  "old overholt cask strength": ["rye whiskey", "whiskey americano"],
-  "overholt rye": ["rye whiskey", "whiskey americano"],
-  "overholt": ["rye whiskey", "whiskey americano"],
-
-  "dad's hat": ["rye whiskey", "whiskey americano"],
-  "dads hat": ["rye whiskey", "whiskey americano"],
-  "dad's hat rye": ["rye whiskey", "whiskey americano"],
-  "dads hat rye": ["rye whiskey", "whiskey americano"],
-  "dad's hat pennsylvania rye": ["rye whiskey", "whiskey americano"],
-  "dads hat pennsylvania rye": ["rye whiskey", "whiskey americano"],
-  "dad's hat straight rye": ["rye whiskey", "whiskey americano"],
-  "dads hat straight rye": ["rye whiskey", "whiskey americano"],
-  "dad's hat rye whiskey": ["rye whiskey", "whiskey americano"],
-  "dads hat rye whiskey": ["rye whiskey", "whiskey americano"],
-  "dad's hat bottled in bond": ["rye whiskey", "whiskey americano"],
-  "dads hat bottled in bond": ["rye whiskey", "whiskey americano"],
-  "dad's hat vermouth barrel finish": ["rye whiskey", "whiskey americano"],
-  "dads hat vermouth barrel finish": ["rye whiskey", "whiskey americano"],
-  "dad's hat port barrel finish": ["rye whiskey", "whiskey americano"],
-  "dads hat port barrel finish": ["rye whiskey", "whiskey americano"],
-  "dad's hat single barrel": ["rye whiskey", "whiskey americano"],
-  "dads hat single barrel": ["rye whiskey", "whiskey americano"],
-  "dad's hat pennsylvania": ["rye whiskey", "whiskey americano"],
-  "dads hat pennsylvania": ["rye whiskey", "whiskey americano"],
-
-  "pikesville rye": ["rye whiskey", "whiskey americano"],
-  "pikesville straight rye": ["rye whiskey", "whiskey americano"],
-  "pikesville rye whiskey": ["rye whiskey", "whiskey americano"],
-  "pikesville 110": ["rye whiskey", "whiskey americano"],
-  "pikesville 110 proof": ["rye whiskey", "whiskey americano"],
-  "pikesville supreme rye": ["rye whiskey", "whiskey americano"],
-  "pikesville maryland rye": ["rye whiskey", "whiskey americano"],
-  "heaven hill pikesville": ["rye whiskey", "whiskey americano"],
-
-  "russell's reserve rye": ["rye whiskey", "whiskey americano"],
-  "russells reserve rye": ["rye whiskey", "whiskey americano"],
-  "russell's reserve straight rye": ["rye whiskey", "whiskey americano"],
-  "russells reserve straight rye": ["rye whiskey", "whiskey americano"],
-  "russell's reserve rye whiskey": ["rye whiskey", "whiskey americano"],
-  "russells reserve rye whiskey": ["rye whiskey", "whiskey americano"],
-  "russell's reserve 6 rye": ["rye whiskey", "whiskey americano"],
-  "russells reserve 6 rye": ["rye whiskey", "whiskey americano"],
-  "russell's reserve 6 year rye": ["rye whiskey", "whiskey americano"],
-  "russells reserve 6 year rye": ["rye whiskey", "whiskey americano"],
-  "wild turkey russell's reserve rye": ["rye whiskey", "whiskey americano"],
-  "wild turkey russells reserve rye": ["rye whiskey", "whiskey americano"],
-  "rr rye": ["rye whiskey", "whiskey americano"],
-
-  "smooth ambler old scout rye": ["rye whiskey", "whiskey americano"],
-  "smooth ambler rye": ["rye whiskey", "whiskey americano"],
-  "smooth ambler old scout straight rye": ["rye whiskey", "whiskey americano"],
-  "smooth ambler old scout rye whiskey": ["rye whiskey", "whiskey americano"],
-  "smooth ambler old scout single barrel rye": ["rye whiskey", "whiskey americano"],
-  "smooth ambler spirits rye": ["rye whiskey", "whiskey americano"],
-
-  "rye whiskey": ["rye whiskey"],
-  "rye": ["rye whiskey"],
-  "straight rye": ["rye whiskey"],
-  "straight rye whiskey": ["rye whiskey"],
-  "american rye": ["rye whiskey", "whiskey americano"],
-  "american rye whiskey": ["rye whiskey", "whiskey americano"],
-  "kentucky rye": ["rye whiskey", "whiskey americano"],
-  "kentucky straight rye": ["rye whiskey", "whiskey americano"],
-  "kentucky straight rye whiskey": ["rye whiskey", "whiskey americano"],
-  "pennsylvania rye": ["rye whiskey", "whiskey americano"],
-  "maryland rye": ["rye whiskey", "whiskey americano"],
-  "indiana rye whiskey": ["rye whiskey", "whiskey americano"],
-  "bottled in bond rye": ["rye whiskey"],
-  "bib rye": ["rye whiskey"],
-  "cask strength rye": ["rye whiskey"],
-  "barrel proof rye": ["rye whiskey"],
-  "single barrel rye": ["rye whiskey"],
-  "small batch rye": ["rye whiskey"],
-  "high rye whiskey": ["rye whiskey", "whiskey americano"],
-  "100% rye": ["rye whiskey"],
-  "whiskey americano": ["whiskey americano"],
-  "american whiskey": ["whiskey americano"],
-  "us rye": ["rye whiskey"],
-  "usa rye": ["rye whiskey"]
+  "bulleit rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit 95 rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit frontier whiskey rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit rye 12": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit rye 12 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit rye barrel strength": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit rye cask strength": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit rye blenders select": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit rye blender's select": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve distiller's select rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve distillers select rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve master's collection rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve masters collection rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve double double oaked rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek smoked maple rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek limited edition rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek cask strength rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kc rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig 10": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig 10": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig 10 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig 10 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig 10 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig 10 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig 12": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig 12": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig 12 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig 12 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig 12 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig 12 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig 12 old world": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig 12 old world": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig old world": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig old world": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig 15": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig 15": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig 15 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig 15 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig 15 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig 15 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig boss hog": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig boss hog": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig boss hog rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig boss hog rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig farmstock": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig farmstock": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig farmstock rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig farmstock rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig farmstock beyond bonded": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig farmstock beyond bonded": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig farmstock crop": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig farmstock crop": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig piggyback": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig piggyback": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig piggyback rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig piggyback rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig piggyback 6": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig piggyback 6": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig piggyback 6 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig piggyback 6 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig smokestock": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig smokestock": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig limited edition": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig limited edition": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wp rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wp10": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wp15": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "sazerac rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "sazerac straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "sazerac 6": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "sazerac 6 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "sazerac 6 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "sazerac 18": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "sazerac 18 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "sazerac 18 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "sazerac rye 18": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "sazerac rye btac": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "sazerac rye antique collection": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "buffalo trace sazerac rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "thomas h. handy sazerac": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "thomas h handy sazerac": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "thomas handy sazerac": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "thomas handy rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "thomas h. handy rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "thomas h handy rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "thh rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rittenhouse rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rittenhouse straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rittenhouse rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rittenhouse bottled in bond": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rittenhouse bib": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rittenhouse 100": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rittenhouse 100 proof": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rittenhouse rye 100": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rittenhouse rye 100 proof": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rittenhouse rye bib": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "heaven hill rittenhouse": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west double rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west double rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west double rye!": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west distillery double rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west american prairie": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west rendezvous rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west rendezvous": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west campfire": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west yippee ki-yay": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west yippee ki yay": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west midwinter night's dram": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west midwinter nights dram": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west a midwinter night's dram": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "high west distillery": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "hw double rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "hw rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's us1 rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters us1 rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's us*1 rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters us*1 rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's single barrel rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters single barrel rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's toasted barrel rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters toasted barrel rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's 10 rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters 10 rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's 10 anni rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's barrel strength rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters barrel strength rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angel's envy rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angels envy rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angel's envy rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angels envy rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angel's envy caribbean rum cask rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angels envy caribbean rum cask rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angel's envy rum cask rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angels envy rum cask rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angel's envy finished rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angels envy finished rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "ae rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden dark rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden's dark rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil haydens dark rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden dark rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden's dark rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dark rye basil hayden": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bh dark rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jack daniel's rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jack daniels rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jack daniel's tennessee rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jack daniels tennessee rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jack daniel's straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jack daniels straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jack daniel's tennessee straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jack daniels tennessee straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jd rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jack rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam pre-prohibition rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam pre prohibition rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "beam rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff bottled in bond rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff bib rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff single barrel rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff distilling rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff malted rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff winter rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail single barrel rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail bottled in bond rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail settlers select rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail high rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption high rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption 10 barrel rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption barrel proof rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption cask strength rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption aged rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye 4": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye 4 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye 4 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye 6": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye 6 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye 6 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye 10": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye 10 anni": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye 10 year": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye barrel strength": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye cask strength": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye prohibition era recipe": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton small batch rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton rye small batch": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "templeton spirits": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "the good stuff templeton": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few spirits rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few barrel rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few spirits straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few distillery rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair ryemageddon": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair triple smoke rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair wry moon rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair artisan rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair distillery rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws four grain": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws four grain straight bourbon": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws four grain rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws whiskey four grain": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws whiskey house four grain": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "a.d. laws four grain": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "ad laws four grain": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws san luis valley rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws henry road rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "mgp rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "mgp straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "mgp rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "mgp 95 rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "mgp 95": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "mgp indiana rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "lawrenceburg rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "mgp ingredients rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "mgp distillery rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "midwest grain products rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "midwest grain products": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "indiana rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "mgp sourced rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "col. e.h. taylor rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "col e.h. taylor rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "colonel e.h. taylor rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "colonel eh taylor rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "e.h. taylor rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "eh taylor rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "e.h. taylor straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "eh taylor straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "colonel e.h. taylor straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "eht rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "taylor rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old overholt": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old overholt rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old overholt straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old overholt rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old overholt 86": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old overholt 86 proof": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old overholt bottled in bond": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old overholt bib": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old overholt 114": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old overholt 114 proof": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old overholt cask strength": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "overholt rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "overholt": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dad's hat": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dads hat": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dad's hat rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dads hat rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dad's hat pennsylvania rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dads hat pennsylvania rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dad's hat straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dads hat straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dad's hat rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dads hat rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dad's hat bottled in bond": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dads hat bottled in bond": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dad's hat vermouth barrel finish": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dads hat vermouth barrel finish": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dad's hat port barrel finish": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dads hat port barrel finish": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dad's hat single barrel": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dads hat single barrel": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dad's hat pennsylvania": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dads hat pennsylvania": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pikesville rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pikesville straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pikesville rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pikesville 110": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pikesville 110 proof": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pikesville supreme rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pikesville maryland rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "heaven hill pikesville": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russell's reserve rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russells reserve rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russell's reserve straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russells reserve straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russell's reserve rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russells reserve rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russell's reserve 6 rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russells reserve 6 rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russell's reserve 6 year rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russells reserve 6 year rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey russell's reserve rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey russells reserve rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rr rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler old scout rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler old scout straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler old scout rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler old scout single barrel rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler spirits rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "straight rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "american rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "american rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky straight rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky straight rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pennsylvania rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "maryland rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "indiana rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bottled in bond rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "bib rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "cask strength rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "barrel proof rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "single barrel rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "small batch rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "high rye whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "100% rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "whiskey americano": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "american whiskey": [
+    "rye",
+    "rye whiskey",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "us rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ],
+  "usa rye": [
+    "rye",
+    "rye whiskey",
+    "whiskey"
+  ]
 }

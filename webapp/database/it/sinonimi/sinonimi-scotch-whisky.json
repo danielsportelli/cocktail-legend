@@ -1,763 +1,4271 @@
 {
-  "glenfiddich": ["scotch whisky single malt"],
-  "glenfiddich 12": ["scotch whisky single malt"],
-  "glenfiddich 12 anni": ["scotch whisky single malt"],
-  "glenfiddich 15": ["scotch whisky single malt"],
-  "glenfiddich 15 anni": ["scotch whisky single malt"],
-  "glenfiddich 18": ["scotch whisky single malt"],
-  "glenfiddich 18 anni": ["scotch whisky single malt"],
-  "glenfiddich 21": ["scotch whisky single malt"],
-  "glenfiddich 21 anni": ["scotch whisky single malt"],
-  "glenfiddich 26": ["scotch whisky single malt"],
-  "glenfiddich 30": ["scotch whisky single malt"],
-  "glenfiddich excellence": ["scotch whisky single malt"],
-  "glenfiddich ipa experiment": ["scotch whisky single malt"],
-  "glenfiddich fire & cane": ["scotch whisky single malt"],
-  "glenfiddich winter storm": ["scotch whisky single malt"],
-  "glenfiddich grand cru": ["scotch whisky single malt"],
-  "glenfiddich grande couronne": ["scotch whisky single malt"],
-  "glenfiddich project xx": ["scotch whisky single malt"],
-  "glenfiddich speyside": ["scotch whisky single malt"],
-  "fidich": ["scotch whisky single malt"],
-  "the glenfiddich": ["scotch whisky single malt"],
-
-  "glenlivet": ["scotch whisky single malt"],
-  "the glenlivet": ["scotch whisky single malt"],
-  "glenlivet 12": ["scotch whisky single malt"],
-  "glenlivet 12 anni": ["scotch whisky single malt"],
-  "glenlivet 15": ["scotch whisky single malt"],
-  "glenlivet 15 anni": ["scotch whisky single malt"],
-  "glenlivet 18": ["scotch whisky single malt"],
-  "glenlivet 18 anni": ["scotch whisky single malt"],
-  "glenlivet 21": ["scotch whisky single malt"],
-  "glenlivet 21 anni": ["scotch whisky single malt"],
-  "glenlivet 25": ["scotch whisky single malt"],
-  "glenlivet founder's reserve": ["scotch whisky single malt"],
-  "glenlivet founders reserve": ["scotch whisky single malt"],
-  "glenlivet captain's reserve": ["scotch whisky single malt"],
-  "glenlivet captains reserve": ["scotch whisky single malt"],
-  "glenlivet code": ["scotch whisky single malt"],
-  "glenlivet caribbean reserve": ["scotch whisky single malt"],
-  "glenlivet nadurra": ["scotch whisky single malt"],
-  "glenlivet nadurra oloroso": ["scotch whisky single malt"],
-  "glenlivet nadurra peated": ["scotch whisky single malt"],
-  "glenlivet archive": ["scotch whisky single malt"],
-
-  "macallan": ["scotch whisky single malt"],
-  "the macallan": ["scotch whisky single malt"],
-  "macallan 12": ["scotch whisky single malt"],
-  "macallan 12 anni": ["scotch whisky single malt"],
-  "macallan 15": ["scotch whisky single malt"],
-  "macallan 15 anni": ["scotch whisky single malt"],
-  "macallan 18": ["scotch whisky single malt"],
-  "macallan 18 anni": ["scotch whisky single malt"],
-  "macallan 21": ["scotch whisky single malt"],
-  "macallan 25": ["scotch whisky single malt"],
-  "macallan 25 anni": ["scotch whisky single malt"],
-  "macallan 30": ["scotch whisky single malt"],
-  "macallan double cask": ["scotch whisky single malt"],
-  "macallan double cask 12": ["scotch whisky single malt"],
-  "macallan double cask 15": ["scotch whisky single malt"],
-  "macallan double cask 18": ["scotch whisky single malt"],
-  "macallan sherry oak": ["scotch whisky single malt"],
-  "macallan sherry oak 12": ["scotch whisky single malt"],
-  "macallan sherry oak 18": ["scotch whisky single malt"],
-  "macallan sherry oak 25": ["scotch whisky single malt"],
-  "macallan triple cask": ["scotch whisky single malt"],
-  "macallan fine oak": ["scotch whisky single malt"],
-  "macallan edition": ["scotch whisky single malt"],
-  "macallan edition 1": ["scotch whisky single malt"],
-  "macallan edition 2": ["scotch whisky single malt"],
-  "macallan edition 3": ["scotch whisky single malt"],
-  "macallan edition 4": ["scotch whisky single malt"],
-  "macallan edition 5": ["scotch whisky single malt"],
-  "macallan edition 6": ["scotch whisky single malt"],
-  "macallan quest": ["scotch whisky single malt"],
-  "macallan rare cask": ["scotch whisky single malt"],
-  "macallan reflexion": ["scotch whisky single malt"],
-  "macallan m": ["scotch whisky single malt"],
-  "macallan estate": ["scotch whisky single malt"],
-  "macallan lumina": ["scotch whisky single malt"],
-  "macallan harmony": ["scotch whisky single malt"],
-  "macallan sienna": ["scotch whisky single malt"],
-  "macallan amber": ["scotch whisky single malt"],
-  "macallan gold": ["scotch whisky single malt"],
-  "macallan ruby": ["scotch whisky single malt"],
-  "mac": ["scotch whisky single malt"],
-
-  "laphroaig": ["scotch whisky single malt"],
-  "laphroaig 10": ["scotch whisky single malt"],
-  "laphroaig 10 anni": ["scotch whisky single malt"],
-  "laphroaig 16": ["scotch whisky single malt"],
-  "laphroaig 18": ["scotch whisky single malt"],
-  "laphroaig 25": ["scotch whisky single malt"],
-  "laphroaig quarter cask": ["scotch whisky single malt"],
-  "laphroaig qc": ["scotch whisky single malt"],
-  "laphroaig triple wood": ["scotch whisky single malt"],
-  "laphroaig select": ["scotch whisky single malt"],
-  "laphroaig lore": ["scotch whisky single malt"],
-  "laphroaig four oak": ["scotch whisky single malt"],
-  "laphroaig 1815": ["scotch whisky single malt"],
-  "laphroaig an cuan mor": ["scotch whisky single malt"],
-  "laphroaig cairdeas": ["scotch whisky single malt"],
-  "laphroaig islay": ["scotch whisky single malt"],
-  "lafroyg": ["scotch whisky single malt"],
-  "laphroig": ["scotch whisky single malt"],
-
-  "bowmore": ["scotch whisky single malt"],
-  "bowmore 12": ["scotch whisky single malt"],
-  "bowmore 12 anni": ["scotch whisky single malt"],
-  "bowmore 15": ["scotch whisky single malt"],
-  "bowmore 15 anni": ["scotch whisky single malt"],
-  "bowmore 18": ["scotch whisky single malt"],
-  "bowmore 18 anni": ["scotch whisky single malt"],
-  "bowmore 25": ["scotch whisky single malt"],
-  "bowmore 27": ["scotch whisky single malt"],
-  "bowmore no.1": ["scotch whisky single malt"],
-  "bowmore no 1": ["scotch whisky single malt"],
-  "bowmore small batch": ["scotch whisky single malt"],
-  "bowmore legend": ["scotch whisky single malt"],
-  "bowmore tempest": ["scotch whisky single malt"],
-  "bowmore laimrig": ["scotch whisky single malt"],
-  "bowmore vault edition": ["scotch whisky single malt"],
-  "bowmore isle of islay": ["scotch whisky single malt"],
-
-  "ardbeg": ["scotch whisky single malt"],
-  "ardbeg 10": ["scotch whisky single malt"],
-  "ardbeg 10 anni": ["scotch whisky single malt"],
-  "ardbeg an oa": ["scotch whisky single malt"],
-  "ardbeg an-oa": ["scotch whisky single malt"],
-  "ardbeg uigeadail": ["scotch whisky single malt"],
-  "ardbeg uig": ["scotch whisky single malt"],
-  "ardbeg corryvreckan": ["scotch whisky single malt"],
-  "ardbeg corry": ["scotch whisky single malt"],
-  "ardbeg wee beastie": ["scotch whisky single malt"],
-  "ardbeg traigh bhan": ["scotch whisky single malt"],
-  "ardbeg perpetuum": ["scotch whisky single malt"],
-  "ardbeg auriverdes": ["scotch whisky single malt"],
-  "ardbeg galileo": ["scotch whisky single malt"],
-  "ardbeg ardbog": ["scotch whisky single malt"],
-  "ardbeg supernova": ["scotch whisky single malt"],
-  "ardbeg blasda": ["scotch whisky single malt"],
-  "ardbeg dark cove": ["scotch whisky single malt"],
-  "ardbeg grooves": ["scotch whisky single malt"],
-  "ardbeg twenty two": ["scotch whisky single malt"],
-  "ardbeg heavy vapours": ["scotch whisky single malt"],
-  "ardbeg committee": ["scotch whisky single malt"],
-  "ardbeg islay": ["scotch whisky single malt"],
-
-  "talisker": ["scotch whisky single malt"],
-  "talisker 10": ["scotch whisky single malt"],
-  "talisker 10 anni": ["scotch whisky single malt"],
-  "talisker 18": ["scotch whisky single malt"],
-  "talisker 18 anni": ["scotch whisky single malt"],
-  "talisker 25": ["scotch whisky single malt"],
-  "talisker 30": ["scotch whisky single malt"],
-  "talisker storm": ["scotch whisky single malt"],
-  "talisker port ruighe": ["scotch whisky single malt"],
-  "talisker dark storm": ["scotch whisky single malt"],
-  "talisker skye": ["scotch whisky single malt"],
-  "talisker distillers edition": ["scotch whisky single malt"],
-  "talisker de": ["scotch whisky single malt"],
-  "talisker neist point": ["scotch whisky single malt"],
-  "talisker isle of skye": ["scotch whisky single malt"],
-
-  "oban": ["scotch whisky single malt"],
-  "oban 14": ["scotch whisky single malt"],
-  "oban 14 anni": ["scotch whisky single malt"],
-  "oban 18": ["scotch whisky single malt"],
-  "oban 21": ["scotch whisky single malt"],
-  "oban little bay": ["scotch whisky single malt"],
-  "oban distillers edition": ["scotch whisky single malt"],
-
-  "dalmore": ["scotch whisky single malt"],
-  "the dalmore": ["scotch whisky single malt"],
-  "dalmore 12": ["scotch whisky single malt"],
-  "dalmore 12 anni": ["scotch whisky single malt"],
-  "dalmore 15": ["scotch whisky single malt"],
-  "dalmore 15 anni": ["scotch whisky single malt"],
-  "dalmore 18": ["scotch whisky single malt"],
-  "dalmore 18 anni": ["scotch whisky single malt"],
-  "dalmore 25": ["scotch whisky single malt"],
-  "dalmore cigar malt": ["scotch whisky single malt"],
-  "dalmore cigar malt reserve": ["scotch whisky single malt"],
-  "dalmore king alexander iii": ["scotch whisky single malt"],
-  "dalmore king alexander": ["scotch whisky single malt"],
-  "dalmore portwood": ["scotch whisky single malt"],
-  "dalmore constellation": ["scotch whisky single malt"],
-  "dalmore resolution": ["scotch whisky single malt"],
-  "dalmore quintessence": ["scotch whisky single malt"],
-
-  "balvenie": ["scotch whisky single malt"],
-  "the balvenie": ["scotch whisky single malt"],
-  "balvenie 12": ["scotch whisky single malt"],
-  "balvenie 12 anni": ["scotch whisky single malt"],
-  "balvenie 14": ["scotch whisky single malt"],
-  "balvenie 14 anni": ["scotch whisky single malt"],
-  "balvenie 17": ["scotch whisky single malt"],
-  "balvenie 21": ["scotch whisky single malt"],
-  "balvenie 25": ["scotch whisky single malt"],
-  "balvenie 30": ["scotch whisky single malt"],
-  "balvenie doublewood": ["scotch whisky single malt"],
-  "balvenie doublewood 12": ["scotch whisky single malt"],
-  "balvenie doublewood 17": ["scotch whisky single malt"],
-  "balvenie caribbean cask": ["scotch whisky single malt"],
-  "balvenie caribbean cask 14": ["scotch whisky single malt"],
-  "balvenie portwood": ["scotch whisky single malt"],
-  "balvenie portwood 21": ["scotch whisky single malt"],
-  "balvenie triple cask": ["scotch whisky single malt"],
-  "balvenie tun 1401": ["scotch whisky single malt"],
-  "balvenie tun 1509": ["scotch whisky single malt"],
-  "balvenie tun 1858": ["scotch whisky single malt"],
-  "balvenie single barrel": ["scotch whisky single malt"],
-  "balvenie single barrel 12": ["scotch whisky single malt"],
-  "balvenie single barrel 15": ["scotch whisky single malt"],
-  "balvenie single barrel 25": ["scotch whisky single malt"],
-  "balvenie week of peat": ["scotch whisky single malt"],
-  "balvenie stories": ["scotch whisky single malt"],
-  "balvenie peated": ["scotch whisky single malt"],
-
-  "highland park": ["scotch whisky single malt"],
-  "highland park 12": ["scotch whisky single malt"],
-  "highland park 12 anni": ["scotch whisky single malt"],
-  "highland park 15": ["scotch whisky single malt"],
-  "highland park 18": ["scotch whisky single malt"],
-  "highland park 18 anni": ["scotch whisky single malt"],
-  "highland park 21": ["scotch whisky single malt"],
-  "highland park 25": ["scotch whisky single malt"],
-  "highland park 30": ["scotch whisky single malt"],
-  "highland park viking honour": ["scotch whisky single malt"],
-  "highland park viking scars": ["scotch whisky single malt"],
-  "highland park dark origins": ["scotch whisky single malt"],
-  "highland park magnus": ["scotch whisky single malt"],
-  "highland park valfather": ["scotch whisky single malt"],
-  "highland park valknut": ["scotch whisky single malt"],
-  "highland park einar": ["scotch whisky single malt"],
-  "highland park sigurd": ["scotch whisky single malt"],
-  "highland park svein": ["scotch whisky single malt"],
-  "highland park freya": ["scotch whisky single malt"],
-  "highland park loki": ["scotch whisky single malt"],
-  "highland park thor": ["scotch whisky single malt"],
-  "highland park odin": ["scotch whisky single malt"],
-  "hp 12": ["scotch whisky single malt"],
-  "hp 18": ["scotch whisky single malt"],
-
-  "glenmorangie": ["scotch whisky single malt"],
-  "glenmorangie original": ["scotch whisky single malt"],
-  "glenmorangie 10": ["scotch whisky single malt"],
-  "glenmorangie 10 anni": ["scotch whisky single malt"],
-  "glenmorangie 12": ["scotch whisky single malt"],
-  "glenmorangie 18": ["scotch whisky single malt"],
-  "glenmorangie 18 anni": ["scotch whisky single malt"],
-  "glenmorangie 25": ["scotch whisky single malt"],
-  "glenmorangie lasanta": ["scotch whisky single malt"],
-  "glenmorangie quinta ruban": ["scotch whisky single malt"],
-  "glenmorangie nectar d'or": ["scotch whisky single malt"],
-  "glenmorangie nectar dor": ["scotch whisky single malt"],
-  "glenmorangie signet": ["scotch whisky single malt"],
-  "glenmorangie astar": ["scotch whisky single malt"],
-  "glenmorangie duthac": ["scotch whisky single malt"],
-  "glenmorangie tayne": ["scotch whisky single malt"],
-  "glenmorangie milsean": ["scotch whisky single malt"],
-  "glenmorangie bacalta": ["scotch whisky single malt"],
-  "glenmorangie spios": ["scotch whisky single malt"],
-  "glenmorangie allta": ["scotch whisky single malt"],
-  "glenmorangie cadboll": ["scotch whisky single malt"],
-  "glenmorangie x": ["scotch whisky single malt"],
-  "glenmo": ["scotch whisky single malt"],
-
-  "glenfarclas": ["scotch whisky single malt"],
-  "glenfarclas 10": ["scotch whisky single malt"],
-  "glenfarclas 12": ["scotch whisky single malt"],
-  "glenfarclas 15": ["scotch whisky single malt"],
-  "glenfarclas 17": ["scotch whisky single malt"],
-  "glenfarclas 21": ["scotch whisky single malt"],
-  "glenfarclas 25": ["scotch whisky single malt"],
-  "glenfarclas 30": ["scotch whisky single malt"],
-  "glenfarclas 40": ["scotch whisky single malt"],
-  "glenfarclas 105": ["scotch whisky single malt"],
-  "glenfarclas family casks": ["scotch whisky single malt"],
-  "the glenfarclas": ["scotch whisky single malt"],
-
-  "benromach": ["scotch whisky single malt"],
-  "benromach 10": ["scotch whisky single malt"],
-  "benromach 10 anni": ["scotch whisky single malt"],
-  "benromach 15": ["scotch whisky single malt"],
-  "benromach 21": ["scotch whisky single malt"],
-  "benromach peat smoke": ["scotch whisky single malt"],
-  "benromach organic": ["scotch whisky single malt"],
-  "benromach cask strength": ["scotch whisky single malt"],
-  "benromach heritage": ["scotch whisky single malt"],
-  "benromach contrasts": ["scotch whisky single malt"],
-
-  "glendronach": ["scotch whisky single malt"],
-  "the glendronach": ["scotch whisky single malt"],
-  "glen dronach": ["scotch whisky single malt"],
-  "glendronach 12": ["scotch whisky single malt"],
-  "glendronach 12 anni": ["scotch whisky single malt"],
-  "glendronach 15": ["scotch whisky single malt"],
-  "glendronach 18": ["scotch whisky single malt"],
-  "glendronach 21": ["scotch whisky single malt"],
-  "glendronach parliament": ["scotch whisky single malt"],
-  "glendronach allardice": ["scotch whisky single malt"],
-  "glendronach revival": ["scotch whisky single malt"],
-  "glendronach traditionally peated": ["scotch whisky single malt"],
-  "glendronach cask strength": ["scotch whisky single malt"],
-  "glendronach grandeur": ["scotch whisky single malt"],
-  "glendronach kingsman": ["scotch whisky single malt"],
-
-  "springbank": ["scotch whisky single malt"],
-  "springbank 10": ["scotch whisky single malt"],
-  "springbank 10 anni": ["scotch whisky single malt"],
-  "springbank 12": ["scotch whisky single malt"],
-  "springbank 15": ["scotch whisky single malt"],
-  "springbank 18": ["scotch whisky single malt"],
-  "springbank 21": ["scotch whisky single malt"],
-  "springbank 25": ["scotch whisky single malt"],
-  "springbank cv": ["scotch whisky single malt"],
-  "springbank local barley": ["scotch whisky single malt"],
-  "springbank 100 proof": ["scotch whisky single malt"],
-  "springbank longrow": ["scotch whisky single malt"],
-  "longrow": ["scotch whisky single malt"],
-  "longrow 18": ["scotch whisky single malt"],
-  "longrow red": ["scotch whisky single malt"],
-  "longrow peated": ["scotch whisky single malt"],
-  "springbank hazelburn": ["scotch whisky single malt"],
-  "hazelburn": ["scotch whisky single malt"],
-  "hazelburn 10": ["scotch whisky single malt"],
-  "hazelburn 21": ["scotch whisky single malt"],
-  "hazelburn triple distilled": ["scotch whisky single malt"],
-
-  "kilchoman": ["scotch whisky single malt"],
-  "kilchoman machir bay": ["scotch whisky single malt"],
-  "kilchoman sanaig": ["scotch whisky single malt"],
-  "kilchoman loch gorm": ["scotch whisky single malt"],
-  "kilchoman 100% islay": ["scotch whisky single malt"],
-  "kilchoman 100 islay": ["scotch whisky single malt"],
-  "kilchoman port cask": ["scotch whisky single malt"],
-  "kilchoman bramble": ["scotch whisky single malt"],
-  "kilchoman fino": ["scotch whisky single malt"],
-  "kilchoman cask strength": ["scotch whisky single malt"],
-
-  "bruichladdich": ["scotch whisky single malt"],
-  "bruichladdich classic laddie": ["scotch whisky single malt"],
-  "bruichladdich islay barley": ["scotch whisky single malt"],
-  "bruichladdich bere barley": ["scotch whisky single malt"],
-  "bruichladdich organic": ["scotch whisky single malt"],
-  "bruichladdich 18": ["scotch whisky single malt"],
-  "bruichladdich 21": ["scotch whisky single malt"],
-  "bruichladdich 22": ["scotch whisky single malt"],
-  "bruichladdich black art": ["scotch whisky single malt"],
-  "bruichladdich octomore": ["scotch whisky single malt"],
-  "octomore": ["scotch whisky single malt"],
-  "octomore 14": ["scotch whisky single malt"],
-  "octomore 13": ["scotch whisky single malt"],
-  "octomore 12": ["scotch whisky single malt"],
-  "octomore 11": ["scotch whisky single malt"],
-  "octomore 10": ["scotch whisky single malt"],
-  "bruichladdich port charlotte": ["scotch whisky single malt"],
-  "port charlotte": ["scotch whisky single malt"],
-  "port charlotte 10": ["scotch whisky single malt"],
-  "port charlotte 18": ["scotch whisky single malt"],
-  "port charlotte islay barley": ["scotch whisky single malt"],
-  "port charlotte scottish barley": ["scotch whisky single malt"],
-  "port charlotte heavily peated": ["scotch whisky single malt"],
-  "the laddie": ["scotch whisky single malt"],
-  "laddie": ["scotch whisky single malt"],
-
-  "bunnahabhain": ["scotch whisky single malt"],
-  "bunnahabhain 12": ["scotch whisky single malt"],
-  "bunnahabhain 12 anni": ["scotch whisky single malt"],
-  "bunnahabhain 18": ["scotch whisky single malt"],
-  "bunnahabhain 18 anni": ["scotch whisky single malt"],
-  "bunnahabhain 25": ["scotch whisky single malt"],
-  "bunnahabhain stiuireadair": ["scotch whisky single malt"],
-  "bunnahabhain moine": ["scotch whisky single malt"],
-  "bunnahabhain toiteach": ["scotch whisky single malt"],
-  "bunnahabhain toiteach a dha": ["scotch whisky single malt"],
-  "bunnahabhain ceobanach": ["scotch whisky single malt"],
-  "bunnahabhain islay": ["scotch whisky single malt"],
-
-  "caol ila": ["scotch whisky single malt"],
-  "caol ila 12": ["scotch whisky single malt"],
-  "caol ila 12 anni": ["scotch whisky single malt"],
-  "caol ila 18": ["scotch whisky single malt"],
-  "caol ila 18 anni": ["scotch whisky single malt"],
-  "caol ila 25": ["scotch whisky single malt"],
-  "caol ila distillers edition": ["scotch whisky single malt"],
-  "caol ila moch": ["scotch whisky single malt"],
-  "caol ila unpeated": ["scotch whisky single malt"],
-  "caolila": ["scotch whisky single malt"],
-
-  "tobermory": ["scotch whisky single malt"],
-  "tobermory 10": ["scotch whisky single malt"],
-  "tobermory 10 anni": ["scotch whisky single malt"],
-  "tobermory 15": ["scotch whisky single malt"],
-  "tobermory 20": ["scotch whisky single malt"],
-  "tobermory 21": ["scotch whisky single malt"],
-  "ledaig": ["scotch whisky single malt"],
-  "ledaig 10": ["scotch whisky single malt"],
-  "ledaig 18": ["scotch whisky single malt"],
-  "ledaig peated": ["scotch whisky single malt"],
-  "ledaig rioja": ["scotch whisky single malt"],
-  "ledaig sinclair series": ["scotch whisky single malt"],
-
-  "jura": ["scotch whisky single malt"],
-  "isle of jura": ["scotch whisky single malt"],
-  "jura 10": ["scotch whisky single malt"],
-  "jura 10 anni": ["scotch whisky single malt"],
-  "jura 12": ["scotch whisky single malt"],
-  "jura 18": ["scotch whisky single malt"],
-  "jura 21": ["scotch whisky single malt"],
-  "jura origin": ["scotch whisky single malt"],
-  "jura journey": ["scotch whisky single malt"],
-  "jura seven wood": ["scotch whisky single malt"],
-  "jura superstition": ["scotch whisky single malt"],
-  "jura prophecy": ["scotch whisky single malt"],
-  "jura winter edition": ["scotch whisky single malt"],
-  "jura one for you": ["scotch whisky single malt"],
-
-  "aberfeldy": ["scotch whisky single malt"],
-  "aberfeldy 12": ["scotch whisky single malt"],
-  "aberfeldy 12 anni": ["scotch whisky single malt"],
-  "aberfeldy 16": ["scotch whisky single malt"],
-  "aberfeldy 18": ["scotch whisky single malt"],
-  "aberfeldy 21": ["scotch whisky single malt"],
-  "aberfeldy 25": ["scotch whisky single malt"],
-  "aberfeldy gold": ["scotch whisky single malt"],
-
-  "edradour": ["scotch whisky single malt"],
-  "edradour 10": ["scotch whisky single malt"],
-  "edradour 10 anni": ["scotch whisky single malt"],
-  "edradour 12": ["scotch whisky single malt"],
-  "edradour ballechin": ["scotch whisky single malt"],
-  "ballechin": ["scotch whisky single malt"],
-  "edradour caledonia": ["scotch whisky single malt"],
-  "edradour oloroso": ["scotch whisky single malt"],
-  "edradour sauternes": ["scotch whisky single malt"],
-  "edradour straight from the cask": ["scotch whisky single malt"],
-
-  "benriach": ["scotch whisky single malt"],
-  "the benriach": ["scotch whisky single malt"],
-  "ben riach": ["scotch whisky single malt"],
-  "benriach 10": ["scotch whisky single malt"],
-  "benriach 12": ["scotch whisky single malt"],
-  "benriach 16": ["scotch whisky single malt"],
-  "benriach 21": ["scotch whisky single malt"],
-  "benriach 25": ["scotch whisky single malt"],
-  "benriach the original ten": ["scotch whisky single malt"],
-  "benriach smoke season": ["scotch whisky single malt"],
-  "benriach the smoky ten": ["scotch whisky single malt"],
-  "benriach the smoky twelve": ["scotch whisky single malt"],
-  "benriach the smoky sixteen": ["scotch whisky single malt"],
-  "benriach the twenty one": ["scotch whisky single malt"],
-  "benriach the twenty five": ["scotch whisky single malt"],
-  "benriach curiositas": ["scotch whisky single malt"],
-  "benriach authenticus": ["scotch whisky single malt"],
-
-  "glenrothes": ["scotch whisky single malt"],
-  "the glenrothes": ["scotch whisky single malt"],
-  "glenrothes select reserve": ["scotch whisky single malt"],
-  "glenrothes 10": ["scotch whisky single malt"],
-  "glenrothes 12": ["scotch whisky single malt"],
-  "glenrothes 18": ["scotch whisky single malt"],
-  "glenrothes 25": ["scotch whisky single malt"],
-  "glenrothes vintage reserve": ["scotch whisky single malt"],
-  "glenrothes whisky maker's cut": ["scotch whisky single malt"],
-  "glenrothes whisky makers cut": ["scotch whisky single malt"],
-  "glenrothes soleo": ["scotch whisky single malt"],
-
-  "cardhu": ["scotch whisky single malt"],
-  "cardhu 12": ["scotch whisky single malt"],
-  "cardhu 12 anni": ["scotch whisky single malt"],
-  "cardhu 15": ["scotch whisky single malt"],
-  "cardhu 18": ["scotch whisky single malt"],
-  "cardhu amber rock": ["scotch whisky single malt"],
-  "cardhu gold reserve": ["scotch whisky single malt"],
-  "cardhu special cask": ["scotch whisky single malt"],
-  "cardu": ["scotch whisky single malt"],
-
-  "strathisla": ["scotch whisky single malt"],
-  "strathisla 12": ["scotch whisky single malt"],
-  "strathisla 12 anni": ["scotch whisky single malt"],
-  "strathisla 25": ["scotch whisky single malt"],
-
-  "auchentoshan": ["scotch whisky single malt"],
-  "auchentoshan american oak": ["scotch whisky single malt"],
-  "auchentoshan 12": ["scotch whisky single malt"],
-  "auchentoshan 12 anni": ["scotch whisky single malt"],
-  "auchentoshan 18": ["scotch whisky single malt"],
-  "auchentoshan 21": ["scotch whisky single malt"],
-  "auchentoshan three wood": ["scotch whisky single malt"],
-  "auchentoshan heartwood": ["scotch whisky single malt"],
-  "auchentoshan blood oak": ["scotch whisky single malt"],
-
-  "deanston": ["scotch whisky single malt"],
-  "deanston 12": ["scotch whisky single malt"],
-  "deanston 12 anni": ["scotch whisky single malt"],
-  "deanston 18": ["scotch whisky single malt"],
-  "deanston virgin oak": ["scotch whisky single malt"],
-  "deanston organic": ["scotch whisky single malt"],
-  "deanston dragon cask": ["scotch whisky single malt"],
-  "deanston Kentucky cask": ["scotch whisky single malt"],
-
-  "tomatin": ["scotch whisky single malt"],
-  "tomatin 12": ["scotch whisky single malt"],
-  "tomatin 12 anni": ["scotch whisky single malt"],
-  "tomatin 14": ["scotch whisky single malt"],
-  "tomatin 18": ["scotch whisky single malt"],
-  "tomatin 21": ["scotch whisky single malt"],
-  "tomatin 25": ["scotch whisky single malt"],
-  "tomatin 30": ["scotch whisky single malt"],
-  "tomatin legacy": ["scotch whisky single malt"],
-  "tomatin cu bocan": ["scotch whisky single malt"],
-  "cu bocan": ["scotch whisky single malt"],
-  "tomatin five virtues": ["scotch whisky single malt"],
-
-  "the singleton": ["scotch whisky single malt"],
-  "singleton": ["scotch whisky single malt"],
-  "singleton of glendullan": ["scotch whisky single malt"],
-  "singleton glendullan": ["scotch whisky single malt"],
-  "singleton of dufftown": ["scotch whisky single malt"],
-  "singleton dufftown": ["scotch whisky single malt"],
-  "singleton of glen ord": ["scotch whisky single malt"],
-  "singleton glen ord": ["scotch whisky single malt"],
-  "singleton 12": ["scotch whisky single malt"],
-  "singleton 15": ["scotch whisky single malt"],
-  "singleton 18": ["scotch whisky single malt"],
-  "singleton 21": ["scotch whisky single malt"],
-  "singleton spey cascade": ["scotch whisky single malt"],
-  "singleton spey reserve": ["scotch whisky single malt"],
-  "singleton spey tenné": ["scotch whisky single malt"],
-  "singleton spey tenne": ["scotch whisky single malt"],
-
-  "johnnie walker": ["scotch whisky blended"],
-  "johnnie walker red": ["scotch whisky blended"],
-  "johnnie walker red label": ["scotch whisky blended"],
-  "jw red": ["scotch whisky blended"],
-  "johnnie walker black": ["scotch whisky blended"],
-  "johnnie walker black label": ["scotch whisky blended"],
-  "jw black": ["scotch whisky blended"],
-  "jw black label": ["scotch whisky blended"],
-  "johnnie walker double black": ["scotch whisky blended"],
-  "jw double black": ["scotch whisky blended"],
-  "johnnie walker green label": ["scotch whisky blended"],
-  "jw green": ["scotch whisky blended"],
-  "jw green label": ["scotch whisky blended"],
-  "johnnie walker gold": ["scotch whisky blended"],
-  "johnnie walker gold label": ["scotch whisky blended"],
-  "jw gold": ["scotch whisky blended"],
-  "jw gold label": ["scotch whisky blended"],
-  "johnnie walker gold label reserve": ["scotch whisky blended"],
-  "johnnie walker blue": ["scotch whisky blended"],
-  "johnnie walker blue label": ["scotch whisky blended"],
-  "jw blue": ["scotch whisky blended"],
-  "jw blue label": ["scotch whisky blended"],
-  "johnnie walker platinum": ["scotch whisky blended"],
-  "johnnie walker 18": ["scotch whisky blended"],
-  "johnnie walker swing": ["scotch whisky blended"],
-  "johnnie walker explorers club": ["scotch whisky blended"],
-  "johnnie walker island green": ["scotch whisky blended"],
-  "johnnie walker aged 18": ["scotch whisky blended"],
-  "johnnie walker xr21": ["scotch whisky blended"],
-  "johnnie walker king george v": ["scotch whisky blended"],
-  "johnnie walker jane walker": ["scotch whisky blended"],
-  "johnnie walker ghost": ["scotch whisky blended"],
-  "johnnie walker highball": ["scotch whisky blended"],
-  "johnnie walker blenders batch": ["scotch whisky blended"],
-  "jw": ["scotch whisky blended"],
-  "johnnie": ["scotch whisky blended"],
-
-  "chivas regal": ["scotch whisky blended"],
-  "chivas": ["scotch whisky blended"],
-  "chivas 12": ["scotch whisky blended"],
-  "chivas 12 anni": ["scotch whisky blended"],
-  "chivas regal 12": ["scotch whisky blended"],
-  "chivas 15": ["scotch whisky blended"],
-  "chivas regal 15": ["scotch whisky blended"],
-  "chivas 18": ["scotch whisky blended"],
-  "chivas regal 18": ["scotch whisky blended"],
-  "chivas 21": ["scotch whisky blended"],
-  "chivas regal 21": ["scotch whisky blended"],
-  "chivas regal 25": ["scotch whisky blended"],
-  "chivas extra": ["scotch whisky blended"],
-  "chivas extra 13": ["scotch whisky blended"],
-  "chivas ultis": ["scotch whisky blended"],
-  "chivas the icon": ["scotch whisky blended"],
-  "chivas mizunara": ["scotch whisky blended"],
-  "chivas regal mizunara": ["scotch whisky blended"],
-  "chivas regal extra": ["scotch whisky blended"],
-
-  "ballantine's": ["scotch whisky blended"],
-  "ballantines": ["scotch whisky blended"],
-  "ballantine": ["scotch whisky blended"],
-  "ballantines finest": ["scotch whisky blended"],
-  "ballantine's finest": ["scotch whisky blended"],
-  "ballantines 12": ["scotch whisky blended"],
-  "ballantine's 12": ["scotch whisky blended"],
-  "ballantines 17": ["scotch whisky blended"],
-  "ballantine's 17": ["scotch whisky blended"],
-  "ballantines 21": ["scotch whisky blended"],
-  "ballantine's 21": ["scotch whisky blended"],
-  "ballantines 30": ["scotch whisky blended"],
-  "ballantine's 30": ["scotch whisky blended"],
-  "ballantines brasil": ["scotch whisky blended"],
-  "ballantine's brasil": ["scotch whisky blended"],
-  "ballantines hard fired": ["scotch whisky blended"],
-  "ballantine's hard fired": ["scotch whisky blended"],
-  "ballantines french smoky": ["scotch whisky blended"],
-  "ballantines american barrel": ["scotch whisky blended"],
-  "ballantines glenburgie": ["scotch whisky blended"],
-
-  "famous grouse": ["scotch whisky blended"],
-  "the famous grouse": ["scotch whisky blended"],
-  "famous grouse smoky black": ["scotch whisky blended"],
-  "famous grouse naked grouse": ["scotch whisky blended"],
-  "famous grouse snow grouse": ["scotch whisky blended"],
-  "black grouse": ["scotch whisky blended"],
-  "the black grouse": ["scotch whisky blended"],
-  "snow grouse": ["scotch whisky blended"],
-  "naked grouse": ["scotch whisky blended"],
-
-  "dewar's": ["scotch whisky blended"],
-  "dewars": ["scotch whisky blended"],
-  "dewar's white label": ["scotch whisky blended"],
-  "dewars white label": ["scotch whisky blended"],
-  "dewar's 12": ["scotch whisky blended"],
-  "dewars 12": ["scotch whisky blended"],
-  "dewar's 15": ["scotch whisky blended"],
-  "dewars 15": ["scotch whisky blended"],
-  "dewar's 18": ["scotch whisky blended"],
-  "dewars 18": ["scotch whisky blended"],
-  "dewar's 25": ["scotch whisky blended"],
-  "dewars 25": ["scotch whisky blended"],
-  "dewar's caribbean smooth": ["scotch whisky blended"],
-  "dewars caribbean smooth": ["scotch whisky blended"],
-  "dewar's ilegal smooth": ["scotch whisky blended"],
-  "dewars ilegal smooth": ["scotch whisky blended"],
-  "dewar's double double": ["scotch whisky blended"],
-  "dewars double double": ["scotch whisky blended"],
-  "dewar's japanese smooth": ["scotch whisky blended"],
-  "dewars japanese smooth": ["scotch whisky blended"],
-
-  "grant's": ["scotch whisky blended"],
-  "grants": ["scotch whisky blended"],
-  "william grant's": ["scotch whisky blended"],
-  "william grants": ["scotch whisky blended"],
-  "grant's family reserve": ["scotch whisky blended"],
-  "grants family reserve": ["scotch whisky blended"],
-  "grant's triple wood": ["scotch whisky blended"],
-  "grants triple wood": ["scotch whisky blended"],
-  "grant's ale cask": ["scotch whisky blended"],
-  "grants ale cask": ["scotch whisky blended"],
-  "grant's 12": ["scotch whisky blended"],
-  "grants 12": ["scotch whisky blended"],
-  "grant's 18": ["scotch whisky blended"],
-  "grants 18": ["scotch whisky blended"],
-  "grant's 25": ["scotch whisky blended"],
-  "grants 25": ["scotch whisky blended"],
-  "grant's sherry cask": ["scotch whisky blended"],
-
-  "bell's": ["scotch whisky blended"],
-  "bells": ["scotch whisky blended"],
-  "bell's original": ["scotch whisky blended"],
-  "bells original": ["scotch whisky blended"],
-  "bell's special reserve": ["scotch whisky blended"],
-  "bell's extra special": ["scotch whisky blended"],
-
-  "teacher's": ["scotch whisky blended"],
-  "teachers": ["scotch whisky blended"],
-  "teacher's highland cream": ["scotch whisky blended"],
-  "teachers highland cream": ["scotch whisky blended"],
-  "teacher's origin": ["scotch whisky blended"],
-  "teachers origin": ["scotch whisky blended"],
-
-  "label 5": ["scotch whisky blended"],
-  "label five": ["scotch whisky blended"],
-  "label 5 classic black": ["scotch whisky blended"],
-  "label 5 extra premium": ["scotch whisky blended"],
-  "label 5 12 anni": ["scotch whisky blended"],
-  "label 5 gold heritage": ["scotch whisky blended"],
-
-  "william lawson's": ["scotch whisky blended"],
-  "william lawsons": ["scotch whisky blended"],
-  "lawson's": ["scotch whisky blended"],
-  "lawsons": ["scotch whisky blended"],
-  "william lawson's finest": ["scotch whisky blended"],
-  "william lawsons finest": ["scotch whisky blended"],
-  "william lawson's 13": ["scotch whisky blended"],
-  "william lawsons 13": ["scotch whisky blended"],
-  "william lawson's 18": ["scotch whisky blended"],
-
-  "monkey shoulder": ["scotch whisky blended"],
-  "monkey shoulder blended malt": ["scotch whisky blended"],
-  "monkey shoulder smokey monkey": ["scotch whisky blended"],
-  "smokey monkey": ["scotch whisky blended"],
-  "monkey shoulder batch 27": ["scotch whisky blended"],
-
-  "compass box": ["scotch whisky blended"],
-  "compass box great king street": ["scotch whisky blended"],
-  "compass box artist's blend": ["scotch whisky blended"],
-  "compass box artists blend": ["scotch whisky blended"],
-  "compass box glasgow blend": ["scotch whisky blended"],
-  "compass box hedonism": ["scotch whisky blended"],
-  "compass box the peat monster": ["scotch whisky blended"],
-  "compass box peat monster": ["scotch whisky blended"],
-  "compass box spice tree": ["scotch whisky blended"],
-  "compass box the spice tree": ["scotch whisky blended"],
-  "compass box orchard house": ["scotch whisky blended"],
-  "compass box double single": ["scotch whisky blended"],
-  "compass box flaming heart": ["scotch whisky blended"],
-  "compass box juveniles": ["scotch whisky blended"],
-  "compass box no name": ["scotch whisky blended"],
-  "compass box stranger and stranger": ["scotch whisky blended"],
-  "compass box oak cross": ["scotch whisky blended"],
-
-  "naked malt": ["scotch whisky blended"],
-  "naked grouse blended malt": ["scotch whisky blended"],
-
-  "royal salute": ["scotch whisky blended"],
-  "royal salute 21": ["scotch whisky blended"],
-  "royal salute 21 anni": ["scotch whisky blended"],
-  "royal salute 32": ["scotch whisky blended"],
-  "royal salute 38": ["scotch whisky blended"],
-  "royal salute 62": ["scotch whisky blended"],
-  "royal salute the hundred cask": ["scotch whisky blended"],
-  "royal salute signature blend": ["scotch whisky blended"],
-  "royal salute blended grain": ["scotch whisky blended"],
-
-  "j&b": ["scotch whisky blended"],
-  "j and b": ["scotch whisky blended"],
-  "justerini & brooks": ["scotch whisky blended"],
-  "j&b rare": ["scotch whisky blended"],
-  "j&b reserve": ["scotch whisky blended"],
-  "j&b 12": ["scotch whisky blended"],
-  "j&b ultima": ["scotch whisky blended"],
-  "j&b jet": ["scotch whisky blended"],
-
-  "cutty sark": ["scotch whisky blended"],
-  "cutty sark original": ["scotch whisky blended"],
-  "cutty sark prohibition": ["scotch whisky blended"],
-  "cutty sark storm": ["scotch whisky blended"],
-  "cutty sark 25": ["scotch whisky blended"],
-
-  "white horse": ["scotch whisky blended"],
-  "white horse fine old": ["scotch whisky blended"],
-
-  "clan campbell": ["scotch whisky blended"],
-  "clan campbell highland": ["scotch whisky blended"],
-  "clan campbell 12": ["scotch whisky blended"],
-  "clan campbell 15": ["scotch whisky blended"],
-  "clan campbell the black": ["scotch whisky blended"],
-
-  "scotch": ["scotch whisky single malt", "scotch whisky blended"],
-  "scotch whisky": ["scotch whisky single malt", "scotch whisky blended"],
-  "single malt": ["scotch whisky single malt"],
-  "single malt scozzese": ["scotch whisky single malt"],
-  "whisky scozzese": ["scotch whisky single malt", "scotch whisky blended"],
-  "blended scotch": ["scotch whisky blended"],
-  "blended malt": ["scotch whisky blended"],
-  "whisky single malt": ["scotch whisky single malt"],
-  "malt whisky": ["scotch whisky single malt"],
-  "scotch blended": ["scotch whisky blended"]
+  "glenfiddich": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich 15 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich 18 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich 21 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich 26": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich 30": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich excellence": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich ipa experiment": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich fire & cane": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich winter storm": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich grand cru": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich grande couronne": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich project xx": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfiddich speyside": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "fidich": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "the glenfiddich": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "the glenlivet": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet 15 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet 18 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet 21 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet founder's reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet founders reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet captain's reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet captains reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet code": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet caribbean reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet nadurra": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet nadurra oloroso": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet nadurra peated": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenlivet archive": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "the macallan": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan 15 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan 18 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan 25 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan 30": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan double cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan double cask 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan double cask 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan double cask 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan sherry oak": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan sherry oak 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan sherry oak 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan sherry oak 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan triple cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan fine oak": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan edition": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan edition 1": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan edition 2": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan edition 3": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan edition 4": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan edition 5": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan edition 6": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan quest": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan rare cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan reflexion": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan m": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan estate": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan lumina": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan harmony": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan sienna": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan amber": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan gold": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "macallan ruby": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "mac": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig 10 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig 16": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig quarter cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig qc": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig triple wood": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig select": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig lore": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig four oak": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig 1815": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig an cuan mor": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig cairdeas": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroaig islay": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "lafroyg": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laphroig": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore 15 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore 18 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore 27": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore no.1": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore no 1": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore small batch": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore legend": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore tempest": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore laimrig": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore vault edition": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bowmore isle of islay": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg 10 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg an oa": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg an-oa": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg uigeadail": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg uig": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg corryvreckan": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg corry": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg wee beastie": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg traigh bhan": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg perpetuum": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg auriverdes": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg galileo": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg ardbog": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg supernova": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg blasda": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg dark cove": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg grooves": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg twenty two": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg heavy vapours": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg committee": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ardbeg islay": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker 10 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker 18 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker 30": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker storm": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker port ruighe": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker dark storm": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker skye": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker distillers edition": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker de": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker neist point": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "talisker isle of skye": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "oban": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "oban 14": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "oban 14 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "oban 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "oban 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "oban little bay": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "oban distillers edition": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "the dalmore": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore 15 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore 18 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore cigar malt": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore cigar malt reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore king alexander iii": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore king alexander": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore portwood": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore constellation": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore resolution": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "dalmore quintessence": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "the balvenie": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie 14": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie 14 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie 17": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie 30": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie doublewood": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie doublewood 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie doublewood 17": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie caribbean cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie caribbean cask 14": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie portwood": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie portwood 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie triple cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie tun 1401": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie tun 1509": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie tun 1858": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie single barrel": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie single barrel 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie single barrel 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie single barrel 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie week of peat": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie stories": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "balvenie peated": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park 18 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park 30": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park viking honour": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park viking scars": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park dark origins": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park magnus": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park valfather": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park valknut": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park einar": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park sigurd": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park svein": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park freya": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park loki": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park thor": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "highland park odin": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "hp 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "hp 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie original": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie 10 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie 18 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie lasanta": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie quinta ruban": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie nectar d'or": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie nectar dor": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie signet": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie astar": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie duthac": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie tayne": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie milsean": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie bacalta": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie spios": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie allta": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie cadboll": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmorangie x": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenmo": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfarclas": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfarclas 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfarclas 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfarclas 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfarclas 17": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfarclas 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfarclas 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfarclas 30": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfarclas 40": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfarclas 105": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenfarclas family casks": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "the glenfarclas": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benromach": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benromach 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benromach 10 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benromach 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benromach 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benromach peat smoke": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benromach organic": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benromach cask strength": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benromach heritage": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benromach contrasts": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "the glendronach": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glen dronach": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach parliament": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach allardice": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach revival": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach traditionally peated": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach cask strength": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach grandeur": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glendronach kingsman": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank 10 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank cv": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank local barley": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank 100 proof": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank longrow": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "longrow": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "longrow 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "longrow red": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "longrow peated": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "springbank hazelburn": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "hazelburn": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "hazelburn 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "hazelburn 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "hazelburn triple distilled": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "kilchoman": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "kilchoman machir bay": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "kilchoman sanaig": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "kilchoman loch gorm": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "kilchoman 100% islay": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "kilchoman 100 islay": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "kilchoman port cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "kilchoman bramble": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "kilchoman fino": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "kilchoman cask strength": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bruichladdich": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bruichladdich classic laddie": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bruichladdich islay barley": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bruichladdich bere barley": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bruichladdich organic": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bruichladdich 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bruichladdich 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bruichladdich 22": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bruichladdich black art": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bruichladdich octomore": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "octomore": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "octomore 14": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "octomore 13": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "octomore 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "octomore 11": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "octomore 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bruichladdich port charlotte": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "port charlotte": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "port charlotte 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "port charlotte 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "port charlotte islay barley": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "port charlotte scottish barley": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "port charlotte heavily peated": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "the laddie": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "laddie": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain 18 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain stiuireadair": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain moine": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain toiteach": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain toiteach a dha": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain ceobanach": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "bunnahabhain islay": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "caol ila": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "caol ila 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "caol ila 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "caol ila 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "caol ila 18 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "caol ila 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "caol ila distillers edition": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "caol ila moch": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "caol ila unpeated": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "caolila": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tobermory": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tobermory 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tobermory 10 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tobermory 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tobermory 20": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tobermory 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ledaig": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ledaig 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ledaig 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ledaig peated": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ledaig rioja": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ledaig sinclair series": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "isle of jura": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura 10 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura origin": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura journey": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura seven wood": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura superstition": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura prophecy": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura winter edition": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "jura one for you": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "aberfeldy": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "aberfeldy 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "aberfeldy 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "aberfeldy 16": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "aberfeldy 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "aberfeldy 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "aberfeldy 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "aberfeldy gold": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "edradour": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "edradour 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "edradour 10 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "edradour 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "edradour ballechin": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ballechin": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "edradour caledonia": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "edradour oloroso": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "edradour sauternes": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "edradour straight from the cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "the benriach": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "ben riach": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach 16": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach the original ten": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach smoke season": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach the smoky ten": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach the smoky twelve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach the smoky sixteen": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach the twenty one": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach the twenty five": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach curiositas": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "benriach authenticus": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenrothes": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "the glenrothes": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenrothes select reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenrothes 10": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenrothes 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenrothes 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenrothes 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenrothes vintage reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenrothes whisky maker's cut": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenrothes whisky makers cut": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "glenrothes soleo": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "cardhu": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "cardhu 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "cardhu 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "cardhu 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "cardhu 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "cardhu amber rock": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "cardhu gold reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "cardhu special cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "cardu": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "strathisla": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "strathisla 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "strathisla 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "strathisla 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "auchentoshan": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "auchentoshan american oak": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "auchentoshan 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "auchentoshan 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "auchentoshan 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "auchentoshan 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "auchentoshan three wood": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "auchentoshan heartwood": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "auchentoshan blood oak": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "deanston": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "deanston 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "deanston 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "deanston 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "deanston virgin oak": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "deanston organic": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "deanston dragon cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "deanston Kentucky cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tomatin": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tomatin 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tomatin 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tomatin 14": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tomatin 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tomatin 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tomatin 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tomatin 30": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tomatin legacy": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tomatin cu bocan": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "cu bocan": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "tomatin five virtues": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "the singleton": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton of glendullan": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton glendullan": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton of dufftown": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton dufftown": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton of glen ord": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton glen ord": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton spey cascade": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton spey reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton spey tenné": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "singleton spey tenne": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "johnnie walker": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker red": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker red label": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "jw red": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker black": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker black label": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "jw black": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "jw black label": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker double black": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "jw double black": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker green label": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "jw green": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "jw green label": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker gold": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker gold label": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "jw gold": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "jw gold label": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker gold label reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker blue": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker blue label": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "jw blue": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "jw blue label": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker platinum": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker swing": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker explorers club": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker island green": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker aged 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker xr21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker king george v": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker jane walker": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker ghost": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker highball": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie walker blenders batch": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "jw": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "johnnie": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas regal": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas regal 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas regal 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas regal 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas regal 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas regal 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas extra": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas extra 13": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas ultis": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas the icon": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas mizunara": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas regal mizunara": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "chivas regal extra": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantine's": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantines": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantine": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantines finest": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantine's finest": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantines 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantine's 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantines 17": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantine's 17": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantines 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantine's 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantines 30": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantine's 30": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantines brasil": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantine's brasil": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantines hard fired": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantine's hard fired": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantines french smoky": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantines american barrel": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "ballantines glenburgie": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "famous grouse": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "the famous grouse": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "famous grouse smoky black": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "famous grouse naked grouse": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "famous grouse snow grouse": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "black grouse": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "the black grouse": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "snow grouse": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "naked grouse": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewar's": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewars": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewar's white label": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewars white label": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewar's 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewars 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewar's 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewars 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewar's 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewars 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewar's 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewars 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewar's caribbean smooth": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewars caribbean smooth": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewar's ilegal smooth": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewars ilegal smooth": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewar's double double": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewars double double": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewar's japanese smooth": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "dewars japanese smooth": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grant's": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grants": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "william grant's": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "william grants": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grant's family reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grants family reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grant's triple wood": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grants triple wood": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grant's ale cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grants ale cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grant's 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grants 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grant's 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grants 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grant's 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grants 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "grant's sherry cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "bell's": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "bells": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "bell's original": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "bells original": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "bell's special reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "bell's extra special": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "teacher's": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "teachers": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "teacher's highland cream": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "teachers highland cream": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "teacher's origin": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "teachers origin": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "label 5": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "label five": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "label 5 classic black": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "label 5 extra premium": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "label 5 12 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "label 5 gold heritage": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "william lawson's": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "william lawsons": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "lawson's": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "lawsons": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "william lawson's finest": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "william lawsons finest": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "william lawson's 13": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "william lawsons 13": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "william lawson's 18": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "monkey shoulder": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "monkey shoulder blended malt": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "monkey shoulder smokey monkey": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "smokey monkey": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "monkey shoulder batch 27": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box great king street": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box artist's blend": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box artists blend": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box glasgow blend": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box hedonism": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box the peat monster": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box peat monster": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box spice tree": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box the spice tree": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box orchard house": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box double single": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box flaming heart": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box juveniles": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box no name": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box stranger and stranger": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "compass box oak cross": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "naked malt": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "naked grouse blended malt": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "royal salute": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "royal salute 21": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "royal salute 21 anni": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "royal salute 32": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "royal salute 38": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "royal salute 62": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "royal salute the hundred cask": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "royal salute signature blend": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "royal salute blended grain": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "j&b": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "j and b": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "justerini & brooks": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "j&b rare": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "j&b reserve": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "j&b 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "j&b ultima": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "j&b jet": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "cutty sark": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "cutty sark original": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "cutty sark prohibition": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "cutty sark storm": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "cutty sark 25": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "white horse": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "white horse fine old": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "clan campbell": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "clan campbell highland": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "clan campbell 12": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "clan campbell 15": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "clan campbell the black": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "scotch": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt",
+    "scotch blended"
+  ],
+  "scotch whisky": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt",
+    "scotch blended"
+  ],
+  "single malt": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "single malt scozzese": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "whisky scozzese": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt",
+    "scotch blended"
+  ],
+  "blended scotch": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "blended malt": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ],
+  "whisky single malt": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "malt whisky": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch single malt"
+  ],
+  "scotch blended": [
+    "scotch",
+    "scotch whisky",
+    "whisky",
+    "scotch blended"
+  ]
 }

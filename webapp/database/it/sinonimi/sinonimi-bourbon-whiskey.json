@@ -1,658 +1,3023 @@
 {
-  "maker's mark": ["bourbon"],
-  "makers mark": ["bourbon"],
-  "maker's mark bourbon": ["bourbon"],
-  "makers mark bourbon": ["bourbon"],
-  "maker's mark red wax": ["bourbon"],
-  "maker's mark 46": ["bourbon"],
-  "makers mark 46": ["bourbon"],
-  "maker's mark cask strength": ["bourbon"],
-  "makers mark cask strength": ["bourbon"],
-  "maker's mark private select": ["bourbon"],
-  "makers mark private select": ["bourbon"],
-  "maker's mark wood finishing": ["bourbon"],
-  "makers mark wood finishing": ["bourbon"],
-  "maker's mark se": ["bourbon"],
-  "makers mark se": ["bourbon"],
-  "mm bourbon": ["bourbon"],
-  "mm46": ["bourbon"],
-
-  "jim beam": ["bourbon", "whiskey americano"],
-  "jim beam bourbon": ["bourbon", "whiskey americano"],
-  "jim beam white": ["bourbon", "whiskey americano"],
-  "jim beam white label": ["bourbon", "whiskey americano"],
-  "jim beam black": ["bourbon", "whiskey americano"],
-  "jim beam black label": ["bourbon", "whiskey americano"],
-  "jim beam double oak": ["bourbon", "whiskey americano"],
-  "jim beam devil's cut": ["bourbon", "whiskey americano"],
-  "jim beam devils cut": ["bourbon", "whiskey americano"],
-  "jim beam red stag": ["bourbon", "whiskey americano"],
-  "jim beam honey": ["bourbon", "whiskey americano"],
-  "jim beam apple": ["bourbon", "whiskey americano"],
-  "jim beam orange": ["bourbon", "whiskey americano"],
-  "jim beam vanilla": ["bourbon", "whiskey americano"],
-  "jim beam single barrel": ["bourbon", "whiskey americano"],
-  "jim beam signature craft": ["bourbon", "whiskey americano"],
-  "jim beam distiller's masterpiece": ["bourbon", "whiskey americano"],
-  "jim beam distillers masterpiece": ["bourbon", "whiskey americano"],
-  "jim beam repeal batch": ["bourbon", "whiskey americano"],
-  "jim beam bonded": ["bourbon", "whiskey americano"],
-  "jim beam bottled in bond": ["bourbon", "whiskey americano"],
-  "beam bourbon": ["bourbon", "whiskey americano"],
-  "james b. beam": ["bourbon", "whiskey americano"],
-  "james beam": ["bourbon", "whiskey americano"],
-
-  "wild turkey": ["bourbon", "whiskey americano"],
-  "wild turkey bourbon": ["bourbon", "whiskey americano"],
-  "wild turkey 81": ["bourbon", "whiskey americano"],
-  "wild turkey 101": ["bourbon", "whiskey americano"],
-  "wild turkey rare breed": ["bourbon", "whiskey americano"],
-  "wild turkey rare breed cask strength": ["bourbon", "whiskey americano"],
-  "wild turkey longbranch": ["bourbon", "whiskey americano"],
-  "wild turkey long branch": ["bourbon", "whiskey americano"],
-  "wild turkey american honey": ["bourbon", "whiskey americano"],
-  "wild turkey diamond anniversary": ["bourbon", "whiskey americano"],
-  "wild turkey master's keep": ["bourbon", "whiskey americano"],
-  "wild turkey masters keep": ["bourbon", "whiskey americano"],
-  "wild turkey master's keep revival": ["bourbon", "whiskey americano"],
-  "wild turkey revival": ["bourbon", "whiskey americano"],
-  "wild turkey distiller's reserve": ["bourbon", "whiskey americano"],
-  "wild turkey russell's reserve": ["bourbon", "whiskey americano"],
-  "russells reserve": ["bourbon", "whiskey americano"],
-  "russell's reserve": ["bourbon", "whiskey americano"],
-  "russell's reserve 10": ["bourbon", "whiskey americano"],
-  "russells reserve 10": ["bourbon", "whiskey americano"],
-  "russell's reserve single barrel": ["bourbon", "whiskey americano"],
-  "russells reserve single barrel": ["bourbon", "whiskey americano"],
-  "wt 101": ["bourbon", "whiskey americano"],
-  "wt 81": ["bourbon", "whiskey americano"],
-
-  "bulleit": ["bourbon", "whiskey americano"],
-  "bulleit bourbon": ["bourbon", "whiskey americano"],
-  "bulleit frontier whiskey": ["bourbon", "whiskey americano"],
-  "bulleit 10": ["bourbon", "whiskey americano"],
-  "bulleit 10 anni": ["bourbon", "whiskey americano"],
-  "bulleit barrel strength": ["bourbon", "whiskey americano"],
-  "bulleit cask strength": ["bourbon", "whiskey americano"],
-  "bulleit blenders select": ["bourbon", "whiskey americano"],
-  "bulleit blender's select": ["bourbon", "whiskey americano"],
-  "bulleit american whiskey": ["bourbon", "whiskey americano"],
-
-  "woodford reserve": ["bourbon", "whiskey americano"],
-  "woodford": ["bourbon", "whiskey americano"],
-  "woodford reserve bourbon": ["bourbon", "whiskey americano"],
-  "woodford reserve distiller's select": ["bourbon", "whiskey americano"],
-  "woodford reserve distillers select": ["bourbon", "whiskey americano"],
-  "woodford reserve double oaked": ["bourbon", "whiskey americano"],
-  "woodford double oaked": ["bourbon", "whiskey americano"],
-  "woodford reserve batch proof": ["bourbon", "whiskey americano"],
-  "woodford batch proof": ["bourbon", "whiskey americano"],
-  "woodford reserve master's collection": ["bourbon", "whiskey americano"],
-  "woodford masters collection": ["bourbon", "whiskey americano"],
-  "woodford reserve personal selection": ["bourbon", "whiskey americano"],
-  "woodford reserve baccarat edition": ["bourbon", "whiskey americano"],
-  "woodford baccarat": ["bourbon", "whiskey americano"],
-  "woodford reserve very fine rare bourbon": ["bourbon", "whiskey americano"],
-  "woodford reserve five malt stouted mash": ["bourbon", "whiskey americano"],
-  "woodford reserve straight malt": ["bourbon", "whiskey americano"],
-
-  "buffalo trace": ["bourbon", "whiskey americano"],
-  "buffalo trace bourbon": ["bourbon", "whiskey americano"],
-  "buffalo trace distillery": ["bourbon", "whiskey americano"],
-  "bt bourbon": ["bourbon", "whiskey americano"],
-  "buffalo trace single oak project": ["bourbon", "whiskey americano"],
-  "buffalo trace antique collection": ["bourbon", "whiskey americano"],
-  "btac": ["bourbon", "whiskey americano"],
-
-  "eagle rare": ["bourbon", "whiskey americano"],
-  "eagle rare bourbon": ["bourbon", "whiskey americano"],
-  "eagle rare 10": ["bourbon", "whiskey americano"],
-  "eagle rare 10 anni": ["bourbon", "whiskey americano"],
-  "eagle rare 17": ["bourbon", "whiskey americano"],
-  "eagle rare 17 anni": ["bourbon", "whiskey americano"],
-  "eagle rare single barrel": ["bourbon", "whiskey americano"],
-
-  "blanton's": ["bourbon", "whiskey americano"],
-  "blantons": ["bourbon", "whiskey americano"],
-  "blanton's bourbon": ["bourbon", "whiskey americano"],
-  "blantons bourbon": ["bourbon", "whiskey americano"],
-  "blanton's single barrel": ["bourbon", "whiskey americano"],
-  "blantons single barrel": ["bourbon", "whiskey americano"],
-  "blanton's original": ["bourbon", "whiskey americano"],
-  "blantons original": ["bourbon", "whiskey americano"],
-  "blanton's gold": ["bourbon", "whiskey americano"],
-  "blantons gold": ["bourbon", "whiskey americano"],
-  "blanton's straight from the barrel": ["bourbon", "whiskey americano"],
-  "blantons straight from the barrel": ["bourbon", "whiskey americano"],
-  "blanton's sftb": ["bourbon", "whiskey americano"],
-  "blantons sftb": ["bourbon", "whiskey americano"],
-  "blanton's special reserve": ["bourbon", "whiskey americano"],
-  "blantons special reserve": ["bourbon", "whiskey americano"],
-  "blanton's dumper": ["bourbon", "whiskey americano"],
-  "blantons dumper": ["bourbon", "whiskey americano"],
-
-  "knob creek": ["bourbon", "whiskey americano"],
-  "knob creek bourbon": ["bourbon", "whiskey americano"],
-  "knob creek 9": ["bourbon", "whiskey americano"],
-  "knob creek 9 anni": ["bourbon", "whiskey americano"],
-  "knob creek single barrel": ["bourbon", "whiskey americano"],
-  "knob creek single barrel reserve": ["bourbon", "whiskey americano"],
-  "knob creek cask strength": ["bourbon", "whiskey americano"],
-  "knob creek smoked maple": ["bourbon", "whiskey americano"],
-  "knob creek quarter oak": ["bourbon", "whiskey americano"],
-  "knob creek 12": ["bourbon", "whiskey americano"],
-  "knob creek 12 anni": ["bourbon", "whiskey americano"],
-  "knob creek 18": ["bourbon", "whiskey americano"],
-  "knob creek 25th anniversary": ["bourbon", "whiskey americano"],
-  "knob creek 2001 limited edition": ["bourbon", "whiskey americano"],
-  "kc bourbon": ["bourbon", "whiskey americano"],
-
-  "four roses": ["bourbon", "whiskey americano"],
-  "four roses bourbon": ["bourbon", "whiskey americano"],
-  "four roses yellow label": ["bourbon", "whiskey americano"],
-  "four roses small batch": ["bourbon", "whiskey americano"],
-  "four roses small batch select": ["bourbon", "whiskey americano"],
-  "four roses single barrel": ["bourbon", "whiskey americano"],
-  "four roses limited edition small batch": ["bourbon", "whiskey americano"],
-  "four roses le small batch": ["bourbon", "whiskey americano"],
-  "four roses mariage": ["bourbon", "whiskey americano"],
-  "four roses al young": ["bourbon", "whiskey americano"],
-  "four roses anniversary": ["bourbon", "whiskey americano"],
-  "4 roses": ["bourbon", "whiskey americano"],
-  "4 roses bourbon": ["bourbon", "whiskey americano"],
-
-  "elijah craig": ["bourbon", "whiskey americano"],
-  "elijah craig bourbon": ["bourbon", "whiskey americano"],
-  "elijah craig small batch": ["bourbon", "whiskey americano"],
-  "elijah craig 12": ["bourbon", "whiskey americano"],
-  "elijah craig 12 anni": ["bourbon", "whiskey americano"],
-  "elijah craig barrel proof": ["bourbon", "whiskey americano"],
-  "elijah craig cask strength": ["bourbon", "whiskey americano"],
-  "elijah craig single barrel": ["bourbon", "whiskey americano"],
-  "elijah craig 18": ["bourbon", "whiskey americano"],
-  "elijah craig 18 anni": ["bourbon", "whiskey americano"],
-  "elijah craig 23": ["bourbon", "whiskey americano"],
-  "elijah craig toasted": ["bourbon", "whiskey americano"],
-  "elijah craig toasted barrel": ["bourbon", "whiskey americano"],
-  "ec small batch": ["bourbon", "whiskey americano"],
-  "ec barrel proof": ["bourbon", "whiskey americano"],
-  "ecbp": ["bourbon", "whiskey americano"],
-
-  "heaven hill": ["bourbon", "whiskey americano"],
-  "heaven hill bourbon": ["bourbon", "whiskey americano"],
-  "heaven hill old style bourbon": ["bourbon", "whiskey americano"],
-  "heaven hill bottled in bond": ["bourbon", "whiskey americano"],
-  "heaven hill 7": ["bourbon", "whiskey americano"],
-  "heaven hill 7 anni": ["bourbon", "whiskey americano"],
-  "heaven hill heritage": ["bourbon", "whiskey americano"],
-  "heaven hill heritage collection": ["bourbon", "whiskey americano"],
-  "hh bourbon": ["bourbon", "whiskey americano"],
-
-  "larceny": ["bourbon", "whiskey americano"],
-  "larceny bourbon": ["bourbon", "whiskey americano"],
-  "larceny small batch": ["bourbon", "whiskey americano"],
-  "larceny barrel proof": ["bourbon", "whiskey americano"],
-  "larceny cask strength": ["bourbon", "whiskey americano"],
-  "larceny very special small batch": ["bourbon", "whiskey americano"],
-  "larceny barrel proof a124": ["bourbon", "whiskey americano"],
-  "larceny barrel proof b524": ["bourbon", "whiskey americano"],
-  "larceny barrel proof c924": ["bourbon", "whiskey americano"],
-
-  "old forester": ["bourbon", "whiskey americano"],
-  "old forrester": ["bourbon", "whiskey americano"],
-  "old forester bourbon": ["bourbon", "whiskey americano"],
-  "old forester 86": ["bourbon", "whiskey americano"],
-  "old forester 86 proof": ["bourbon", "whiskey americano"],
-  "old forester 100": ["bourbon", "whiskey americano"],
-  "old forester 100 proof": ["bourbon", "whiskey americano"],
-  "old forester 1870": ["bourbon", "whiskey americano"],
-  "old forester 1897": ["bourbon", "whiskey americano"],
-  "old forester 1910": ["bourbon", "whiskey americano"],
-  "old forester 1920": ["bourbon", "whiskey americano"],
-  "old forester statesman": ["bourbon", "whiskey americano"],
-  "old forester birthday bourbon": ["bourbon", "whiskey americano"],
-  "old forester president's choice": ["bourbon", "whiskey americano"],
-  "old forester presidents choice": ["bourbon", "whiskey americano"],
-  "old forester whiskey row series": ["bourbon", "whiskey americano"],
-  "old forester single barrel": ["bourbon", "whiskey americano"],
-  "of bourbon": ["bourbon", "whiskey americano"],
-
-  "old grand-dad": ["bourbon", "whiskey americano"],
-  "old grand dad": ["bourbon", "whiskey americano"],
-  "old granddad": ["bourbon", "whiskey americano"],
-  "old grand-dad bourbon": ["bourbon", "whiskey americano"],
-  "old grand dad bourbon": ["bourbon", "whiskey americano"],
-  "old grand-dad 80": ["bourbon", "whiskey americano"],
-  "old grand-dad 80 proof": ["bourbon", "whiskey americano"],
-  "old grand-dad 100": ["bourbon", "whiskey americano"],
-  "old grand-dad 100 proof": ["bourbon", "whiskey americano"],
-  "old grand-dad 114": ["bourbon", "whiskey americano"],
-  "old grand-dad 114 proof": ["bourbon", "whiskey americano"],
-  "old grand-dad bonded": ["bourbon", "whiskey americano"],
-  "old grand-dad bottled in bond": ["bourbon", "whiskey americano"],
-  "ogd bourbon": ["bourbon", "whiskey americano"],
-  "ogd 114": ["bourbon", "whiskey americano"],
-
-  "basil hayden": ["bourbon", "whiskey americano"],
-  "basil hayden's": ["bourbon", "whiskey americano"],
-  "basil haydens": ["bourbon", "whiskey americano"],
-  "basil hayden bourbon": ["bourbon", "whiskey americano"],
-  "basil hayden's bourbon": ["bourbon", "whiskey americano"],
-  "basil hayden dark rye": ["bourbon", "whiskey americano"],
-  "basil hayden 10": ["bourbon", "whiskey americano"],
-  "basil hayden 10 anni": ["bourbon", "whiskey americano"],
-  "basil hayden subtle smoke": ["bourbon", "whiskey americano"],
-  "basil hayden red wine cask finish": ["bourbon", "whiskey americano"],
-  "basil hayden two by two": ["bourbon", "whiskey americano"],
-  "bh bourbon": ["bourbon", "whiskey americano"],
-
-  "booker's": ["bourbon", "whiskey americano"],
-  "bookers": ["bourbon", "whiskey americano"],
-  "booker's bourbon": ["bourbon", "whiskey americano"],
-  "bookers bourbon": ["bourbon", "whiskey americano"],
-  "booker's cask strength": ["bourbon", "whiskey americano"],
-  "bookers cask strength": ["bourbon", "whiskey americano"],
-  "booker's batch": ["bourbon", "whiskey americano"],
-  "bookers batch": ["bourbon", "whiskey americano"],
-  "booker's noe": ["bourbon", "whiskey americano"],
-  "bookers noe": ["bourbon", "whiskey americano"],
-  "booker's 30th anniversary": ["bourbon", "whiskey americano"],
-
-  "baker's": ["bourbon", "whiskey americano"],
-  "bakers": ["bourbon", "whiskey americano"],
-  "baker's bourbon": ["bourbon", "whiskey americano"],
-  "bakers bourbon": ["bourbon", "whiskey americano"],
-  "baker's 7": ["bourbon", "whiskey americano"],
-  "bakers 7": ["bourbon", "whiskey americano"],
-  "baker's 7 anni": ["bourbon", "whiskey americano"],
-  "baker's single barrel": ["bourbon", "whiskey americano"],
-  "bakers single barrel": ["bourbon", "whiskey americano"],
-
-  "michter's": ["bourbon", "whiskey americano"],
-  "michters": ["bourbon", "whiskey americano"],
-  "michter's bourbon": ["bourbon", "whiskey americano"],
-  "michters bourbon": ["bourbon", "whiskey americano"],
-  "michter's us1 bourbon": ["bourbon", "whiskey americano"],
-  "michters us1 bourbon": ["bourbon", "whiskey americano"],
-  "michter's us*1": ["bourbon", "whiskey americano"],
-  "michters us1": ["bourbon", "whiskey americano"],
-  "michter's small batch bourbon": ["bourbon", "whiskey americano"],
-  "michters small batch bourbon": ["bourbon", "whiskey americano"],
-  "michter's toasted barrel": ["bourbon", "whiskey americano"],
-  "michters toasted barrel": ["bourbon", "whiskey americano"],
-  "michter's20": ["bourbon", "whiskey americano"],
-  "michters 20": ["bourbon", "whiskey americano"],
-  "michter's 20 anni": ["bourbon", "whiskey americano"],
-  "michter's barrel strength bourbon": ["bourbon", "whiskey americano"],
-  "michters barrel strength bourbon": ["bourbon", "whiskey americano"],
-  "michter's celebration": ["bourbon", "whiskey americano"],
-
-  "angel's envy": ["bourbon", "whiskey americano"],
-  "angels envy": ["bourbon", "whiskey americano"],
-  "angel's envy bourbon": ["bourbon", "whiskey americano"],
-  "angels envy bourbon": ["bourbon", "whiskey americano"],
-  "angel's envy port finish": ["bourbon", "whiskey americano"],
-  "angels envy port finish": ["bourbon", "whiskey americano"],
-  "angel's envy port wine cask": ["bourbon", "whiskey americano"],
-  "angels envy port wine cask": ["bourbon", "whiskey americano"],
-  "angel's envy cask strength": ["bourbon", "whiskey americano"],
-  "angels envy cask strength": ["bourbon", "whiskey americano"],
-  "angel's envy finished bourbon": ["bourbon", "whiskey americano"],
-  "ae bourbon": ["bourbon", "whiskey americano"],
-
-  "jefferson's": ["bourbon", "whiskey americano"],
-  "jeffersons": ["bourbon", "whiskey americano"],
-  "jefferson's bourbon": ["bourbon", "whiskey americano"],
-  "jeffersons bourbon": ["bourbon", "whiskey americano"],
-  "jefferson's very small batch": ["bourbon", "whiskey americano"],
-  "jeffersons very small batch": ["bourbon", "whiskey americano"],
-  "jefferson's reserve": ["bourbon", "whiskey americano"],
-  "jeffersons reserve": ["bourbon", "whiskey americano"],
-  "jefferson's chef collaboration": ["bourbon", "whiskey americano"],
-  "jefferson's ocean": ["bourbon", "whiskey americano"],
-  "jeffersons ocean": ["bourbon", "whiskey americano"],
-  "jefferson's ocean aged at sea": ["bourbon", "whiskey americano"],
-  "jeffersons ocean aged at sea": ["bourbon", "whiskey americano"],
-  "jefferson's presidential select": ["bourbon", "whiskey americano"],
-  "jeffersons presidential select": ["bourbon", "whiskey americano"],
-  "jefferson's wood experiment": ["bourbon", "whiskey americano"],
-  "jeffersons wood experiment": ["bourbon", "whiskey americano"],
-  "jefferson's marian mclain": ["bourbon", "whiskey americano"],
-
-  "rabbit hole": ["bourbon", "whiskey americano"],
-  "rabbit hole bourbon": ["bourbon", "whiskey americano"],
-  "rabbit hole dareringer": ["bourbon", "whiskey americano"],
-  "rabbit hole heigold": ["bourbon", "whiskey americano"],
-  "rabbit hole boxergrail": ["bourbon", "whiskey americano"],
-  "rabbit hole cavehill": ["bourbon", "whiskey americano"],
-  "rabbit hole founder's collection": ["bourbon", "whiskey americano"],
-  "rabbit hole founders collection": ["bourbon", "whiskey americano"],
-  "rabbit hole nevallier": ["bourbon", "whiskey americano"],
-  "rabbit hole straight bourbon": ["bourbon", "whiskey americano"],
-
-  "whistlepig": ["bourbon", "whiskey americano"],
-  "whistle pig": ["bourbon", "whiskey americano"],
-  "whistlepig bourbon": ["bourbon", "whiskey americano"],
-  "whistle pig bourbon": ["bourbon", "whiskey americano"],
-  "whistlepig piggyback bourbon": ["bourbon", "whiskey americano"],
-  "whistle pig piggyback bourbon": ["bourbon", "whiskey americano"],
-  "whistlepig piggyback 6": ["bourbon", "whiskey americano"],
-  "whistle pig piggyback 6": ["bourbon", "whiskey americano"],
-
-  "pappy van winkle": ["bourbon", "whiskey americano"],
-  "pappy van winkle's": ["bourbon", "whiskey americano"],
-  "pappy vanwinkle": ["bourbon", "whiskey americano"],
-  "pappy van winkle bourbon": ["bourbon", "whiskey americano"],
-  "pappy van winkle's family reserve": ["bourbon", "whiskey americano"],
-  "pappy van winkle family reserve": ["bourbon", "whiskey americano"],
-  "pappy van winkle 10": ["bourbon", "whiskey americano"],
-  "pappy van winkle 10 anni": ["bourbon", "whiskey americano"],
-  "pappy van winkle 12": ["bourbon", "whiskey americano"],
-  "pappy van winkle 12 anni": ["bourbon", "whiskey americano"],
-  "pappy van winkle 15": ["bourbon", "whiskey americano"],
-  "pappy van winkle 15 anni": ["bourbon", "whiskey americano"],
-  "pappy van winkle 20": ["bourbon", "whiskey americano"],
-  "pappy van winkle 20 anni": ["bourbon", "whiskey americano"],
-  "pappy van winkle 23": ["bourbon", "whiskey americano"],
-  "pappy van winkle 23 anni": ["bourbon", "whiskey americano"],
-  "old rip van winkle": ["bourbon", "whiskey americano"],
-  "old rip van winkle 10": ["bourbon", "whiskey americano"],
-  "old rip van winkle 10 handmade": ["bourbon", "whiskey americano"],
-  "van winkle special reserve": ["bourbon", "whiskey americano"],
-  "van winkle special reserve 12": ["bourbon", "whiskey americano"],
-  "van winkle lot b": ["bourbon", "whiskey americano"],
-  "pappy": ["bourbon", "whiskey americano"],
-  "pvw": ["bourbon", "whiskey americano"],
-
-  "w.l. weller": ["bourbon", "whiskey americano"],
-  "wl weller": ["bourbon", "whiskey americano"],
-  "w l weller": ["bourbon", "whiskey americano"],
-  "weller": ["bourbon", "whiskey americano"],
-  "weller bourbon": ["bourbon", "whiskey americano"],
-  "w.l. weller special reserve": ["bourbon", "whiskey americano"],
-  "weller special reserve": ["bourbon", "whiskey americano"],
-  "weller sr": ["bourbon", "whiskey americano"],
-  "w.l. weller antique 107": ["bourbon", "whiskey americano"],
-  "weller antique 107": ["bourbon", "whiskey americano"],
-  "weller antique": ["bourbon", "whiskey americano"],
-  "w.l. weller 12": ["bourbon", "whiskey americano"],
-  "weller 12": ["bourbon", "whiskey americano"],
-  "weller 12 anni": ["bourbon", "whiskey americano"],
-  "w.l. weller full proof": ["bourbon", "whiskey americano"],
-  "weller full proof": ["bourbon", "whiskey americano"],
-  "w.l. weller single oak": ["bourbon", "whiskey americano"],
-  "weller single oak": ["bourbon", "whiskey americano"],
-  "w.l. weller omaha": ["bourbon", "whiskey americano"],
-  "weller omaha": ["bourbon", "whiskey americano"],
-  "william larue weller": ["bourbon", "whiskey americano"],
-  "william larue weller btac": ["bourbon", "whiskey americano"],
-  "wlw": ["bourbon", "whiskey americano"],
-
-  "george t. stagg": ["bourbon", "whiskey americano"],
-  "george t stagg": ["bourbon", "whiskey americano"],
-  "george stagg": ["bourbon", "whiskey americano"],
-  "george t. stagg bourbon": ["bourbon", "whiskey americano"],
-  "george t stagg bourbon": ["bourbon", "whiskey americano"],
-  "george t. stagg btac": ["bourbon", "whiskey americano"],
-  "gts": ["bourbon", "whiskey americano"],
-
-  "stagg jr.": ["bourbon", "whiskey americano"],
-  "stagg jr": ["bourbon", "whiskey americano"],
-  "stagg junior": ["bourbon", "whiskey americano"],
-  "stagg jr. bourbon": ["bourbon", "whiskey americano"],
-  "stagg jr bourbon": ["bourbon", "whiskey americano"],
-  "stagg": ["bourbon", "whiskey americano"],
-
-  "barrell bourbon": ["bourbon", "whiskey americano"],
-  "barrel bourbon": ["bourbon", "whiskey americano"],
-  "barrell craft spirits bourbon": ["bourbon", "whiskey americano"],
-  "barrell bourbon batch": ["bourbon", "whiskey americano"],
-  "barrell bourbon single barrel": ["bourbon", "whiskey americano"],
-  "barrell bourbon dovetail": ["bourbon", "whiskey americano"],
-  "barrell bourbon vantage": ["bourbon", "whiskey americano"],
-  "barrell bourbon gold label": ["bourbon", "whiskey americano"],
-  "barrell bourbon infinite cask": ["bourbon", "whiskey americano"],
-  "barrell bourbon tale of two islands": ["bourbon", "whiskey americano"],
-  "barrell craft spirits": ["bourbon", "whiskey americano"],
-  "bcs bourbon": ["bourbon", "whiskey americano"],
-
-  "blood oath": ["bourbon", "whiskey americano"],
-  "blood oath bourbon": ["bourbon", "whiskey americano"],
-  "blood oath pact": ["bourbon", "whiskey americano"],
-  "blood oath pact 1": ["bourbon", "whiskey americano"],
-  "blood oath pact 2": ["bourbon", "whiskey americano"],
-  "blood oath pact 3": ["bourbon", "whiskey americano"],
-  "blood oath pact 4": ["bourbon", "whiskey americano"],
-  "blood oath pact 5": ["bourbon", "whiskey americano"],
-  "blood oath pact 6": ["bourbon", "whiskey americano"],
-  "blood oath pact 7": ["bourbon", "whiskey americano"],
-  "blood oath pact 8": ["bourbon", "whiskey americano"],
-  "blood oath pact 9": ["bourbon", "whiskey americano"],
-  "blood oath pact 10": ["bourbon", "whiskey americano"],
-  "blood oath limited edition": ["bourbon", "whiskey americano"],
-
-  "willett": ["bourbon", "whiskey americano"],
-  "willett bourbon": ["bourbon", "whiskey americano"],
-  "willett pot still reserve": ["bourbon", "whiskey americano"],
-  "willett pot still": ["bourbon", "whiskey americano"],
-  "willett family estate": ["bourbon", "whiskey americano"],
-  "willett family estate bottled": ["bourbon", "whiskey americano"],
-  "willett family estate 4": ["bourbon", "whiskey americano"],
-  "willett family estate 6": ["bourbon", "whiskey americano"],
-  "willett family estate 7": ["bourbon", "whiskey americano"],
-  "willett family estate 8": ["bourbon", "whiskey americano"],
-  "willett family estate 9": ["bourbon", "whiskey americano"],
-  "willett family estate 10": ["bourbon", "whiskey americano"],
-  "willett single barrel bourbon": ["bourbon", "whiskey americano"],
-  "willett distillery": ["bourbon", "whiskey americano"],
-  "kentucky bourbon distillers": ["bourbon", "whiskey americano"],
-  "kbdistillers": ["bourbon", "whiskey americano"],
-  "noah's mill": ["bourbon", "whiskey americano"],
-  "noahs mill": ["bourbon", "whiskey americano"],
-  "rowan's creek": ["bourbon", "whiskey americano"],
-  "rowans creek": ["bourbon", "whiskey americano"],
-  "pure kentucky xo": ["bourbon", "whiskey americano"],
-
-  "new riff": ["bourbon", "whiskey americano"],
-  "new riff bourbon": ["bourbon", "whiskey americano"],
-  "new riff distilling bourbon": ["bourbon", "whiskey americano"],
-  "new riff single barrel bourbon": ["bourbon", "whiskey americano"],
-  "new riff bottled in bond bourbon": ["bourbon", "whiskey americano"],
-  "new riff bib bourbon": ["bourbon", "whiskey americano"],
-  "new riff malted bourbon": ["bourbon", "whiskey americano"],
-  "new riff winter bourbon": ["bourbon", "whiskey americano"],
-  "new riff distilling": ["bourbon", "whiskey americano"],
-
-  "wilderness trail": ["bourbon", "whiskey americano"],
-  "wilderness trail bourbon": ["bourbon", "whiskey americano"],
-  "wilderness trail small batch": ["bourbon", "whiskey americano"],
-  "wilderness trail single barrel": ["bourbon", "whiskey americano"],
-  "wilderness trail bottled in bond": ["bourbon", "whiskey americano"],
-  "wilderness trail settlers select": ["bourbon", "whiskey americano"],
-  "wilderness trail distillery": ["bourbon", "whiskey americano"],
-  "wilderness trail wheated bourbon": ["bourbon", "whiskey americano"],
-  "wilderness trail high rye bourbon": ["bourbon", "whiskey americano"],
-
-  "cooper's craft": ["bourbon", "whiskey americano"],
-  "coopers craft": ["bourbon", "whiskey americano"],
-  "cooper's craft bourbon": ["bourbon", "whiskey americano"],
-  "coopers craft bourbon": ["bourbon", "whiskey americano"],
-  "cooper's craft 82.2": ["bourbon", "whiskey americano"],
-  "coopers craft 82.2": ["bourbon", "whiskey americano"],
-  "cooper's craft barrel reserve": ["bourbon", "whiskey americano"],
-  "coopers craft barrel reserve": ["bourbon", "whiskey americano"],
-  "cooper's craft 100 proof": ["bourbon", "whiskey americano"],
-  "coopers craft 100 proof": ["bourbon", "whiskey americano"],
-
-  "town branch": ["bourbon", "whiskey americano"],
-  "town branch bourbon": ["bourbon", "whiskey americano"],
-  "town branch distillery": ["bourbon", "whiskey americano"],
-  "town branch single barrel bourbon": ["bourbon", "whiskey americano"],
-  "town branch malt": ["bourbon", "whiskey americano"],
-  "town branch straight bourbon": ["bourbon", "whiskey americano"],
-  "lexington brewing distilling": ["bourbon", "whiskey americano"],
-
-  "kentucky owl": ["bourbon", "whiskey americano"],
-  "kentucky owl bourbon": ["bourbon", "whiskey americano"],
-  "kentucky owl batch": ["bourbon", "whiskey americano"],
-  "kentucky owl batch 1": ["bourbon", "whiskey americano"],
-  "kentucky owl batch 2": ["bourbon", "whiskey americano"],
-  "kentucky owl batch 3": ["bourbon", "whiskey americano"],
-  "kentucky owl batch 4": ["bourbon", "whiskey americano"],
-  "kentucky owl batch 5": ["bourbon", "whiskey americano"],
-  "kentucky owl batch 6": ["bourbon", "whiskey americano"],
-  "kentucky owl batch 7": ["bourbon", "whiskey americano"],
-  "kentucky owl batch 8": ["bourbon", "whiskey americano"],
-  "kentucky owl batch 9": ["bourbon", "whiskey americano"],
-  "kentucky owl batch 10": ["bourbon", "whiskey americano"],
-  "kentucky owl the wiseman": ["bourbon", "whiskey americano"],
-  "kentucky owl confiscated": ["bourbon", "whiskey americano"],
-  "kentucky owl st. patrick's edition": ["bourbon", "whiskey americano"],
-  "kentucky owl st patricks edition": ["bourbon", "whiskey americano"],
-
-  "smooth ambler": ["bourbon", "whiskey americano"],
-  "smooth ambler bourbon": ["bourbon", "whiskey americano"],
-  "smooth ambler old scout bourbon": ["bourbon", "whiskey americano"],
-  "smooth ambler old scout": ["bourbon", "whiskey americano"],
-  "smooth ambler old scout single barrel": ["bourbon", "whiskey americano"],
-  "smooth ambler contradiction": ["bourbon", "whiskey americano"],
-  "smooth ambler big level": ["bourbon", "whiskey americano"],
-  "smooth ambler spirits": ["bourbon", "whiskey americano"],
-
-  "redemption bourbon": ["bourbon", "whiskey americano"],
-  "redemption": ["bourbon", "whiskey americano"],
-  "redemption high rye bourbon": ["bourbon", "whiskey americano"],
-  "redemption wheated bourbon": ["bourbon", "whiskey americano"],
-  "redemption 10 barrel": ["bourbon", "whiskey americano"],
-  "redemption straight bourbon": ["bourbon", "whiskey americano"],
-  "redemption barrel proof": ["bourbon", "whiskey americano"],
-  "redemption cask strength": ["bourbon", "whiskey americano"],
-
-  "few bourbon": ["bourbon", "whiskey americano"],
-  "few spirits bourbon": ["bourbon", "whiskey americano"],
-  "few straight bourbon": ["bourbon", "whiskey americano"],
-  "few barrel bourbon": ["bourbon", "whiskey americano"],
-  "few spirits distillery": ["bourbon", "whiskey americano"],
-  "few": ["bourbon", "whiskey americano"],
-
-  "corsair": ["bourbon", "whiskey americano"],
-  "corsair bourbon": ["bourbon", "whiskey americano"],
-  "corsair artisan": ["bourbon", "whiskey americano"],
-  "corsair triple smoke": ["bourbon", "whiskey americano"],
-  "corsair quinoa bourbon": ["bourbon", "whiskey americano"],
-  "corsair distillery": ["bourbon", "whiskey americano"],
-  "corsair wry moon": ["bourbon", "whiskey americano"],
-  "corsair american bourbon": ["bourbon", "whiskey americano"],
-
-  "laws whiskey": ["bourbon", "whiskey americano"],
-  "laws whiskey house": ["bourbon", "whiskey americano"],
-  "laws bourbon": ["bourbon", "whiskey americano"],
-  "laws four grain straight bourbon": ["bourbon", "whiskey americano"],
-  "laws four grain bourbon": ["bourbon", "whiskey americano"],
-  "laws san luis valley straight bourbon": ["bourbon", "whiskey americano"],
-  "laws san luis valley bourbon": ["bourbon", "whiskey americano"],
-  "laws henry road straight bourbon": ["bourbon", "whiskey americano"],
-  "laws henry road bourbon": ["bourbon", "whiskey americano"],
-  "laws almont farms straight bourbon": ["bourbon", "whiskey americano"],
-  "a.d. laws": ["bourbon", "whiskey americano"],
-  "ad laws": ["bourbon", "whiskey americano"],
-  "a.d. laws whiskey house": ["bourbon", "whiskey americano"],
-
-  "evan williams": ["bourbon", "whiskey americano"],
-  "evan williams bourbon": ["bourbon", "whiskey americano"],
-  "evan williams black label": ["bourbon", "whiskey americano"],
-  "evan williams white label": ["bourbon", "whiskey americano"],
-  "evan williams 1783": ["bourbon", "whiskey americano"],
-  "evan williams 1783 small batch": ["bourbon", "whiskey americano"],
-  "evan williams single barrel": ["bourbon", "whiskey americano"],
-  "evan williams single barrel vintage": ["bourbon", "whiskey americano"],
-  "evan williams bottled in bond": ["bourbon", "whiskey americano"],
-  "evan williams white": ["bourbon", "whiskey americano"],
-  "evan williams green label": ["bourbon", "whiskey americano"],
-  "evan williams honey": ["bourbon", "whiskey americano"],
-  "evan williams fire": ["bourbon", "whiskey americano"],
-  "evan williams cherry": ["bourbon", "whiskey americano"],
-  "ew bourbon": ["bourbon", "whiskey americano"],
-  "ew single barrel": ["bourbon", "whiskey americano"],
-
-  "henry mckenna": ["bourbon", "whiskey americano"],
-  "henry mckenna bourbon": ["bourbon", "whiskey americano"],
-  "henry mckenna 10": ["bourbon", "whiskey americano"],
-  "henry mckenna 10 anni": ["bourbon", "whiskey americano"],
-  "henry mckenna single barrel": ["bourbon", "whiskey americano"],
-  "henry mckenna single barrel bottled in bond": ["bourbon", "whiskey americano"],
-  "henry mckenna bib": ["bourbon", "whiskey americano"],
-  "henry mckenna 10 single barrel": ["bourbon", "whiskey americano"],
-
-  "rebel bourbon": ["bourbon", "whiskey americano"],
-  "rebel yell": ["bourbon", "whiskey americano"],
-  "rebel yell bourbon": ["bourbon", "whiskey americano"],
-  "rebel": ["bourbon", "whiskey americano"],
-  "rebel 100": ["bourbon", "whiskey americano"],
-  "rebel 100 proof": ["bourbon", "whiskey americano"],
-  "rebel small batch": ["bourbon", "whiskey americano"],
-  "rebel single barrel": ["bourbon", "whiskey americano"],
-  "rebel ksbwb": ["bourbon", "whiskey americano"],
-  "rebel straight bourbon": ["bourbon", "whiskey americano"],
-  "lux row rebel yell": ["bourbon", "whiskey americano"],
-
-  "1792": ["bourbon", "whiskey americano"],
-  "1792 bourbon": ["bourbon", "whiskey americano"],
-  "1792 small batch": ["bourbon", "whiskey americano"],
-  "1792 single barrel": ["bourbon", "whiskey americano"],
-  "1792 full proof": ["bourbon", "whiskey americano"],
-  "1792 aged 12 years": ["bourbon", "whiskey americano"],
-  "1792 12 anni": ["bourbon", "whiskey americano"],
-  "1792 sweet wheat": ["bourbon", "whiskey americano"],
-  "1792 bottled in bond": ["bourbon", "whiskey americano"],
-  "1792 high rye": ["bourbon", "whiskey americano"],
-  "barton 1792": ["bourbon", "whiskey americano"],
-  "barton 1792 distillery": ["bourbon", "whiskey americano"],
-  "barton bourbon": ["bourbon", "whiskey americano"],
-
-  "george dickel": ["bourbon", "whiskey americano"],
-  "george dickel bourbon": ["bourbon", "whiskey americano"],
-  "george dickel superior no. 12": ["bourbon", "whiskey americano"],
-  "george dickel superior no 12": ["bourbon", "whiskey americano"],
-  "george dickel no. 12": ["bourbon", "whiskey americano"],
-  "george dickel no 12": ["bourbon", "whiskey americano"],
-  "george dickel old no. 8": ["bourbon", "whiskey americano"],
-  "george dickel old no 8": ["bourbon", "whiskey americano"],
-  "george dickel no. 8": ["bourbon", "whiskey americano"],
-  "george dickel no 8": ["bourbon", "whiskey americano"],
-  "george dickel barrel select": ["bourbon", "whiskey americano"],
-  "george dickel tabasco": ["bourbon", "whiskey americano"],
-  "george dickel bottled in bond": ["bourbon", "whiskey americano"],
-  "george dickel 8": ["bourbon", "whiskey americano"],
-  "george dickel 12": ["bourbon", "whiskey americano"],
-  "george dickel hand selected barrel": ["bourbon", "whiskey americano"],
-  "george dickel cascade hollow": ["bourbon", "whiskey americano"],
-  "dickel bourbon": ["bourbon", "whiskey americano"],
-  "dickel": ["bourbon", "whiskey americano"],
-
-  "bourbon": ["bourbon"],
-  "bourbon americano": ["bourbon"],
-  "straight bourbon": ["bourbon"],
-  "straight bourbon whiskey": ["bourbon"],
-  "kentucky straight bourbon": ["bourbon"],
-  "kentucky bourbon": ["bourbon"],
-  "kentucky whiskey": ["bourbon", "whiskey americano"],
-  "whiskey americano": ["whiskey americano"],
-  "american whiskey": ["whiskey americano"],
-  "american bourbon": ["bourbon", "whiskey americano"],
-  "bourbon whiskey": ["bourbon", "whiskey americano"],
-  "us bourbon": ["bourbon"],
-  "usa bourbon": ["bourbon"],
-  "bottled in bond bourbon": ["bourbon"],
-  "bib bourbon": ["bourbon"],
-  "cask strength bourbon": ["bourbon"],
-  "barrel proof bourbon": ["bourbon"],
-  "single barrel bourbon": ["bourbon"],
-  "small batch bourbon": ["bourbon"],
-  "high rye bourbon": ["bourbon"],
-  "wheated bourbon": ["bourbon"],
-  "wheat bourbon": ["bourbon"],
-  "corn whiskey": ["whiskey americano"],
-  "tennessee whiskey": ["whiskey americano"],
-  "tennessee bourbon": ["bourbon", "whiskey americano"]
+  "maker's mark": [
+    "bourbon",
+    "whiskey"
+  ],
+  "makers mark": [
+    "bourbon",
+    "whiskey"
+  ],
+  "maker's mark bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "makers mark bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "maker's mark red wax": [
+    "bourbon",
+    "whiskey"
+  ],
+  "maker's mark 46": [
+    "bourbon",
+    "whiskey"
+  ],
+  "makers mark 46": [
+    "bourbon",
+    "whiskey"
+  ],
+  "maker's mark cask strength": [
+    "bourbon",
+    "whiskey"
+  ],
+  "makers mark cask strength": [
+    "bourbon",
+    "whiskey"
+  ],
+  "maker's mark private select": [
+    "bourbon",
+    "whiskey"
+  ],
+  "makers mark private select": [
+    "bourbon",
+    "whiskey"
+  ],
+  "maker's mark wood finishing": [
+    "bourbon",
+    "whiskey"
+  ],
+  "makers mark wood finishing": [
+    "bourbon",
+    "whiskey"
+  ],
+  "maker's mark se": [
+    "bourbon",
+    "whiskey"
+  ],
+  "makers mark se": [
+    "bourbon",
+    "whiskey"
+  ],
+  "mm bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "mm46": [
+    "bourbon",
+    "whiskey"
+  ],
+  "jim beam": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam white": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam white label": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam black": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam black label": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam double oak": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam devil's cut": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam devils cut": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam red stag": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam honey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam apple": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam orange": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam vanilla": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam signature craft": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam distiller's masterpiece": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam distillers masterpiece": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam repeal batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam bonded": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jim beam bottled in bond": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "beam bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "james b. beam": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "james beam": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey 81": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey 101": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey rare breed": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey rare breed cask strength": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey longbranch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey long branch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey american honey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey diamond anniversary": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey master's keep": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey masters keep": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey master's keep revival": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey revival": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey distiller's reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wild turkey russell's reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russells reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russell's reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russell's reserve 10": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russells reserve 10": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russell's reserve single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "russells reserve single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wt 101": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wt 81": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit frontier whiskey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit 10": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit 10 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit barrel strength": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit cask strength": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit blenders select": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit blender's select": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bulleit american whiskey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve distiller's select": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve distillers select": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve double oaked": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford double oaked": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve batch proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford batch proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve master's collection": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford masters collection": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve personal selection": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve baccarat edition": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford baccarat": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve very fine rare bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve five malt stouted mash": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "woodford reserve straight malt": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "buffalo trace": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "buffalo trace bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "buffalo trace distillery": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bt bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "buffalo trace single oak project": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "buffalo trace antique collection": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "btac": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "eagle rare": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "eagle rare bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "eagle rare 10": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "eagle rare 10 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "eagle rare 17": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "eagle rare 17 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "eagle rare single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blanton's": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blantons": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blanton's bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blantons bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blanton's single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blantons single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blanton's original": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blantons original": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blanton's gold": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blantons gold": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blanton's straight from the barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blantons straight from the barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blanton's sftb": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blantons sftb": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blanton's special reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blantons special reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blanton's dumper": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blantons dumper": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek 9": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek 9 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek single barrel reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek cask strength": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek smoked maple": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek quarter oak": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek 12": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek 12 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek 18": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek 25th anniversary": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "knob creek 2001 limited edition": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kc bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "four roses": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "four roses bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "four roses yellow label": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "four roses small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "four roses small batch select": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "four roses single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "four roses limited edition small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "four roses le small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "four roses mariage": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "four roses al young": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "four roses anniversary": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "4 roses": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "4 roses bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig 12": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig 12 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig barrel proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig cask strength": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig 18": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig 18 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig 23": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig toasted": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "elijah craig toasted barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "ec small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "ec barrel proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "ecbp": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "heaven hill": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "heaven hill bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "heaven hill old style bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "heaven hill bottled in bond": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "heaven hill 7": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "heaven hill 7 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "heaven hill heritage": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "heaven hill heritage collection": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "hh bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "larceny": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "larceny bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "larceny small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "larceny barrel proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "larceny cask strength": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "larceny very special small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "larceny barrel proof a124": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "larceny barrel proof b524": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "larceny barrel proof c924": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forrester": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester 86": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester 86 proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester 100": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester 100 proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester 1870": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester 1897": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester 1910": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester 1920": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester statesman": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester birthday bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester president's choice": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester presidents choice": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester whiskey row series": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old forester single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "of bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand-dad": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand dad": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old granddad": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand-dad bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand dad bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand-dad 80": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand-dad 80 proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand-dad 100": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand-dad 100 proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand-dad 114": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand-dad 114 proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand-dad bonded": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old grand-dad bottled in bond": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "ogd bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "ogd 114": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden's": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil haydens": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden's bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden dark rye": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden 10": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden 10 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden subtle smoke": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden red wine cask finish": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "basil hayden two by two": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bh bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "booker's": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bookers": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "booker's bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bookers bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "booker's cask strength": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bookers cask strength": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "booker's batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bookers batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "booker's noe": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bookers noe": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "booker's 30th anniversary": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "baker's": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bakers": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "baker's bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bakers bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "baker's 7": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bakers 7": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "baker's 7 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "baker's single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bakers single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's us1 bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters us1 bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's us*1": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters us1": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's small batch bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters small batch bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's toasted barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters toasted barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's20": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters 20": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's 20 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's barrel strength bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michters barrel strength bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "michter's celebration": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angel's envy": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angels envy": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angel's envy bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angels envy bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angel's envy port finish": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angels envy port finish": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angel's envy port wine cask": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angels envy port wine cask": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angel's envy cask strength": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angels envy cask strength": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "angel's envy finished bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "ae bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jefferson's": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jeffersons": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jefferson's bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jeffersons bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jefferson's very small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jeffersons very small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jefferson's reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jeffersons reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jefferson's chef collaboration": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jefferson's ocean": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jeffersons ocean": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jefferson's ocean aged at sea": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jeffersons ocean aged at sea": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jefferson's presidential select": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jeffersons presidential select": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jefferson's wood experiment": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jeffersons wood experiment": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "jefferson's marian mclain": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rabbit hole": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rabbit hole bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rabbit hole dareringer": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rabbit hole heigold": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rabbit hole boxergrail": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rabbit hole cavehill": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rabbit hole founder's collection": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rabbit hole founders collection": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rabbit hole nevallier": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rabbit hole straight bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig piggyback bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig piggyback bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistlepig piggyback 6": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whistle pig piggyback 6": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle's": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy vanwinkle": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle's family reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle family reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle 10": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle 10 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle 12": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle 12 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle 15": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle 15 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle 20": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle 20 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle 23": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy van winkle 23 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old rip van winkle": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old rip van winkle 10": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "old rip van winkle 10 handmade": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "van winkle special reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "van winkle special reserve 12": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "van winkle lot b": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pappy": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pvw": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "w.l. weller": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wl weller": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "w l weller": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "weller": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "weller bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "w.l. weller special reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "weller special reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "weller sr": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "w.l. weller antique 107": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "weller antique 107": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "weller antique": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "w.l. weller 12": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "weller 12": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "weller 12 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "w.l. weller full proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "weller full proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "w.l. weller single oak": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "weller single oak": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "w.l. weller omaha": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "weller omaha": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "william larue weller": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "william larue weller btac": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wlw": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george t. stagg": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george t stagg": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george stagg": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george t. stagg bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george t stagg bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george t. stagg btac": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "gts": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "stagg jr.": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "stagg jr": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "stagg junior": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "stagg jr. bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "stagg jr bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "stagg": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barrell bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barrel bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barrell craft spirits bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barrell bourbon batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barrell bourbon single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barrell bourbon dovetail": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barrell bourbon vantage": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barrell bourbon gold label": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barrell bourbon infinite cask": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barrell bourbon tale of two islands": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barrell craft spirits": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bcs bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath pact": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath pact 1": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath pact 2": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath pact 3": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath pact 4": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath pact 5": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath pact 6": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath pact 7": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath pact 8": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath pact 9": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath pact 10": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "blood oath limited edition": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett pot still reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett pot still": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett family estate": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett family estate bottled": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett family estate 4": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett family estate 6": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett family estate 7": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett family estate 8": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett family estate 9": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett family estate 10": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett single barrel bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "willett distillery": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky bourbon distillers": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kbdistillers": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "noah's mill": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "noahs mill": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rowan's creek": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rowans creek": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "pure kentucky xo": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff distilling bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff single barrel bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff bottled in bond bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff bib bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff malted bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff winter bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "new riff distilling": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail bottled in bond": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail settlers select": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail distillery": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail wheated bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "wilderness trail high rye bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "cooper's craft": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "coopers craft": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "cooper's craft bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "coopers craft bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "cooper's craft 82.2": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "coopers craft 82.2": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "cooper's craft barrel reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "coopers craft barrel reserve": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "cooper's craft 100 proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "coopers craft 100 proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "town branch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "town branch bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "town branch distillery": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "town branch single barrel bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "town branch malt": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "town branch straight bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "lexington brewing distilling": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl batch 1": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl batch 2": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl batch 3": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl batch 4": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl batch 5": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl batch 6": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl batch 7": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl batch 8": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl batch 9": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl batch 10": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl the wiseman": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl confiscated": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl st. patrick's edition": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "kentucky owl st patricks edition": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler old scout bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler old scout": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler old scout single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler contradiction": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler big level": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "smooth ambler spirits": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption high rye bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption wheated bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption 10 barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption straight bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption barrel proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "redemption cask strength": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few spirits bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few straight bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few barrel bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few spirits distillery": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "few": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair artisan": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair triple smoke": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair quinoa bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair distillery": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair wry moon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "corsair american bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws whiskey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws whiskey house": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws four grain straight bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws four grain bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws san luis valley straight bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws san luis valley bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws henry road straight bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws henry road bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "laws almont farms straight bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "a.d. laws": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "ad laws": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "a.d. laws whiskey house": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams black label": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams white label": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams 1783": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams 1783 small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams single barrel vintage": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams bottled in bond": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams white": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams green label": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams honey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams fire": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "evan williams cherry": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "ew bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "ew single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "henry mckenna": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "henry mckenna bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "henry mckenna 10": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "henry mckenna 10 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "henry mckenna single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "henry mckenna single barrel bottled in bond": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "henry mckenna bib": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "henry mckenna 10 single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rebel bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rebel yell": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rebel yell bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rebel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rebel 100": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rebel 100 proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rebel small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rebel single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rebel ksbwb": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "rebel straight bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "lux row rebel yell": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "1792": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "1792 bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "1792 small batch": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "1792 single barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "1792 full proof": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "1792 aged 12 years": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "1792 12 anni": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "1792 sweet wheat": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "1792 bottled in bond": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "1792 high rye": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barton 1792": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barton 1792 distillery": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "barton bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel superior no. 12": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel superior no 12": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel no. 12": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel no 12": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel old no. 8": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel old no 8": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel no. 8": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel no 8": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel barrel select": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel tabasco": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel bottled in bond": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel 8": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel 12": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel hand selected barrel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "george dickel cascade hollow": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dickel bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "dickel": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "bourbon americano": [
+    "bourbon",
+    "whiskey"
+  ],
+  "straight bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "straight bourbon whiskey": [
+    "bourbon",
+    "whiskey"
+  ],
+  "kentucky straight bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "kentucky bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "kentucky whiskey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "whiskey americano": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "american whiskey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "american bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "bourbon whiskey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "us bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "usa bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "bottled in bond bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "bib bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "cask strength bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "barrel proof bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "single barrel bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "small batch bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "high rye bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "wheated bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "wheat bourbon": [
+    "bourbon",
+    "whiskey"
+  ],
+  "corn whiskey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "tennessee whiskey": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ],
+  "tennessee bourbon": [
+    "bourbon",
+    "whiskey",
+    "whiskey americano"
+  ]
 }
