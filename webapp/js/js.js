@@ -857,6 +857,12 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     el.style.background='';
     el.style.borderColor='';
     el.style.color='';
+    // dimma le altre pill dello stesso gruppo
+    var parent=el.parentElement;
+    if(parent){
+      if(parent.querySelectorAll('.sig-pill').length) parent.classList.add('sig-pill-group-active');
+      if(parent.querySelectorAll('.crea-pill').length) parent.classList.add('crea-pill-group-active');
+    }
   }
   function pillOff(el){
     el.classList.remove('sel');

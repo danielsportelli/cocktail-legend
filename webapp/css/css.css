@@ -727,7 +727,13 @@ body{padding-bottom:56px;}
 
 /* Pill selezionate — stile soft */
 .sig-pill.sel,.crea-pill.sel{
-  background:rgba(37,99,235,.15) !important;
-  border-color:rgba(37,99,235,.5) !important;
-  color:#93c5fd !important;
+  background:rgba(37,99,235,.28) !important;
+  border-color:#3b82f6 !important;
+  color:#fff !important;
+  font-weight:700 !important;
+}
+/* Quando almeno una pill nel gruppo è selezionata, le altre si dimmano */
+.sig-pill-group-active .sig-pill:not(.sel),
+.crea-pill-group-active .crea-pill:not(.sel){
+  opacity:.45;
 }
