@@ -73,6 +73,113 @@ var AO = {"Analcolico":0,"Basso":1,"Medio basso":2,"Medio":3,"Medio alto":4,"Alt
 var FMAP = {cat:"categoria", dis:"distillato", abv:"abv"};
 var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", sap:"Sapore", frz:"Frizzante", bic:"Bicchiere"};
 
+// ═══════════ RICERCA CON SUGGESTIONS ═══════════
+(function(){
+  var inp = null;
+  var box = null;
+  var activeIdx = -1;
+  var lastQ = '';
+
+  function initSearch(){
+    inp = document.getElementById('srch');
+    box = document.getElementById('srch-suggestions');
+    if(!inp || !box) return;
+
+    inp.addEventListener('input', function(){
+      Q = this.value;
+      lastQ = Q;
+      activeIdx = -1;
+      showSuggestions(Q);
+      render();
+    });
+
+    inp.addEventListener('keydown', function(e){
+      var items = box.querySelectorAll('.srch-sug-item');
+      if(e.key === 'ArrowDown'){
+        e.preventDefault();
+        activeIdx = Math.min(activeIdx + 1, items.length - 1);
+        highlightItem(items);
+      } else if(e.key === 'ArrowUp'){
+        e.preventDefault();
+        activeIdx = Math.max(activeIdx - 1, -1);
+        highlightItem(items);
+      } else if(e.key === 'Enter'){
+        e.preventDefault();
+        if(activeIdx >= 0 && items[activeIdx]){
+          selectSuggestion(items[activeIdx].dataset.name);
+        } else {
+          closeSuggestions();
+        }
+      } else if(e.key === 'Escape'){
+        closeSuggestions();
+        inp.blur();
+      }
+    });
+
+    inp.addEventListener('focus', function(){
+      if(Q.length >= 1) showSuggestions(Q);
+    });
+
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.srch-wrap')) closeSuggestions();
+    });
+  }
+
+  function showSuggestions(q){
+    if(!box || !DATA) return;
+    q = q.toLowerCase().trim();
+    if(!q){ closeSuggestions(); return; }
+
+    var matches = DATA.filter(function(c){
+      return c.name.toLowerCase().indexOf(q) !== -1;
+    }).slice(0, 7);
+
+    if(!matches.length){ closeSuggestions(); return; }
+
+    box.innerHTML = matches.map(function(c){
+      var name = c.name;
+      var idx = name.toLowerCase().indexOf(q);
+      var hi = name.substring(0, idx) +
+               '<strong>' + name.substring(idx, idx + q.length) + '</strong>' +
+               name.substring(idx + q.length);
+      return '<div class="srch-sug-item" data-name="' + name.replace(/"/g,'&quot;') + '">' + hi + '</div>';
+    }).join('');
+
+    box.querySelectorAll('.srch-sug-item').forEach(function(item){
+      item.addEventListener('mousedown', function(e){
+        e.preventDefault();
+        selectSuggestion(this.dataset.name);
+      });
+    });
+
+    box.classList.add('open');
+  }
+
+  function highlightItem(items){
+    items.forEach(function(el){ el.classList.remove('active'); });
+    if(activeIdx >= 0 && items[activeIdx]) items[activeIdx].classList.add('active');
+  }
+
+  function selectSuggestion(name){
+    inp.value = name;
+    Q = name;
+    closeSuggestions();
+    render();
+  }
+
+  function closeSuggestions(){
+    if(box) box.classList.remove('open');
+    activeIdx = -1;
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initSearch);
+  } else {
+    initSearch();
+  }
+})();
+
+
 // ═══════════ PREFERITI ═══════════
 var FAVS_KEY = "cl_favs";
 var FAV_ONLY = false;
