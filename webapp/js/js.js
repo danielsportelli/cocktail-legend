@@ -1008,6 +1008,10 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     setVisible('crea-step-input',false);
     setVisible('crea-step-signature',false);
     if(err)err.style.display='none';
+    // Nascondi tutto il follow-up durante il fetch
+    ['fu-q1','fu-yes-opts','fu-no-opts','fu-mod-area','fu-altro-area','fu-chat-area'].forEach(function(id){
+      var el=document.getElementById(id);if(el)el.style.display='none';
+    });
     if(resp)resp.style.display='block';
     if(body)body.innerHTML='<span style="color:var(--dim);">Il barman sta pensando…</span>';
     try{
@@ -1176,16 +1180,6 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       setVisible('fu-q1',false);
       setVisible('fu-no-opts',true);
     });
-
-    // Chiedimi altro → chat libera
-    var fuChiedimi=document.getElementById('fu-chiedimi');
-    if(fuChiedimi)fuChiedimi.addEventListener('click',function(){
-      setVisible('fu-chat-area',true);
-      var i=document.getElementById('fu-chat-inp');if(i)setTimeout(function(){i.focus();},80);
-    });
-
-    // Chat libera send
-    makeSendBtn('fu-chat-send','fu-chat-inp',function(v){ return v; });
 
     // Torna ai comandi dal sì
     var fuCmds=document.getElementById('fu-cmds');
