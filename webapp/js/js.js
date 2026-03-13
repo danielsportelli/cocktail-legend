@@ -698,7 +698,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   var selectedPill = null;
 
   // Stato multi-step signature
-  var sig = { tipo: null, momento: null, gusto: null, tenore: null };
+  var sig = { tipo: null, momento: null, gusto: null, tenore: null, bicchiere: null };
 
   // ─── PROMPTS per i 5 comandi semplici ───────────────────────────
   var PROMPTS = {
@@ -755,6 +755,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       lines.push('Crea un signature drink ALCOLICO con queste caratteristiche:');
       lines.push('- Momento: ' + sig.momento);
       lines.push('- Tenore alcolico: ' + sig.tenore);
+      if(sig.bicchiere) lines.push('- Bicchiere: ' + sig.bicchiere);
     } else {
       lines.push('Crea un signature drink ANALCOLICO (zero alcol) con queste caratteristiche:');
       lines.push('- Profilo gusto: ' + sig.gusto);
@@ -811,7 +812,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   // ─── NAVIGAZIONE PRINCIPALE ───────────────────────────────────────
   function showCmds(){
     currentCmd=null; selectedPill=null;
-    sig={tipo:null,momento:null,gusto:null,tenore:null};
+    sig={tipo:null,momento:null,gusto:null,tenore:null,bicchiere:null};
     setVisible('crea-step-cmds',true);
     setVisible('crea-step-signature',false);
     setVisible('crea-step-input',false);
@@ -834,6 +835,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     setVisible('sig-step-2b',false);
     setVisible('sig-step-3',false);
     setVisible('sig-step-4',false);
+    setVisible('sig-step-5',false);
+        setVisible('sig-step-5',false);
   }
 
   function setVisible(id, show){
@@ -850,15 +853,17 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
     if(cmd==='signature'){
       // reset stato sig
-      sig={tipo:null,momento:null,gusto:null,tenore:null};
+      sig={tipo:null,momento:null,gusto:null,tenore:null,bicchiere:null};
       setVisible('crea-step-signature',true);
       setVisible('sig-step-1',true);
       setVisible('sig-step-2a',false);
       setVisible('sig-step-2b',false);
       setVisible('sig-step-3',false);
       setVisible('sig-step-4',false);
+        setVisible('sig-step-5',false);
       // reset tutte le pill signature
       document.querySelectorAll('.sig-pill').forEach(function(p){ pillOff(p); });
+      document.querySelectorAll('.sig-pill-group-active').forEach(function(el){ el.classList.remove('sig-pill-group-active'); });
     } else {
       var cfg=PROMPTS[cmd];
       setVisible('crea-step-input',true);
@@ -913,6 +918,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         setVisible('sig-step-2b',false);
         setVisible('sig-step-3',false);
         setVisible('sig-step-4',false);
+        setVisible('sig-step-5',false);
         sig.momento=null; sig.tenore=null;
         document.querySelectorAll('.sig-pill[data-step="2a"]').forEach(function(p){ pillOff(p); });
       } else {
@@ -920,6 +926,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         setVisible('sig-step-2a',false);
         setVisible('sig-step-3',false);
         setVisible('sig-step-4',false);
+        setVisible('sig-step-5',false);
         sig.gusto=null;
         document.querySelectorAll('.sig-pill[data-step="2b"]').forEach(function(p){ pillOff(p); });
       }
@@ -927,6 +934,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       sig.momento=val;
       setVisible('sig-step-3',true);
       setVisible('sig-step-4',false);
+        setVisible('sig-step-5',false);
       sig.tenore=null;
       document.querySelectorAll('.sig-pill[data-step="3"]').forEach(function(p){ pillOff(p); });
     } else if(step==='2b'){
@@ -939,6 +947,12 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     } else if(step==='3'){
       sig.tenore=val;
       setVisible('sig-step-4',true);
+      setVisible('sig-step-5',false);
+      sig.bicchiere=null;
+      document.querySelectorAll('.sig-pill[data-step="4"]').forEach(function(p){ pillOff(p); });
+    } else if(step==='4'){
+      sig.bicchiere=val;
+      setVisible('sig-step-5',true);
       var si=document.getElementById('sig-input');
       if(si){si.value='';setTimeout(function(){si.focus();},100);}
       updateSigBtn();
@@ -999,6 +1013,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     setVisible('fu-chat-area',false);
     setVisible('fu-mod-area',false);
     setVisible('fu-altro-area',false);
+    var cn=document.getElementById('crea-new');
+    if(cn)cn.style.display='inline-flex';
   }
 
   async function doFetch(prompt){
@@ -1008,8 +1024,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     setVisible('crea-step-input',false);
     setVisible('crea-step-signature',false);
     if(err)err.style.display='none';
-    // Nascondi tutto il follow-up durante il fetch
-    ['fu-q1','fu-yes-opts','fu-no-opts','fu-mod-area','fu-altro-area','fu-chat-area'].forEach(function(id){
+    // Nascondi tutto il follow-up e torna-ai-comandi durante il fetch
+    ['fu-q1','fu-yes-opts','fu-no-opts','fu-mod-area','fu-altro-area','fu-chat-area','crea-new'].forEach(function(id){
       var el=document.getElementById(id);if(el)el.style.display='none';
     });
     if(resp)resp.style.display='block';
@@ -1021,7 +1037,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         body:JSON.stringify({
           model:'claude-sonnet-4-20250514',
           max_tokens:1000,
-          system:'Sei un barman creativo di fama internazionale. Parli sempre in italiano. Tono diretto e professionale, da collega a collega. Non citare mai database o fonti esterne. Usi ## per titoli sezione, **grassetto** per nomi drink e ingredienti chiave, - per liste. Tecnica, Bicchiere e Garnish vanno sempre su righe separate, mai sulla stessa riga. Le ricette sono sempre punti di partenza da assaggiare e bilanciare.',
+          system:'Sei un barman creativo di fama internazionale. Parli sempre in italiano. Tono diretto e professionale, da collega a collega. Non citare mai database o fonti esterne. Rispondi SEMPRE con questa struttura esatta: ## NOME DRINK (una riga di concept). ## RICETTA (lista ingredienti con - dose Ingrediente). **Tecnica:** su riga separata. **Bicchiere:** su riga separata. **Garnish:** su riga separata. ## PREPARAZIONI (solo se servono sciroppi artigianali, infusi o wash - ogni voce: **Nome prep:** istruzioni 1 riga - altrimenti ometti la sezione). ## PERSONALIZZAZIONE (consiglio bilanciamento, sempre presente). Usa ## per titoli, **grassetto** per label come Tecnica/Bicchiere/Garnish e nomi preparazioni, - per ingredienti. Nessuna sezione extra fuori da questa struttura.',
           messages:[{role:'user',content:prompt}]
         })
       });
