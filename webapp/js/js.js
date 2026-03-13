@@ -356,30 +356,26 @@ function updateAllCounts() {
   });
 }
 function initF() {
-  Promise.all([
-    fetch("database/it/categorie-it.json").then(function(r){ return r.json(); }),
-    fetch("database/it/sapori-it.json").then(function(r){ return r.json(); }),
-    fetch("database/it/bicchieri-it.json").then(function(r){ return r.json(); })
-  ]).then(function(results){
-    var cats  = results[0].sort(function(a,b){ return a.localeCompare(b,"it"); });
-    var saps  = results[1].sort(function(a,b){ return a.localeCompare(b,"it"); });
-    var bics  = results[2].sort(function(a,b){ return a.localeCompare(b,"it"); });
-
-    // Ingredienti: solo quelli presenti almeno in 1 cocktail (da DATA)
-    var ingSet = {};
-    DATA.forEach(function(c){
-      c.distillato.forEach(function(d){ ingSet[d] = 1; });
-      c.ingredienti.forEach(function(i){ ingSet[i[1]] = 1; });
-    });
-    var ings = Object.keys(ingSet).sort(function(a,b){ return a.localeCompare(b,"it"); });
-
-    buildDropdown("dd-cat","cat", cats);
-    buildDropdown("dd-dis","dis", ings);
-    buildDropdown("dd-sap","sap", saps);
-    buildDropdown("dd-frz","frz", ["Si","No"]);
-    buildDropdown("dd-bic","bic", bics);
-    buildDropdown("dd-abv","abv", ["Analcolico","Basso","Medio basso","Medio","Medio alto","Alto","Molto alto"]);
+  // Tutto costruito da DATA — zero fetch aggiuntivi
+  var catSet = {}, ingSet = {}, sapSet = {}, bicSet = {};
+  DATA.forEach(function(c){
+    catSet[c.categoria] = 1;
+    c.distillato.forEach(function(d){ ingSet[d] = 1; });
+    c.ingredienti.forEach(function(i){ ingSet[i[1]] = 1; });
+    c.sapori.forEach(function(s){ sapSet[s] = 1; });
+    bicSet[c.bicchiere] = 1;
   });
+  var cats = Object.keys(catSet).sort(function(a,b){ return a.localeCompare(b,"it"); });
+  var ings = Object.keys(ingSet).sort(function(a,b){ return a.localeCompare(b,"it"); });
+  var saps = Object.keys(sapSet).sort(function(a,b){ return a.localeCompare(b,"it"); });
+  var bics = Object.keys(bicSet).sort(function(a,b){ return a.localeCompare(b,"it"); });
+
+  buildDropdown("dd-cat","cat", cats);
+  buildDropdown("dd-dis","dis", ings);
+  buildDropdown("dd-sap","sap", saps);
+  buildDropdown("dd-frz","frz", ["Si","No"]);
+  buildDropdown("dd-bic","bic", bics);
+  buildDropdown("dd-abv","abv", ["Analcolico","Basso","Medio basso","Medio","Medio alto","Alto","Molto alto"]);
 }
 
 // Dropdown toggle per ogni fg-btn
@@ -1165,14 +1161,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     makeSendBtn('fu-mod-send','fu-mod-inp',function(v){
       var body=document.getElementById('crea-body');
       var prev=body?body.innerText.substring(0,400):'';
-      return 'Sulla base di questa proposta:
-"""
-'+prev+'
-"""
-
-Vorrei questa modifica: '+v+'
-
-Rifai la ricetta con la modifica richiesta, mantenendo lo stesso formato.';
+      return 'Sulla base di questa proposta:\n"""\n'+prev+'\n"""\n\nVorrei questa modifica: '+v+'\n\nRifai la ricetta con la modifica richiesta, mantenendo lo stesso formato.';
     });
 
     // Proponi qualcos'altro
