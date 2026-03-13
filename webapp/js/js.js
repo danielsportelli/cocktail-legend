@@ -495,7 +495,8 @@ function render() {
   else if(s==="abv-")res.sort(function(a,b){return(AO[b.abv]||0)-(AO[a.abv]||0);});
   RES=res;
   showCards();
-  updateAllCounts();
+  clearTimeout(window._uacTimer);
+  window._uacTimer = setTimeout(updateAllCounts, 150);
 }
 
 function showCards(){
