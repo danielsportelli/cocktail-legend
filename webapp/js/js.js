@@ -95,14 +95,16 @@ function expandQuery(q) {
       if (terms.indexOf(cat) === -1) terms.push(cat);
     }
   }
-  // Match parziale: cerca tutte le chiavi che CONTENGONO la query
-  var allKeys = Object.keys(SYNONYMS);
-  for (var k = 0; k < allKeys.length; k++) {
-    if (allKeys[k] !== key && allKeys[k].indexOf(key) !== -1) {
-      var vals = SYNONYMS[allKeys[k]];
-      for (var v = 0; v < vals.length; v++) {
-        var cat2 = vals[v].toLowerCase();
-        if (terms.indexOf(cat2) === -1) terms.push(cat2);
+  // Match parziale: solo se query >= 3 caratteri
+  if (key.length >= 3) {
+    var allKeys = Object.keys(SYNONYMS);
+    for (var k = 0; k < allKeys.length; k++) {
+      if (allKeys[k] !== key && allKeys[k].indexOf(key) !== -1) {
+        var vals = SYNONYMS[allKeys[k]];
+        for (var v = 0; v < vals.length; v++) {
+          var cat2 = vals[v].toLowerCase();
+          if (terms.indexOf(cat2) === -1) terms.push(cat2);
+        }
       }
     }
   }
@@ -662,7 +664,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   render();
   updateAllCounts();
 });
-document.getElementById("srch").addEventListener("input",function(e){Q=e.target.value;render();});
+document.getElementById("srch").addEventListener("input",function(e){
+  Q=e.target.value;
+  clearTimeout(window._renderTimer);
+  window._renderTimer = setTimeout(render, 300);
+});
 document.getElementById("srch").addEventListener("keydown",function(e){if(e.key==="Enter")this.blur();});
 document.getElementById("srt").addEventListener("change",render);
 document.getElementById("btn-reset").addEventListener("click",function(){
