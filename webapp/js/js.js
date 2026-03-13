@@ -358,14 +358,20 @@ function updateAllCounts() {
 function initF() {
   Promise.all([
     fetch("database/it/categorie-it.json").then(function(r){ return r.json(); }),
-    fetch("database/it/ingredienti-it.json").then(function(r){ return r.json(); }),
     fetch("database/it/sapori-it.json").then(function(r){ return r.json(); }),
     fetch("database/it/bicchieri-it.json").then(function(r){ return r.json(); })
   ]).then(function(results){
     var cats  = results[0].sort(function(a,b){ return a.localeCompare(b,"it"); });
-    var ings  = results[1].sort(function(a,b){ return a.localeCompare(b,"it"); });
-    var saps  = results[2].sort(function(a,b){ return a.localeCompare(b,"it"); });
-    var bics  = results[3].sort(function(a,b){ return a.localeCompare(b,"it"); });
+    var saps  = results[1].sort(function(a,b){ return a.localeCompare(b,"it"); });
+    var bics  = results[2].sort(function(a,b){ return a.localeCompare(b,"it"); });
+
+    // Ingredienti: solo quelli presenti almeno in 1 cocktail (da DATA)
+    var ingSet = {};
+    DATA.forEach(function(c){
+      c.distillato.forEach(function(d){ ingSet[d] = 1; });
+      c.ingredienti.forEach(function(i){ ingSet[i[1]] = 1; });
+    });
+    var ings = Object.keys(ingSet).sort(function(a,b){ return a.localeCompare(b,"it"); });
 
     buildDropdown("dd-cat","cat", cats);
     buildDropdown("dd-dis","dis", ings);
@@ -851,14 +857,16 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
   // ─── SIGNATURE MULTI-STEP ─────────────────────────────────────────
   function pillOn(el){
-    el.style.background='#2563eb';
-    el.style.borderColor='#2563eb';
-    el.style.color='#fff';
+    el.classList.add('sel');
+    el.style.background='';
+    el.style.borderColor='';
+    el.style.color='';
   }
   function pillOff(el){
-    el.style.background='var(--bg)';
-    el.style.borderColor='var(--brd)';
-    el.style.color='var(--txt2)';
+    el.classList.remove('sel');
+    el.style.background='';
+    el.style.borderColor='';
+    el.style.color='';
   }
 
   function onSigPill(btn){
@@ -951,6 +959,16 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   }
 
   // ─── FETCH ────────────────────────────────────────────────────────
+  function showFollowUp(){
+    var fuq=document.getElementById('fu-q1');
+    if(fuq)fuq.style.display='block';
+    setVisible('fu-yes-opts',false);
+    setVisible('fu-no-opts',false);
+    setVisible('fu-chat-area',false);
+    setVisible('fu-mod-area',false);
+    setVisible('fu-altro-area',false);
+  }
+
   async function doFetch(prompt){
     var resp=document.getElementById('crea-response');
     var body=document.getElementById('crea-body');
@@ -976,6 +994,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       if(!text)throw new Error((data&&data.error&&data.error.message)||'Risposta vuota');
       if(body)body.innerHTML=mdToHtml(text);
       incUsage(); renderUsage();
+      // mostra follow-up
+      showFollowUp();
     }catch(e){
       if(resp)resp.style.display='none';
       if(err){err.style.display='block';err.textContent='⚠️ '+(e.message||'Errore. Riprova.');}
@@ -1035,8 +1055,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     document.querySelectorAll('.crea-pill').forEach(function(p){
       p.addEventListener('click',function(){
         selectedPill=this.dataset.val;
-        document.querySelectorAll('.crea-pill').forEach(function(x){ pillOff(x); });
-        pillOn(this);
+        document.querySelectorAll('.crea-pill').forEach(function(x){ x.classList.remove('sel'); });
+        this.classList.add('sel');
         updateBtn();
       });
     });
@@ -1063,8 +1083,125 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       });
     });
 
-    // Nuova domanda
+    // Torna ai comandi
     var newBtn=document.getElementById('crea-new');
     if(newBtn)newBtn.addEventListener('click',showCmds);
+
+    // ── FOLLOW-UP ──────────────────────────────────────────────
+    // Variabile che tiene l'ultimo prompt inviato (per contesto)
+    // e l'ultima risposta (per modifiche)
+    
+    function resetFollowUp(){
+      setVisible('fu-q1',true);
+      setVisible('fu-yes-opts',false);
+      setVisible('fu-no-opts',false);
+      setVisible('fu-chat-area',false);
+      setVisible('fu-mod-area',false);
+      setVisible('fu-altro-area',false);
+      var ci=document.getElementById('fu-chat-inp');if(ci)ci.value='';
+      var mi=document.getElementById('fu-mod-inp');if(mi)mi.value='';
+      var ai=document.getElementById('fu-altro-inp');if(ai)ai.value='';
+    }
+
+    function makeSendBtn(btnId, inpId, buildFn){
+      var btn=document.getElementById(btnId);
+      var inp=document.getElementById(inpId);
+      if(inp) inp.addEventListener('input', function(){
+        if(!btn)return;
+        var active=this.value.trim().length>0&&getUsage()<MAX;
+        btn.disabled=!active;
+        btn.style.background=active?'#2563eb':'var(--surf)';
+        btn.style.color=active?'#fff':'var(--dim)';
+        btn.style.border=active?'none':'1px solid var(--brd)';
+        btn.style.cursor=active?'pointer':'not-allowed';
+        btn.style.boxShadow=active?'0 4px 16px rgba(37,99,235,.4)':'none';
+      });
+      if(btn) btn.addEventListener('click', function(){
+        var val=inp?inp.value.trim():'';
+        if(!val)return;
+        this.disabled=true;this.textContent='...';
+        var prompt=buildFn(val);
+        doFetch(prompt).then(function(){ resetFollowUp(); });
+      });
+    }
+
+    // Sì
+    var fuYes=document.getElementById('fu-yes');
+    if(fuYes)fuYes.addEventListener('click',function(){
+      setVisible('fu-q1',false);
+      setVisible('fu-yes-opts',true);
+    });
+
+    // No
+    var fuNo=document.getElementById('fu-no');
+    if(fuNo)fuNo.addEventListener('click',function(){
+      setVisible('fu-q1',false);
+      setVisible('fu-no-opts',true);
+    });
+
+    // Chiedimi altro → chat libera
+    var fuChiedimi=document.getElementById('fu-chiedimi');
+    if(fuChiedimi)fuChiedimi.addEventListener('click',function(){
+      setVisible('fu-chat-area',true);
+      var i=document.getElementById('fu-chat-inp');if(i)setTimeout(function(){i.focus();},80);
+    });
+
+    // Chat libera send
+    makeSendBtn('fu-chat-send','fu-chat-inp',function(v){ return v; });
+
+    // Torna ai comandi dal sì
+    var fuCmds=document.getElementById('fu-cmds');
+    if(fuCmds)fuCmds.addEventListener('click',showCmds);
+
+    // Modifichiamo questo
+    var fuMod=document.getElementById('fu-modifica');
+    if(fuMod)fuMod.addEventListener('click',function(){
+      setVisible('fu-no-opts',false);
+      setVisible('fu-mod-area',true);
+      var i=document.getElementById('fu-mod-inp');if(i)setTimeout(function(){i.focus();},80);
+    });
+
+    // Modifica send — costruisce prompt con contesto
+    makeSendBtn('fu-mod-send','fu-mod-inp',function(v){
+      var body=document.getElementById('crea-body');
+      var prev=body?body.innerText.substring(0,400):'';
+      return 'Sulla base di questa proposta:
+"""
+'+prev+'
+"""
+
+Vorrei questa modifica: '+v+'
+
+Rifai la ricetta con la modifica richiesta, mantenendo lo stesso formato.';
+    });
+
+    // Proponi qualcos'altro
+    var fuAltro=document.getElementById('fu-altro');
+    if(fuAltro)fuAltro.addEventListener('click',function(){
+      setVisible('fu-no-opts',false);
+      setVisible('fu-altro-area',true);
+      var i=document.getElementById('fu-altro-inp');if(i)setTimeout(function(){i.focus();},80);
+    });
+
+    // Proponi altro send — riusa sig o prompt precedente
+    var fuAltroSend=document.getElementById('fu-altro-send');
+    if(fuAltroSend)fuAltroSend.addEventListener('click',function(){
+      var inp=document.getElementById('fu-altro-inp');
+      var val=inp?inp.value.trim():'';
+      // Se campo vuoto → stessi parametri del signature precedente
+      var prompt;
+      if(val){
+        prompt=buildSignaturePrompt(val);
+      } else {
+        // Riutilizza sig state
+        var sigInp=document.getElementById('sig-input');
+        var sigVal=sigInp?sigInp.value.trim():'';
+        prompt=buildSignaturePrompt(sigVal||'stessi ingredienti di prima');
+      }
+      prompt+=' — Proponi un drink completamente diverso dalla risposta precedente.';
+      this.disabled=true;this.textContent='...';
+      doFetch(prompt).then(function(){ resetFollowUp(); });
+    });
+
   });
 })();

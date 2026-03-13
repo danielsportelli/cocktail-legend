@@ -64,7 +64,7 @@
   </button>
 <button class="tab-btn tab-btn-crea" id="tbtn-crea" onclick="openDrawer('crea')">
   <span class="tab-btn-ico-crea">
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="2" y="16" font-family="Arial Black,sans-serif" font-weight="900" font-size="12" fill="currentColor">AI</text><path d="M17.5 1l.5 2 2 .5-2 .5-.5 2-.5-2-2-.5 2-.5Z" fill="currentColor"/></svg>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.09 6.26L20.18 10l-6.09 1.74L12 18l-2.09-6.26L3.82 10l6.09-1.74Z"/></svg>
   </span>
   <span class="tab-btn-lbl">Barman AI</span>
 </button>
@@ -439,7 +439,7 @@
         </button>
 
         <button class="crea-cmd-btn" data-cmd="ribilancia" style="display:flex;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M5 9l7-7 7 7"/><path d="M3 16h18"/><path d="M5 16c0 2.2 1.6 4 3.5 4s3.5-1.8 3.5-4"/><path d="M12 16c0 2.2 1.6 4 3.5 4s3.5-1.8 3.5-4"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="12" y1="22" x2="12" y2="15"/><path d="M5 15c0-3.3 3-3.3 3 0s3 3.3 3 0"/><path d="M13 15c0-3.3 3-3.3 3 0s3 3.3 3 0"/><line x1="12" y1="15" x2="12" y2="6"/><path d="M8 6 Q12 2 16 6" fill="none"/><line x1="6" y1="8" x2="18" y2="8"/></svg>
           <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Ribilancia un drink</span>
           <span style="font-size:.6rem;color:var(--dim);">Troppo dolce, acido o forte</span>
         </button>
@@ -558,9 +558,57 @@
         Il barman risponde
       </div>
       <div id="crea-body" style="font-size:.78rem;line-height:1.75;color:var(--txt);"></div>
+
+      <!-- FOLLOW-UP: sei soddisfatto? -->
+      <div id="fu-q1" style="margin-top:1.1rem;padding-top:.9rem;border-top:1px solid var(--brd);">
+        <div style="font-size:.68rem;color:var(--dim);margin-bottom:.5rem;">Sei soddisfatto della proposta?</div>
+        <div style="display:flex;gap:.45rem;">
+          <button id="fu-yes" style="flex:1;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:8px;padding:.5rem;font-size:.72rem;font-weight:600;color:#4ade80;cursor:pointer;font-family:inherit;transition:all .2s;">✓ Sì</button>
+          <button id="fu-no" style="flex:1;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);border-radius:8px;padding:.5rem;font-size:.72rem;font-weight:600;color:#f87171;cursor:pointer;font-family:inherit;transition:all .2s;">✗ No</button>
+        </div>
+      </div>
+
+      <!-- SE SÌ -->
+      <div id="fu-yes-opts" style="display:none;margin-top:.85rem;">
+        <div style="font-size:.68rem;color:var(--dim);margin-bottom:.5rem;">Perfetto! Cosa vuoi fare adesso?</div>
+        <div style="display:flex;gap:.45rem;flex-wrap:wrap;">
+          <button id="fu-chiedimi" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .6rem;font-size:.7rem;font-weight:600;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .2s;">Chiedimi altro</button>
+          <button id="fu-cmds" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .6rem;font-size:.7rem;font-weight:600;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .2s;">Torna ai comandi</button>
+        </div>
+        <!-- barra chat libera -->
+        <div id="fu-chat-area" style="display:none;margin-top:.75rem;">
+          <textarea id="fu-chat-inp" rows="2" placeholder="Scrivi la tua domanda..."
+            style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
+          <button id="fu-chat-send" disabled style="margin-top:.5rem;width:100%;padding:.65rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">✦ Invia</button>
+        </div>
+      </div>
+
+      <!-- SE NO -->
+      <div id="fu-no-opts" style="display:none;margin-top:.85rem;">
+        <div style="font-size:.68rem;color:var(--dim);margin-bottom:.5rem;">Cosa vuoi fare?</div>
+        <div style="display:flex;gap:.45rem;">
+          <button id="fu-modifica" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .4rem;font-size:.68rem;font-weight:600;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;">✏️ Modifichiamo<br>questo</button>
+          <button id="fu-altro" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .4rem;font-size:.68rem;font-weight:600;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;">🔄 Proponi<br>qualcos'altro</button>
+        </div>
+        <!-- modifica: chat libera -->
+        <div id="fu-mod-area" style="display:none;margin-top:.75rem;">
+          <div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.4rem;">Dimmi cosa vuoi modificare</div>
+          <textarea id="fu-mod-inp" rows="2" placeholder="es. rendilo più fresco, cambia il distillato con il rum..."
+            style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
+          <button id="fu-mod-send" disabled style="margin-top:.5rem;width:100%;padding:.65rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">✦ Modifica</button>
+        </div>
+        <!-- proponi altro: stessi ingredienti o nuovi -->
+        <div id="fu-altro-area" style="display:none;margin-top:.75rem;">
+          <div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.4rem;">Stessi ingredienti o ne aggiungi?</div>
+          <textarea id="fu-altro-inp" rows="2" placeholder="Lascia vuoto per gli stessi ingredienti, oppure aggiungi o cambia..."
+            style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
+          <button id="fu-altro-send" style="margin-top:.5rem;width:100%;padding:.65rem;background:#2563eb;color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(37,99,235,.4);">✦ Proponi</button>
+        </div>
+      </div>
+
       <button id="crea-new" style="margin-top:1rem;display:inline-flex;align-items:center;gap:.35rem;background:var(--bg);border:1px solid var(--brd);border-radius:7px;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:.3rem .65rem;transition:all .2s;">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Nuova domanda
+        Torna ai comandi
       </button>
     </div>
 
