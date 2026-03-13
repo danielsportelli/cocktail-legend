@@ -570,52 +570,59 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   var USAGE_MONTH = 'cl_ai_month';
   var MAX = 50;
   var currentCmd = null;
+  var selectedPill = null;
 
   var PROMPTS = {
-    crea: {
+    signature: {
       label: 'Ingredienti che hai',
-      placeholder: 'es. gin, lime, menta, zenzero...',
-      build: function(v){ return 'Ho questi ingredienti: '+v+'.
-
-Crea per me:
-1. 2-3 cocktail originali con ricetta sintetica (dosi, tecnica, bicchiere).
-2. 1-2 twist creativi inediti.
-3. Un consiglio pratico su come valorizzarli insieme.
-
-Ricorda: punto di partenza da assaggiare e bilanciare.'; }
+      placeholder: 'es. gin, lime, basilico, pepe rosa...',
+      usePills: false,
+      build: function(v){
+        return 'Ho questi ingredienti: ' + v + '.\n\nCrea un signature drink originale:\n1. Nome del drink e concept.\n2. Ricetta completa (dosi, tecnica, bicchiere, garnish).\n3. Note su come bilanciare e personalizzare.\n\nRicorda: punto di partenza da assaggiare e bilanciare sul momento.';
+      }
     },
-    chiedi: {
+    consiglio: {
       label: 'La tua domanda',
-      placeholder: 'es. Qual è la differenza tra Negroni e Americano?',
+      placeholder: 'es. Come gestisco un cliente che vuole un drink analcolico interessante?',
+      usePills: false,
       build: function(v){ return v; }
     },
-    bilancia: {
+    ribilancia: {
       label: 'Descrivi il problema',
-      placeholder: 'es. Il mio Margarita è troppo dolce, ho usato 20ml Triple Sec...',
-      build: function(v){ return 'Ho un problema di bilanciamento: '+v+'
-
-Dammi consigli pratici per correggerlo al banco.'; }
+      placeholder: 'es. Il mio Margarita è troppo dolce, ho usato 20ml Triple Sec e 10ml lime...',
+      usePills: false,
+      build: function(v){
+        return 'Ho un problema di bilanciamento: ' + v + '\n\nDammi 2-3 soluzioni pratiche concrete da applicare subito al banco.';
+      }
     },
-    sostituisci: {
-      label: 'Cosa non hai?',
-      placeholder: 'es. Non ho Aperol, sto facendo uno Spritz...',
-      build: function(v){ return 'Non ho questo ingrediente: '+v+'
-
-Suggerisci 2-3 alternative concrete con note su come cambia il risultato finale.'; }
+    twist: {
+      label: 'Quale classico vuoi reinterpretare?',
+      placeholder: 'es. Negroni, Old Fashioned, Margarita...',
+      usePills: false,
+      build: function(v){
+        return 'Voglio fare un twist creativo su: ' + v + '.\n\nProponmi 2-3 reinterpretazioni originali mantenendo la struttura del classico ma con ingredienti o tecniche inaspettate. Per ognuna: nome, variazione chiave, ricetta sintetica.';
+      }
     },
-    menu: {
-      label: 'Stagione o tema',
-      placeholder: 'es. Menu estivo per un beach bar, 5 cocktail...',
-      build: function(v){ return 'Crea un menu cocktail per: '+v+'
-
-Dammi 4-5 drink con nome, ingredienti chiave e concept del drink. Tono professionale.'; }
+    pairing: {
+      label: 'Descrivi il piatto',
+      placeholder: 'es. Tartare di tonno con avocado e sesamo...',
+      usePills: false,
+      build: function(v){
+        return 'Devo abbinare un cocktail a questo piatto: ' + v + '.\n\nSuggerisci 2-3 drink con abbinamento per contrasto o per affinità. Per ognuno spiega brevemente perché funziona con quel piatto.';
+      }
     },
-    tecnica: {
-      label: 'Cosa vuoi sapere?',
-      placeholder: 'es. Come si fa un ghiaccio cristallino? Differenza dry shake / wet shake?',
-      build: function(v){ return 'Domanda tecnica: '+v+'
-
-Rispondi in modo pratico e diretto, da barman esperto a barman.'; }
+    giorno: {
+      label: 'Che momento è?',
+      placeholder: '',
+      usePills: true,
+      build: function(v){
+        var now = new Date();
+        var mesi = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+        var stagioni = ['inverno','inverno','primavera','primavera','primavera','estate','estate','estate','autunno','autunno','autunno','inverno'];
+        var data = now.getDate() + ' ' + mesi[now.getMonth()] + ' ' + now.getFullYear();
+        var stagione = stagioni[now.getMonth()];
+        return 'Oggi è ' + data + ', siamo in ' + stagione + '. Crea il cocktail del giorno per il momento: ' + v + '.\n\nDammi UN solo drink con:\n- Nome originale e concept stagionale\n- Ricetta completa (dosi, tecnica, bicchiere, garnish)\n- In 1 riga: perché è perfetto per questo momento\n\nDeve essere creativo, non un classico già noto.';
+      }
     }
   };
 
@@ -659,16 +666,17 @@ Rispondi in modo pratico e diretto, da barman esperto a barman.'; }
 
   function showCmds(){
     currentCmd=null;
-    var cmds=document.getElementById('crea-cmds');
-    var area=document.getElementById('crea-input-area');
-    var btn=document.getElementById('crea-btn');
+    selectedPill=null;
+    var stepCmds=document.getElementById('crea-step-cmds');
+    var stepInput=document.getElementById('crea-step-input');
     var resp=document.getElementById('crea-response');
     var err=document.getElementById('crea-error');
-    if(cmds)cmds.style.display='grid';
-    if(area)area.style.display='none';
-    if(btn)btn.style.display='none';
+    var exhausted=document.getElementById('crea-exhausted');
+    if(stepCmds)stepCmds.style.display='block';
+    if(stepInput)stepInput.style.display='none';
     if(resp)resp.style.display='none';
     if(err)err.style.display='none';
+    if(exhausted)exhausted.style.display='none';
     var inp=document.getElementById('crea-input');
     if(inp)inp.value='';
   }
@@ -676,26 +684,41 @@ Rispondi in modo pratico e diretto, da barman esperto a barman.'; }
   function selectCmd(cmd){
     if(getUsage()>=MAX){showExhausted();return;}
     currentCmd=cmd;
+    selectedPill=null;
     var cfg=PROMPTS[cmd];
-    var cmds=document.getElementById('crea-cmds');
-    var area=document.getElementById('crea-input-area');
+    var stepCmds=document.getElementById('crea-step-cmds');
+    var stepInput=document.getElementById('crea-step-input');
     var label=document.getElementById('crea-input-label');
+    var pills=document.getElementById('crea-pills');
     var inp=document.getElementById('crea-input');
     var btn=document.getElementById('crea-btn');
-    if(cmds)cmds.style.display='none';
-    if(area)area.style.display='block';
+    if(stepCmds)stepCmds.style.display='none';
+    if(stepInput)stepInput.style.display='block';
     if(label)label.textContent=cfg.label;
-    if(inp){inp.placeholder=cfg.placeholder;inp.value='';inp.focus();}
-    if(btn){btn.style.display='block';updateBtn();}
+    if(cfg.usePills){
+      if(pills)pills.style.display='flex';
+      if(inp)inp.style.display='none';
+      // reset pills
+      document.querySelectorAll('.crea-pill').forEach(function(p){
+        p.style.background='var(--bg)';
+        p.style.borderColor='var(--brd)';
+        p.style.color='var(--txt2)';
+      });
+    } else {
+      if(pills)pills.style.display='none';
+      if(inp){inp.style.display='block';inp.placeholder=cfg.placeholder;inp.value='';inp.focus();}
+    }
+    updateBtn();
   }
 
   function updateBtn(){
     var btn=document.getElementById('crea-btn');
     var inp=document.getElementById('crea-input');
-    if(!btn)return;
-    var hasText=inp&&inp.value.trim().length>0;
+    if(!btn||!currentCmd)return;
+    var cfg=PROMPTS[currentCmd];
+    var hasVal=cfg.usePills ? selectedPill!==null : (inp&&inp.value.trim().length>0);
     var exhausted=getUsage()>=MAX;
-    var active=hasText&&!exhausted&&currentCmd;
+    var active=hasVal&&!exhausted;
     btn.disabled=!active;
     btn.style.background=active?'#2563eb':'var(--surf)';
     btn.style.color=active?'#fff':'var(--dim)';
@@ -706,33 +729,32 @@ Rispondi in modo pratico e diretto, da barman esperto a barman.'; }
 
   function mdToHtml(md){
     return md
-      .replace(/^## (.+)$/gm,'<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);"></div>')
-      .replace(/^### (.+)$/gm,'<div style="font-size:.82rem;font-weight:700;color:var(--txt);margin:12px 0 3px;"></div>')
-      .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--amber);font-weight:700;"></strong>')
-      .replace(/\*(.+?)\*/g,'<em style="color:var(--txt2);"></em>')
-      .replace(/^- (.+)$/gm,'<div style="padding:3px 0 3px 10px;border-left:2px solid rgba(96,165,250,.25);color:var(--txt2);font-size:.78rem;"></div>')
+      .replace(/^## (.+)$/gm,'<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">$1</div>')
+      .replace(/^### (.+)$/gm,'<div style="font-size:.82rem;font-weight:700;color:var(--txt);margin:12px 0 3px;">$1</div>')
+      .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--amber);font-weight:700;">$1</strong>')
+      .replace(/\*(.+?)\*/g,'<em style="color:var(--txt2);">$1</em>')
+      .replace(/^- (.+)$/gm,'<div style="padding:3px 0 3px 10px;border-left:2px solid rgba(96,165,250,.25);color:var(--txt2);font-size:.78rem;">$1</div>')
       .replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--brd);margin:12px 0;">')
-      .replace(/
-
-/g,'<br><br>');
+      .replace(/\n\n/g,'<br><br>');
   }
 
   async function askBarman(){
     if(getUsage()>=MAX){showExhausted();return;}
     var inp=document.getElementById('crea-input');
-    var val=inp?inp.value.trim():'';
+    var cfg=PROMPTS[currentCmd];
+    var val=cfg.usePills ? selectedPill : (inp?inp.value.trim():'');
     if(!val||!currentCmd)return;
     var btn=document.getElementById('crea-btn');
     var resp=document.getElementById('crea-response');
     var body=document.getElementById('crea-body');
     var err=document.getElementById('crea-error');
-    var area=document.getElementById('crea-input-area');
+    var stepInput=document.getElementById('crea-step-input');
     if(btn){btn.disabled=true;btn.textContent='...';}
     if(err)err.style.display='none';
-    if(area)area.style.display='none';
+    if(stepInput)stepInput.style.display='none';
     if(resp)resp.style.display='block';
     if(body)body.innerHTML='<span style="color:var(--dim);">Il barman sta pensando…</span>';
-    var prompt=PROMPTS[currentCmd].build(val);
+    var prompt=cfg.build(val);
     try{
       var res=await fetch(WORKER_URL,{
         method:'POST',
@@ -745,14 +767,14 @@ Rispondi in modo pratico e diretto, da barman esperto a barman.'; }
         })
       });
       var data=await res.json();
-      var text=data?.content?.[0]?.text||'';
-      if(!text)throw new Error(data?.error?.message||'Risposta vuota');
+      var text=data&&data.content&&data.content[0]?data.content[0].text:'';
+      if(!text)throw new Error((data&&data.error&&data.error.message)||'Risposta vuota');
       if(body)body.innerHTML=mdToHtml(text);
       incUsage();renderUsage();
-      if(btn){btn.style.display='none';}
+      if(btn)btn.textContent='✦ Chiedi al Barman';
     }catch(e){
       if(resp)resp.style.display='none';
-      if(area)area.style.display='block';
+      if(stepInput)stepInput.style.display='block';
       if(err){err.style.display='block';err.textContent='⚠️ '+(e.message||'Errore. Riprova.');}
       if(btn){btn.disabled=false;btn.textContent='✦ Chiedi al Barman';}
     }
@@ -768,7 +790,23 @@ Rispondi in modo pratico e diretto, da barman esperto a barman.'; }
       b.addEventListener('mouseleave',function(){ this.style.borderColor='var(--brd)'; this.style.background='var(--bg)'; });
     });
 
-    // Input testo
+    // Pills
+    document.querySelectorAll('.crea-pill').forEach(function(p){
+      p.addEventListener('click',function(){
+        selectedPill=this.dataset.val;
+        document.querySelectorAll('.crea-pill').forEach(function(x){
+          x.style.background='var(--bg)';
+          x.style.borderColor='var(--brd)';
+          x.style.color='var(--txt2)';
+        });
+        this.style.background='#2563eb';
+        this.style.borderColor='#2563eb';
+        this.style.color='#fff';
+        updateBtn();
+      });
+    });
+
+    // Input textarea
     var inp=document.getElementById('crea-input');
     if(inp)inp.addEventListener('input',updateBtn);
 
