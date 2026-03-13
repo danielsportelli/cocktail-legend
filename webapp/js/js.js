@@ -355,6 +355,22 @@ function updateAllCounts() {
     }
   });
 }
+
+// Aggiorna --fb-h dinamicamente (altezza filter-bar sticky)
+function updateFbH(){
+  var fb=document.getElementById('filter-bar');
+  if(fb) document.documentElement.style.setProperty('--fb-h', fb.offsetHeight+'px');
+}
+updateFbH();
+window.addEventListener('resize', updateFbH);
+// Aggiorna anche quando il pannello filtri si apre/chiude
+var _fpObs = new MutationObserver(updateFbH);
+document.addEventListener('DOMContentLoaded', function(){
+  var fp=document.getElementById('filter-panel');
+  if(fp) _fpObs.observe(fp, {attributes:true, attributeFilter:['class']});
+  updateFbH();
+});
+
 function initF() {
   // Tutto costruito da DATA — zero fetch aggiuntivi
   var catSet = {}, ingSet = {}, sapSet = {}, bicSet = {};
@@ -806,6 +822,18 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(inp)inp.value='';
     var sigInp=document.getElementById('sig-input');
     if(sigInp)sigInp.value='';
+    // reset pill: rimuovi classi sel e group-active
+    document.querySelectorAll('.sig-pill.sel,.crea-pill.sel').forEach(function(p){
+      p.classList.remove('sel');
+    });
+    document.querySelectorAll('.sig-pill-group-active,.crea-pill-group-active').forEach(function(el){
+      el.classList.remove('sig-pill-group-active','crea-pill-group-active');
+    });
+    // reset step signature visibilità
+    setVisible('sig-step-2a',false);
+    setVisible('sig-step-2b',false);
+    setVisible('sig-step-3',false);
+    setVisible('sig-step-4',false);
   }
 
   function setVisible(id, show){
@@ -924,11 +952,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var hasText=inp&&inp.value.trim().length>0;
     var active=hasText&&getUsage()<MAX;
     btn.disabled=!active;
-    btn.style.background=active?'#2563eb':'var(--surf)';
+    btn.style.background=active?'var(--amber)':'var(--surf)';
     btn.style.color=active?'#fff':'var(--dim)';
     btn.style.border=active?'none':'1px solid var(--brd)';
     btn.style.cursor=active?'pointer':'not-allowed';
-    btn.style.boxShadow=active?'0 4px 16px rgba(37,99,235,.4)':'none';
+    btn.style.boxShadow=active?'0 4px 16px rgba(245,158,11,.35)':'none';
   }
 
   // ─── BOTTONE INVIO (altri comandi) ────────────────────────────────
@@ -941,11 +969,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var hasVal=cfg.usePills ? selectedPill!==null : (inp&&inp.value.trim().length>0);
     var active=hasVal&&getUsage()<MAX;
     btn.disabled=!active;
-    btn.style.background=active?'#2563eb':'var(--surf)';
+    btn.style.background=active?'var(--amber)':'var(--surf)';
     btn.style.color=active?'#fff':'var(--dim)';
     btn.style.border=active?'none':'1px solid var(--brd)';
     btn.style.cursor=active?'pointer':'not-allowed';
-    btn.style.boxShadow=active?'0 4px 16px rgba(37,99,235,.4)':'none';
+    btn.style.boxShadow=active?'0 4px 16px rgba(245,158,11,.35)':'none';
   }
 
   // ─── MARKDOWN → HTML ──────────────────────────────────────────────
@@ -1094,15 +1122,21 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     // e l'ultima risposta (per modifiche)
     
     function resetFollowUp(){
-      setVisible('fu-q1',true);
-      setVisible('fu-yes-opts',false);
-      setVisible('fu-no-opts',false);
-      setVisible('fu-chat-area',false);
-      setVisible('fu-mod-area',false);
-      setVisible('fu-altro-area',false);
+      var fuq=document.getElementById('fu-q1');
+      if(fuq)fuq.style.display='block';
+      ['fu-yes-opts','fu-no-opts','fu-chat-area','fu-mod-area','fu-altro-area'].forEach(function(id){
+        var el=document.getElementById(id);if(el)el.style.display='none';
+      });
       var ci=document.getElementById('fu-chat-inp');if(ci)ci.value='';
       var mi=document.getElementById('fu-mod-inp');if(mi)mi.value='';
       var ai=document.getElementById('fu-altro-inp');if(ai)ai.value='';
+      // reset bottoni invio follow-up
+      ['fu-chat-send','fu-mod-send'].forEach(function(id){
+        var b=document.getElementById(id);
+        if(b){b.disabled=true;b.textContent='✦ Invia';
+          b.style.background='var(--surf)';b.style.color='var(--dim)';
+          b.style.border='1px solid var(--brd)';b.style.boxShadow='none';}
+      });
     }
 
     function makeSendBtn(btnId, inpId, buildFn){
@@ -1112,11 +1146,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         if(!btn)return;
         var active=this.value.trim().length>0&&getUsage()<MAX;
         btn.disabled=!active;
-        btn.style.background=active?'#2563eb':'var(--surf)';
+        btn.style.background=active?'var(--amber)':'var(--surf)';
         btn.style.color=active?'#fff':'var(--dim)';
         btn.style.border=active?'none':'1px solid var(--brd)';
         btn.style.cursor=active?'pointer':'not-allowed';
-        btn.style.boxShadow=active?'0 4px 16px rgba(37,99,235,.4)':'none';
+        btn.style.boxShadow=active?'0 4px 16px rgba(245,158,11,.35)':'none';
       });
       if(btn) btn.addEventListener('click', function(){
         var val=inp?inp.value.trim():'';
@@ -1159,7 +1193,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var fuMod=document.getElementById('fu-modifica');
     if(fuMod)fuMod.addEventListener('click',function(){
       setVisible('fu-no-opts',false);
-      setVisible('fu-mod-area',true);
+      var area=document.getElementById('fu-mod-area');
+      if(area)area.style.display='block';
       var i=document.getElementById('fu-mod-inp');if(i)setTimeout(function(){i.focus();},80);
     });
 
@@ -1174,28 +1209,26 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var fuAltro=document.getElementById('fu-altro');
     if(fuAltro)fuAltro.addEventListener('click',function(){
       setVisible('fu-no-opts',false);
-      setVisible('fu-altro-area',true);
-      var i=document.getElementById('fu-altro-inp');if(i)setTimeout(function(){i.focus();},80);
+      var area=document.getElementById('fu-altro-area');
+      if(area)area.style.display='block';
+      var i=document.getElementById('fu-altro-inp');
+      if(i)setTimeout(function(){i.focus();},80);
     });
 
-    // Proponi altro send — riusa sig o prompt precedente
+    // Proponi altro send
     var fuAltroSend=document.getElementById('fu-altro-send');
     if(fuAltroSend)fuAltroSend.addEventListener('click',function(){
       var inp=document.getElementById('fu-altro-inp');
       var val=inp?inp.value.trim():'';
-      // Se campo vuoto → stessi parametri del signature precedente
-      var prompt;
-      if(val){
-        prompt=buildSignaturePrompt(val);
-      } else {
-        // Riutilizza sig state
-        var sigInp=document.getElementById('sig-input');
-        var sigVal=sigInp?sigInp.value.trim():'';
-        prompt=buildSignaturePrompt(sigVal||'stessi ingredienti di prima');
-      }
-      prompt+=' — Proponi un drink completamente diverso dalla risposta precedente.';
-      this.disabled=true;this.textContent='...';
-      doFetch(prompt).then(function(){ resetFollowUp(); });
+      var sigInp=document.getElementById('sig-input');
+      var sigVal=sigInp?sigInp.value.trim():'';
+      var base=val?val:(sigVal||'stessi ingredienti di prima');
+      var prompt=buildSignaturePrompt(base)+' Proponi un drink completamente diverso dalla risposta precedente.';
+      fuAltroSend.disabled=true;fuAltroSend.textContent='...';
+      doFetch(prompt).then(function(){
+        fuAltroSend.textContent='✦ Proponi';
+        resetFollowUp();
+      });
     });
 
   });

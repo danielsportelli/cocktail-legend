@@ -704,30 +704,34 @@ body{padding-bottom:56px;}
   justify-content: center;
   width: 42px;
   height: 42px;
-  background: #1a2f4a;
-  border: 1px solid rgba(37,99,235,.5);
+  background: transparent;
+  border: none;
   border-radius: 10px;
   color: #60a5fa;
-  box-shadow: 0 1px 6px rgba(37,99,235,.2);
-  transition: transform .2s, box-shadow .2s;
+  transition: transform .2s;
+}
+.tab-btn-ico-crea svg {
+  filter: drop-shadow(0 0 4px rgba(96,165,250,.5));
+  width: 26px;
+  height: 26px;
 }
 .tab-btn-crea:active .tab-btn-ico-crea {
   transform: scale(.92);
-  box-shadow: 0 1px 6px rgba(37,99,235,.25);
 }
 .tab-btn-crea .tab-btn-lbl {
   color: #60a5fa;
   font-weight: 700;
 }
 .tab-btn-crea.active .tab-btn-ico-crea {
-  background: #1e3a8a;
-  border-color: rgba(96,165,250,.7);
-  box-shadow: 0 1px 10px rgba(96,165,250,.3);
+  color: var(--amber);
+}
+.tab-btn-crea.active .tab-btn-ico-crea svg {
+  filter: drop-shadow(0 0 6px rgba(245,158,11,.6));
 }
 
 /* Pill selezionate — stile soft */
 .sig-pill.sel,.crea-pill.sel{
-  background:rgba(37,99,235,.28) !important;
+  background:rgba(37,99,235,.3) !important;
   border-color:#3b82f6 !important;
   color:#fff !important;
   font-weight:700 !important;
@@ -735,5 +739,6 @@ body{padding-bottom:56px;}
 /* Quando almeno una pill nel gruppo è selezionata, le altre si dimmano */
 .sig-pill-group-active .sig-pill:not(.sel),
 .crea-pill-group-active .crea-pill:not(.sel){
-  opacity:.45;
+  opacity:.28;
+  border-color:rgba(255,255,255,.1) !important;
 }
