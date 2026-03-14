@@ -1032,7 +1032,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     setVisible('crea-step-signature',false);
     if(err)err.style.display='none';
     // Nascondi tutto il follow-up e torna-ai-comandi durante il fetch
-    ['fu-q1','fu-yes-opts','fu-no-opts','fu-mod-area','fu-altro-area','fu-chat-area','crea-new'].forEach(function(id){
+    ['fu-q1','fu-yes-opts','fu-no-opts','crea-new'].forEach(function(id){
       var el=document.getElementById(id);if(el)el.style.display='none';
     });
     if(resp)resp.style.display='block';
@@ -1153,19 +1153,14 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     function resetFollowUp(){
       var fuq=document.getElementById('fu-q1');
       if(fuq)fuq.style.display='block';
-      ['fu-yes-opts','fu-no-opts','fu-chat-area','fu-mod-area','fu-altro-area'].forEach(function(id){
+      ['fu-yes-opts','fu-no-opts'].forEach(function(id){
         var el=document.getElementById(id);if(el)el.style.display='none';
       });
-      var ci=document.getElementById('fu-chat-inp');if(ci)ci.value='';
-      var mi=document.getElementById('fu-mod-inp');if(mi)mi.value='';
-      var ai=document.getElementById('fu-altro-inp');if(ai)ai.value='';
-      // reset bottoni invio follow-up
-      ['fu-chat-send','fu-mod-send'].forEach(function(id){
-        var b=document.getElementById(id);
-        if(b){b.disabled=true;b.textContent='✦ Invia';
-          b.style.background='var(--surf)';b.style.color='var(--dim)';
-          b.style.border='1px solid var(--brd)';b.style.boxShadow='none';}
-      });
+      var ni=document.getElementById('fu-no-inp');if(ni)ni.value='';
+      var ns=document.getElementById('fu-no-send');
+      if(ns){ns.disabled=true;ns.textContent='✦ Chiedi al Barman';
+        ns.style.background='var(--surf)';ns.style.color='var(--dim)';
+        ns.style.border='1px solid var(--brd)';ns.style.boxShadow='none';ns.style.opacity='.5';}
     }
 
     function makeSendBtn(btnId, inpId, buildFn){
@@ -1204,51 +1199,39 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       setVisible('fu-no-opts',true);
     });
 
-    // Torna ai comandi dal sì
-    var fuCmds=document.getElementById('fu-cmds');
-    if(fuCmds)fuCmds.addEventListener('click',showCmds);
+    // SI: niente bottone extra, c'è già "Torna ai comandi" fisso in basso
 
-    // Modifichiamo questo
-    var fuMod=document.getElementById('fu-modifica');
-    if(fuMod)fuMod.addEventListener('click',function(){
-      setVisible('fu-no-opts',false);
-      var area=document.getElementById('fu-mod-area');
-      if(area)area.style.display='block';
-      var i=document.getElementById('fu-mod-inp');if(i)setTimeout(function(){i.focus();},80);
-    });
-
-    // Modifica send — costruisce prompt con contesto
-    makeSendBtn('fu-mod-send','fu-mod-inp',function(v){
-      var body=document.getElementById('crea-body');
-      var prev=body?body.innerText.substring(0,400):'';
-      return 'Sulla base di questa proposta:\n"""\n'+prev+'\n"""\n\nVorrei questa modifica: '+v+'\n\nRifai la ricetta con la modifica richiesta, mantenendo lo stesso formato.';
-    });
-
-    // Proponi qualcos'altro
-    var fuAltro=document.getElementById('fu-altro');
-    if(fuAltro)fuAltro.addEventListener('click',function(){
-      setVisible('fu-no-opts',false);
-      var area=document.getElementById('fu-altro-area');
-      if(area)area.style.display='block';
-      var i=document.getElementById('fu-altro-inp');
-      if(i)setTimeout(function(){i.focus();},80);
-    });
-
-    // Proponi altro send
-    var fuAltroSend=document.getElementById('fu-altro-send');
-    if(fuAltroSend)fuAltroSend.addEventListener('click',function(){
-      var inp=document.getElementById('fu-altro-inp');
-      var val=inp?inp.value.trim():'';
-      var sigInp=document.getElementById('sig-input');
-      var sigVal=sigInp?sigInp.value.trim():'';
-      var base=val?val:(sigVal||'stessi ingredienti di prima');
-      var prompt=buildSignaturePrompt(base)+' Proponi un drink completamente diverso dalla risposta precedente.';
-      fuAltroSend.disabled=true;fuAltroSend.textContent='...';
-      doFetch(prompt).then(function(){
-        fuAltroSend.textContent='✦ Proponi';
-        resetFollowUp();
+    // NO: barra chat unica — modifica o nuova proposta
+    var fuNoInp=document.getElementById('fu-no-inp');
+    var fuNoSend=document.getElementById('fu-no-send');
+    if(fuNoInp){
+      fuNoInp.addEventListener('input',function(){
+        if(!fuNoSend)return;
+        var active=this.value.trim().length>0&&getUsage()<MAX;
+        fuNoSend.disabled=!active;
+        fuNoSend.style.background=active?'var(--amber)':'var(--surf)';
+        fuNoSend.style.color=active?'#0a0f1e':'var(--dim)';
+        fuNoSend.style.border=active?'none':'1px solid var(--brd)';
+        fuNoSend.style.cursor=active?'pointer':'not-allowed';
+        fuNoSend.style.boxShadow=active?'0 4px 16px rgba(245,158,11,.35)':'none';
+        fuNoSend.style.opacity=active?'1':'.5';
       });
-    });
+    }
+    if(fuNoSend){
+      fuNoSend.addEventListener('click',function(){
+        var val=fuNoInp?fuNoInp.value.trim():'';
+        if(!val)return;
+        var body=document.getElementById('crea-body');
+        var prev=body?body.innerText.substring(0,500):'';
+        var prompt='Sulla base di questa proposta precedente:\n"""\n'+prev+'\n"""\n\nRichiesta: '+val+'\n\nRispondi con la stessa struttura esatta (## NOME DRINK, ## RICETTA, ecc.).';
+        fuNoSend.disabled=true;fuNoSend.textContent='...';
+        doFetch(prompt).then(function(){
+          fuNoSend.disabled=false;
+          fuNoSend.textContent='✦ Chiedi al Barman';
+          if(fuNoInp)fuNoInp.value='';
+        });
+      });
+    }
 
   });
 })();

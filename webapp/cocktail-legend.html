@@ -578,34 +578,17 @@
         </div>
       </div>
 
-      <!-- SE SÌ -->
+      <!-- SE SÌ: solo messaggio, niente bottoni extra -->
       <div id="fu-yes-opts" style="display:none;margin-top:.85rem;">
-        <button id="fu-cmds" style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .2s;">Torna ai comandi</button>
+        <div style="font-size:.72rem;color:var(--dim);font-style:italic;">Usa il tasto in basso per tornare ai comandi.</div>
       </div>
 
-      <!-- SE NO: scelta azione -->
+      <!-- SE NO: barra chat unica -->
       <div id="fu-no-opts" style="display:none;margin-top:.85rem;">
-        <div style="font-size:.68rem;color:var(--dim);margin-bottom:.5rem;">Cosa vuoi fare?</div>
-        <div style="display:flex;gap:.45rem;">
-          <button id="fu-modifica" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .4rem;font-size:.68rem;font-weight:600;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;">Modifichiamo<br>questo</button>
-          <button id="fu-altro" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .4rem;font-size:.68rem;font-weight:600;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;">Proponi<br>qualcos'altro</button>
-        </div>
-      </div>
-
-      <!-- modifica chat — fuori da fu-no-opts -->
-      <div id="fu-mod-area" style="display:none;margin-top:.75rem;">
-        <div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.4rem;">Dimmi cosa vuoi modificare</div>
-        <textarea id="fu-mod-inp" rows="2" placeholder="es. rendilo più fresco, cambia il distillato con il rum..."
+        <div style="font-size:.68rem;color:var(--dim);margin-bottom:.5rem;">Vuoi modificare o vuoi una nuova proposta?</div>
+        <textarea id="fu-no-inp" rows="2" placeholder="Dimmi cosa vuoi che faccia — modifica, nuovo drink, cambia ingrediente..."
           style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
-        <button id="fu-mod-send" disabled style="margin-top:.5rem;width:100%;padding:.65rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">✦ Modifica</button>
-      </div>
-
-      <!-- proponi altro — fuori da fu-no-opts -->
-      <div id="fu-altro-area" style="display:none;margin-top:.75rem;">
-        <div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.4rem;">Stessi ingredienti o ne aggiungi?</div>
-        <textarea id="fu-altro-inp" rows="2" placeholder="Lascia vuoto per gli stessi ingredienti, oppure aggiungi o cambia..."
-          style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
-        <button id="fu-altro-send" style="margin-top:.5rem;width:100%;padding:.65rem;background:var(--amber);color:#0a0f1e;border:none;border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(245,158,11,.35);">✦ Proponi</button>
+        <button id="fu-no-send" disabled style="margin-top:.5rem;width:100%;padding:.7rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">✦ Chiedi al Barman</button>
       </div>
 
       <button id="crea-new" style="margin-top:1rem;display:inline-flex;align-items:center;gap:.35rem;background:var(--bg);border:1px solid var(--brd);border-radius:7px;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:.3rem .65rem;transition:all .2s;">
