@@ -710,12 +710,14 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   // ─── PROMPTS per i 5 comandi semplici ───────────────────────────
   var PROMPTS = {
     consiglio: {
-      label: 'La tua domanda',
-      placeholder: 'es. Come gestisco un cliente che vuole un drink analcolico interessante?',
+      label: 'Chiedimi qualsiasi cosa',
+      placeholder: 'es. Come costruisco una drink list estiva? Quali trend seguire?',
       usePills: false,
+      maxTokens: 1200,
       build: function(v){ return v; }
     },
     ribilancia: {
+      maxTokens: 600,
       label: 'Descrivi il problema',
       placeholder: 'es. Il mio Margarita è troppo dolce, ho usato 20ml Triple Sec e 10ml lime...',
       usePills: false,
@@ -724,6 +726,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       }
     },
     twist: {
+      maxTokens: 700,
       label: 'Quale classico vuoi reinterpretare?',
       placeholder: 'es. Negroni, Old Fashioned, Margarita...',
       usePills: false,
@@ -732,14 +735,16 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       }
     },
     pairing: {
-      label: 'Descrivi il piatto',
+      label: 'Descrivi il piatto e ti propongo 3 drink',
       placeholder: 'es. Tartare di tonno con avocado e sesamo...',
       usePills: false,
+      maxTokens: 700,
       build: function(v){
-        return 'Devo abbinare un cocktail a questo piatto: ' + v + '.\n\nSuggerisci 2-3 drink con abbinamento per contrasto o per affinità. Per ognuno spiega brevemente perché funziona con quel piatto.';
+        return 'Devo abbinare cocktail a questo piatto: ' + v + '.\n\nProponmi esattamente 3 drink diversi tra loro (uno per contrasto, uno per affinità, uno creativo/inaspettato). Per ognuno: nome drink, ingredienti chiave, e 1 riga sul perché funziona con il piatto.';
       }
     },
     giorno: {
+      maxTokens: 500,
       label: 'Che momento è?',
       placeholder: '',
       usePills: true,
@@ -1000,16 +1005,18 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
   // ─── MARKDOWN → HTML ──────────────────────────────────────────────
   function mdToHtml(md){
-    var firstH2=true;
-    var lines=md.split('\n');
-    var out=lines.map(function(line){
+    var SEZIONI = ['RICETTA','PREPARAZIONI','PERSONALIZZAZIONE'];
+    var lines = md.split('\n');
+    var out = lines.map(function(line){
       if(/^## .+/.test(line)){
-        var title=line.replace(/^## /,'');
-        if(firstH2){
-          firstH2=false;
-          return '<div style="font-size:1.1rem;font-weight:800;color:var(--txt);margin:4px 0 10px;letter-spacing:-.01em;">'+title+'</div>';
+        var title = line.replace(/^## /, '');
+        var isSezione = SEZIONI.indexOf(title.trim().toUpperCase()) !== -1;
+        if(isSezione){
+          return '<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">'+title+'</div>';
+        } else {
+          // Nome drink
+          return '<div style="font-size:1.1rem;font-weight:800;color:var(--txt);margin:14px 0 6px;letter-spacing:-.01em;">'+title+'</div>';
         }
-        return '<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">'+title+'</div>';
       }
       if(/^### .+/.test(line)) return '<div style="font-size:.82rem;font-weight:700;color:var(--txt);margin:12px 0 3px;">'+line.replace(/^### /,'')+'</div>';
       if(/^- .+/.test(line)) return '<div style="padding:3px 0 3px 10px;border-left:2px solid rgba(96,165,250,.25);color:var(--txt2);font-size:.78rem;">'+line.replace(/^- /,'')+'</div>';
@@ -1036,7 +1043,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(cn)cn.style.display='inline-flex';
   }
 
-  async function doFetch(prompt){
+  async function doFetch(prompt, maxTokensOverride){
     var resp=document.getElementById('crea-response');
     var body=document.getElementById('crea-body');
     var err=document.getElementById('crea-error');
@@ -1055,7 +1062,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
           model:'claude-sonnet-4-20250514',
-          max_tokens:1000,
+          max_tokens:maxTokensOverride||(currentCmd&&PROMPTS[currentCmd]&&PROMPTS[currentCmd].maxTokens?PROMPTS[currentCmd].maxTokens:1000),
           system:'Sei un barman creativo di fama internazionale. Parli sempre in italiano. Tono diretto e professionale, da collega a collega. Non citare mai database o fonti esterne. Rispondi SEMPRE con questa struttura esatta: ## NOME DRINK (una riga di concept). ## RICETTA (lista ingredienti con - dose Ingrediente). **Tecnica:** su riga separata. **Bicchiere:** su riga separata. **Garnish:** su riga separata. ## PREPARAZIONI (solo se servono sciroppi artigianali, infusi o wash - ogni voce: **Nome prep:** istruzioni 1 riga - altrimenti ometti la sezione). ## PERSONALIZZAZIONE (consiglio bilanciamento, sempre presente). Usa ## per titoli, **grassetto** per label come Tecnica/Bicchiere/Garnish e nomi preparazioni, - per ingredienti. Nessuna sezione extra fuori da questa struttura.',
           messages:[{role:'user',content:prompt}]
         })
@@ -1090,7 +1097,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(!val)return;
     var sigBtn=document.getElementById('sig-btn');
     if(sigBtn){sigBtn.disabled=true;sigBtn.textContent='...';}
-    await doFetch(buildSignaturePrompt(val));
+    await doFetch(buildSignaturePrompt(val), 500);
     if(sigBtn)sigBtn.textContent='✦ Chiedi al Barman';
   }
 
@@ -1193,7 +1200,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         if(!val)return;
         this.disabled=true;this.textContent='...';
         var prompt=buildFn(val);
-        doFetch(prompt).then(function(){ resetFollowUp(); });
+        doFetch(prompt, 600).then(function(){ resetFollowUp(); });
       });
     }
 
@@ -1237,7 +1244,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var prev=body?body.innerText.substring(0,500):'';
         var prompt='Sulla base di questa proposta precedente:\n"""\n'+prev+'\n"""\n\nRichiesta: '+val+'\n\nRispondi con la stessa struttura esatta (## NOME DRINK, ## RICETTA, ecc.).';
         fuNoSend.disabled=true;fuNoSend.textContent='...';
-        doFetch(prompt).then(function(){
+        doFetch(prompt, 600).then(function(){
           fuNoSend.disabled=false;
           fuNoSend.textContent='✦ Chiedi al Barman';
           if(fuNoInp)fuNoInp.value='';
