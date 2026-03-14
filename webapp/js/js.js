@@ -709,14 +709,6 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
   // ─── PROMPTS per i 5 comandi semplici ───────────────────────────
   var PROMPTS = {
-    mybar: {
-      maxTokens: 600,
-      label: 'Cosa hai in casa o al bar?',
-      placeholder: 'es. Campari, gin, limone, zucchero, acqua tonica...',
-      usePills: false,
-      isMyBar: true,
-      build: function(v){ return v; }
-    },
     twist: {
       maxTokens: 700,
       label: 'Quale classico vuoi reinterpretare?',
@@ -858,19 +850,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     setVisible('crea-response',false);
     setVisible('crea-error',false);
 
-    if(cmd==='mybar'){
-      setVisible('crea-step-input',true);
-      var cfg=PROMPTS['mybar'];
-      var label=document.getElementById('crea-input-label');
-      var pills=document.getElementById('crea-pills');
-      var inp=document.getElementById('crea-input');
-      selectedPill=null;
-      if(label)label.textContent=cfg.label;
-      if(pills)pills.style.display='none';
-      if(inp){inp.style.display='block';inp.placeholder=cfg.placeholder;inp.value='';setTimeout(function(){inp.focus();},100);}
-      updateBtn();
-      return;
-    } else if(cmd==='signature'){
+    if(cmd==='signature'){
       // reset stato sig
       sig={tipo:null,momento:null,gusto:null,tenore:null,bicchiere:null};
       setVisible('crea-step-signature',true);
@@ -1041,7 +1021,6 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   function showFollowUp(){
     // Determina tipo follow-up
     var fuType = 'sino'; // default: signature e giorno
-    if(currentCmd==='mybar') fuType='mybar';
     else if(currentCmd==='twist'||currentCmd==='pairing') fuType='tre';
     else if(currentCmd==='signature') fuType='sino';
     else if(currentCmd==='giorno') fuType='sino';
@@ -1050,7 +1029,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(fuBlock)fuBlock.style.display='block';
 
     // Nascondi tutti i tipi
-    ['fu-type-sino','fu-type-tre','fu-type-mybar','fu-chat-cont','fu-scelta-drink'].forEach(function(id){
+    ['fu-type-sino','fu-type-tre','fu-chat-cont','fu-scelta-drink'].forEach(function(id){
       var el=document.getElementById(id);if(el)el.style.display='none';
     });
 
@@ -1130,100 +1109,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var btn=document.getElementById('crea-btn');
     if(btn){btn.disabled=true;btn.textContent='...';}
 
-    if(currentCmd==='mybar'){
-      await doMyBar(val);
-    } else {
       await doFetch(cfg.build(val), cfg.maxTokens||1000);
-    }
     if(btn)btn.textContent='✦ Chiedi al Barman';
-  }
-
-  async function doMyBar(ingredientiRaw){
-    var resp=document.getElementById('crea-response');
-    var body=document.getElementById('crea-body');
-    var err=document.getElementById('crea-error');
-    setVisible('crea-step-input',false);
-    if(err)err.style.display='none';
-    ['fu-block','crea-new'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none';});
-    if(resp)resp.style.display='block';
-    if(body)body.innerHTML='<span style="color:var(--dim);">Il barman sta cercando nei tuoi drink…</span>';
-
-    try{
-      // Step 1: normalizza ingredienti con AI
-      var normRes=await fetch(WORKER_URL,{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          model:'claude-sonnet-4-20250514',
-          max_tokens:300,
-          system:'Sei un esperto di bartending. Rispondi SOLO con JSON valido, nessun testo extra.',
-          messages:[{role:'user',content:'Normalizza questi ingredienti nei nomi standard da bartender italiano. Es: Campari→Bitter rosso, Zacapa 23→Rum guatemalteco, Gin Monkey 47→Gin, Aperol→Aperol.\n\nIngredienti: '+ingredientiRaw+'\n\nRispondi SOLO con: {"normalizzati":["nome1","nome2"]}'}]
-        })
-      });
-      var normData=await normRes.json();
-      var normText=normData&&normData.content&&normData.content[0]?normData.content[0].text:'';
-      var normalizzati=[];
-      try{
-        var parsed=JSON.parse(normText.replace(/```json|```/g,'').trim());
-        normalizzati=parsed.normalizzati||[];
-      }catch(e){ normalizzati=ingredientiRaw.split(',').map(function(s){return s.trim();}); }
-
-      // Step 2: cerca nel database
-      var data=window.DATA||[];
-      var risultati=[];
-      var parziali=[];
-
-      data.forEach(function(c){
-        var ingDB=(c.distillato||[]).concat((c.ingredienti||[]).map(function(i){return i[1];}))
-          .map(function(s){return s.toLowerCase();});
-
-        var matchati=normalizzati.filter(function(n){
-          var nl=n.toLowerCase();
-          return ingDB.some(function(d){return d.includes(nl)||nl.includes(d.split(' ')[0]);});
-        });
-
-        if(matchati.length===normalizzati.length){
-          risultati.push({drink:c,matchati:matchati,mancanti:[]});
-        } else if(matchati.length>=normalizzati.length-2&&matchati.length>0){
-          var mancanti=ingDB.filter(function(d){
-            return !normalizzati.some(function(n){return d.includes(n.toLowerCase())||n.toLowerCase().includes(d.split(' ')[0]);});
-          }).slice(0,3);
-          parziali.push({drink:c,matchati:matchati,mancanti:mancanti});
-        }
-      });
-
-      // Step 3: formatta risposta
-      var html='';
-      if(risultati.length){
-        html+='<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:0 0 10px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">Puoi fare subito ('+risultati.length+')</div>';
-        risultati.slice(0,8).forEach(function(r){
-          html+='<div style="padding:6px 0 6px 10px;border-left:2px solid var(--amber);margin-bottom:4px;font-size:.8rem;color:var(--txt);font-weight:600;">'+r.drink.name+'</div>';
-        });
-      }
-      if(parziali.length){
-        html+='<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:16px 0 10px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">Con un piccolo acquisto ('+parziali.length+')</div>';
-        parziali.slice(0,5).forEach(function(r){
-          var mancantiStr=r.drink.ingredienti.filter(function(i){
-            return !normalizzati.some(function(n){return i[1].toLowerCase().includes(n.toLowerCase())||n.toLowerCase().includes(i[1].toLowerCase().split(' ')[0]);});
-          }).map(function(i){return i[1];}).slice(0,2).join(', ');
-          html+='<div style="padding:6px 0 6px 10px;border-left:2px solid rgba(96,165,250,.3);margin-bottom:4px;">';
-          html+='<div style="font-size:.8rem;color:var(--txt);font-weight:600;">'+r.drink.name+'</div>';
-          if(mancantiStr)html+='<div style="font-size:.7rem;color:var(--dim);">Manca: '+mancantiStr+'</div>';
-          html+='</div>';
-        });
-      }
-      if(!risultati.length&&!parziali.length){
-        html='<div style="color:var(--dim);font-size:.8rem;">Nessun drink trovato con questi ingredienti. Prova ad aggiungere qualcosa!</div>';
-      }
-
-      if(body)body.innerHTML=html;
-      incUsage();renderUsage();
-      showFollowUp();
-      var cn=document.getElementById('crea-new');if(cn)cn.style.display='inline-flex';
-    }catch(e){
-      if(resp)resp.style.display='none';
-      if(err){err.style.display='block';err.textContent='⚠️ '+(e.message||'Errore. Riprova.');}
-      setVisible('crea-step-input',true);
-    }
   }
 
   // ─── INIT ─────────────────────────────────────────────────────────
@@ -1285,7 +1172,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     function resetFollowUp(){
       var fuBlock=document.getElementById('fu-block');
       if(fuBlock)fuBlock.style.display='none';
-      ['fu-type-sino','fu-type-tre','fu-type-mybar','fu-chat-cont','fu-scelta-drink'].forEach(function(id){
+      ['fu-type-sino','fu-type-tre','fu-chat-cont','fu-scelta-drink'].forEach(function(id){
         var el=document.getElementById(id);if(el)el.style.display='none';
       });
       var ci=document.getElementById('fu-cont-inp');if(ci)ci.value='';
@@ -1455,12 +1342,6 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       });
     });
 
-    // My Bar: cambia ingredienti
-    var fuMybarNuova=document.getElementById('fu-mybar-nuova');
-    if(fuMybarNuova)fuMybarNuova.addEventListener('click',function(){
-      showCmds();setTimeout(function(){selectCmd('mybar');},50);
-    });
-
         // Bottoni back (tutti quelli con .crea-back-btn)
     document.querySelectorAll('.crea-back-btn').forEach(function(b){
       b.addEventListener('click',function(){
@@ -1480,7 +1361,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     function resetFollowUp(){
       var fuBlock=document.getElementById('fu-block');
       if(fuBlock)fuBlock.style.display='none';
-      ['fu-type-sino','fu-type-tre','fu-type-mybar','fu-chat-cont','fu-scelta-drink'].forEach(function(id){
+      ['fu-type-sino','fu-type-tre','fu-chat-cont','fu-scelta-drink'].forEach(function(id){
         var el=document.getElementById(id);if(el)el.style.display='none';
       });
       var ci=document.getElementById('fu-cont-inp');if(ci)ci.value='';
