@@ -1021,9 +1021,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   function showFollowUp(){
     // Determina tipo follow-up
     var fuType = 'sino'; // default: signature e giorno
-    else if(currentCmd==='twist'||currentCmd==='pairing') fuType='tre';
-    else if(currentCmd==='signature') fuType='sino';
-    else if(currentCmd==='giorno') fuType='sino';
+    if(currentCmd==='twist'||currentCmd==='pairing') fuType='tre';
 
     var fuBlock=document.getElementById('fu-block');
     if(fuBlock)fuBlock.style.display='block';
