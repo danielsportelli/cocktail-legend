@@ -1000,15 +1000,27 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
   // ─── MARKDOWN → HTML ──────────────────────────────────────────────
   function mdToHtml(md){
-    return md
-      .replace(/^## (.+)$/gm,'<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">$1</div>')
-      .replace(/^### (.+)$/gm,'<div style="font-size:.82rem;font-weight:700;color:var(--txt);margin:12px 0 3px;">$1</div>')
+    var firstH2=true;
+    var lines=md.split('\n');
+    var out=lines.map(function(line){
+      if(/^## .+/.test(line)){
+        var title=line.replace(/^## /,'');
+        if(firstH2){
+          firstH2=false;
+          return '<div style="font-size:1.1rem;font-weight:800;color:var(--txt);margin:4px 0 10px;letter-spacing:-.01em;">'+title+'</div>';
+        }
+        return '<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">'+title+'</div>';
+      }
+      if(/^### .+/.test(line)) return '<div style="font-size:.82rem;font-weight:700;color:var(--txt);margin:12px 0 3px;">'+line.replace(/^### /,'')+'</div>';
+      if(/^- .+/.test(line)) return '<div style="padding:3px 0 3px 10px;border-left:2px solid rgba(96,165,250,.25);color:var(--txt2);font-size:.78rem;">'+line.replace(/^- /,'')+'</div>';
+      if(/^---$/.test(line)) return '<hr style="border:none;border-top:1px solid var(--brd);margin:12px 0;">';
+      return line;
+    }).join('\n');
+    return out
       .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--amber);font-weight:700;">$1</strong>')
       .replace(/\*(.+?)\*/g,'<em style="color:var(--txt2);">$1</em>')
-      .replace(/^- (.+)$/gm,'<div style="padding:3px 0 3px 10px;border-left:2px solid rgba(96,165,250,.25);color:var(--txt2);font-size:.78rem;">$1</div>')
-      .replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--brd);margin:12px 0;">')
-      .replace(/\n/g,'<br>')
-      .replace(/<br><br>/g,'<br><br>');
+      .replace(/\n\n/g,'<br><br>')
+      .replace(/\n/g,'<br>');
   }
 
   // ─── FETCH ────────────────────────────────────────────────────────

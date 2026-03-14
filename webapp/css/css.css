@@ -381,8 +381,9 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   .grid{grid-template-columns:1fr 1fr}
   .main{padding:1rem 4%}
   .m-grid{grid-template-columns:1fr 1fr}
-  .filter-top{flex-wrap:wrap;gap:.35rem;row-gap:.35rem;}
+  .filter-top{flex-wrap:wrap;gap:.35rem;row-gap:.3rem;}
   .srch-wrap{flex:1 1 100%;order:-1;margin-bottom:0;}
+  .filter-bar{padding:.45rem 4% .4rem;}
   .btn-toggle-filters,.btn-reset-sm,.btn-favonly{flex-shrink:0;}
 }
 
