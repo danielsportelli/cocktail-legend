@@ -570,13 +570,13 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   touch-action:manipulation;
 }
 .tab-btn:hover{color:var(--txt2);}
-.tab-btn.active{color:var(--blue-l);}
+.tab-btn.active{color:var(--amber);}
 .tab-btn-ico{line-height:1;display:flex;align-items:center;justify-content:center;}
 .tab-btn-ico svg{transition:all .2s;}
-.tab-btn.active .tab-btn-ico svg{stroke:var(--blue-l);}
-.tab-btn.active .tab-btn-ico svg rect,.tab-btn.active .tab-btn-ico svg polygon{fill:var(--blue-l);fill-opacity:0.2;}
-.tab-btn.active .tab-btn-ico svg circle{fill:var(--blue-l);}
-.tab-btn.active .tab-btn-ico svg .filled-circle{fill:var(--blue-l);}
+.tab-btn.active .tab-btn-ico svg{stroke:var(--amber);}
+.tab-btn.active .tab-btn-ico svg rect,.tab-btn.active .tab-btn-ico svg polygon{fill:var(--amber);fill-opacity:0.15;}
+.tab-btn.active .tab-btn-ico svg circle{fill:var(--amber);}
+.tab-btn.active .tab-btn-ico svg .filled-circle{fill:var(--amber);}
 .tab-btn-lbl{font-size:.58rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
 
 /* Drawer (sale dal basso) */
@@ -707,26 +707,38 @@ body{padding-bottom:56px;}
   background: transparent;
   border: none;
   border-radius: 10px;
-  color: #60a5fa;
-  transition: transform .2s;
+  color: var(--amber);
+  transition: transform .2s, color .2s;
 }
 .tab-btn-ico-crea svg {
-  filter: drop-shadow(0 0 4px rgba(96,165,250,.5));
+  filter: drop-shadow(0 0 5px rgba(245,158,11,.55));
   width: 26px;
   height: 26px;
+  transition: filter .2s;
 }
 .tab-btn-crea:active .tab-btn-ico-crea {
   transform: scale(.92);
 }
 .tab-btn-crea .tab-btn-lbl {
-  color: #60a5fa;
+  color: var(--amber);
   font-weight: 700;
 }
+/* Quando AI è attiva → amber pieno */
 .tab-btn-crea.active .tab-btn-ico-crea {
   color: var(--amber);
 }
 .tab-btn-crea.active .tab-btn-ico-crea svg {
-  filter: drop-shadow(0 0 6px rgba(245,158,11,.6));
+  filter: drop-shadow(0 0 7px rgba(245,158,11,.8));
+}
+/* Quando AI è "spenta" (altra tab aperta) → neutra */
+.tab-btn-crea.dim .tab-btn-ico-crea {
+  color: var(--dim);
+}
+.tab-btn-crea.dim .tab-btn-ico-crea svg {
+  filter: none;
+}
+.tab-btn-crea.dim .tab-btn-lbl {
+  color: var(--dim);
 }
 
 /* Pill selezionate — stile soft */

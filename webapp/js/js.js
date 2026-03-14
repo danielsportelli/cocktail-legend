@@ -109,6 +109,7 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", sap:"Sapore"
           selectSuggestion(items[activeIdx].dataset.name);
         } else {
           closeSuggestions();
+          inp.blur();
         }
       } else if(e.key === 'Escape'){
         closeSuggestions();
@@ -118,6 +119,12 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", sap:"Sapore"
 
     inp.addEventListener('focus', function(){
       if(Q.length >= 1) showSuggestions(Q);
+    });
+    // tasto cerca/invio su tastiera mobile
+    inp.addEventListener('search', function(){
+      closeSuggestions();
+      inp.blur();
+      render();
     });
 
     document.addEventListener('click', function(e){

@@ -657,6 +657,12 @@ function openDrawer(id) {
   overlay.classList.add('show');
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
+  // Logica AI: se apro tab non-AI, dimmo la stellina; se apro AI, torno normale
+  var creabtn = document.getElementById('tbtn-crea');
+  if(creabtn){
+    if(id === 'crea'){ creabtn.classList.remove('dim'); }
+    else { creabtn.classList.add('dim'); }
+  }
   // Nascondi filter-bar e rbar sotto il drawer
   var fb=document.getElementById('filter-bar');if(fb)fb.style.zIndex='40';
   var rb=document.getElementById('rbar');if(rb)rb.style.zIndex='40';
@@ -667,6 +673,11 @@ function closeAllDrawers(silent) {
   document.getElementById('drawer-overlay').classList.remove('show');
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   if (!silent) CURRENT_DRAWER = null;
+  // In riposo: AI torna evidenziata
+  if (!silent){
+    var creabtn = document.getElementById('tbtn-crea');
+    if(creabtn) creabtn.classList.remove('dim');
+  }
   // Ripristina z-index solo se chiusura definitiva
   if (!silent) {
     var fb=document.getElementById('filter-bar');if(fb)fb.style.zIndex='';
