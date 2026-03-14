@@ -1291,7 +1291,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var ci=document.getElementById('fu-cont-inp');if(ci)ci.value='';
       var si=document.getElementById('fu-scelta-inp');if(si)si.value='';
       var cs=document.getElementById('fu-cont-send');
-      if(cs){cs.disabled=true;cs.textContent='✦ Chiedi al Barman';
+      if(cs){cs.disabled=true;cs.textContent='✦ Modifica';
         cs.style.background='var(--surf)';cs.style.color='var(--dim)';
         cs.style.border='1px solid var(--brd)';cs.style.boxShadow='none';cs.style.opacity='.5';}
     }
@@ -1344,7 +1344,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         this.style.color='#4ade80';
         var self=this;
         setTimeout(function(){
-          self.textContent='🔖 Salva';
+          self.textContent='Salva';
           self.style.background='rgba(245,158,11,.12)';
           self.style.borderColor='rgba(245,158,11,.3)';
           self.style.color='var(--amber)';
@@ -1448,12 +1448,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       fuContSend.disabled=true;fuContSend.textContent='...';
       var maxTok=(currentCmd==='twist'||currentCmd==='pairing')?700:500;
       doFetch(prompt,maxTok).then(function(){
-        fuContSend.disabled=false;fuContSend.textContent='✦ Chiedi al Barman';
-        if(fuContInp)fuContInp.value='';
-        var chat=document.getElementById('fu-chat-cont');
-        if(chat)chat.style.display='block';
-        var cn=document.getElementById('crea-new');
-        if(cn)cn.style.display='inline-flex';
+        resetFollowUp();
+        showFollowUp();
       });
     });
 
@@ -1488,7 +1484,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var ci=document.getElementById('fu-cont-inp');if(ci)ci.value='';
       var si=document.getElementById('fu-scelta-inp');if(si)si.value='';
       var cs=document.getElementById('fu-cont-send');
-      if(cs){cs.disabled=true;cs.textContent='✦ Chiedi al Barman';
+      if(cs){cs.disabled=true;cs.textContent='✦ Modifica';
         cs.style.background='var(--surf)';cs.style.color='var(--dim)';
         cs.style.border='1px solid var(--brd)';cs.style.boxShadow='none';cs.style.opacity='.5';}
     }
@@ -1556,9 +1552,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var prompt='Sulla base di questa proposta precedente:\n"""\n'+prev+'\n"""\n\nRichiesta: '+val+'\n\nRispondi con la stessa struttura esatta (## NOME DRINK, ## RICETTA, ecc.).';
         fuNoSend.disabled=true;fuNoSend.textContent='...';
         doFetch(prompt, 600).then(function(){
-          fuNoSend.disabled=false;
-          fuNoSend.textContent='✦ Chiedi al Barman';
-          if(fuNoInp)fuNoInp.value='';
+          resetFollowUp();
+          showFollowUp();
         });
       });
     }
