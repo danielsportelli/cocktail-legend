@@ -709,38 +709,32 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
   // ─── PROMPTS per i 5 comandi semplici ───────────────────────────
   var PROMPTS = {
-    consiglio: {
-      label: 'Chiedimi qualsiasi cosa',
-      placeholder: 'es. Come costruisco una drink list estiva? Quali trend seguire?',
-      usePills: false,
-      maxTokens: 1200,
-      build: function(v){ return v; }
-    },
-    ribilancia: {
+    mybar: {
       maxTokens: 600,
-      label: 'Descrivi il problema',
-      placeholder: 'es. Il mio Margarita è troppo dolce, ho usato 20ml Triple Sec e 10ml lime...',
+      label: 'Cosa hai in casa o al bar?',
+      placeholder: 'es. Campari, gin, limone, zucchero, acqua tonica...',
       usePills: false,
-      build: function(v){
-        return 'Ho un problema di bilanciamento: ' + v + '\n\nDammi 2-3 soluzioni pratiche concrete da applicare subito al banco.';
-      }
+      isMyBar: true,
+      build: function(v){ return v; }
     },
     twist: {
       maxTokens: 700,
       label: 'Quale classico vuoi reinterpretare?',
       placeholder: 'es. Negroni, Old Fashioned, Margarita...',
       usePills: false,
+      fuType: 'tre',
       build: function(v){
-        return 'Voglio fare un twist creativo su: ' + v + '.\n\nProponmi 2-3 reinterpretazioni originali mantenendo la struttura del classico ma con ingredienti o tecniche inaspettate. Per ognuna: nome, variazione chiave, ricetta sintetica.';
+        return 'Voglio fare un twist creativo su: ' + v + '.\n\nProponmi esattamente 3 reinterpretazioni originali. Per ognuna usa ## NOME TWIST, concept in 1 riga, ricetta sintetica (ingredienti chiave + tecnica), variazione chiave rispetto al classico.';
       }
     },
     pairing: {
+      maxTokens: 700,
       label: 'Descrivi il piatto e ti propongo 3 drink',
       placeholder: 'es. Tartare di tonno con avocado e sesamo...',
       usePills: false,
-      maxTokens: 700,
+      fuType: 'tre',
       build: function(v){
-        return 'Devo abbinare cocktail a questo piatto: ' + v + '.\n\nProponmi esattamente 3 drink diversi tra loro (uno per contrasto, uno per affinità, uno creativo/inaspettato). Per ognuno: nome drink, ingredienti chiave, e 1 riga sul perché funziona con il piatto.';
+        return 'Devo abbinare cocktail a questo piatto: ' + v + '.\n\nProponmi esattamente 3 drink (uno per contrasto, uno per affinità, uno creativo/inaspettato). Per ognuno usa ## NOME DRINK, ingredienti chiave, 1 riga sul perché funziona con il piatto.';
       }
     },
     giorno: {
@@ -748,6 +742,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       label: 'Che momento è?',
       placeholder: '',
       usePills: true,
+      fuType: 'sino',
       build: function(v){
         var now = new Date();
         var mesi = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
@@ -863,7 +858,19 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     setVisible('crea-response',false);
     setVisible('crea-error',false);
 
-    if(cmd==='signature'){
+    if(cmd==='mybar'){
+      setVisible('crea-step-input',true);
+      var cfg=PROMPTS['mybar'];
+      var label=document.getElementById('crea-input-label');
+      var pills=document.getElementById('crea-pills');
+      var inp=document.getElementById('crea-input');
+      selectedPill=null;
+      if(label)label.textContent=cfg.label;
+      if(pills)pills.style.display='none';
+      if(inp){inp.style.display='block';inp.placeholder=cfg.placeholder;inp.value='';setTimeout(function(){inp.focus();},100);}
+      updateBtn();
+      return;
+    } else if(cmd==='signature'){
       // reset stato sig
       sig={tipo:null,momento:null,gusto:null,tenore:null,bicchiere:null};
       setVisible('crea-step-signature',true);
@@ -1032,13 +1039,25 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
   // ─── FETCH ────────────────────────────────────────────────────────
   function showFollowUp(){
-    var fuq=document.getElementById('fu-q1');
-    if(fuq)fuq.style.display='block';
-    setVisible('fu-yes-opts',false);
-    setVisible('fu-no-opts',false);
-    setVisible('fu-chat-area',false);
-    setVisible('fu-mod-area',false);
-    setVisible('fu-altro-area',false);
+    // Determina tipo follow-up
+    var fuType = 'sino'; // default: signature e giorno
+    if(currentCmd==='mybar') fuType='mybar';
+    else if(currentCmd==='twist'||currentCmd==='pairing') fuType='tre';
+    else if(currentCmd==='signature') fuType='sino';
+    else if(currentCmd==='giorno') fuType='sino';
+
+    var fuBlock=document.getElementById('fu-block');
+    if(fuBlock)fuBlock.style.display='block';
+
+    // Nascondi tutti i tipi
+    ['fu-type-sino','fu-type-tre','fu-type-mybar','fu-chat-cont','fu-scelta-drink'].forEach(function(id){
+      var el=document.getElementById(id);if(el)el.style.display='none';
+    });
+
+    // Mostra il tipo corretto
+    var typeEl=document.getElementById('fu-type-'+fuType);
+    if(typeEl)typeEl.style.display='block';
+
     var cn=document.getElementById('crea-new');
     if(cn)cn.style.display='inline-flex';
   }
@@ -1051,7 +1070,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     setVisible('crea-step-signature',false);
     if(err)err.style.display='none';
     // Nascondi tutto il follow-up e torna-ai-comandi durante il fetch
-    ['fu-q1','fu-yes-opts','fu-no-opts','crea-new'].forEach(function(id){
+    ['fu-block','crea-new'].forEach(function(id){
       var el=document.getElementById(id);if(el)el.style.display='none';
     });
     if(resp)resp.style.display='block';
@@ -1105,12 +1124,106 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(getUsage()>=MAX){showExhausted();return;}
     var inp=document.getElementById('crea-input');
     var cfg=PROMPTS[currentCmd];
+    if(!cfg)return;
     var val=cfg.usePills ? selectedPill : (inp?inp.value.trim():'');
     if(!val||!currentCmd)return;
     var btn=document.getElementById('crea-btn');
     if(btn){btn.disabled=true;btn.textContent='...';}
-    await doFetch(cfg.build(val));
+
+    if(currentCmd==='mybar'){
+      await doMyBar(val);
+    } else {
+      await doFetch(cfg.build(val), cfg.maxTokens||1000);
+    }
     if(btn)btn.textContent='✦ Chiedi al Barman';
+  }
+
+  async function doMyBar(ingredientiRaw){
+    var resp=document.getElementById('crea-response');
+    var body=document.getElementById('crea-body');
+    var err=document.getElementById('crea-error');
+    setVisible('crea-step-input',false);
+    if(err)err.style.display='none';
+    ['fu-block','crea-new'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none';});
+    if(resp)resp.style.display='block';
+    if(body)body.innerHTML='<span style="color:var(--dim);">Il barman sta cercando nei tuoi drink…</span>';
+
+    try{
+      // Step 1: normalizza ingredienti con AI
+      var normRes=await fetch(WORKER_URL,{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'claude-sonnet-4-20250514',
+          max_tokens:300,
+          system:'Sei un esperto di bartending. Rispondi SOLO con JSON valido, nessun testo extra.',
+          messages:[{role:'user',content:'Normalizza questi ingredienti nei nomi standard da bartender italiano. Es: Campari→Bitter rosso, Zacapa 23→Rum guatemalteco, Gin Monkey 47→Gin, Aperol→Aperol.\n\nIngredienti: '+ingredientiRaw+'\n\nRispondi SOLO con: {"normalizzati":["nome1","nome2"]}'}]
+        })
+      });
+      var normData=await normRes.json();
+      var normText=normData&&normData.content&&normData.content[0]?normData.content[0].text:'';
+      var normalizzati=[];
+      try{
+        var parsed=JSON.parse(normText.replace(/```json|```/g,'').trim());
+        normalizzati=parsed.normalizzati||[];
+      }catch(e){ normalizzati=ingredientiRaw.split(',').map(function(s){return s.trim();}); }
+
+      // Step 2: cerca nel database
+      var data=window.DATA||[];
+      var risultati=[];
+      var parziali=[];
+
+      data.forEach(function(c){
+        var ingDB=(c.distillato||[]).concat((c.ingredienti||[]).map(function(i){return i[1];}))
+          .map(function(s){return s.toLowerCase();});
+
+        var matchati=normalizzati.filter(function(n){
+          var nl=n.toLowerCase();
+          return ingDB.some(function(d){return d.includes(nl)||nl.includes(d.split(' ')[0]);});
+        });
+
+        if(matchati.length===normalizzati.length){
+          risultati.push({drink:c,matchati:matchati,mancanti:[]});
+        } else if(matchati.length>=normalizzati.length-2&&matchati.length>0){
+          var mancanti=ingDB.filter(function(d){
+            return !normalizzati.some(function(n){return d.includes(n.toLowerCase())||n.toLowerCase().includes(d.split(' ')[0]);});
+          }).slice(0,3);
+          parziali.push({drink:c,matchati:matchati,mancanti:mancanti});
+        }
+      });
+
+      // Step 3: formatta risposta
+      var html='';
+      if(risultati.length){
+        html+='<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:0 0 10px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">Puoi fare subito ('+risultati.length+')</div>';
+        risultati.slice(0,8).forEach(function(r){
+          html+='<div style="padding:6px 0 6px 10px;border-left:2px solid var(--amber);margin-bottom:4px;font-size:.8rem;color:var(--txt);font-weight:600;">'+r.drink.name+'</div>';
+        });
+      }
+      if(parziali.length){
+        html+='<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:16px 0 10px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">Con un piccolo acquisto ('+parziali.length+')</div>';
+        parziali.slice(0,5).forEach(function(r){
+          var mancantiStr=r.drink.ingredienti.filter(function(i){
+            return !normalizzati.some(function(n){return i[1].toLowerCase().includes(n.toLowerCase())||n.toLowerCase().includes(i[1].toLowerCase().split(' ')[0]);});
+          }).map(function(i){return i[1];}).slice(0,2).join(', ');
+          html+='<div style="padding:6px 0 6px 10px;border-left:2px solid rgba(96,165,250,.3);margin-bottom:4px;">';
+          html+='<div style="font-size:.8rem;color:var(--txt);font-weight:600;">'+r.drink.name+'</div>';
+          if(mancantiStr)html+='<div style="font-size:.7rem;color:var(--dim);">Manca: '+mancantiStr+'</div>';
+          html+='</div>';
+        });
+      }
+      if(!risultati.length&&!parziali.length){
+        html='<div style="color:var(--dim);font-size:.8rem;">Nessun drink trovato con questi ingredienti. Prova ad aggiungere qualcosa!</div>';
+      }
+
+      if(body)body.innerHTML=html;
+      incUsage();renderUsage();
+      showFollowUp();
+      var cn=document.getElementById('crea-new');if(cn)cn.style.display='inline-flex';
+    }catch(e){
+      if(resp)resp.style.display='none';
+      if(err){err.style.display='block';err.textContent='⚠️ '+(e.message||'Errore. Riprova.');}
+      setVisible('crea-step-input',true);
+    }
   }
 
   // ─── INIT ─────────────────────────────────────────────────────────
@@ -1170,16 +1283,214 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     // e l'ultima risposta (per modifiche)
     
     function resetFollowUp(){
-      var fuq=document.getElementById('fu-q1');
-      if(fuq)fuq.style.display='block';
-      ['fu-yes-opts','fu-no-opts'].forEach(function(id){
+      var fuBlock=document.getElementById('fu-block');
+      if(fuBlock)fuBlock.style.display='none';
+      ['fu-type-sino','fu-type-tre','fu-type-mybar','fu-chat-cont','fu-scelta-drink'].forEach(function(id){
         var el=document.getElementById(id);if(el)el.style.display='none';
       });
-      var ni=document.getElementById('fu-no-inp');if(ni)ni.value='';
-      var ns=document.getElementById('fu-no-send');
-      if(ns){ns.disabled=true;ns.textContent='✦ Chiedi al Barman';
-        ns.style.background='var(--surf)';ns.style.color='var(--dim)';
-        ns.style.border='1px solid var(--brd)';ns.style.boxShadow='none';ns.style.opacity='.5';}
+      var ci=document.getElementById('fu-cont-inp');if(ci)ci.value='';
+      var si=document.getElementById('fu-scelta-inp');if(si)si.value='';
+      var cs=document.getElementById('fu-cont-send');
+      if(cs){cs.disabled=true;cs.textContent='✦ Chiedi al Barman';
+        cs.style.background='var(--surf)';cs.style.color='var(--dim)';
+        cs.style.border='1px solid var(--brd)';cs.style.boxShadow='none';cs.style.opacity='.5';}
+    }
+
+    function makeSendBtn(btnId, inpId, buildFn){
+      var btn=document.getElementById(btnId);
+      var inp=document.getElementById(inpId);
+      if(inp) inp.addEventListener('input', function(){
+        if(!btn)return;
+        var active=this.value.trim().length>0&&getUsage()<MAX;
+        btn.disabled=!active;
+        btn.style.background=active?'var(--amber)':'var(--surf)';
+        btn.style.color=active?'#0a0f1e':'var(--dim)';
+        btn.style.border=active?'none':'1px solid var(--brd)';
+        btn.style.cursor=active?'pointer':'not-allowed';
+        btn.style.boxShadow=active?'0 4px 16px rgba(245,158,11,.35)':'none';
+      });
+      if(btn) btn.addEventListener('click', function(){
+        var val=inp?inp.value.trim():'';
+        if(!val)return;
+        this.disabled=true;this.textContent='...';
+        var prompt=buildFn(val);
+        doFetch(prompt, 600).then(function(){ resetFollowUp(); });
+      });
+    }
+
+    // Sì
+    var fuYes=document.getElementById('fu-yes');
+    if(fuYes)fuYes.addEventListener('click',function(){
+      setVisible('fu-q1',false);
+      setVisible('fu-yes-opts',true);
+    });
+
+    // No
+    var fuNo=document.getElementById('fu-no');
+    if(fuNo)fuNo.addEventListener('click',function(){
+      setVisible('fu-q1',false);
+      setVisible('fu-no-opts',true);
+    });
+
+    // ── FOLLOW-UP LISTENERS ──────────────────────────────────────
+
+    // Salva (placeholder fino a Firebase)
+    function setupSaveBtn(id){
+      var b=document.getElementById(id);
+      if(b)b.addEventListener('click',function(){
+        this.textContent='✓ Salvato!';
+        this.style.background='rgba(34,197,94,.15)';
+        this.style.borderColor='rgba(34,197,94,.4)';
+        this.style.color='#4ade80';
+        var self=this;
+        setTimeout(function(){
+          self.textContent='🔖 Salva';
+          self.style.background='rgba(245,158,11,.12)';
+          self.style.borderColor='rgba(245,158,11,.3)';
+          self.style.color='var(--amber)';
+        },2000);
+      });
+    }
+    setupSaveBtn('fu-save');
+    setupSaveBtn('fu-save-tre');
+
+    // Lavoriamo su questa (sino)
+    var fuLavora=document.getElementById('fu-lavora');
+    if(fuLavora)fuLavora.addEventListener('click',function(){
+      setVisible('fu-type-sino',false);
+      var chat=document.getElementById('fu-chat-cont');
+      if(chat)chat.style.display='block';
+      setTimeout(function(){var i=document.getElementById('fu-cont-inp');if(i)i.focus();},80);
+    });
+
+    // Nuova proposta (sino)
+    var fuNuova=document.getElementById('fu-nuova');
+    if(fuNuova)fuNuova.addEventListener('click',function(){
+      var prompt;
+      if(currentCmd==='signature'){
+        var sigInp=document.getElementById('sig-input');
+        prompt=buildSignaturePrompt(sigInp?sigInp.value.trim():'stessi ingredienti')+' Proponi un drink completamente diverso.';
+        doFetch(prompt,500).then(function(){resetFollowUp();showFollowUp();});
+      } else if(currentCmd==='giorno'){
+        prompt=PROMPTS.giorno.build(selectedPill||'all day')+' Proponi un drink completamente diverso.';
+        doFetch(prompt,500).then(function(){resetFollowUp();showFollowUp();});
+      }
+    });
+
+    // Modifica una proposta (tre)
+    var fuModTre=document.getElementById('fu-modifica-tre');
+    if(fuModTre)fuModTre.addEventListener('click',function(){
+      setVisible('fu-type-tre',false);
+      var scelta=document.getElementById('fu-scelta-drink');
+      if(scelta)scelta.style.display='block';
+      setTimeout(function(){var i=document.getElementById('fu-scelta-inp');if(i)i.focus();},80);
+    });
+
+    // Scelta drink
+    var fuSceltaInp=document.getElementById('fu-scelta-inp');
+    var fuSceltaSend=document.getElementById('fu-scelta-send');
+    if(fuSceltaInp)fuSceltaInp.addEventListener('input',function(){
+      if(!fuSceltaSend)return;
+      var active=this.value.trim().length>0&&getUsage()<MAX;
+      fuSceltaSend.disabled=!active;
+      fuSceltaSend.style.background=active?'var(--amber)':'var(--surf)';
+      fuSceltaSend.style.color=active?'#0a0f1e':'var(--dim)';
+      fuSceltaSend.style.border=active?'none':'1px solid var(--brd)';
+      fuSceltaSend.style.cursor=active?'pointer':'not-allowed';
+      fuSceltaSend.style.opacity=active?'1':'.5';
+    });
+    if(fuSceltaSend)fuSceltaSend.addEventListener('click',function(){
+      var val=fuSceltaInp?fuSceltaInp.value.trim():'';
+      if(!val)return;
+      setVisible('fu-scelta-drink',false);
+      var chat=document.getElementById('fu-chat-cont');
+      if(chat)chat.style.display='block';
+      var ci=document.getElementById('fu-cont-inp');
+      if(ci){ci.value='Voglio lavorare su: '+val+'. ';ci.focus();}
+      var cs=document.getElementById('fu-cont-send');
+      if(cs){cs.disabled=false;cs.style.background='var(--amber)';cs.style.color='#0a0f1e';
+        cs.style.border='none';cs.style.cursor='pointer';cs.style.opacity='1';
+        cs.style.boxShadow='0 4px 16px rgba(245,158,11,.35)';}
+    });
+
+    // Altre 3 varianti
+    var fuAltreTre=document.getElementById('fu-altre-tre');
+    if(fuAltreTre)fuAltreTre.addEventListener('click',function(){
+      var inp=document.getElementById('crea-input');
+      var val=inp?inp.value.trim():'';
+      var body=document.getElementById('crea-body');
+      var prev=body?body.innerText.substring(0,200):'';
+      var prompt=(currentCmd==='twist'?PROMPTS.twist.build(val):PROMPTS.pairing.build(val))+
+        ' Proponi 3 varianti completamente diverse dalle precedenti.';
+      doFetch(prompt,700).then(function(){resetFollowUp();showFollowUp();});
+    });
+
+    // Chat continua
+    var fuContInp=document.getElementById('fu-cont-inp');
+    var fuContSend=document.getElementById('fu-cont-send');
+    if(fuContInp)fuContInp.addEventListener('input',function(){
+      if(!fuContSend)return;
+      var active=this.value.trim().length>0&&getUsage()<MAX;
+      fuContSend.disabled=!active;
+      fuContSend.style.background=active?'var(--amber)':'var(--surf)';
+      fuContSend.style.color=active?'#0a0f1e':'var(--dim)';
+      fuContSend.style.border=active?'none':'1px solid var(--brd)';
+      fuContSend.style.cursor=active?'pointer':'not-allowed';
+      fuContSend.style.opacity=active?'1':'.5';
+      fuContSend.style.boxShadow=active?'0 4px 16px rgba(245,158,11,.35)':'none';
+    });
+    if(fuContSend)fuContSend.addEventListener('click',function(){
+      var val=fuContInp?fuContInp.value.trim():'';
+      if(!val)return;
+      var body=document.getElementById('crea-body');
+      var prev=body?body.innerText.substring(0,500):'';
+      var prompt='Sulla base di questa proposta:\n"""\n'+prev+'\n"""\n\nRichiesta: '+val+'\n\nRispondi con la stessa struttura esatta.';
+      fuContSend.disabled=true;fuContSend.textContent='...';
+      var maxTok=(currentCmd==='twist'||currentCmd==='pairing')?700:500;
+      doFetch(prompt,maxTok).then(function(){
+        fuContSend.disabled=false;fuContSend.textContent='✦ Chiedi al Barman';
+        if(fuContInp)fuContInp.value='';
+        var chat=document.getElementById('fu-chat-cont');
+        if(chat)chat.style.display='block';
+        var cn=document.getElementById('crea-new');
+        if(cn)cn.style.display='inline-flex';
+      });
+    });
+
+    // My Bar: cambia ingredienti
+    var fuMybarNuova=document.getElementById('fu-mybar-nuova');
+    if(fuMybarNuova)fuMybarNuova.addEventListener('click',function(){
+      showCmds();setTimeout(function(){selectCmd('mybar');},50);
+    });
+
+        // Bottoni back (tutti quelli con .crea-back-btn)
+    document.querySelectorAll('.crea-back-btn').forEach(function(b){
+      b.addEventListener('click',function(){
+        var target=this.dataset.target;
+        if(target==='cmds') showCmds();
+      });
+    });
+
+    // Torna ai comandi
+    var newBtn=document.getElementById('crea-new');
+    if(newBtn)newBtn.addEventListener('click',showCmds);
+
+    // ── FOLLOW-UP ──────────────────────────────────────────────
+    // Variabile che tiene l'ultimo prompt inviato (per contesto)
+    // e l'ultima risposta (per modifiche)
+    
+    function resetFollowUp(){
+      var fuBlock=document.getElementById('fu-block');
+      if(fuBlock)fuBlock.style.display='none';
+      ['fu-type-sino','fu-type-tre','fu-type-mybar','fu-chat-cont','fu-scelta-drink'].forEach(function(id){
+        var el=document.getElementById(id);if(el)el.style.display='none';
+      });
+      var ci=document.getElementById('fu-cont-inp');if(ci)ci.value='';
+      var si=document.getElementById('fu-scelta-inp');if(si)si.value='';
+      var cs=document.getElementById('fu-cont-send');
+      if(cs){cs.disabled=true;cs.textContent='✦ Chiedi al Barman';
+        cs.style.background='var(--surf)';cs.style.color='var(--dim)';
+        cs.style.border='1px solid var(--brd)';cs.style.boxShadow='none';cs.style.opacity='.5';}
     }
 
     function makeSendBtn(btnId, inpId, buildFn){
