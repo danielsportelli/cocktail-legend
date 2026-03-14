@@ -1360,6 +1360,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       setVisible('fu-type-sino',false);
       var chat=document.getElementById('fu-chat-cont');
       if(chat)chat.style.display='block';
+      var cs=document.getElementById('fu-cont-send');
+      if(cs)cs.textContent='✦ Modifica';
       setTimeout(function(){var i=document.getElementById('fu-cont-inp');if(i)i.focus();},80);
     });
 
