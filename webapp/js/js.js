@@ -703,6 +703,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   var MAX = 50;
   var currentCmd = null;
   var selectedPill = null;
+  var lastRawText = '';
 
   // Stato multi-step signature
   var sig = { tipo: null, momento: null, gusto: null, tenore: null, bicchiere: null };
@@ -1066,6 +1067,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var data=await res.json();
       var text=data&&data.content&&data.content[0]?data.content[0].text:'';
       if(!text)throw new Error((data&&data.error&&data.error.message)||'Risposta vuota');
+      lastRawText=text;
       if(body)body.innerHTML=mdToHtml(text);
       incUsage(); renderUsage();
       // mostra follow-up
@@ -1310,27 +1312,26 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var val=fuContInp?fuContInp.value.trim():'';
       if(!val)return;
       var body=document.getElementById('crea-body');
-      var fullText=body?body.innerText:'';
       var prev='';
-      // Se è twist/pairing e c'è un drink selezionato, estrai solo quella proposta
-      if((currentCmd==='twist'||currentCmd==='pairing')&&body&&body.dataset.selectedDrinkNum){
-        var num=parseInt(body.dataset.selectedDrinkNum);
-        // Dividi il testo per separatori --- o per ## (ogni drink inizia con ##)
-        var chunks=fullText.split(/\n---\n|\n## /);
-        // Ricostruisci con ## per i chunk dopo il primo split
-        var drinks=[];
-        for(var ci2=0;ci2<chunks.length;ci2++){
-          var ch=chunks[ci2].trim();
-          if(ch.length>30)drinks.push(ch);
+      var numLabel=['prima','seconda','terza'];
+      var drinkNum=body&&body.dataset.selectedDrinkNum?parseInt(body.dataset.selectedDrinkNum):0;
+      if((currentCmd==='twist'||currentCmd==='pairing')&&drinkNum&&lastRawText){
+        // Split sul markdown grezzo usando --- come separatore tra i 3 drink
+        var parts=lastRawText.split(/\n---\n/);
+        if(parts.length>=drinkNum){
+          prev=parts[drinkNum-1].trim().substring(0,800);
+        } else {
+          // fallback: split per ## che precede ogni nome drink
+          var allDrinks=lastRawText.split(/(?=\n## )/).filter(function(s){return s.trim().length>30;});
+          prev=(allDrinks[drinkNum-1]||lastRawText).trim().substring(0,800);
         }
-        if(drinks[num-1])prev=drinks[num-1].substring(0,600);
-        else prev=fullText.substring(0,600);
       } else {
-        prev=fullText.substring(0,500);
+        prev=lastRawText.substring(0,600)||'';
       }
-      var prompt='Sulla base di questa proposta:\n"""\n'+prev+'\n"""\n\nRichiesta: '+val+'\n\nRispondi con la stessa struttura esatta (## NOME DRINK, ## RICETTA, ## PERSONALIZZAZIONE).';
+      var context=drinkNum?'Stai lavorando sulla '+numLabel[drinkNum-1]+' proposta.\n\n':'';
+      var prompt=context+'Sulla base di questa proposta:\n"""\n'+prev+'\n"""\n\nRichiesta: '+val+'\n\nRispondi con la stessa struttura esatta (## NOME DRINK, ## RICETTA, ## PERSONALIZZAZIONE).';
       fuContSend.disabled=true;fuContSend.textContent='...';
-      var maxTok=(currentCmd==='twist'||currentCmd==='pairing')?700:500;
+      var maxTok=(currentCmd==='twist'||currentCmd==='pairing')?800:500;
       doFetch(prompt,maxTok).then(function(){
         resetFollowUp();
         showFollowUp();
@@ -1426,8 +1427,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       fuNoSend.addEventListener('click',function(){
         var val=fuNoInp?fuNoInp.value.trim():'';
         if(!val)return;
-        var body=document.getElementById('crea-body');
-        var prev=body?body.innerText.substring(0,500):'';
+        var prev=lastRawText.substring(0,600)||'';
         var prompt='Sulla base di questa proposta precedente:\n"""\n'+prev+'\n"""\n\nRichiesta: '+val+'\n\nRispondi con la stessa struttura esatta (## NOME DRINK, ## RICETTA, ecc.).';
         fuNoSend.disabled=true;fuNoSend.textContent='...';
         doFetch(prompt, 600).then(function(){
