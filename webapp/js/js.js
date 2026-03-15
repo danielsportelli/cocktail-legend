@@ -465,6 +465,11 @@ document.getElementById("btn-filters").addEventListener("click", function(e){
     document.querySelectorAll(".fg-btn.open").forEach(function(btn){ btn.classList.remove("open"); });
     document.querySelectorAll(".fg-dropdown.open").forEach(function(dd){ dd.classList.remove("open"); });
   }
+  // Ricalcola altezza filter-bar subito e dopo l'animazione di chiusura
+  updateFbH();
+  setTimeout(updateFbH, 50);
+  setTimeout(updateFbH, 200);
+  setTimeout(updateFbH, 400);
 });
 
 
