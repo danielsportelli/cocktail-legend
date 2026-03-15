@@ -668,23 +668,32 @@ function openDrawer(id) {
   var overlay = document.getElementById('drawer-overlay');
   var btn = document.getElementById('tbtn-' + id);
   if (!drawer) return;
+  // Se stessa tab → chiudi
   if (CURRENT_DRAWER === id) {
     closeAllDrawers();
     return;
   }
-  closeAllDrawers(true);
+  // Se c'è già una tab aperta → swap diretto senza animazione di chiusura
+  if (CURRENT_DRAWER !== null) {
+    // Nascondi drawer corrente senza transizione
+    var prevDrawer = document.getElementById('drawer-' + CURRENT_DRAWER);
+    if (prevDrawer) {
+      prevDrawer.style.transition = 'none';
+      prevDrawer.classList.remove('open');
+      // Ripristina transizione al prossimo frame
+      requestAnimationFrame(function(){ prevDrawer.style.transition = ''; });
+    }
+  }
   CURRENT_DRAWER = id;
   drawer.classList.add('open');
   overlay.classList.add('show');
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
-  // Logica AI: se apro tab non-AI, dimmo la stellina; se apro AI, torno normale
   var creabtn = document.getElementById('tbtn-crea');
   if(creabtn){
     if(id === 'crea'){ creabtn.classList.remove('dim'); }
     else { creabtn.classList.add('dim'); }
   }
-  // Nascondi filter-bar e rbar sotto il drawer
   var fb=document.getElementById('filter-bar');if(fb)fb.style.zIndex='40';
   var rb=document.getElementById('rbar');if(rb)rb.style.zIndex='40';
 }

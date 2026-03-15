@@ -614,6 +614,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   text-transform:uppercase;color:var(--dim);
   margin-bottom:1.2rem;padding-bottom:.7rem;
   border-bottom:1px solid var(--brd);
+  position:sticky;top:2.1rem;background:var(--surf);z-index:1;
 }
 /* overlay scuro dietro drawer */
 .drawer-overlay{
