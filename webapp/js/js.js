@@ -713,7 +713,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   var PROMPTS = {
     twist: {
       maxTokens: 1200,
-      label: 'Quale classico vuoi reinterpretare? (3 varianti)',
+      label: 'Scrivi un drink classico e ti propongo 3 varianti',
       placeholder: 'es. Negroni, Old Fashioned, Margarita...',
       usePills: false,
       fuType: 'tre',
