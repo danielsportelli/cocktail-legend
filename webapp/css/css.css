@@ -602,8 +602,6 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .drawer-sticky-top{
   position:sticky;top:0;background:var(--surf);z-index:3;
-  padding:0 1.2rem;
-  margin:0 -1.2rem;
 }
 .drawer-handle{
   display:flex;justify-content:center;padding:.7rem 0 .3rem;
