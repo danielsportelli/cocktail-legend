@@ -1167,19 +1167,6 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     // Variabile che tiene l'ultimo prompt inviato (per contesto)
     // e l'ultima risposta (per modifiche)
     
-    function resetFollowUp(){
-      var fuBlock=document.getElementById('fu-block');
-      if(fuBlock)fuBlock.style.display='none';
-      ['fu-type-sino','fu-type-tre','fu-chat-cont','fu-scelta-drink'].forEach(function(id){
-        var el=document.getElementById(id);if(el)el.style.display='none';
-      });
-      var ci=document.getElementById('fu-cont-inp');if(ci)ci.value='';
-      var cs=document.getElementById('fu-cont-send');
-      if(cs){cs.disabled=true;cs.textContent='✦ Modifica';
-        cs.style.background='var(--surf)';cs.style.color='var(--dim)';
-        cs.style.border='1px solid var(--brd)';cs.style.boxShadow='none';cs.style.opacity='.5';}
-    }
-
     function makeSendBtn(btnId, inpId, buildFn){
       var btn=document.getElementById(btnId);
       var inp=document.getElementById(inpId);
@@ -1266,7 +1253,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     // Modifica una proposta (tre) — apre i 3 bottoni Prima/Seconda/Terza
     var fuModTre=document.getElementById('fu-modifica-tre');
     if(fuModTre)fuModTre.addEventListener('click',function(){
-      setVisible('fu-type-tre',false);
+      setVisible('fu-tre-opts',false);
       var scelta=document.getElementById('fu-scelta-drink');
       if(scelta)scelta.style.display='block';
     });
@@ -1372,7 +1359,9 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       ['fu-type-sino','fu-type-tre','fu-chat-cont','fu-scelta-drink'].forEach(function(id){
         var el=document.getElementById(id);if(el)el.style.display='none';
       });
-      var ci=document.getElementById('fu-cont-inp');if(ci)ci.value='';
+      var treOpts=document.getElementById('fu-tre-opts');
+      if(treOpts)treOpts.style.display='block';
+      var ci=document.getElementById('fu-cont-inp');if(ci){ci.value='';ci.placeholder='Dimmi cosa vuoi che faccia...';}
       var cs=document.getElementById('fu-cont-send');
       if(cs){cs.disabled=true;cs.textContent='✦ Modifica';
         cs.style.background='var(--surf)';cs.style.color='var(--dim)';
