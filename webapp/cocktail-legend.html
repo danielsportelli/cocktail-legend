@@ -673,22 +673,23 @@ function openDrawer(id) {
     closeAllDrawers();
     return;
   }
-  // Se c'è già una tab aperta → swap diretto senza animazione di chiusura
-  if (CURRENT_DRAWER !== null) {
-    // Nascondi drawer corrente senza transizione
-    var prevDrawer = document.getElementById('drawer-' + CURRENT_DRAWER);
-    if (prevDrawer) {
-      prevDrawer.style.transition = 'none';
-      prevDrawer.classList.remove('open');
-      // Ripristina transizione al prossimo frame
-      requestAnimationFrame(function(){ prevDrawer.style.transition = ''; });
-    }
-  }
-  CURRENT_DRAWER = id;
+  // Swap diretto: disabilita transizioni su tutti i drawer, poi swappa
+  var allDrawers = document.querySelectorAll('.drawer');
+  allDrawers.forEach(function(d){ d.style.transition = 'none'; });
+  // Rimuovi open da tutti
+  allDrawers.forEach(function(d){ d.classList.remove('open'); });
+  // Aggiungi open al nuovo — senza transizione è istantaneo
   drawer.classList.add('open');
+  // Ripristina transizioni al prossimo frame (per future animazioni di chiusura)
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      allDrawers.forEach(function(d){ d.style.transition = ''; });
+    });
+  });
   overlay.classList.add('show');
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
+  CURRENT_DRAWER = id;
   var creabtn = document.getElementById('tbtn-crea');
   if(creabtn){
     if(id === 'crea'){ creabtn.classList.remove('dim'); }

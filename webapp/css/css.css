@@ -602,7 +602,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .drawer-handle{
   display:flex;justify-content:center;padding:.7rem 0 .3rem;
-  position:sticky;top:0;background:var(--surf);z-index:2;
+  position:sticky;top:0;background:var(--surf);z-index:3;
 }
 .drawer-handle::before{
   content:'';width:36px;height:4px;
@@ -611,10 +611,12 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .drawer-inner{padding:0 1.2rem 2rem;}
 .drawer-header{
   font-size:.65rem;font-weight:800;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--dim);
-  margin-bottom:1.2rem;padding-bottom:.7rem;
+  text-transform:uppercase;color:var(--surf);
+  margin-bottom:1.2rem;padding:.5rem 1.2rem .7rem;
   border-bottom:1px solid var(--brd);
-  position:sticky;top:2.1rem;background:var(--surf);z-index:1;
+  position:sticky;top:1.3rem;background:var(--surf);z-index:2;
+  margin-left:-1.2rem;margin-right:-1.2rem;
+  color:var(--dim);
 }
 /* overlay scuro dietro drawer */
 .drawer-overlay{
