@@ -256,7 +256,7 @@ function uniq(key) {
       for(var j=0;j<c.ingredienti.length;j++)s[c.ingredienti[j][1]]=1;
     }
     else if(key==="frz"){s[c.frizzante?"Si":"No"]=1;}
-    else if(key==="glos"){s[c.bicchiere]=1;}
+    else if(key==="bic"){s[c.bicchiere]=1;}
     else{s[c[key]]=1;}
   }
   return Object.keys(s).sort();
@@ -277,7 +277,7 @@ function uniqFromRes(key) {
       for (var j = 0; j < c.ingredienti.length; j++) s[c.ingredienti[j][1]] = 1;
     }
     else if (key === "frz") { s[c.frizzante ? "Si" : "No"] = 1; }
-    else if (key === "glos") { s[c.bicchiere] = 1; }
+    else if (key === "bic") { s[c.bicchiere] = 1; }
     else { var f2 = key==="cat" ? "categoria" : key==="abv" ? "abv" : key; s[c[f2]] = 1; }
   }
   return s;
@@ -291,7 +291,7 @@ function countFor(key, val) {
     if(AF.abv.length && key!=="abv" && AF.abv.indexOf(c.abv)===-1) return false;
     if(AF.sap.length && key!=="sap" && !AF.sap.some(function(s){return c.sapori.indexOf(s)!==-1;})) return false;
     if(AF.frz.length && key!=="frz" && AF.frz.indexOf(c.frizzante?"Si":"No")===-1) return false;
-    if(AF.glos.length && key!=="glos" && AF.glos.indexOf(c.bicchiere)===-1) return false;
+    if(AF.bic.length && key!=="bic" && AF.bic.indexOf(c.bicchiere)===-1) return false;
     if(FAV_ONLY){var favs=loadFavs();if(favs.indexOf(c.name)===-1)return false;}
     // filtro testuale: solo nome cocktail
     if(Q){var q2=Q.toLowerCase().trim();if(c.name.toLowerCase().indexOf(q2)===-1)return false;}
@@ -300,7 +300,7 @@ function countFor(key, val) {
   if(key==="sap") return base.filter(function(c){return c.sapori.indexOf(val)!==-1;}).length;
   if(key==="dis"){var vl=val.toLowerCase();return base.filter(function(c){return c.distillato.some(function(x){return x.toLowerCase()===vl;})||c.ingredienti.some(function(i){return i[1].toLowerCase()===vl;});}).length;}
   if(key==="frz") return base.filter(function(c){return (c.frizzante?"Si":"No")===val;}).length;
-  if(key==="glos") return base.filter(function(c){return c.bicchiere===val;}).length;
+  if(key==="bic") return base.filter(function(c){return c.bicchiere===val;}).length;
   var field = FMAP[key] || key;
   return base.filter(function(c){return c[field]===val;}).length;
 }
@@ -341,7 +341,7 @@ function buildDropdown(id, key, items) {
 function updateAllCounts() {
   // Pre-calcola i resSet per chiave una sola volta
   var _resSets = {};
-  ["cat","dis","abv","sap","frz","glos"].forEach(function(k){ _resSets[k] = uniqFromRes(k); });
+  ["cat","dis","abv","sap","frz","bic"].forEach(function(k){ _resSets[k] = uniqFromRes(k); });
   document.querySelectorAll(".ci").forEach(function(div){
     var k = div.dataset.key, v = div.dataset.val;
     var cnt = countFor(k, v);
@@ -411,7 +411,7 @@ function initF() {
   buildDropdown("dd-dis","dis", ings);
   buildDropdown("dd-sap","sap", saps);
   buildDropdown("dd-frz","frz", ["Si","No"]);
-  buildDropdown("dd-glos","glos", bics);
+  buildDropdown("dd-bic","bic", bics);
   buildDropdown("dd-abv","abv", ["Analcolico","Basso","Medio basso","Medio","Medio alto","Alto","Molto alto"]);
 }
 
@@ -512,13 +512,13 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function updateBadges() {
-  var total = AF.cat.length + AF.dis.length + AF.abv.length + AF.sap.length + AF.frz.length + AF.glos.length;
+  var total = AF.cat.length + AF.dis.length + AF.abv.length + AF.sap.length + AF.frz.length + AF.bic.length;
   var badge = document.getElementById("active-badge");
   badge.textContent = total;
   badge.classList.toggle("show", total > 0);
 
   // contatori sui singoli btn
-  ["cat","dis","abv","sap","frz","glos"].forEach(function(k){
+  ["cat","dis","abv","sap","frz","bic"].forEach(function(k){
     var cnt = document.getElementById("cnt-"+k);
     cnt.textContent = AF[k].length;
     cnt.classList.toggle("show", AF[k].length > 0);
@@ -566,7 +566,7 @@ function render() {
   if(AF.dis.length){res=res.filter(function(c){return AF.dis.some(function(d){var dl=d.toLowerCase();return c.distillato.some(function(x){return x.toLowerCase()===dl;})||c.ingredienti.some(function(i){return i[1].toLowerCase()===dl;});});});}
   if(AF.abv.length){res=res.filter(function(c){return AF.abv.indexOf(c.abv)!==-1;});}
   if(AF.frz.length){res=res.filter(function(c){return AF.frz.indexOf(c.frizzante?"Si":"No")!==-1;});}  
-  if(AF.glos.length){res=res.filter(function(c){return AF.glos.indexOf(c.bicchiere)!==-1;});}
+  if(AF.bic.length){res=res.filter(function(c){return AF.bic.indexOf(c.bicchiere)!==-1;});}
   if(AF.sap.length){res=res.filter(function(c){return AF.sap.some(function(s){return c.sapori.indexOf(s)!==-1;});});}
   if(FAV_ONLY){var favs=loadFavs();res=res.filter(function(c){return favs.indexOf(c.name)!==-1;});}
   var s=document.getElementById("srt").value;
@@ -1720,8 +1720,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         if(hdr)hdr.textContent=RIS_TITLES[cmd]||'Risorse';
         document.getElementById('ris-step-cmds').style.display='none';
         document.getElementById('ris-step-tmp').style.display=cmd==='tmp'?'block':'none';
-        document.getElementById('ris-step-bic').style.display=cmd==='glos'?'block':'none';
-        if(cmd==='glos') populateRisGlossario();
+        document.getElementById('ris-step-bic').style.display=cmd==='bic'?'block':'none';
+        if(cmd==='bic') populateRisGlossario();
       });
     });
 
@@ -1785,12 +1785,14 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var src=document.querySelector('#drawer-glos .drawer-inner');
       var dst=document.getElementById('ris-glossario-content');
       if(!src||!dst)return;
-      Array.from(src.childNodes).forEach(function(n){
-        var tag=n.nodeName;
-        if(tag==='DIV'&&n.classList&&n.classList.contains('drawer-header'))return;
-        if(tag==='P')return;
-        dst.appendChild(n.cloneNode(true));
-      });
+      // Prendi tutto l'innerHTML ed escludi drawer-header e primo p
+      var tmp=document.createElement('div');
+      tmp.innerHTML=src.innerHTML;
+      var hdr=tmp.querySelector('.drawer-header');
+      if(hdr)hdr.remove();
+      var p=tmp.querySelector('p');
+      if(p)p.remove();
+      dst.innerHTML=tmp.innerHTML;
       _glossPopulated=true;
     }
 

@@ -704,7 +704,7 @@ body{padding-bottom:56px;}
 .copied-toast.show{opacity:1;}
 
 /* ═══ BARMAN AI TAB ═══ */
-.tab-btn-crea {
+.tab-btn-ai {
   position: relative;
 }
 .tab-btn-ico-crea {
@@ -725,28 +725,28 @@ body{padding-bottom:56px;}
   height: 26px;
   transition: filter .2s;
 }
-.tab-btn-crea:active .tab-btn-ico-crea {
+.tab-btn-ai:active .tab-btn-ico-crea {
   transform: scale(.92);
 }
-.tab-btn-crea .tab-btn-lbl {
+.tab-btn-ai .tab-btn-lbl {
   color: var(--amber);
   font-weight: 700;
 }
 /* Quando AI è attiva → amber pieno */
-.tab-btn-crea.active .tab-btn-ico-crea {
+.tab-btn-ai.active .tab-btn-ico-crea {
   color: var(--amber);
 }
-.tab-btn-crea.active .tab-btn-ico-crea svg {
+.tab-btn-ai.active .tab-btn-ico-crea svg {
   filter: drop-shadow(0 0 7px rgba(245,158,11,.8));
 }
 /* Quando AI è "spenta" (altra tab aperta) → neutra */
-.tab-btn-crea.dim .tab-btn-ico-crea {
+.tab-btn-ai.dim .tab-btn-ico-crea {
   color: var(--dim);
 }
-.tab-btn-crea.dim .tab-btn-ico-crea svg {
+.tab-btn-ai.dim .tab-btn-ico-crea svg {
   filter: none;
 }
-.tab-btn-crea.dim .tab-btn-lbl {
+.tab-btn-ai.dim .tab-btn-lbl {
   color: var(--dim);
 }
 
