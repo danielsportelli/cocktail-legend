@@ -10,9 +10,9 @@
 <style>
   /* Drawer fullscreen quando aperto */
   .drawer.open {
-    top: 0 !important;
-    height: calc(100dvh - 64px) !important;
-    max-height: calc(100dvh - 64px) !important;
+    bottom: var(--tab-bar-h, 56px) !important;
+    max-height: calc(100dvh - var(--tab-bar-h, 56px)) !important;
+    height: calc(100dvh - var(--tab-bar-h, 56px)) !important;
     border-radius: 0 !important;
   }
 </style>

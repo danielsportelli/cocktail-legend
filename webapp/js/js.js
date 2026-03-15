@@ -463,8 +463,29 @@ document.getElementById("btn-filters").addEventListener("click", function(e){
   }
 });
 
+
+// ═══ RESET COMPLETO (filtri + ricerca) ═══
+document.addEventListener('DOMContentLoaded', function(){
+  var resetBtn = document.getElementById('btn-reset');
+  if(resetBtn) resetBtn.addEventListener('click', function(){
+    AF = {cat:[], dis:[], abv:[], sap:[], frz:[], bic:[]};
+    Q = '';
+    var srch = document.getElementById('srch');
+    if(srch) srch.value = '';
+    document.querySelectorAll('.ci.on').forEach(function(ci){
+      ci.classList.remove('on');
+      var cb = ci.querySelector('.cb');
+      if(cb) cb.classList.remove('on');
+    });
+    document.querySelectorAll('.fg-btn.open').forEach(function(b){ b.classList.remove('open'); });
+    document.querySelectorAll('.fg-dropdown.open').forEach(function(d){ d.classList.remove('open'); });
+    updateBadges();
+    render();
+    updateAllCounts();
+  });
+});
+
 function updateBadges() {
-  var total = AF.cat.length + AF.dis.length + AF.abv.length + AF.sap.length + AF.frz.length + AF.bic.length;
   var badge = document.getElementById("active-badge");
   badge.textContent = total;
   badge.classList.toggle("show", total > 0);
