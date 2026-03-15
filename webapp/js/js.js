@@ -704,6 +704,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   var currentCmd = null;
   var selectedPill = null;
   var lastRawText = '';
+  var giornoTipo = null; // 'alcolico' o 'analcolico'
 
   // Stato multi-step signature
   var sig = { tipo: null, momento: null, gusto: null, tenore: null, bicchiere: null };
@@ -742,7 +743,6 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var stagioni = ['inverno','inverno','primavera','primavera','primavera','estate','estate','estate','autunno','autunno','autunno','inverno'];
         var mese = mesi[now.getMonth()];
         var stagione = stagioni[now.getMonth()];
-        // Ingredienti stagionali per mese
         var ingredientiStagione = {
           'dicembre':'agrumi (arancia, mandarino), melograno, cannella, chiodi di garofano, castagne, cachi',
           'gennaio':'agrumi (limone, arancia amara), melograno, vaniglia, radici invernali',
@@ -758,7 +758,9 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           'novembre':'melograno, mele cotogne, castagne, arancia, spezie calde, cachi'
         };
         var ing = ingredientiStagione[mese] || 'ingredienti di stagione';
-        return 'Oggi è il ' + now.getDate() + ' ' + mese + ', siamo in ' + stagione + '.\n\nCrea il cocktail del giorno con stile: ' + v + '.\n\nREGOLA FONDAMENTALE: devi usare obbligatoriamente almeno un ingrediente fresco di stagione di questo periodo tra questi: ' + ing + '.\nQuesto ingrediente stagionale deve essere il cuore del drink, non un semplice garnish.\n\nRispondi SOLO con questa struttura:\n## NOME DRINK\nConcept in 1 riga.\n## RICETTA\n- dose Ingrediente (lista completa)\n**Tecnica:** su riga separata\n**Bicchiere:** su riga separata\n**Garnish:** su riga separata\n## INGREDIENTE STAGIONALE\nQuale ingrediente di stagione hai usato e perché è perfetto in questo momento.\n## PERSONALIZZAZIONE\nConsiglio di bilanciamento.';
+        var tipoStr = giornoTipo==='analcolico' ? 'ANALCOLICO (zero alcol)' : 'ALCOLICO, stile '+v;
+        var stileNote = giornoTipo==='analcolico' ? '' : '\nStile: '+v+'.';
+        return 'Oggi è il ' + now.getDate() + ' ' + mese + ', siamo in ' + stagione + '.\n\nCrea il cocktail del giorno '+tipoStr+'.\n\nREGOLA FONDAMENTALE: devi usare obbligatoriamente almeno un ingrediente fresco di stagione di questo periodo tra questi: ' + ing + '.\nQuesto ingrediente stagionale deve essere il cuore del drink, non un semplice garnish.'+stileNote+'\n\nRispondi SOLO con questa struttura:\n## NOME DRINK\nConcept in 1 riga.\n## RICETTA\n- dose Ingrediente (lista completa)\n**Tecnica:** su riga separata\n**Bicchiere:** su riga separata\n**Garnish:** su riga separata\n## INGREDIENTE STAGIONALE\nQuale ingrediente di stagione hai usato e perché è perfetto in questo momento.\n## PERSONALIZZAZIONE\nConsiglio di bilanciamento.';
       }
     }
   };
@@ -827,7 +829,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
   // ─── NAVIGAZIONE PRINCIPALE ───────────────────────────────────────
   function showCmds(){
-    currentCmd=null; selectedPill=null;
+    currentCmd=null; selectedPill=null; giornoTipo=null;
     sig={tipo:null,momento:null,gusto:null,tenore:null,bicchiere:null};
     setVisible('crea-step-cmds',true);
     setVisible('crea-step-signature',false);
@@ -880,9 +882,21 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       // reset tutte le pill signature
       document.querySelectorAll('.sig-pill').forEach(function(p){ pillOff(p); });
       document.querySelectorAll('.sig-pill-group-active').forEach(function(el){ el.classList.remove('sig-pill-group-active'); });
+    } else if(cmd==='giorno'){
+      // multi-step giorno: step1 alcolico/analcolico
+      giornoTipo=null; selectedPill=null;
+      setVisible('crea-step-input',true);
+      setVisible('giorno-step-1',true);
+      setVisible('giorno-step-2',false);
+      var pills=document.getElementById('crea-pills');
+      if(pills)pills.style.display='none';
+      document.querySelectorAll('.giorno-tipo-pill,.crea-pill').forEach(function(p){ pillOff(p); });
+      updateBtn();
     } else {
       var cfg=PROMPTS[cmd];
       setVisible('crea-step-input',true);
+      setVisible('giorno-step-1',false);
+      setVisible('giorno-step-2',false);
       var label=document.getElementById('crea-input-label');
       if(label)label.textContent=cfg.label;
       var pills=document.getElementById('crea-pills');
@@ -997,7 +1011,13 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(!btn||!currentCmd)return;
     var cfg=PROMPTS[currentCmd];
     if(!cfg)return;
-    var hasVal=cfg.usePills ? selectedPill!==null : (inp&&inp.value.trim().length>0);
+    var hasVal;
+    if(currentCmd==='giorno'){
+      // abilitato se: analcolico selezionato, oppure alcolico + stile selezionato
+      hasVal=(giornoTipo==='analcolico')||(giornoTipo==='alcolico'&&selectedPill!==null);
+    } else {
+      hasVal=cfg.usePills ? selectedPill!==null : (inp&&inp.value.trim().length>0);
+    }
     var active=hasVal&&getUsage()<MAX;
     btn.disabled=!active;
     btn.textContent=currentCmd==='giorno'?'✦ Crea il drink del giorno':'✦ Chiedi al Barman';
@@ -1006,6 +1026,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     btn.style.border=active?'none':'1px solid var(--brd)';
     btn.style.cursor=active?'pointer':'not-allowed';
     btn.style.boxShadow=active?'0 4px 16px rgba(245,158,11,.35)':'none';
+    btn.style.opacity=active?'1':'.5';
   }
 
   // ─── MARKDOWN → HTML ──────────────────────────────────────────────
@@ -1126,13 +1147,17 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var inp=document.getElementById('crea-input');
     var cfg=PROMPTS[currentCmd];
     if(!cfg)return;
-    var val=cfg.usePills ? selectedPill : (inp?inp.value.trim():'');
+    var val;
+    if(currentCmd==='giorno'){
+      val=giornoTipo==='analcolico'?'analcolico':selectedPill;
+    } else {
+      val=cfg.usePills ? selectedPill : (inp?inp.value.trim():'');
+    }
     if(!val||!currentCmd)return;
     var btn=document.getElementById('crea-btn');
     if(btn){btn.disabled=true;btn.textContent='...';}
-
       await doFetch(cfg.build(val), cfg.maxTokens||1000);
-    if(btn)btn.textContent='✦ Chiedi al Barman';
+    if(btn)btn.textContent='✦ Crea il drink del giorno';
   }
 
   // ─── INIT ─────────────────────────────────────────────────────────
@@ -1151,7 +1176,32 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       p.addEventListener('click',function(){ onSigPill(this); });
     });
 
-    // Pill giorno (altri comandi)
+    // Pill tipo giorno (alcolico/analcolico) — step 1
+    document.querySelectorAll('.giorno-tipo-pill').forEach(function(p){
+      p.addEventListener('click',function(){
+        giornoTipo=this.dataset.val;
+        // dimma le altre
+        document.querySelectorAll('.giorno-tipo-pill').forEach(function(x){ pillOff(x); });
+        pillOn(this);
+        if(giornoTipo==='alcolico'){
+          // mostra step 2 con le pill stile
+          setVisible('giorno-step-2',true);
+          var label=document.getElementById('crea-input-label');
+          if(label)label.textContent='In che stile lo vuoi?';
+          var pills=document.getElementById('crea-pills');
+          if(pills)pills.style.display='flex';
+          document.querySelectorAll('.crea-pill').forEach(function(x){ pillOff(x); });
+          selectedPill=null;
+        } else {
+          // analcolico: niente stile, abilita direttamente il bottone
+          setVisible('giorno-step-2',false);
+          selectedPill=null;
+        }
+        updateBtn();
+      });
+    });
+
+    // Pill giorno stile (pre/after/all day)
     document.querySelectorAll('.crea-pill').forEach(function(p){
       p.addEventListener('click',function(){
         selectedPill=this.dataset.val;
@@ -1365,8 +1415,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         }
         if(sigLines.length)sigContext='VINCOLI ORIGINALI DA RISPETTARE (non cambiare questi parametri):\n'+sigLines.join('\n')+'\n\n';
       }
-      if(currentCmd==='giorno'&&selectedPill){
-        sigContext='VINCOLO ORIGINALE DA RISPETTARE: stile '+selectedPill+' (non cambiare questo parametro).\n\n';
+      if(currentCmd==='giorno'&&(giornoTipo||selectedPill)){
+        var gLines=[];
+        if(giornoTipo)gLines.push('- Tipo: '+(giornoTipo==='analcolico'?'ANALCOLICO (zero alcol)':'ALCOLICO'));
+        if(giornoTipo==='alcolico'&&selectedPill)gLines.push('- Stile: '+selectedPill);
+        sigContext='VINCOLI ORIGINALI DA RISPETTARE (non cambiare questi parametri):\n'+gLines.join('\n')+'\n\n';
       }
       var isModifyMode=(currentCmd==='twist'||currentCmd==='pairing')&&drinkNum>0;
       var prompt=context+sigContext+'Sulla base di questa proposta:\n"""\n'+prev+'\n"""\n\nRichiesta di modifica: '+val+'\n\nRispondi con la stessa struttura esatta (## NOME DRINK, ## RICETTA, ## PERSONALIZZAZIONE) e aggiungi in fondo ## MODIFICHE APPORTATE con elenco sintetico dei cambiamenti.';
