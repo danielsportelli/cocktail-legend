@@ -731,7 +731,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       }
     },
     giorno: {
-      maxTokens: 500,
+      maxTokens: 600,
       label: 'In che stile lo vuoi?',
       placeholder: '',
       usePills: true,
@@ -740,9 +740,25 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var now = new Date();
         var mesi = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
         var stagioni = ['inverno','inverno','primavera','primavera','primavera','estate','estate','estate','autunno','autunno','autunno','inverno'];
-        var data = now.getDate() + ' ' + mesi[now.getMonth()] + ' ' + now.getFullYear();
+        var mese = mesi[now.getMonth()];
         var stagione = stagioni[now.getMonth()];
-        return 'Oggi è ' + data + ', siamo in ' + stagione + '. Crea il cocktail del giorno per il momento: ' + v + '.\n\nDammi UN solo drink con:\n- Nome originale e concept stagionale\n- Ricetta completa (dosi, tecnica, bicchiere, garnish)\n- In 1 riga: perché è perfetto per questo momento\n\nDeve essere creativo, non un classico già noto.';
+        // Ingredienti stagionali per mese
+        var ingredientiStagione = {
+          'dicembre':'agrumi (arancia, mandarino), melograno, cannella, chiodi di garofano, castagne, cachi',
+          'gennaio':'agrumi (limone, arancia amara), melograno, vaniglia, radici invernali',
+          'febbraio':'agrumi (pompelmo, bergamotto), carciofi, finocchio',
+          'marzo':'fragole precoci, asparagi, piselli, menta fresca',
+          'aprile':'fragole, ciliegie precoci, asparagi, menta, fiori di sambuco',
+          'maggio':'fragole, ciliegie, fiori di sambuco, menta, basilico fresco',
+          'giugno':'fragole, ciliegie, albicocche, fiori di sambuco, basilico, pesche',
+          'luglio':'pesche, albicocche, anguria, melone, basilico, mirtilli, lamponi',
+          'agosto':'pesche, anguria, melone, fichi, pomodori, basilico, lavanda',
+          'settembre':'fichi, uva, pere, mele, mirtilli, rosmarino, salvia',
+          'ottobre':'mele, pere, uva, fichi, melograno, zucca, rosmarino, timo',
+          'novembre':'melograno, mele cotogne, castagne, arancia, spezie calde, cachi'
+        };
+        var ing = ingredientiStagione[mese] || 'ingredienti di stagione';
+        return 'Oggi è il ' + now.getDate() + ' ' + mese + ', siamo in ' + stagione + '.\n\nCrea il cocktail del giorno con stile: ' + v + '.\n\nREGOLA FONDAMENTALE: devi usare obbligatoriamente almeno un ingrediente fresco di stagione di questo periodo tra questi: ' + ing + '.\nQuesto ingrediente stagionale deve essere il cuore del drink, non un semplice garnish.\n\nRispondi SOLO con questa struttura:\n## NOME DRINK\nConcept in 1 riga.\n## RICETTA\n- dose Ingrediente (lista completa)\n**Tecnica:** su riga separata\n**Bicchiere:** su riga separata\n**Garnish:** su riga separata\n## INGREDIENTE STAGIONALE\nQuale ingrediente di stagione hai usato e perché è perfetto in questo momento.\n## PERSONALIZZAZIONE\nConsiglio di bilanciamento.';
       }
     }
   };
@@ -1335,10 +1351,27 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         prev=lastRawText.substring(0,600)||'';
       }
       var context=drinkNum?'Stai modificando la '+numLabel[drinkNum-1]+' proposta.\n\n':'';
+      // Per signature: aggiungi i vincoli originali così l'AI li rispetta
+      var sigContext='';
+      if(currentCmd==='signature'){
+        var sigLines=[];
+        if(sig.tipo==='alcolico'){
+          if(sig.momento)sigLines.push('- Momento: '+sig.momento);
+          if(sig.tenore)sigLines.push('- Tenore alcolico: '+sig.tenore);
+          if(sig.bicchiere)sigLines.push('- Bicchiere: '+sig.bicchiere);
+        } else if(sig.tipo==='analcolico'){
+          sigLines.push('- Tipo: ANALCOLICO');
+          if(sig.gusto)sigLines.push('- Profilo gusto: '+sig.gusto);
+        }
+        if(sigLines.length)sigContext='VINCOLI ORIGINALI DA RISPETTARE (non cambiare questi parametri):\n'+sigLines.join('\n')+'\n\n';
+      }
+      if(currentCmd==='giorno'&&selectedPill){
+        sigContext='VINCOLO ORIGINALE DA RISPETTARE: stile '+selectedPill+' (non cambiare questo parametro).\n\n';
+      }
       var isModifyMode=(currentCmd==='twist'||currentCmd==='pairing')&&drinkNum>0;
-      var prompt=context+'Sulla base di questa proposta:\n"""\n'+prev+'\n"""\n\nRichiesta di modifica: '+val+'\n\nRispondi con la stessa struttura esatta (## NOME DRINK, ## RICETTA, ## PERSONALIZZAZIONE) e aggiungi in fondo ## MODIFICHE APPORTATE con elenco sintetico dei cambiamenti.';
+      var prompt=context+sigContext+'Sulla base di questa proposta:\n"""\n'+prev+'\n"""\n\nRichiesta di modifica: '+val+'\n\nRispondi con la stessa struttura esatta (## NOME DRINK, ## RICETTA, ## PERSONALIZZAZIONE) e aggiungi in fondo ## MODIFICHE APPORTATE con elenco sintetico dei cambiamenti.';
       fuContSend.disabled=true;fuContSend.textContent='...';
-      var maxTok=isModifyMode?900:500;
+      var maxTok=(currentCmd==='signature'||currentCmd==='giorno')?600:900;
       doFetch(prompt,maxTok).then(function(){
         if(isModifyMode){
           showModifyFollowUp();
