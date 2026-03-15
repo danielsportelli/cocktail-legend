@@ -371,12 +371,8 @@ function updateAllCounts() {
 function updateFbH(){
   var fb=document.getElementById('filter-bar');
   if(!fb) return;
-  // Forza reflow per leggere l'altezza reale aggiornata
-  void fb.offsetHeight;
+  void fb.offsetHeight; // forza reflow
   document.documentElement.style.setProperty('--fb-h', fb.offsetHeight+'px');
-  // Forza repaint sulla rbar
-  var rb=document.getElementById('rbar');
-  if(rb){ rb.style.display='none'; void rb.offsetHeight; rb.style.display=''; }
 }
 updateFbH();
 window.addEventListener('resize', updateFbH);
@@ -479,11 +475,10 @@ document.getElementById("btn-filters").addEventListener("click", function(e){
     document.querySelectorAll(".fg-btn.open").forEach(function(btn){ btn.classList.remove("open"); });
     document.querySelectorAll(".fg-dropdown.open").forEach(function(dd){ dd.classList.remove("open"); });
   }
-  // Ricalcola altezza filter-bar subito e dopo l'animazione di chiusura
+  // Ricalcola altezza filter-bar — polling durante tutta l'animazione (280ms)
   updateFbH();
-  setTimeout(updateFbH, 50);
-  setTimeout(updateFbH, 200);
-  setTimeout(updateFbH, 400);
+  var _fbTimer = setInterval(updateFbH, 30);
+  setTimeout(function(){ clearInterval(_fbTimer); updateFbH(); }, 350);
 });
 
 
@@ -502,6 +497,14 @@ document.addEventListener('DOMContentLoaded', function(){
     });
     document.querySelectorAll('.fg-btn.open').forEach(function(b){ b.classList.remove('open'); });
     document.querySelectorAll('.fg-dropdown.open').forEach(function(d){ d.classList.remove('open'); });
+    // Chiudi anche il pannello filtri e ricalcola altezza
+    var panel = document.getElementById('filter-panel');
+    var btnF = document.getElementById('btn-filters');
+    if(panel){ panel.classList.remove('open'); }
+    if(btnF){ btnF.classList.remove('open'); }
+    updateFbH();
+    var _fbTimer2 = setInterval(updateFbH, 30);
+    setTimeout(function(){ clearInterval(_fbTimer2); updateFbH(); }, 350);
     updateBadges();
     render();
     updateAllCounts();
