@@ -890,6 +890,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       setVisible('giorno-step-2',false);
       var pills=document.getElementById('crea-pills');
       if(pills)pills.style.display='none';
+      var inp=document.getElementById('crea-input');
+      if(inp)inp.style.display='none';
       document.querySelectorAll('.giorno-tipo-pill,.crea-pill').forEach(function(p){ pillOff(p); });
       document.querySelectorAll('.sig-pill-group-active').forEach(function(el){ el.classList.remove('sig-pill-group-active'); });
       updateBtn();
@@ -1190,12 +1192,16 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           var label=document.getElementById('crea-input-label');
           if(label)label.textContent='In che stile lo vuoi?';
           var pills=document.getElementById('crea-pills');
-          if(pills)pills.style.display='flex';
+          if(pills){pills.style.display='flex';pills.style.marginBottom='0';}
+          var inp=document.getElementById('crea-input');
+          if(inp)inp.style.display='none';
           document.querySelectorAll('.crea-pill').forEach(function(x){ pillOff(x); });
           selectedPill=null;
         } else {
           // analcolico: niente stile, abilita direttamente il bottone
           setVisible('giorno-step-2',false);
+          var inp=document.getElementById('crea-input');
+          if(inp)inp.style.display='none';
           selectedPill=null;
         }
         updateBtn();
