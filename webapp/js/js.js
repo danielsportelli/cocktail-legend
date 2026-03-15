@@ -891,6 +891,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var pills=document.getElementById('crea-pills');
       if(pills)pills.style.display='none';
       document.querySelectorAll('.giorno-tipo-pill,.crea-pill').forEach(function(p){ pillOff(p); });
+      document.querySelectorAll('.sig-pill-group-active').forEach(function(el){ el.classList.remove('sig-pill-group-active'); });
       updateBtn();
     } else {
       var cfg=PROMPTS[cmd];
