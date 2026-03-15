@@ -530,6 +530,8 @@
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
         Torna ai comandi
       </button>
+      <!-- Label universale per tutti i comandi non-giorno -->
+      <div id="crea-input-label" style="display:none;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;"></div>
       <!-- Step 1 giorno: alcolico / analcolico -->
       <div id="giorno-step-1" style="display:none;">
         <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Alcolico o analcolico?</div>
@@ -540,16 +542,12 @@
       </div>
       <!-- Step 2 giorno: stile (solo se alcolico) -->
       <div id="giorno-step-2" style="display:none;margin-top:.75rem;">
-        <div id="crea-input-label" style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;"></div>
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">In che stile lo vuoi?</div>
         <div id="crea-pills" style="display:none;gap:.55rem;">
           <button class="crea-pill" data-val="pre dinner" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Pre dinner</button>
           <button class="crea-pill" data-val="after dinner" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">After dinner</button>
           <button class="crea-pill" data-val="all day" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">All day</button>
         </div>
-      </div>
-      <!-- label e pills per altri comandi (twist, pairing) -->
-      <div id="other-input-wrap">
-        <div id="crea-input-label-other" style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;display:none;"></div>
       </div>
       <textarea id="crea-input" rows="2" placeholder=""
         style="display:none;width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>

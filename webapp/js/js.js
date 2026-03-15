@@ -713,7 +713,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   var PROMPTS = {
     twist: {
       maxTokens: 1200,
-      label: 'Quale classico vuoi reinterpretare?',
+      label: 'Quale classico vuoi reinterpretare? (3 varianti)',
       placeholder: 'es. Negroni, Old Fashioned, Margarita...',
       usePills: false,
       fuType: 'tre',
@@ -888,6 +888,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       setVisible('crea-step-input',true);
       setVisible('giorno-step-1',true);
       setVisible('giorno-step-2',false);
+      var label=document.getElementById('crea-input-label');
+      if(label)label.style.display='none';
       var pills=document.getElementById('crea-pills');
       if(pills)pills.style.display='none';
       var inp=document.getElementById('crea-input');
@@ -901,7 +903,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       setVisible('giorno-step-1',false);
       setVisible('giorno-step-2',false);
       var label=document.getElementById('crea-input-label');
-      if(label)label.textContent=cfg.label;
+      if(label){label.textContent=cfg.label;label.style.display='block';}
       var pills=document.getElementById('crea-pills');
       var inp=document.getElementById('crea-input');
       selectedPill=null;
