@@ -587,10 +587,12 @@
           </div>
           <!-- Scelta quale drink modificare -->
           <div id="fu-scelta-drink" style="display:none;margin-top:.75rem;">
-            <div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.4rem;">Su quale proposta vuoi lavorare?</div>
-            <textarea id="fu-scelta-inp" rows="1" placeholder="es. La seconda, quella con il Negroni..."
-              style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
-            <button id="fu-scelta-send" disabled style="margin-top:.5rem;width:100%;padding:.65rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">✦ Lavoriamo su questa</button>
+            <div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Su quale proposta vuoi lavorare?</div>
+            <div style="display:flex;gap:.45rem;">
+              <button class="fu-scelta-num" data-num="1" style="flex:1;background:var(--surf);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.6rem .4rem;font-size:.7rem;font-weight:700;color:var(--txt);cursor:pointer;font-family:inherit;transition:all .2s;">Prima</button>
+              <button class="fu-scelta-num" data-num="2" style="flex:1;background:var(--surf);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.6rem .4rem;font-size:.7rem;font-weight:700;color:var(--txt);cursor:pointer;font-family:inherit;transition:all .2s;">Seconda</button>
+              <button class="fu-scelta-num" data-num="3" style="flex:1;background:var(--surf);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.6rem .4rem;font-size:.7rem;font-weight:700;color:var(--txt);cursor:pointer;font-family:inherit;transition:all .2s;">Terza</button>
+            </div>
           </div>
         </div>
 
