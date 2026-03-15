@@ -732,7 +732,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     },
     giorno: {
       maxTokens: 500,
-      label: 'Che momento è?',
+      label: 'In che stile lo vuoi?',
       placeholder: '',
       usePills: true,
       fuType: 'sino',
@@ -984,6 +984,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var hasVal=cfg.usePills ? selectedPill!==null : (inp&&inp.value.trim().length>0);
     var active=hasVal&&getUsage()<MAX;
     btn.disabled=!active;
+    btn.textContent=currentCmd==='giorno'?'✦ Crea il drink del giorno':'✦ Chiedi al Barman';
     btn.style.background=active?'var(--amber)':'var(--surf)';
     btn.style.color=active?'#0a0f1e':'var(--dim)';
     btn.style.border=active?'none':'1px solid var(--brd)';
@@ -993,7 +994,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
   // ─── MARKDOWN → HTML ──────────────────────────────────────────────
   function mdToHtml(md){
-    var SEZIONI = ['RICETTA','PREPARAZIONI','PERSONALIZZAZIONE'];
+    var SEZIONI = ['RICETTA','PREPARAZIONI','PERSONALIZZAZIONE','MODIFICHE APPORTATE'];
     var lines = md.split('\n');
     var out = lines.map(function(line){
       if(/^## .+/.test(line)){
@@ -1035,6 +1036,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     // Mostra il tipo corretto
     var typeEl=document.getElementById('fu-type-'+fuType);
     if(typeEl)typeEl.style.display='block';
+    // Assicura che i bottoni interni del blocco tre siano visibili
+    if(fuType==='tre'){
+      var treOpts=document.getElementById('fu-tre-opts');
+      if(treOpts)treOpts.style.display='block';
+    }
 
     var cn=document.getElementById('crea-new');
     if(cn)cn.style.display='inline-flex';
@@ -1133,8 +1139,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     document.querySelectorAll('.crea-pill').forEach(function(p){
       p.addEventListener('click',function(){
         selectedPill=this.dataset.val;
-        document.querySelectorAll('.crea-pill').forEach(function(x){ x.classList.remove('sel'); });
-        this.classList.add('sel');
+        document.querySelectorAll('.crea-pill').forEach(function(x){ pillOff(x); });
+        pillOn(this);
         updateBtn();
       });
     });
@@ -1328,13 +1334,18 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       } else {
         prev=lastRawText.substring(0,600)||'';
       }
-      var context=drinkNum?'Stai lavorando sulla '+numLabel[drinkNum-1]+' proposta.\n\n':'';
-      var prompt=context+'Sulla base di questa proposta:\n"""\n'+prev+'\n"""\n\nRichiesta: '+val+'\n\nRispondi con la stessa struttura esatta (## NOME DRINK, ## RICETTA, ## PERSONALIZZAZIONE).';
+      var context=drinkNum?'Stai modificando la '+numLabel[drinkNum-1]+' proposta.\n\n':'';
+      var isModifyMode=(currentCmd==='twist'||currentCmd==='pairing')&&drinkNum>0;
+      var prompt=context+'Sulla base di questa proposta:\n"""\n'+prev+'\n"""\n\nRichiesta di modifica: '+val+'\n\nRispondi con la stessa struttura esatta (## NOME DRINK, ## RICETTA, ## PERSONALIZZAZIONE) e aggiungi in fondo ## MODIFICHE APPORTATE con elenco sintetico dei cambiamenti.';
       fuContSend.disabled=true;fuContSend.textContent='...';
-      var maxTok=(currentCmd==='twist'||currentCmd==='pairing')?800:500;
+      var maxTok=isModifyMode?900:500;
       doFetch(prompt,maxTok).then(function(){
-        resetFollowUp();
-        showFollowUp();
+        if(isModifyMode){
+          showModifyFollowUp();
+        } else {
+          resetFollowUp();
+          showFollowUp();
+        }
       });
     });
 
@@ -1367,6 +1378,26 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       if(cs){cs.disabled=true;cs.textContent='✦ Modifica';
         cs.style.background='var(--surf)';cs.style.color='var(--dim)';
         cs.style.border='1px solid var(--brd)';cs.style.boxShadow='none';cs.style.opacity='.5';}
+    }
+
+    // Dopo una modifica su drink specifico: non resettare, lascia barra chat attiva
+    function showModifyFollowUp(){
+      var fuBlock=document.getElementById('fu-block');
+      if(fuBlock)fuBlock.style.display='block';
+      // Nascondi tutto tranne la barra chat
+      ['fu-type-sino','fu-type-tre','fu-scelta-drink'].forEach(function(id){
+        var el=document.getElementById(id);if(el)el.style.display='none';
+      });
+      var chat=document.getElementById('fu-chat-cont');
+      if(chat)chat.style.display='block';
+      var ci=document.getElementById('fu-cont-inp');
+      if(ci){ci.value='';ci.placeholder='Chiedi altre modifiche a questo drink...';}
+      var cs=document.getElementById('fu-cont-send');
+      if(cs){cs.disabled=true;cs.textContent='✦ Modifica';
+        cs.style.background='var(--surf)';cs.style.color='var(--dim)';
+        cs.style.border='1px solid var(--brd)';cs.style.boxShadow='none';cs.style.opacity='.5';}
+      var cn=document.getElementById('crea-new');
+      if(cn)cn.style.display='inline-flex';
     }
 
     function makeSendBtn(btnId, inpId, buildFn){
