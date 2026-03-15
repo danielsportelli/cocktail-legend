@@ -1613,7 +1613,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         + '• <strong style="color:var(--txt);">Territorio</strong> — ingredienti tipici della tua zona, produttori locali, distillati regionali<br>'
         + '• <strong style="color:var(--txt);">Stagionalità</strong> — frutta fresca, erbe aromatiche, spezie di stagione<br>'
         + '• <strong style="color:var(--txt);">Tema narrativo</strong> — un film, un\'era storica, una nazione, un profumo<br><br>'
-        + 'Più dai contesto al barman, più il risultato sarà centrato. Scrivi nell\'input gli ingredienti che vuoi usare e aggiungi note libere: <em style="color:var(--dim);">es. "gin, cardamomo, yuzu — voglio qualcosa di elegante e floreale per un menu estivo".</em>',
+        + 'Più dai contesto al nostro Barman Intelligente, più il risultato sarà centrato. Scrivi nell\'input gli ingredienti che vuoi usare e aggiungi note libere: <em style="color:var(--dim);">es. "gin, cardamomo, yuzu — voglio qualcosa di elegante e floreale per un menu estivo".</em>',
 
       twist: '<strong style="color:var(--txt);display:block;margin-bottom:.5rem;">La logica del Twist on Classic</strong>'
         + 'Un twist si differenzia da un signature perché mantiene la struttura e l\'identità del classico di partenza. Non si stravolge: si reinterpreta.<br><br>'
@@ -1622,7 +1622,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         + '• Negroni → sostituisci il Campari con un bitter ai fiori di sambuco<br>'
         + '• Margarita → swappa il Cointreau con un liquore al passion fruit<br>'
         + '• Old Fashioned → usa uno sciroppo al miele invece dello zucchero<br><br>'
-        + 'Scrivi il nome del classico e il barman propone 3 varianti con logiche diverse.',
+        + 'Scrivi il nome del classico e il nostro Barman Intelligente propone 3 varianti con logiche diverse.',
 
       pairing: '<strong style="color:var(--txt);display:block;margin-bottom:.5rem;">Come funziona il Food Pairing</strong>'
         + 'L\'abbinamento drink-cibo segue tre logiche principali:<br><br>'
@@ -1633,7 +1633,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
       giorno: '<strong style="color:var(--txt);display:block;margin-bottom:.5rem;">Come sfruttare il Cocktail del Giorno</strong>'
         + 'Questa funzione è pensata per chi lavora dietro al bancone ogni giorno. Avere sempre un cocktail del giorno da proporre ai clienti abituali è uno strumento di fidelizzazione potente — evita che si trovino sempre la stessa drink list e crea attesa e curiosità.<br><br>'
-        + 'La logica è la <strong style="color:var(--amber);">stagionalità</strong>: il barman parte da ciò che offre la natura oggi — frutta, verdure, erbe, spezie di stagione — e costruisce un drink che racconta questo momento preciso dell\'anno.<br><br>'
+        + 'La logica è la <strong style="color:var(--amber);">stagionalità</strong>: il nostro Barman Intelligente parte da ciò che offre la natura oggi — frutta, verdure, erbe, spezie di stagione — e costruisce un drink che racconta questo momento preciso dell\'anno.<br><br>'
         + 'Non è un signature generico: è una proposta ancorata al calendario, pensata per oggi. Perfetta da scrivere sulla lavagna del locale, da raccontare al cliente che chiede "cosa mi consigli?" o da inserire nel menu come speciale della settimana.'
     };
 
