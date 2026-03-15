@@ -857,6 +857,13 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   function showCmds(){
     currentCmd=null; selectedPill=null; giornoTipo=null;
     sig={tipo:null,momento:null,gusto:null,tenore:null,bicchiere:null};
+    // Titolo: torna a default
+    var hdr=document.getElementById('crea-drawer-header');
+    if(hdr)hdr.textContent='Chiedi al Barman';
+    // Nascondi tasto Tips
+    var tipsBtn=document.getElementById('crea-tips-btn');
+    if(tipsBtn)tipsBtn.style.display='none';
+
     setVisible('crea-step-cmds',true);
     setVisible('crea-step-signature',false);
     setVisible('crea-step-input',false);
@@ -891,6 +898,15 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   function selectCmd(cmd){
     if(getUsage()>=MAX){showExhausted();return;}
     currentCmd=cmd;
+
+    // ── Titolo dinamico ──
+    var TITLES={signature:'Crea un Signature',twist:'Twist on Classic',pairing:'Food Pairing',giorno:'Cocktail del Giorno'};
+    var hdr=document.getElementById('crea-drawer-header');
+    if(hdr)hdr.textContent=TITLES[cmd]||'Chiedi al Barman';
+    // Mostra tasto Tips
+    var tipsBtn=document.getElementById('crea-tips-btn');
+    if(tipsBtn)tipsBtn.style.display='inline-flex';
+
     setVisible('crea-step-cmds',false);
     setVisible('crea-response',false);
     setVisible('crea-error',false);
@@ -1586,6 +1602,60 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           resetFollowUp();
           showFollowUp();
         });
+      });
+    }
+
+    // ── TIPS POPUP ──────────────────────────────────────────────────
+    var TIPS_CONTENT = {
+      signature: '<strong style="color:var(--txt);display:block;margin-bottom:.5rem;">Come creare una Drink List Signature</strong>'
+        + 'Un signature non nasce a caso — nasce da un\'idea. Parti da un tema che racconta qualcosa: il territorio (botaniche locali, agrumi di stagione, erbe spontanee), la stagionalità (cosa offre la natura in questo momento), oppure un concept narrativo come un film, un\'epoca, un viaggio tra nazioni.<br><br>'
+        + '<strong style="color:var(--amber);">Punta su questi filoni:</strong><br>'
+        + '• <strong style="color:var(--txt);">Territorio</strong> — ingredienti tipici della tua zona, produttori locali, distillati regionali<br>'
+        + '• <strong style="color:var(--txt);">Stagionalità</strong> — frutta fresca, erbe aromatiche, spezie di stagione<br>'
+        + '• <strong style="color:var(--txt);">Tema narrativo</strong> — un film, un\'era storica, una nazione, un profumo<br><br>'
+        + 'Più dai contesto al barman, più il risultato sarà centrato. Scrivi nell\'input gli ingredienti che vuoi usare e aggiungi note libere: <em style="color:var(--dim);">es. "gin, cardamomo, yuzu — voglio qualcosa di elegante e floreale per un menu estivo".</em>',
+
+      twist: '<strong style="color:var(--txt);display:block;margin-bottom:.5rem;">La logica del Twist on Classic</strong>'
+        + 'Un twist si differenzia da un signature perché mantiene la struttura e l\'identità del classico di partenza. Non si stravolge: si reinterpreta.<br><br>'
+        + 'La regola d\'oro è lavorare su <strong style="color:var(--amber);">massimo 1 o 2 ingredienti</strong>: cambia una parte alcolica, sostituisci l\'amaro, usa un bitter diverso, swappa lo sciroppo con un infuso artigianale. Se tocchi tutto, non è più un twist — diventa un drink nuovo.<br><br>'
+        + '<strong style="color:var(--amber);">Esempi di approccio:</strong><br>'
+        + '• Negroni → sostituisci il Campari con un bitter ai fiori di sambuco<br>'
+        + '• Margarita → swappa il Cointreau con un liquore al passion fruit<br>'
+        + '• Old Fashioned → usa uno sciroppo al miele invece dello zucchero<br><br>'
+        + 'Scrivi il nome del classico e il barman propone 3 varianti con logiche diverse.',
+
+      pairing: '<strong style="color:var(--txt);display:block;margin-bottom:.5rem;">Come funziona il Food Pairing</strong>'
+        + 'L\'abbinamento drink-cibo segue tre logiche principali:<br><br>'
+        + '• <strong style="color:var(--amber);">Abbinamento per similitudine</strong> — stessi profili aromatici. Un cocktail agrumato con un piatto di pesce fresco. Un drink speziato con una cucina orientale.<br><br>'
+        + '• <strong style="color:var(--amber);">Abbinamento per contrasto</strong> — opposti che si compensano. Un cocktail amaro e secco con una tartare di carne grassa. Un drink dolce e fruttato con un piatto sapido.<br><br>'
+        + '• <strong style="color:var(--amber);">Abbinamento inaspettato</strong> — combo distanti ma vincenti. Funziona quando entrambi hanno un elemento umami o aromatico in comune non ovvio.<br><br>'
+        + 'Descrivi il piatto con qualche dettaglio (cottura, ingredienti principali, sapore dominante) e ricevi 3 proposte con logiche di abbinamento diverse.',
+
+      giorno: '<strong style="color:var(--txt);display:block;margin-bottom:.5rem;">Come sfruttare il Cocktail del Giorno</strong>'
+        + 'Questa funzione è pensata per chi lavora dietro al bancone ogni giorno. Avere sempre un cocktail del giorno da proporre ai clienti abituali è uno strumento di fidelizzazione potente — evita che si trovino sempre la stessa drink list e crea attesa e curiosità.<br><br>'
+        + 'La logica è la <strong style="color:var(--amber);">stagionalità</strong>: il barman parte da ciò che offre la natura oggi — frutta, verdure, erbe, spezie di stagione — e costruisce un drink che racconta questo momento preciso dell\'anno.<br><br>'
+        + 'Non è un signature generico: è una proposta ancorata al calendario, pensata per oggi. Perfetta da scrivere sulla lavagna del locale, da raccontare al cliente che chiede "cosa mi consigli?" o da inserire nel menu come speciale della settimana.'
+    };
+
+    var tipsBtn2=document.getElementById('crea-tips-btn');
+    var tipsOverlay=document.getElementById('tips-overlay');
+    var tipsClose=document.getElementById('tips-close');
+    var tipsContent=document.getElementById('tips-content');
+
+    if(tipsBtn2){
+      tipsBtn2.addEventListener('click',function(){
+        if(!currentCmd||!TIPS_CONTENT[currentCmd])return;
+        if(tipsContent)tipsContent.innerHTML=TIPS_CONTENT[currentCmd];
+        if(tipsOverlay){tipsOverlay.style.display='flex';}
+      });
+    }
+    function closeTips(){
+      if(tipsOverlay)tipsOverlay.style.display='none';
+    }
+    if(tipsClose)tipsClose.addEventListener('click',closeTips);
+    if(tipsOverlay){
+      tipsOverlay.addEventListener('click',function(e){
+        if(e.target===tipsOverlay)closeTips();
       });
     }
 

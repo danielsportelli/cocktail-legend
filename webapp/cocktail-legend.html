@@ -418,7 +418,7 @@
 <div class="drawer" id="drawer-crea">
   <div class="drawer-handle"></div>
   <div class="drawer-inner">
-    <div class="drawer-header">Chiedi al Barman</div>
+    <div class="drawer-header" id="crea-drawer-header">Chiedi al Barman</div>
 
     <!-- USAGE BAR -->
     <div id="crea-usage-bar" style="display:flex;align-items:center;gap:8px;margin-bottom:1.1rem;font-size:.65rem;color:var(--dim);">
@@ -428,6 +428,12 @@
       </div>
       <span id="crea-usage-txt">0/50</span>
     </div>
+
+    <!-- TASTO TIPS (visibile solo dentro una funzione) -->
+    <button id="crea-tips-btn" style="display:none;align-items:center;gap:.4rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:.35rem .75rem;font-family:inherit;font-size:.65rem;font-weight:700;color:var(--amber);cursor:pointer;margin-bottom:.85rem;letter-spacing:.06em;transition:all .2s;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Tips
+    </button>
 
     <!-- GRIGLIA 5 COMANDI -->
     <div id="crea-step-cmds">
@@ -636,6 +642,20 @@
 
     <div id="crea-error" style="display:none;margin-top:.75rem;padding:.65rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;font-size:.72rem;color:#f87171;"></div>
 
+  </div>
+</div>
+
+<!-- POPUP TIPS -->
+<div id="tips-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:1.2rem;">
+  <div id="tips-box" style="background:#0f172a;border:1px solid rgba(245,158,11,.25);border-radius:16px;width:100%;max-width:360px;max-height:80vh;overflow-y:auto;padding:1.25rem 1.1rem 1rem;position:relative;box-shadow:0 8px 40px rgba(0,0,0,.6);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;">
+      <div style="display:flex;align-items:center;gap:.45rem;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span style="font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);">Come usarla</span>
+      </div>
+      <button id="tips-close" style="background:none;border:none;color:var(--dim);font-size:1rem;cursor:pointer;padding:.1rem .3rem;line-height:1;">&#x2715;</button>
+    </div>
+    <div id="tips-content" style="font-size:.75rem;color:var(--txt2);line-height:1.7;"></div>
   </div>
 </div>
 
