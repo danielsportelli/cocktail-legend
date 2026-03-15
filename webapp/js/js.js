@@ -262,8 +262,12 @@ function uniq(key) {
   return Object.keys(s).sort();
 }
 function uniqFromRes(key) {
-  var src = Q ? RES : null; // usa RES solo se c'è testo nella search bar
-  if (!src) return null;    // nessun filtraggio → comportamento normale
+  if (!Q) return null; // nessuna ricerca attiva → comportamento normale
+  // Calcola da DATA filtrato solo per Q (non per AF), così i filtri rimangono cliccabili
+  var src = DATA.filter(function(c){
+    var q2 = Q.toLowerCase().trim();
+    return c.name.toLowerCase().indexOf(q2) !== -1;
+  });
   var s = {};
   for (var i = 0; i < src.length; i++) {
     var c = src[i];
@@ -276,7 +280,7 @@ function uniqFromRes(key) {
     else if (key === "bic") { s[c.bicchiere] = 1; }
     else { var f2 = key==="cat" ? "categoria" : key==="abv" ? "abv" : key; s[c[f2]] = 1; }
   }
-  return s; // set di valori presenti nei risultati correnti
+  return s;
 }
 function countFor(key, val) {
   // Filtra con tutti i filtri attivi TRANNE quello della stessa chiave
@@ -486,6 +490,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function updateBadges() {
+  var total = AF.cat.length + AF.dis.length + AF.abv.length + AF.sap.length + AF.frz.length + AF.bic.length;
   var badge = document.getElementById("active-badge");
   badge.textContent = total;
   badge.classList.toggle("show", total > 0);
