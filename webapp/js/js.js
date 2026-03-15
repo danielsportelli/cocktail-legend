@@ -370,10 +370,24 @@ function updateAllCounts() {
 // Aggiorna --fb-h dinamicamente (altezza filter-bar sticky)
 function updateFbH(){
   var fb=document.getElementById('filter-bar');
-  if(fb) document.documentElement.style.setProperty('--fb-h', fb.offsetHeight+'px');
+  if(!fb) return;
+  // Forza reflow per leggere l'altezza reale aggiornata
+  void fb.offsetHeight;
+  document.documentElement.style.setProperty('--fb-h', fb.offsetHeight+'px');
+  // Forza repaint sulla rbar
+  var rb=document.getElementById('rbar');
+  if(rb){ rb.style.display='none'; void rb.offsetHeight; rb.style.display=''; }
 }
 updateFbH();
 window.addEventListener('resize', updateFbH);
+window.addEventListener('load', function(){ updateFbH(); setTimeout(updateFbH, 300); });
+// Su desktop: ricalcola al primo scroll per catturare altezze non ancora stabilizzate
+(function(){
+  var done = false;
+  window.addEventListener('scroll', function(){
+    if(!done){ done=true; updateFbH(); }
+  }, {passive:true, once:true});
+})();
 // Aggiorna anche quando il pannello filtri si apre/chiude
 var _fpObs = new MutationObserver(updateFbH);
 document.addEventListener('DOMContentLoaded', function(){
