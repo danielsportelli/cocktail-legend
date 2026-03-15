@@ -905,8 +905,22 @@ document.getElementById('drawer-overlay').addEventListener('click', function(){
       try { ok = document.execCommand('copy'); } catch(e){}
       document.body.removeChild(inp);
       if (!ok && navigator.clipboard) navigator.clipboard.writeText(code).catch(function(){});
-      toast.classList.add('show');
-      setTimeout(function(){ toast.classList.remove('show'); }, 2000);
+      // Feedback visivo sul pulsante stesso
+      var span = el.querySelector('.vnt-code-copy');
+      var origText = span ? span.textContent : '';
+      var origBg = el.style.background;
+      var origBorder = el.style.borderColor;
+      var origColor = el.style.color;
+      el.style.background = 'rgba(34,197,94,.15)';
+      el.style.borderColor = 'rgba(34,197,94,.5)';
+      el.style.color = '#4ade80';
+      if(span){ span.textContent = '✓ copiato'; span.style.color = '#4ade80'; }
+      setTimeout(function(){
+        el.style.background = origBg;
+        el.style.borderColor = origBorder;
+        el.style.color = origColor;
+        if(span){ span.textContent = origText; span.style.color = ''; }
+      }, 2000);
     });
   }
   copyCode('copy-corsi',  'LEGEND20');

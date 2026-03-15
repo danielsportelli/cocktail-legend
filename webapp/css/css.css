@@ -711,8 +711,8 @@ body{padding-bottom:56px;}
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   background: transparent;
   border: none;
   border-radius: 10px;
@@ -721,8 +721,8 @@ body{padding-bottom:56px;}
 }
 .tab-btn-ico-crea svg {
   filter: drop-shadow(0 0 5px rgba(245,158,11,.55));
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   transition: filter .2s;
 }
 .tab-btn-ai:active .tab-btn-ico-crea {
