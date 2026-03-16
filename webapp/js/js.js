@@ -2048,9 +2048,27 @@ function populateRisGlass(){
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">La regola del food cost</strong>'
     +'Nei bar professionali il costo delle materie prime dovrebbe incidere tra il <strong style="color:var(--txt)">18% e il 25%</strong> del prezzo di vendita. Il range ideale è <strong style="color:var(--txt)">20–23%</strong>. Sopra il 25% i margini si assottigliano pericolosamente.<br><br>'
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">I coefficienti usati nei bar</strong>'
-    +'×4 → food cost 25% (margine accettabile)<br>'
+    +'×4 → food cost 25% (margine minimo accettabile)<br>'
     +'×4.5 → food cost 22% (range ideale)<br>'
-    +'×5 → food cost 20% (ottimo margine)<br><br>'
+    +'×5 → food cost 20% (margine ottimale)<br>'
+    +'Più alto è il coefficiente, maggiore è il margine.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Garnish</strong>'
+    +'<strong style="color:var(--txt)">Semplice</strong> — scorza, fetta, agrume fresco: ~€0.05<br>'
+    +'<strong style="color:var(--txt)">Media</strong> — disidratata, fiore edibile: ~€0.10–0.15<br>'
+    +'<strong style="color:var(--txt)">Elaborata</strong> — cioccolato, pasta, decorazioni: ~€0.20+<br>'
+    +'Nei cocktail naked (senza garnish) questa voce non va considerata.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Ghiaccio chunk / sfera</strong>'
+    +'A differenza del ghiaccio standard, chunk e sfere hanno un costo unitario rilevante (~€0.70–0.80 a pezzo). In contesti bar fissi spesso non viene conteggiato, ma in catering o eventi va sempre incluso.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Foamer</strong>'
+    +'I foamer artificiali si dividono in due sistemi di dosaggio:<br>'
+    +'<strong style="color:var(--txt)">Tappo forato stile dash</strong> (es. Fee Brothers) — 5 dash per drink ≈ 2.5ml per dose<br>'
+    +'<strong style="color:var(--txt)">Pipetta contagocce</strong> (es. Ms. Better\'s, Stillabunt) — 10 gocce per drink ≈ 0.5ml per dose<br><br>'
+    +'Prezzi di riferimento rilevati:<br>'
+    +'Fee Brothers 150ml ~€16 → €0.27/dose<br>'
+    +'Ms. Better\'s 120ml ~€50 → €0.21/dose<br>'
+    +'Stillabunt 95ml ~€35 → €0.18/dose<br>'
+    +'<strong style="color:var(--txt)">Media: ~€0.20 per dose</strong> — valore di default consigliato.<br><br>'
+    +'Se usi <strong style="color:var(--txt)">albume o aquafaba</strong> il costo è trascurabile e non va incluso nel calcolo.<br><br>'
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare il prezzo personalizzato</strong>'
     +'Inserisci il prezzo a cui vorresti vendere il drink. Il calcolatore ti mostra il food cost percentuale e ti dice se sei nel range professionale consigliato.';
 
@@ -2062,7 +2080,7 @@ function populateRisGlass(){
     row.style.cssText = 'display:grid;grid-template-columns:1fr .7fr .65fr .55fr auto;gap:.3rem;margin-bottom:.35rem;align-items:center;';
     var inpStyle = 'width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.4rem .4rem;color:var(--txt);font-family:inherit;font-size:.72rem;outline:none;box-sizing:border-box;';
     row.innerHTML = '<input type="text" class="cost-name" placeholder="Prodotto" style="'+inpStyle+'">'
-      +'<input type="number" class="cost-format" placeholder="cl" min="1" style="'+inpStyle+'">'
+      +'<input type="number" class="cost-format" placeholder="ml" min="1" style="'+inpStyle+'">'
       +'<input type="number" class="cost-price" placeholder="€" min="0" step="0.01" style="'+inpStyle+'">'
       +'<input type="number" class="cost-dose" placeholder="ml" min="0" step="0.5" style="'+inpStyle+'">'
       +'<button class="cost-remove-btn" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:.9rem;padding:0 .15rem;line-height:1;flex-shrink:0;">✕</button>';
@@ -2074,10 +2092,41 @@ function populateRisGlass(){
     return row;
   }
 
+  function getExtraCosts(){
+    var extras = [];
+    // Garnish
+    var garnishToggle = document.getElementById('toggle-garnish');
+    if(garnishToggle && garnishToggle.dataset.active==='1'){
+      var activeGarnish = document.querySelector('.garnish-opt-btn.garnish-selected');
+      if(activeGarnish){
+        var val = activeGarnish.dataset.val;
+        if(val === 'custom'){
+          var ci = document.getElementById('garnish-custom-input');
+          var cv = parseFloat(ci ? ci.value : 0) || 0;
+          if(cv > 0) extras.push({nome:'Garnish', costo:cv});
+        } else {
+          extras.push({nome:'Garnish', costo:parseFloat(val)||0});
+        }
+      }
+    }
+    // Ghiaccio
+    var ghiaccioToggle = document.getElementById('toggle-ghiaccio');
+    if(ghiaccioToggle && ghiaccioToggle.dataset.active==='1'){
+      var gp = parseFloat((document.getElementById('ghiaccio-price')||{}).value)||0.75;
+      if(gp > 0) extras.push({nome:'Ghiaccio chunk/sfera', costo:gp});
+    }
+    // Foamer
+    var foamerToggle = document.getElementById('toggle-foamer');
+    if(foamerToggle && foamerToggle.dataset.active==='1'){
+      var fp = parseFloat((document.getElementById('foamer-price')||{}).value)||0.10;
+      if(fp > 0) extras.push({nome:'Foamer', costo:fp});
+    }
+    return extras;
+  }
+
   function calcCost(){
     var rows = document.querySelectorAll('#cost-ingredients .cost-row');
     var total = 0;
-    var allFilled = rows.length > 0;
     var details = [];
 
     rows.forEach(function(row){
@@ -2086,13 +2135,17 @@ function populateRisGlass(){
       var dose = parseFloat(row.querySelector('.cost-dose').value) || 0;
       var name = row.querySelector('.cost-name').value.trim() || '—';
       if(fmt > 0 && price > 0 && dose > 0){
-        var fmtMl = fmt * 10; // cl → ml
-        var costIng = (price / fmtMl) * dose;
+        var costIng = (price / fmt) * dose;
         total += costIng;
         details.push(name + ': ' + fmtEur(costIng));
-      } else {
-        if(!fmt || !price || !dose) allFilled = false;
       }
+    });
+
+    // Voci extra
+    var extras = getExtraCosts();
+    extras.forEach(function(e){
+      total += e.costo;
+      details.push(e.nome + ': ' + fmtEur(e.costo));
     });
 
     var resultEl = document.getElementById('cost-result');
@@ -2172,6 +2225,77 @@ function populateRisGlass(){
 
     addBtn.addEventListener('click', addRow);
     resetBtn.addEventListener('click', reset);
+
+    // ─── Toggle voci aggiuntive ───
+    function initToggle(toggleId, optionsId, labelId, defaultActive){
+      var btn = document.getElementById(toggleId);
+      var opts = document.getElementById(optionsId);
+      var lbl = document.getElementById(labelId);
+      if(!btn) return;
+      function setActive(active){
+        btn.dataset.active = active ? '1' : '0';
+        btn.style.background = active ? 'var(--amber)' : 'var(--brd)';
+        btn.querySelector('span').style.left = active ? '18px' : '2px';
+        if(opts) opts.style.display = active ? 'block' : 'none';
+        if(lbl) lbl.style.color = active ? 'var(--amber)' : 'var(--dim)';
+        calcCost();
+      }
+      btn.addEventListener('click', function(){
+        setActive(btn.dataset.active !== '1');
+      });
+      setActive(defaultActive||false);
+    }
+
+    initToggle('toggle-garnish',  'garnish-options',  'garnish-cost-label',  false);
+    initToggle('toggle-ghiaccio', 'ghiaccio-options', 'ghiaccio-cost-label', false);
+    initToggle('toggle-foamer',   'foamer-options',   'foamer-cost-label',   false);
+
+    // Aggiorna label costo toggle quando cambiano i valori
+    var ghiaccioInput = document.getElementById('ghiaccio-price');
+    var foamerInput   = document.getElementById('foamer-price');
+    function updateToggleLabel(inputEl, labelId){
+      var lbl = document.getElementById(labelId);
+      var toggle = inputEl ? inputEl.closest('.cost-extra-row').querySelector('.cost-extra-toggle') : null;
+      if(lbl && toggle && toggle.dataset.active==='1'){
+        var v = parseFloat(inputEl.value)||0;
+        lbl.textContent = v > 0 ? fmtEur(v) : 'on';
+      }
+    }
+    if(ghiaccioInput) ghiaccioInput.addEventListener('input', function(){ updateToggleLabel(this,'ghiaccio-cost-label'); calcCost(); });
+    if(foamerInput)   foamerInput.addEventListener('input',   function(){ updateToggleLabel(this,'foamer-cost-label');   calcCost(); });
+
+    // Selezione opzioni Garnish
+    document.querySelectorAll('.garnish-opt-btn').forEach(function(b){
+      b.addEventListener('click', function(){
+        document.querySelectorAll('.garnish-opt-btn').forEach(function(x){
+          x.classList.remove('garnish-selected');
+          x.style.borderColor = 'var(--brd)';
+          x.style.background = 'var(--surf)';
+          x.style.color = 'var(--txt2)';
+        });
+        this.classList.add('garnish-selected');
+        this.style.borderColor = 'rgba(245,158,11,.5)';
+        this.style.background = 'rgba(245,158,11,.07)';
+        this.style.color = 'var(--txt)';
+        var customInput = document.getElementById('garnish-custom-input');
+        if(this.dataset.val === 'custom'){
+          if(customInput){ customInput.style.display='block'; customInput.focus(); }
+        } else {
+          if(customInput) customInput.style.display='none';
+          // Aggiorna label
+          var lbl = document.getElementById('garnish-cost-label');
+          if(lbl) lbl.textContent = fmtEur(parseFloat(this.dataset.val)||0);
+        }
+        calcCost();
+      });
+    });
+    var garnishCustom = document.getElementById('garnish-custom-input');
+    if(garnishCustom) garnishCustom.addEventListener('input', function(){
+      var lbl = document.getElementById('garnish-cost-label');
+      var v = parseFloat(this.value)||0;
+      if(lbl) lbl.textContent = v > 0 ? fmtEur(v) : 'on';
+      calcCost();
+    });
     if(customInput){
       customInput.addEventListener('input', function(){
         var rows = document.querySelectorAll('#cost-ingredients .cost-row');
@@ -2180,8 +2304,9 @@ function populateRisGlass(){
           var fmt = parseFloat(row.querySelector('.cost-format').value)||0;
           var price = parseFloat(row.querySelector('.cost-price').value)||0;
           var dose = parseFloat(row.querySelector('.cost-dose').value)||0;
-          if(fmt>0&&price>0&&dose>0) total += (price/(fmt*10))*dose;
+          if(fmt>0&&price>0&&dose>0) total += (price/fmt)*dose;
         });
+        getExtraCosts().forEach(function(e){ total += e.costo; });
         updateCustom(total);
       });
     }

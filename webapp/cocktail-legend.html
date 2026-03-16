@@ -549,7 +549,7 @@
       <!-- Header colonne -->
       <div style="display:grid;grid-template-columns:1fr .7fr .65fr .55fr auto;gap:.3rem;padding:0 .1rem;margin-bottom:.3rem;">
         <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Prodotto</span>
-        <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Formato</span>
+        <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Formato ml</span>
         <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Prezzo €</span>
         <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Dose ml</span>
         <span style="width:18px;display:block;"></span>
@@ -564,6 +564,101 @@
         <button id="cost-reset" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem .8rem;color:var(--dim);font-size:.75rem;font-family:inherit;cursor:pointer;">Reset</button>
       </div>
 
+      <!-- Voci aggiuntive -->
+      <div style="margin-top:.9rem;">
+        <div style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.5rem;">Voci aggiuntive</div>
+
+        <!-- Garnish -->
+        <div class="cost-extra-row" id="extra-garnish-row" style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.55rem .75rem;margin-bottom:.4rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <button class="cost-extra-toggle" id="toggle-garnish" data-active="0" style="width:34px;height:18px;border-radius:99px;border:none;background:var(--brd);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;">
+                <span style="position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s;display:block;"></span>
+              </button>
+              <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Garnish</span>
+            </div>
+            <span id="garnish-cost-label" style="font-size:.68rem;font-weight:700;color:var(--dim);">off</span>
+          </div>
+          <div id="garnish-options" style="display:none;margin-top:.55rem;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.35rem;margin-bottom:.4rem;">
+              <button class="garnish-opt-btn" data-val="0.05" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .3rem;font-size:.62rem;font-family:inherit;color:var(--txt2);cursor:pointer;text-align:center;transition:all .2s;">
+                <div style="font-weight:700;">Semplice</div>
+                <div style="color:var(--dim);font-size:.58rem;margin-top:.1rem;">scorza · fetta · agrume</div>
+                <div style="color:var(--amber);font-weight:700;margin-top:.15rem;">€0.05</div>
+              </button>
+              <button class="garnish-opt-btn" data-val="0.12" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .3rem;font-size:.62rem;font-family:inherit;color:var(--txt2);cursor:pointer;text-align:center;transition:all .2s;">
+                <div style="font-weight:700;">Media</div>
+                <div style="color:var(--dim);font-size:.58rem;margin-top:.1rem;">disidratata · fiore edibile</div>
+                <div style="color:var(--amber);font-weight:700;margin-top:.15rem;">€0.12</div>
+              </button>
+              <button class="garnish-opt-btn" data-val="0.20" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .3rem;font-size:.62rem;font-family:inherit;color:var(--txt2);cursor:pointer;text-align:center;transition:all .2s;">
+                <div style="font-weight:700;">Elaborata</div>
+                <div style="color:var(--dim);font-size:.58rem;margin-top:.1rem;">cioccolato · pasta · complessa</div>
+                <div style="color:var(--amber);font-weight:700;margin-top:.15rem;">€0.20</div>
+              </button>
+              <button class="garnish-opt-btn" data-val="custom" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .3rem;font-size:.62rem;font-family:inherit;color:var(--txt2);cursor:pointer;text-align:center;transition:all .2s;">
+                <div style="font-weight:700;">Custom</div>
+                <div style="color:var(--dim);font-size:.58rem;margin-top:.1rem;">inserisci il tuo valore</div>
+                <div style="color:var(--amber);font-weight:700;margin-top:.15rem;">€ —</div>
+              </button>
+            </div>
+            <input id="garnish-custom-input" type="number" min="0" step="0.01" placeholder="€ valore custom" style="display:none;width:100%;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .6rem;color:var(--txt);font-family:inherit;font-size:.75rem;outline:none;box-sizing:border-box;">
+          </div>
+        </div>
+
+        <!-- Ghiaccio chunk/sfera -->
+        <div class="cost-extra-row" id="extra-ghiaccio-row" style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.55rem .75rem;margin-bottom:.4rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <button class="cost-extra-toggle" id="toggle-ghiaccio" data-active="0" style="width:34px;height:18px;border-radius:99px;border:none;background:var(--brd);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;">
+                <span style="position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s;display:block;"></span>
+              </button>
+              <div>
+                <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Ghiaccio chunk / sfera</span>
+                <div style="font-size:.58rem;color:var(--dim);margin-top:.05rem;">costo per pezzo</div>
+              </div>
+            </div>
+            <span id="ghiaccio-cost-label" style="font-size:.68rem;font-weight:700;color:var(--dim);">off</span>
+          </div>
+          <div id="ghiaccio-options" style="display:none;margin-top:.5rem;display:none;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <span style="font-size:.7rem;color:var(--txt2);">€</span>
+              <input id="ghiaccio-price" type="number" min="0" step="0.05" value="0.75" style="width:90px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;font-weight:700;outline:none;">
+              <span style="font-size:.6rem;color:var(--dim);">a pezzo — modifica se necessario</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Foamer -->
+        <div class="cost-extra-row" id="extra-foamer-row" style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.55rem .75rem;margin-bottom:.4rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <button class="cost-extra-toggle" id="toggle-foamer" data-active="0" style="width:34px;height:18px;border-radius:99px;border:none;background:var(--brd);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;">
+                <span style="position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s;display:block;"></span>
+              </button>
+              <div>
+                <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Foamer</span>
+                <div style="font-size:.58rem;color:var(--dim);margin-top:.05rem;">foamer artificiale — ~5 dash o ~10 gocce per drink</div>
+              </div>
+            </div>
+            <span id="foamer-cost-label" style="font-size:.68rem;font-weight:700;color:var(--dim);">off</span>
+          </div>
+          <div id="foamer-options" style="display:none;margin-top:.5rem;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <span style="font-size:.7rem;color:var(--txt2);">€</span>
+              <input id="foamer-price" type="number" min="0" step="0.01" value="0.20" style="width:90px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;font-weight:700;outline:none;">
+              <span style="font-size:.6rem;color:var(--dim);">a dose — modifica se necessario</span>
+            </div>
+            <div style="margin-top:.4rem;font-size:.6rem;color:var(--dim);line-height:1.5;font-style:italic;">Se usi albume o aquafaba il costo è trascurabile — non includere in questo campo.</div>
+          </div>
+        </div>
+
+        <!-- Disclaimer prezzi indicativi -->
+        <div style="font-size:.6rem;color:var(--dim);line-height:1.5;padding:.4rem .2rem;font-style:italic;">
+          I valori di default sono prezzi medi indicativi. Modifica i campi con i tuoi costi reali. Dettagli sul calcolo nelle Tips.
+        </div>
+      </div>
+
       <!-- Risultato costo -->
       <div style="margin-top:1rem;padding:1rem;background:var(--bg);border:1px solid rgba(245,158,11,.2);border-radius:12px;text-align:center;">
         <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem;">Costo del drink</div>
@@ -576,7 +671,7 @@
         <div style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Prezzi di vendita consigliati</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;">
           <div style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.6rem .5rem;text-align:center;">
-            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×4 — Margine alto</div>
+            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×4 — Margine minimo</div>
             <div id="cost-x4" style="font-size:1.1rem;font-weight:900;color:var(--amber);">—</div>
             <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">food cost 25%</div>
           </div>
@@ -586,7 +681,7 @@
             <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">food cost 22%</div>
           </div>
           <div style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.6rem .5rem;text-align:center;">
-            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×5 — Conservativo</div>
+            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×5 — Margine ottimale</div>
             <div id="cost-x5" style="font-size:1.1rem;font-weight:900;color:var(--amber);">—</div>
             <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">food cost 20%</div>
           </div>
