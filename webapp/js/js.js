@@ -246,6 +246,26 @@ function mlToOz(qty) {
 }
 function fmtQty(qty){return USE_OZ ? mlToOz(qty) : qty;}
 
+// ═══ TOGGLE ML / OZ ═══
+document.addEventListener('DOMContentLoaded', function(){
+  var btnMl = document.getElementById('btn-ml');
+  var btnOz = document.getElementById('btn-oz');
+  if(!btnMl || !btnOz) return;
+  function setUnit(oz){
+    USE_OZ = oz;
+    btnMl.classList.toggle('active', !oz);
+    btnOz.classList.toggle('active', oz);
+    // Aggiorna le quantità nella modal se aperta
+    document.querySelectorAll('.ing-q').forEach(function(el){
+      // il testo originale è salvato in data-ml o lo prendiamo dal dataset
+      var raw = el.dataset.raw;
+      if(raw) el.textContent = fmtQty(raw);
+    });
+  }
+  btnMl.addEventListener('click', function(){ setUnit(false); });
+  btnOz.addEventListener('click', function(){ setUnit(true); });
+});
+
 function uniq(key) {
   var s = {};
   for (var i=0;i<DATA.length;i++){
@@ -671,7 +691,7 @@ function openM(i){
     '<div class="mi"><div class="mi-lbl">Bicchiere</div><div class="mi-val">'+(c.bicchiere||'-')+'</div></div>';
   var ingHtml="";
   for(var ii=0;ii<c.ingredienti.length;ii++){
-    ingHtml+='<div class="ing-row"><span class="ing-q">'+fmtQty(c.ingredienti[ii][0])+'</span><span class="ing-n">'+c.ingredienti[ii][1]+'</span></div>';
+    ingHtml+='<div class="ing-row"><span class="ing-q" data-raw="'+c.ingredienti[ii][0]+'">'+fmtQty(c.ingredienti[ii][0])+'</span><span class="ing-n">'+c.ingredienti[ii][1]+'</span></div>';
   }
   document.getElementById("m-ing").innerHTML=ingHtml;
 
