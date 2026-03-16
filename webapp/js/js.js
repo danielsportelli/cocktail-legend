@@ -2057,9 +2057,9 @@ function populateRisGlass(){
     +'Quando il costo degli ingredienti è alto, applicare un moltiplicatore fisso può portare a prezzi di vendita fuori mercato. In questi casi è consigliato ragionare su un <strong style="color:var(--txt)">margine fisso in €</strong> invece di un coefficiente — usa il campo "a quanto vorresti venderlo?" per trovare il prezzo giusto e verificare il margine netto.<br><br>'
 
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">I coefficienti di calcolo</strong>'
-    +'<strong style="color:var(--txt)">×4</strong> — food cost <strong style="color:var(--txt)">25%</strong> — margine minimo accettabile<br>'
-    +'<strong style="color:var(--txt)">×4.5</strong> — food cost <strong style="color:var(--txt)">22%</strong> — range ideale<br>'
-    +'<strong style="color:var(--txt)">×5</strong> — food cost <strong style="color:var(--txt)">20%</strong> — margine ottimale<br>'
+    +'<strong style="color:var(--txt)">×4</strong> — drink cost <strong style="color:var(--txt)">25%</strong> — margine minimo accettabile<br>'
+    +'<strong style="color:var(--txt)">×4.5</strong> — drink cost <strong style="color:var(--txt)">22%</strong> — range ideale<br>'
+    +'<strong style="color:var(--txt)">×5</strong> — drink cost <strong style="color:var(--txt)">20%</strong> — margine ottimale<br>'
     +'Più alto è il coefficiente, maggiore è il margine. Il coefficiente indica quante volte il prezzo di vendita supera il costo del drink.<br><br>'
 
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Garnish</strong>'
@@ -2218,11 +2218,11 @@ function populateRisGlass(){
       // Sempre nota blu per drink con costo elevato
       color = '#60a5fa';
       if(foodCostPct <= 20){
-        msg = 'Food cost ottimo';
+        msg = 'Drink cost ottimo';
       } else if(foodCostPct <= 23){
-        msg = 'Food cost nel range ideale';
+        msg = 'Drink cost nel range ideale';
       } else if(foodCostPct <= 25){
-        msg = 'Food cost accettabile';
+        msg = 'Drink cost accettabile';
       } else {
         msg = 'Food cost elevato';
       }
@@ -2234,11 +2234,11 @@ function populateRisGlass(){
       } else if(foodCostPct <= 25){
         color = '#fbbf24'; msg = 'Accettabile — tieni d\'occhio i costi';
       } else {
-        color = '#f87171'; msg = 'Attenzione — food cost troppo alto';
+        color = '#f87171'; msg = 'Attenzione — drink cost troppo alto';
       }
     }
 
-    var html = 'Food cost: <strong style="color:'+color+'">'+foodCostPct.toFixed(1)+'%</strong>'
+    var html = 'Drink cost: <strong style="color:'+color+'">'+foodCostPct.toFixed(1)+'%</strong>'
       +' &nbsp;·&nbsp; <span style="color:'+color+'">'+msg+'</span>'
       +'<br>Margine netto: <strong style="color:var(--txt)">'+fmtEur(margineNetto)+'</strong> a drink'
       +'<br><span style="font-size:.62rem;color:var(--dim);">Coefficiente: ×'+coeff+'</span>';
