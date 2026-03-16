@@ -1821,6 +1821,24 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       });
     }
 
+    // Tips box Note di degustazione per Temperature
+    var risTmpTips=document.getElementById('ris-tmp-tips-box');
+    if(risTmpTips){
+      risTmpTips.innerHTML='<div style="margin-top:.8rem;padding:.85rem 1rem;background:var(--bg);border:1px solid rgba(245,158,11,.2);border-radius:12px;font-size:.65rem;color:var(--dim);line-height:1.75;">'
+        +'<strong style="color:var(--txt2);display:block;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.1em;font-size:.62rem;">💡 Note di degustazione</strong>'
+        +'<strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Lascia respirare il distillato</strong>'
+        +'Dopo aver versato, lascia riposare il bicchiere senza agitarlo — in inglese si chiama <em>letting it breathe</em>. La regola empirica: <strong style="color:var(--txt)">1 minuto per ogni anno di invecchiamento</strong>. Un 12 anni → 12 minuti. Serve a far evaporare le note alcoliche più pungenti e far emergere la complessità.<br><br>'
+        +'<strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Non agitare</strong>'
+        +'A differenza del vino, i distillati vanno tenuti fermi. Agitare il bicchiere disperde gli aromi più fini e accentua la percezione alcolica.<br><br>'
+        +'<strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Poche gocce d\'acqua</strong>'
+        +'Aggiungi 2–3 gocce di acqua fredda direttamente nel bicchiere. Servono a rompere i <em>cluster molecolari</em> tra etanolo e acqua: i composti aromatici intrappolati vengono liberati, diventando più percepibili al naso e al palato.<br><br>'
+        +'<strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Acqua a parte per il palato</strong>'
+        +'Un bicchiere d\'acqua fredda tra un assaggio e l\'altro resetta il palato, evitando che l\'alcol del sorso precedente copra le note del successivo.<br><br>'
+        +'<strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Il primo sorso non conta</strong>'
+        +'Il palato ha bisogno di scaldarsi. Il primo sorso prepara le mucose: è il secondo quello in cui percepisci davvero il distillato.'
+        +'</div>';
+    }
+
     // Popola Glossario clonando dal drawer-glos esistente
     var _glossPopulated=false;
     function populateRisGlossario(){
@@ -1964,6 +1982,18 @@ function populateRisGlass(){
   ];
 
   var html='';
+
+  // Box Tips introduttivo
+  html+='<div style="margin-bottom:.9rem;padding:.85rem 1rem;background:var(--bg);border:1px solid rgba(245,158,11,.2);border-radius:12px;font-size:.65rem;color:var(--dim);line-height:1.75;">'
+    +'<strong style="color:var(--txt2);display:block;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.1em;font-size:.62rem;">💡 Il bicchiere non è mai un dettaglio</strong>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Identità visiva e funzionale</strong>'
+    +'Il bicchiere è parte integrante del drink: ne riflette l\'identità, definisce lo stile di servizio e influenza aromi, temperatura e percezione al palato. Un Old Fashioned in un flute o un Martini in un tumbler basso non sono semplicemente "sbagliati" — perdono fascino, funzione e coerenza.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Il vetro giusto esalta il drink</strong>'
+    +'La forma del bicchiere non è estetica fine a se stessa. Concentra gli aromi, mantiene la temperatura corretta, determina come il liquido raggiunge il palato e rende il servizio visivamente coerente con il contenuto. Ogni bicchiere è progettato per valorizzare una tipologia di drink specifica.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Una nota sui nomi</strong>'
+    +'I bicchieri in questa guida rappresentano le tipologie classiche riconosciute nella mixology moderna. Ogni produttore può proporre varianti di forma, dimensione o naming — ma nella maggior parte dei casi si rifà comunque a questi archetipi. Dietro a un nome diverso si cela quasi sempre uno dei modelli classici.'
+    +'</div>';
+
   GLASSES.forEach(function(cat){
     html+='<div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:'+cat.color+';margin:.9rem 0 .5rem;">'+cat.cat+'</div>';
     cat.items.forEach(function(g){
