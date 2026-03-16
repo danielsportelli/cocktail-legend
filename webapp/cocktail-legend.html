@@ -536,12 +536,71 @@
       </div>
     </div>
 
-    <!-- CONTENUTO DRINK COST (placeholder) -->
+    <!-- CONTENUTO DRINK COST -->
     <div id="calc-step-cost" style="display:none;">
-      <div style="text-align:center;padding:2rem 1rem;color:var(--dim);font-size:.78rem;line-height:1.6;">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:.75rem;opacity:.6;"><path d="M3 6h18M3 12h18M3 18h18"/><path d="M7 3v18M17 3v18"/></svg>
-        <div style="color:var(--txt2);font-weight:700;margin-bottom:.4rem;">Drink Cost</div>
-        Funzione in arrivo.<br>Calcola il costo esatto di ogni ingrediente per drink.
+      <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:.65rem;">Calcola il costo esatto di ogni drink e il prezzo di vendita consigliato.</p>
+
+      <!-- Pulsante Tips -->
+      <button id="calc-cost-tips-btn" style="display:flex;align-items:center;gap:.4rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:.35rem .75rem;font-family:inherit;font-size:.65rem;font-weight:700;color:var(--amber);cursor:pointer;margin-bottom:.85rem;letter-spacing:.06em;transition:all .2s;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Tips
+      </button>
+
+      <!-- Header colonne -->
+      <div style="display:grid;grid-template-columns:1fr .7fr .65fr .55fr auto;gap:.3rem;padding:0 .1rem;margin-bottom:.3rem;">
+        <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Prodotto</span>
+        <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Formato</span>
+        <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Prezzo €</span>
+        <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Dose ml</span>
+        <span style="width:18px;display:block;"></span>
+      </div>
+
+      <!-- Righe ingredienti -->
+      <div id="cost-ingredients"></div>
+
+      <!-- Azioni -->
+      <div style="display:flex;gap:.6rem;margin-top:.7rem;">
+        <button id="cost-add-row" style="flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem;color:var(--txt2);font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer;">+ Aggiungi ingrediente</button>
+        <button id="cost-reset" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem .8rem;color:var(--dim);font-size:.75rem;font-family:inherit;cursor:pointer;">Reset</button>
+      </div>
+
+      <!-- Risultato costo -->
+      <div style="margin-top:1rem;padding:1rem;background:var(--bg);border:1px solid rgba(245,158,11,.2);border-radius:12px;text-align:center;">
+        <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem;">Costo del drink</div>
+        <div id="cost-result" style="font-size:2.2rem;font-weight:900;color:var(--amber);line-height:1;">—</div>
+        <div id="cost-result-detail" style="font-size:.65rem;color:var(--dim);margin-top:.35rem;line-height:1.5;"></div>
+      </div>
+
+      <!-- Prezzi consigliati -->
+      <div id="cost-suggested" style="display:none;margin-top:.7rem;">
+        <div style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Prezzi di vendita consigliati</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;">
+          <div style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.6rem .5rem;text-align:center;">
+            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×4 — Margine alto</div>
+            <div id="cost-x4" style="font-size:1.1rem;font-weight:900;color:var(--amber);">—</div>
+            <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">food cost 25%</div>
+          </div>
+          <div style="background:var(--bg);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:.6rem .5rem;text-align:center;">
+            <div style="font-size:.58rem;color:var(--amber);margin-bottom:.2rem;">×4.5 — Bilanciato</div>
+            <div id="cost-x45" style="font-size:1.1rem;font-weight:900;color:var(--amber);">—</div>
+            <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">food cost 22%</div>
+          </div>
+          <div style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.6rem .5rem;text-align:center;">
+            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×5 — Conservativo</div>
+            <div id="cost-x5" style="font-size:1.1rem;font-weight:900;color:var(--amber);">—</div>
+            <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">food cost 20%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prezzo personalizzato -->
+      <div id="cost-custom-wrap" style="display:none;margin-top:.7rem;padding:.85rem;background:var(--bg);border:1px solid var(--brd);border-radius:12px;">
+        <div style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.55rem;">A quanto vorresti venderlo?</div>
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <span style="font-size:.85rem;color:var(--txt2);font-weight:700;">€</span>
+          <input id="cost-custom-price" type="number" min="0" step="0.5" placeholder="es. 12.00" style="flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.45rem .6rem;color:var(--txt);font-family:inherit;font-size:.85rem;font-weight:700;outline:none;">
+        </div>
+        <div id="cost-custom-result" style="margin-top:.65rem;font-size:.7rem;line-height:1.6;color:var(--txt2);min-height:1.2rem;"></div>
       </div>
     </div>
   </div>

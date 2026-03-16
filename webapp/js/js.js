@@ -2036,3 +2036,191 @@ function populateRisGlass(){
   });
   el.innerHTML=html;
 }
+
+// ═══ DRINK COST ═══
+(function(){
+  var COST_MAX_ROWS = 15;
+  var costInited = false;
+
+  // Tips content
+  var TIPS_COST = '<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come si calcola il drink cost</strong>'
+    +'Per ogni ingrediente: (Prezzo bottiglia ÷ Formato in ml) × Dose usata = costo di quell\'ingrediente. La somma di tutti gli ingredienti è il <strong style="color:var(--txt)">costo reale del drink</strong>.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">La regola del food cost</strong>'
+    +'Nei bar professionali il costo delle materie prime dovrebbe incidere tra il <strong style="color:var(--txt)">18% e il 25%</strong> del prezzo di vendita. Il range ideale è <strong style="color:var(--txt)">20–23%</strong>. Sopra il 25% i margini si assottigliano pericolosamente.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">I coefficienti usati nei bar</strong>'
+    +'×4 → food cost 25% (margine accettabile)<br>'
+    +'×4.5 → food cost 22% (range ideale)<br>'
+    +'×5 → food cost 20% (ottimo margine)<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare il prezzo personalizzato</strong>'
+    +'Inserisci il prezzo a cui vorresti vendere il drink. Il calcolatore ti mostra il food cost percentuale e ti dice se sei nel range professionale consigliato.';
+
+  function fmtEur(n){ return '€' + n.toFixed(2); }
+
+  function makeRow(){
+    var row = document.createElement('div');
+    row.className = 'cost-row';
+    row.style.cssText = 'display:grid;grid-template-columns:1fr .7fr .65fr .55fr auto;gap:.3rem;margin-bottom:.35rem;align-items:center;';
+    var inpStyle = 'width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.4rem .4rem;color:var(--txt);font-family:inherit;font-size:.72rem;outline:none;box-sizing:border-box;';
+    row.innerHTML = '<input type="text" class="cost-name" placeholder="Prodotto" style="'+inpStyle+'">'
+      +'<input type="number" class="cost-format" placeholder="cl" min="1" style="'+inpStyle+'">'
+      +'<input type="number" class="cost-price" placeholder="€" min="0" step="0.01" style="'+inpStyle+'">'
+      +'<input type="number" class="cost-dose" placeholder="ml" min="0" step="0.5" style="'+inpStyle+'">'
+      +'<button class="cost-remove-btn" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:.9rem;padding:0 .15rem;line-height:1;flex-shrink:0;">✕</button>';
+    row.querySelector('.cost-remove-btn').addEventListener('click', function(){
+      row.remove();
+      calcCost();
+    });
+    row.querySelectorAll('input').forEach(function(i){ i.addEventListener('input', calcCost); });
+    return row;
+  }
+
+  function calcCost(){
+    var rows = document.querySelectorAll('#cost-ingredients .cost-row');
+    var total = 0;
+    var allFilled = rows.length > 0;
+    var details = [];
+
+    rows.forEach(function(row){
+      var fmt = parseFloat(row.querySelector('.cost-format').value) || 0;
+      var price = parseFloat(row.querySelector('.cost-price').value) || 0;
+      var dose = parseFloat(row.querySelector('.cost-dose').value) || 0;
+      var name = row.querySelector('.cost-name').value.trim() || '—';
+      if(fmt > 0 && price > 0 && dose > 0){
+        var fmtMl = fmt * 10; // cl → ml
+        var costIng = (price / fmtMl) * dose;
+        total += costIng;
+        details.push(name + ': ' + fmtEur(costIng));
+      } else {
+        if(!fmt || !price || !dose) allFilled = false;
+      }
+    });
+
+    var resultEl = document.getElementById('cost-result');
+    var detailEl = document.getElementById('cost-result-detail');
+    var suggestedEl = document.getElementById('cost-suggested');
+    var customWrap = document.getElementById('cost-custom-wrap');
+
+    if(total > 0){
+      resultEl.textContent = fmtEur(total);
+      detailEl.innerHTML = details.join(' &nbsp;·&nbsp; ');
+      document.getElementById('cost-x4').textContent  = fmtEur(total * 4);
+      document.getElementById('cost-x45').textContent = fmtEur(total * 4.5);
+      document.getElementById('cost-x5').textContent  = fmtEur(total * 5);
+      suggestedEl.style.display = 'block';
+      customWrap.style.display = 'block';
+      updateCustom(total);
+    } else {
+      resultEl.textContent = '—';
+      detailEl.innerHTML = '';
+      suggestedEl.style.display = 'none';
+      customWrap.style.display = 'none';
+    }
+  }
+
+  function updateCustom(drinkCost){
+    var input = document.getElementById('cost-custom-price');
+    var out = document.getElementById('cost-custom-result');
+    if(!input || !out) return;
+    var sellPrice = parseFloat(input.value) || 0;
+    if(sellPrice <= 0 || !drinkCost){ out.innerHTML = ''; return; }
+    var foodCostPct = (drinkCost / sellPrice) * 100;
+    var color, msg;
+    if(foodCostPct <= 20){
+      color = '#4ade80'; msg = 'Ottimo — margine eccellente';
+    } else if(foodCostPct <= 23){
+      color = '#86efac'; msg = 'Ottimo — nel range ideale';
+    } else if(foodCostPct <= 25){
+      color = '#fbbf24'; msg = 'Accettabile — tieni d\'occhio i costi';
+    } else {
+      color = '#f87171'; msg = 'Attenzione — food cost troppo alto';
+    }
+    out.innerHTML = 'Food cost: <strong style="color:'+color+'">'+foodCostPct.toFixed(1)+'%</strong>'
+      +' &nbsp;·&nbsp; <span style="color:'+color+'">'+msg+'</span>'
+      +'<br><span style="font-size:.62rem;color:var(--dim);">Coefficiente: ×'+( sellPrice/drinkCost).toFixed(2)+'</span>';
+  }
+
+  function initDrinkCost(){
+    if(costInited) return;
+    costInited = true;
+
+    var wrap = document.getElementById('cost-ingredients');
+    var addBtn = document.getElementById('cost-add-row');
+    var resetBtn = document.getElementById('cost-reset');
+    var customInput = document.getElementById('cost-custom-price');
+    var tipsBtn = document.getElementById('calc-cost-tips-btn');
+    var tipsOverlay = document.getElementById('tips-overlay');
+    var tipsContent = document.getElementById('tips-content');
+    var tipsTitle = document.getElementById('tips-title');
+    var tipsClose = document.getElementById('tips-close');
+
+    function addRow(){
+      var rows = wrap.querySelectorAll('.cost-row');
+      if(rows.length >= COST_MAX_ROWS) return;
+      wrap.appendChild(makeRow());
+      calcCost();
+    }
+
+    function reset(){
+      wrap.innerHTML = '';
+      addRow(); addRow();
+      document.getElementById('cost-result').textContent = '—';
+      document.getElementById('cost-result-detail').innerHTML = '';
+      document.getElementById('cost-suggested').style.display = 'none';
+      document.getElementById('cost-custom-wrap').style.display = 'none';
+      if(customInput) customInput.value = '';
+    }
+
+    addBtn.addEventListener('click', addRow);
+    resetBtn.addEventListener('click', reset);
+    if(customInput){
+      customInput.addEventListener('input', function(){
+        var rows = document.querySelectorAll('#cost-ingredients .cost-row');
+        var total = 0;
+        rows.forEach(function(row){
+          var fmt = parseFloat(row.querySelector('.cost-format').value)||0;
+          var price = parseFloat(row.querySelector('.cost-price').value)||0;
+          var dose = parseFloat(row.querySelector('.cost-dose').value)||0;
+          if(fmt>0&&price>0&&dose>0) total += (price/(fmt*10))*dose;
+        });
+        updateCustom(total);
+      });
+    }
+
+    // Tips popup
+    if(tipsBtn){
+      tipsBtn.addEventListener('click', function(){
+        if(tipsTitle) tipsTitle.textContent = 'Drink Cost';
+        if(tipsContent) tipsContent.innerHTML = TIPS_COST;
+        if(tipsOverlay) tipsOverlay.style.display = 'flex';
+      });
+    }
+    if(tipsClose){
+      tipsClose.addEventListener('click', function(){
+        if(tipsTitle) tipsTitle.textContent = 'Come usarla';
+        if(tipsOverlay) tipsOverlay.style.display = 'none';
+      });
+    }
+    if(tipsOverlay){
+      tipsOverlay.addEventListener('click', function(e){
+        if(e.target === tipsOverlay){
+          if(tipsTitle) tipsTitle.textContent = 'Come usarla';
+          tipsOverlay.style.display = 'none';
+        }
+      });
+    }
+
+    // Popola di default
+    reset();
+  }
+
+  // Aggancia initDrinkCost al click sulla card Drink Cost
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.calc-cmd-btn').forEach(function(b){
+      if(b.dataset.cmd === 'cost'){
+        b.addEventListener('click', function(){
+          setTimeout(initDrinkCost, 50);
+        });
+      }
+    });
+  });
+})();
