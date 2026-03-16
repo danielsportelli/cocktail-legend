@@ -1,4 +1,209 @@
 [
+{
+  "id": "1910",
+  "name": "1910",
+  "distillato": ["Rye whiskey"],
+  "categoria": "Pre dinner",
+  "abv": "Alto",
+  "sapori": ["Amaro", "Aromatico", "Elegante"],
+  "garnish": "Zest di limone",
+  "ingredienti": [
+    ["50 ml", "Rye whiskey"],
+    ["20 ml", "Vermouth rosso"],
+    ["10 ml", "Maraschino"],
+    ["2 dash", "Orange bitters"]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in una coppetta raffreddata"
+  ],
+  "storia": "Il 1910 è un cocktail che porta con sé il profumo di un'America che stava per cambiare per sempre. Siamo negli anni immediatamente precedenti al Proibizionismo — un periodo d'oro per la miscelazione americana, in cui i bartender dei grandi hotel e saloon di New York e Chicago sperimentavano varianti sempre più raffinate dei grandi classici. Il nome richiama proprio quell'anno simbolico, a cavallo tra la Belle Époque e l'era moderna, quando il rye whiskey era il re indiscusso dei bar americani. Poco documentato nelle fonti principali, appartiene alla tradizione dei Manhattan-style stirred cocktails, arricchiti da note floreali e fruttate tipiche dei ricettari d'inizio Novecento.", // FONTE INCERTA
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/1910.webp",
+  "varianti": []
+},
+{
+  "id": "absinthe_cocktail",
+  "name": "Absinthe Cocktail",
+  "distillato": ["Assenzio"],
+  "categoria": "Pre dinner",
+  "abv": "Molto alto",
+  "sapori": ["Erbaceo", "Aromatico", "Secco"],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    ["50 ml", "Assenzio verde"],
+    ["15 ml", "Acqua"],
+    ["10 ml", "Sciroppo di zucchero"],
+    ["1 dash", "Orange bitters"]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "L'Absinthe Cocktail è una delle preparazioni più antiche della storia della miscelazione moderna. Jerry Thomas, il padre del bartending americano, lo incluse già nel suo leggendario Bartender's Guide del 1862 — uno dei primi ricettari di cocktail mai pubblicati — e il Savoy Cocktail Book di Harry Craddock ne riportò una versione aggiornata nel 1930. L'assenzio, distillato a base di artemisia, anice e finocchio prodotto principalmente in Svizzera e Francia, dominava i café parigini della Belle Époque diventando simbolo di bohème e trasgressione artistica. Tra i suoi estimatori più famosi figurano Henri de Toulouse-Lautrec, Oscar Wilde e Ernest Hemingway. Erroneamente ritenuto allucinogeno, fu messo al bando in molti paesi tra il 1905 e il 1915 e rimase proibito per quasi un secolo. La sua riabilitazione legale nei primi anni 2000, a partire dall'Unione Europea, ha riportato in auge questa ricetta essenziale che celebra la complessità botanica della Fata Verde nella sua forma più pura.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/absinthe_cocktail.webp",
+  "varianti": [
+    {"nome": "Improved Absinthe Cocktail", "note": "Variante classica con aggiunta di Maraschino e Peychaud's bitters, riportata da Jerry Thomas nel suo Bartender's Guide"}
+  ]
+},
+{
+  "id": "addington",
+  "name": "Addington",
+  "distillato": ["Vermouth"],
+  "categoria": "Pre dinner",
+  "abv": "Medio basso",
+  "sapori": ["Bilanciato", "Floreale", "Fresco"],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    ["30 ml", "Vermouth bianco"],
+    ["30 ml", "Vermouth rosso"],
+    ["Top", "Soda"]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in una coppetta raffreddata",
+    "Aggiungere un tocco di soda"
+  ],
+  "storia": "L'Addington è un aperitivo britannico di fine Ottocento che prende il nome da Addington, villaggio del Surrey oggi inglobato nel borough londinese di Croydon, storicamente associato all'aristocrazia inglese — vi si trova Addington Palace, residenza di diversi arcivescovi di Canterbury. Il drink è citato nel Savoy Cocktail Book del 1930 e appartiene alla tradizione degli aperitivi aromatizzati che dominavano i gentlemen's club e i salotti dell'alta società vittoriana, in un'epoca in cui i grandi aperitivi aromatizzati italiani e francesi erano simbolo di raffinatezza europea. Rappresenta uno dei primi esempi di low-ABV aperitivo prima ancora che il termine esistesse, anticipando di oltre un secolo la tendenza ai cocktail a bassa gradazione oggi tanto di moda.",
+  "frizzante": true,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/addington.webp",
+  "varianti": []
+},
+{
+  "id": "alamagoozlum",
+  "name": "Alamagoozlum",
+  "distillato": ["Gin", "Rum"],
+  "categoria": "After dinner",
+  "abv": "Medio alto",
+  "sapori": ["Complesso", "Speziato", "Avvolgente"],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    ["30 ml", "Gin"],
+    ["15 ml", "Rum giamaicano"],
+    ["15 ml", "Orange curaçao"],
+    ["15 ml", "Chartreuse gialla"],
+    ["15 ml", "Sciroppo di zucchero"],
+    ["1 dash", "Angostura bitters"],
+    ["q.b.", "Albume d'uovo o foamer"]
+  ],
+  "prep": [
+    "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
+    "Aggiungere ghiaccio e shakerare nuovamente",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "L'Alamagoozlum è uno dei cocktail più stravaganti e affascinanti dell'era vittoriana. Il nome, completamente privo di significato in qualsiasi lingua, era un termine gergale americano di fine Ottocento usato per indicare qualcosa di caotico o incomprensibile — e riflette perfettamente lo spirito esuberante di un'epoca in cui i bartender americani amavano stupire con ricette elaborate e nomi assurdi. La prima documentazione risale al 1895 circa, in alcune guide di miscelazione americane. Caduto nell'oblio per quasi un secolo insieme a molti altri drink dell'era pre-Proibizionismo, è stato riscoperto dal movimento di revival della cocktail culture storica degli anni Duemila, quando bartender e appassionati hanno ricominciato a scavare nei ricettari dimenticati dell'Ottocento.", // FONTE INCERTA
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/alamagoozlum.webp",
+  "varianti": []
+},
+{
+  "id": "amaretto_sour",
+  "name": "Amaretto Sour",
+  "distillato": ["Liquore all'amaretto"],
+  "categoria": "All day",
+  "abv": "Medio basso",
+  "sapori": ["Mandorlato", "Acidulo", "Goloso"],
+  "garnish": "Fetta di arancia + ciliegia",
+  "ingredienti": [
+    ["50 ml", "Liquore all'amaretto"],
+    ["22,5 ml", "Succo di limone fresco"],
+    ["15 ml", "Sciroppo di zucchero"],
+    ["q.b.", "Albume d'uovo o foamer"]
+  ],
+  "prep": [
+    "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
+    "Aggiungere ghiaccio e shakerare nuovamente",
+    "Filtrare (double strain) in un tumbler basso riempito di ghiaccio"
+  ],
+  "storia": "L'Amaretto Sour nasce negli Stati Uniti negli anni Settanta, sull'onda del successo travolgente del Disaronno Originale — il celebre liquore di Saronno, in provincia di Varese, che aveva conquistato il mercato americano grazie a una campagna pubblicitaria aggressiva e a un profilo aromatico immediatamente piacevole. Diventò rapidamente uno dei cocktail più ordinati nei bar americani di quell'epoca, spesso nelle versioni più dolci e semplificate che caratterizzavano la mixology anni Settanta-Ottanta. La vera svolta arrivò nel 2012, quando il bartender americano Jeffrey Morgenthaler, del ristorante Clyde Common di Portland, Oregon, pubblicò una versione rivisitata con bourbon e albume che ridefinì completamente lo standard del drink, trasformandolo da cocktail pop a classico moderno rispettato anche dai professionisti. La sua ricetta è oggi considerata il punto di riferimento per chiunque voglia prepararlo seriamente.",
+  "frizzante": false,
+  "bicchiere": "Tumbler basso",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/amaretto_sour.webp",
+  "varianti": [
+    {"nome": "Whiskey Amaretto Sour", "note": "Versione di Jeffrey Morgenthaler (Clyde Common, Portland) con aggiunta di bourbon, che ne ha ridefinito lo standard nel 2012"}
+  ]
+},
+{
+  "id": "angelo_azzurro",
+  "name": "Angelo Azzurro",
+  "distillato": ["Vodka"],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": ["Dolce", "Agrumato", "Vivace"],
+  "garnish": "Zest di limone",
+  "ingredienti": [
+    ["45 ml", "Vodka"],
+    ["15 ml", "Blue curaçao"],
+    ["22,5 ml", "Succo di limone fresco"],
+    ["15 ml", "Sciroppo di zucchero"]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "L'Angelo Azzurro è un cocktail nato nei bar italiani degli anni Ottanta, in un decennio in cui il colore era diventato protagonista assoluto della miscelazione. Il Blue Curaçao — un distillato aromatizzato all'arancia, colorato artificialmente di blu elettrico e prodotto originariamente sull'isola caraibica di Curaçao — era il simbolo di quella stagione estetica, capace di trasformare qualsiasi bicchiere in uno spettacolo visivo. Il nome richiama sia il colore del cielo che una certa leggerezza tutta italiana. Rimasto un classico nei cocktail bar della penisola molto più che altrove, è uno di quei drink profondamente legati alla cultura del bere italiano degli anni Ottanta-Novanta, spesso associato alle discoteche e ai locali estivi della riviera. Le fonti internazionali lo documentano con variazioni, segno che non esiste una ricetta codificata universalmente riconosciuta.", // FONTE INCERTA
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/angelo_azzurro.webp",
+  "varianti": []
+},
+{
+  "id": "apple_jack",
+  "name": "Apple Jack",
+  "distillato": ["Calvados"],
+  "categoria": "After dinner",
+  "abv": "Alto",
+  "sapori": ["Fruttato", "Caldo", "Speziato"],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    ["50 ml", "Calvados"],
+    ["20 ml", "Vermouth rosso"],
+    ["10 ml", "Sciroppo di zucchero"],
+    ["2 dash", "Angostura bitters"]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in una coppetta raffreddata"
+  ],
+  "storia": "Il nome Apple Jack rimanda a due tradizioni distinte ma intrecciate. La prima è quella americana: l'Applejack è un distillato di sidro di mele prodotto nel New Jersey fin dal XVII secolo, uno dei primi spirits americani documentati, che i coloni producevano con una tecnica chiamata jacking — il congelamento del sidro per concentrare l'alcol. La seconda è quella normanna: il Calvados, acquavite di mele a denominazione di origine controllata prodotta nella regione francese del Calvados, ha influenzato profondamente la versione cocktail del drink così come la conosciamo oggi. Il drink appare nei ricettari americani tra fine Ottocento e inizio Novecento, nel periodo d'oro della miscelazione pre-Proibizionismo. Il Savoy Cocktail Book del 1930 riporta una variante chiamata Applejack Rabbit — con note agrumate e dolcezza d'acero — a testimonianza della popolarità del distillato di mele nella tradizione classica.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/apple_jack.webp",
+  "varianti": [
+    {"nome": "Applejack Rabbit", "note": "Variante sour con succo di arancia, succo di limone e sciroppo d'acero, riportata dal Savoy Cocktail Book del 1930"}
+  ]
+},
+{
+  "id": "archangel",
+  "name": "Archangel",
+  "distillato": ["Gin"],
+  "categoria": "Pre dinner",
+  "abv": "Medio alto",
+  "sapori": ["Amaro", "Agrumato", "Aromatico"],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    ["50 ml", "Gin London dry"],
+    ["22,5 ml", "Aperol"],
+    ["15 ml", "Succo di pompelmo fresco"]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "L'Archangel è un cocktail contemporaneo nato nel contesto della rinascita della mixology europea e americana degli anni Duemila, un movimento culturale che ha rivalutato i grandi classici reinterpretandoli con ingredienti moderni. Il nome evoca la figura dell'arcangelo — potente, preciso, senza compromessi — e riflette la natura diretta e decisa del drink. È attribuito al bartender britannico Alex Kammerling, noto anche come creatore dell'Aperol Spritz nella sua versione moderna, e rappresenta uno dei bitter-sour contemporanei più riusciti della sua generazione. La combinazione di gin London dry con un aperitivo italiano era ancora insolita all'epoca della sua creazione, anticipando una tendenza — quella dei cocktail che mescolano la tradizione ginebrina anglosassone con la cultura degli aperitivi mediterranei — che sarebbe diventata dominante nel decennio successivo.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/archangel.webp",
+  "varianti": []
+},
   {
     "id": "toronto",
     "name": "Toronto",
