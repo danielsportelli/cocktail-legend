@@ -882,7 +882,7 @@ ESEMPIO COMPLETO
     "Mescolare delicatamente per circa 20 secondi",
     "Filtrare in una coppetta raffreddata"
   ],
-  "storia": "Il Toronto e' un cocktail che racconta l'incontro tra due culture del bere: quella americana del rye whiskey e quella europea degli amari. Nato a meta' Novecento e reso noto dal Old Mr. Boston Bartender's Guide del 1948, rappresenta una delle prime espressioni dell'eleganza post-Proibizionismo. Il suo nome, probabilmente ispirato alla citta' canadese, celebra il ruolo del Canada nella diffusione del whiskey di segale. Il drink si distingue per il carattere deciso e aromatico, in cui l'amaro erbaceo del Fernet dialoga con la dolcezza dello zucchero, dando vita a un equilibrio complesso ma armonioso.",
+  "storia": "Il Toronto è documentato per la prima volta nell'Old Mr. Boston Bartender's Guide del 1948, uno dei manuali di miscelazione americani più diffusi del dopoguerra. Il nome rimanda alla città canadese, omaggio al ruolo che il Canada ha avuto nella storia del rye whiskey — durante il Proibizionismo americano, il whiskey canadese di segale attraversava il confine in grandi quantità, diventando il distillato di riferimento per intere generazioni di bartender americani. Il Fernet, l'amaro erbaceo milanese prodotto dalla famiglia Branca dal 1845, era già all'epoca un ingrediente presente nei ricettari americani, arrivato con le ondate di immigrazione italiana. Il Toronto è dunque un incontro geografico oltre che gustativo: Canada, Italia e Stati Uniti in un singolo bicchiere.",
   "frizzante": false,
   "bicchiere": "Coppetta",
   "img": "https://danielsportelli.github.io/cocktail-legend/immagini/toronto.webp",
