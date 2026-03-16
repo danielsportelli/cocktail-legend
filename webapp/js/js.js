@@ -880,8 +880,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     currentCmd=null; selectedPill=null; giornoTipo=null;
     sig={tipo:null,momento:null,gusto:null,tenore:null,bicchiere:null};
     // Titolo: torna a default
-    var hdr=document.getElementById('ai-drawer-header');
+    var hdr=document.getElementById('ai-header-title');
     if(hdr)hdr.textContent='Chiedi al Barman';
+    // Nascondi tasto back header
+    var aiBackHdr=document.getElementById('ai-back-header-btn');
+    if(aiBackHdr)aiBackHdr.classList.remove('visible');
     // Nascondi tasto Tips
     var tipsBtn=document.getElementById('ai-tips-btn');
     if(tipsBtn)tipsBtn.style.display='none';
@@ -923,8 +926,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
     // ── Titolo dinamico ──
     var TITLES={signature:'Crea un Signature',twist:'Twist on Classic',pairing:'Food Pairing',giorno:'Cocktail del Giorno'};
-    var hdr=document.getElementById('ai-drawer-header');
+    var hdr=document.getElementById('ai-header-title');
     if(hdr)hdr.textContent=TITLES[cmd]||'Chiedi al Barman';
+    // Mostra tasto back header
+    var aiBackHdr=document.getElementById('ai-back-header-btn');
+    if(aiBackHdr)aiBackHdr.classList.add('visible');
     // Mostra tasto Tips
     var tipsBtn=document.getElementById('ai-tips-btn');
     if(tipsBtn)tipsBtn.style.display='inline-flex';
@@ -1232,6 +1238,10 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   // ─── INIT ─────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded',function(){
     renderUsage();
+
+    // Back btn header AI → torna alla schermata principale
+    var aiBackHdr=document.getElementById('ai-back-header-btn');
+    if(aiBackHdr)aiBackHdr.addEventListener('click',showCmds);
 
     // Bottoni comando principali
     document.querySelectorAll('.ai-cmd-btn').forEach(function(b){
@@ -1698,15 +1708,19 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var CALC_TITLES={abv:'Calcola ABV',cost:'Drink Cost'};
 
     function showRisCmds(){
-      var hdr=document.getElementById('ris-drawer-header');
-      if(hdr)hdr.textContent='Risorse';
+      var t=document.getElementById('ris-header-title');
+      if(t)t.textContent='Risorse';
+      var b=document.getElementById('ris-back-header-btn');
+      if(b)b.classList.remove('visible');
       document.getElementById('ris-step-cmds').style.display='block';
       document.getElementById('ris-step-tmp').style.display='none';
       document.getElementById('ris-step-bic').style.display='none';
     }
     function showCalcCmds(){
-      var hdr=document.getElementById('calc-drawer-header');
-      if(hdr)hdr.textContent='Calcolatori';
+      var t=document.getElementById('calc-header-title');
+      if(t)t.textContent='Calcolatori';
+      var b=document.getElementById('calc-back-header-btn');
+      if(b)b.classList.remove('visible');
       document.getElementById('calc-step-cmds').style.display='block';
       document.getElementById('calc-step-abv').style.display='none';
       document.getElementById('calc-step-cost').style.display='none';
@@ -1716,8 +1730,10 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     document.querySelectorAll('.ris-cmd-btn').forEach(function(b){
       b.addEventListener('click',function(){
         var cmd=this.dataset.cmd;
-        var hdr=document.getElementById('ris-drawer-header');
-        if(hdr)hdr.textContent=RIS_TITLES[cmd]||'Risorse';
+        var t=document.getElementById('ris-header-title');
+        if(t)t.textContent=RIS_TITLES[cmd]||'Risorse';
+        var backBtn=document.getElementById('ris-back-header-btn');
+        if(backBtn)backBtn.classList.add('visible');
         document.getElementById('ris-step-cmds').style.display='none';
         document.getElementById('ris-step-tmp').style.display=cmd==='tmp'?'block':'none';
         document.getElementById('ris-step-bic').style.display=cmd==='bic'?'block':'none';
@@ -1729,8 +1745,10 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     document.querySelectorAll('.calc-cmd-btn').forEach(function(b){
       b.addEventListener('click',function(){
         var cmd=this.dataset.cmd;
-        var hdr=document.getElementById('calc-drawer-header');
-        if(hdr)hdr.textContent=CALC_TITLES[cmd]||'Calcolatori';
+        var t=document.getElementById('calc-header-title');
+        if(t)t.textContent=CALC_TITLES[cmd]||'Calcolatori';
+        var backBtn=document.getElementById('calc-back-header-btn');
+        if(backBtn)backBtn.classList.add('visible');
         document.getElementById('calc-step-cmds').style.display='none';
         document.getElementById('calc-step-abv').style.display=cmd==='abv'?'block':'none';
         document.getElementById('calc-step-cost').style.display=cmd==='cost'?'block':'none';
@@ -1738,7 +1756,9 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       });
     });
 
-    // Bottoni back
+    // Bottoni back nell'header (nuovi) + quelli vecchi nel contenuto
+    document.getElementById('ris-back-header-btn').addEventListener('click',showRisCmds);
+    document.getElementById('calc-back-header-btn').addEventListener('click',showCalcCmds);
     document.querySelectorAll('.ris-back-btn').forEach(function(b){
       b.addEventListener('click',showRisCmds);
     });
