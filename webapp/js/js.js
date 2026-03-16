@@ -1809,16 +1809,21 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         +'I bicchieri in questa guida rappresentano le tipologie classiche della mixology moderna. Ogni produttore può proporre varianti di forma o naming — ma quasi sempre si rifà a questi archetipi.'
     };
 
+    var TIPS_RIS_TITLES = { tmp: 'Note di degustazione', glass: 'Note' };
+
     var tipsOverlay=document.getElementById('tips-overlay');
     var tipsContent=document.getElementById('tips-content');
     var tipsClose=document.getElementById('tips-close');
+    var tipsTitle=document.getElementById('tips-title');
 
     function openRisTips(key){
       if(!tipsOverlay||!tipsContent||!TIPS_RIS[key])return;
+      if(tipsTitle) tipsTitle.textContent=TIPS_RIS_TITLES[key]||'Come usarla';
       tipsContent.innerHTML=TIPS_RIS[key];
       tipsOverlay.style.display='flex';
     }
     function closeRisTips(){
+      if(tipsTitle) tipsTitle.textContent='Come usarla';
       if(tipsOverlay)tipsOverlay.style.display='none';
     }
 
