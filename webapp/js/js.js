@@ -759,7 +759,12 @@ document.getElementById("m-fav-heart").addEventListener("click",function(){
 document.getElementById("btn-favonly").addEventListener("click",function(){
   FAV_ONLY=!FAV_ONLY;
   this.classList.toggle("active",FAV_ONLY);
-  if(!FAV_ONLY){this.blur();}
+  if(!FAV_ONLY){
+    this.blur();
+    var btn=this;
+    btn.classList.add('fav-resetting');
+    requestAnimationFrame(function(){ btn.classList.remove('fav-resetting'); });
+  }
   render();
   updateAllCounts();
 });

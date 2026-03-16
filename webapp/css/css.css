@@ -314,16 +314,21 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   background:var(--surf);border:1px solid var(--brd);
   color:var(--txt2);padding:.42rem .75rem;border-radius:9px;
   font-size:.78rem;font-weight:600;font-family:inherit;cursor:pointer;
-  transition:border-color .2s,color .2s,background .2s;
+  transition:border-color .2s,background .2s;
   white-space:nowrap;flex-shrink:0;
 }
-.btn-favonly .fav-heart-ico{fill:#ffffff;stroke:#ffffff;transition:fill .2s,stroke .2s;}
+.btn-favonly .fav-heart-ico{fill:#ffffff;stroke:#ffffff;transition:fill .15s,stroke .15s;}
 .btn-favonly:not(.active):hover{border-color:rgba(239,68,68,.3);}
 .btn-favonly:not(.active):hover .fav-heart-ico{fill:#fca5a5;stroke:#fca5a5;}
 .btn-favonly.active{border-color:rgba(239,68,68,.55);background:rgba(239,68,68,.09);}
 .btn-favonly.active .fav-heart-ico{fill:#f87171;stroke:#f87171;}
 .btn-favonly:not(.active){border-color:var(--brd) !important;background:var(--surf) !important;}
+.btn-favonly:not(.active) .fav-heart-ico{fill:#ffffff !important;stroke:#ffffff !important;}
+.btn-favonly.fav-resetting .fav-heart-ico{fill:#ffffff !important;stroke:#ffffff !important;transition:none !important;}
 .btn-favonly:not(.active):focus,.btn-favonly:not(.active):active{border-color:var(--brd) !important;background:var(--surf) !important;outline:none;}
+/* Nasconde scrollbar popup Tips su tutti i browser */
+#tips-box{scrollbar-width:none;-ms-overflow-style:none;}
+#tips-box::-webkit-scrollbar{display:none;}
 .unit-toggle{display:flex;align-items:center;gap:0;background:var(--surf2);border-radius:8px;padding:3px;margin-bottom:1.1rem}
 .unit-btn{flex:1;text-align:center;padding:.3rem .6rem;border-radius:6px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .2s;color:var(--txt2);border:none;background:transparent;font-family:inherit}
 .unit-btn.active{background:var(--blue);color:#fff}
