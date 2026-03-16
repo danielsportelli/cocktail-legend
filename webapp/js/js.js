@@ -1908,9 +1908,9 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var row=document.createElement('div');
         row.className='calc-abv-row';
         row.style.cssText='display:flex;align-items:center;gap:.4rem;margin-top:.5rem;';
-        row.innerHTML='<input type="number" class="cabv-ml" placeholder="ml" min="0" max="500" autocomplete="off" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
+        row.innerHTML='<input type="number" class="cabv-ml" placeholder="ml" min="0" max="500" autocomplete="off" inputmode="decimal" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
           +'<span style="color:var(--dim);font-size:.75rem;">ml</span>'
-          +'<input type="number" class="cabv-pct" placeholder="%" min="0" max="100" autocomplete="off" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
+          +'<input type="number" class="cabv-pct" placeholder="%" min="0" max="100" autocomplete="off" inputmode="decimal" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
           +'<span style="color:var(--dim);font-size:.75rem;">%</span>'
           +'<button onclick="this.parentElement.remove();calcAbvNew();" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:.9rem;padding:0 .2rem;">✕</button>';
         wrap.appendChild(row);
@@ -1951,7 +1951,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var alcol=document.getElementById('calc-abv-alcol');
       if(totalVol<=0){if(result)result.textContent='—';if(desc)desc.textContent='';if(alcol)alcol.textContent='';return;}
       var abv=(totalAlc/totalVol*100).toFixed(1);
-      var label=abv<10?'Basso':abv<20?'Medio':abv<30?'Medio-alto':'Alto';
+      var abvNum=parseFloat(abv);
+      var label=abvNum===0?'Analcolico':abvNum<=8?'Basso':abvNum<=14?'Medio basso':abvNum<=20?'Medio':abvNum<=25?'Medio alto':abvNum<=30?'Alto':'Molto alto';
       if(result)result.textContent=abv+'%';
       if(desc)desc.textContent=label+' — '+totalVol.toFixed(0)+' ml totali';
       if(alcol)alcol.textContent='Alcol etilico puro: '+totalAlc.toFixed(1)+' ml';
@@ -2084,10 +2085,10 @@ function populateRisGlass(){
     row.className = 'cost-row';
     row.style.cssText = 'display:grid;grid-template-columns:1fr .7fr .65fr .55fr auto;gap:.3rem;margin-bottom:.35rem;align-items:center;';
     var inpStyle = 'width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.4rem .4rem;color:var(--txt);font-family:inherit;font-size:.72rem;outline:none;box-sizing:border-box;';
-    row.innerHTML = '<input type="text" class="cost-name" placeholder="Prodotto" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="'+inpStyle+'">'
-      +'<input type="number" class="cost-format" placeholder="ml" min="1" autocomplete="off" style="'+inpStyle+'">'
-      +'<input type="number" class="cost-price" placeholder="€" min="0" step="0.01" autocomplete="off" style="'+inpStyle+'">'
-      +'<input type="number" class="cost-dose" placeholder="ml" min="0" step="0.5" autocomplete="off" style="'+inpStyle+'">'
+    row.innerHTML = '<input type="text" class="cost-name" placeholder="Prodotto" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" inputmode="text" style="'+inpStyle+'">'
+      +'<input type="number" class="cost-format" placeholder="ml" min="1" autocomplete="off" inputmode="decimal" style="'+inpStyle+'">'
+      +'<input type="number" class="cost-price" placeholder="€" min="0" step="0.01" autocomplete="off" inputmode="decimal" style="'+inpStyle+'">'
+      +'<input type="number" class="cost-dose" placeholder="ml" min="0" step="0.5" autocomplete="off" inputmode="decimal" style="'+inpStyle+'">'
       +'<button class="cost-remove-btn" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:.9rem;padding:0 .15rem;line-height:1;flex-shrink:0;">✕</button>';
     row.querySelector('.cost-remove-btn').addEventListener('click', function(){
       row.remove();
@@ -2194,23 +2195,24 @@ function populateRisGlass(){
     var foodCostPct = (drinkCost / sellPrice) * 100;
     var margineNetto = sellPrice - drinkCost;
     var isPregio = drinkCost >= 4;
+    var coeff = (sellPrice / drinkCost).toFixed(2);
     var color, msg;
-    if(foodCostPct <= 20){
+    if(isPregio && foodCostPct > 25){
+      color = '#60a5fa';
+      msg = 'Il prezzo è sotto il consigliato — ma il margine netto di <strong style="color:var(--txt)">'+fmtEur(margineNetto)+'</strong> è comunque sostenibile su un drink di pregio';
+    } else if(foodCostPct <= 20){
       color = '#4ade80'; msg = 'Ottimo — margine eccellente';
     } else if(foodCostPct <= 23){
       color = '#86efac'; msg = 'Ottimo — nel range ideale';
     } else if(foodCostPct <= 25){
       color = '#fbbf24'; msg = 'Accettabile — tieni d\'occhio i costi';
     } else {
-      color = isPregio ? '#fbbf24' : '#f87171';
-      msg = isPregio
-        ? 'Sopra soglia standard — su un drink di pregio valuta il margine assoluto'
-        : 'Attenzione — food cost troppo alto';
+      color = '#f87171'; msg = 'Attenzione — food cost troppo alto';
     }
     out.innerHTML = 'Food cost: <strong style="color:'+color+'">'+foodCostPct.toFixed(1)+'%</strong>'
       +' &nbsp;·&nbsp; <span style="color:'+color+'">'+msg+'</span>'
       +'<br>Margine netto: <strong style="color:var(--txt)">'+fmtEur(margineNetto)+'</strong> a drink'
-      +'<br><span style="font-size:.62rem;color:var(--dim);">Coefficiente: ×'+(sellPrice/drinkCost).toFixed(2)+'</span>';
+      +'<br><span style="font-size:.62rem;color:var(--dim);">Coefficiente: ×'+coeff+'</span>';
   }
 
   function initDrinkCost(){
@@ -2248,29 +2250,93 @@ function populateRisGlass(){
     resetBtn.addEventListener('click', reset);
 
     // ─── Toggle voci aggiuntive ───
-    function initToggle(toggleId, optionsId, labelId, defaultActive){
+    function initToggle(toggleId, optionsId, labelId, defaultVal){
       var btn = document.getElementById(toggleId);
       var opts = document.getElementById(optionsId);
       var lbl = document.getElementById(labelId);
       if(!btn) return;
+
       function setActive(active){
         btn.dataset.active = active ? '1' : '0';
         btn.style.background = active ? 'var(--amber)' : 'var(--brd)';
         btn.querySelector('span').style.left = active ? '18px' : '2px';
         if(opts) opts.style.display = active ? 'block' : 'none';
-        if(lbl) lbl.style.color = active ? 'var(--amber)' : 'var(--dim)';
+        if(lbl){
+          if(active){
+            // Mostra prezzo corrente o 'on'
+            var inp = opts ? opts.querySelector('input[type="number"]') : null;
+            var v = inp ? parseFloat(inp.value) : 0;
+            lbl.textContent = v > 0 ? fmtEur(v) : 'on';
+            lbl.style.color = 'var(--amber)';
+          } else {
+            lbl.textContent = 'off';
+            lbl.style.color = 'var(--dim)';
+          }
+        }
+        // Se attivazione, preimposta valore default se il campo è vuoto
+        if(active && defaultVal !== null){
+          var inp2 = opts ? opts.querySelector('input[type="number"]') : null;
+          if(inp2 && (!inp2.value || parseFloat(inp2.value) === 0)){
+            inp2.value = defaultVal;
+          }
+          if(lbl){
+            var inp3 = opts ? opts.querySelector('input[type="number"]') : null;
+            var v2 = inp3 ? parseFloat(inp3.value) : 0;
+            lbl.textContent = v2 > 0 ? fmtEur(v2) : 'on';
+          }
+        }
         calcCost();
       }
+
+      // Auto-off al blur se valore è 0 o vuoto
+      var numInput = opts ? opts.querySelector('input[type="number"]') : null;
+      if(numInput){
+        numInput.addEventListener('blur', function(){
+          var v = parseFloat(this.value);
+          if(!v || v <= 0){
+            this.value = '';
+            setActive(false);
+          } else {
+            if(lbl){ lbl.textContent = fmtEur(v); lbl.style.color = 'var(--amber)'; }
+          }
+        });
+        numInput.addEventListener('input', function(){
+          // Aggiorna label solo se valore > 0, non disattivare mentre si digita
+          var v = parseFloat(this.value);
+          if(lbl && btn.dataset.active === '1'){
+            lbl.textContent = v > 0 ? fmtEur(v) : 'on';
+          }
+          calcCost();
+        });
+      }
+
       btn.addEventListener('click', function(){
         setActive(btn.dataset.active !== '1');
       });
-      setActive(defaultActive||false);
+      setActive(false);
     }
 
-    initToggle('toggle-garnish',          'garnish-options',          'garnish-cost-label',          false);
-    initToggle('toggle-ghiaccio',         'ghiaccio-options',         'ghiaccio-cost-label',         false);
-    initToggle('toggle-ghiaccio-normale', 'ghiaccio-normale-options', 'ghiaccio-normale-cost-label', false);
-    initToggle('toggle-foamer',           'foamer-options',           'foamer-cost-label',           false);
+    initToggle('toggle-garnish',          'garnish-options',          'garnish-cost-label',          null);
+    initToggle('toggle-ghiaccio',         'ghiaccio-options',         'ghiaccio-cost-label',         0.75);
+    initToggle('toggle-ghiaccio-normale', 'ghiaccio-normale-options', 'ghiaccio-normale-cost-label', 0.50);
+    initToggle('toggle-foamer',           'foamer-options',           'foamer-cost-label',           0.20);
+
+    // Garnish: quando si attiva, seleziona automaticamente "Semplice" come default
+    var origGarnishToggle = document.getElementById('toggle-garnish');
+    if(origGarnishToggle){
+      origGarnishToggle.addEventListener('click', function(){
+        // Dopo il click di initToggle, se ora è attivo e nessuna opzione è selezionata → seleziona Semplice
+        setTimeout(function(){
+          if(origGarnishToggle.dataset.active === '1'){
+            var already = document.querySelector('.garnish-opt-btn.garnish-selected');
+            if(!already){
+              var semplice = document.querySelector('.garnish-opt-btn[data-val="0.05"]');
+              if(semplice) semplice.click();
+            }
+          }
+        }, 10);
+      });
+    }
 
     // Enter → chiudi tastiera su tutti i campi numerici voci extra
     ['ghiaccio-price','ghiaccio-normale-price','foamer-price','cost-custom-price'].forEach(function(id){
