@@ -620,14 +620,15 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .drawer-back-btn{
   display:none;align-items:center;gap:.3rem;
-  background:none;border:none;
+  background:transparent;
+  border:1px solid var(--dim);
   color:var(--dim);font-size:.62rem;font-weight:600;
   font-family:inherit;cursor:pointer;
-  padding:.2rem .4rem;border-radius:6px;
+  padding:.2rem .5rem;border-radius:6px;
   letter-spacing:.05em;text-transform:uppercase;
-  transition:color .15s;flex-shrink:0;
+  transition:color .15s, border-color .15s;flex-shrink:0;
 }
-.drawer-back-btn:hover{ color:var(--txt2); }
+.drawer-back-btn:hover{ color:var(--txt2); border-color:var(--txt2); }
 .drawer-back-btn.visible{ display:inline-flex; }
 /* Nascondi scrollbar su desktop */
 .drawer{ scrollbar-width:none; }
