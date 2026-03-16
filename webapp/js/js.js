@@ -2057,32 +2057,33 @@ function populateRisGlass(){
     +'Quando il costo degli ingredienti è alto, applicare un moltiplicatore fisso può portare a prezzi di vendita fuori mercato. In questi casi è consigliato ragionare su un <strong style="color:var(--txt)">margine fisso in €</strong> invece di un coefficiente — usa il campo "a quanto vorresti venderlo?" per trovare il prezzo giusto e verificare il margine netto.<br><br>'
 
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">I coefficienti di calcolo</strong>'
-    +'×4 — food cost 25% — margine minimo accettabile<br>'
-    +'×4.5 — food cost 22% — range ideale<br>'
-    +'×5 — food cost 20% — margine ottimale<br>'
+    +'<strong style="color:var(--txt)">×4</strong> — food cost <strong style="color:var(--txt)">25%</strong> — margine minimo accettabile<br>'
+    +'<strong style="color:var(--txt)">×4.5</strong> — food cost <strong style="color:var(--txt)">22%</strong> — range ideale<br>'
+    +'<strong style="color:var(--txt)">×5</strong> — food cost <strong style="color:var(--txt)">20%</strong> — margine ottimale<br>'
     +'Più alto è il coefficiente, maggiore è il margine. Il coefficiente indica quante volte il prezzo di vendita supera il costo del drink.<br><br>'
 
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Garnish</strong>'
-    +'SEMPLICE: scorza, fetta, agrume fresco — ~€0.05<br>'
-    +'MEDIA: disidratata, fiore edibile — ~€0.12<br>'
-    +'ELABORATA: cioccolato, pasta, decorazioni — ~€0.20+<br>'
+    +'<strong style="color:var(--txt)">SEMPLICE</strong>: scorza, fetta, agrume fresco — <strong style="color:var(--txt)">~€0.05</strong><br>'
+    +'<strong style="color:var(--txt)">MEDIA</strong>: disidratata, fiore edibile — <strong style="color:var(--txt)">~€0.12</strong><br>'
+    +'<strong style="color:var(--txt)">ELABORATA</strong>: cioccolato, pasta, decorazioni — <strong style="color:var(--txt)">~€0.20+</strong><br>'
     +'Nei cocktail senza garnish questa voce non va inclusa.<br><br>'
 
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Ghiaccio chunk / sfera</strong>'
-    +'Costo unitario rilevante: ~€0.70–0.80 a pezzo.<br>'
-    +'Va sempre incluso quando si usa ghiaccio di pregio, sia in bar fisso che in catering.<br><br>'
+    +'<strong style="color:var(--txt)">Costo unitario rilevante: ~€0.70–0.80 a pezzo.</strong><br>'
+    +'Va sempre incluso quando si usa ghiaccio di pregio, sia in bar fisso che in catering.<br>'
+    +'Se lo autoproduci con stampini e acqua il costo è praticamente nullo — in quel caso non va considerato.<br><br>'
 
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Ghiaccio a cubetti</strong>'
     +'PREZZO AL KG: €1.00–1.40 (acquisto online / fornitore)<br>'
     +'QUANTITÀ MEDIA PER DRINK: ~380–430g<br>'
-    +'COSTO MEDIO PER DRINK: ~€0.40–0.60<br>'
-    +'Consigliato includerlo solo se acquisti il ghiaccio appositamente per l\'occasione (catering, eventi, privati). Se hai una macchina del ghiaccio è un costo variabile di struttura, non imputabile al singolo drink. Se lo autoproduci con stampini e acqua il costo è praticamente nullo — in quel caso non va considerato.<br><br>'
+    +'<strong style="color:var(--txt)">COSTO MEDIO PER DRINK: ~€0.40–0.60</strong><br>'
+    +'Consigliato includerlo solo se acquisti il ghiaccio appositamente per l\'occasione (catering, eventi, privati). Se hai una macchina del ghiaccio è un costo variabile di struttura, non imputabile al singolo drink.<br><br>'
 
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Foamer</strong>'
-    +'TAPPO FORATO (es. Fee Brothers): 3 dash per drink ≈ 2.1ml — bottiglia 150ml → ~71 dosi → €0.23 a dose<br>'
-    +'PIPETTA CONTAGOCCE (es. Ms. Better\'s, Stillabunt): 10 gocce per drink ≈ 0.5ml — bottiglia 95–120ml → 190–240 dosi → €0.18–0.21 a dose<br>'
-    +'MEDIA DI MERCATO: ~€0.20 per dose — valore di default consigliato<br>'
-    +'ALBUME / AQUAFABA: costo trascurabile — non includere in questo campo.';
+    +'<strong style="color:var(--txt)">TAPPO FORATO</strong> (es. Fee Brothers da 150ml): se usi 2 dash (≈1.4ml) per drink fai circa 100 dosi → costo per drink <strong style="color:var(--txt)">€0.15</strong><br>'
+    +'<strong style="color:var(--txt)">PIPETTA CONTAGOCCE</strong> (es. Ms. Better\'s da 120ml): se usi 10 gocce (≈0.5ml) per drink fai circa 190 dosi → costo per drink <strong style="color:var(--txt)">€0.21</strong><br>'
+    +'<strong style="color:var(--txt)">MEDIA DI MERCATO</strong>: €0.18 per dose — valore di default consigliato<br>'
+    +'Se invece usi <strong style="color:var(--txt)">ALBUME / AQUAFABA</strong> il costo è trascurabile — non includere in questo campo.';
 
   function fmtEur(n){ return '€' + n.toFixed(2); }
 
@@ -2396,10 +2397,10 @@ function populateRisGlass(){
           if(customInput){ customInput.style.display='block'; customInput.focus(); }
         } else {
           if(customInput) customInput.style.display='none';
-          // Aggiorna label
-          var lbl = document.getElementById('garnish-cost-label');
-          if(lbl) lbl.textContent = fmtEur(parseFloat(this.dataset.val)||0);
         }
+        // Label sempre "on" quando garnish è attiva
+        var lbl = document.getElementById('garnish-cost-label');
+        if(lbl){ lbl.textContent = 'on'; lbl.style.color = 'var(--amber)'; }
         calcCost();
       });
     });
@@ -2407,8 +2408,7 @@ function populateRisGlass(){
     if(garnishCustom){
       garnishCustom.addEventListener('input', function(){
         var lbl = document.getElementById('garnish-cost-label');
-        var v = parseFloat(this.value)||0;
-        if(lbl) lbl.textContent = v > 0 ? fmtEur(v) : 'on';
+        if(lbl){ lbl.textContent = 'on'; lbl.style.color = 'var(--amber)'; }
         calcCost();
       });
       // Enter → chiudi tastiera
