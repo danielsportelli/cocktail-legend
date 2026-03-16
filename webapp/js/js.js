@@ -1908,13 +1908,16 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var row=document.createElement('div');
         row.className='calc-abv-row';
         row.style.cssText='display:flex;align-items:center;gap:.4rem;margin-top:.5rem;';
-        row.innerHTML='<input type="number" class="cabv-ml" placeholder="ml" min="0" max="500" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
+        row.innerHTML='<input type="number" class="cabv-ml" placeholder="ml" min="0" max="500" autocomplete="off" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
           +'<span style="color:var(--dim);font-size:.75rem;">ml</span>'
-          +'<input type="number" class="cabv-pct" placeholder="%" min="0" max="100" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
+          +'<input type="number" class="cabv-pct" placeholder="%" min="0" max="100" autocomplete="off" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
           +'<span style="color:var(--dim);font-size:.75rem;">%</span>'
           +'<button onclick="this.parentElement.remove();calcAbvNew();" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:.9rem;padding:0 .2rem;">✕</button>';
         wrap.appendChild(row);
-        row.querySelectorAll('input').forEach(function(i){i.addEventListener('input',calcAbvNew);});
+        row.querySelectorAll('input').forEach(function(i){
+          i.addEventListener('input',calcAbvNew);
+          i.addEventListener('keydown',function(e){if(e.key==='Enter')this.blur();});
+        });
       }
 
       var addBtn=document.getElementById('calc-abv-add');
@@ -2044,21 +2047,23 @@ function populateRisGlass(){
 
   // Tips content
   var TIPS_COST = '<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come si calcola il drink cost</strong>'
-    +'Per ogni ingrediente: (Prezzo bottiglia ÷ Formato in ml) × Dose usata = costo di quell\'ingrediente. La somma di tutti gli ingredienti è il <strong style="color:var(--txt)">costo reale del drink</strong>.<br><br>'
+    +'Per ogni ingrediente: (Prezzo bottiglia ÷ Formato in ml) × Dose usata = costo ingrediente. La somma di tutti gli ingredienti più le voci aggiuntive attive è il <strong style="color:var(--txt)">costo reale del drink</strong>.<br><br>'
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">La regola del food cost</strong>'
-    +'Nei bar professionali il costo delle materie prime dovrebbe incidere tra il <strong style="color:var(--txt)">18% e il 25%</strong> del prezzo di vendita. Il range ideale è <strong style="color:var(--txt)">20–23%</strong>. Sopra il 25% i margini si assottigliano pericolosamente.<br><br>'
-    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">I coefficienti usati nei bar</strong>'
-    +'×4 → food cost 25% (margine minimo accettabile)<br>'
-    +'×4.5 → food cost 22% (range ideale)<br>'
-    +'×5 → food cost 20% (margine ottimale)<br>'
-    +'Più alto è il coefficiente, maggiore è il margine.<br><br>'
+    +'Il costo delle materie prime dovrebbe incidere tra il <strong style="color:var(--txt)">18% e il 25%</strong> del prezzo di vendita. Il range ideale è <strong style="color:var(--txt)">20–23%</strong>. Sopra il 25% i margini si assottigliano.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Coefficienti e prodotti di pregio</strong>'
+    +'×4 → food cost 25% · ×4.5 → 22% · ×5 → 20%<br>'
+    +'Su distillati di pregio il moltiplicatore fisso può portare a prezzi fuori mercato. In questi casi ragiona sul <strong style="color:var(--txt)">margine assoluto in €</strong>: usa il campo "a quanto vorresti venderlo" per trovare il prezzo giusto e verifica il margine netto.<br><br>'
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Garnish</strong>'
-    +'<strong style="color:var(--txt)">Semplice</strong> — scorza, fetta, agrume fresco: ~€0.05<br>'
-    +'<strong style="color:var(--txt)">Media</strong> — disidratata, fiore edibile: ~€0.10–0.15<br>'
-    +'<strong style="color:var(--txt)">Elaborata</strong> — cioccolato, pasta, decorazioni: ~€0.20+<br>'
-    +'Nei cocktail naked (senza garnish) questa voce non va considerata.<br><br>'
+    +'Semplice (scorza, fetta, agrume): ~€0.05 · Media (disidratata, fiore edibile): ~€0.12 · Elaborata (cioccolato, pasta): ~€0.20+. Nei cocktail naked non va inclusa.<br><br>'
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Ghiaccio chunk / sfera</strong>'
-    +'A differenza del ghiaccio standard, chunk e sfere hanno un costo unitario rilevante (~€0.70–0.80 a pezzo). In contesti bar fissi spesso non viene conteggiato, ma in catering o eventi va sempre incluso.<br><br>'
+    +'Costo unitario rilevante (~€0.70–0.80 a pezzo) da includere sempre quando si usa ghiaccio di pregio, sia in bar fisso che in catering.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Ghiaccio a cubetti</strong>'
+    +'Consumo medio: ~380–430g per drink. Prezzo indicativo: €1.00–1.40/kg (e-commerce) → <strong style="color:var(--txt)">~€0.40–0.60 per drink</strong>. Da attivare <strong style="color:var(--txt)">solo se acquisti il ghiaccio appositamente</strong> (catering, eventi, privati). Se hai una macchina del ghiaccio è un costo variabile di struttura, non imputabile al singolo drink.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Foamer</strong>'
+    +'Due sistemi di dosaggio:<br>'
+    +'<strong style="color:var(--txt)">Tappo forato stile dash</strong> (es. Fee Brothers) — 3 dash per drink ≈ 2.1ml · 150ml = ~71 dosi → €0.23/dose<br>'
+    +'<strong style="color:var(--txt)">Pipetta contagocce</strong> (es. Ms. Better\'s, Stillabunt) — 10 gocce per drink ≈ 0.5ml · ~120–95ml = 190–240 dosi → €0.18–0.21/dose<br>'
+    +'Media di mercato: <strong style="color:var(--txt)">~€0.20 per dose</strong>. Se usi albume o aquafaba il costo è trascurabile — non includere.';
     +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Foamer</strong>'
     +'I foamer artificiali si dividono in due sistemi di dosaggio:<br>'
     +'<strong style="color:var(--txt)">Tappo forato stile dash</strong> (es. Fee Brothers) — 5 dash per drink ≈ 2.5ml per dose<br>'
@@ -2079,22 +2084,24 @@ function populateRisGlass(){
     row.className = 'cost-row';
     row.style.cssText = 'display:grid;grid-template-columns:1fr .7fr .65fr .55fr auto;gap:.3rem;margin-bottom:.35rem;align-items:center;';
     var inpStyle = 'width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.4rem .4rem;color:var(--txt);font-family:inherit;font-size:.72rem;outline:none;box-sizing:border-box;';
-    row.innerHTML = '<input type="text" class="cost-name" placeholder="Prodotto" style="'+inpStyle+'">'
-      +'<input type="number" class="cost-format" placeholder="ml" min="1" style="'+inpStyle+'">'
-      +'<input type="number" class="cost-price" placeholder="€" min="0" step="0.01" style="'+inpStyle+'">'
-      +'<input type="number" class="cost-dose" placeholder="ml" min="0" step="0.5" style="'+inpStyle+'">'
+    row.innerHTML = '<input type="text" class="cost-name" placeholder="Prodotto" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="'+inpStyle+'">'
+      +'<input type="number" class="cost-format" placeholder="ml" min="1" autocomplete="off" style="'+inpStyle+'">'
+      +'<input type="number" class="cost-price" placeholder="€" min="0" step="0.01" autocomplete="off" style="'+inpStyle+'">'
+      +'<input type="number" class="cost-dose" placeholder="ml" min="0" step="0.5" autocomplete="off" style="'+inpStyle+'">'
       +'<button class="cost-remove-btn" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:.9rem;padding:0 .15rem;line-height:1;flex-shrink:0;">✕</button>';
     row.querySelector('.cost-remove-btn').addEventListener('click', function(){
       row.remove();
       calcCost();
     });
-    row.querySelectorAll('input').forEach(function(i){ i.addEventListener('input', calcCost); });
+    row.querySelectorAll('input').forEach(function(i){
+      i.addEventListener('input', calcCost);
+      i.addEventListener('keydown', function(e){ if(e.key==='Enter') this.blur(); });
+    });
     return row;
   }
 
   function getExtraCosts(){
     var extras = [];
-    // Garnish
     var garnishToggle = document.getElementById('toggle-garnish');
     if(garnishToggle && garnishToggle.dataset.active==='1'){
       var activeGarnish = document.querySelector('.garnish-opt-btn.garnish-selected');
@@ -2109,16 +2116,19 @@ function populateRisGlass(){
         }
       }
     }
-    // Ghiaccio
     var ghiaccioToggle = document.getElementById('toggle-ghiaccio');
     if(ghiaccioToggle && ghiaccioToggle.dataset.active==='1'){
       var gp = parseFloat((document.getElementById('ghiaccio-price')||{}).value)||0.75;
       if(gp > 0) extras.push({nome:'Ghiaccio chunk/sfera', costo:gp});
     }
-    // Foamer
+    var ghiaccioNormToggle = document.getElementById('toggle-ghiaccio-normale');
+    if(ghiaccioNormToggle && ghiaccioNormToggle.dataset.active==='1'){
+      var gnp = parseFloat((document.getElementById('ghiaccio-normale-price')||{}).value)||0.50;
+      if(gnp > 0) extras.push({nome:'Ghiaccio', costo:gnp});
+    }
     var foamerToggle = document.getElementById('toggle-foamer');
     if(foamerToggle && foamerToggle.dataset.active==='1'){
-      var fp = parseFloat((document.getElementById('foamer-price')||{}).value)||0.10;
+      var fp = parseFloat((document.getElementById('foamer-price')||{}).value)||0.20;
       if(fp > 0) extras.push({nome:'Foamer', costo:fp});
     }
     return extras;
@@ -2161,12 +2171,17 @@ function populateRisGlass(){
       document.getElementById('cost-x5').textContent  = fmtEur(total * 5);
       suggestedEl.style.display = 'block';
       customWrap.style.display = 'block';
+      // Nota prodotti di pregio
+      var pregioNote = document.getElementById('cost-pregio-note');
+      if(pregioNote) pregioNote.style.display = total >= 4 ? 'block' : 'none';
       updateCustom(total);
     } else {
       resultEl.textContent = '—';
       detailEl.innerHTML = '';
       suggestedEl.style.display = 'none';
       customWrap.style.display = 'none';
+      var pregioNote2 = document.getElementById('cost-pregio-note');
+      if(pregioNote2) pregioNote2.style.display = 'none';
     }
   }
 
@@ -2177,6 +2192,8 @@ function populateRisGlass(){
     var sellPrice = parseFloat(input.value) || 0;
     if(sellPrice <= 0 || !drinkCost){ out.innerHTML = ''; return; }
     var foodCostPct = (drinkCost / sellPrice) * 100;
+    var margineNetto = sellPrice - drinkCost;
+    var isPregio = drinkCost >= 4;
     var color, msg;
     if(foodCostPct <= 20){
       color = '#4ade80'; msg = 'Ottimo — margine eccellente';
@@ -2185,11 +2202,15 @@ function populateRisGlass(){
     } else if(foodCostPct <= 25){
       color = '#fbbf24'; msg = 'Accettabile — tieni d\'occhio i costi';
     } else {
-      color = '#f87171'; msg = 'Attenzione — food cost troppo alto';
+      color = isPregio ? '#fbbf24' : '#f87171';
+      msg = isPregio
+        ? 'Sopra soglia standard — su un drink di pregio valuta il margine assoluto'
+        : 'Attenzione — food cost troppo alto';
     }
     out.innerHTML = 'Food cost: <strong style="color:'+color+'">'+foodCostPct.toFixed(1)+'%</strong>'
       +' &nbsp;·&nbsp; <span style="color:'+color+'">'+msg+'</span>'
-      +'<br><span style="font-size:.62rem;color:var(--dim);">Coefficiente: ×'+( sellPrice/drinkCost).toFixed(2)+'</span>';
+      +'<br>Margine netto: <strong style="color:var(--txt)">'+fmtEur(margineNetto)+'</strong> a drink'
+      +'<br><span style="font-size:.62rem;color:var(--dim);">Coefficiente: ×'+(sellPrice/drinkCost).toFixed(2)+'</span>';
   }
 
   function initDrinkCost(){
@@ -2246,9 +2267,16 @@ function populateRisGlass(){
       setActive(defaultActive||false);
     }
 
-    initToggle('toggle-garnish',  'garnish-options',  'garnish-cost-label',  false);
-    initToggle('toggle-ghiaccio', 'ghiaccio-options', 'ghiaccio-cost-label', false);
-    initToggle('toggle-foamer',   'foamer-options',   'foamer-cost-label',   false);
+    initToggle('toggle-garnish',          'garnish-options',          'garnish-cost-label',          false);
+    initToggle('toggle-ghiaccio',         'ghiaccio-options',         'ghiaccio-cost-label',         false);
+    initToggle('toggle-ghiaccio-normale', 'ghiaccio-normale-options', 'ghiaccio-normale-cost-label', false);
+    initToggle('toggle-foamer',           'foamer-options',           'foamer-cost-label',           false);
+
+    // Enter → chiudi tastiera su tutti i campi numerici voci extra
+    ['ghiaccio-price','ghiaccio-normale-price','foamer-price','cost-custom-price'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.addEventListener('keydown', function(e){ if(e.key==='Enter'){ this.blur(); } });
+    });
 
     // Aggiorna label costo toggle quando cambiano i valori
     var ghiaccioInput = document.getElementById('ghiaccio-price');

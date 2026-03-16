@@ -514,9 +514,9 @@
       <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Calcola la gradazione alcolica stimata del tuo cocktail in base agli ingredienti.</p>
       <div id="calc-abv-ingredients">
         <div class="calc-abv-row" style="display:flex;align-items:center;gap:.4rem;">
-          <input type="number" class="cabv-ml" placeholder="ml" min="0" max="500" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+          <input type="number" class="cabv-ml" placeholder="ml" autocomplete="off" min="0" max="500" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
           <span style="color:var(--dim);font-size:.75rem;">ml</span>
-          <input type="number" class="cabv-pct" placeholder="%" min="0" max="100" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+          <input type="number" class="cabv-pct" placeholder="%" autocomplete="off" min="0" max="100" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
           <span style="color:var(--dim);font-size:.75rem;">%</span>
         </div>
       </div>
@@ -623,7 +623,7 @@
           <div id="ghiaccio-options" style="display:none;margin-top:.5rem;display:none;">
             <div style="display:flex;align-items:center;gap:.5rem;">
               <span style="font-size:.7rem;color:var(--txt2);">€</span>
-              <input id="ghiaccio-price" type="number" min="0" step="0.05" value="0.75" style="width:90px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;font-weight:700;outline:none;">
+              <input id="ghiaccio-price" type="number" min="0" step="0.05" value="0.75" autocomplete="off" style="width:90px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;font-weight:700;outline:none;">
               <span style="font-size:.6rem;color:var(--dim);">a pezzo — modifica se necessario</span>
             </div>
           </div>
@@ -646,10 +646,34 @@
           <div id="foamer-options" style="display:none;margin-top:.5rem;">
             <div style="display:flex;align-items:center;gap:.5rem;">
               <span style="font-size:.7rem;color:var(--txt2);">€</span>
-              <input id="foamer-price" type="number" min="0" step="0.01" value="0.20" style="width:90px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;font-weight:700;outline:none;">
+              <input id="foamer-price" type="number" min="0" step="0.01" value="0.20" autocomplete="off" style="width:90px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;font-weight:700;outline:none;">
               <span style="font-size:.6rem;color:var(--dim);">a dose — modifica se necessario</span>
             </div>
             <div style="margin-top:.4rem;font-size:.6rem;color:var(--dim);line-height:1.5;font-style:italic;">Se usi albume o aquafaba il costo è trascurabile — non includere in questo campo.</div>
+          </div>
+        </div>
+
+        <!-- Ghiaccio a cubetti -->
+        <div class="cost-extra-row" id="extra-ghiaccio-normale-row" style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.55rem .75rem;margin-bottom:.4rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <button class="cost-extra-toggle" id="toggle-ghiaccio-normale" data-active="0" style="width:34px;height:18px;border-radius:99px;border:none;background:var(--brd);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;">
+                <span style="position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s;display:block;"></span>
+              </button>
+              <div>
+                <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Ghiaccio a cubetti</span>
+                <div style="font-size:.58rem;color:var(--dim);margin-top:.05rem;">solo se acquistato per l'occasione</div>
+              </div>
+            </div>
+            <span id="ghiaccio-normale-cost-label" style="font-size:.68rem;font-weight:700;color:var(--dim);">off</span>
+          </div>
+          <div id="ghiaccio-normale-options" style="display:none;margin-top:.5rem;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <span style="font-size:.7rem;color:var(--txt2);">€</span>
+              <input id="ghiaccio-normale-price" type="number" min="0" step="0.05" value="0.50" autocomplete="off" style="width:90px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;font-weight:700;outline:none;">
+              <span style="font-size:.6rem;color:var(--dim);">a drink — modifica se necessario</span>
+            </div>
+            <div style="margin-top:.4rem;font-size:.6rem;color:var(--dim);line-height:1.5;font-style:italic;">Attiva solo se devi acquistare il ghiaccio (catering, eventi, privati). Se hai una macchina del ghiaccio è un costo variabile non imputabile al singolo drink.</div>
           </div>
         </div>
 
@@ -671,20 +695,24 @@
         <div style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Prezzi di vendita consigliati</div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;">
           <div style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.6rem .5rem;text-align:center;">
-            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×4 — Margine minimo</div>
-            <div id="cost-x4" style="font-size:1.1rem;font-weight:900;color:var(--amber);">—</div>
+            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×4 — Minimo</div>
+            <div id="cost-x4" style="font-size:1.1rem;font-weight:900;color:#60a5fa;">—</div>
             <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">food cost 25%</div>
           </div>
-          <div style="background:var(--bg);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:.6rem .5rem;text-align:center;">
-            <div style="font-size:.58rem;color:var(--amber);margin-bottom:.2rem;">×4.5 — Bilanciato</div>
-            <div id="cost-x45" style="font-size:1.1rem;font-weight:900;color:var(--amber);">—</div>
+          <div style="background:var(--bg);border:1px solid rgba(96,165,250,.3);border-radius:10px;padding:.6rem .5rem;text-align:center;">
+            <div style="font-size:.58rem;color:#60a5fa;margin-bottom:.2rem;">×4.5 — Bilanciato</div>
+            <div id="cost-x45" style="font-size:1.1rem;font-weight:900;color:#60a5fa;">—</div>
             <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">food cost 22%</div>
           </div>
           <div style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.6rem .5rem;text-align:center;">
-            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×5 — Margine ottimale</div>
-            <div id="cost-x5" style="font-size:1.1rem;font-weight:900;color:var(--amber);">—</div>
+            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×5 — Ottimale</div>
+            <div id="cost-x5" style="font-size:1.1rem;font-weight:900;color:#60a5fa;">—</div>
             <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">food cost 20%</div>
           </div>
+        </div>
+        <!-- Nota prodotti di pregio -->
+        <div id="cost-pregio-note" style="display:none;margin-top:.5rem;padding:.55rem .7rem;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.2);border-radius:8px;font-size:.62rem;color:var(--dim);line-height:1.55;">
+          <strong style="color:#60a5fa;">Drink di pregio</strong> — Con un costo elevato il moltiplicatore fisso può portare a prezzi fuori mercato. Valuta un margine fisso in € sul costo reale invece di applicare ×4/×5.
         </div>
       </div>
 
@@ -693,9 +721,9 @@
         <div style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.55rem;">A quanto vorresti venderlo?</div>
         <div style="display:flex;align-items:center;gap:.5rem;">
           <span style="font-size:.85rem;color:var(--txt2);font-weight:700;">€</span>
-          <input id="cost-custom-price" type="number" min="0" step="0.5" placeholder="es. 12.00" style="flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.45rem .6rem;color:var(--txt);font-family:inherit;font-size:.85rem;font-weight:700;outline:none;">
+          <input id="cost-custom-price" type="number" min="0" step="0.5" placeholder="es. 12.00" autocomplete="off" style="flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.45rem .6rem;color:var(--txt);font-family:inherit;font-size:.85rem;font-weight:700;outline:none;">
         </div>
-        <div id="cost-custom-result" style="margin-top:.65rem;font-size:.7rem;line-height:1.6;color:var(--txt2);min-height:1.2rem;"></div>
+        <div id="cost-custom-result" style="margin-top:.65rem;font-size:.7rem;line-height:1.7;color:var(--txt2);min-height:1.2rem;"></div>
       </div>
     </div>
   </div>
