@@ -2386,16 +2386,13 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     }
 
     // Reset a schermata cmds quando si riapre il drawer dall'esterno
-    if(!window._openDrawerWrapped){
-      window._openDrawerWrapped = true;
-      var origOpen=window.openDrawer;
-      window.openDrawer=function(id){
-        if(id==='ris') showRisCmds();
-        if(id==='calc') showCalcCmds();
-        if(id==='acc') setTimeout(function(){ if(typeof renderAccountTab==='function') renderAccountTab(); }, 50);
-        origOpen(id);
-      };
-    }
+    var origOpen=window.openDrawer;
+    window.openDrawer=function(id){
+      if(id==='ris') showRisCmds();
+      if(id==='calc') showCalcCmds();
+      if(id==='acc') { setTimeout(function(){ if(typeof renderAccountTab==='function') renderAccountTab(); }, 50); }
+      origOpen(id);
+    };
 
     // Zone Temperature per drawer Risorse
     var ZONES=[
