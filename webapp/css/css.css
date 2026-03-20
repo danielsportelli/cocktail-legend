@@ -803,7 +803,14 @@ img {
   user-drag: none;
   pointer-events: none;
 }
-/* Ri-abilita pointer events sui bottoni e link */
-button, a, input, textarea, select, .tab-btn, .ai-cmd-btn, .sig-pill, .ai-pill, .fav-heart, .saved-ai-item, .saved-cat-header, .saved-del-btn, #saved-card-header, .ai-back-btn, .drawer-handle {
+/* Ri-abilita pointer events su tutto l'interattivo */
+button, a, input, textarea, select,
+.tab-btn, .tab-btn *, .ai-cmd-btn, .calc-cmd-btn, .ris-cmd-btn,
+.sig-pill, .ai-pill, .crea-pill,
+.fav-heart, .saved-ai-item, .saved-cat-header, .saved-del-btn,
+#saved-card-header, .ai-back-btn, .drawer-handle,
+.drawer, .drawer *, .drawer-overlay,
+.batch-preset, .batch-del-row, .batch-row input,
+#batch-add-row, #batch-reset, #batch-bottle-ml {
   pointer-events: auto;
 }
