@@ -786,3 +786,5 @@ body{padding-bottom:56px;}
   opacity:.28;
   border-color:rgba(255,255,255,.1) !important;
 }
+
+#saved-detail-body::-webkit-scrollbar{ display:none; }
