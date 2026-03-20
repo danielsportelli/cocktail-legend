@@ -2266,7 +2266,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
     // Titoli dinamici
     var RIS_TITLES={tmp:'Temperature',bic:'Glossario',glass:'Bicchieri'};
-    var CALC_TITLES={abv:'Calcola ABV',cost:'Drink Cost'};
+    var CALC_TITLES={abv:'Calcola ABV',cost:'Drink Cost',batch:'Pre-Batch'};
 
     function showRisCmds(){
       var t=document.getElementById('ris-header-title');
@@ -2286,6 +2286,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       document.getElementById('calc-step-cmds').style.display='block';
       document.getElementById('calc-step-abv').style.display='none';
       document.getElementById('calc-step-cost').style.display='none';
+      document.getElementById('calc-step-batch').style.display='none';
     }
 
     // Click card Risorse
@@ -2316,7 +2317,9 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         document.getElementById('calc-step-cmds').style.display='none';
         document.getElementById('calc-step-abv').style.display=cmd==='abv'?'block':'none';
         document.getElementById('calc-step-cost').style.display=cmd==='cost'?'block':'none';
+        document.getElementById('calc-step-batch').style.display=cmd==='batch'?'block':'none';
         if(cmd==='abv') initCalcABV();
+        if(cmd==='batch') initCalcBatch();
       });
     });
 
@@ -2430,6 +2433,113 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       if(p)p.remove();
       dst.innerHTML=tmp.innerHTML;
       _glossPopulated=true;
+    }
+
+    // ── PRE-BATCH ──────────────────────────────────────────────────
+    var _batchInited = false;
+    function initCalcBatch(){
+      if(_batchInited) return;
+      _batchInited = true;
+
+      function addBatchRow(){
+        var wrap = document.getElementById('batch-ingredients');
+        var row = document.createElement('div');
+        row.className = 'batch-row';
+        row.style.cssText = 'display:flex;align-items:center;gap:.4rem;margin-bottom:.4rem;';
+        row.innerHTML =
+          '<input type="text" class="batch-name" placeholder="Ingrediente" autocomplete="off" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;outline:none;">'+
+          '<input type="number" class="batch-ml" placeholder="ml" inputmode="decimal" min="0" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'+
+          '<span style="color:var(--dim);font-size:.72rem;">ml</span>'+
+          '<button class="batch-del-row" style="background:none;border:none;color:var(--dim);font-size:1.1rem;cursor:pointer;padding:0 .2rem;line-height:1;pointer-events:auto;">&#215;</button>';
+        wrap.appendChild(row);
+        row.querySelector('.batch-del-row').addEventListener('click', function(){
+          var rows = wrap.querySelectorAll('.batch-row');
+          if(rows.length > 2) row.remove();
+          calcBatch();
+        });
+        row.querySelectorAll('input').forEach(function(inp){
+          inp.addEventListener('input', calcBatch);
+        });
+      }
+
+      function resetBatch(){
+        var wrap = document.getElementById('batch-ingredients');
+        wrap.innerHTML = '';
+        for(var i=0;i<2;i++) addBatchRow();
+        var bottleInp = document.getElementById('batch-bottle-ml');
+        if(bottleInp) bottleInp.value = '';
+        var rw = document.getElementById('batch-result-wrap');
+        if(rw) rw.style.display = 'none';
+      }
+
+      function calcBatch(){
+        var bottleInp = document.getElementById('batch-bottle-ml');
+        var bottleMl = parseFloat(bottleInp ? bottleInp.value : 0);
+        var rows = document.querySelectorAll('#batch-ingredients .batch-row');
+        var ingredients = [];
+        var totalBase = 0;
+        rows.forEach(function(row){
+          var name = row.querySelector('.batch-name').value.trim();
+          var ml = parseFloat(row.querySelector('.batch-ml').value) || 0;
+          if(ml > 0){ ingredients.push({name: name || 'Ingrediente', ml: ml}); totalBase += ml; }
+        });
+
+        var rw = document.getElementById('batch-result-wrap');
+        if(!rw) return;
+        if(bottleMl < 250 || ingredients.length === 0 || totalBase === 0){
+          rw.style.display = 'none'; return;
+        }
+
+        // Formula: dose_batch = (dose_ing / totale_base) * ml_bottiglia
+        var html = '';
+        var maxBatch = 0;
+        ingredients.forEach(function(ing){
+          var batchMl = (ing.ml / totalBase) * bottleMl;
+          if(batchMl > maxBatch) maxBatch = batchMl;
+          var pct = Math.round((ing.ml / totalBase) * 100);
+          var barW = Math.round((batchMl / (bottleMl)) * 100);
+          html +=
+            '<div style="margin-bottom:.55rem;">'+
+              '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.2rem;">'+
+                '<span style="font-size:.72rem;color:var(--txt2);font-weight:600;">'+(ing.name)+'</span>'+
+                '<span style="font-size:.85rem;font-weight:800;color:var(--amber);">'+batchMl.toFixed(1)+' ml</span>'+
+              '</div>'+
+              '<div style="height:3px;background:var(--brd);border-radius:99px;overflow:hidden;">'+
+                '<div style="height:100%;width:'+barW+'%;background:var(--amber);border-radius:99px;"></div>'+
+              '</div>'+
+              '<div style="font-size:.58rem;color:var(--dim);margin-top:.15rem;">'+pct+'% della ricetta</div>'+
+            '</div>';
+        });
+
+        document.getElementById('batch-result-rows').innerHTML = html;
+        document.getElementById('batch-result-size').textContent = bottleMl >= 1000 ? (bottleMl/1000).toFixed(1)+'L' : bottleMl+'ml';
+        document.getElementById('batch-total-base').textContent = totalBase+'ml';
+        rw.style.display = 'block';
+      }
+
+      // Init listeners
+      document.querySelectorAll('#batch-ingredients .batch-row').forEach(function(row){
+        row.querySelector('.batch-del-row').addEventListener('click', function(){
+          var wrap = document.getElementById('batch-ingredients');
+          if(wrap.querySelectorAll('.batch-row').length > 2) row.remove();
+          calcBatch();
+        });
+        row.querySelectorAll('input').forEach(function(inp){
+          inp.addEventListener('input', calcBatch);
+        });
+      });
+
+      document.getElementById('batch-add-row').addEventListener('click', addBatchRow);
+      document.getElementById('batch-reset').addEventListener('click', resetBatch);
+      document.getElementById('batch-bottle-ml').addEventListener('input', calcBatch);
+
+      // Preset bottiglia
+      document.querySelectorAll('.batch-preset').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var inp = document.getElementById('batch-bottle-ml');
+          if(inp){ inp.value = this.dataset.ml; calcBatch(); }
+        });
+      });
     }
 
     // Calcolo ABV per Calcolatori
