@@ -226,25 +226,11 @@ def abv_label(abv):
     if abv <= 30: return "Alto"
     return "Molto alto"
 
-STORIA_BANNED_INGREDIENTS = [
-    " ml", "sciroppo", "succo di", "vermouth", "curaçao", "curacao",
-    "bitters", "dash", "q.b.", "shake", "shaker", "mixing glass",
-    "double strain", "filtrare", "mescolare",
-]
-STORIA_BANNED_SOURCES = [
-    "difford", "iba-world", "liquor.com", "punchdrink", "punch.com",
-]
 
-def audit_storia(storia):
-    s = storia.lower()
-    ing_found = [k for k in STORIA_BANNED_INGREDIENTS if k in s]
-    src_found = [k for k in STORIA_BANNED_SOURCES if k in s]
-    return ing_found, src_found
 
 input_path = Path("cocktails-it.json")
 output_path = Path("cocktails-it-fixed.json")
 abv_report_path = Path("abv_report.txt")
-storia_audit_path = Path("storia_audit.txt")
 
 print(f"Caricamento {input_path}...")
 with open(input_path, encoding="utf-8") as f:
@@ -256,7 +242,6 @@ print(f"Cocktail caricati: {len(data)}")
 
 abv_changes = []
 abv_report_lines = []
-storia_issues = []
 
 for c in data:
     name = c.get("name", "?")
@@ -274,10 +259,6 @@ for c in data:
         abv_changes.append((name, old_abv, new_label, abv_val))
         c["abv"] = new_label
 
-    storia = c.get("storia", "")
-    ing_found, src_found = audit_storia(storia)
-    if ing_found or src_found:
-        storia_issues.append({"name": name, "ing": ing_found, "src": src_found})
 
 print(f"\nSalvataggio {output_path}...")
 with open(output_path, "w", encoding="utf-8") as f:
@@ -296,23 +277,10 @@ with open(abv_report_path, "w", encoding="utf-8") as f:
     for name, old, new, val in abv_changes:
         f.write(f"  {name:<35} | {old} → {new}  ({val:.1f}%)\n")
 
-with open(storia_audit_path, "w", encoding="utf-8") as f:
-    f.write("STORIA AUDIT — drink con potenziali problemi\n")
-    f.write("=" * 70 + "\n")
-    f.write(f"Totale storie con segnalazioni: {len(storia_issues)}\n\n")
-    for item in storia_issues:
-        f.write(f"► {item['name']}\n")
-        if item['ing']:
-            f.write(f"  Ingredienti/tecnica: {', '.join(item['ing'])}\n")
-        if item['src']:
-            f.write(f"  Fonti competitor: {', '.join(item['src'])}\n")
-        f.write("\n")
 
 print(f"\n{'='*60}")
-print(f"ABV cambiati:          {len(abv_changes)} / {len(data)}")
-print(f"Storie con segnalazioni: {len(storia_issues)} / {len(data)}")
+print(f"ABV cambiati: {len(abv_changes)} / {len(data)}")
 print(f"\nFile generati:")
-print(f"  {output_path}      ← JSON corretto da usare")
-print(f"  {abv_report_path}      ← dettaglio calcoli ABV")
-print(f"  {storia_audit_path}  ← storie da rivedere")
+print(f"  {output_path}   ← JSON corretto da usare")
+print(f"  {abv_report_path}   ← dettaglio calcoli ABV")
 print(f"{'='*60}")

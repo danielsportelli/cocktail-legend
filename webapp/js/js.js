@@ -862,7 +862,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 (function(){
   var WORKER_URL = 'https://cocktail-legend-ai.daniel-sportelli.workers.dev';
   var MAX = 50;
-  var _usageCache = null; // cache locale {count, month}
+  var _usageCache = null; // cache locale {monthlyCount, extraCredits, periodStart}
   var currentCmd = null;
   var selectedPill = null;
   var lastRawText = '';
@@ -952,26 +952,51 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   }
 
   // ─── USAGE ───────────────────────────────────────────────────────
-  function _getMonth(){ var n=new Date(); return n.getFullYear()+'-'+n.getMonth(); }
+  // ─── LOGICA DOPPIO CONTATORE ─────────────────────────────────────
+  // Primo i crediti mensili (50, si ricaricano ogni 30gg dalla registrazione)
+  // Poi i crediti extra (acquistati, non scadono mai)
+
+  function _isPeriodExpired(periodStart){
+    if(!periodStart) return true;
+    var start = new Date(periodStart);
+    var now = new Date();
+    var diff = (now - start) / (1000 * 60 * 60 * 24);
+    return diff >= 30;
+  }
+
+  function getMonthlyUsed(){ return _usageCache ? (_usageCache.monthlyCount || 0) : 0; }
+  function getExtraCredits(){ return _usageCache ? (_usageCache.extraCredits || 0) : 0; }
+  function getMonthlyRemaining(){ return Math.max(0, MAX - getMonthlyUsed()); }
+  function getTotalRemaining(){ return getMonthlyRemaining() + getExtraCredits(); }
 
   function getUsage(){
-    if(_usageCache && _usageCache.month===_getMonth()) return _usageCache.count;
-    return 0;
+    // Compatibilità con chiamate esistenti — restituisce crediti totali usati questo periodo
+    return getMonthlyUsed();
   }
 
   function incUsage(){
+    if(!_usageCache) return 0;
     var user = window._currentUser;
     var db = window._fbDb;
     var docFn = window._fbFunctions ? window._fbFunctions.doc : null;
     var setDoc = window._fbFunctions ? window._fbFunctions.setDoc : null;
-    if(!user || !db || !docFn || !setDoc) return getUsage();
-    var month = _getMonth();
-    var newCount = getUsage() + 1;
-    _usageCache = { count: newCount, month: month };
+    if(!user || !db || !docFn || !setDoc) return getTotalRemaining();
+
+    // Scala prima dai mensili, poi dagli extra
+    if(_usageCache.monthlyCount < MAX){
+      _usageCache.monthlyCount++;
+    } else if(_usageCache.extraCredits > 0){
+      _usageCache.extraCredits--;
+    }
+
     var userDoc = docFn(db, 'users', user.uid);
-    setDoc(userDoc, { aiUsage: { count: newCount, month: month } }, { merge: true })
-      .catch(function(e){ console.warn('incUsage err', e); });
-    return newCount;
+    setDoc(userDoc, { aiUsage: {
+      monthlyCount: _usageCache.monthlyCount,
+      extraCredits: _usageCache.extraCredits,
+      periodStart: _usageCache.periodStart
+    }}, { merge: true }).catch(function(e){ console.warn('incUsage err', e); });
+
+    return getTotalRemaining();
   }
 
   // Carica usage da Firestore all'avvio
@@ -981,32 +1006,144 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var db = window._fbDb;
     var docFn = window._fbFunctions ? window._fbFunctions.doc : null;
     var getDoc = window._fbFunctions ? window._fbFunctions.getDoc : null;
+    var setDoc = window._fbFunctions ? window._fbFunctions.setDoc : null;
     if(!db || !docFn || !getDoc) return;
     var userDoc = docFn(db, 'users', user.uid);
     getDoc(userDoc).then(function(snap){
-      var month = _getMonth();
+      var now = new Date();
+      var nowStr = now.toISOString().split('T')[0];
       if(snap.exists()){
         var data = snap.data();
         var ai = data.aiUsage || {};
-        if(ai.month === month){
-          _usageCache = { count: ai.count || 0, month: month };
+        var periodStart = ai.periodStart || data.createdAt || nowStr;
+        // Controlla se il periodo di 30gg è scaduto
+        if(_isPeriodExpired(periodStart)){
+          // Calcola nuovo periodStart (avanza di 30gg finché non è nel futuro)
+          var start = new Date(periodStart);
+          while(_isPeriodExpired(start.toISOString().split('T')[0])){
+            start.setDate(start.getDate() + 30);
+          }
+          var newPeriodStart = start.toISOString().split('T')[0];
+          _usageCache = {
+            monthlyCount: 0,
+            extraCredits: ai.extraCredits || 0,
+            periodStart: newPeriodStart
+          };
+          // Salva reset su Firestore
+          setDoc(userDoc, { aiUsage: _usageCache }, { merge: true })
+            .catch(function(e){ console.warn('reset period err', e); });
         } else {
-          _usageCache = { count: 0, month: month };
+          _usageCache = {
+            monthlyCount: ai.monthlyCount || 0,
+            extraCredits: ai.extraCredits || 0,
+            periodStart: periodStart
+          };
         }
       } else {
-        _usageCache = { count: 0, month: month };
+        // Nuovo utente — crea documento
+        _usageCache = { monthlyCount: 0, extraCredits: 0, periodStart: nowStr };
+        setDoc(userDoc, {
+          createdAt: nowStr,
+          email: user.email,
+          aiUsage: _usageCache
+        }).catch(function(e){ console.warn('createUser err', e); });
       }
       renderUsage();
-    }).catch(function(e){ console.warn('loadUsage err', e); _usageCache = { count: 0, month: _getMonth() }; });
+      renderAccountTab();
+    }).catch(function(e){
+      console.warn('loadUsage err', e);
+      _usageCache = { monthlyCount: 0, extraCredits: 0, periodStart: new Date().toISOString().split('T')[0] };
+    });
   });
   function renderUsage(){
-    var u=getUsage();
-    var pct=Math.min(100,(u/MAX)*100);
-    var fill=document.getElementById('ai-usage-fill');
+    var monthly = getMonthlyUsed();
+    var extra = getExtraCredits();
+    var pct = Math.min(100,(monthly/MAX)*100);
+    var fill = document.getElementById('ai-usage-fill');
     if(fill){fill.style.width=pct+'%';fill.style.background=pct>=80?'#ef4444':'var(--amber)';}
-    var txt=document.getElementById('ai-usage-txt');
-    if(txt)txt.textContent=u+'/'+MAX;
-    if(u>=MAX)showExhausted();
+    var txt = document.getElementById('ai-usage-txt');
+    if(txt){
+      if(extra > 0){
+        txt.textContent = monthly+'/'+MAX+' + '+extra+' extra';
+      } else {
+        txt.textContent = monthly+'/'+MAX;
+      }
+    }
+    if(getTotalRemaining()<=0) showExhausted();
+  }
+
+  function renderAccountTab(){
+    var el = document.getElementById('acc-content');
+    if(!el) return;
+    var user = window._currentUser;
+    if(!user || !_usageCache) return;
+    var monthly = getMonthlyUsed();
+    var extra = getExtraCredits();
+    var monthlyRem = getMonthlyRemaining();
+    var pct = Math.min(100,(monthly/MAX)*100);
+    var periodStart = _usageCache.periodStart || '';
+    var nextReset = '';
+    if(periodStart){
+      var d = new Date(periodStart);
+      d.setDate(d.getDate()+30);
+      nextReset = d.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'});
+    }
+    el.innerHTML =
+      '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.35rem;">Account</div>'+
+        '<div style="font-size:.8rem;color:var(--txt2);font-weight:600;">'+user.email+'</div>'+
+      '</div>'+
+      '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.7rem;">Crediti mensili</div>'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'+
+          '<span style="font-size:.75rem;color:var(--txt2);">'+monthly+' / '+MAX+' usati</span>'+
+          '<span style="font-size:.7rem;color:var(--dim);">Reset: '+nextReset+'</span>'+
+        '</div>'+
+        '<div style="height:5px;background:var(--brd);border-radius:99px;overflow:hidden;">'+
+          '<div style="height:100%;width:'+pct+'%;background:'+(pct>=80?'#ef4444':'var(--amber)')+';border-radius:99px;transition:width .4s;"></div>'+
+        '</div>'+
+        '<div style="font-size:.65rem;color:var(--dim);margin-top:.35rem;">'+monthlyRem+' crediti mensili rimanenti</div>'+
+      '</div>'+
+      '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.5rem;">Crediti extra</div>'+
+        '<div style="font-size:1.4rem;font-weight:800;color:var(--amber);margin-bottom:.2rem;">'+extra+'</div>'+
+        '<div style="font-size:.65rem;color:var(--dim);">Non scadono. Si usano dopo i crediti mensili.</div>'+
+      '</div>'+
+      '<div style="margin-bottom:1rem;">'+
+        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.7rem;">Acquista crediti extra</div>'+
+        '<div style="display:flex;flex-direction:column;gap:.5rem;">'+
+          '<a href="#" class="acc-pkg-btn" data-pkg="250" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
+            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">250 crediti extra</div><div style="font-size:.62rem;color:var(--dim);">Non scadono mai</div></div>'+
+            '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">1,99 €</div>'+
+          '</a>'+
+          '<a href="#" class="acc-pkg-btn" data-pkg="500" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid rgba(245,158,11,.4);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
+            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">500 crediti extra <span style="font-size:.58rem;background:var(--amber);color:#000;border-radius:4px;padding:1px 5px;margin-left:4px;">PIÙ POPOLARE</span></div><div style="font-size:.62rem;color:var(--dim);">Non scadono mai</div></div>'+
+            '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">3,99 €</div>'+
+          '</a>'+
+          '<a href="#" class="acc-pkg-btn" data-pkg="1000" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
+            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">1000 crediti extra</div><div style="font-size:.62rem;color:var(--dim);">Non scadono mai</div></div>'+
+            '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">5,99 €</div>'+
+          '</a>'+
+        '</div>'+
+      '</div>'+
+      '<div style="text-align:center;padding-top:.8rem;border-top:1px solid var(--brd);">'+
+        '<button id="acc-logout-btn" style="background:none;border:none;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:.4rem .8rem;border-radius:6px;transition:color .2s;">Disconnetti account</button>'+
+      '</div>';
+
+    // Logout
+    var logoutBtn = document.getElementById('acc-logout-btn');
+    if(logoutBtn){
+      logoutBtn.addEventListener('click', function(){
+        if(!confirm('Vuoi disconnetterti?')) return;
+        var auth = window._fbAuth;
+        var signOutFn = window._fbFunctions ? window._fbFunctions.signOut : null;
+        if(auth && signOutFn){
+          signOutFn(auth).then(function(){
+            location.reload();
+          });
+        }
+      });
+    }
   }
   function showExhausted(){
     var b=document.getElementById('ai-exhausted');
@@ -1015,10 +1152,17 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(b)b.style.display='block';
     if(btn)btn.disabled=true;
     if(sigBtn)sigBtn.disabled=true;
-    var now=new Date();
-    var next=new Date(now.getFullYear(),now.getMonth()+1,1);
     var d=document.getElementById('ai-reset-date');
-    if(d)d.textContent='Si resetterà il '+next.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'});
+    if(d){
+      var periodStart = _usageCache ? _usageCache.periodStart : null;
+      if(periodStart){
+        var next = new Date(periodStart);
+        next.setDate(next.getDate()+30);
+        d.textContent='Crediti mensili: si ricaricano il '+next.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'})+'. Oppure acquista crediti extra nella tab Account.';
+      } else {
+        d.textContent='Acquista crediti extra nella tab Account.';
+      }
+    }
   }
 
   // ─── NAVIGAZIONE PRINCIPALE ───────────────────────────────────────
@@ -1067,7 +1211,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   }
 
   function selectCmd(cmd){
-    if(getUsage()>=MAX){showExhausted();return;}
+    if(getTotalRemaining()<=0){showExhausted();return;}
     currentCmd=cmd;
 
     // ── Titolo dinamico ──
@@ -1215,7 +1359,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var inp=document.getElementById('sig-input');
     if(!btn)return;
     var hasText=inp&&inp.value.trim().length>0;
-    var active=hasText&&getUsage()<MAX;
+    var active=hasText&&getTotalRemaining()>0;
     btn.disabled=!active;
     btn.style.background=active?'var(--amber)':'var(--surf)';
     btn.style.color=active?'#0a0f1e':'var(--dim)';
@@ -1239,7 +1383,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     } else {
       hasVal=cfg.usePills ? selectedPill!==null : (inp&&inp.value.trim().length>0);
     }
-    var active=hasVal&&getUsage()<MAX;
+    var active=hasVal&&getTotalRemaining()>0;
     btn.disabled=!active;
     btn.textContent=currentCmd==='giorno'?'✦ Crea il drink del giorno':'✦ Chiedi al Barman';
     btn.style.background=active?'var(--amber)':'var(--surf)';
@@ -1353,7 +1497,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   }
 
   async function askSignature(){
-    if(getUsage()>=MAX){showExhausted();return;}
+    if(getTotalRemaining()<=0){showExhausted();return;}
     var inp=document.getElementById('sig-input');
     var val=inp?inp.value.trim():'';
     if(!val)return;
@@ -1364,7 +1508,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   }
 
   async function askBarman(){
-    if(getUsage()>=MAX){showExhausted();return;}
+    if(getTotalRemaining()<=0){showExhausted();return;}
     var inp=document.getElementById('ai-input');
     var cfg=PROMPTS[currentCmd];
     if(!cfg)return;
@@ -1475,7 +1619,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var inp=document.getElementById(inpId);
       if(inp) inp.addEventListener('input', function(){
         if(!btn)return;
-        var active=this.value.trim().length>0&&getUsage()<MAX;
+        var active=this.value.trim().length>0&&getTotalRemaining()>0;
         btn.disabled=!active;
         btn.style.background=active?'var(--amber)':'var(--surf)';
         btn.style.color=active?'#0a0f1e':'var(--dim)';
@@ -1600,7 +1744,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var fuContSend=document.getElementById('fu-cont-send');
     if(fuContInp)fuContInp.addEventListener('input',function(){
       if(!fuContSend)return;
-      var active=this.value.trim().length>0&&getUsage()<MAX;
+      var active=this.value.trim().length>0&&getTotalRemaining()>0;
       fuContSend.disabled=!active;
       fuContSend.style.background=active?'var(--amber)':'var(--surf)';
       fuContSend.style.color=active?'#0a0f1e':'var(--dim)';
@@ -1720,7 +1864,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var inp=document.getElementById(inpId);
       if(inp) inp.addEventListener('input', function(){
         if(!btn)return;
-        var active=this.value.trim().length>0&&getUsage()<MAX;
+        var active=this.value.trim().length>0&&getTotalRemaining()>0;
         btn.disabled=!active;
         btn.style.background=active?'var(--amber)':'var(--surf)';
         btn.style.color=active?'#0a0f1e':'var(--dim)';
@@ -1759,7 +1903,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(fuNoInp){
       fuNoInp.addEventListener('input',function(){
         if(!fuNoSend)return;
-        var active=this.value.trim().length>0&&getUsage()<MAX;
+        var active=this.value.trim().length>0&&getTotalRemaining()>0;
         fuNoSend.disabled=!active;
         fuNoSend.style.background=active?'var(--amber)':'var(--surf)';
         fuNoSend.style.color=active?'#0a0f1e':'var(--dim)';
