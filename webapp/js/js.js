@@ -2486,7 +2486,15 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
         var rw = document.getElementById('batch-result-wrap');
         if(!rw) return;
-        if(bottleMl < 250 || ingredients.length === 0 || totalBase === 0){
+        // Errore sotto 250ml
+        var errEl = document.getElementById('batch-bottle-err');
+        if(bottleMl > 0 && bottleMl < 250){
+          if(errEl) errEl.style.display = 'block';
+          rw.style.display = 'none'; return;
+        } else {
+          if(errEl) errEl.style.display = 'none';
+        }
+        if(!bottleMl || ingredients.length === 0 || totalBase === 0){
           rw.style.display = 'none'; return;
         }
 

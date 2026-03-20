@@ -223,7 +223,7 @@
     <div class="drawer-header">Vantaggi esclusivi</div>
     <p style="font-size:.72rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Ecco i tuoi codici coupon esclusivi riservati agli acquirenti di Cocktail Legend.</p>
     <div class="vnt-item">
-      <div class="vnt-item-title">🎓 I miei corsi di Mixology</div>
+      <div class="vnt-item-title"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:5px;margin-bottom:2px;"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>I miei corsi di Mixology</div>
       <div class="vnt-item-desc">-20% sui singoli corsi. Non valido sulla promo Bundle.</div>
       <div class="vnt-code" id="copy-corsi">LEGEND20<span class="vnt-code-copy">copia</span></div>
       <a href="https://danielsportelli.github.io/academy" target="_blank" rel="noopener" class="vnt-link">
@@ -232,7 +232,7 @@
       </a>
     </div>
     <div class="vnt-item">
-      <div class="vnt-item-title">🍸 Lumian Bar Tools</div>
+      <div class="vnt-item-title"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:5px;margin-bottom:2px;"><path d="M4 4l7 9v5h-2v2h6v-2h-2v-5l7-9H4z"/><line x1="4" y1="4" x2="20" y2="4"/></svg>Lumian Bar Tools</div>
       <div class="vnt-item-desc">-20% con minimo d&rsquo;ordine 50&euro;. Non valido durante alcuni periodi dell&rsquo;anno (es. Black Friday, Natale, ecc.).</div>
       <div class="vnt-code" id="copy-lumian">LEGEND20<span class="vnt-code-copy">copia</span></div>
       <a href="https://www.lumianbartools.com/" target="_blank" rel="noopener" class="vnt-link">
@@ -511,7 +511,7 @@
           </div>
         </button>
         <button class="calc-cmd-btn" data-cmd="batch" style="display:flex;flex-direction:row;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l3 7H5L8 2z"/><path d="M5 9v11a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"/><line x1="12" y1="13" x2="12" y2="19"/><line x1="9" y1="16" x2="15" y2="16"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="1" width="6" height="3" rx="1"/><path d="M8 4h8c1 2 2 3 2 6v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-9c0-3 1-4 2-6z"/><rect x="8.5" y="11" width="7" height="4" rx=".5" fill="rgba(245,158,11,.25)" stroke="var(--amber)" stroke-width="1.2"/></svg>
           <div style="display:flex;flex-direction:column;gap:.15rem;">
             <span style="font-size:.72rem;font-weight:700;color:var(--txt);">Pre-Batch</span>
             <span style="font-size:.6rem;color:var(--dim);">Dosi per bottiglia</span>
@@ -743,13 +743,14 @@
       <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Calcola le dosi di ogni ingrediente per riempire una bottiglia. Inserisci la ricetta base e la dimensione della bottiglia target.</p>
 
       <div style="margin-bottom:1rem;">
-        <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Dimensione bottiglia target</div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.45rem;"><div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">Dimensione bottiglia target</div><span style="font-size:.58rem;color:#60a5fa;">min. 250 ml</span></div>
         <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">
           <input type="number" id="batch-bottle-ml" placeholder="es. 750" inputmode="decimal" min="250" max="10000" style="width:90px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
           <span style="color:var(--dim);font-size:.75rem;">ml</span>
           <button class="batch-preset" data-ml="500" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">500ml</button>
           <button class="batch-preset" data-ml="750" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">750ml</button>
           <button class="batch-preset" data-ml="1000" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">1L</button>
+          <div id="batch-bottle-err" style="display:none;width:100%;font-size:.62rem;color:#f87171;margin-top:.3rem;">⚠️ La bottiglia deve essere almeno 250 ml</div>
           <button class="batch-preset" data-ml="1500" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">1.5L</button>
         </div>
       </div>
