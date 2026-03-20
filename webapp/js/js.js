@@ -911,10 +911,10 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           'gennaio':['limone','arancia amara','pompelmo rosa','kumquat','bergamotto','cedro','vaniglia','radice di zenzero','barbabietola','mela cotogna','melograno','finocchio','timo fresco','rosmarino'],
           'febbraio':['pompelmo','bergamotto','arancia rossa','limone','kumquat','finocchio','carciofo','vaniglia','zenzero','miele di castagno','timo','lavanda secca','radice di liquirizia'],
           'marzo':['fragole precoci','rabarbaro','menta fresca','piselli freschi','asparagi verdi','limone','pompelmo','timo limone','fiori di violetta','miele millefiori','ginger fresco','tarassaco','borragine'],
-          'aprile':['fragole','rabarbaro','fiori di sambuco','ciliegie precoci','menta piperita','basilico fresco','asparagi','limone','piselli','miele d acacia','timo','fiori di lavanda','acetosella'],
+          'aprile':['fragole','rabarbaro','fiori di sambuco','ciliegie precoci','menta piperita','basilico fresco','asparagi','limone','piselli','miele acacia','timo','fiori di lavanda','acetosella'],
           'maggio':['fragole mature','ciliegie','fiori di sambuco','basilico genovese','menta','limone','albicocche precoci','rosa canina','cedro','kumquat','erba cedrina','verbena','melissa'],
           'giugno':['fragole','ciliegie','albicocche','pesche precoci','fiori di sambuco','basilico','menta','lamponi','ribes rosso','lavanda','limone','melone cantalupo','pomodorini'],
-          'luglio':['pesche','albicocche','anguria','melone retato','lamponi','mirtilli','more precoci','basilico','menta','lavanda','fico d india','susine','cetriolo','pomodoro'],
+          'luglio':['pesche','albicocche','anguria','melone retato','lamponi','mirtilli','more precoci','basilico','menta','lavanda','fico d\u0027india','susine','cetriolo','pomodoro'],
           'agosto':['pesche noci','fichi freschi','anguria','melone','more','lamponi','mirtilli','pomodoro','basilico','lavanda','fico','uva fragola','prugne','zucchina'],
           'settembre':['fichi','uva nera','uva bianca','pere williams','mele golden','mirtilli','more','rosmarino','salvia','miele di fiori','melograno','marroni','zucca','nocciole fresche'],
           'ottobre':['mele renette','pere','melograno','fichi secchi','uva fragola','zucca','marroni','rosmarino','timo','salvia','cachi','noci fresche','mele cotogne','chiodi di garofano'],
@@ -1795,8 +1795,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var cat = CAT_LABELS[currentCmd] || 'AI';
 
       // Titolo automatico: prime parole del testo
-      var firstLine = text.split('
-').filter(function(l){ return l.trim(); })[0] || '';
+      var firstLine = text.split('\n').filter(function(l){ return l.trim(); })[0] || '';
       var title = firstLine.replace(/^#+\s*/, '').substring(0, 50);
       if(!title) title = cat;
 
