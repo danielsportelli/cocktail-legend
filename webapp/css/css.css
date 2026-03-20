@@ -603,7 +603,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   transform:translateZ(0);
   will-change:transform;
 }
-.drawer.open{bottom:calc(var(--tab-bar-h, 56px) - 6px);}
+.drawer.open{bottom:calc(var(--tab-bar-h, 56px) - 6px);z-index:601;}
 .drawer.keyboard-open{
   bottom:0 !important;
   max-height:50vh;
