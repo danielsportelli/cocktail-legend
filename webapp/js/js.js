@@ -2266,7 +2266,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
     // Titoli dinamici
     var RIS_TITLES={tmp:'Temperature',bic:'Glossario',glass:'Bicchieri'};
-    var CALC_TITLES={abv:'Calcola ABV',cost:'Calcola Drink Cost',batch:'Calcola Pre-Batch'};
+    var CALC_TITLES={abv:'Calcola ABV',cost:'Drink Cost',batch:'Pre-Batch'};
 
     function showRisCmds(){
       var t=document.getElementById('ris-header-title');
@@ -2486,15 +2486,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
         var rw = document.getElementById('batch-result-wrap');
         if(!rw) return;
-        // Errore sotto 250ml
-        var errEl = document.getElementById('batch-bottle-err');
-        if(bottleMl > 0 && bottleMl < 250){
-          if(errEl) errEl.style.display = 'block';
-          rw.style.display = 'none'; return;
-        } else {
-          if(errEl) errEl.style.display = 'none';
-        }
-        if(!bottleMl || ingredients.length === 0 || totalBase === 0){
+        if(bottleMl < 250 || ingredients.length === 0 || totalBase === 0){
           rw.style.display = 'none'; return;
         }
 
