@@ -894,7 +894,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       }
     },
     giorno: {
-      maxTokens: 600,
+      maxTokens: 700,
       label: 'In che stile lo vuoi?',
       placeholder: '',
       usePills: true,
@@ -905,24 +905,31 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var stagioni = ['inverno','inverno','primavera','primavera','primavera','estate','estate','estate','autunno','autunno','autunno','inverno'];
         var mese = mesi[now.getMonth()];
         var stagione = stagioni[now.getMonth()];
+
+        // Lista ampliata — array per selezione random
         var ingredientiStagione = {
-          'dicembre':'agrumi (arancia, mandarino), melograno, cannella, chiodi di garofano, castagne, cachi',
-          'gennaio':'agrumi (limone, arancia amara), melograno, vaniglia, radici invernali',
-          'febbraio':'agrumi (pompelmo, bergamotto), carciofi, finocchio',
-          'marzo':'fragole precoci, asparagi, piselli, menta fresca',
-          'aprile':'fragole, ciliegie precoci, asparagi, menta, fiori di sambuco',
-          'maggio':'fragole, ciliegie, fiori di sambuco, menta, basilico fresco',
-          'giugno':'fragole, ciliegie, albicocche, fiori di sambuco, basilico, pesche',
-          'luglio':'pesche, albicocche, anguria, melone, basilico, mirtilli, lamponi',
-          'agosto':'pesche, anguria, melone, fichi, pomodori, basilico, lavanda',
-          'settembre':'fichi, uva, pere, mele, mirtilli, rosmarino, salvia',
-          'ottobre':'mele, pere, uva, fichi, melograno, zucca, rosmarino, timo',
-          'novembre':'melograno, mele cotogne, castagne, arancia, spezie calde, cachi'
+          'gennaio':['limone','arancia amara','pompelmo rosa','kumquat','bergamotto','cedro','vaniglia','radice di zenzero','barbabietola','mela cotogna','melograno','finocchio','timo fresco','rosmarino'],
+          'febbraio':['pompelmo','bergamotto','arancia rossa','limone','kumquat','finocchio','carciofo','vaniglia','zenzero','miele di castagno','timo','lavanda secca','radice di liquirizia'],
+          'marzo':['fragole precoci','rabarbaro','menta fresca','piselli freschi','asparagi verdi','limone','pompelmo','timo limone','fiori di violetta','miele millefiori','ginger fresco','tarassaco','borragine'],
+          'aprile':['fragole','rabarbaro','fiori di sambuco','ciliegie precoci','menta piperita','basilico fresco','asparagi','limone','piselli','miele d acacia','timo','fiori di lavanda','acetosella'],
+          'maggio':['fragole mature','ciliegie','fiori di sambuco','basilico genovese','menta','limone','albicocche precoci','rosa canina','cedro','kumquat','erba cedrina','verbena','melissa'],
+          'giugno':['fragole','ciliegie','albicocche','pesche precoci','fiori di sambuco','basilico','menta','lamponi','ribes rosso','lavanda','limone','melone cantalupo','pomodorini'],
+          'luglio':['pesche','albicocche','anguria','melone retato','lamponi','mirtilli','more precoci','basilico','menta','lavanda','fico d india','susine','cetriolo','pomodoro'],
+          'agosto':['pesche noci','fichi freschi','anguria','melone','more','lamponi','mirtilli','pomodoro','basilico','lavanda','fico','uva fragola','prugne','zucchina'],
+          'settembre':['fichi','uva nera','uva bianca','pere williams','mele golden','mirtilli','more','rosmarino','salvia','miele di fiori','melograno','marroni','zucca','nocciole fresche'],
+          'ottobre':['mele renette','pere','melograno','fichi secchi','uva fragola','zucca','marroni','rosmarino','timo','salvia','cachi','noci fresche','mele cotogne','chiodi di garofano'],
+          'novembre':['melograno','cachi','mele cotogne','marroni','arance','mandarini','cannella','vaniglia','chiodi di garofano','noce moscata','rosmarino','miele di castagno','zenzero'],
+          'dicembre':['arancia','mandarino','clementine','melograno','cannella','chiodi di garofano','anice stellato','vaniglia','castagne','cachi','cedro','bergamotto','vin brulé spezie','noce moscata']
         };
-        var ing = ingredientiStagione[mese] || 'ingredienti di stagione';
+
+        var lista = ingredientiStagione[mese] || ['ingredienti freschi di stagione'];
+        // Selezione RANDOM dalla lista
+        var ingScelto = lista[Math.floor(Math.random() * lista.length)];
+
         var tipoStr = giornoTipo==='analcolico' ? 'ANALCOLICO (zero alcol)' : 'ALCOLICO, stile '+v;
         var stileNote = giornoTipo==='analcolico' ? '' : '\nStile: '+v+'.';
-        return 'Oggi è il ' + now.getDate() + ' ' + mese + ', siamo in ' + stagione + '.\n\nCrea il cocktail del giorno '+tipoStr+'.\n\nREGOLA FONDAMENTALE: devi usare obbligatoriamente almeno un ingrediente fresco di stagione di questo periodo tra questi: ' + ing + '.\nQuesto ingrediente stagionale deve essere il cuore del drink, non un semplice garnish.'+stileNote+'\n\nRispondi SOLO con questa struttura:\n## NOME DRINK\nConcept in 1 riga.\n## RICETTA\n- dose Ingrediente (lista completa)\n**Tecnica:** su riga separata\n**Bicchiere:** su riga separata\n**Garnish:** su riga separata\n## INGREDIENTE STAGIONALE\nQuale ingrediente di stagione hai usato e perché è perfetto in questo momento.\n## PERSONALIZZAZIONE\nConsiglio di bilanciamento.';
+
+        return 'Oggi è il ' + now.getDate() + ' ' + mese + ', siamo in ' + stagione + '.\n\nCrea il cocktail del giorno '+tipoStr+'.\n\nINGREDIENTE PROTAGONISTA (obbligatorio): '+ingScelto+'.\nDeve essere il cuore del drink, non un semplice garnish. Costruisci tutto intorno a lui.\n\nREGOLA STRUTTURA: proponi un drink con una struttura originale — scegli liberamente base alcolica, profilo gusto e bicchiere in modo che il risultato sia diverso da un drink generico.'+stileNote+'\n\nRispondi SOLO con questa struttura:\n## NOME DRINK\nConcept in 1 riga.\n## RICETTA\n- dose Ingrediente (lista completa)\n**Tecnica:** su riga separata\n**Bicchiere:** su riga separata\n**Garnish:** su riga separata\n## INGREDIENTE PROTAGONISTA\nPerché '+ingScelto+' funziona perfettamente in questo momento e come si esprime nel drink.\n## PERSONALIZZAZIONE\nConsiglio di bilanciamento.';
       }
     }
   };
@@ -1072,6 +1079,120 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(getTotalRemaining()<=0) showExhausted();
   }
 
+  // ─── SALVATI AI ──────────────────────────────────────────────────
+  function renderSavedCard(){
+    var user = window._currentUser;
+    var db = window._fbDb;
+    var docFn = window._fbFunctions ? window._fbFunctions.doc : null;
+    var getDoc = window._fbFunctions ? window._fbFunctions.getDoc : null;
+    if(!user || !db || !docFn || !getDoc) return;
+    var userDoc = docFn(db, 'users', user.uid);
+    getDoc(userDoc).then(function(snap){
+      var saved = [];
+      if(snap.exists() && snap.data().savedAI) saved = snap.data().savedAI;
+      var el = document.getElementById('ai-saved-card');
+      if(!el) return;
+      if(!saved.length){
+        el.style.display='none'; return;
+      }
+      el.style.display='block';
+      // Raggruppa per categoria
+      var groups = {};
+      var ORDER = ['signature','twist','pairing','giorno'];
+      saved.forEach(function(item){
+        if(!groups[item.cat]) groups[item.cat]=[];
+        groups[item.cat].push(item);
+      });
+      var CAT_ICONS = {
+        signature:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 22v-7"/><path d="M3 3l7 9h4l7-9z"/></svg>',
+        twist:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>',
+        pairing:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>',
+        giorno:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+      };
+      var html = '';
+      ORDER.forEach(function(cat){
+        if(!groups[cat]) return;
+        var items = groups[cat];
+        var label = items[0].catLabel;
+        var icon = CAT_ICONS[cat] || '';
+        html += '<div style="margin-bottom:.85rem;">';
+        html += '<div style="display:flex;align-items:center;gap:.35rem;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.4rem;">'+icon+' '+label+'</div>';
+        items.forEach(function(item){
+          var d = new Date(item.savedAt);
+          var dateStr = d.toLocaleDateString('it-IT',{day:'numeric',month:'short'});
+          html += '<div class="saved-ai-item" data-id="'+item.id+'" data-cat="'+item.cat+'" style="display:flex;justify-content:space-between;align-items:center;padding:.45rem .55rem;border-radius:7px;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.15);margin-bottom:.3rem;cursor:pointer;transition:border-color .2s;">';
+          html += '<div style="font-size:.7rem;color:var(--txt2);font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:.5rem;">'+item.title+'</div>';
+          html += '<div style="display:flex;align-items:center;gap:.4rem;flex-shrink:0;">';
+          html += '<span style="font-size:.58rem;color:var(--dim);">'+dateStr+'</span>';
+          html += '<button class="saved-del-btn" data-id="'+item.id+'" style="background:none;border:none;color:var(--dim);cursor:pointer;padding:0;line-height:1;font-size:.75rem;" title="Elimina">×</button>';
+          html += '</div>';
+          html += '</div>';
+        });
+        html += '</div>';
+      });
+      el.querySelector('#saved-list').innerHTML = html;
+
+      // Click su item → apre testo
+      el.querySelectorAll('.saved-ai-item').forEach(function(row){
+        row.addEventListener('click', function(e){
+          if(e.target.classList.contains('saved-del-btn')) return;
+          var id = this.dataset.id;
+          var found = saved.find(function(s){ return s.id===id; });
+          if(found) openSavedItem(found);
+        });
+      });
+
+      // Click elimina
+      el.querySelectorAll('.saved-del-btn').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          var id = this.dataset.id;
+          deleteSavedItem(id, saved);
+        });
+      });
+    });
+  }
+
+  function openSavedItem(item){
+    var panel = document.getElementById('saved-detail-panel');
+    if(!panel){
+      panel = document.createElement('div');
+      panel.id = 'saved-detail-panel';
+      panel.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:9999;overflow-y:auto;padding:1.2rem 1rem 2rem;';
+      document.body.appendChild(panel);
+    }
+    panel.innerHTML =
+      '<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;">'+
+        '<button id="saved-detail-back" style="background:none;border:none;color:var(--amber);cursor:pointer;font-size:.75rem;font-weight:600;font-family:inherit;display:flex;align-items:center;gap:.3rem;">'+
+          '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg> Torna'+
+        '</button>'+
+        '<span style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;">'+item.catLabel+'</span>'+
+      '</div>'+
+      '<div style="font-size:.78rem;line-height:1.8;color:var(--txt);white-space:pre-wrap;">'+item.text+'</div>';
+    panel.style.display='block';
+    document.getElementById('saved-detail-back').addEventListener('click', function(){
+      panel.style.display='none';
+    });
+  }
+
+  function deleteSavedItem(id, saved){
+    var user = window._currentUser;
+    var db = window._fbDb;
+    var docFn = window._fbFunctions ? window._fbFunctions.doc : null;
+    var setDoc = window._fbFunctions ? window._fbFunctions.setDoc : null;
+    if(!user || !db || !docFn || !setDoc) return;
+    var newSaved = saved.filter(function(s){ return s.id !== id; });
+    var userDoc = docFn(db, 'users', user.uid);
+    setDoc(userDoc, { savedAI: newSaved }, { merge: true })
+      .then(function(){ renderSavedCard(); })
+      .catch(function(e){ console.warn('deleteAI err', e); });
+  }
+
+  // Carica salvati quando utente è pronto
+  window.addEventListener('fb-auth-ready', function(e){
+    if(e.detail.user) setTimeout(renderSavedCard, 800);
+  });
+
   function renderAccountTab(){
     var el = document.getElementById('acc-content');
     if(!el) return;
@@ -1090,7 +1211,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     }
     el.innerHTML =
       '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
-        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.35rem;">Account</div>'+
+        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.35rem;">Accesso effettuato con</div>'+
         '<div style="font-size:.8rem;color:var(--txt2);font-weight:600;">'+user.email+'</div>'+
       '</div>'+
       '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
@@ -1652,21 +1773,70 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
     // ── FOLLOW-UP LISTENERS ──────────────────────────────────────
 
-    // Salva (placeholder fino a Firebase)
+    // Salva su Firestore
+    function saveAiResponse(){
+      var user = window._currentUser;
+      var db = window._fbDb;
+      var docFn = window._fbFunctions ? window._fbFunctions.doc : null;
+      var setDoc = window._fbFunctions ? window._fbFunctions.setDoc : null;
+      if(!user || !db || !docFn || !setDoc){ return false; }
+
+      var body = document.getElementById('ai-body');
+      var text = body ? body.innerText : '';
+      if(!text.trim()) return false;
+
+      // Mappa cmd -> categoria leggibile
+      var CAT_LABELS = {
+        signature: 'Signature',
+        twist: 'Twist on Classic',
+        pairing: 'Food Pairing',
+        giorno: 'Cocktail del Giorno'
+      };
+      var cat = CAT_LABELS[currentCmd] || 'AI';
+
+      // Titolo automatico: prime parole del testo
+      var firstLine = text.split('
+').filter(function(l){ return l.trim(); })[0] || '';
+      var title = firstLine.replace(/^#+\s*/, '').substring(0, 50);
+      if(!title) title = cat;
+
+      var now = new Date();
+      var item = {
+        id: now.getTime().toString(),
+        cat: currentCmd || 'generic',
+        catLabel: cat,
+        title: title,
+        text: text,
+        savedAt: now.toISOString()
+      };
+
+      var userDoc = docFn(db, 'users', user.uid);
+      // Carica lista esistente, aggiungi in cima, limita a 50
+      var getDoc = window._fbFunctions ? window._fbFunctions.getDoc : null;
+      if(!getDoc) return false;
+      getDoc(userDoc).then(function(snap){
+        var saved = [];
+        if(snap.exists() && snap.data().savedAI) saved = snap.data().savedAI;
+        saved.unshift(item);
+        if(saved.length > 50) saved = saved.slice(0, 50);
+        setDoc(userDoc, { savedAI: saved }, { merge: true })
+          .then(function(){ renderSavedCard(); })
+          .catch(function(e){ console.warn('saveAI err', e); });
+      });
+      return true;
+    }
+
     function setupSaveBtn(id){
       var b=document.getElementById(id);
       if(b)b.addEventListener('click',function(){
-        this.textContent='✓ Salvato!';
-        this.style.background='rgba(34,197,94,.15)';
-        this.style.borderColor='rgba(34,197,94,.4)';
-        this.style.color='#4ade80';
-        var self=this;
-        setTimeout(function(){
-          self.textContent='Salva';
-          self.style.background='rgba(245,158,11,.12)';
-          self.style.borderColor='rgba(245,158,11,.3)';
-          self.style.color='var(--amber)';
-        },2000);
+        var ok = saveAiResponse();
+        if(ok){
+          this.textContent='✓ Salvato!';
+          this.style.background='rgba(34,197,94,.15)';
+          this.style.borderColor='rgba(34,197,94,.4)';
+          this.style.color='#4ade80';
+          this.disabled=true;
+        }
       });
     }
     setupSaveBtn('fu-save');
@@ -1692,7 +1862,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         prompt=buildSignaturePrompt(sigInp?sigInp.value.trim():'stessi ingredienti')+' Proponi un drink completamente diverso.';
         doFetch(prompt,500).then(function(){resetFollowUp();showFollowUp();});
       } else if(currentCmd==='giorno'){
-        prompt=PROMPTS.giorno.build(selectedPill||'all day')+' Proponi un drink completamente diverso.';
+        prompt=PROMPTS.giorno.build(selectedPill||'all day')+' IMPORTANTE: proponi un drink con struttura completamente diversa dal precedente — cambia base alcolica, profilo gusto e bicchiere.';
         doFetch(prompt,500).then(function(){resetFollowUp();showFollowUp();});
       }
     });
