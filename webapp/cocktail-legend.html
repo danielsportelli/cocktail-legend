@@ -1279,5 +1279,18 @@ function calcABV() {
 <script type="module" src="js/firebase-init.js"></script>
 <script src="js/js.js" defer></script>
 
+<!-- PROTEZIONE CONTENUTI -->
+<script>
+  // Blocca tasto destro ovunque
+  document.addEventListener('contextmenu', function(e){ e.preventDefault(); return false; });
+  // Blocca selezione testo da tastiera (Ctrl+A)
+  document.addEventListener('selectstart', function(e){ e.preventDefault(); return false; });
+  // Blocca copia (Ctrl+C)
+  document.addEventListener('copy', function(e){ e.preventDefault(); return false; });
+  // Blocca drag & drop immagini
+  document.addEventListener('dragstart', function(e){ e.preventDefault(); return false; });
+</script>
 </body>
-</html>
+</html
+
+>
