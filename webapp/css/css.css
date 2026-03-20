@@ -789,28 +789,4 @@ body{padding-bottom:56px;}
 
 #saved-detail-body::-webkit-scrollbar{ display:none; }
 
-/* ── PROTEZIONE CONTENUTI ──────────────────────────────────────── */
-/* Disabilita selezione testo ovunque */
-* {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-/* Disabilita drag su immagini */
-img {
-  -webkit-user-drag: none;
-  user-drag: none;
-  pointer-events: none;
-}
-/* Ri-abilita pointer events su tutto l'interattivo */
-button, a, input, textarea, select,
-.tab-btn, .tab-btn *, .ai-cmd-btn, .calc-cmd-btn, .ris-cmd-btn,
-.sig-pill, .ai-pill, .crea-pill,
-.fav-heart, .saved-ai-item, .saved-cat-header, .saved-del-btn,
-#saved-card-header, .ai-back-btn, .drawer-handle,
-.drawer, .drawer *, .drawer-overlay,
-.batch-preset, .batch-del-row, .batch-row input,
-#batch-add-row, #batch-reset, #batch-bottle-ml {
-  pointer-events: auto;
-}
+
