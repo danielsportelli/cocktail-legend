@@ -192,7 +192,7 @@
     </div>
     <div class="m-img">
       <div class="m-img-ph">&#127864;</div>
-      <img id="m-img" src="" alt="">
+      <img id="m-img" src="" alt="" oncontextmenu="return false;" draggable="false" style="-webkit-user-select:none;user-select:none;">
       <div class="m-sap"><div class="m-sap-tags" id="m-sap"></div></div>
     </div>
     <div class="m-body">
@@ -1225,5 +1225,17 @@ function calcABV() {
 <!-- Firebase SDK -->
 <script type="module" src="js/firebase-init.js"></script>
 <script src="js/js.js" defer></script>
+
+<!-- PROTEZIONE CONTENUTI -->
+<script>
+  // Blocca tasto destro ovunque
+  document.addEventListener('contextmenu', function(e){ e.preventDefault(); return false; });
+  // Blocca selezione testo da tastiera (Ctrl+A)
+  document.addEventListener('selectstart', function(e){ e.preventDefault(); return false; });
+  // Blocca copia (Ctrl+C)
+  document.addEventListener('copy', function(e){ e.preventDefault(); return false; });
+  // Blocca drag & drop immagini
+  document.addEventListener('dragstart', function(e){ e.preventDefault(); return false; });
+</script>
 </body>
 </html>
