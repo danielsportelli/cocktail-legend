@@ -145,7 +145,7 @@ REGOLE PER LE QUANTITA'
 REGOLE PER frizzante
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-true se il drink contiene uno o piu' di questi: Soda, Soda al limone, Soda al pompelmo rosa, Acqua tonica, Ginger beer, Ginger ale, Spumante, Prosecco, Champagne, Cola.
+true se il drink contiene uno o piu' di questi: Soda, Soda al limone, Soda al pompelmo rosa, Acqua tonica, Ginger beer, Ginger ale, Spumante, Prosecco, Champagne, Franciacorta, Coca, Fanta, Sprite, Lemon soda, Chinotto, Cedrata, Cola.
 false in tutti gli altri casi.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -162,19 +162,20 @@ Somma tutti i valori ottenuti.
 GRADAZIONI DI RIFERIMENTO (valori medi da usare):
 - Distillati base (gin, vodka, rum, tequila, mezcal, whiskey/whisky, cognac,
   calvados, grappa, pisco, acquavite): 40%
-- Distillati overproof (navy strength, overproof 151, cask strength): 57%
+- Distillati navy strength: 57%
+- Distillati overproof 151: 75,5%
 - Assenzio: 68%
-- Vermouth (rosso, bianco, dry, rosato, extra dry): 18%
-- Vermouth di Torino / Chambery: 18%
+- Vermouth (rosso, bianco, dry, rosato, extra dry): 16%
+- Vermouth di Torino / Chambery: 16%
 - Lillet blanc: 17%
 - Aperol: 11%
 - Campari / Aperitivo rosso / Aperitivo bianco: 25%
-- Liquori e triple sec (Cointreau, Grand Marnier, Orange curacao,
-  Blue curacao, Maraschino, Chartreuse gialla, Creme de violette,
-  Creme de cassis, Creme de mure, liquori alla frutta, ecc.): 30%
+- Triple sec (Cointreau, Grand Marnier): 40%
+- Liquori (Orange curacao, Blue curacao, Maraschino, Chartreuse gialla, Creme de violette,
+  Creme de cassis, Creme de mure, liquori alla frutta, ecc.): 25%
 - Chartreuse verde: 55%
 - Fernet / Amari ad alta gradazione (Fernet, Cynar, Amaro): 39%
-- Amari leggeri (Aperol-style, amari 20-25%): 23%
+- Amari italiani: 23-30%
 - Benedettino / Dom Benedettine: 40%
 - Drambuie: 40%
 - Baileys / Crema di whiskey: 17%
@@ -184,6 +185,7 @@ GRADAZIONI DI RIFERIMENTO (valori medi da usare):
 - Prosecco / Spumante / Champagne / Cava: 11%
 - Birra: 5%
 - Succhi, sciroppi, acqua, soda, ginger beer, cola, albume: 0%
+- Bitters aromatici (angostura, peychaud's, amargo, orange bitters, ecc.): 0%
 
 PASSO 2 - CALCOLA IL VOLUME TOTALE DEL DRINK (ml):
 Somma tutti gli ingredienti in ml.
@@ -200,7 +202,7 @@ PASSO 4 - APPLICA IL FATTORE DI DILUIZIONE:
 - Build / Dirty dump / Swizzle: moltiplica ABV_lordo x 0,90 (diluizione ~10%)
 - Drink con top abbondante (soda, spumante, cola): gia diluito dal volume,
   nessuna ulteriore correzione
-- Blend / Frozen: moltiplica ABV_lordo x 0,85
+- Blend / Frozen: moltiplica ABV_lordo x 0,60
 
 PASSO 5 - MAPPA SULL'ETICHETTA:
 ABV finale nel bicchiere -> etichetta da usare nel campo "abv":

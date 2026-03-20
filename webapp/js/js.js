@@ -1,58 +1,100 @@
 // ═══════════════════════════════════
-// PASSWORD — cambia il valore qui sotto quando vuoi
-var SECRET = "legend2025";
+// LOGIN FIREBASE — email + password
 // ═══════════════════════════════════
-
 (function() {
   var overlay = document.getElementById("login-overlay");
-  var input   = document.getElementById("login-pwd");
+  var emailIn = document.getElementById("login-email");
+  var pwdIn   = document.getElementById("login-pwd");
   var btn     = document.getElementById("login-btn");
   var err     = document.getElementById("login-err");
   var eye     = document.getElementById("login-eye");
-  var STORE   = "cl_auth";
-
-  // Controlla se già autenticato (localStorage)
-  if (localStorage.getItem(STORE) === "1") {
-    overlay.style.display = "none";
-    return;
-  }
+  var resetLnk= document.getElementById("login-reset");
 
   // Blocca body scroll finché non loggato
   document.body.style.overflow = "hidden";
 
-  function tryLogin() {
-    if (input.value === SECRET) {
-      localStorage.setItem(STORE, "1");
+  // Attendi che Firebase sia pronto
+  window.addEventListener('fb-auth-ready', function(e) {
+    if (e.detail.user) {
+      // Già loggato — nascondi overlay
       overlay.style.transition = "opacity .35s";
       overlay.style.opacity = "0";
       setTimeout(function() {
         overlay.style.display = "none";
         document.body.style.overflow = "";
       }, 350);
-    } else {
-      err.textContent = "Password sbagliata.";
-      input.value = "";
-      input.focus();
-      input.style.borderColor = "#f87171";
-      setTimeout(function() { input.style.borderColor = ""; }, 1500);
     }
+  }, { once: false });
+
+  function showErr(msg) {
+    err.textContent = msg;
+    pwdIn.style.borderColor = "#f87171";
+    setTimeout(function() { pwdIn.style.borderColor = ""; }, 1500);
+  }
+
+  function tryLogin() {
+    var email = emailIn.value.trim();
+    var pwd   = pwdIn.value;
+    if (!email || !pwd) { showErr("Inserisci email e password."); return; }
+    btn.disabled = true;
+    btn.textContent = "Accesso...";
+    err.textContent = "";
+
+    var auth = window._fbAuth;
+    var signIn = window._fbFunctions.signInWithEmailAndPassword;
+    if (!auth || !signIn) { showErr("Errore di connessione. Riprova."); btn.disabled=false; btn.textContent="Accedi →"; return; }
+
+    signIn(auth, email, pwd)
+      .then(function() {
+        overlay.style.transition = "opacity .35s";
+        overlay.style.opacity = "0";
+        setTimeout(function() {
+          overlay.style.display = "none";
+          document.body.style.overflow = "";
+        }, 350);
+      })
+      .catch(function(e) {
+        btn.disabled = false;
+        btn.textContent = "Accedi →";
+        if (e.code === "auth/invalid-credential" || e.code === "auth/wrong-password" || e.code === "auth/user-not-found") {
+          showErr("Email o password non corretti.");
+        } else if (e.code === "auth/too-many-requests") {
+          showErr("Troppi tentativi. Aspetta qualche minuto.");
+        } else {
+          showErr("Errore: " + e.message);
+        }
+      });
   }
 
   btn.addEventListener("click", tryLogin);
-  input.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") tryLogin();
-  });
+  pwdIn.addEventListener("keydown", function(e) { if (e.key === "Enter") tryLogin(); });
+  emailIn.addEventListener("keydown", function(e) { if (e.key === "Enter") pwdIn.focus(); });
 
   // Mostra/nascondi password
   eye.addEventListener("click", function() {
-    if (input.type === "password") {
-      input.type = "text";
+    if (pwdIn.type === "password") {
+      pwdIn.type = "text";
       eye.innerHTML = "&#128064;";
     } else {
-      input.type = "password";
+      pwdIn.type = "password";
       eye.innerHTML = "&#128065;";
     }
   });
+
+  // Password dimenticata
+  if (resetLnk) {
+    resetLnk.addEventListener("click", function(e) {
+      e.preventDefault();
+      var email = emailIn.value.trim();
+      if (!email) { showErr("Inserisci la tua email prima."); return; }
+      var auth = window._fbAuth;
+      var resetPwd = window._fbFunctions.sendPasswordResetEmail;
+      if (!auth || !resetPwd) return;
+      resetPwd(auth, email)
+        .then(function() { err.style.color="#4ade80"; err.textContent = "Email di reset inviata!"; setTimeout(function(){ err.style.color=""; err.textContent=""; },4000); })
+        .catch(function() { showErr("Email non trovata."); });
+    });
+  }
 })();
 
 var DATA = [];
@@ -187,15 +229,63 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", sap:"Sapore"
 })();
 
 
-// ═══════════ PREFERITI ═══════════
-var FAVS_KEY = "cl_favs";
+// ═══════════ PREFERITI (Firestore) ═══════════
 var FAV_ONLY = false;
 var HEART_OFF = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
 var HEART_ON  = '<svg width="15" height="15" viewBox="0 0 24 24" fill="#ef4444" stroke="#ef4444" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>';
-function loadFavs(){try{return JSON.parse(localStorage.getItem(FAVS_KEY)||"[]");}catch(e){return[];}}
-function saveFavs(arr){try{localStorage.setItem(FAVS_KEY,JSON.stringify(arr));}catch(e){}}
-function isFav(name){return loadFavs().indexOf(name)!==-1;}
-function toggleFav(name){var f=loadFavs();var i=f.indexOf(name);if(i===-1)f.push(name);else f.splice(i,1);saveFavs(f);return i===-1;}
+
+// Cache locale per performance (sincronizzata con Firestore)
+var _favsCache = null;
+
+function _getUserDoc() {
+  var user = window._currentUser;
+  var db = window._fbDb;
+  var docFn = window._fbFunctions ? window._fbFunctions.doc : null;
+  if (!user || !db || !docFn) return null;
+  return docFn(db, 'users', user.uid);
+}
+
+function loadFavs() {
+  return _favsCache || [];
+}
+
+function saveFavs(arr) {
+  _favsCache = arr;
+  var userDoc = _getUserDoc();
+  if (!userDoc) return;
+  var setDoc = window._fbFunctions.setDoc;
+  setDoc(userDoc, { favs: arr }, { merge: true }).catch(function(e){ console.warn('saveFavs err', e); });
+}
+
+function isFav(name) {
+  return loadFavs().indexOf(name) !== -1;
+}
+
+function toggleFav(name) {
+  var f = loadFavs().slice();
+  var i = f.indexOf(name);
+  if (i === -1) f.push(name); else f.splice(i, 1);
+  saveFavs(f);
+  return i === -1;
+}
+
+// Carica preferiti da Firestore quando utente è pronto
+window.addEventListener('fb-auth-ready', function(e) {
+  if (!e.detail.user) return;
+  var userDoc = _getUserDoc();
+  if (!userDoc) return;
+  var getDoc = window._fbFunctions.getDoc;
+  getDoc(userDoc).then(function(snap) {
+    if (snap.exists()) {
+      var data = snap.data();
+      _favsCache = data.favs || [];
+    } else {
+      _favsCache = [];
+    }
+    refreshAllHearts();
+  }).catch(function(e){ console.warn('loadFavs err', e); _favsCache = []; });
+});
+
 function refreshAllHearts(){
   document.querySelectorAll(".fav-heart").forEach(function(b){
     var n=b.dataset.name;
@@ -771,9 +861,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 // ═══════════ AUTOCOMPLETE RICERCA ═══════════
 (function(){
   var WORKER_URL = 'https://cocktail-legend-ai.daniel-sportelli.workers.dev';
-  var USAGE_KEY = 'cl_ai_usage';
-  var USAGE_MONTH = 'cl_ai_month';
   var MAX = 50;
+  var _usageCache = null; // cache locale {count, month}
   var currentCmd = null;
   var selectedPill = null;
   var lastRawText = '';
@@ -863,21 +952,53 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   }
 
   // ─── USAGE ───────────────────────────────────────────────────────
+  function _getMonth(){ var n=new Date(); return n.getFullYear()+'-'+n.getMonth(); }
+
   function getUsage(){
-    var now = new Date();
-    var month = now.getFullYear()+'-'+now.getMonth();
-    if(localStorage.getItem(USAGE_MONTH)!==month){
-      localStorage.setItem(USAGE_MONTH,month);
-      localStorage.setItem(USAGE_KEY,'0');
-      return 0;
-    }
-    return parseInt(localStorage.getItem(USAGE_KEY)||'0',10);
+    if(_usageCache && _usageCache.month===_getMonth()) return _usageCache.count;
+    return 0;
   }
+
   function incUsage(){
-    var u=getUsage()+1;
-    localStorage.setItem(USAGE_KEY,String(u));
-    return u;
+    var user = window._currentUser;
+    var db = window._fbDb;
+    var docFn = window._fbFunctions ? window._fbFunctions.doc : null;
+    var setDoc = window._fbFunctions ? window._fbFunctions.setDoc : null;
+    if(!user || !db || !docFn || !setDoc) return getUsage();
+    var month = _getMonth();
+    var newCount = getUsage() + 1;
+    _usageCache = { count: newCount, month: month };
+    var userDoc = docFn(db, 'users', user.uid);
+    setDoc(userDoc, { aiUsage: { count: newCount, month: month } }, { merge: true })
+      .catch(function(e){ console.warn('incUsage err', e); });
+    return newCount;
   }
+
+  // Carica usage da Firestore all'avvio
+  window.addEventListener('fb-auth-ready', function(e){
+    if(!e.detail.user) return;
+    var user = e.detail.user;
+    var db = window._fbDb;
+    var docFn = window._fbFunctions ? window._fbFunctions.doc : null;
+    var getDoc = window._fbFunctions ? window._fbFunctions.getDoc : null;
+    if(!db || !docFn || !getDoc) return;
+    var userDoc = docFn(db, 'users', user.uid);
+    getDoc(userDoc).then(function(snap){
+      var month = _getMonth();
+      if(snap.exists()){
+        var data = snap.data();
+        var ai = data.aiUsage || {};
+        if(ai.month === month){
+          _usageCache = { count: ai.count || 0, month: month };
+        } else {
+          _usageCache = { count: 0, month: month };
+        }
+      } else {
+        _usageCache = { count: 0, month: month };
+      }
+      renderUsage();
+    }).catch(function(e){ console.warn('loadUsage err', e); _usageCache = { count: 0, month: _getMonth() }; });
+  });
   function renderUsage(){
     var u=getUsage();
     var pct=Math.min(100,(u/MAX)*100);

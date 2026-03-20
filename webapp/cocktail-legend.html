@@ -22,14 +22,18 @@
   <div class="login-box">
     <div class="login-logo">Daniel Sportelli</div>
     <div class="login-title">Cocktail Legend</div>
-    <p class="login-sub">Inserisci la password<br>per accedere.</p>
+    <p class="login-sub">Accedi al tuo account<br>per continuare.</p>
+    <div class="login-input-wrap" style="margin-bottom:10px;">
+      <input class="login-input" type="email" id="login-email" placeholder="Email" autocomplete="email">
+    </div>
     <div class="login-input-wrap">
       <input class="login-input" type="password" id="login-pwd" placeholder="Password" autocomplete="current-password">
       <button class="login-eye" id="login-eye" type="button">&#128065;</button>
     </div>
     <button class="login-btn" id="login-btn">Accedi &rarr;</button>
     <div class="login-err" id="login-err"></div>
-    <p class="login-note">Hai acquistato Cocktail Legend?<br>Trovi la password nella email di conferma.</p>
+    <p class="login-note" style="margin-top:12px;"><a href="#" id="login-reset" style="color:var(--amber);text-decoration:none;font-size:0.82rem;">Password dimenticata?</a></p>
+    <p class="login-note">Hai acquistato Cocktail Legend?<br>Usa l'email con cui hai acquistato.</p>
   </div>
 </div>
 
@@ -1205,6 +1209,8 @@ function calcABV() {
 
 </script>
 
-<script src="js/js.js"></script>
+<!-- Firebase SDK -->
+<script type="module" src="js/firebase-init.js"></script>
+<script src="js/js.js" defer></script>
 </body>
 </html>
