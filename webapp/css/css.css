@@ -773,7 +773,7 @@ body{padding-bottom:56px;}
 }
 
 /* Pill selezionate — stile soft */
-.sig-pill.sel,.crea-pill.sel{
+.sig-pill.sel,.crea-pill.sel,.ai-pill.sel{
   background:rgba(37,99,235,.3) !important;
   border-color:#3b82f6 !important;
   color:#fff !important;
@@ -781,7 +781,8 @@ body{padding-bottom:56px;}
 }
 /* Quando almeno una pill nel gruppo è selezionata, le altre si dimmano */
 .sig-pill-group-active .sig-pill:not(.sel),
-.crea-pill-group-active .crea-pill:not(.sel){
+.crea-pill-group-active .crea-pill:not(.sel),
+.ai-pill-group-active .ai-pill:not(.sel){
   opacity:.28;
   border-color:rgba(255,255,255,.1) !important;
 }

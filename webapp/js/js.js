@@ -1228,7 +1228,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
         '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.5rem;">Crediti extra</div>'+
         '<div style="font-size:1.4rem;font-weight:800;color:var(--amber);margin-bottom:.2rem;">'+extra+'</div>'+
-        '<div style="font-size:.65rem;color:var(--dim);">Non scadono. Si usano dopo i crediti mensili.</div>'+
+        '<div style="font-size:.65rem;color:var(--dim);">I crediti extra non hanno scadenza e vengono utilizzati solo dopo aver esaurito i crediti mensili.</div>'+
       '</div>'+
       '<div style="margin-bottom:1rem;">'+
         '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.7rem;">Acquista crediti extra</div>'+
