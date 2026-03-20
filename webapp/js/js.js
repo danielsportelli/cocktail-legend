@@ -2390,6 +2390,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     window.openDrawer=function(id){
       if(id==='ris') showRisCmds();
       if(id==='calc') showCalcCmds();
+      if(id==='acc') { setTimeout(function(){ if(typeof renderAccountTab==='function') renderAccountTab(); }, 50); }
       origOpen(id);
     };
 
