@@ -2266,7 +2266,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
     // Titoli dinamici
     var RIS_TITLES={tmp:'Temperature',bic:'Glossario',glass:'Bicchieri'};
-    var CALC_TITLES={abv:'Calcola ABV',cost:'Drink Cost',batch:'Pre-Batch'};
+    var CALC_TITLES={abv:'Calcola ABV',cost:'Calcola Drink Cost',batch:'Calcola Pre-Batch'};
 
     function showRisCmds(){
       var t=document.getElementById('ris-header-title');
