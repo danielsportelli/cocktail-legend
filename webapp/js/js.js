@@ -1168,7 +1168,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         '</button>'+
         '<span style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;">'+item.catLabel+'</span>'+
       '</div>'+
-      '<div style="font-size:.78rem;line-height:1.8;color:var(--txt);white-space:pre-wrap;">'+item.text+'</div>';
+      '<div style="font-size:.78rem;line-height:1.8;color:var(--txt);">'+mdToHtml(item.text)+'</div>';
     panel.style.display='block';
     document.getElementById('saved-detail-back').addEventListener('click', function(){
       panel.style.display='none';
