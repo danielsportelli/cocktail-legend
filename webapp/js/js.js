@@ -1168,7 +1168,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         '</button>'+
         '<span style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;">'+item.catLabel+'</span>'+
       '</div>'+
-      '<div style="font-size:.78rem;line-height:1.8;color:var(--txt);">'+mdToHtml(item.text)+'</div>';
+      '<div style="font-size:.78rem;line-height:1.8;color:var(--txt);">'+(window.mdToHtml ? window.mdToHtml(item.text) : item.text.replace(/\n/g,'<br>'))+'</div>';
     panel.style.display='block';
     document.getElementById('saved-detail-back').addEventListener('click', function(){
       panel.style.display='none';
@@ -1516,6 +1516,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   }
 
   // ─── MARKDOWN → HTML ──────────────────────────────────────────────
+  window.mdToHtml = function(md){ return mdToHtml(md); };
   function mdToHtml(md){
     var SEZIONI = ['RICETTA','PREPARAZIONI','PERSONALIZZAZIONE','MODIFICHE APPORTATE'];
     var lines = md.split('\n');
@@ -1599,6 +1600,17 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       lastRawText=text;
       if(body)body.innerHTML=mdToHtml(text);
       incUsage(); renderUsage();
+      // Resetta tasto Salva per ogni nuova risposta
+      ['fu-save','fu-save-tre'].forEach(function(id){
+        var sb=document.getElementById(id);
+        if(sb){
+          sb.disabled=false;
+          sb.textContent='Salva';
+          sb.style.background='rgba(245,158,11,.12)';
+          sb.style.borderColor='rgba(245,158,11,.3)';
+          sb.style.color='var(--amber)';
+        }
+      });
       // mostra follow-up
       showFollowUp();
     }catch(e){
