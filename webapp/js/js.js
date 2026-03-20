@@ -1119,11 +1119,9 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       if(snap.exists() && snap.data().savedAI) saved = snap.data().savedAI;
       var el = document.getElementById('ai-saved-card');
       if(!el) return;
-      if(!saved.length){
-        el.style.display='none'; return;
-      }
+      if(!saved.length){ el.style.display='none'; return; }
       el.style.display='block';
-      // Raggruppa per categoria
+
       var groups = {};
       var ORDER = ['signature','twist','pairing','giorno'];
       saved.forEach(function(item){
@@ -1136,30 +1134,94 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         pairing:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>',
         giorno:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
       };
-      var html = '';
+
+      var CHEVRON = '<svg class="saved-chv" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>';
+
+      // Conta totale salvati
+      var totalCount = saved.length;
+
+      // Header card — chiuso di default
+      var cardOpen = el.dataset.open === '1';
+      var headerHtml =
+        '<div id="saved-card-header" style="display:flex;align-items:center;gap:.5rem;cursor:pointer;user-select:none;">'+
+          '<div style="width:26px;height:26px;background:rgba(37,99,235,.2);border-radius:7px;display:grid;place-items:center;flex-shrink:0;">'+
+            '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>'+
+          '</div>'+
+          '<div style="flex:1;">'+
+            '<div style="font-size:.72rem;font-weight:700;color:#60a5fa;">Le tue ricerche salvate</div>'+
+            '<div style="font-size:.58rem;color:var(--dim);">'+totalCount+' '+(totalCount===1?'elemento':'elementi')+' salvati</div>'+
+          '</div>'+
+          '<span style="color:var(--dim);transition:transform .2s;display:block;transform:rotate('+(cardOpen?'180':'0')+'deg);">'+CHEVRON+'</span>'+
+        '</div>';
+
+      // Categorie accordion
+      var catsHtml = '';
       ORDER.forEach(function(cat){
         if(!groups[cat]) return;
         var items = groups[cat];
         var label = items[0].catLabel;
         var icon = CAT_ICONS[cat] || '';
-        html += '<div style="margin-bottom:.85rem;">';
-        html += '<div style="display:flex;align-items:center;gap:.35rem;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.4rem;">'+icon+' '+label+'</div>';
+        var catOpen = el.dataset['cat_'+cat] === '1';
+        var itemsHtml = '';
         items.forEach(function(item){
           var d = new Date(item.savedAt);
           var dateStr = d.toLocaleDateString('it-IT',{day:'numeric',month:'short'});
-          html += '<div class="saved-ai-item" data-id="'+item.id+'" data-cat="'+item.cat+'" style="display:flex;justify-content:space-between;align-items:center;padding:.45rem .55rem;border-radius:7px;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.15);margin-bottom:.3rem;cursor:pointer;transition:border-color .2s;">';
-          html += '<div style="font-size:.7rem;color:var(--txt2);font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:.5rem;">'+item.title+'</div>';
-          html += '<div style="display:flex;align-items:center;gap:.4rem;flex-shrink:0;">';
-          html += '<span style="font-size:.58rem;color:var(--dim);">'+dateStr+'</span>';
-          html += '<button class="saved-del-btn" data-id="'+item.id+'" style="background:none;border:none;color:var(--dim);cursor:pointer;padding:0;line-height:1;font-size:.75rem;" title="Elimina">×</button>';
-          html += '</div>';
-          html += '</div>';
+          itemsHtml +=
+            '<div class="saved-ai-item" data-id="'+item.id+'" data-cat="'+item.cat+'" style="display:flex;justify-content:space-between;align-items:center;padding:.4rem .5rem;border-radius:7px;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.12);margin-bottom:.25rem;cursor:pointer;">'+
+              '<div style="font-size:.7rem;color:var(--txt2);font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:.5rem;">'+item.title+'</div>'+
+              '<div style="display:flex;align-items:center;gap:.4rem;flex-shrink:0;">'+
+                '<span style="font-size:.58rem;color:var(--dim);">'+dateStr+'</span>'+
+                '<button class="saved-del-btn" data-id="'+item.id+'" style="background:none;border:none;color:var(--dim);cursor:pointer;padding:0;line-height:1;font-size:.8rem;" title="Elimina">×</button>'+
+              '</div>'+
+            '</div>';
         });
-        html += '</div>';
+        catsHtml +=
+          '<div class="saved-cat-block" data-cat="'+cat+'" style="margin-bottom:.4rem;">'+
+            '<div class="saved-cat-header" data-cat="'+cat+'" style="display:flex;align-items:center;gap:.35rem;padding:.35rem .4rem;border-radius:7px;cursor:pointer;background:rgba(37,99,235,.04);">'+
+              '<span style="color:#60a5fa;">'+icon+'</span>'+
+              '<span style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;flex:1;">'+label+'</span>'+
+              '<span style="font-size:.58rem;color:var(--dim);margin-right:.3rem;">'+items.length+'</span>'+
+              '<span style="color:var(--dim);transition:transform .2s;display:block;transform:rotate('+(catOpen?'180':'0')+'deg);">'+CHEVRON+'</span>'+
+            '</div>'+
+            '<div class="saved-cat-items" data-cat="'+cat+'" style="display:'+(catOpen?'block':'none')+';padding-top:.25rem;">'+
+              itemsHtml+
+            '</div>'+
+          '</div>';
       });
-      el.querySelector('#saved-list').innerHTML = html;
 
-      // Click su item → apre testo
+      var listHtml = '<div id="saved-list" style="margin-top:.7rem;display:'+(cardOpen?'block':'none')+';">'+catsHtml+'</div>';
+
+      el.querySelector('#saved-list').outerHTML = '<div id="saved-list-wrap"></div>';
+      el.innerHTML =
+        '<div id="saved-list-wrap">'+
+          headerHtml+
+          '<div id="saved-list" style="margin-top:.7rem;display:'+(cardOpen?'block':'none')+';">'+catsHtml+'</div>'+
+        '</div>';
+
+      // Toggle card principale
+      el.querySelector('#saved-card-header').addEventListener('click', function(){
+        var isOpen = el.dataset.open === '1';
+        el.dataset.open = isOpen ? '0' : '1';
+        var list = el.querySelector('#saved-list');
+        var chv = this.querySelector('.saved-chv');
+        if(list) list.style.display = isOpen ? 'none' : 'block';
+        if(chv) chv.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+      });
+
+      // Toggle categorie
+      el.querySelectorAll('.saved-cat-header').forEach(function(hdr){
+        hdr.addEventListener('click', function(){
+          var cat = this.dataset.cat;
+          var isOpen = el.dataset['cat_'+cat] === '1';
+          el.dataset['cat_'+cat] = isOpen ? '0' : '1';
+          var itemsEl = el.querySelector('.saved-cat-items[data-cat="'+cat+'"]');
+          var chv = this.querySelector('.saved-chv');
+          if(itemsEl) itemsEl.style.display = isOpen ? 'none' : 'block';
+          if(chv) chv.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+      });
+
+      // Click su item
       el.querySelectorAll('.saved-ai-item').forEach(function(row){
         row.addEventListener('click', function(e){
           if(e.target.classList.contains('saved-del-btn')) return;
