@@ -1,3 +1,30 @@
+// ── mdToHtml globale (usata anche nei salvati) ──────────────────
+function mdToHtml(md){
+  var SEZIONI = ['RICETTA','PREPARAZIONI','PERSONALIZZAZIONE','MODIFICHE APPORTATE','INGREDIENTE PROTAGONISTA','INGREDIENTE STAGIONALE'];
+  var lines = md.split('\n');
+  var out = lines.map(function(line){
+    if(/^## .+/.test(line)){
+      var title = line.replace(/^## /, '');
+      var isSezione = SEZIONI.indexOf(title.trim().toUpperCase()) !== -1;
+      if(isSezione){
+        return '<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">'+title+'</div>';
+      } else {
+        return '<div style="font-size:1.1rem;font-weight:800;color:var(--txt);margin:14px 0 6px;letter-spacing:-.01em;">'+title+'</div>';
+      }
+    }
+    if(/^### .+/.test(line)) return '<div style="font-size:.82rem;font-weight:700;color:var(--txt);margin:12px 0 3px;">'+line.replace(/^### /,'')+'</div>';
+    if(/^- .+/.test(line)) return '<div style="padding:3px 0 3px 10px;border-left:2px solid rgba(96,165,250,.25);color:var(--txt2);font-size:.78rem;">'+line.replace(/^- /,'')+'</div>';
+    if(/^---$/.test(line)) return '<hr style="border:none;border-top:1px solid var(--brd);margin:12px 0;">';
+    return line;
+  }).join('\n');
+  return out
+    .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--amber);font-weight:700;">$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em style="color:var(--txt2);">$1</em>')
+    .replace(/\n\n/g,'<br><br>')
+    .replace(/\n/g,'<br>');
+}
+// ────────────────────────────────────────────────────────────────
+
 // ═══════════════════════════════════
 // LOGIN FIREBASE — email + password
 // ═══════════════════════════════════
@@ -1162,13 +1189,13 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       document.body.appendChild(panel);
     }
     panel.innerHTML =
-      '<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;">'+
+      '<div style="position:sticky;top:0;z-index:10;background:var(--bg);display:flex;align-items:center;gap:.6rem;padding:.75rem 0;border-bottom:1px solid var(--brd);margin-bottom:1rem;">'+
         '<button id="saved-detail-back" style="background:none;border:none;color:var(--amber);cursor:pointer;font-size:.75rem;font-weight:600;font-family:inherit;display:flex;align-items:center;gap:.3rem;">'+
           '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg> Torna'+
         '</button>'+
         '<span style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;">'+item.catLabel+'</span>'+
       '</div>'+
-      '<div style="font-size:.78rem;line-height:1.8;color:var(--txt);">'+(window.mdToHtml ? window.mdToHtml(item.text) : item.text.replace(/\n/g,'<br>'))+'</div>';
+      '<div style="font-size:.78rem;line-height:1.8;color:var(--txt);">'+mdToHtml(item.text)+'</div>';
     panel.style.display='block';
     document.getElementById('saved-detail-back').addEventListener('click', function(){
       panel.style.display='none';
@@ -1516,7 +1543,6 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   }
 
   // ─── MARKDOWN → HTML ──────────────────────────────────────────────
-  window.mdToHtml = function(md){ return mdToHtml(md); };
   function mdToHtml(md){
     var SEZIONI = ['RICETTA','PREPARAZIONI','PERSONALIZZAZIONE','MODIFICHE APPORTATE'];
     var lines = md.split('\n');
@@ -1794,7 +1820,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       if(!user || !db || !docFn || !setDoc){ return false; }
 
       var body = document.getElementById('ai-body');
-      var text = body ? body.innerText : '';
+      var text = lastRawText || (body ? body.innerText : '');
       if(!text.trim()) return false;
 
       // Mappa cmd -> categoria leggibile
