@@ -2266,7 +2266,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
     // Titoli dinamici
     var RIS_TITLES={tmp:'Temperature',bic:'Glossario',glass:'Bicchieri'};
-    var CALC_TITLES={abv:'Calcola ABV',cost:'Calcola Drink Cost',batch:'Calcola Pre-Batch'};
+    var CALC_TITLES={abv:'Calcola ABV',cost:'Drink Cost',batch:'Pre-Batch'};
 
     function showRisCmds(){
       var t=document.getElementById('ris-header-title');
@@ -2452,14 +2452,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           '<span style="color:var(--dim);font-size:.72rem;">ml</span>'+
           '<button class="batch-del-row" style="background:none;border:none;color:var(--dim);font-size:1.1rem;cursor:pointer;padding:0 .2rem;line-height:1;pointer-events:auto;">&#215;</button>';
         wrap.appendChild(row);
-        row.querySelector('.batch-del-row').addEventListener('click', function(){
-          var rows = wrap.querySelectorAll('.batch-row');
-          if(rows.length > 2) row.remove();
-          calcBatch();
-        });
-        row.querySelectorAll('input').forEach(function(inp){
-          inp.addEventListener('input', calcBatch);
-        });
+        attachRowListeners(row);
+        updateEnterKeys();
       }
 
       function resetBatch(){
@@ -2470,6 +2464,49 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         if(bottleInp) bottleInp.value = '';
         var rw = document.getElementById('batch-result-wrap');
         if(rw) rw.style.display = 'none';
+      }
+
+      // Aggiorna enterkeyhint in base alla posizione nella lista
+      function updateEnterKeys(){
+        var rows = document.querySelectorAll('#batch-ingredients .batch-row');
+        rows.forEach(function(row, i){
+          var nameInp = row.querySelector('.batch-name');
+          var mlInp = row.querySelector('.batch-ml');
+          var isLast = (i === rows.length - 1);
+          if(nameInp){ nameInp.setAttribute('enterkeyhint','next'); }
+          if(mlInp){ mlInp.setAttribute('enterkeyhint', isLast ? 'done' : 'next'); }
+        });
+      }
+
+      // Gestione tasto invio/next tra campi
+      function handleEnterKey(e){
+        if(e.key !== 'Enter') return;
+        e.preventDefault();
+        var rows = Array.from(document.querySelectorAll('#batch-ingredients .batch-row'));
+        var allInputs = [];
+        rows.forEach(function(row){
+          allInputs.push(row.querySelector('.batch-name'));
+          allInputs.push(row.querySelector('.batch-ml'));
+        });
+        var idx = allInputs.indexOf(document.activeElement);
+        if(idx !== -1 && idx < allInputs.length - 1){
+          allInputs[idx + 1].focus();
+        } else {
+          document.activeElement.blur(); // chiudi tastiera sull'ultimo
+        }
+      }
+
+      function attachRowListeners(row){
+        row.querySelector('.batch-del-row').addEventListener('click', function(){
+          var wrap = document.getElementById('batch-ingredients');
+          if(wrap.querySelectorAll('.batch-row').length > 2) row.remove();
+          updateEnterKeys();
+          calcBatch();
+        });
+        row.querySelectorAll('input').forEach(function(inp){
+          inp.addEventListener('input', calcBatch);
+          inp.addEventListener('keydown', handleEnterKey);
+        });
       }
 
       function calcBatch(){
@@ -2486,7 +2523,15 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
         var rw = document.getElementById('batch-result-wrap');
         if(!rw) return;
-        if(bottleMl < 250 || ingredients.length === 0 || totalBase === 0){
+        // Gestione errore bottiglia < 250ml
+        var errEl = document.getElementById('batch-bottle-err');
+        if(bottleMl > 0 && bottleMl < 250){
+          if(errEl) errEl.style.display = 'block';
+          rw.style.display = 'none'; return;
+        } else {
+          if(errEl) errEl.style.display = 'none';
+        }
+        if(!bottleMl || ingredients.length === 0 || totalBase === 0){
           rw.style.display = 'none'; return;
         }
 
@@ -2517,17 +2562,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         rw.style.display = 'block';
       }
 
-      // Init listeners
+      // Init listeners righe esistenti
       document.querySelectorAll('#batch-ingredients .batch-row').forEach(function(row){
-        row.querySelector('.batch-del-row').addEventListener('click', function(){
-          var wrap = document.getElementById('batch-ingredients');
-          if(wrap.querySelectorAll('.batch-row').length > 2) row.remove();
-          calcBatch();
-        });
-        row.querySelectorAll('input').forEach(function(inp){
-          inp.addEventListener('input', calcBatch);
-        });
+        attachRowListeners(row);
       });
+      updateEnterKeys();
 
       document.getElementById('batch-add-row').addEventListener('click', addBatchRow);
       document.getElementById('batch-reset').addEventListener('click', resetBatch);
