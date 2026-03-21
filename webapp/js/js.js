@@ -945,7 +945,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       }
     },
     pairing: {
-      maxTokens: 1500,
+      maxTokens: 2000,
       label: 'Descrivi il piatto e ti propongo 3 drink',
       placeholder: 'es. Tartare di tonno con avocado e sesamo...',
       usePills: false,
@@ -1721,7 +1721,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var el=document.getElementById(id);if(el)el.style.display='none';
     });
     if(resp)resp.style.display='block';
-    if(body)body.innerHTML='<span style="color:var(--dim);">Il barman sta pensando…</span>';
+    if(body)body.innerHTML='<div class="ai-thinking"><span class="ai-think-star s1">✦</span><span class="ai-think-star s2">✦</span><span class="ai-think-star s3">✦</span></div>';
     try{
       var res=await fetch(WORKER_URL,{
         method:'POST',
@@ -1737,7 +1737,14 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var text=data&&data.content&&data.content[0]?data.content[0].text:'';
       if(!text)throw new Error((data&&data.error&&data.error.message)||'Risposta vuota');
       lastRawText=text;
-      if(body)body.innerHTML=mdToHtml(text);
+      if(body){
+        body.innerHTML=mdToHtml(text);
+        // Postilla fissa sempre visibile sotto ogni risposta
+        var postilla = document.createElement('div');
+        postilla.style.cssText = 'margin-top:1.1rem;padding:.6rem .75rem;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.15);border-radius:8px;font-size:.62rem;color:var(--dim);line-height:1.6;font-style:italic;';
+        postilla.textContent = '* Le proposte sono punti di partenza da assaggiare e bilanciare. Gli ingredienti reali variano: un vermouth può essere più dolce di un altro, due gin possono avere sentori diversi, la frutta di stagione cambia intensità. Assaggia sempre e aggiusta a tuo piacere prima del servizio.';
+        body.appendChild(postilla);
+      }
       incUsage(); renderUsage();
       // Resetta tasto Salva per ogni nuova risposta
       ['fu-save','fu-save-tre'].forEach(function(id){
@@ -1791,6 +1798,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       val=cfg.usePills ? selectedPill : (inp?inp.value.trim():'');
     }
     if(!val||!currentCmd)return;
+    lastUserInput = val;
     var btn=document.getElementById('ai-btn');
     if(btn){btn.disabled=true;btn.textContent='...';}
       await doFetch(cfg.build(val), cfg.maxTokens||1000);

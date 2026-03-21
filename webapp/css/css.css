@@ -807,3 +807,26 @@ img {
 button, a, input, textarea, select, .tab-btn, .ai-cmd-btn, .sig-pill, .ai-pill, .fav-heart, .saved-ai-item, .saved-cat-header, .saved-del-btn, #saved-card-header, .ai-back-btn, .drawer-handle {
   pointer-events: auto;
 }
+
+/* ── AI BARMAN ICONA + THINKING ANIMATION ── */
+@keyframes aiStarPulse {
+  0%, 100% { opacity: .25; transform: scale(.7); }
+  50%       { opacity: 1;   transform: scale(1.2); }
+}
+.ai-star-icon {
+  transition: transform .2s;
+}
+.ai-thinking {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: .4rem 0;
+}
+.ai-think-star {
+  color: var(--amber);
+  font-size: 1rem;
+  animation: aiStarPulse 1.2s ease-in-out infinite;
+}
+.ai-think-star.s1 { animation-delay: 0s; }
+.ai-think-star.s2 { animation-delay: .25s; }
+.ai-think-star.s3 { animation-delay: .5s; }
