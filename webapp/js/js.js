@@ -1745,7 +1745,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         postilla.textContent = '* Le proposte sono punti di partenza da assaggiare e bilanciare. Gli ingredienti reali variano: un vermouth può essere più dolce di un altro, due gin possono avere sentori diversi, la frutta di stagione cambia intensità. Assaggia sempre e aggiusta a tuo piacere prima del servizio.';
         body.appendChild(postilla);
       }
-      incUsage(); renderUsage();
+      incUsage(); renderUsage(); renderAccountTab();
       // Resetta tasto Salva per ogni nuova risposta
       ['fu-save','fu-save-tre'].forEach(function(id){
         var sb=document.getElementById(id);
