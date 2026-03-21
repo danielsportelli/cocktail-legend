@@ -737,23 +737,25 @@
         <div id="cost-custom-result" style="margin-top:.65rem;font-size:.7rem;line-height:1.7;color:var(--txt2);min-height:1.2rem;"></div>
       </div>
     </div>
-  </div>
-</div>
+
 
     <!-- CONTENUTO PRE-BATCH -->
     <div id="calc-step-batch" style="display:none;">
       <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Calcola le dosi di ogni ingrediente per riempire una bottiglia. Inserisci la ricetta base e la dimensione della bottiglia target.</p>
       <div style="margin-bottom:1rem;">
-        <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Dimensione bottiglia target</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.45rem;">
+          <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">Dimensione bottiglia target</div>
+          <span style="font-size:.58rem;color:#60a5fa;">min. 250 ml</span>
+        </div>
         <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">
           <input type="number" id="batch-bottle-ml" placeholder="es. 750" inputmode="decimal" min="250" max="10000" style="width:90px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
           <span style="color:var(--dim);font-size:.75rem;">ml</span>
           <button class="batch-preset" data-ml="500" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">500ml</button>
           <button class="batch-preset" data-ml="750" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">750ml</button>
           <button class="batch-preset" data-ml="1000" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">1L</button>
+          <div id="batch-bottle-err" style="display:none;width:100%;margin-top:.3rem;font-size:.62rem;color:#f87171;">⚠️ La bottiglia deve essere almeno 250 ml</div>
           <button class="batch-preset" data-ml="1500" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">1.5L</button>
         </div>
-        <div id="batch-bottle-err" style="display:none;margin-top:.35rem;font-size:.62rem;color:#f87171;">La bottiglia deve essere almeno 250 ml</div>
       </div>
       <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Ingredienti ricetta base</div>
       <div id="batch-ingredients">
@@ -783,6 +785,9 @@
         </div>
       </div>
     </div>
+
+  </div>
+</div>
 
 <!-- DRAWER: ACCOUNT -->
 <div class="drawer" id="drawer-acc">
