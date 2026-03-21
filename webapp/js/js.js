@@ -56,21 +56,21 @@ function mdToHtml(md){
         document.body.style.overflow = "";
       }, 350);
     } else {
-      // Mostra login solo se non c'era una sessione precedente
-      if (localStorage.getItem('cl_logged') !== '1') {
-        localStorage.removeItem('cl_logged');
-        overlay.style.display = "";
-        document.body.style.overflow = "hidden";
-      } else {
-        // Era loggato ma Firebase dice null — potrebbe essere transiente, aspetta
-        // Se persiste dopo 2s allora forza il login
+      // Firebase conferma: nessuna sessione valida
+      if (localStorage.getItem('cl_logged') === '1') {
+        // Token scaduto — aspetta 1.5s per sicurezza poi forza login
         setTimeout(function() {
           if (!window._currentUser) {
             localStorage.removeItem('cl_logged');
-            overlay.style.display = "";
-            document.body.style.overflow = "hidden";
+            var o = document.getElementById('login-overlay');
+            if (o) { o.style.display = ''; o.style.opacity = '1'; }
+            document.body.style.overflow = 'hidden';
           }
-        }, 2000);
+        }, 1500);
+      } else {
+        localStorage.removeItem('cl_logged');
+        overlay.style.display = '';
+        document.body.style.overflow = 'hidden';
       }
     }
   }, { once: false });
