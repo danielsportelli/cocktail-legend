@@ -1957,7 +1957,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       // Titolo automatico: per pairing usa l'input utente, per gli altri la prima riga della risposta
       var title;
       if(currentCmd === 'pairing' && lastUserInput){
-        title = lastUserInput.substring(0, 60);
+        title = lastUserInput.substring(0, 60).toUpperCase();
       } else {
         var firstLine = text.split('\n').filter(function(l){ return l.trim(); })[0] || '';
         title = firstLine.replace(/^#+\s*/, '').substring(0, 50);
