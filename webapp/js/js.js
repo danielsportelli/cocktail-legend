@@ -56,10 +56,22 @@ function mdToHtml(md){
         document.body.style.overflow = "";
       }, 350);
     } else {
-      // Token scaduto o logout — mostra login
-      localStorage.removeItem('cl_logged');
-      overlay.style.display = "";
-      document.body.style.overflow = "hidden";
+      // Mostra login solo se non c'era una sessione precedente
+      if (localStorage.getItem('cl_logged') !== '1') {
+        localStorage.removeItem('cl_logged');
+        overlay.style.display = "";
+        document.body.style.overflow = "hidden";
+      } else {
+        // Era loggato ma Firebase dice null — potrebbe essere transiente, aspetta
+        // Se persiste dopo 2s allora forza il login
+        setTimeout(function() {
+          if (!window._currentUser) {
+            localStorage.removeItem('cl_logged');
+            overlay.style.display = "";
+            document.body.style.overflow = "hidden";
+          }
+        }, 2000);
+      }
     }
   }, { once: false });
 
@@ -1335,16 +1347,16 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       '<div style="margin-bottom:1rem;">'+
         '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.7rem;">Acquista crediti extra</div>'+
         '<div style="display:flex;flex-direction:column;gap:.5rem;">'+
+          '<a href="#" class="acc-pkg-btn" data-pkg="50" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
+            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">50 crediti extra</div><div style="font-size:.62rem;color:var(--dim);">Non scadono mai</div></div>'+
+            '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">0,99 €</div>'+
+          '</a>'+
           '<a href="#" class="acc-pkg-btn" data-pkg="250" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
             '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">250 crediti extra</div><div style="font-size:.62rem;color:var(--dim);">Non scadono mai</div></div>'+
-            '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">1,99 €</div>'+
+            '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">2,99 €</div>'+
           '</a>'+
-          '<a href="#" class="acc-pkg-btn" data-pkg="500" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid rgba(245,158,11,.4);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
-            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">500 crediti extra <span style="font-size:.58rem;background:var(--amber);color:#000;border-radius:4px;padding:1px 5px;margin-left:4px;">PIÙ POPOLARE</span></div><div style="font-size:.62rem;color:var(--dim);">Non scadono mai</div></div>'+
-            '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">3,99 €</div>'+
-          '</a>'+
-          '<a href="#" class="acc-pkg-btn" data-pkg="1000" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
-            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">1000 crediti extra</div><div style="font-size:.62rem;color:var(--dim);">Non scadono mai</div></div>'+
+          '<a href="#" class="acc-pkg-btn" data-pkg="1000" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid rgba(245,158,11,.4);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
+            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">1000 crediti extra <span style="font-size:.58rem;background:var(--amber);color:#000;border-radius:4px;padding:1px 5px;margin-left:4px;">PIÙ POPOLARE</span></div><div style="font-size:.62rem;color:var(--dim);">Non scadono mai</div></div>'+
             '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">5,99 €</div>'+
           '</a>'+
         '</div>'+
