@@ -2557,7 +2557,9 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         });
 
         document.getElementById('batch-result-rows').innerHTML = html;
-        document.getElementById('batch-result-size').textContent = bottleMl >= 1000 ? (bottleMl/1000).toFixed(1)+'L' : bottleMl+'ml';
+        var litri = bottleMl / 1000;
+        var litriStr = litri === Math.floor(litri) ? Math.floor(litri)+'L' : litri+'L';
+        document.getElementById('batch-result-size').textContent = bottleMl >= 1000 ? litriStr : bottleMl+'ml';
         document.getElementById('batch-total-base').textContent = totalBase+'ml';
         rw.style.display = 'block';
       }
