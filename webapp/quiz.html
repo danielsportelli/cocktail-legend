@@ -64,14 +64,17 @@ body::after{
 
 /* ── BACK NAV ── */
 .nav-back{
-  display:flex;align-items:center;gap:.5rem;
+  display:inline-flex;align-items:center;gap:.5rem;
   color:var(--txt2);font-size:.8rem;font-weight:600;
   text-decoration:none;
   padding:.3rem 0;
   transition:color .2s;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+  width:fit-content;
 }
 .nav-back:hover{color:var(--blue-l);}
-.nav-back svg{flex-shrink:0;}
+.nav-back svg{flex-shrink:0;pointer-events:none;}
 
 /* ── HEADER ── */
 .app-header{
@@ -371,6 +374,8 @@ body::after{
 *{-webkit-user-select:none;user-select:none;}
 img{-webkit-user-drag:none;pointer-events:none;}
 button,a,.option,.lb-tab{pointer-events:auto;}
+/* Elimina flash blu su tap mobile */
+a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
 </style>
 </head>
 <body>
@@ -419,7 +424,7 @@ button,a,.option,.lb-tab{pointer-events:auto;}
     <div class="quiz-none" id="state-none" style="display:none;">
       <div class="coming-soon-icon">⚡</div>
       <div class="coming-soon-title">Coming Soon</div>
-      <div class="coming-soon-sub">Il Quiz del Giorno è in arrivo.<br>Torna presto per sfidare la classifica!</div>
+      <div class="coming-soon-sub">Quiz Time è in arrivo!</div>
       <div class="coming-soon-badge">🏆 Classifica · Streak · Punti</div>
     </div>
 
@@ -595,7 +600,7 @@ async function loadLeaderboard(tab) {
   list.innerHTML = '<div class="lb-row lb-loading">Caricamento…</div>';
 
   const tabMeta = {
-    weekly:  { title:'Classifica Settimanale', reset:'Lunedì', field:'pts_week' },
+    weekly:  { title:'Classifica Settimanale', reset:'Ogni Lunedì', field:'pts_week' },
     monthly: { title:'Classifica Mensile',     reset:'1° del mese', field:'pts_month' },
     alltime: { title:'All Time — % Correttezza', reset:'Non si resetta', field:'pts_total' }
   };
@@ -612,7 +617,7 @@ async function loadLeaderboard(tab) {
     const snap = await getDocs(q);
 
     if (snap.empty) {
-      list.innerHTML = '<div class="lb-row lb-loading">Nessun punteggio ancora.</div>';
+      list.innerHTML = '<div class="lb-row lb-loading">Nessun punteggio ancora — sii il primo! 🏆</div>';
       return;
     }
 
@@ -668,8 +673,9 @@ async function loadLeaderboard(tab) {
 
     list.innerHTML = html;
   } catch(e) {
-    list.innerHTML = '<div class="lb-row lb-loading">Errore caricamento.</div>';
-    console.error(e);
+    // Se il campo non esiste ancora (nessun utente ha ancora punti), mostra messaggio amichevole
+    list.innerHTML = '<div class="lb-row lb-loading">Nessun punteggio ancora — sii il primo! 🏆</div>';
+    console.warn('Leaderboard:', e.message);
   }
 }
 
