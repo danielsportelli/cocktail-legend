@@ -15,8 +15,7 @@
 body { background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; min-height:100vh; padding:2rem 1rem 4rem; -webkit-font-smoothing:antialiased; }
 .container { max-width:860px; margin:0 auto; }
 
-/* LOGIN OVERLAY */
-#login-overlay { position:fixed; inset:0; background:var(--bg); display:flex; align-items:center; justify-content:center; z-index:100; flex-direction:column; gap:1.5rem; }
+#login-overlay { position:fixed; inset:0; background:var(--bg); display:flex; align-items:center; justify-content:center; z-index:100; }
 .login-box { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2.5rem; text-align:center; max-width:360px; width:100%; }
 .login-logo { font-size:1.4rem; font-weight:900; background:linear-gradient(135deg,var(--primary-l),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:0.5rem; }
 .login-sub { font-size:0.82rem; color:var(--muted); margin-bottom:2rem; }
@@ -24,7 +23,6 @@ body { background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sa
 .btn-google:hover { transform:translateY(-1px); box-shadow:0 4px 16px rgba(255,255,255,0.15); }
 .btn-google svg { width:20px; height:20px; flex-shrink:0; }
 
-/* MAIN */
 #main-content { display:none; }
 .header { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:2rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border); }
 .header-left { display:flex; align-items:center; gap:1rem; }
@@ -40,18 +38,32 @@ body { background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sa
 .stat-val { font-size:1.6rem; font-weight:900; color:var(--text); display:block; }
 .stat-lbl { font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin-top:0.25rem; display:block; }
 
+/* ACTIVATION CARD */
+.activation-card { border-radius:16px; padding:1.5rem; margin-bottom:1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; transition:all 0.3s; }
+.activation-card.off { background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25); }
+.activation-card.on  { background:rgba(34,197,94,0.08);  border:1px solid rgba(34,197,94,0.25); }
+.activation-left { flex:1; }
+.activation-status { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.4rem; }
+.activation-card.off .activation-status { color:#f87171; }
+.activation-card.on  .activation-status { color:#4ade80; }
+.activation-title { font-size:1.05rem; font-weight:800; color:var(--text); margin-bottom:0.25rem; }
+.activation-sub { font-size:0.78rem; color:var(--muted); }
+
+.toggle-wrap { display:flex; align-items:center; gap:1rem; }
+.toggle-label { font-size:0.8rem; font-weight:700; color:var(--muted); }
+.toggle { position:relative; width:56px; height:28px; cursor:pointer; }
+.toggle input { opacity:0; width:0; height:0; }
+.toggle-slider { position:absolute; inset:0; background:var(--surface2); border-radius:99px; transition:0.3s; }
+.toggle-slider::before { content:''; position:absolute; width:22px; height:22px; left:3px; bottom:3px; background:white; border-radius:50%; transition:0.3s; }
+.toggle input:checked + .toggle-slider { background:var(--ok); }
+.toggle input:checked + .toggle-slider::before { transform:translateX(28px); }
+
 .card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.5rem; margin-bottom:1.5rem; }
 .card-title { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent); margin-bottom:1rem; }
 
-.oggi-row { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
-.oggi-info { flex:1; }
-.oggi-label { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:0.3rem; }
-.oggi-val { font-size:1rem; font-weight:700; color:var(--text); }
-.oggi-sub { font-size:0.75rem; color:var(--muted); margin-top:0.15rem; }
-
-select { background:var(--bg); border:1.5px solid var(--border); color:var(--text); padding:0.6rem 0.9rem; border-radius:8px; font-size:0.82rem; font-family:inherit; outline:none; cursor:pointer; min-width:160px; }
 textarea { width:100%; height:260px; background:var(--bg); border:1.5px solid var(--border); border-radius:10px; color:var(--primary-l); font-family:'Courier New',monospace; font-size:0.78rem; padding:1rem; resize:vertical; outline:none; line-height:1.6; }
 textarea::placeholder { color:var(--surface2); }
+.textarea-hint { font-size:0.72rem; color:var(--muted); margin-top:0.6rem; }
 
 .action-row { display:flex; gap:0.75rem; margin-top:1rem; flex-wrap:wrap; }
 .btn { padding:0.7rem 1.4rem; border-radius:10px; border:1.5px solid var(--border); font-size:0.82rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all 0.2s; display:inline-flex; align-items:center; gap:0.4rem; }
@@ -65,7 +77,7 @@ textarea::placeholder { color:var(--surface2); }
 .validation-box.ok { background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.25); color:#4ade80; display:block; }
 .validation-box.error { background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25); color:#f87171; display:block; }
 
-.log-box { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:1rem 1.1rem; font-family:'Courier New',monospace; font-size:0.78rem; line-height:2; min-height:100px; max-height:320px; overflow-y:auto; margin-top:1rem; }
+.log-box { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:1rem 1.1rem; font-family:'Courier New',monospace; font-size:0.78rem; line-height:2; min-height:60px; max-height:320px; overflow-y:auto; margin-top:1rem; }
 .log-ok { color:#4ade80; } .log-err { color:#f87171; } .log-inf { color:var(--muted); } .log-done { color:var(--accent); font-weight:700; } .log-warn { color:#fbbf24; }
 
 .domande-list { display:flex; flex-direction:column; gap:0.5rem; max-height:400px; overflow-y:auto; }
@@ -80,25 +92,22 @@ textarea::placeholder { color:var(--surface2); }
 .badge-usata { background:rgba(100,116,139,0.2); color:var(--muted); }
 .badge-libera { background:rgba(37,99,235,0.12); color:var(--primary-l); }
 .empty-state { text-align:center; color:var(--muted); font-size:0.82rem; padding:2rem; }
-.textarea-hint { font-size:0.72rem; color:var(--muted); margin-top:0.6rem; }
 ::-webkit-scrollbar { width:5px; } ::-webkit-scrollbar-track { background:transparent; } ::-webkit-scrollbar-thumb { background:var(--surface2); border-radius:99px; }
 </style>
 </head>
 <body>
 
-<!-- LOGIN OVERLAY -->
 <div id="login-overlay">
   <div class="login-box">
     <div class="login-logo">Cocktail Legend</div>
     <div class="login-sub">Pannello Admin Quiz — Accesso riservato</div>
     <button class="btn-google" onclick="loginGoogle()">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
       Accedi con Google
     </button>
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
 <div id="main-content">
 <div class="container">
 
@@ -113,6 +122,7 @@ textarea::placeholder { color:var(--surface2); }
     </div>
   </div>
 
+  <!-- STATS -->
   <div class="stats-row">
     <div class="stat-box"><span class="stat-val" id="stat-totale">—</span><span class="stat-lbl">Domande totali</span></div>
     <div class="stat-box"><span class="stat-val" id="stat-libere" style="color:var(--primary-l)">—</span><span class="stat-lbl">Ancora da usare</span></div>
@@ -120,22 +130,23 @@ textarea::placeholder { color:var(--surface2); }
     <div class="stat-box"><span class="stat-val" id="stat-giorni" style="color:var(--accent)">—</span><span class="stat-lbl">Giorni rimanenti</span></div>
   </div>
 
-  <div class="card">
-    <div class="card-title">📅 Quiz del giorno</div>
-    <div class="oggi-row">
-      <div class="oggi-info">
-        <div class="oggi-label">Domanda attiva oggi</div>
-        <div class="oggi-val" id="oggi-val">Caricamento...</div>
-        <div class="oggi-sub" id="oggi-sub"></div>
-      </div>
-      <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
-        <select id="select-domanda"><option value="">Seleziona domanda...</option></select>
-        <button class="btn btn-primary" onclick="impostaOggi()">Imposta oggi</button>
-      </div>
+  <!-- ACTIVATION TOGGLE -->
+  <div class="activation-card off" id="activation-card">
+    <div class="activation-left">
+      <div class="activation-status" id="activation-status">● QUIZ NON ATTIVO</div>
+      <div class="activation-title" id="activation-title">Il quiz giornaliero è disattivato</div>
+      <div class="activation-sub" id="activation-sub">Attiva quando sei pronto al lancio — la Cloud Function inizierà a girare dalla notte stessa</div>
     </div>
-    <div class="log-box" id="log-oggi"><span class="log-inf">Caricamento...</span></div>
+    <div class="toggle-wrap">
+      <span class="toggle-label" id="toggle-label">OFF</span>
+      <label class="toggle">
+        <input type="checkbox" id="quiz-toggle" onchange="toggleQuiz(this.checked)">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
   </div>
 
+  <!-- CARICA DOMANDE -->
   <div class="card">
     <div class="card-title">⬆ Carica nuovo batch di domande</div>
     <textarea id="json-input" placeholder='Incolla qui il JSON delle nuove domande...
@@ -163,6 +174,7 @@ textarea::placeholder { color:var(--surface2); }
     <div class="log-box" id="log-carica" style="display:none;"></div>
   </div>
 
+  <!-- LISTA DOMANDE -->
   <div class="card">
     <div class="card-title">📋 Tutte le domande in Firebase</div>
     <div class="action-row" style="margin-bottom:1rem;margin-top:0;">
@@ -215,23 +227,10 @@ window.loginGoogle = async function() {
 }
 window.logout = async function() { await signOut(auth); }
 
-// UTILS
-function logOggi(msg, tipo='inf') {
-  const el = document.getElementById('log-oggi');
-  if (el.innerHTML.includes('Caricamento')) el.innerHTML = '';
-  el.innerHTML += `<div class="log-${tipo}">${msg}</div>`;
-}
-function logCarica(msg, tipo='inf') {
-  const el = document.getElementById('log-carica');
-  el.style.display = 'block';
-  el.innerHTML += `<div class="log-${tipo}">${msg}</div>`;
-  el.scrollTop = el.scrollHeight;
-}
-
 // INIT
 async function init() {
   await caricaStats();
-  await caricaOggi();
+  await caricaStatoAttivazione();
 }
 
 // STATS
@@ -249,54 +248,50 @@ async function caricaStats() {
   } catch(e) { console.error(e); }
 }
 
-// OGGI
-async function caricaOggi() {
+// ACTIVATION
+async function caricaStatoAttivazione() {
   try {
-    const qSnap = await getDocs(collection(db, 'domande'));
-    const sel = document.getElementById('select-domanda');
-    sel.innerHTML = '<option value="">Seleziona domanda...</option>';
-    qSnap.forEach(d => {
-      const data = d.data();
-      if (!data.usata) {
-        const opt = document.createElement('option');
-        opt.value = data.id;
-        opt.textContent = `${data.id} — ${data.domanda.substring(0,45)}...`;
-        sel.appendChild(opt);
-      }
-    });
-    const ref = doc(db, 'quiz_del_giorno', 'attuale');
-    const snap = await getDoc(ref);
-    if (snap.exists()) {
-      const data = snap.data();
-      document.getElementById('oggi-val').textContent = `${data.domanda_id} — ${data.testo ? data.testo.substring(0,60)+'...' : ''}`;
-      document.getElementById('oggi-sub').textContent = `Impostata il: ${data.data_impostazione || '—'} · Categoria: ${data.categoria || '—'}`;
-      logOggi(`✓ Domanda attiva oggi: ${data.domanda_id}`, 'ok');
-    } else {
-      document.getElementById('oggi-val').textContent = 'Nessuna domanda impostata';
-      logOggi('⚠ Nessuna domanda del giorno impostata.', 'warn');
-    }
-  } catch(e) { logOggi('✗ Errore: ' + e.message, 'err'); }
+    const snap = await getDoc(doc(db, 'config', 'quiz'));
+    const attivo = snap.exists() && snap.data().attivo === true;
+    aggiornaToggleUI(attivo);
+    document.getElementById('quiz-toggle').checked = attivo;
+  } catch(e) { console.error(e); }
 }
 
-window.impostaOggi = async function() {
-  const id = document.getElementById('select-domanda').value;
-  if (!id) { logOggi('⚠ Seleziona prima una domanda.', 'warn'); return; }
-  try {
-    const dSnap = await getDoc(doc(db, 'domande', id));
-    if (!dSnap.exists()) { logOggi('✗ Domanda non trovata.', 'err'); return; }
-    const d = dSnap.data();
-    const oggi = new Date().toISOString().split('T')[0];
-    await setDoc(doc(db, 'quiz_del_giorno', 'attuale'), {
-      domanda_id: id, testo: d.domanda, categoria: d.categoria,
-      difficolta: d.difficolta, data_impostazione: oggi
-    });
-    logOggi(`✓ Domanda ${id} impostata come quiz del giorno (${oggi})`, 'ok');
-    document.getElementById('oggi-val').textContent = `${id} — ${d.domanda.substring(0,60)}...`;
-    document.getElementById('oggi-sub').textContent = `Impostata il: ${oggi} · Categoria: ${d.categoria}`;
-  } catch(e) { logOggi('✗ Errore: ' + e.message, 'err'); }
+function aggiornaToggleUI(attivo) {
+  const card = document.getElementById('activation-card');
+  const status = document.getElementById('activation-status');
+  const title = document.getElementById('activation-title');
+  const sub = document.getElementById('activation-sub');
+  const label = document.getElementById('toggle-label');
+
+  if (attivo) {
+    card.className = 'activation-card on';
+    status.textContent = '● QUIZ ATTIVO';
+    title.textContent = 'Il quiz giornaliero è in esecuzione';
+    sub.textContent = 'La Cloud Function gira ogni notte a mezzanotte e imposta la nuova domanda automaticamente';
+    label.textContent = 'ON';
+  } else {
+    card.className = 'activation-card off';
+    status.textContent = '● QUIZ NON ATTIVO';
+    title.textContent = 'Il quiz giornaliero è disattivato';
+    sub.textContent = 'Attiva quando sei pronto al lancio — la Cloud Function inizierà a girare dalla notte stessa';
+    label.textContent = 'OFF';
+  }
 }
 
-// VALIDA
+window.toggleQuiz = async function(attivo) {
+  try {
+    await setDoc(doc(db, 'config', 'quiz'), { attivo: attivo });
+    aggiornaToggleUI(attivo);
+    console.log('Quiz ' + (attivo ? 'attivato' : 'disattivato'));
+  } catch(e) {
+    alert('Errore: ' + e.message);
+    document.getElementById('quiz-toggle').checked = !attivo;
+  }
+}
+
+// VALIDA JSON
 let domandeValidate = null;
 window.validaJSON = function() {
   const input = document.getElementById('json-input').value.trim();
@@ -332,6 +327,14 @@ window.resetValidazione = function() {
   domandeValidate = null;
 }
 
+// CARICA
+function logCarica(msg, tipo='inf') {
+  const el = document.getElementById('log-carica');
+  el.style.display = 'block';
+  el.innerHTML += `<div class="log-${tipo}">${msg}</div>`;
+  el.scrollTop = el.scrollHeight;
+}
+
 window.caricaDomande = async function() {
   if (!domandeValidate) return;
   const btn = document.getElementById('btn-carica');
@@ -351,8 +354,10 @@ window.caricaDomande = async function() {
   logCarica('─────────────────────────────');
   if (err===0) {
     logCarica(`✅ COMPLETATO — ${ok}/${domandeValidate.length} domande caricate.`, 'done');
-    await caricaStats(); await caricaListaDomande();
-    domandeValidate=null; document.getElementById('json-input').value='';
+    await caricaStats();
+    await caricaListaDomande();
+    domandeValidate=null;
+    document.getElementById('json-input').value='';
     document.getElementById('validation-box').className='validation-box';
   } else {
     logCarica(`⚠ Completato con ${err} errori.`, 'warn');
@@ -360,6 +365,7 @@ window.caricaDomande = async function() {
   }
 }
 
+// LISTA
 window.caricaListaDomande = async function() {
   const list = document.getElementById('domande-list');
   list.innerHTML = '<div class="empty-state">Caricamento...</div>';
