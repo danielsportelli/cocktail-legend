@@ -1,0 +1,482 @@
+[
+  {
+    "id": "q001",
+    "batch": 1,
+    "domanda": "Quale cereale è la base tradizionale del bourbon whiskey americano?",
+    "opzioni": {
+      "A": "Mais",
+      "B": "Segale",
+      "C": "Orzo"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "Per legge il bourbon deve essere prodotto con almeno il 51% di mais. È questa percentuale elevata che gli conferisce la sua dolcezza caratteristica rispetto ad altri whiskey.",
+    "categoria": "spirits",
+    "difficolta": "facile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q002",
+    "batch": 1,
+    "domanda": "In quale decennio nacque lo Spritz con Aperol e prosecco così come lo conosciamo oggi?",
+    "opzioni": {
+      "A": "Anni '70",
+      "B": "Anni '50",
+      "C": "Anni '90"
+    },
+    "risposta_corretta": "C",
+    "spiegazione": "Lo Spritz con Aperol e prosecco si diffuse nel Nordest Italia negli anni '90 e divenne fenomeno globale solo negli anni 2000. Lo Spritz come concetto esiste dall'800, ma quella ricetta specifica è recente.",
+    "categoria": "storia_cocktail",
+    "difficolta": "facile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q003",
+    "batch": 1,
+    "domanda": "Quali sono i tre ingredienti principali del cocktail IBA \"Between the Sheets\"?",
+    "opzioni": {
+      "A": "Cognac, rum bianco, Cointreau",
+      "B": "Rum bianco, Cointreau, succo di limone",
+      "C": "Cognac, Grand Marnier, succo di lime"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "Il Between the Sheets è composto da cognac, rum bianco e Cointreau in parti uguali, con un tocco di succo di limone. È un derivato del Sidecar, nella categoria Unforgettables IBA.",
+    "categoria": "iba",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q004",
+    "batch": 1,
+    "domanda": "Da cosa si ricava il Campari?",
+    "opzioni": {
+      "A": "Dalla distillazione di vino rosso invecchiato",
+      "B": "Da erbe e spezie in infusione nell'alcol",
+      "C": "Dalla fermentazione di agrumi siciliani"
+    },
+    "risposta_corretta": "B",
+    "spiegazione": "Il Campari è un bitter ottenuto da un'infusione di erbe, radici, scorze e spezie in alcol e acqua. La ricetta esatta è segreta. Fino al 2006 conteneva il colorante cocciniglia, poi sostituito con colorante artificiale.",
+    "categoria": "ingredienti",
+    "difficolta": "facile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q005",
+    "batch": 1,
+    "domanda": "Cosa si intende con la tecnica \"dry shake\" in bartending?",
+    "opzioni": {
+      "A": "Shakerare senza ghiaccio prima di aggiungere il ghiaccio",
+      "B": "Agitare il drink nel bicchiere senza shaker né ghiaccio",
+      "C": "Shakerare con ghiaccio secco al posto di quello normale"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "Il dry shake consiste nell'agitare gli ingredienti senza ghiaccio per emulsionare componenti proteiche come l'albume d'uovo. Poi si aggiunge il ghiaccio e si shaka di nuovo per raffreddare e diluire.",
+    "categoria": "tecniche",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q006",
+    "batch": 1,
+    "domanda": "Quale paese è il maggior produttore mondiale di rum per volume?",
+    "opzioni": {
+      "A": "India",
+      "B": "Cuba",
+      "C": "Giamaica"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "L'India è il maggior produttore mondiale di rum per volume, grazie a brand come McDowell's e Old Monk. Cuba e Giamaica dominano nella percezione culturale ma non nei volumi produttivi globali.",
+    "categoria": "spirits",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q007",
+    "batch": 1,
+    "domanda": "Il bourbon Jack Daniel's è tecnicamente classificato come bourbon?",
+    "opzioni": {
+      "A": "No, è un Tennessee Whiskey filtrato con carbone di acero",
+      "B": "Sì, rispetta tutti i requisiti legali del bourbon",
+      "C": "No, perché usa meno del 51% di mais"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "Jack Daniel's non si definisce bourbon ma Tennessee Whiskey, perché subisce il Lincoln County Process — filtrazione lenta attraverso carbone di acero prima della maturazione. Questo passaggio lo esclude dalla categoria bourbon secondo i produttori, anche se tecnicamente rispetta quasi tutti i requisiti legali.",
+    "categoria": "spirits",
+    "difficolta": "facile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q008",
+    "batch": 1,
+    "domanda": "Chi è accreditato come l'inventore del Margarita nella versione più documentata?",
+    "opzioni": {
+      "A": "Francisco \"Pancho\" Morales",
+      "B": "Enrique Bastate Gutierrez",
+      "C": "Carlos \"Danny\" Herrera"
+    },
+    "risposta_corretta": "C",
+    "spiegazione": "Tra le molte origini rivendicate, la versione più documentata attribuisce il Margarita a Carlos Herrera, che lo preparò nel 1938 per l'attrice Marjorie King nel suo ristorante di Tijuana.",
+    "categoria": "storia_cocktail",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q009",
+    "batch": 1,
+    "domanda": "Il cocktail IBA \"Corpse Reviver #2\" contiene quale ingrediente insolito?",
+    "opzioni": {
+      "A": "Un goccio di assenzio",
+      "B": "Sale affumicato",
+      "C": "Pepe di Cayenna"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "Il Corpse Reviver #2 prevede gin, Cointreau, Lillet Blanc e succo di limone, con il tocco finale di un goccio di assenzio roteato nel bicchiere e scartato. È nella categoria New Era Drinks IBA.",
+    "categoria": "iba",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q010",
+    "batch": 1,
+    "domanda": "Qual è la differenza principale tra vermut dry e vermut rosso?",
+    "opzioni": {
+      "A": "Il dry è distillato, il rosso è fermentato",
+      "B": "Il dry è più secco e meno dolce, il rosso è dolcificato con zucchero",
+      "C": "Il colore dipende dall'uva usata, il sapore è identico"
+    },
+    "risposta_corretta": "B",
+    "spiegazione": "Entrambi sono vini aromatizzati con erbe e spezie, ma il vermut dry ha meno zucchero ed è più secco, mentre il vermut rosso è dolcificato e ha un profilo più ricco e amaro-dolce.",
+    "categoria": "ingredienti",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q011",
+    "batch": 1,
+    "domanda": "Cosa si intende con il termine \"pot still\" nella produzione di distillati?",
+    "opzioni": {
+      "A": "Un alambicco a batch discontinuo che produce distillato più ricco di congeners",
+      "B": "Il contenitore di maturazione in legno dopo la distillazione",
+      "C": "Una colonna di distillazione continua ad alta efficienza"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "Il pot still è l'alambicco tradizionale a forma di cipolla, usato in distillazione discontinua. Produce distillati con più congeners rispetto al column still, conferendo maggiore complessità e carattere al prodotto finale.",
+    "categoria": "spirits",
+    "difficolta": "difficile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q012",
+    "batch": 1,
+    "domanda": "Per quale scopo principale si usa la tecnica del \"throwing\" in bartending?",
+    "opzioni": {
+      "A": "Per ossigenare e aerare il drink, esaltando aromi e texture nei cocktail spirit-forward",
+      "B": "Per preservare la carbonazione nei long drink gassati",
+      "C": "Per creare un effetto visivo a strati nel bicchiere senza mescolare gli ingredienti"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "Il throwing — versare il drink da altezza tra due contenitori — serve ad aerare il cocktail introducendo micro-bolle che esaltano aromi e texture, particolarmente nei drink a base di vermut, sherry e distillati. È una tecnica storica spagnola, non adatta ai drink con ingredienti gassati che si costruiscono direttamente nel bicchiere.",
+    "categoria": "tecniche",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q013",
+    "batch": 1,
+    "domanda": "In quale anno fu pubblicato \"The Bar-Tender's Guide\" di Jerry Thomas, primo libro di ricette cocktail della storia?",
+    "opzioni": {
+      "A": "1879",
+      "B": "1862",
+      "C": "1848"
+    },
+    "risposta_corretta": "B",
+    "spiegazione": "Jerry Thomas pubblicò The Bar-Tender's Guide nel 1862, considerato la bibbia della mixologia moderna. Thomas è spesso chiamato il padre della bartending americana e fu il primo a standardizzare le ricette dei cocktail in forma scritta.",
+    "categoria": "storia_cocktail",
+    "difficolta": "difficile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q014",
+    "batch": 1,
+    "domanda": "Quale dei seguenti cocktail NON appartiene alla categoria IBA \"The Unforgettables\"?",
+    "opzioni": {
+      "A": "Dry Martini",
+      "B": "Aperol Spritz",
+      "C": "Daiquiri"
+    },
+    "risposta_corretta": "B",
+    "spiegazione": "L'Aperol Spritz appartiene alla categoria IBA New Era Drinks, non agli Unforgettables. Gli Unforgettables includono i grandi classici storici come Dry Martini, Daiquiri, Manhattan, Negroni e Old Fashioned.",
+    "categoria": "iba",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q015",
+    "batch": 1,
+    "domanda": "Cosa sono i \"congeners\" in un distillato e dove si formano?",
+    "opzioni": {
+      "A": "Composti come esteri, aldeidi e alcoli superiori che si formano durante la fermentazione",
+      "B": "Lieviti residui che continuano a fermentare in bottiglia",
+      "C": "Impurità rimosse dalla filtrazione a carbone attivo"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "I congeners si formano durante la fermentazione — non la distillazione, che li separa e concentra soltanto. Comprendono esteri, aldeidi, metanolo e alcoli superiori. Contribuiscono ad aroma e complessità del distillato ma in eccesso sono responsabili dei postumi da sbornia.",
+    "categoria": "ingredienti",
+    "difficolta": "difficile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q016",
+    "batch": 1,
+    "domanda": "Da quale pianta si ricava la tequila?",
+    "opzioni": {
+      "A": "Cactus saguaro",
+      "B": "Maguey selvatico",
+      "C": "Agave blu Weber"
+    },
+    "risposta_corretta": "C",
+    "spiegazione": "La tequila si produce esclusivamente dall'agave blu Weber, coltivata principalmente nello stato di Jalisco in Messico. Il mezcal invece può essere prodotto da diverse varietà di agave.",
+    "categoria": "spirits",
+    "difficolta": "facile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q017",
+    "batch": 1,
+    "domanda": "Cos'è il \"fine strainer\" e quando si usa in aggiunta allo strainer principale?",
+    "opzioni": {
+      "A": "Sostituisce lo strainer Hawthorne nei drink stirred per filtrare i frammenti di ghiaccio",
+      "B": "Si usa in doppia filtratura per eliminare frammenti di ghiaccio, polpa e semi dai drink shakerati",
+      "C": "Si usa esclusivamente per filtrare drink caldi come il toddy e il punch"
+    },
+    "risposta_corretta": "B",
+    "spiegazione": "Il fine strainer è un colino a maglia fine usato in doppia filtratura insieme allo strainer principale, per eliminare frammenti di ghiaccio tritato, polpa di agrumi e semi. Si usa soprattutto con drink shakerati che contengono succhi freschi, per una texture più pulita nel bicchiere.",
+    "categoria": "attrezzatura",
+    "difficolta": "difficile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q018",
+    "batch": 1,
+    "domanda": "In quale paese è nato il cocktail Pisco Sour?",
+    "opzioni": {
+      "A": "Perù",
+      "B": "Argentina",
+      "C": "Cile"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "Il Pisco Sour è considerato il cocktail nazionale del Perù, creato dal barman americano Victor Morris a Lima negli anni '20. Anche il Cile rivendica il pisco, ma la paternità del cocktail è peruviana.",
+    "categoria": "storia_cocktail",
+    "difficolta": "facile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q019",
+    "batch": 1,
+    "domanda": "Cosa significa \"on the rocks\" nella terminologia dei cocktail?",
+    "opzioni": {
+      "A": "Servito con sale sul bordo del bicchiere",
+      "B": "Servito con ghiaccio nel bicchiere",
+      "C": "Servito freddo filtrato senza ghiaccio nel bicchiere"
+    },
+    "risposta_corretta": "B",
+    "spiegazione": "On the rocks significa servire il drink versato su cubetti di ghiaccio nel bicchiere. Il termine rocks indica i cubetti di ghiaccio, in contrasto con straight up — filtrato e servito senza ghiaccio nel bicchiere.",
+    "categoria": "tecniche",
+    "difficolta": "facile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q020",
+    "batch": 1,
+    "domanda": "Quale cocktail IBA è composto da vodka, succo di lime e ginger beer?",
+    "opzioni": {
+      "A": "Moscow Mule",
+      "B": "Vodka Collins",
+      "C": "Dark 'n' Stormy"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "Il Moscow Mule è composto da vodka, succo di lime fresco e ginger beer, tradizionalmente servito in un caratteristico bicchiere di rame. È nella categoria Longdrink della lista IBA ufficiale.",
+    "categoria": "iba",
+    "difficolta": "facile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q021",
+    "batch": 1,
+    "domanda": "Cosa distingue un Single Malt Scotch da un Blended Scotch?",
+    "opzioni": {
+      "A": "Il Single Malt matura in rovere americano, il Blended in rovere europeo",
+      "B": "Il Single Malt è distillato una sola volta, il Blended viene ridistillato più volte",
+      "C": "Il Single Malt proviene da una sola distilleria e usa solo malto d'orzo, il Blended mescola distillati di più distillerie"
+    },
+    "risposta_corretta": "C",
+    "spiegazione": "Il Single Malt Scotch è prodotto da un'unica distilleria usando esclusivamente malto d'orzo. Il Blended Scotch mescola whisky di malt da più distillerie con grain whisky, risultando generalmente più morbido e accessibile.",
+    "categoria": "spirits",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q022",
+    "batch": 1,
+    "domanda": "Cos'è il Cointreau?",
+    "opzioni": {
+      "A": "Uno sciroppo analcolico a base di succo d'arancia concentrato",
+      "B": "Un liquore alcolico a base di scorze di arancia dolce e amara",
+      "C": "Un amaro prodotto con arancia rossa siciliana DOP"
+    },
+    "risposta_corretta": "B",
+    "spiegazione": "Il Cointreau è un triple sec — liquore alcolico al 40% vol prodotto da scorze di arancia dolce e amara. Non è uno sciroppo: è alcolico, trasparente e secco, fondamentale in cocktail come Margarita, Cosmopolitan e Sidecar.",
+    "categoria": "ingredienti",
+    "difficolta": "facile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q023",
+    "batch": 1,
+    "domanda": "Il cocktail \"Aviation\" prende il nome da cosa?",
+    "opzioni": {
+      "A": "Dal colore celeste dato dalla violetta che ricorda il cielo",
+      "B": "Fu creato per i piloti della Prima Guerra Mondiale",
+      "C": "Fu inventato da un barman di nome Hugo Aviation"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "L'Aviation deve il suo nome al colore azzurro-viola conferito dalla crème de violette, che ricorda il cielo. Fu creato da Hugo Ensslin intorno al 1916 e riscoperto durante il revival della mixology classica negli anni 2000.",
+    "categoria": "storia_cocktail",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q024",
+    "batch": 1,
+    "domanda": "Cos'è un \"Lewis bag\" e per cosa si usa in bartending?",
+    "opzioni": {
+      "A": "Un filtro di cotone per chiarificare i cocktail attraverso il cold drip",
+      "B": "Un contenitore isolante per mantenere freddi i distillati durante il servizio al banco",
+      "C": "Un sacchetto di tela in cui si mette il ghiaccio per frantumarlo col mazzuolo, producendo ghiaccio tritato asciutto ideale per Julep e Swizzle"
+    },
+    "risposta_corretta": "C",
+    "spiegazione": "Il Lewis bag è un sacchetto di tela robusta in cui si inserisce il ghiaccio che viene frantumato con un mazzuolo di legno. La tela assorbe l'acqua in eccesso producendo ghiaccio tritato asciutto, perfetto per Mint Julep e Swizzle.",
+    "categoria": "attrezzatura",
+    "difficolta": "difficile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q025",
+    "batch": 1,
+    "domanda": "Cosa indica la dicitura \"NAS\" su una bottiglia di whisky scozzese?",
+    "opzioni": {
+      "A": "Natural Aging System — maturazione in botte senza additivi",
+      "B": "Non-Allocated Spirit — produzione limitata non in distribuzione normale",
+      "C": "No Age Statement — l'età di maturazione non è dichiarata in etichetta"
+    },
+    "risposta_corretta": "C",
+    "spiegazione": "NAS significa No Age Statement: il produttore non dichiara l'età di maturazione in etichetta. Può indicare blend di whisky di età diverse. Brand come Macallan e Glenfiddich hanno rilasciato versioni NAS molto discusse dagli appassionati.",
+    "categoria": "spirits",
+    "difficolta": "difficile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q026",
+    "batch": 1,
+    "domanda": "In quale categoria IBA ufficiale è classificato il cocktail \"Clover Club\"?",
+    "opzioni": {
+      "A": "New Era Drinks",
+      "B": "The Unforgettables",
+      "C": "Contemporary Classics"
+    },
+    "risposta_corretta": "C",
+    "spiegazione": "Il Clover Club — gin, succo di limone, sciroppo di lampone e albume — è classificato tra i Contemporary Classics IBA, la categoria che raccoglie cocktail del XX secolo diventati classici moderni, distinta dagli Unforgettables che sono i grandi classici storici.",
+    "categoria": "iba",
+    "difficolta": "difficile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q027",
+    "batch": 1,
+    "domanda": "Cosa si intende con \"fat washing\" in mixologia moderna?",
+    "opzioni": {
+      "A": "Filtrare un cocktail attraverso uno strato di grasso animale per ammorbidirne la texture",
+      "B": "Lavare gli ingredienti grassi con acqua calda prima di usarli per ridurne il peso gustativo",
+      "C": "Infondere un grasso in un distillato e poi rimuoverlo con il freddo, lasciando solo gli aromi"
+    },
+    "risposta_corretta": "C",
+    "spiegazione": "Il fat washing consiste nel mescolare un grasso — burro nocciola, olio di sesamo, grasso di bacon — con un distillato, lasciarlo in infusione e poi congelare. Il grasso solidifica e si rimuove, lasciando gli aromi nel liquido.",
+    "categoria": "tecniche",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q028",
+    "batch": 1,
+    "domanda": "Quale cocktail fu creato per mascherare il sapore del cattivo alcol durante il Proibizionismo americano?",
+    "opzioni": {
+      "A": "Bee's Knees",
+      "B": "Old Fashioned",
+      "C": "Sidecar"
+    },
+    "risposta_corretta": "A",
+    "spiegazione": "Il Bee's Knees — gin, miele e limone — nacque durante il Proibizionismo (1920-1933) per mascherare il sapore del gin di pessima qualità prodotto illegalmente. Miele e limone coprivano efficacemente le impurità del bathtub gin dell'epoca.",
+    "categoria": "storia_cocktail",
+    "difficolta": "difficile",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q029",
+    "batch": 1,
+    "domanda": "Cos'è l'Angostura Bitters e dove viene prodotta?",
+    "opzioni": {
+      "A": "Un amaro italiano prodotto in Piemonte dalla famiglia Angostura",
+      "B": "Una soluzione aromatica alcolica a base di erbe e spezie, prodotta a Trinidad e Tobago",
+      "C": "Un bitter tedesco prodotto nella città bavarese di Angostura"
+    },
+    "risposta_corretta": "B",
+    "spiegazione": "L'Angostura Bitters è prodotta a Trinidad e Tobago dalla House of Angostura. Nonostante il nome, non ha niente a che fare con la città venezuelana di Angostura dove fu originalmente formulata nel 1824 come medicinale militare.",
+    "categoria": "ingredienti",
+    "difficolta": "media",
+    "usata": false,
+    "data_utilizzo": null
+  },
+  {
+    "id": "q030",
+    "batch": 1,
+    "domanda": "Cosa distingue il Cognac dall'Armagnac, entrambi brandy francesi?",
+    "opzioni": {
+      "A": "L'Armagnac usa uve Cabernet, il Cognac usa uve Ugni Blanc",
+      "B": "Il Cognac è distillato due volte in pot still ed è più elegante, l'Armagnac usa distillazione continua ed è più rustico e territoriale",
+      "C": "L'Armagnac matura in rovere americano, il Cognac esclusivamente in rovere del Limousin"
+    },
+    "risposta_corretta": "B",
+    "spiegazione": "Il Cognac viene distillato due volte in alambicchi pot still tradizionali, risultando più elegante e raffinato. L'Armagnac usa una distillazione continua che conserva più congeners, rendendolo più rustico, aromatico e caratteristico del territorio.",
+    "categoria": "spirits",
+    "difficolta": "difficile",
+    "usata": false,
+    "data_utilizzo": null
+  }
+]
