@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230f172a' stroke='url(%23g)' stroke-width='3'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232563eb'/><stop offset='1' stop-color='%23f59e0b'/></linearGradient></defs><text x='50' y='67' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='42' fill='%23f59e0b'>CL</text></svg>"/>
+<title>Quiz del Giorno — Cocktail Legend</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --blue:#2563eb;
+  --blue-d:#1e40af;
+  --blue-l:#60a5fa;
+  --amber:#f59e0b;
+  --amber-d:#d97706;
+  --bg:#0a0f1e;
+  --surf:#1e293b;
+  --surf2:#334155;
+  --txt:#f1f5f9;
+  --txt2:#94a3b8;
+  --brd:rgba(255,255,255,.08);
+  --dim:#64748b;
+  --correct:#22c55e;
+  --wrong:#ef4444;
+  --correct-bg:rgba(34,197,94,.12);
+  --wrong-bg:rgba(239,68,68,.12);
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  padding:1.5rem 1rem 5rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* GRID BG */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,black 0%,transparent 100%);
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 10%,rgba(37,99,235,.10) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
+.wrapper{
+  position:relative;z-index:1;
+  width:100%;max-width:480px;
+  display:flex;flex-direction:column;gap:1.25rem;
+}
+
+/* ── BACK NAV ── */
+.nav-back{
+  display:flex;align-items:center;gap:.5rem;
+  color:var(--txt2);font-size:.8rem;font-weight:600;
+  text-decoration:none;
+  padding:.3rem 0;
+  transition:color .2s;
+}
+.nav-back:hover{color:var(--blue-l);}
+.nav-back svg{flex-shrink:0;}
+
+/* ── HEADER ── */
+.app-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 .1rem;
+}
+.logo{
+  font-family:'Inter',sans-serif;font-size:1.2rem;font-weight:900;
+  letter-spacing:-.03em;
+  background:linear-gradient(135deg,var(--blue-l),var(--amber));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.streak-pill{
+  display:flex;align-items:center;gap:.4rem;
+  background:rgba(245,158,11,.10);
+  border:1px solid rgba(245,158,11,.25);
+  border-radius:99px;padding:.3rem .75rem;
+  font-size:.78rem;font-weight:700;color:var(--amber);
+}
+
+/* ── LEADERBOARD TABS ── */
+.lb-tabs{
+  display:flex;gap:.4rem;
+  background:var(--surf);border:1px solid var(--brd);
+  border-radius:14px;padding:.3rem;
+}
+.lb-tab{
+  flex:1;text-align:center;font-size:.72rem;font-weight:700;
+  padding:.42rem;border-radius:10px;cursor:pointer;
+  color:var(--txt2);transition:all .2s;letter-spacing:.02em;
+  user-select:none;
+}
+.lb-tab.active{
+  background:linear-gradient(135deg,var(--blue),var(--blue-d));
+  color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.35);
+}
+
+/* ── LEADERBOARD ── */
+.leaderboard{
+  background:var(--surf);border:1px solid var(--brd);
+  border-radius:18px;overflow:hidden;
+}
+.lb-header{
+  padding:.9rem 1.2rem .7rem;border-bottom:1px solid var(--brd);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.lb-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt2);}
+.lb-reset-txt{font-size:.65rem;color:var(--txt2);}
+.lb-reset-txt span{color:var(--blue-l);font-weight:600;}
+
+.lb-row{
+  display:grid;grid-template-columns:28px 1fr auto;
+  align-items:center;gap:.7rem;
+  padding:.65rem 1.2rem;border-bottom:1px solid var(--brd);
+  transition:background .2s;
+}
+.lb-row:last-child{border-bottom:none;}
+.lb-row.me{background:rgba(37,99,235,.07);border-left:2px solid var(--blue);}
+.lb-row.lb-loading{
+  justify-content:center;display:flex;
+  padding:1.5rem;color:var(--dim);font-size:.78rem;
+  border:none;grid-template-columns:1fr;
+}
+
+.lb-rank{font-size:.78rem;font-weight:800;color:var(--txt2);text-align:center;}
+.lb-rank.gold{color:#fbbf24;}
+.lb-rank.silver{color:#94a3b8;}
+.lb-rank.bronze{color:#d97706;}
+
+.lb-user{display:flex;flex-direction:column;gap:.1rem;}
+.lb-name{font-size:.85rem;font-weight:600;color:var(--txt);}
+.you-badge{
+  display:inline-block;font-size:.58rem;font-weight:700;
+  text-transform:uppercase;background:rgba(37,99,235,.2);
+  color:var(--blue-l);border-radius:4px;padding:.1rem .3rem;
+  margin-left:.35rem;vertical-align:middle;
+}
+.lb-meta{font-size:.68rem;color:var(--txt2);}
+.lb-score{text-align:right;}
+.lb-pts{font-size:.9rem;font-weight:800;color:var(--amber);display:block;}
+.lb-pts-label{font-size:.62rem;color:var(--txt2);font-weight:500;}
+
+/* ── QUIZ CARD ── */
+.quiz-card{
+  background:var(--surf);border:1px solid var(--brd);
+  border-radius:18px;overflow:hidden;
+}
+
+/* loading state */
+.quiz-loading{
+  padding:3rem 1.5rem;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:.75rem;
+}
+.loading-spinner{
+  width:32px;height:32px;border-radius:50%;
+  border:3px solid var(--brd);border-top-color:var(--blue-l);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-txt{font-size:.82rem;color:var(--txt2);}
+
+/* already-answered state */
+.quiz-done{
+  padding:2rem 1.25rem;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:.75rem;
+}
+.done-icon{font-size:2.5rem;}
+.done-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);}
+.done-sub{font-size:.82rem;color:var(--txt2);line-height:1.6;}
+.done-pts{
+  display:inline-flex;align-items:center;gap:.35rem;
+  background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);
+  border-radius:99px;padding:.4rem 1rem;
+  font-size:.88rem;font-weight:800;color:var(--amber);
+}
+
+/* coming soon */
+.coming-soon-icon{
+  font-size:2.8rem;
+  filter:drop-shadow(0 0 16px rgba(245,158,11,.5));
+  animation:floatIcon 2.5s ease-in-out infinite;
+}
+@keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.coming-soon-title{
+  font-family:'Inter',sans-serif;font-size:1.5rem;font-weight:900;
+  letter-spacing:-.04em;
+  background:linear-gradient(135deg,var(--blue-l),var(--amber));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.coming-soon-sub{
+  font-size:.83rem;color:var(--txt2);line-height:1.7;text-align:center;
+}
+.coming-soon-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);
+  border-radius:99px;padding:.35rem 1rem;
+  font-size:.72rem;font-weight:700;color:var(--blue-l);
+  letter-spacing:.04em;
+}
+
+/* no-quiz state */
+.quiz-none{
+  padding:2.8rem 1.5rem;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:.85rem;
+}
+
+/* ── TOP BAR ── */
+.quiz-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 1.2rem .75rem;border-bottom:1px solid var(--brd);
+}
+.quiz-badge{
+  display:flex;align-items:center;gap:.4rem;
+  font-size:.68rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--blue-l);
+}
+.quiz-badge::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--blue-l);box-shadow:0 0 6px var(--blue-l);
+  animation:pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.timer-wrap{display:flex;align-items:center;gap:.5rem;}
+.diff-badge{
+  font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  padding:.2rem .5rem;border-radius:6px;
+}
+.diff-badge.easy{background:rgba(34,197,94,.12);color:#4ade80;}
+.diff-badge.medium{background:rgba(245,158,11,.12);color:var(--amber);}
+.diff-badge.hard{background:rgba(239,68,68,.12);color:#f87171;}
+
+.timer-ring{position:relative;width:36px;height:36px;}
+.timer-ring svg{transform:rotate(-90deg);width:36px;height:36px;}
+.timer-ring circle.t-bg{fill:none;stroke:var(--surf2);stroke-width:3;}
+.timer-ring circle.t-prog{
+  fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round;
+  stroke-dasharray:94.2;stroke-dashoffset:0;
+  transition:stroke-dashoffset 1s linear,stroke .5s;
+}
+.timer-num{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:800;color:var(--amber);
+}
+
+/* ── BODY ── */
+.quiz-body{padding:1.4rem 1.2rem 1.2rem;}
+
+.cat-chip{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-size:.65rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--txt2);margin-bottom:.9rem;
+}
+.cat-dot{width:5px;height:5px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+
+.question-text{
+  font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;
+  line-height:1.45;color:var(--txt);margin-bottom:1.4rem;letter-spacing:-.01em;
+}
+
+/* ── OPTIONS ── */
+.options{display:flex;flex-direction:column;gap:.6rem;}
+.option{
+  display:flex;align-items:center;gap:.85rem;
+  padding:.8rem .95rem;border-radius:12px;
+  border:1.5px solid var(--brd);
+  background:rgba(255,255,255,.02);
+  cursor:pointer;transition:all .2s;
+  position:relative;overflow:hidden;
+  -webkit-user-select:none;user-select:none;
+}
+.option::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(37,99,235,.06),transparent);
+  opacity:0;transition:opacity .2s;
+}
+.option:hover{
+  border-color:rgba(37,99,235,.4);
+  background:rgba(37,99,235,.06);
+  transform:translateY(-1px);
+}
+.option:hover::before{opacity:1;}
+.option:hover .opt-letter{background:var(--blue);color:#fff;border-color:var(--blue);}
+.option.correct{border-color:var(--correct);background:var(--correct-bg);cursor:default;transform:none;}
+.option.correct .opt-letter{background:var(--correct);color:#fff;border-color:var(--correct);}
+.option.selected-wrong{border-color:var(--wrong);background:var(--wrong-bg);cursor:default;}
+.option.selected-wrong .opt-letter{background:var(--wrong);color:#fff;border-color:var(--wrong);}
+.option.dimmed{opacity:.32;cursor:default;}
+.option.disabled{pointer-events:none;}
+
+.opt-letter{
+  width:30px;height:30px;border-radius:8px;
+  border:1.5px solid var(--surf2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:800;color:var(--txt2);
+  flex-shrink:0;transition:all .2s;font-family:'Syne',sans-serif;
+}
+.opt-text{font-size:.88rem;font-weight:500;color:var(--txt);line-height:1.4;}
+
+/* ── RESULT BANNER ── */
+.result-banner{
+  display:none;margin:0 1.2rem 1.2rem;
+  padding:.95rem 1.05rem;border-radius:12px;
+  flex-direction:column;gap:.65rem;
+  animation:slideUp .3s ease;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.result-banner.show{display:flex;}
+.result-banner.correct-banner{background:var(--correct-bg);border:1px solid rgba(34,197,94,.3);}
+.result-banner.wrong-banner{background:var(--wrong-bg);border:1px solid rgba(239,68,68,.3);}
+.result-top{display:flex;align-items:center;justify-content:space-between;}
+.result-label{display:flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:700;}
+.result-label.correct-lbl{color:var(--correct);}
+.result-label.wrong-lbl{color:var(--wrong);}
+.result-pts{font-size:.8rem;font-weight:800;padding:.2rem .55rem;border-radius:8px;}
+.result-pts.earned{background:rgba(34,197,94,.15);color:#4ade80;}
+.result-pts.zero{background:rgba(239,68,68,.15);color:#f87171;}
+.result-explanation{font-size:.8rem;color:var(--txt2);line-height:1.6;}
+.result-explanation strong{color:var(--txt);font-weight:600;}
+
+/* ── STATS ── */
+.quiz-stats{display:flex;border-top:1px solid var(--brd);}
+.stat-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  padding:.85rem 0;gap:.1rem;border-right:1px solid var(--brd);
+}
+.stat-item:last-child{border-right:none;}
+.stat-val{font-size:.95rem;font-weight:800;color:var(--txt);font-family:'Syne',sans-serif;}
+.stat-lbl{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--txt2);}
+
+/* ── UPCOMING ── */
+.upcoming-card{
+  background:var(--surf);border:1px solid var(--brd);
+  border-radius:16px;padding:.9rem 1.2rem;
+  display:flex;align-items:center;gap:.9rem;
+}
+.upcoming-icon{
+  width:38px;height:38px;border-radius:10px;
+  background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:1.1rem;
+}
+.upcoming-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt2);margin-bottom:.15rem;}
+.upcoming-time{font-size:.92rem;font-weight:800;color:var(--txt);font-family:'Syne',sans-serif;}
+.upcoming-sub{font-size:.68rem;color:var(--txt2);margin-top:.1rem;}
+
+/* ── COUNTDOWN ── */
+.countdown-wrap{
+  background:var(--surf);border:1px solid var(--brd);
+  border-radius:16px;padding:1rem 1.2rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.countdown-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt2);}
+.countdown-timer{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--blue-l);}
+
+/* PROTEZIONE */
+*{-webkit-user-select:none;user-select:none;}
+img{-webkit-user-drag:none;pointer-events:none;}
+button,a,.option,.lb-tab{pointer-events:auto;}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- BACK -->
+  <a class="nav-back" href="cocktail-legend.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Torna all'app
+  </a>
+
+  <!-- HEADER -->
+  <div class="app-header">
+    <div class="logo">Quiz Time</div>
+    <div class="streak-pill" id="streak-pill">🔥 — giorni</div>
+  </div>
+
+  <!-- LEADERBOARD TABS -->
+  <div class="lb-tabs">
+    <div class="lb-tab" onclick="switchLbTab(this,'weekly')">Settimanale</div>
+    <div class="lb-tab active" onclick="switchLbTab(this,'monthly')">Mensile</div>
+    <div class="lb-tab" onclick="switchLbTab(this,'alltime')">All Time</div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div class="leaderboard">
+    <div class="lb-header">
+      <div class="lb-title" id="lb-title">Classifica Mensile</div>
+      <div class="lb-reset-txt" id="lb-reset-txt">Reset <span id="lb-reset-date">1° Aprile</span></div>
+    </div>
+    <div id="lb-list">
+      <div class="lb-row lb-loading">Caricamento classifica…</div>
+    </div>
+  </div>
+
+  <!-- QUIZ CARD -->
+  <div class="quiz-card" id="quiz-card">
+    <!-- Stato: loading -->
+    <div class="quiz-loading" id="state-loading">
+      <div class="loading-spinner"></div>
+      <div class="loading-txt">Caricamento domanda…</div>
+    </div>
+
+    <!-- Stato: nessun quiz / coming soon -->
+    <div class="quiz-none" id="state-none" style="display:none;">
+      <div class="coming-soon-icon">⚡</div>
+      <div class="coming-soon-title">Coming Soon</div>
+      <div class="coming-soon-sub">Il Quiz del Giorno è in arrivo.<br>Torna presto per sfidare la classifica!</div>
+      <div class="coming-soon-badge">🏆 Classifica · Streak · Punti</div>
+    </div>
+
+    <!-- Stato: già risposto oggi -->
+    <div class="quiz-done" id="state-done" style="display:none;">
+      <div class="done-icon" id="done-icon">✅</div>
+      <div class="done-title" id="done-title">Hai già risposto oggi!</div>
+      <div class="done-sub" id="done-sub">La prossima domanda sarà disponibile domani alle 00:00.</div>
+      <div class="done-pts" id="done-pts">+0 pt oggi</div>
+    </div>
+
+    <!-- Stato: quiz attivo -->
+    <div id="state-quiz" style="display:none;">
+      <!-- TOP BAR -->
+      <div class="quiz-topbar">
+        <div class="quiz-badge">Quiz del Giorno</div>
+        <div class="timer-wrap">
+          <div class="diff-badge easy" id="diff-badge">Facile</div>
+          <div class="timer-ring">
+            <svg viewBox="0 0 36 36">
+              <circle class="t-bg" cx="18" cy="18" r="15"/>
+              <circle class="t-prog" id="timer-circle" cx="18" cy="18" r="15"/>
+            </svg>
+            <div class="timer-num" id="timer-num">30</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="quiz-body">
+        <div class="cat-chip"><div class="cat-dot"></div><span id="q-categoria">—</span></div>
+        <div class="question-text" id="q-testo">Caricamento…</div>
+        <div class="options" id="options-wrap"></div>
+      </div>
+
+      <!-- RESULT BANNER -->
+      <div class="result-banner" id="result-banner">
+        <div class="result-top">
+          <div class="result-label" id="result-label">—</div>
+          <div class="result-pts" id="result-pts">+0 pt</div>
+        </div>
+        <div class="result-explanation" id="result-explanation"></div>
+      </div>
+
+      <!-- STATS -->
+      <div class="quiz-stats">
+        <div class="stat-item">
+          <div class="stat-val" id="stat-correttezza">—</div>
+          <div class="stat-lbl">Correttezza</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="stat-giorni">0</div>
+          <div class="stat-lbl">Giorni giocati</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val" id="stat-streak">0</div>
+          <div class="stat-lbl">Streak 🔥</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /quiz-card -->
+
+  <!-- PROSSIMA DOMANDA -->
+  <div class="upcoming-card" id="upcoming-card" style="display:none;">
+    <div class="upcoming-icon">🕛</div>
+    <div>
+      <div class="upcoming-label">Prossima domanda</div>
+      <div class="upcoming-time">Domani alle 00:00</div>
+      <div class="upcoming-sub" id="upcoming-sub">—</div>
+    </div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import {
+  getAuth, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc, getDoc, setDoc, updateDoc,
+  collection, query, orderBy, limit, getDocs,
+  increment, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDkIK5KD-LHCdAhxHVS-bbnwP9Qak2vTxc",
+  authDomain: "cocktail-legend.firebaseapp.com",
+  projectId: "cocktail-legend",
+  storageBucket: "cocktail-legend.firebasestorage.app",
+  messagingSenderId: "237023162237",
+  appId: "1:237023162237:web:8a35e5421521171e2fa614"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ── UTILITIES ──────────────────────────────────────────
+function todayKey() {
+  // Formato YYYY-MM-DD in timezone locale
+  const d = new Date();
+  return d.getFullYear() + '-'
+    + String(d.getMonth()+1).padStart(2,'0') + '-'
+    + String(d.getDate()).padStart(2,'0');
+}
+
+function getWeekKey() {
+  const d = new Date();
+  const jan1 = new Date(d.getFullYear(), 0, 1);
+  const week = Math.ceil(((d - jan1) / 86400000 + jan1.getDay() + 1) / 7);
+  return d.getFullYear() + '-W' + String(week).padStart(2,'0');
+}
+
+function getMonthKey() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
+}
+
+function calcPts(secondsLeft, isCorrect) {
+  if (!isCorrect) return 0;
+  // Punti base 100, bonus fino a 50 per velocità
+  return 100 + Math.round((secondsLeft / 30) * 50);
+}
+
+function showState(id) {
+  ['state-loading','state-none','state-done','state-quiz'].forEach(function(s){
+    document.getElementById(s).style.display = (s === id) ? '' : 'none';
+  });
+}
+
+// ── TIMER ──────────────────────────────────────────────
+let timerVal = 30;
+let timerInterval = null;
+let answered = false;
+const CIRCUMFERENCE = 94.2;
+
+function startTimer(onTimeout) {
+  const circle = document.getElementById('timer-circle');
+  const num = document.getElementById('timer-num');
+  timerVal = 30;
+  timerInterval = setInterval(function() {
+    timerVal--;
+    num.textContent = timerVal;
+    const offset = CIRCUMFERENCE * (1 - timerVal / 30);
+    circle.style.strokeDashoffset = offset;
+    if (timerVal <= 10) {
+      circle.style.stroke = '#ef4444';
+      num.style.color = '#ef4444';
+    }
+    if (timerVal <= 0) {
+      clearInterval(timerInterval);
+      if (!answered) onTimeout();
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+
+// ── LEADERBOARD ─────────────────────────────────────────
+let currentLbTab = 'monthly';
+
+async function loadLeaderboard(tab) {
+  currentLbTab = tab;
+  const list = document.getElementById('lb-list');
+  const title = document.getElementById('lb-title');
+  const resetDate = document.getElementById('lb-reset-date');
+
+  list.innerHTML = '<div class="lb-row lb-loading">Caricamento…</div>';
+
+  const tabMeta = {
+    weekly:  { title:'Classifica Settimanale', reset:'Lunedì', field:'pts_week' },
+    monthly: { title:'Classifica Mensile',     reset:'1° del mese', field:'pts_month' },
+    alltime: { title:'All Time — % Correttezza', reset:'Non si resetta', field:'pts_total' }
+  };
+  const meta = tabMeta[tab];
+  title.textContent = meta.title;
+  resetDate.textContent = meta.reset;
+
+  try {
+    const q = query(
+      collection(db, 'users'),
+      orderBy(meta.field, 'desc'),
+      limit(10)
+    );
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+      list.innerHTML = '<div class="lb-row lb-loading">Nessun punteggio ancora.</div>';
+      return;
+    }
+
+    const currentUid = window._quizUid || '';
+    let html = '';
+    let rank = 0;
+    let meFound = false;
+
+    snap.forEach(function(docSnap) {
+      rank++;
+      const d = docSnap.data();
+      const isMe = docSnap.id === currentUid;
+      if (isMe) meFound = true;
+      const rankCls = rank===1?'gold':rank===2?'silver':rank===3?'bronze':'';
+      const pts = tab === 'alltime'
+        ? (d.pct_correttezza ? Math.round(d.pct_correttezza)+'%' : '—')
+        : (d[meta.field] || 0);
+      const label = tab === 'alltime' ? 'corrette' : 'punti';
+      const metaTxt = d.last_played
+        ? (d.last_played === todayKey() ? 'Risposto oggi' : 'Risposto ieri')
+        : '—';
+      html += `<div class="lb-row${isMe?' me':''}">
+        <div class="lb-rank ${rankCls}">${rank}</div>
+        <div class="lb-user">
+          <div class="lb-name">${escHtml(d.nickname||'Utente')}${isMe?'<span class="you-badge">Tu</span>':''}</div>
+          <div class="lb-meta">${metaTxt}</div>
+        </div>
+        <div class="lb-score">
+          <span class="lb-pts">${pts}</span>
+          <span class="lb-pts-label">${label}</span>
+        </div>
+      </div>`;
+    });
+
+    // Se l'utente corrente non è in top10 e ha dati, aggiungilo in fondo
+    if (!meFound && currentUid && window._quizUserData) {
+      const ud = window._quizUserData;
+      const pts = tab === 'alltime'
+        ? (ud.pct_correttezza ? Math.round(ud.pct_correttezza)+'%' : '—')
+        : (ud[meta.field] || 0);
+      html += `<div class="lb-row me">
+        <div class="lb-rank">…</div>
+        <div class="lb-user">
+          <div class="lb-name">${escHtml(ud.nickname||'Tu')}<span class="you-badge">Tu</span></div>
+          <div class="lb-meta">Il tuo punteggio</div>
+        </div>
+        <div class="lb-score">
+          <span class="lb-pts">${pts}</span>
+          <span class="lb-pts-label">${tab==='alltime'?'corrette':'punti'}</span>
+        </div>
+      </div>`;
+    }
+
+    list.innerHTML = html;
+  } catch(e) {
+    list.innerHTML = '<div class="lb-row lb-loading">Errore caricamento.</div>';
+    console.error(e);
+  }
+}
+
+window.switchLbTab = function(el, tab) {
+  document.querySelectorAll('.lb-tab').forEach(function(t){ t.classList.remove('active'); });
+  el.classList.add('active');
+  loadLeaderboard(tab);
+};
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── RENDER RISPOSTA ────────────────────────────────────
+function showResult(isCorrect, isTimeout, ptsEarned, spiegazione, rispostaCorretta) {
+  const banner   = document.getElementById('result-banner');
+  const label    = document.getElementById('result-label');
+  const pts      = document.getElementById('result-pts');
+  const expl     = document.getElementById('result-explanation');
+
+  banner.classList.remove('correct-banner','wrong-banner');
+  banner.classList.add('show');
+
+  if (isTimeout) {
+    banner.classList.add('wrong-banner');
+    label.innerHTML = '⏱ Tempo scaduto!';
+    label.className = 'result-label wrong-lbl';
+    pts.textContent = '+0 pt';
+    pts.className = 'result-pts zero';
+    expl.innerHTML = 'Il tempo è scaduto. La risposta corretta era <strong>' + escHtml(rispostaCorretta) + '</strong>.' + (spiegazione ? ' ' + escHtml(spiegazione) : '');
+  } else if (isCorrect) {
+    banner.classList.add('correct-banner');
+    label.innerHTML = '✓ Risposta corretta!';
+    label.className = 'result-label correct-lbl';
+    pts.textContent = '+' + ptsEarned + ' pt';
+    pts.className = 'result-pts earned';
+    expl.innerHTML = spiegazione ? escHtml(spiegazione) : '';
+  } else {
+    banner.classList.add('wrong-banner');
+    label.innerHTML = '✗ Risposta sbagliata';
+    label.className = 'result-label wrong-lbl';
+    pts.textContent = '+0 pt';
+    pts.className = 'result-pts zero';
+    expl.innerHTML = 'La risposta corretta era <strong>' + escHtml(rispostaCorretta) + '</strong>.' + (spiegazione ? ' ' + escHtml(spiegazione) : '');
+  }
+
+  // Mostra upcoming
+  document.getElementById('upcoming-card').style.display = '';
+}
+
+// ── SALVA RISPOSTA SU FIRESTORE ────────────────────────
+async function saveRisposta(uid, quizId, isCorrect, ptsEarned, oggi) {
+  try {
+    // 1. Salva la risposta specifica
+    await setDoc(doc(db, 'risposte', uid + '_' + oggi), {
+      uid: uid,
+      quiz_id: quizId,
+      data: oggi,
+      corretta: isCorrect,
+      punti: ptsEarned,
+      timestamp: serverTimestamp()
+    });
+
+    // 2. Aggiorna il profilo utente
+    const userRef = doc(db, 'users', uid);
+    const userSnap = await getDoc(userRef);
+    const userData = userSnap.exists() ? userSnap.data() : {};
+
+    const totRisposte = (userData.tot_risposte || 0) + 1;
+    const totCorrette = (userData.tot_corrette || 0) + (isCorrect ? 1 : 0);
+    const pctCorrettezza = Math.round((totCorrette / totRisposte) * 100);
+
+    // Calcola streak
+    const ieri = new Date();
+    ieri.setDate(ieri.getDate() - 1);
+    const ieriKey = ieri.getFullYear() + '-' + String(ieri.getMonth()+1).padStart(2,'0') + '-' + String(ieri.getDate()).padStart(2,'0');
+    const lastPlayed = userData.last_played || '';
+    let streak = userData.streak || 0;
+    if (lastPlayed === ieriKey) {
+      streak = streak + 1; // continuazione streak
+    } else if (lastPlayed === oggi) {
+      streak = streak; // già risposto oggi (non dovrebbe succedere)
+    } else {
+      streak = 1; // streak interrotta
+    }
+
+    await setDoc(userRef, {
+      last_played: oggi,
+      tot_risposte: totRisposte,
+      tot_corrette: totCorrette,
+      pct_correttezza: pctCorrettezza,
+      streak: streak,
+      pts_total: (userData.pts_total || 0) + ptsEarned,
+      pts_week: (userData.pts_week || 0) + ptsEarned,
+      pts_month: (userData.pts_month || 0) + ptsEarned,
+    }, { merge: true });
+
+    // Aggiorna stats in UI
+    document.getElementById('stat-correttezza').textContent = pctCorrettezza + '%';
+    document.getElementById('stat-giorni').textContent = totRisposte;
+    document.getElementById('stat-streak').textContent = streak;
+    document.getElementById('streak-pill').textContent = '🔥 ' + streak + ' giorni';
+
+    // Ricarica classifica per aggiornare
+    window._quizUserData = {
+      ...(userSnap.exists() ? userSnap.data() : {}),
+      last_played: oggi,
+      streak,
+      pts_total: (userData.pts_total || 0) + ptsEarned,
+      pts_week: (userData.pts_week || 0) + ptsEarned,
+      pts_month: (userData.pts_month || 0) + ptsEarned,
+      pct_correttezza: pctCorrettezza
+    };
+    loadLeaderboard(currentLbTab);
+
+  } catch(e) {
+    console.error('Errore salvataggio risposta:', e);
+  }
+}
+
+// ── MAIN QUIZ LOADER ───────────────────────────────────
+async function loadQuiz(user) {
+  window._quizUid = user.uid;
+  const oggi = todayKey();
+
+  // Carica dati utente
+  try {
+    const userSnap = await getDoc(doc(db, 'users', user.uid));
+    if (userSnap.exists()) {
+      const ud = userSnap.data();
+      window._quizUserData = ud;
+      document.getElementById('stat-correttezza').textContent = ud.pct_correttezza ? Math.round(ud.pct_correttezza)+'%' : '—';
+      document.getElementById('stat-giorni').textContent = ud.tot_risposte || 0;
+      document.getElementById('stat-streak').textContent = ud.streak || 0;
+      document.getElementById('streak-pill').textContent = '🔥 ' + (ud.streak || 0) + ' giorni';
+    }
+  } catch(e) { console.error(e); }
+
+  // Controlla se ha già risposto oggi
+  try {
+    const rispSnap = await getDoc(doc(db, 'risposte', user.uid + '_' + oggi));
+    if (rispSnap.exists()) {
+      const rd = rispSnap.data();
+      // Ha già risposto
+      const doneIcon = document.getElementById('done-icon');
+      const doneTitle = document.getElementById('done-title');
+      const doneSub = document.getElementById('done-sub');
+      const donePts = document.getElementById('done-pts');
+
+      if (rd.corretta) {
+        doneIcon.textContent = '✅';
+        doneTitle.textContent = 'Risposta corretta!';
+        doneSub.textContent = 'Ottimo lavoro. La prossima domanda sarà disponibile domani alle 00:00.';
+      } else {
+        doneIcon.textContent = '❌';
+        doneTitle.textContent = 'Hai già risposto oggi';
+        doneSub.textContent = 'Riprova domani per scalare la classifica. La costanza fa la differenza!';
+      }
+      donePts.textContent = '+' + (rd.punti || 0) + ' pt oggi';
+
+      showState('state-done');
+      document.getElementById('upcoming-card').style.display = '';
+      loadLeaderboard(currentLbTab);
+      return;
+    }
+  } catch(e) { console.error(e); }
+
+  // Leggi domanda del giorno
+  try {
+    // Prima prova config/quiz per la domanda attuale
+    const configSnap = await getDoc(doc(db, 'config', 'quiz'));
+    const config = configSnap.exists() ? configSnap.data() : {};
+    
+    // Controlla se il quiz è attivo
+    if (config.attivo === false) {
+      showState('state-none');
+      loadLeaderboard(currentLbTab);
+      return;
+    }
+
+    // Leggi la domanda del giorno da domande/{oggi} oppure da config.domanda_id
+    let quizData = null;
+    let quizId = oggi;
+
+    // Prova prima con la data di oggi come ID documento
+    const domandaSnap = await getDoc(doc(db, 'domande', oggi));
+    if (domandaSnap.exists()) {
+      quizData = domandaSnap.data();
+      quizId = oggi;
+    } else if (config.domanda_id) {
+      // Fallback: usa l'ID specificato in config
+      const domSnap2 = await getDoc(doc(db, 'domande', config.domanda_id));
+      if (domSnap2.exists()) {
+        quizData = domSnap2.data();
+        quizId = config.domanda_id;
+      }
+    }
+
+    if (!quizData) {
+      showState('state-none');
+      loadLeaderboard(currentLbTab);
+      return;
+    }
+
+    // Render quiz
+    renderQuiz(quizData, quizId, user.uid, oggi);
+
+  } catch(e) {
+    console.error('Errore caricamento quiz:', e);
+    showState('state-none');
+  }
+
+  loadLeaderboard(currentLbTab);
+}
+
+function renderQuiz(data, quizId, uid, oggi) {
+  // Popola campi
+  document.getElementById('q-categoria').textContent = data.categoria || 'Cocktail';
+  document.getElementById('q-testo').textContent = data.domanda || '—';
+
+  // Difficoltà badge
+  const diffBadge = document.getElementById('diff-badge');
+  const diff = (data.difficolta || 'facile').toLowerCase();
+  diffBadge.textContent = diff.charAt(0).toUpperCase() + diff.slice(1);
+  diffBadge.className = 'diff-badge ' + (diff === 'facile' ? 'easy' : diff === 'media' ? 'medium' : 'hard');
+
+  // Prossima domanda upcoming
+  const upcomingSub = document.getElementById('upcoming-sub');
+  if (data.prossima_categoria) {
+    upcomingSub.textContent = 'Categoria: ' + data.prossima_categoria + (data.prossima_difficolta ? ' · Difficoltà: ' + data.prossima_difficolta : '');
+  } else {
+    upcomingSub.textContent = 'Preparati per domani!';
+  }
+
+  // Opzioni
+  const wrap = document.getElementById('options-wrap');
+  wrap.innerHTML = '';
+  const opzioni = data.opzioni || [];
+  const rispostaCorretta = data.risposta_corretta || '';
+  const spiegazione = data.spiegazione || '';
+  const letters = ['A','B','C','D'];
+
+  opzioni.forEach(function(testo, i) {
+    const isCorrect = testo === rispostaCorretta;
+    const div = document.createElement('div');
+    div.className = 'option';
+    div.innerHTML = '<div class="opt-letter">' + (letters[i]||i+1) + '</div><div class="opt-text">' + escHtml(testo) + '</div>';
+    div.addEventListener('click', function() {
+      if (answered) return;
+      handleAnswer(div, isCorrect, rispostaCorretta, spiegazione, opzioni, uid, quizId, oggi);
+    });
+    wrap.appendChild(div);
+  });
+
+  showState('state-quiz');
+  answered = false;
+
+  // Avvia timer
+  startTimer(function() {
+    // Timeout
+    answered = true;
+    document.querySelectorAll('.option').forEach(function(o){
+      o.classList.add('disabled');
+      // Evidenzia risposta corretta
+      const txt = o.querySelector('.opt-text').textContent;
+      if (txt === rispostaCorretta) o.classList.add('correct');
+      else o.classList.add('dimmed');
+    });
+    showResult(false, true, 0, spiegazione, rispostaCorretta);
+    saveRisposta(uid, quizId, false, 0, oggi);
+  });
+}
+
+function handleAnswer(el, isCorrect, rispostaCorretta, spiegazione, opzioni, uid, quizId, oggi) {
+  answered = true;
+  stopTimer();
+
+  const ptsEarned = calcPts(timerVal, isCorrect);
+
+  // Stili opzioni
+  document.querySelectorAll('.option').forEach(function(o) {
+    o.classList.add('disabled');
+    const txt = o.querySelector('.opt-text').textContent;
+    if (o === el) {
+      o.classList.add(isCorrect ? 'correct' : 'selected-wrong');
+    } else if (txt === rispostaCorretta) {
+      o.classList.add('correct');
+    } else {
+      o.classList.add('dimmed');
+    }
+  });
+
+  showResult(isCorrect, false, ptsEarned, spiegazione, rispostaCorretta);
+  saveRisposta(uid, quizId, isCorrect, ptsEarned, oggi);
+}
+
+// ── AUTH GUARD ─────────────────────────────────────────
+onAuthStateChanged(auth, function(user) {
+  if (!user) {
+    // Non loggato → rimanda all'app
+    window.location.href = 'cocktail-legend.html';
+    return;
+  }
+  loadQuiz(user);
+});
+</script>
+
+</body>
+</html>
