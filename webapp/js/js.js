@@ -3284,7 +3284,7 @@ function populateRisGlass(){
   // ── UTILS ─────────────────────────────────────────────────────
   function sanitizeNick(val) {
     // Rimuove spazi, caratteri speciali — solo lettere, numeri, trattino, underscore, punto
-    return val.replace(/[^a-zA-Z0-9_-.]/g, '').slice(0, 24);
+    return val.replace(/[^a-zA-Z0-9_.]/g, '').slice(0, 24);
   }
 
   function isValidNick(val) {
