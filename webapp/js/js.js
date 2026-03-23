@@ -3297,23 +3297,25 @@ function populateRisGlass(){
   async function checkNicknameAvailable(nick, currentUid) {
     var db = window._fbDb;
     var fn = window._fbFunctions;
-    if (!db || !fn) return false;
+    if (!db || !fn) return true; // se non disponibile Firebase, lascia passare
     try {
       var q = fn.query(
         fn.collection(db, 'users'),
         fn.where('nickname', '==', nick)
       );
       var snap = await fn.getDocs(q);
-      if (snap.empty) return true; // disponibile
+      if (snap.empty) return true; // nessuno ha questo nickname → disponibile
       // Controlla che non sia l'utente stesso
       var takenByOther = false;
       snap.forEach(function(d) {
         if (d.id !== currentUid) takenByOther = true;
       });
-      return !takenByOther;
+      return !takenByOther; // true = disponibile (lo ha solo lui stesso)
     } catch(e) {
-      console.error('checkNickname:', e);
-      return false;
+      // Errore query (es. indice mancante) → consideriamo disponibile
+      // L'unicità è garantita anche al salvataggio
+      console.warn('checkNickname query error (indice Firestore mancante?):', e.message);
+      return true;
     }
   }
 
@@ -3384,7 +3386,7 @@ function populateRisGlass(){
         // Bottone
         '<button id="nick-modal-btn" disabled' +
         'style="width:100%;padding:.75rem;border-radius:10px;border:none;cursor:not-allowed;font-family:inherit;' +
-        'font-size:.85rem;font-weight:700;letter-spacing:.01em;' +
+        'font-size:.88rem;font-weight:700;letter-spacing:.01em;text-align:center;' +
         'background:rgba(255,255,255,.06);color:#64748b;transition:all .2s;">' +
           'Conferma' +
         '</button>' +
@@ -3412,11 +3414,11 @@ function populateRisGlass(){
       _lastValid = ok;
       btn.disabled = !ok;
       btn.style.background = ok
-        ? 'linear-gradient(135deg,#2563eb,#1e40af)'
+        ? 'linear-gradient(135deg,#f59e0b,#d97706)'
         : 'rgba(255,255,255,.06)';
-      btn.style.color = ok ? '#fff' : '#64748b';
+      btn.style.color = ok ? '#0a0f1e' : '#64748b';
       btn.style.cursor = ok ? 'pointer' : 'not-allowed';
-      btn.style.boxShadow = ok ? '0 4px 14px rgba(37,99,235,.35)' : 'none';
+      btn.style.boxShadow = ok ? '0 4px 14px rgba(245,158,11,.4)' : 'none';
     }
 
     input.addEventListener('input', function() {
