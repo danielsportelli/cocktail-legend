@@ -3284,7 +3284,7 @@ function populateRisGlass(){
   // ── UTILS ─────────────────────────────────────────────────────
   function sanitizeNick(val) {
     // Rimuove spazi, caratteri speciali — solo lettere, numeri, trattino, underscore, punto
-    return val.replace(/[^a-zA-Z0-9_.]/g, '').slice(0, 24);
+    return val.replace(/[^a-zA-Z0-9_-.]/g, '').slice(0, 24);
   }
 
   function isValidNick(val) {
@@ -3445,7 +3445,7 @@ function populateRisGlass(){
           setFeedback('✓ @' + clean + ' è disponibile', '#22c55e');
           setBtnEnabled(true);
         } else {
-          setFeedback('✗ @' + clean + ' è già preso', '#f87171');
+          setFeedback('✗ @' + clean + ' non è disponibile', '#f87171');
           setBtnEnabled(false);
         }
       }, 600);
