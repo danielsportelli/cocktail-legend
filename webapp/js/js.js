@@ -3283,7 +3283,7 @@ function populateRisGlass(){
 
   // ── UTILS ─────────────────────────────────────────────────────
   function sanitizeNick(val) {
-    // Rimuove spazi, caratteri speciali — solo lettere, numeri, underscore, punto
+    // Rimuove spazi, caratteri speciali — solo lettere, numeri, trattino, underscore, punto
     return val.replace(/[^a-zA-Z0-9_.]/g, '').slice(0, 24);
   }
 
@@ -3361,7 +3361,6 @@ function populateRisGlass(){
         // Titolo
         '<div style="text-align:center;margin-bottom:1.25rem;">' +
           '<div style="font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#f1f5f9;margin-bottom:.35rem;">Scegli il tuo nickname</div>' +
-          '<div style="font-size:.78rem;color:#94a3b8;line-height:1.5;">Sarà il tuo nome in classifica.<br>Deve essere unico, come su Instagram.</div>' +
         '</div>' +
 
         // Input
@@ -3379,7 +3378,7 @@ function populateRisGlass(){
 
         // Regole
         '<div style="font-size:.65rem;color:#64748b;margin-bottom:1.1rem;line-height:1.6;">' +
-          '3–24 caratteri · lettere, numeri, punto e underscore' +
+          '3–24 caratteri · (lettere, numeri, punto, trattino e underscore)' +
         '</div>' +
 
         // Bottone
@@ -3387,7 +3386,7 @@ function populateRisGlass(){
         'style="width:100%;padding:.75rem;border-radius:10px;border:none;cursor:not-allowed;font-family:inherit;' +
         'font-size:.85rem;font-weight:700;letter-spacing:.01em;' +
         'background:rgba(255,255,255,.06);color:#64748b;transition:all .2s;">' +
-          'Continua' +
+          'Conferma' +
         '</button>' +
 
       '</div>';
