@@ -848,43 +848,40 @@ async function loadQuiz(user) {
 
   // Leggi domanda del giorno
   try {
-    // Prima prova config/quiz per la domanda attuale
+    // 1. Controlla se il quiz è attivo
     const configSnap = await getDoc(doc(db, 'config', 'quiz'));
     const config = configSnap.exists() ? configSnap.data() : {};
-    
-    // Controlla se il quiz è attivo
+
     if (config.attivo === false) {
       showState('state-none');
       loadLeaderboard(currentLbTab);
       return;
     }
 
-    // Leggi la domanda del giorno da domande/{oggi} oppure da config.domanda_id
-    let quizData = null;
-    let quizId = oggi;
+    // 2. Leggi da quiz_del_giorno/attuale (scritto dalla Cloud Function)
+    const attualeSnap = await getDoc(doc(db, 'quiz_del_giorno', 'attuale'));
 
-    // Prova prima con la data di oggi come ID documento
-    const domandaSnap = await getDoc(doc(db, 'domande', oggi));
-    if (domandaSnap.exists()) {
-      quizData = domandaSnap.data();
-      quizId = oggi;
-    } else if (config.domanda_id) {
-      // Fallback: usa l'ID specificato in config
-      const domSnap2 = await getDoc(doc(db, 'domande', config.domanda_id));
-      if (domSnap2.exists()) {
-        quizData = domSnap2.data();
-        quizId = config.domanda_id;
-      }
-    }
-
-    if (!quizData) {
+    if (!attualeSnap.exists()) {
       showState('state-none');
       loadLeaderboard(currentLbTab);
       return;
     }
 
+    const quizData = attualeSnap.data();
+    const quizId = quizData.domanda_id || oggi;
+
+    // Mappa i campi: la Cloud Function usa "testo" invece di "domanda"
+    const datiNormalizzati = {
+      domanda:          quizData.testo || quizData.domanda || '—',
+      opzioni:          quizData.opzioni || [],
+      risposta_corretta: quizData.risposta_corretta || '',
+      spiegazione:      quizData.spiegazione || '',
+      categoria:        quizData.categoria || 'Cocktail',
+      difficolta:       quizData.difficolta || 'facile',
+    };
+
     // Render quiz
-    renderQuiz(quizData, quizId, user.uid, oggi);
+    renderQuiz(datiNormalizzati, quizId, user.uid, oggi);
 
   } catch(e) {
     console.error('Errore caricamento quiz:', e);
