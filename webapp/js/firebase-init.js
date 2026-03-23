@@ -16,7 +16,11 @@ import {
   setDoc,
   updateDoc,
   arrayUnion,
-  arrayRemove
+  arrayRemove,
+  query,
+  where,
+  getDocs,
+  collection
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -45,7 +49,11 @@ window._fbFunctions = {
   setDoc,
   updateDoc,
   arrayUnion,
-  arrayRemove
+  arrayRemove,
+  query,
+  where,
+  getDocs,
+  collection
 };
 
 // ── Variabile globale utente corrente ─────────────

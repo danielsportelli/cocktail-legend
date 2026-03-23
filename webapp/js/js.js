@@ -1132,6 +1132,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       }
       renderUsage();
       renderAccountTab();
+      // Esponi globalmente per il modulo nickname
+      window._renderAccountTab = renderAccountTab;
     }).catch(function(e){
       console.warn('loadUsage err', e);
       _usageCache = { monthlyCount: 0, extraCredits: 0, periodStart: new Date().toISOString().split('T')[0] };
@@ -1348,7 +1350,16 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       d.setDate(d.getDate()+30);
       nextReset = d.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'});
     }
+
+    // Sezione nickname (asincrona) — inserisce placeholder e poi popola
+    var nickPlaceholder =
+      '<div id="nick-acc-section" style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">' +
+        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Nickname</div>' +
+        '<div style="font-size:.72rem;color:var(--dim);">Caricamento…</div>' +
+      '</div>';
+
     el.innerHTML =
+      nickPlaceholder +
       '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
         '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.35rem;">Accesso effettuato con</div>'+
         '<div style="font-size:.8rem;color:var(--txt2);font-weight:600;">'+user.email+'</div>'+
@@ -1389,6 +1400,19 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       '<div style="text-align:center;padding-top:.8rem;border-top:1px solid var(--brd);">'+
         '<button id="acc-logout-btn" style="background:none;border:none;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:.4rem .8rem;border-radius:6px;transition:color .2s;">Disconnetti account</button>'+
       '</div>';
+
+    // Popola sezione nickname in modo asincrono
+    if (window._buildNicknameSection) {
+      window._buildNicknameSection(user.uid).then(function(html) {
+        var nickEl = document.getElementById('nick-acc-section');
+        if (nickEl) {
+          nickEl.outerHTML = html;
+          if (window._initNicknameAccSection) {
+            window._initNicknameAccSection(user.uid);
+          }
+        }
+      });
+    }
 
     // Logout
     var logoutBtn = document.getElementById('acc-logout-btn');
@@ -3247,4 +3271,392 @@ function populateRisGlass(){
       }
     });
   });
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// NICKNAME SYSTEM
+// — Modale primo accesso
+// — Sezione modifica nel drawer Account
+// — Verifica unicità in tempo reale su Firestore
+// ═══════════════════════════════════════════════════════════════
+(function() {
+
+  // ── UTILS ─────────────────────────────────────────────────────
+  function sanitizeNick(val) {
+    // Rimuove spazi, caratteri speciali — solo lettere, numeri, underscore, punto
+    return val.replace(/[^a-zA-Z0-9_.]/g, '').slice(0, 24);
+  }
+
+  function isValidNick(val) {
+    return val.length >= 3 && val.length <= 24 && /^[a-zA-Z0-9_.]+$/.test(val);
+  }
+
+  var _nickCheckTimer = null;
+
+  // Controlla unicità nickname su Firestore
+  async function checkNicknameAvailable(nick, currentUid) {
+    var db = window._fbDb;
+    var fn = window._fbFunctions;
+    if (!db || !fn) return false;
+    try {
+      var q = fn.query(
+        fn.collection(db, 'users'),
+        fn.where('nickname', '==', nick)
+      );
+      var snap = await fn.getDocs(q);
+      if (snap.empty) return true; // disponibile
+      // Controlla che non sia l'utente stesso
+      var takenByOther = false;
+      snap.forEach(function(d) {
+        if (d.id !== currentUid) takenByOther = true;
+      });
+      return !takenByOther;
+    } catch(e) {
+      console.error('checkNickname:', e);
+      return false;
+    }
+  }
+
+  // Salva nickname su Firestore
+  async function saveNickname(uid, nick) {
+    var db = window._fbDb;
+    var fn = window._fbFunctions;
+    if (!db || !fn) return false;
+    try {
+      await fn.setDoc(fn.doc(db, 'users', uid), { nickname: nick }, { merge: true });
+      window._currentNickname = nick;
+      return true;
+    } catch(e) {
+      console.error('saveNickname:', e);
+      return false;
+    }
+  }
+
+  // ── MODALE PRIMO ACCESSO ───────────────────────────────────────
+  function createNicknameModal() {
+    if (document.getElementById('nickname-modal')) return;
+
+    var modal = document.createElement('div');
+    modal.id = 'nickname-modal';
+    modal.style.cssText = [
+      'position:fixed;inset:0;z-index:9999',
+      'background:rgba(0,0,0,.7)',
+      'display:flex;align-items:center;justify-content:center',
+      'padding:1.5rem',
+      'animation:fadeIn .25s ease'
+    ].join(';');
+
+    modal.innerHTML =
+      '<div style="background:#1e293b;border:1px solid rgba(255,255,255,.08);border-radius:20px;' +
+      'width:100%;max-width:360px;padding:1.75rem 1.5rem;position:relative;">' +
+
+        // Icona
+        '<div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(37,99,235,.2),rgba(245,158,11,.15));' +
+        'border:1px solid rgba(245,158,11,.25);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">' +
+          '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+            '<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>' +
+          '</svg>' +
+        '</div>' +
+
+        // Titolo
+        '<div style="text-align:center;margin-bottom:1.25rem;">' +
+          '<div style="font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#f1f5f9;margin-bottom:.35rem;">Scegli il tuo nickname</div>' +
+          '<div style="font-size:.78rem;color:#94a3b8;line-height:1.5;">Sarà il tuo nome in classifica.<br>Deve essere unico, come su Instagram.</div>' +
+        '</div>' +
+
+        // Input
+        '<div style="position:relative;margin-bottom:.5rem;">' +
+          '<span style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);font-size:.85rem;color:#64748b;font-weight:600;">@</span>' +
+          '<input id="nick-modal-input" type="text" maxlength="24" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"' +
+          'placeholder="il_tuo_nickname"' +
+          'style="width:100%;background:#0a0f1e;border:1.5px solid rgba(255,255,255,.1);border-radius:10px;' +
+          'padding:.65rem .75rem .65rem 1.75rem;font-size:.9rem;font-family:inherit;color:#f1f5f9;outline:none;' +
+          'transition:border-color .2s;-webkit-user-select:text;user-select:text;">' +
+        '</div>' +
+
+        // Feedback disponibilità
+        '<div id="nick-modal-feedback" style="font-size:.72rem;min-height:1.2rem;margin-bottom:.9rem;padding:0 .2rem;"></div>' +
+
+        // Regole
+        '<div style="font-size:.65rem;color:#64748b;margin-bottom:1.1rem;line-height:1.6;">' +
+          '3–24 caratteri · lettere, numeri, punto e underscore' +
+        '</div>' +
+
+        // Bottone
+        '<button id="nick-modal-btn" disabled' +
+        'style="width:100%;padding:.75rem;border-radius:10px;border:none;cursor:not-allowed;font-family:inherit;' +
+        'font-size:.85rem;font-weight:700;letter-spacing:.01em;' +
+        'background:rgba(255,255,255,.06);color:#64748b;transition:all .2s;">' +
+          'Continua' +
+        '</button>' +
+
+      '</div>';
+
+    document.body.appendChild(modal);
+
+    var input = document.getElementById('nick-modal-input');
+    var btn = document.getElementById('nick-modal-btn');
+    var feedback = document.getElementById('nick-modal-feedback');
+
+    // Focus input
+    setTimeout(function() { input && input.focus(); }, 300);
+
+    // Stato bottone e feedback
+    var _lastValid = false;
+
+    function setFeedback(msg, color) {
+      feedback.textContent = msg;
+      feedback.style.color = color;
+    }
+
+    function setBtnEnabled(ok) {
+      _lastValid = ok;
+      btn.disabled = !ok;
+      btn.style.background = ok
+        ? 'linear-gradient(135deg,#2563eb,#1e40af)'
+        : 'rgba(255,255,255,.06)';
+      btn.style.color = ok ? '#fff' : '#64748b';
+      btn.style.cursor = ok ? 'pointer' : 'not-allowed';
+      btn.style.boxShadow = ok ? '0 4px 14px rgba(37,99,235,.35)' : 'none';
+    }
+
+    input.addEventListener('input', function() {
+      var raw = this.value;
+      var clean = sanitizeNick(raw);
+      if (clean !== raw) this.value = clean;
+
+      setBtnEnabled(false);
+      clearTimeout(_nickCheckTimer);
+
+      if (!isValidNick(clean)) {
+        if (clean.length > 0 && clean.length < 3) {
+          setFeedback('Minimo 3 caratteri', '#f87171');
+        } else {
+          setFeedback('', '');
+        }
+        return;
+      }
+
+      setFeedback('Controllo disponibilità…', '#60a5fa');
+
+      var uid = window._currentUser ? window._currentUser.uid : '';
+      _nickCheckTimer = setTimeout(async function() {
+        var available = await checkNicknameAvailable(clean, uid);
+        if (available) {
+          setFeedback('✓ @' + clean + ' è disponibile', '#22c55e');
+          setBtnEnabled(true);
+        } else {
+          setFeedback('✗ @' + clean + ' è già preso', '#f87171');
+          setBtnEnabled(false);
+        }
+      }, 600);
+    });
+
+    btn.addEventListener('click', async function() {
+      if (!_lastValid) return;
+      var nick = input.value.trim();
+      var uid = window._currentUser ? window._currentUser.uid : '';
+      if (!uid) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Salvataggio…';
+
+      var ok = await saveNickname(uid, nick);
+      if (ok) {
+        // Rimuovi modale
+        modal.style.opacity = '0';
+        modal.style.transition = 'opacity .25s';
+        setTimeout(function() {
+          if (modal.parentNode) modal.parentNode.removeChild(modal);
+        }, 250);
+        // Aggiorna drawer account se aperto
+        if (typeof renderAccountTab === 'function') renderAccountTab();
+        else if (window._renderAccountTab) window._renderAccountTab();
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Continua';
+        setFeedback('Errore nel salvataggio. Riprova.', '#f87171');
+      }
+    });
+  }
+
+  // ── CONTROLLA SE MOSTRARE IL MODALE AL LOGIN ───────────────────
+  async function checkNicknameOnLogin(user) {
+    var db = window._fbDb;
+    var fn = window._fbFunctions;
+    if (!db || !fn || !user) return;
+    try {
+      var snap = await fn.getDoc(fn.doc(db, 'users', user.uid));
+      if (!snap.exists() || !snap.data().nickname) {
+        // Nessun nickname → mostra modale
+        setTimeout(createNicknameModal, 800);
+      } else {
+        window._currentNickname = snap.data().nickname;
+      }
+    } catch(e) {
+      console.error('checkNicknameOnLogin:', e);
+    }
+  }
+
+  // Agganciato all'evento fb-auth-ready
+  window.addEventListener('fb-auth-ready', function(e) {
+    if (e.detail && e.detail.user) {
+      checkNicknameOnLogin(e.detail.user);
+    }
+  });
+
+  // ── SEZIONE NICKNAME NEL DRAWER ACCOUNT ───────────────────────
+  // Questa funzione viene chiamata da renderAccountTab() dopo aver
+  // costruito il contenuto base — aggiunge la sezione nickname in cima
+  window._buildNicknameSection = async function(uid) {
+    var db = window._fbDb;
+    var fn = window._fbFunctions;
+    if (!db || !fn) return '';
+
+    var nickname = '';
+    try {
+      var snap = await fn.getDoc(fn.doc(db, 'users', uid));
+      if (snap.exists() && snap.data().nickname) {
+        nickname = snap.data().nickname;
+        window._currentNickname = nickname;
+      }
+    } catch(e) { console.error(e); }
+
+    return (
+      '<div id="nick-acc-section" style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">' +
+        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Nickname</div>' +
+
+        // Visualizzazione nickname attuale
+        '<div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;">' +
+          '<div style="font-size:.88rem;font-weight:700;color:var(--txt);">@' + (nickname || '—') + '</div>' +
+          '<button id="nick-edit-btn" style="background:transparent;border:1px solid var(--brd);border-radius:7px;' +
+          'color:var(--dim);font-size:.62rem;font-weight:700;font-family:inherit;cursor:pointer;' +
+          'padding:.2rem .55rem;letter-spacing:.05em;text-transform:uppercase;transition:all .2s;">' +
+            'Modifica' +
+          '</button>' +
+        '</div>' +
+
+        // Form modifica (nascosto di default)
+        '<div id="nick-edit-form" style="display:none;margin-top:.75rem;">' +
+          '<div style="position:relative;margin-bottom:.4rem;">' +
+            '<span style="position:absolute;left:.6rem;top:50%;transform:translateY(-50%);font-size:.8rem;color:var(--dim);font-weight:600;">@</span>' +
+            '<input id="nick-acc-input" type="text" maxlength="24" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"' +
+            'value="' + nickname + '"' +
+            'style="width:100%;background:var(--bg);border:1.5px solid var(--brd);border-radius:9px;' +
+            'padding:.55rem .65rem .55rem 1.6rem;font-size:.82rem;font-family:inherit;color:var(--txt);' +
+            'outline:none;transition:border-color .2s;-webkit-user-select:text;user-select:text;">' +
+          '</div>' +
+          '<div id="nick-acc-feedback" style="font-size:.7rem;min-height:1rem;margin-bottom:.6rem;"></div>' +
+          '<div style="display:flex;gap:.5rem;">' +
+            '<button id="nick-acc-cancel" style="flex:1;padding:.52rem;border-radius:8px;border:1px solid var(--brd);' +
+            'background:transparent;color:var(--dim);font-family:inherit;font-size:.75rem;font-weight:600;cursor:pointer;">Annulla</button>' +
+            '<button id="nick-acc-save" disabled style="flex:2;padding:.52rem;border-radius:8px;border:none;' +
+            'background:rgba(255,255,255,.06);color:var(--dim);font-family:inherit;font-size:.75rem;font-weight:700;' +
+            'cursor:not-allowed;transition:all .2s;">Salva</button>' +
+          '</div>' +
+        '</div>' +
+
+      '</div>'
+    );
+  };
+
+  // Aggancia eventi alla sezione nickname dopo che è stata inserita nel DOM
+  window._initNicknameAccSection = function(uid) {
+    var editBtn   = document.getElementById('nick-edit-btn');
+    var editForm  = document.getElementById('nick-edit-form');
+    var input     = document.getElementById('nick-acc-input');
+    var feedback  = document.getElementById('nick-acc-feedback');
+    var saveBtn   = document.getElementById('nick-acc-save');
+    var cancelBtn = document.getElementById('nick-acc-cancel');
+
+    if (!editBtn || !editForm || !input || !saveBtn || !cancelBtn) return;
+
+    var _lastValid = false;
+    var _originalNick = input.value;
+
+    function setFb(msg, color) { feedback.textContent = msg; feedback.style.color = color; }
+    function setSave(ok) {
+      _lastValid = ok;
+      saveBtn.disabled = !ok;
+      saveBtn.style.background = ok ? 'linear-gradient(135deg,#2563eb,#1e40af)' : 'rgba(255,255,255,.06)';
+      saveBtn.style.color = ok ? '#fff' : 'var(--dim)';
+      saveBtn.style.cursor = ok ? 'pointer' : 'not-allowed';
+    }
+
+    // Apri form
+    editBtn.addEventListener('click', function() {
+      editForm.style.display = 'block';
+      editBtn.style.display = 'none';
+      input.focus();
+      input.select();
+    });
+
+    // Annulla
+    cancelBtn.addEventListener('click', function() {
+      editForm.style.display = 'none';
+      editBtn.style.display = '';
+      input.value = _originalNick;
+      setFb('', '');
+      setSave(false);
+    });
+
+    // Input con debounce check unicità
+    input.addEventListener('input', function() {
+      var raw = this.value;
+      var clean = sanitizeNick(raw);
+      if (clean !== raw) this.value = clean;
+
+      setSave(false);
+      clearTimeout(_nickCheckTimer);
+      setFb('', '');
+
+      if (clean === _originalNick) {
+        setFb('', '');
+        return;
+      }
+      if (!isValidNick(clean)) {
+        if (clean.length > 0 && clean.length < 3) setFb('Minimo 3 caratteri', '#f87171');
+        return;
+      }
+
+      setFb('Controllo…', '#60a5fa');
+      _nickCheckTimer = setTimeout(async function() {
+        var available = await checkNicknameAvailable(clean, uid);
+        if (available) {
+          setFb('✓ @' + clean + ' è disponibile', '#22c55e');
+          setSave(true);
+        } else {
+          setFb('✗ @' + clean + ' è già preso', '#f87171');
+          setSave(false);
+        }
+      }, 600);
+    });
+
+    // Salva
+    saveBtn.addEventListener('click', async function() {
+      if (!_lastValid) return;
+      var nick = input.value.trim();
+      if (!uid) return;
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Salvataggio…';
+      var ok = await saveNickname(uid, nick);
+      if (ok) {
+        _originalNick = nick;
+        editForm.style.display = 'none';
+        editBtn.style.display = '';
+        editBtn.style.display = '';
+        // Aggiorna testo @nickname
+        var display = document.querySelector('#nick-acc-section .nick-display-val');
+        if (display) display.textContent = '@' + nick;
+        // Aggiorna tutto il drawer
+        if (window._renderAccountTab) window._renderAccountTab();
+        setFb('', '');
+      } else {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Salva';
+        setFb('Errore. Riprova.', '#f87171');
+      }
+    });
+  };
+
 })();
