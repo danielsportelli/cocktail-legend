@@ -3378,7 +3378,7 @@ function populateRisGlass(){
 
         // Regole
         '<div style="font-size:.65rem;color:#64748b;margin-bottom:1.1rem;line-height:1.6;">' +
-          '3–24 caratteri · (lettere, numeri, punto, trattino e underscore)' +
+          '3–24 caratteri · (lettere, numeri, punto e underscore)' +
         '</div>' +
 
         // Bottone
