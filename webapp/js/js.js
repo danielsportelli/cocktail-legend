@@ -263,6 +263,7 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", sap:"Sapore"
     inp.value = name;
     Q = name;
     closeSuggestions();
+    inp.blur();
     render();
   }
 
@@ -1384,15 +1385,15 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.7rem;">Acquista crediti extra per le funzioni AI</div>'+
         '<div style="display:flex;flex-direction:column;gap:.5rem;">'+
           '<a href="#" class="acc-pkg-btn" data-pkg="50" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
-            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">50 crediti extra</div><div style="font-size:.62rem;color:var(--dim);">Costo singolo credito 0,039€</div></div>'+
+            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">50 crediti extra</div><div style="font-size:.62rem;color:var(--dim);">0,039€/credito</div></div>'+
             '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">1,99 €</div>'+
           '</a>'+
           '<a href="#" class="acc-pkg-btn" data-pkg="200" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
-            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">200 crediti extra</div><div style="font-size:.62rem;color:var(--dim);">Costo singolo credito 0,024€</div></div>'+
+            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">200 crediti extra</div><div style="font-size:.62rem;color:var(--dim);">0,024€/credito</div></div>'+
             '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">4,99 €</div>'+
           '</a>'+
           '<a href="#" class="acc-pkg-btn" data-pkg="1000" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid rgba(245,158,11,.4);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
-            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">1000 crediti extra <span style="font-size:.58rem;background:var(--amber);color:#000;border-radius:4px;padding:1px 5px;margin-left:4px;">PIÙ VANTAGGIOSO</span></div><div style="font-size:.62rem;color:var(--dim);">Costo singolo credito 0,019€</div></div>'+
+            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">1000 crediti extra <span style="font-size:.58rem;background:var(--amber);color:#000;border-radius:4px;padding:1px 5px;margin-left:4px;">PIÙ VANTAGGIOSO</span></div><div style="font-size:.62rem;color:var(--dim);">0,019€/credito</div></div>'+
             '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">19,99 €</div>'+
           '</a>'+
         '</div>'+
