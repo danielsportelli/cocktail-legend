@@ -59,7 +59,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Assenzio verde"
+        "Assenzio"
       ],
       [
         "15 ml",
@@ -206,7 +206,7 @@
       ],
       [
         "22,5 ml",
-        "Succo di limone fresco"
+        "Succo di limone"
       ],
       [
         "15 ml",
@@ -258,7 +258,7 @@
       ],
       [
         "22,5 ml",
-        "Succo di limone fresco"
+        "Succo di limone"
       ],
       [
         "15 ml",
@@ -348,7 +348,7 @@
       ],
       [
         "15 ml",
-        "Succo di pompelmo fresco"
+        "Succo di pompelmo"
       ]
     ],
     "prep": [
@@ -382,7 +382,7 @@
       ],
       [
         "7,5 ml",
-        "Fernet"
+        "Fernet branca"
       ],
       [
         "7,5 ml",
@@ -500,7 +500,7 @@
       "Gin"
     ],
     "categoria": "Pre dinner",
-    "abv": "Alto",
+    "abv": "Medio alto",
     "sapori": [
       "Erbaceo",
       "Amaro",
@@ -683,7 +683,7 @@
     "id": "whiskey_sour",
     "name": "Whiskey Sour",
     "distillato": [
-      "Bourbon whisky"
+      "Bourbon whiskey"
     ],
     "categoria": "All day",
     "abv": "Medio",
@@ -772,7 +772,7 @@
       "Gin"
     ],
     "categoria": "Pre dinner",
-    "abv": "Alto",
+    "abv": "Medio",
     "sapori": [
       "Amaro",
       "Fresco",
@@ -786,11 +786,11 @@
       ],
       [
         "30 ml",
-        "Amaro alla genziana"
+        "Suze"
       ],
       [
         "30 ml",
-        "Aperitivo bianco"
+        "Lillet blanc"
       ]
     ],
     "prep": [
@@ -1497,7 +1497,7 @@
       "Gin"
     ],
     "categoria": "All day",
-    "abv": "Medio alto",
+    "abv": "Alto",
     "sapori": [
       "Rinfrescante",
       "Agrumato",
@@ -1516,7 +1516,7 @@
       [
         "15 ml",
         "Succo di lime"
-      ],      
+      ],
       [
         "2 dash",
         "Angostura bitters"
@@ -1572,7 +1572,7 @@
       [
         "15 ml",
         "Succo di arancia"
-      ]     
+      ]
     ],
     "prep": [
       "Frullare tutti gli ingredienti con ghiaccio tritato",
@@ -1905,7 +1905,7 @@
       "Cachaça"
     ],
     "categoria": "Pre dinner",
-    "abv": "Alto",
+    "abv": "Medio alto",
     "sapori": [
       "Erbaceo",
       "Intenso",
@@ -1923,7 +1923,7 @@
       ],
       [
         "15 ml",
-        "Amaro al carciofo"
+        "Cynar"
       ]
     ],
     "prep": [
@@ -1944,7 +1944,7 @@
       "Gin"
     ],
     "categoria": "All day",
-    "abv": "Medio basso",
+    "abv": "Basso",
     "sapori": [
       "Cremoso",
       "Rinfrescante",
@@ -2157,7 +2157,7 @@
       "Rye whiskey"
     ],
     "categoria": "Pre dinner",
-    "abv": "Alto",
+    "abv": "Molto alto",
     "sapori": [
       "Intenso",
       "Speziato",
@@ -2974,7 +2974,7 @@
       "Bitter rosso"
     ],
     "categoria": "Pre dinner",
-    "abv": "Basso",
+    "abv": "Medio basso",
     "sapori": [
       "Amaro",
       "Effervescente",
@@ -2984,7 +2984,7 @@
     "ingredienti": [
       [
         "30 ml",
-        "Bitter rosso"
+        "Campari"
       ],
       [
         "30 ml",
@@ -3214,7 +3214,7 @@
       "Rum"
     ],
     "categoria": "All day",
-    "abv": "Medio basso",
+    "abv": "Medio",
     "sapori": [
       "Fresco",
       "Mentolato",
@@ -3229,7 +3229,7 @@
       [
         "15 ml",
         "Liquore alla pesca"
-      ],      
+      ],
       [
         "15 ml",
         "Succo di lime"
@@ -3240,12 +3240,12 @@
       ],
       [
         "4",
-        "Pezzi di ananas"
+        "Fetta di ananas"
       ],
       [
         "10",
         "Foglie di menta"
-      ]      
+      ]
     ],
     "prep": [
       "Frullare tutti gli ingredienti con ghiaccio tritato",
@@ -3298,7 +3298,7 @@
       "Rum giamaicano"
     ],
     "categoria": "All day",
-    "abv": "Medio alto",
+    "abv": "Medio",
     "sapori": [
       "Fresco",
       "Rinfrescante",
@@ -3445,7 +3445,7 @@
       [
         "25 ml",
         "Sciroppo di agave"
-      ]      
+      ]
     ],
     "prep": [
       "Shakerare tutto con ghiaccio",
@@ -3855,7 +3855,7 @@
     "id": "bellini",
     "name": "Bellini",
     "distillato": [
-      "Spumante"
+      "Prosecco"
     ],
     "categoria": "All day",
     "abv": "Basso",
@@ -3872,7 +3872,7 @@
       ],
       [
         "100 ml",
-        "Spumante"
+        "Prosecco"
       ]
     ],
     "prep": [
@@ -4232,7 +4232,7 @@
       "Bourbon whiskey"
     ],
     "categoria": "Pre dinner",
-    "abv": "Medio",
+    "abv": "Medio alto",
     "sapori": [
       "Intenso",
       "Amaro",
@@ -4246,7 +4246,7 @@
       ],
       [
         "30 ml",
-        "Bitter rosso"
+        "Campari"
       ],
       [
         "30 ml",
@@ -4514,7 +4514,7 @@
       ],
       [
         "1/2",
-        "Lime fresco"
+        "Lime"
       ]
     ],
     "prep": [
@@ -4597,7 +4597,7 @@
       "Rum"
     ],
     "categoria": "All day",
-    "abv": "Medio alto",
+    "abv": "Medio",
     "sapori": [
       "Fresco",
       "Agrumato",
@@ -4673,7 +4673,7 @@
       "Gin"
     ],
     "categoria": "Pre dinner",
-    "abv": "Medio",
+    "abv": "Alto",
     "sapori": [
       "Elegante",
       "Amaro",
@@ -4691,7 +4691,7 @@
       ],
       [
         "7,5 ml",
-        "Bitter rosso"
+        "Campari"
       ]
     ],
     "prep": [
@@ -5190,7 +5190,7 @@
       [
         "60 ml",
         "Rum scuro"
-      ],    
+      ],
       [
         "100 ml",
         "Ginger beer"
@@ -5420,7 +5420,7 @@
     "prep": [
       "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
       "Aggiungere ghiaccio e shakerare nuovamente",
-      "Filtrare (double strain) in un tumbler basso raffreddato",
+      "Filtrare (double strain) in una coppetta raffreddata",
       "Grattuggiare noce moscata sulla superficie"
     ],
     "storia": "L'Eggnog ha origini europee che risalgono al posset medievale inglese — una bevanda calda a base di latte cagliato, uova e alcol consumata nelle corti britanniche fin dal XIII secolo. Nelle colonie americane del XVIII secolo, dove il latte era abbondante e il rum dei Caraibi facilmente disponibile, la ricetta si trasformò e si diffuse come bevanda festiva. George Washington era noto per la sua ricetta personale di eggnog, particolarmente alcolica — includeva rye whiskey, rum, sherry e vino Madeira. La transizione dall'alcol europeo al whisky americano avvenne nel corso dell'Ottocento, man mano che l'industria distillatoria americana si sviluppava. L'Eggnog è oggi la bevanda natalizia per antonomasia negli Stati Uniti e in Canada, consumato principalmente tra il Thanksgiving di novembre e il Capodanno. Il 24 dicembre è il National Eggnog Day negli Stati Uniti.",
@@ -5492,7 +5492,7 @@
       ],
       [
         "15 ml",
-        "Bitter rosso"
+        "Campari"
       ],
       [
         "22,5 ml",
@@ -5577,7 +5577,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Fernet"
+        "Fernet branca"
       ],
       [
         "120 ml",
@@ -5914,7 +5914,7 @@
       "Bitter rosso"
     ],
     "categoria": "All day",
-    "abv": "Analcolico",
+    "abv": "Basso",
     "sapori": [
       "Amaro",
       "Agrumato",
@@ -5924,7 +5924,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Bitter rosso"
+        "Campari"
       ],
       [
         "120 ml",
@@ -6117,7 +6117,7 @@
       "Gin"
     ],
     "categoria": "Pre dinner",
-    "abv": "Medio alto",
+    "abv": "Alto",
     "sapori": [
       "Agrumato",
       "Secco",
@@ -6131,7 +6131,7 @@
       ],
       [
         "15 ml",
-        "Bitter rosso"
+        "Campari"
       ],
       [
         "15 ml",
@@ -6447,7 +6447,7 @@
       ],
       [
         "1 bspoon",
-        "Fernet"
+        "Fernet branca"
       ]
     ],
     "prep": [
@@ -6507,7 +6507,7 @@
       "Rum"
     ],
     "categoria": "All day",
-    "abv": "Medio alto",
+    "abv": "Medio",
     "sapori": [
       "Fresco",
       "Agrumato",
@@ -6518,7 +6518,7 @@
       [
         "60 ml",
         "Rum"
-      ],    
+      ],
       [
         "30 ml",
         "Succo di pompelmo rosa"
@@ -6855,7 +6855,7 @@
       ],
       [
         "6 gocce",
-        "Acqua ai fiori d'arancio"
+        "Acqua ai fiori di arancio"
       ],
       [
         "q.b.",
@@ -6985,7 +6985,7 @@
       ],
       [
         "15 ml",
-        "Liquore al melone verde"
+        "Midori"
       ],
       [
         "22,5 ml",
@@ -7019,7 +7019,7 @@
       "Midori"
     ],
     "categoria": "All day",
-    "abv": "Medio",
+    "abv": "Basso",
     "sapori": [
       "Dolce",
       "Agrumato",
@@ -7029,7 +7029,7 @@
     "ingredienti": [
       [
         "30 ml",
-        "Liquore al melone verde"
+        "Midori"
       ],
       [
         "30 ml",
@@ -7104,7 +7104,7 @@
       "Rum"
     ],
     "categoria": "All day",
-    "abv": "Basso",
+    "abv": "Medio basso",
     "sapori": [
       "Esotico",
       "Fruttato",
@@ -7118,7 +7118,7 @@
       ],
       [
         "15 ml",
-        "Bitter rosso"
+        "Campari"
       ],
       [
         "45 ml",
@@ -7953,7 +7953,7 @@
       "Bitter rosso"
     ],
     "categoria": "Pre dinner",
-    "abv": "Basso",
+    "abv": "Medio",
     "sapori": [
       "Amaro",
       "Erbaceo",
@@ -7963,7 +7963,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Bitter rosso"
+        "Campari"
       ],
       [
         "45 ml",
@@ -7985,7 +7985,7 @@
     "id": "mimosa",
     "name": "Mimosa",
     "distillato": [
-      "Spumante"
+      "Prosecco"
     ],
     "categoria": "Pre dinner",
     "abv": "Basso",
@@ -7998,7 +7998,7 @@
     "ingredienti": [
       [
         "75 ml",
-        "Spumante"
+        "Prosecco"
       ],
       [
         "75 ml",
@@ -8359,7 +8359,7 @@
       ],
       [
         "7,5 ml",
-        "Fernet"
+        "Fernet branca"
       ],
       [
         "7,5 ml",
@@ -8438,7 +8438,7 @@
       "Gin"
     ],
     "categoria": "Pre dinner",
-    "abv": "Medio",
+    "abv": "Medio alto",
     "sapori": [
       "Amaro",
       "Erbaceo",
@@ -8456,7 +8456,7 @@
       ],
       [
         "30 ml",
-        "Bitter rosso"
+        "Campari"
       ]
     ],
     "prep": [
@@ -8602,13 +8602,17 @@
         "Zolletta di zucchero"
       ],
       [
+        "1o ml",
+        "Acqua"
+      ],
+      [
         "4 dash",
         "Angostura bitters"
       ]
     ],
     "prep": [
       "In un mixing glass mettere la zolletta di zucchero e l'angostura",
-      "Aggiungere un po' d'acqua e mescolare fino a sciogliere lo zucchero",
+      "Aggiungere l'acqua e mescolare fino a sciogliere lo zucchero",
       "Aggiungere il whiskey e il ghiaccio e mescolare delicatamente per circa 20 secondi",
       "Filtrare e versare in un bicchiere old fashioned riempito di ghiaccio (meglio se chunk)"
     ],
@@ -8625,7 +8629,7 @@
       "Rye whiskey"
     ],
     "categoria": "Pre dinner",
-    "abv": "Medio",
+    "abv": "Medio alto",
     "sapori": [
       "Secco",
       "Speziato",
@@ -8639,7 +8643,7 @@
       ],
       [
         "30 ml",
-        "Bitter rosso"
+        "Campari"
       ],
       [
         "30 ml",
@@ -8980,7 +8984,7 @@
       [
         "50 ml",
         "Estratto di ananas"
-      ]     
+      ]
     ],
     "prep": [
       "Frullare tutti gli ingredienti con ghiaccio tritato",
@@ -9092,7 +9096,7 @@
     "id": "bucks_fizz",
     "name": "Buck's Fizz",
     "distillato": [
-      "Spumante"
+      "Prosecco"
     ],
     "categoria": "Pre dinner",
     "abv": "Basso",
@@ -9105,7 +9109,7 @@
     "ingredienti": [
       [
         "100 ml",
-        "Spumante"
+        "Prosecco"
       ],
       [
         "50 ml",
@@ -9126,7 +9130,7 @@
     "id": "tintoretto",
     "name": "Tintoretto",
     "distillato": [
-      "Spumante"
+      "Prosecco"
     ],
     "categoria": "All day",
     "abv": "Basso",
@@ -9143,7 +9147,7 @@
       ],
       [
         "100 ml",
-        "Spumante"
+        "Prosecco"
       ]
     ],
     "prep": [
@@ -9161,7 +9165,7 @@
     "id": "rossini",
     "name": "Rossini",
     "distillato": [
-      "Spumante"
+      "Prosecco"
     ],
     "categoria": "All day",
     "abv": "Basso",
@@ -9178,7 +9182,7 @@
       ],
       [
         "100 ml",
-        "Spumante"
+        "Prosecco"
       ]
     ],
     "prep": [
@@ -9230,7 +9234,7 @@
     "id": "puccini",
     "name": "Puccini",
     "distillato": [
-      "Spumante"
+      "Prosecco"
     ],
     "categoria": "All day",
     "abv": "Basso",
@@ -9247,7 +9251,7 @@
       ],
       [
         "100 ml",
-        "Spumante"
+        "Prosecco"
       ]
     ],
     "prep": [
@@ -9265,7 +9269,7 @@
     "id": "tiziano",
     "name": "Tiziano",
     "distillato": [
-      "Spumante"
+      "Prosecco"
     ],
     "categoria": "All day",
     "abv": "Basso",
@@ -9282,7 +9286,7 @@
       ],
       [
         "100 ml",
-        "Spumante"
+        "Prosecco"
       ]
     ],
     "prep": [
