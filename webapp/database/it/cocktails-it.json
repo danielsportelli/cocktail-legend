@@ -281,7 +281,7 @@
     "distillato": [
       "Calvados"
     ],
-    "categoria": "After dinner",
+    "categoria": "Pre dinner",
     "abv": "Medio alto",
     "sapori": [
       "Fruttato",
@@ -459,7 +459,7 @@
       "Erbaceo",
       "Elegante"
     ],
-    "garnish": "Zest di limone + ciliegia",
+    "garnish": "Zest di limone + Ciliegia",
     "ingredienti": [
       [
         "45 ml",
@@ -506,22 +506,22 @@
       "Amaro",
       "Aromatico"
     ],
-    "garnish": "Zest di limone + ciliegia",
+    "garnish": "Zest di limone + Ciliegia",
     "ingredienti": [
       [
-        "50 ml",
-        "Gin"
+        "30 ml",
+        "Gin Old Tom"
       ],
       [
-        "15 ml",
+        "30 ml",
         "Vermouth dry"
       ],
       [
-        "5 ml",
+        "7,5 ml",
         "Maraschino"
       ],
       [
-        "1 dash",
+        "3 dash",
         "Orange bitters"
       ],
       [
@@ -599,8 +599,8 @@
     "varianti": []
   },
   {
-    "id": "vesper_martini",
-    "name": "Vesper Martini",
+    "id": "vesper",
+    "name": "Vesper",
     "distillato": [
       "Gin",
       "Vodka"
@@ -624,17 +624,17 @@
       ],
       [
         "7,5 ml",
-        "Americano bianco"
+        "Lillet blanc"
       ]
     ],
     "prep": [
       "Shakerare tutto con ghiaccio",
       "Filtrare (double strain) in una coppetta raffreddata"
     ],
-    "storia": "Il Vesper Martini nasce come ponte tra narrativa e mixology, frutto dell'immaginazione di Ian Fleming che, con Casino Royale, ha trasformato una semplice ordinazione in un'icona globale. Il cocktail prende vita dall'incontro tra gin, vodka e un vino aromatizzato che conferisce complessità e carattere, incarnando perfettamente lo spirito audace e sofisticato di James Bond. La popolarità del Vesper Martini si è consolidata grazie ai film, diventando simbolo di eleganza e raffinatezza, un drink che racconta storie di intrighi, stile e glamour. La leggenda della frase 'shaken, not stirred' ha reso questo cocktail un cult, mentre le varianti moderne cercano di ricreare l'aroma originale del Kina Lillet, ormai scomparso. Perfetto per occasioni formali o cene eleganti.",
+    "storia": "Il Vesper nasce come ponte tra narrativa e mixology, frutto dell'immaginazione di Ian Fleming che, con Casino Royale, ha trasformato una semplice ordinazione in un'icona globale. Il cocktail prende vita dall'incontro tra gin, vodka e un vino aromatizzato che conferisce complessità e carattere, incarnando perfettamente lo spirito audace e sofisticato di James Bond. La popolarità del Vesper Martini si è consolidata grazie ai film, diventando simbolo di eleganza e raffinatezza, un drink che racconta storie di intrighi, stile e glamour. La leggenda della frase 'shaken, not stirred' ha reso questo cocktail un cult, mentre le varianti moderne cercano di ricreare l'aroma originale del Kina Lillet, ormai scomparso. Perfetto per occasioni formali o cene eleganti.",
     "frizzante": false,
     "bicchiere": "Coppetta",
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vesper_martini.webp",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vesper.webp",
     "varianti": []
   },
   {
@@ -692,7 +692,7 @@
       "Cremoso",
       "Agrumato"
     ],
-    "garnish": "Zest di arancia + amarena",
+    "garnish": "Zest di arancia + Ciliegia",
     "ingredienti": [
       [
         "50 ml",
@@ -929,7 +929,7 @@
         "Sciroppo di granatina"
       ],
       [
-        "2 dash",
+        "1 dash",
         "Angostura bitters"
       ],
       [
@@ -1120,7 +1120,7 @@
       "Complesso",
       "Agrumato"
     ],
-    "garnish": "Ciuffo di menta + frutti di bosco",
+    "garnish": "Ciuffo di menta + Frutti di bosco",
     "ingredienti": [
       [
         "30 ml",
@@ -1159,7 +1159,7 @@
       "Agrumato",
       "Effervescente"
     ],
-    "garnish": "Fetta di arancia + ciliegia",
+    "garnish": "Fetta di arancia + Ciliegia",
     "ingredienti": [
       [
         "15 ml",
@@ -1235,7 +1235,7 @@
       "Dolce",
       "Complesso"
     ],
-    "garnish": "Ananas + ciliegia",
+    "garnish": "Fetta di ananas + Ciliegia",
     "ingredienti": [
       [
         "30 ml",
@@ -1503,7 +1503,7 @@
       "Agrumato",
       "Speziato"
     ],
-    "garnish": "Ciuffo di menta + fetta di arancia",
+    "garnish": "Ciuffo di menta + Fetta di arancia",
     "ingredienti": [
       [
         "30 ml",
@@ -1514,13 +1514,9 @@
         "Gin"
       ],
       [
-        "22,5 ml",
-        "Succo di lime"
-      ],
-      [
         "15 ml",
-        "Sciroppo di zucchero"
-      ],
+        "Succo di lime"
+      ],      
       [
         "2 dash",
         "Angostura bitters"
@@ -1576,14 +1572,10 @@
       [
         "15 ml",
         "Succo di arancia"
-      ],
-      [
-        "90 gr",
-        "Ghiaccio tritato"
-      ]
+      ]     
     ],
     "prep": [
-      "Frullare tutti gli ingredienti fino a ottenere una consistenza omogenea e cremosa",
+      "Frullare tutti gli ingredienti con ghiaccio tritato",
       "Versare in un bicchiere hurricane"
     ],
     "storia": "Il Sumatra Kula è un cocktail tiki la cui paternità è generalmente attribuita a Victor Bergeron — alias Trader Vic — il ristoratore californiano che insieme a Donn Beach fu il grande architetto della cultura tiki americana. Bergeron aprì il suo primo locale a Oakland nel 1934, inizialmente come semplice bar, trasformandolo negli anni Quaranta in un tiki bar dall'estetica polinesiana che divenne modello per centinaia di locali in tutto il paese. Il nome richiama Sumatra, l'isola indonesiana, e Kula, termine che in alcune culture polinesiane indica comunità e condivisione — una scelta tipica dell'estetica tiki, che mescolava suggestioni geografiche di tutto il Pacifico senza preoccuparsi troppo dell'accuratezza etnica. Come molti drink tiki, nasce in un contesto di pura fantasia esotica piuttosto che da una tradizione autentica di qualche isola specifica.",
@@ -1644,7 +1636,7 @@
       "Fruttato",
       "Speziato"
     ],
-    "garnish": "Ananas + 3 ciliegie",
+    "garnish": "Fetta di ananas + 3 ciliegie",
     "ingredienti": [
       [
         "45 ml",
@@ -1672,7 +1664,7 @@
       ],
       [
         "15 ml",
-        "Honey mix"
+        "Miele"
       ],
       [
         "1 dash",
@@ -1680,9 +1672,10 @@
       ]
     ],
     "prep": [
-      "Versare tutti gli ingredienti in uno nel milkshake mixer con una paletta di ghiaccio tritato (circa 200 gr)",
+      "Versare tutti gli ingredienti in un milkshake mixer con una paletta di ghiaccio tritato (circa 200 gr)",
       "Miscelare per circa un minuto finché il ghiaccio non sarà quasi sciolto",
-      "Versare tutto (dirty dump) in un bicchiere highball"
+      "Versare tutto (dirty dump) in un bicchiere highball",
+      "Se necessario aggiungere altro ghiaccio tritato a colmare"
     ],
     "storia": "Nato negli anni '40 da Donn Beach nel leggendario Don the Beachcomber, il Three Dots and a Dash rappresenta un simbolo di speranza e rinascita. Il suo nome, che in codice Morse significa 'V' di Victory, evocava la fine della guerra e l'inizio di una nuova era. Ideato per celebrare la vittoria degli Alleati, divenne presto uno dei capisaldi della cultura Tiki, riflesso di un'epoca che cercava evasione e leggerezza attraverso profumi esotici e atmosfere lontane. La decorazione tradizionale — tre ciliegie e una fetta d'ananas — è un dettaglio simbolico che racchiude l'intera filosofia del drink: trasformare un messaggio di coraggio in un gesto di condivisione e festa. Ancora oggi il Three Dots and a Dash è un'icona del bartending tropicale, un racconto liquido di creatività e resilienza.",
     "frizzante": false,
@@ -1735,7 +1728,7 @@
     "distillato": [
       "Irish whiskey"
     ],
-    "categoria": "All day",
+    "categoria": "Pre dinner",
     "abv": "Molto alto",
     "sapori": [
       "Erbaceo",
@@ -1755,6 +1748,10 @@
       [
         "15 ml",
         "Chartreuse verde"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
       ]
     ],
     "prep": [
@@ -1781,7 +1778,7 @@
       "Avvolgente",
       "Effervescente"
     ],
-    "garnish": "Mezzo maracuja",
+    "garnish": "1/2 Passion fruit",
     "ingredienti": [
       [
         "45 ml",
@@ -1832,7 +1829,7 @@
       "Morbido",
       "Avvolgente"
     ],
-    "garnish": "Spolverata di noce moscata",
+    "garnish": "Noce moscata",
     "ingredienti": [
       [
         "15 ml",
@@ -1849,7 +1846,8 @@
     ],
     "prep": [
       "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) in una coppetta raffreddata"
+      "Filtrare (double strain) in una coppetta raffreddata",
+      "Grattuggiare noce moscata sulla superficie"
     ],
     "storia": "Il Porto Flip appartiene alla famiglia dei \"flip\" — categoria di drink a base di uova documentata già nell'Inghilterra del XVII secolo, quando si preparavano mescolando birra, rum o vino con uova e zucchero, spesso riscaldando il tutto con un ferro arroventato. Jerry Thomas include diverse versioni di flip nel suo Bartender's Guide del 1862, consacrandoli tra i classici americani dell'epoca. La versione con il Porto — il vino liquoroso prodotto nella regione del Douro in Portogallo e invecchiato nelle cantine di Vila Nova de Gaia — si impose come la più raffinata della categoria, sostituendo i distillati più rustici con un ingrediente dall'eleganza europea. Il Porto Flip è riconosciuto dall'IBA nella categoria delle \"unforgettables\", le ricette storiche che l'associazione considera patrimonio irrinunciabile della miscelazione classica.",
     "frizzante": false,
@@ -1967,20 +1965,24 @@
         "Succo di lime"
       ],
       [
-        "20 ml",
+        "30 ml",
         "Sciroppo di zucchero"
       ],
       [
-        "30 ml",
+        "60 ml",
         "Panna fresca"
       ],
       [
-        "2 gocce",
-        "Acqua ai fiori d'arancio"
+        "30 ml",
+        "Albume d'uovo"
       ],
       [
-        "q.b.",
-        "Albume d'uovo o foamer"
+        "3 dash",
+        "Acqua ai fiori di arancio"
+      ],
+      [
+        "2 drop",
+        "Estratto di vaniglia"
       ],
       [
         "Top",
@@ -1989,13 +1991,13 @@
     ],
     "prep": [
       "Shakerare tutto con ghiaccio (tranne la soda)",
-      "Filtrare (double strain) in un bicchiere collins senza ghiaccio",
-      "Completare con la soda",
-      "Mescolare delicatamente dal basso verso l'alto"
+      "Shakerare una seconda volta senza ghiaccio (reverse dry shake)",
+      "Filtrare (double strain) in un bicchiere highball senza ghiaccio",
+      "Completare con la soda"
     ],
     "storia": "Il Ramos Gin Fizz nasce nel 1888 a New Orleans, creato da Henry C. Ramos al suo Imperial Cabinet Saloon in St. Charles Street. Ramos era ossessionato dalla consistenza del drink — voleva una schiuma densa, quasi solida, che richiedeva uno shaking prolungato e continuo. Durante il Mardi Gras del 1915, al suo locale lavoravano contemporaneamente fino a 35 \"shaker boys\" — ragazzi pagati appositamente per shakerare senza sosta — per riuscire a servire la domanda. Ramos vendette il locale nel 1919, poco prima del Proibizionismo, lasciando in eredità la ricetta. Il governatore della Louisiana Huey Long era talmente ossessionato dal Ramos Fizz che nel 1935 portò un bartender di New Orleans a New York per insegnare ai barman del New Yorker Hotel come prepararlo correttamente, durante una visita ufficiale alla città.",
     "frizzante": true,
-    "bicchiere": "Collins",
+    "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/ramos_fizz.webp",
     "varianti": []
   },
@@ -2168,22 +2170,23 @@
         "Rye whiskey"
       ],
       [
-        "20 ml",
+        "22,5 ml",
         "Vermouth rosso"
       ],
       [
-        "5 ml",
+        "15 ml",
         "Liquore alla ciliegia"
       ],
       [
-        "1 dash",
+        "7,5 ml",
         "Assenzio"
       ]
     ],
     "prep": [
-      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Versare l'assenzio in una coppetta raffreddata per aromatizzare e poi eliminare l'assenzio"
+      "Versare tutti gli altri ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in una coppetta raffreddata"
+      "Filtrare nella coppetta"
     ],
     "storia": "Il Remember the Maine viene documentato da Charles H. Baker Jr. nel suo \"The Gentleman's Companion\" del 1939, uno dei libri di viaggio e gastronomia più eccentrici della letteratura americana del Novecento. Baker era un giornalista e avventuriero che raccoglieva ricette di cocktail durante i suoi viaggi in giro per il mondo, e il libro è scritto in uno stile narrativo e personale insolito per un ricettario. Il nome rimanda al famoso grido di guerra \"Remember the Maine, to Hell with Spain!\" — lo slogan patriottico americano nato dopo l'esplosione della corazzata USS Maine nel porto dell'Avana nel febbraio 1898, evento che fu il pretesto per l'entrata degli Stati Uniti nella guerra ispano-americana. Baker lo descrive come un drink che aveva bevuto a Cuba e che associava direttamente a quella storia, costruendo attorno al cocktail una narrazione storica e personale tipica del suo stile.",
     "frizzante": false,
@@ -2377,7 +2380,7 @@
     "distillato": [
       "Vodka"
     ],
-    "categoria": "All day",
+    "categoria": "Pre dinner",
     "abv": "Medio basso",
     "sapori": [
       "Fruttato",
@@ -2387,7 +2390,7 @@
     "garnish": "More",
     "ingredienti": [
       [
-        "30 ml",
+        "22,5 ml",
         "Vodka"
       ],
       [
@@ -2541,7 +2544,7 @@
     "id": "sazerac",
     "name": "Sazerac",
     "distillato": [
-      "Rye whiskey"
+      "Rye whiskey o Cognac"
     ],
     "categoria": "After dinner",
     "abv": "Alto",
@@ -2554,7 +2557,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Rye whiskey o cognac"
+        "Rye whiskey o Cognac"
       ],
       [
         "1",
@@ -2806,11 +2809,11 @@
       "Fruttato",
       "Avvolgente"
     ],
-    "garnish": "Fetta di arancia + ciliegia",
+    "garnish": "Fetta di arancia + Ciliegia",
     "ingredienti": [
       [
         "30 ml",
-        "Southern Comfort"
+        "Southern comfort"
       ],
       [
         "30 ml",
@@ -2977,7 +2980,7 @@
       "Effervescente",
       "Classico"
     ],
-    "garnish": "Zest di limone + fetta di arancia",
+    "garnish": "Zest di limone + Fetta di arancia",
     "ingredienti": [
       [
         "30 ml",
@@ -3015,7 +3018,7 @@
       "Intenso",
       "Raffinato"
     ],
-    "garnish": "Fetta di mela",
+    "garnish": "Nessuna",
     "ingredienti": [
       [
         "30 ml",
@@ -3217,7 +3220,7 @@
       "Mentolato",
       "Aromatico"
     ],
-    "garnish": "Ciuffo di menta",
+    "garnish": "Ciuffo di menta + Fetta di ananas",
     "ingredienti": [
       [
         "30 ml",
@@ -3226,30 +3229,26 @@
       [
         "15 ml",
         "Liquore alla pesca"
-      ],
+      ],      
       [
-        "45 ml",
-        "Estratto di ananas"
-      ],
-      [
-        "22,5 ml",
+        "15 ml",
         "Succo di lime"
       ],
       [
-        "22,5 ml",
+        "30 ml",
         "Honey mix"
       ],
       [
-        "8",
-        "Foglie di menta"
+        "4",
+        "Pezzi di ananas"
       ],
       [
-        "80 gr",
-        "Ghiaccio tritato"
-      ]
+        "10",
+        "Foglie di menta"
+      ]      
     ],
     "prep": [
-      "Frullare tutti gli ingredienti con ghiaccio",
+      "Frullare tutti gli ingredienti con ghiaccio tritato",
       "Versare in un bicchiere hurricane"
     ],
     "storia": "Il Missionary's Downfall nasce nel 1937 al Don the Beachcomber di Hollywood, creato da Donn Beach — Ernest Raymond Beaumont Gantt — il fondatore del primo tiki bar americano. Il nome è tipicamente ironico: il \"missionario\" che cade, che cede alla tentazione di qualcosa che dovrebbe condannare. Appartiene alla prima generazione di cocktail tiki in assoluto, quelli nati direttamente dalla mente di Donn Beach tra il 1933 e il 1940, prima che la cultura tiki diventasse un fenomeno di massa. La particolarità tecnica è nell'uso del frullatore — Beach fu uno dei primissimi bartender a integrare il frullatore nella preparazione dei cocktail, in anni in cui era ancora considerato un elettrodomestico da cucina e non uno strumento da bar. Il risultato è un drink dalla consistenza quasi da frullato tropicale, anomalo nel panorama della miscelazione dell'epoca.",
@@ -3262,16 +3261,16 @@
     "id": "pimms_cup",
     "name": "Pimm's Cup",
     "distillato": [
-      "Pimm’s No.1"
+      "Pimm's No.1"
     ],
-    "categoria": "Pre dinner",
+    "categoria": "All day",
     "abv": "Molto alto",
     "sapori": [
       "Rinfrescante",
       "Fruttato",
       "Speziato"
     ],
-    "garnish": "Ciuffo di menta + mix di frutta",
+    "garnish": "Ciuffo di menta + Mix di frutta",
     "ingredienti": [
       [
         "50 ml",
@@ -3305,29 +3304,29 @@
       "Rinfrescante",
       "Potente"
     ],
-    "garnish": "Ciuffo di menta",
+    "garnish": "Zest di arancia",
     "ingredienti": [
       [
         "50 ml",
         "Rum giamaicano"
       ],
       [
-        "22,5 ml",
+        "15 ml",
         "Succo di lime"
       ],
       [
-        "15 ml",
-        "Sciroppo di zucchero"
+        "30 ml",
+        "Succo di canna da zucchero"
       ]
     ],
     "prep": [
-      "Versare tutto in un bicchiere highball",
+      "Versare tutto in un tumbler basso",
       "Aggiungere ghiaccio tritato e miscelare con uno swizzle stick",
       "Se necessario colmare con altro ghiaccio tritato"
     ],
     "storia": "Il Planter's Punch ha origini giamaicane che risalgono probabilmente alla seconda metà dell'Ottocento. La prima apparizione documentata in forma scritta è del 1878 sul giornale satirico britannico \"Fun\", dove compare come filastrocca: \"One of sour, two of sweet, three of strong, four of weak\" — una ricetta in versi che definiva le proporzioni del drink in modo mnemonico. I \"planters\" del titolo erano i proprietari delle piantagioni di canna da zucchero caraibiche, che producevano rum in abbondanza e avevano tutto l'interesse a creare consumo locale. Il Myers's Rum giamaicano, fondato nel 1879 da Fred L. Myers, è storicamente associato alla versione più diffusa del drink. Non esiste una ricetta canonica — ogni isola, ogni famiglia, ogni bar ne ha una propria — e questa fluidità fa parte dell'identità del Planter's Punch come drink vivente della tradizione orale caraibica.",
     "frizzante": false,
-    "bicchiere": "Highball",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/planters_punch.webp",
     "varianti": []
   },
@@ -3424,7 +3423,7 @@
     "id": "tommys_margarita",
     "name": "Tommy's Margarita",
     "distillato": [
-      "Tequila reposado"
+      "Tequila"
     ],
     "categoria": "All day",
     "abv": "Medio",
@@ -3436,8 +3435,8 @@
     "garnish": "Rondella di lime",
     "ingredienti": [
       [
-        "50 ml",
-        "Tequila reposado"
+        "60 ml",
+        "Tequila"
       ],
       [
         "25 ml",
@@ -3446,16 +3445,11 @@
       [
         "25 ml",
         "Sciroppo di agave"
-      ],
-      [
-        "q.b.",
-        "Crusta di sale"
-      ]
+      ]      
     ],
     "prep": [
-      "Bordare un tumbler basso con sale e riempirlo di ghiaccio",
       "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) nel tumbler basso"
+      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio"
     ],
     "storia": "Il Tommy's Margarita nasce nel 1990 al Tommy's Mexican Restaurant di San Francisco, creato da Julio Bermejo — appassionato studioso della tequila e figlio dei fondatori del locale. Bermejo sostituì il triple sec con il néctar di agave, modificando radicalmente l'equilibrio del drink e valorizzando la tequila 100% agave come protagonista assoluta. La scelta del néctar di agave non era solo gustativa ma ideologica: Bermejo voleva un drink che esprimesse la purezza del distillato messicano senza l'interferenza dell'arancio del triple sec. Il Tommy's Margarita divenne il manifesto del movimento di rivalutazione della tequila di qualità negli Stati Uniti, e Bermejo uno dei suoi principali ambasciatori. Nel 2003 l'IBA lo riconobbe ufficialmente come variante moderna della Margarita classica, rendendolo uno dei pochissimi cocktail contemporanei ad ottenere riconoscimento ufficiale in vita del suo creatore.",
     "frizzante": false,
@@ -3476,7 +3470,7 @@
       "Floreale",
       "Cremoso"
     ],
-    "garnish": "Zest di limone + uva",
+    "garnish": "Zest di limone + Uva",
     "ingredienti": [
       [
         "45 ml",
@@ -3517,7 +3511,7 @@
       "Rye whiskey",
       "Cognac"
     ],
-    "categoria": "After dinner",
+    "categoria": "Pre dinner",
     "abv": "Alto",
     "sapori": [
       "Ricco",
@@ -3582,12 +3576,17 @@
         "Succo di limone"
       ],
       [
-        "15 ml",
-        "Honey mix"
+        "22,5 ml",
+        "Succo di arancia"
+      ],
+      [
+        "1 bspoon",
+        "Miele"
       ]
     ],
     "prep": [
-      "Shakerare tutto con ghiaccio",
+      "In uno shaker mettere il succo di limone, il succo di arancia, il miele e con un barspoon sciogliere bene il miele e amalgamare il tutto",
+      "Aggiungere il gin e shakerare tutto con ghiaccio"
       "Filtrare (double strain) in una coppetta raffreddata"
     ],
     "storia": "Il Bee's Knees nasce durante il Proibizionismo americano, con le prime documentazioni che risalgono ai primi anni Venti. Il nome è un'espressione idiomatica americana degli anni Venti che significava \"la cosa migliore in assoluto\" — equivalente dell'italiano \"il massimo\" — e faceva parte di un gergo giovanile dell'epoca ricco di riferimenti agli animali: the cat's pajamas, the elephant's eyebrows, the snake's hips. L'uso del miele come dolcificante aveva una funzione pratica precisa: il gin di contrabbando prodotto illegalmente durante il Proibizionismo aveva spesso un sapore aspro e sgradevole, e il miele — insieme al succo di limone — serviva a mascherarlo efficacemente. La ricetta compare nel Savoy Cocktail Book del 1930 nella versione portata in Europa dai bartender americani emigrati per sfuggire al Proibizionismo. Il 3 settembre è il Bee's Knees Day, giornata che celebra il cocktail e che molti bar associano a campagne per la tutela delle api.",
@@ -3775,7 +3774,7 @@
       "Effervescente",
       "Avvolgente"
     ],
-    "garnish": "Fetta di ananas + ciliegia",
+    "garnish": "Fetta di ananas + Ciliegia",
     "ingredienti": [
       [
         "45 ml",
@@ -3892,8 +3891,7 @@
     "name": "Between the Sheets",
     "distillato": [
       "Rum",
-      "Cognac",
-      "Triple sec"
+      "Cognac"
     ],
     "categoria": "After dinner",
     "abv": "Alto",
@@ -3939,14 +3937,14 @@
       "Chartreuse verde",
       "Vermouth rosso"
     ],
-    "categoria": "After dinner",
+    "categoria": "Pre dinner",
     "abv": "Molto alto",
     "sapori": [
       "Erbaceo",
       "Intenso",
       "Speziato"
     ],
-    "garnish": "Zest di limone + amarena",
+    "garnish": "Zest di limone + Ciliegia",
     "ingredienti": [
       [
         "30 ml",
@@ -4016,7 +4014,7 @@
     "distillato": [
       "Scotch whisky"
     ],
-    "categoria": "All day",
+    "categoria": "Pre dinner",
     "abv": "Medio",
     "sapori": [
       "Fruttato",
@@ -4065,7 +4063,7 @@
       "Speziato",
       "Rinfrescante"
     ],
-    "garnish": "Sedano + fetta di limone",
+    "garnish": "Sedano + Fetta di limone",
     "ingredienti": [
       [
         "45 ml",
@@ -4243,7 +4241,7 @@
     "garnish": "Zest di arancia",
     "ingredienti": [
       [
-        "30 ml",
+        "45 ml",
         "Bourbon whiskey"
       ],
       [
@@ -4258,11 +4256,11 @@
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare in una coppetta raffreddata"
     ],
     "storia": "Il Boulevardier nasce a Parigi negli anni Venti, associato a Erskine Gwynne — giornalista e scrittore americano che viveva nella capitale francese e pubblicava una rivista mondana chiamata proprio \"The Boulevardier\". La ricetta compare nel libro \"Barflies and Cocktails\" di Harry MacElhone del 1927, dove viene attribuita direttamente a Gwynne. Il nome \"boulevardier\" in francese indica il frequentatore ozioso dei boulevard parigini — l'uomo di mondo che passeggia, osserva e socializza — ed era il ritratto perfetto dell'americano espatriato della generazione perduta che abitava Parigi negli anni Venti. Strutturalmente il Boulevardier è identico al Negroni — gin, vermouth rosso, Campari — con il bourbon al posto del gin, una sostituzione che sposta il baricentro del drink verso note più calde e dolci. Paradossalmente, il Negroni nacque nello stesso periodo a Firenze, e i due drink sono fratelli separati da un distillato.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/boulevardier.webp",
     "varianti": []
   },
@@ -4283,7 +4281,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Old Tom gin"
+        "Gin Old Tom"
       ],
       [
         "45 ml",
@@ -4612,12 +4610,16 @@
         "Rum"
       ],
       [
-        "22,5 ml",
+        "15 ml",
         "Succo di lime"
       ],
       [
-        "22,5 ml",
-        "Honey mix"
+        "15 ml",
+        "Miele"
+      ],
+      [
+        "50 ml",
+        "Acqua"
       ]
     ],
     "prep": [
@@ -4677,29 +4679,29 @@
       "Amaro",
       "Ricco"
     ],
-    "garnish": "Fetta di arancia",
+    "garnish": "Zest di limone",
     "ingredienti": [
       [
-        "30 ml",
+        "45 ml",
         "Gin"
       ],
       [
-        "30 ml",
+        "22,5 ml",
         "Vermouth dry"
       ],
       [
-        "30 ml",
+        "7,5 ml",
         "Bitter rosso"
       ]
     ],
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare in una coppetta raffreddata"
     ],
     "storia": "Il Cardinale è un classico italiano nato negli anni '50, probabilmente al famoso Hotel Excelsior di Roma. È una variante raffinata del Negroni ma con il vermouth secco al posto di quello rosso dolce, conferendo un gusto più asciutto e delicato. Il nome richiama il colore rosso intenso della bevanda, evocando l'abito cerimoniale dei cardinali della Chiesa cattolica, omaggio all'Italia e alle sue tradizioni religiose ed enogastronomiche. Negli anni '50 divenne simbolo di sofisticatezza nei cocktail bar della capitale italiana, affermandosi rapidamente come scelta elegante per chi desiderava una variante meno dolce del Negroni. Alcune fonti sostengono sia stato creato per un cardinale romano, il cui gusto personale influenzò la scelta degli ingredienti.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/cardinale.webp",
     "varianti": []
   },
@@ -4716,7 +4718,7 @@
       "Elegante",
       "Aromatico"
     ],
-    "garnish": "Zest di limone + ciliegia",
+    "garnish": "Zest di limone + Ciliegia",
     "ingredienti": [
       [
         "45 ml",
@@ -4737,11 +4739,11 @@
     ],
     "prep": [
       "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) in una coppetta raffreddata"
+      "Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio"
     ],
     "storia": "Il Casino compare nel Savoy Cocktail Book di Harry Craddock del 1930, senza attribuzione a un inventore specifico. È costruito sulla struttura dell'Old Tom Gin — una tipologia di gin leggermente dolcificata, tipica dell'Inghilterra del XIX secolo, che aveva quasi scomparso dal mercato prima di tornare in produzione negli anni Duemila — con l'aggiunta di Maraschino, succo di limone e orange bitters. Il nome evoca i casinò e i luoghi di gioco d'azzardo, una scelta che riflette l'estetica dei cocktail dell'era pre-Proibizionismo americano, dove i locali notturni, il gioco e il bere erano intimamente connessi. È uno dei drink del Savoy Cocktail Book che richiedono l'Old Tom Gin originale per essere preparati correttamente — la sua dolcezza naturale è parte integrante dell'equilibrio della ricetta — e questo lo ha reso difficile da replicare per decenni, finché la produzione dell'Old Tom è ripresa.",
     "frizzante": false,
-    "bicchiere": "Coppetta",
+    "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/casino.webp",
     "varianti": []
   },
@@ -4801,7 +4803,7 @@
       "Aromatico",
       "Rinfrescante"
     ],
-    "garnish": "Foglia di ananas + lime",
+    "garnish": "Ciuffo di menta + Noce moscata",
     "ingredienti": [
       [
         "45 ml",
@@ -4824,7 +4826,8 @@
       "In un bicchiere highball inserire lo 'swizzle stick'",
       "Versare tutti gli ingredienti e il ghiaccio tritato",
       "Miscelare bene facendo ruotare lo swizzle tra i palmi delle mani",
-      "Aggiungere altro ghiaccio tritato fino a riempire il bicchiere"
+      "Aggiungere altro ghiaccio tritato fino a riempire il bicchiere",
+      "Grattuggiare noce moscata sulla superficie"
     ],
     "storia": "Il Chartreuse Swizzle nasce nel 2002 a San Francisco, creato da Marco Dionysos al Forbidden Island di Alameda — uno dei tiki bar più rispettati della California. Dionysos era uno dei protagonisti del revival tiki americano degli anni Duemila, un movimento che stava riscoprendo e reinterpretando i classici di Donn Beach e Trader Vic con ingredienti di qualità superiore. L'idea di usare la Chartreuse verde come base di un tiki drink era radicalmente insolita — il liquore dei monaci certosini della Grande Chartreuse in Isère non aveva mai avuto un ruolo di protagonista nella tradizione caraibica — ma Dionysos trovò una sinergia inaspettata tra le erbe alpine francesi e i sapori tropicali del falernum e del succo di ananas. Il Chartreuse Swizzle è oggi considerato uno dei cocktail contemporanei più riusciti del movimento tiki revival, studiato nelle scuole di bartending come esempio di fusione creativa tra tradizioni distanti.",
     "frizzante": false,
@@ -5182,24 +5185,20 @@
       "Speziato",
       "Rinfrescante"
     ],
-    "garnish": "Fetta di lime",
+    "garnish": "Rondella di lime",
     "ingredienti": [
       [
-        "50 ml",
+        "60 ml",
         "Rum scuro"
-      ],
+      ],    
       [
-        "15 ml",
-        "Succo di lime"
-      ],
-      [
-        "120 ml",
+        "100 ml",
         "Ginger beer"
       ]
     ],
     "prep": [
       "Riempire un bicchiere highball con ghiaccio",
-      "Versare prima la ginger beer e il succo di lime",
+      "Versare prima la ginger beer",
       "Infine versare il rum in superfice (float) per creare l'effetto visivo di una tempesta"
     ],
     "storia": "Il Dark 'N' Stormy è il cocktail nazionale delle Bermuda, e uno dei pochissimi drink al mondo con un marchio registrato: la Gosling Brothers — la famiglia bermudiana che produce il rum Black Seal dal 1806 — detiene i diritti legali sul nome, stabilendo che solo il loro rum può essere utilizzato in un Dark 'N' Stormy autentico. Le origini del drink risalgono ai primi del Novecento, quando i marinai della Royal Navy britannica di stanza alle Bermuda mescolavano il rum locale con la ginger beer prodotta dalla stessa base navale. Il nome descrive l'aspetto visivo del drink: il rum scuro versato sopra la ginger beer chiara galleggia in superficie come una nuvola temporalesca. Il trademark fu registrato ufficialmente dalla Gosling's nel 1991, rendendolo un caso unico nella storia dei cocktail — una bevanda popolare con protezione legale del nome.",
@@ -5310,7 +5309,7 @@
       "Fruttato",
       "Rinfrescante"
     ],
-    "garnish": "Fetta di lime",
+    "garnish": "1/2 Passion fruit",
     "ingredienti": [
       [
         "30 ml",
@@ -5321,7 +5320,7 @@
         "Rum bianco cubano"
       ],
       [
-        "22,5 ml",
+        "15 ml",
         "Succo di lime"
       ],
       [
@@ -5330,16 +5329,17 @@
       ],
       [
         "15 ml",
-        "Honey mix"
+        "Miele"
       ]
     ],
     "prep": [
-      "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) in una coppetta raffreddata"
+      "Frullare tutto con ghiaccio tritato per qualche secondo con un mixer per milkshake",
+      "Versare tutto in un bicchiere highball"
+      "Aggiungere altro ghiaccio tritato fino a riempire il bicchiere"
     ],
     "storia": "Il Don's Special Daiquiri è una creazione di Donn Beach — Ernest Raymond Beaumont Gantt — il fondatore del Don the Beachcomber di Hollywood, il primo tiki bar americano aperto nel 1933. Donn Beach era ossessionato dalla complessità aromatica e dalla segretezza delle ricette: teneva le sue formule in codice, usava nomi in codice per gli ingredienti anche con il proprio staff, e brevettava i blend di rum che usava nei suoi drink. Il Don's Special Daiquiri è una delle sue varianti del Daiquiri classico costruita attorno all'uso di rum multipli — una tecnica che Donn Beach aveva mutuato dalla tradizione punch caraibica — che creano una base più complessa di quella possibile con un solo distillato. Come molte sue ricette, fu tenuta segreta per decenni e ricostruita solo negli anni Novanta e Duemila grazie al lavoro del ricercatore Jeff Berry sugli archivi originali di Beach.",
     "frizzante": false,
-    "bicchiere": "Coppetta",
+    "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/dons_special_daiquiri.webp",
     "varianti": []
   },
@@ -5398,7 +5398,7 @@
       "Vellutato",
       "Ricco"
     ],
-    "garnish": "Noce moscata + cannella",
+    "garnish": "Noce moscata + Cannella",
     "ingredienti": [
       [
         "50 ml",
@@ -5420,7 +5420,8 @@
     "prep": [
       "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
       "Aggiungere ghiaccio e shakerare nuovamente",
-      "Filtrare (double strain) in un tumbler basso raffreddato"
+      "Filtrare (double strain) in un tumbler basso raffreddato",
+      "Grattuggiare noce moscata sulla superficie"
     ],
     "storia": "L'Eggnog ha origini europee che risalgono al posset medievale inglese — una bevanda calda a base di latte cagliato, uova e alcol consumata nelle corti britanniche fin dal XIII secolo. Nelle colonie americane del XVIII secolo, dove il latte era abbondante e il rum dei Caraibi facilmente disponibile, la ricetta si trasformò e si diffuse come bevanda festiva. George Washington era noto per la sua ricetta personale di eggnog, particolarmente alcolica — includeva rye whiskey, rum, sherry e vino Madeira. La transizione dall'alcol europeo al whisky americano avvenne nel corso dell'Ottocento, man mano che l'industria distillatoria americana si sviluppava. L'Eggnog è oggi la bevanda natalizia per antonomasia negli Stati Uniti e in Canada, consumato principalmente tra il Thanksgiving di novembre e il Capodanno. Il 24 dicembre è il National Eggnog Day negli Stati Uniti.",
     "frizzante": false,
@@ -5764,7 +5765,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Old Tom gin"
+        "Gin Old Tom"
       ],
       [
         "45 ml",
@@ -6031,7 +6032,7 @@
       "Mentolato",
       "Agrumato"
     ],
-    "garnish": "Ciuffo di basilico",
+    "garnish": "Nessuna",
     "ingredienti": [
       [
         "60 ml",
@@ -6046,17 +6047,17 @@
         "Sciroppo di zucchero"
       ],
       [
-        "6/8",
+        "10",
         "Foglie di basilico"
       ]
     ],
     "prep": [
       "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio"
+      "Filtrare (double strain) in una coppetta raffreddata"
     ],
     "storia": "Il Gin Basil Smash nasce nel 2008 ad Amburgo per mano di Jörg Meyer, al bar Le Lion, e si afferma rapidamente come icona della mixology moderna grazie alla sua freschezza e semplicità. La combinazione di gin, basilico fresco e succo di limone crea un profilo erbaceo e vivace, immediatamente riconoscibile anche per il suo verde brillante. Il cocktail ha conquistato i bar europei e internazionali, ottenendo premi e diventando simbolo della tendenza a valorizzare ingredienti naturali e sapori autentici. La sua ricetta semplice lo rende perfetto anche per la preparazione domestica, ideale per i mesi estivi e adatto ad accompagnare piatti leggeri. Con la sua versatilità e il fascino contemporaneo, il Gin Basil Smash unisce innovazione e equilibrio, regalando un'esperienza rinfrescante e raffinata.",
     "frizzante": false,
-    "bicchiere": "Tumbler basso",
+    "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gin_basil_smash.webp",
     "varianti": []
   },
@@ -6271,7 +6272,7 @@
       "Vanigliato",
       "Avvolgente"
     ],
-    "garnish": "Spolverata di cacao",
+    "garnish": "Cacao",
     "ingredienti": [
       [
         "30 ml",
@@ -6288,7 +6289,8 @@
     ],
     "prep": [
       "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) in una coppetta raffreddata"
+      "Filtrare (double strain) in una coppetta raffreddata",
+      "Spolverata di cacao sulla superficie"
     ],
     "storia": "Il Golden Cadillac nasce nel 1952 al Poor Red's Bar-B-Q di El Dorado, in California — un ristorante di barbecue che ancora oggi rivendica la paternità del drink. La storia racconta che Frank Cline, il bartender del locale, lo creò per celebrare una coppia di fidanzati che avevano appena acquistato una Cadillac color oro, la macchina simbolo del sogno americano del dopoguerra. Il nome è un tributo diretto a quell'automobile: la Cadillac era negli anni Cinquanta il massimo dell'aspirazione materiale americana, associata al successo, al glamour hollywoodiano e alla cultura dell'abbondanza del boom economico. La combinazione di Galliano, crema di cacao bianca e panna è costruita per evocare quelle stesse sensazioni di lusso accessibile che la Cadillac rappresentava per la classe media americana.",
     "frizzante": false,
@@ -6355,7 +6357,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Tequila reposado"
+        "Tequila"
       ],
       [
         "30 ml",
@@ -6394,7 +6396,7 @@
       "Mentolato",
       "Dolce"
     ],
-    "garnish": "Spolverata di cacao",
+    "garnish": "Cacao",
     "ingredienti": [
       [
         "30 ml",
@@ -6411,7 +6413,8 @@
     ],
     "prep": [
       "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) in una coppetta raffreddata"
+      "Filtrare (double strain) in una coppetta raffreddata",
+      "Spoverata di cacao sulla superficie"
     ],
     "storia": "Il Grasshopper nasce negli anni Cinquanta al Tujague's Restaurant di New Orleans — uno dei ristoranti più antichi della città, aperto nel 1856 — creato da Philip Guichet. Il nome deriva dal colore verde brillante del drink, che ricorda appunto il grillo. Guichet presentò il Grasshopper a una competizione di cocktail a New York, dove vinse il secondo posto, contribuendo alla sua diffusione nazionale. Il drink appartiene alla categoria dei dessert cocktails cremosi americani degli anni Cinquanta e Sessanta, pensati per essere serviti al posto del dolce a fine pasto. Il Tujague's è ancora oggi aperto nel French Quarter di New Orleans e serve il Grasshopper nel bicchiere originale come parte della sua storia.",
     "frizzante": false,
@@ -6471,7 +6474,7 @@
       "Speziato",
       "Rinfrescante"
     ],
-    "garnish": "Fetta di arancia + ciliegia",
+    "garnish": "Fetta di arancia + Ciliegia",
     "ingredienti": [
       [
         "50 ml",
@@ -6515,6 +6518,10 @@
       [
         "60 ml",
         "Rum"
+      ],    
+      [
+        "30 ml",
+        "Succo di pompelmo rosa"
       ],
       [
         "15 ml",
@@ -6522,10 +6529,6 @@
       ],
       [
         "15 ml",
-        "Succo di pompelmo rosa"
-      ],
-      [
-        "10 ml",
         "Maraschino"
       ]
     ],
@@ -6552,7 +6555,7 @@
       "Avvolgente",
       "Speziato"
     ],
-    "garnish": "Limone + cannella",
+    "garnish": "Fetta di limone + Cannella",
     "ingredienti": [
       [
         "45 ml",
@@ -6590,7 +6593,7 @@
       "Dolce",
       "Effervescente"
     ],
-    "garnish": "Ciuffo di menta + lime",
+    "garnish": "Ciuffo di menta + Rondella di lime",
     "ingredienti": [
       [
         "50 ml",
@@ -6706,7 +6709,7 @@
         "Succo di ananas"
       ],
       [
-        "q.b.",
+        "1",
         "Rondella di zenzero"
       ]
     ],
@@ -6735,7 +6738,7 @@
       "Agrumato",
       "Speziato"
     ],
-    "garnish": "Zest di limone",
+    "garnish": "Nessuna",
     "ingredienti": [
       [
         "30 ml",
@@ -6769,11 +6772,11 @@
     "prep": [
       "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
       "Aggiungere ghiaccio e shakerare nuovamente",
-      "Filtrare (double strain) in una coppetta raffreddata"
+      "Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio"
     ],
     "storia": "L'Illegal è un cocktail moderno creato da Phil Ward al Death & Co di New York — lo speakeasy aperto nel 2006 nell'East Village che ha definito l'estetica della mixology americana contemporanea. Ward è uno dei bartender più influenti della sua generazione e ha contribuito a diffondere la cultura del mezcal negli Stati Uniti in un periodo in cui il distillato messicano era ancora poco conosciuto fuori dal Messico. Il nome Illegal è un riferimento diretto al mezcal prodotto artigianalmente nelle zone rurali del Oaxaca senza licenza o documentazione formale — una realtà comune nel Messico di quegli anni, dove i piccoli produttori tradizionali operavano al di fuori del sistema di certificazione ufficiale. Il cocktail è costruito attorno all'incontro tra mezcal, Cointreau e succo di lime, una struttura da sour che valorizza le note affumicate del distillato.",
     "frizzante": false,
-    "bicchiere": "Coppetta",
+    "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/illegal.webp",
     "varianti": []
   },
@@ -6836,7 +6839,7 @@
       "Morbido",
       "Floreale"
     ],
-    "garnish": "Spolverata di cannella",
+    "garnish": "Cannella",
     "ingredienti": [
       [
         "60 ml",
@@ -6862,7 +6865,8 @@
     "prep": [
       "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
       "Aggiungere ghiaccio e shakerare nuovamente",
-      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio"
+      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio",
+      "Grattuggiare cannella sulla superficie"
     ],
     "storia": "L'Infante nasce nel 2007 al Death & Co di New York, creato da Daniel Eun — uno dei bartender della prima generazione del locale che avrebbe definito la cocktail culture newyorkese degli anni Duemila. Il Death & Co, aperto nel gennaio 2007 nell'East Village, fu uno dei locali più influenti della storia recente della miscelazione americana: il suo approccio serio e documentato ai cocktail classici e alle creazioni originali contribuì a fondare quello che viene chiamato il movimento neo-speakeasy. Il nome Infante — dal termine spagnolo che indica il figlio minore di un re, non destinato al trono — fu scelto da Eun probabilmente per la sua evocazione di eleganza discreta e di qualcosa di nobile ma non necessariamente famoso. La tequila e il Lillet blanc sono i protagonisti, in una struttura che richiama i drink stirred europei reinterpretati con un distillato messicano.",
     "frizzante": false,
@@ -7109,15 +7113,15 @@
     "garnish": "Foglia di ananas",
     "ingredienti": [
       [
-        "30 ml",
-        "Rum scuro"
+        "45 ml",
+        "Rum blackstrap"
       ],
       [
         "15 ml",
         "Bitter rosso"
       ],
       [
-        "60 ml",
+        "45 ml",
         "Succo di ananas"
       ],
       [
@@ -7184,7 +7188,7 @@
     "distillato": [
       "Vino bianco"
     ],
-    "categoria": "All day",
+    "categoria": "Pre dinner",
     "abv": "Medio basso",
     "sapori": [
       "Fruttato",
@@ -7227,7 +7231,7 @@
     "distillato": [
       "Rye whiskey"
     ],
-    "categoria": "After dinner",
+    "categoria": "Pre dinner",
     "abv": "Alto",
     "sapori": [
       "Intenso",
@@ -8069,7 +8073,7 @@
       "Agrumato",
       "Erbaceo"
     ],
-    "garnish": "Ciuffo di menta + lime",
+    "garnish": "Ciuffo di menta + Rondella di lime",
     "ingredienti": [
       [
         "50 ml",
@@ -8250,7 +8254,7 @@
       "Speziato",
       "Dissetante"
     ],
-    "garnish": "Ciuffo di menta + lime",
+    "garnish": "Ciuffo di menta + Rondella di lime",
     "ingredienti": [
       [
         "50 ml",
@@ -8587,7 +8591,7 @@
       "Ricco",
       "Intenso"
     ],
-    "garnish": "Zest di arancia + ciliegia",
+    "garnish": "Zest di arancia + Ciliegia",
     "ingredienti": [
       [
         "60 ml",
@@ -8713,7 +8717,7 @@
       "Cremoso",
       "Avvolgente"
     ],
-    "garnish": "Ananas + noce moscata",
+    "garnish": "Fetta di ananas + Noce moscata",
     "ingredienti": [
       [
         "45 ml",
@@ -8734,7 +8738,8 @@
     ],
     "prep": [
       "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"
+      "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio",
+      "Grattuggiare noce moscata sulla superficie"
     ],
     "storia": "Il Painkiller nasce negli anni Settanta al Soggy Dollar Bar di Jost Van Dyke, una delle isole minori delle Isole Vergini Britanniche — un'isola così piccola e remota da non avere un molo, costringendo i visitatori ad arrivare a nuoto dalla barca, con i dollari inevitabilmente bagnati da cui il locale prende il nome. Il drink fu creato dalla proprietaria Daphne Henderson per offrire qualcosa di rinfrescante e nutriente ai clienti che avevano nuotato fino al bar. Negli anni Ottanta il brand Pusser's Rum — il produttore del rum della Royal Navy britannica — registrò il nome Painkiller come marchio commerciale legato al proprio prodotto, stabilendo che solo il rum Pusser's potesse essere usato in un Painkiller autentico. È uno dei due soli cocktail al mondo con nome registrato come marchio, insieme al Dark 'N' Stormy della Gosling's.",
     "frizzante": false,
@@ -8775,8 +8780,7 @@
       ]
     ],
     "prep": [
-      "Bordare un bicchiere highball con sale e riempirlo di ghiaccio",
-      "Versare tutti gli ingredienti",
+      "Versare tutto in un bicchiere highball riempito di ghiaccio",
       "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
     ],
     "storia": "La Paloma è considerata da molti messicani il loro cocktail nazionale più autentico — più radicato della Margarita, che paradossalmente è molto più famosa all'estero. Le origini sono incerte: la paternità è spesso attribuita a Don Javier Delgado Corona di La Capilla a Tequila, ma alcune fonti la collegano invece all'azienda Squirt, produttrice del succo di pompelmo gassato che nelle versioni tradizionali messicane sostituisce il succo fresco. Il nome rimanda alla celebre canzone La Paloma, scritta nel 1863 dallo spagnolo Sebastián Iradier e diventata uno degli spartiti più eseguiti e riarrangiati nella storia della musica popolare mondiale. In Messico la Paloma si beve in modo informale, spesso in bottiglia direttamente con una caramella salata al bordo — un rito popolare che non ha nulla a che fare con la versione internazionalizzata servita nei cocktail bar.",
@@ -8806,7 +8810,7 @@
       ],
       [
         "22,5 ml",
-        "Amaro"
+        "Amaro nonino"
       ],
       [
         "22,5 ml",
@@ -8963,7 +8967,7 @@
       "Fruttato",
       "Rinfrescante"
     ],
-    "garnish": "Ananas + ciliegia",
+    "garnish": "Fetta di ananas + Ciliegia",
     "ingredienti": [
       [
         "50 ml",
@@ -8974,20 +8978,12 @@
         "Crema di cocco"
       ],
       [
-        "90 ml",
+        "50 ml",
         "Estratto di ananas"
-      ],
-      [
-        "15 ml",
-        "Succo di lime"
-      ],
-      [
-        "120 gr",
-        "Ghiaccio tritato"
-      ]
+      ]     
     ],
     "prep": [
-      "Frullare tutti gli ingredienti fino a ottenere una consistenza omogenea e cremosa",
+      "Frullare tutti gli ingredienti con ghiaccio tritato",
       "Versare in un bicchiere hurricane"
     ],
     "storia": "La Piña Colada nasce a Porto Rico nel 1954, creata da Ramón Monchito Marrero al Caribe Hilton di San Juan — uno dei primi resort internazionali dell'isola, aperto nel 1949. Marrero impiegò tre mesi a perfezionare la ricetta, che richiedeva la crema di cocco Coco López — il prodotto creato dal professor Ramón López Irizarry dell'Università di Porto Rico nel 1949, che per la prima volta rese stabile e commercializzabile la polpa di cocco. Senza la Coco López la Piña Colada come la conosciamo non sarebbe esistita. Dal 1978 è il cocktail ufficiale di Porto Rico, riconoscimento che ne celebra il ruolo di ambasciatore culturale dell'isola nel mondo. Nel 1979 la canzone Escape (The Piña Colada Song) di Rupert Holmes raggiunse il primo posto nelle classifiche americane, consolidandone lo status pop. Il 10 luglio è la Giornata Nazionale della Piña Colada a Porto Rico.",
@@ -9009,28 +9005,42 @@
       "Esotico",
       "Dolce"
     ],
-    "garnish": "Ananas",
+    "garnish": "Nessuna",
     "ingredienti": [
       [
         "60 ml",
         "Pisco"
       ],
       [
-        "40 ml",
-        "Succo di limone"
+        "22,5 ml",
+        "Succo di ananas"
+      ],
+      [
+        "15 ml",
+        "Succo di lime"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
       ],
       [
         "30 ml",
-        "Sciroppo d'ananas"
+        "Vino bianco secco"
+      ],
+      [
+        "3",
+        "Chiodi di garofano"
       ]
     ],
     "prep": [
-      "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"
+      "In uno shaker pesta i chiodi di garofano",
+      "Aggiungi tutti gli ingredienti (tranne il vino) e shakera con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata",
+      "Aggiungere il vino e mescolare delicatamente con un barspoon"
     ],
     "storia": "Il Pisco Punch nasce a San Francisco verso la fine dell'Ottocento, quando la città era al culmine del suo boom economico post-corsa all'oro e il porto era uno dei più trafficati del Pacifico. Fu creato da Duncan Nicol, proprietario del Bank Exchange Saloon — uno dei bar più famosi della città, aperto nel 1853 in Montgomery Street — che custodiva la ricetta con tale gelosia da non averla mai divulgata completamente. Rudyard Kipling lo assaggiò durante un soggiorno a San Francisco nel 1889 e lo descrisse come qualcosa che scendeva come limonata ma aveva la forza per spaccare la testa di un uomo. Quando Nicol morì nel 1926, la ricetta scomparve con lui. Per decenni il Pisco Punch fu considerato un fantasma della miscelazione — un cocktail famoso di cui nessuno sapeva i componenti esatti. Il ricercatore David Wondrich lo ricostruì nel corso degli anni Duemila analizzando le testimonianze d'epoca, identificando il pineapple gum syrup come l'ingrediente segreto che rendeva il drink così straordinario.",
     "frizzante": false,
-    "bicchiere": "Highball",
+    "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pisco_punch.webp",
     "varianti": []
   },
@@ -9047,7 +9057,7 @@
       "Fresco",
       "Bilanciato"
     ],
-    "garnish": "3 dash Peychaud's Bitters",
+    "garnish": "3 gocce Amargo chuncho",
     "ingredienti": [
       [
         "50 ml",
@@ -9070,7 +9080,7 @@
       "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
       "Aggiungere ghiaccio e shakerare nuovamente",
       "Filtrare (double strain) in una coppetta raffreddata",
-      "Aggiungere 3 dash di Peychaud's sulla schiuma"
+      "Aggiungere 3 gocce di Amargo chuncho sulla schiuma"
     ],
     "storia": "Il Pisco Sour nasce a Lima, Perù, nei primi anni del Novecento, attribuito a Victor Vaughen Morris — un barman americano dello Utah che si trasferì in Perù nel 1903 per lavorare nelle miniere e aprì il Morris' Bar a Lima nel 1916. Morris adattò la struttura del Whiskey Sour utilizzando il pisco — il distillato di uva prodotto in Perù — al posto del whisky. La versione con albume d'uovo e Angostura bitters fu perfezionata dal barman peruviano Mario Bruiget, che lavorava al Morris' Bar negli anni Venti. Il Perù e il Cile rivendicano entrambi la paternità del drink — il Cile sostiene che il pisco sia stato prodotto per primo nel paese e che il Pisco Sour nasca lì — una disputa che ha assunto dimensioni diplomatiche e che si risolve diversamente a seconda di chi si chiede. Il Perù ha designato il primo sabato di febbraio come Giornata Nazionale del Pisco Sour, festa ufficiale che mobilita bar e ristoranti di tutto il paese.",
     "frizzante": false,
@@ -9491,7 +9501,7 @@
     "id": "tia_mia",
     "name": "Tia Mia",
     "distillato": [
-      "Rum Giamaicano",
+      "Rum",
       "Mezcal"
     ],
     "categoria": "All day",
