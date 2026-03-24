@@ -534,28 +534,28 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 
 .sg-banner{
-  background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(96,165,250,.06));
-  border-bottom:1px solid rgba(37,99,235,.15);
+  background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(251,191,36,.06));
+  border-bottom:1px solid rgba(245,158,11,.15);
   padding:.55rem 5%;
   display:flex;align-items:center;justify-content:center;gap:.7rem;
   text-decoration:none;
   transition:background .2s;
 }
-.sg-banner:hover{background:linear-gradient(135deg,rgba(37,99,235,.2),rgba(96,165,250,.1));}
+.sg-banner:hover{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(251,191,36,.1));}
 .sg-banner-ico{
   width:28px;height:28px;border-radius:7px;
-  background:rgba(37,99,235,.2);
+  background:rgba(245,158,11,.2);
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;
 }
 .sg-banner-text{display:flex;flex-direction:column;gap:.1rem}
-.sg-banner-title{font-size:.78rem;font-weight:800;color:var(--blue-l);letter-spacing:.02em}
+.sg-banner-title{font-size:.78rem;font-weight:800;color:var(--amber);letter-spacing:.02em}
 .sg-banner-sub{font-size:.65rem;color:var(--dim);font-weight:500}
 .sg-banner-dl{
   margin-left:auto;flex-shrink:0;
   display:flex;align-items:center;gap:.3rem;
-  font-size:.68rem;font-weight:700;color:var(--blue-l);
-  background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.25);
+  font-size:.68rem;font-weight:700;color:var(--amber);
+  background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.25);
   padding:.22rem .6rem;border-radius:20px;
 }
 

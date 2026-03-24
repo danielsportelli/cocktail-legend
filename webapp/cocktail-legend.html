@@ -42,18 +42,13 @@
   <div class="hdr-inner">
     <h1>Cocktail Legend</h1>
     <p>La prima app italiana per bartender professionisti</p>
-    <a href="https://danielsportelli.github.io/academy" target="_blank" rel="noopener" class="corso-btn">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-      Scopri l'Academy
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
   </div>
 </header>
 
 <!-- BARRA FILTRI STICKY -->
 <a href="quiz.html" class="sg-banner">
   <div class="sg-banner-ico">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="#60a5fa" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--amber)" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
   </div>
   <div class="sg-banner-text">
     <span class="sg-banner-title">Quiz del giorno</span>
@@ -67,8 +62,8 @@
 <!-- BOTTOM TAB BAR -->
 <div class="tab-bar" id="tab-bar">
   <button class="tab-btn" id="tbtn-vnt" onclick="openDrawer('vnt')">
-    <span class="tab-btn-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="2.5"/><circle cx="16" cy="16" r="2.5"/><line x1="19" y1="5" x2="5" y2="19"/></svg></span>
-    <span class="tab-btn-lbl">Vantaggi</span>
+    <span class="tab-btn-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg></span>
+    <span class="tab-btn-lbl">Academy</span>
   </button>
   <button class="tab-btn" id="tbtn-ris" onclick="openDrawer('ris')">
     <span class="tab-btn-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
@@ -223,14 +218,27 @@
     <div class="drawer-header">ACADEMY</div>
     <p style="font-size:.72rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Scopri tutti i corsi di mixology.</p>
     <div class="vnt-item">
-      <div class="vnt-item-title"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-right:5px;margin-bottom:2px;"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>Sciroppi Homemade</div>
+      <div class="vnt-item-title">Sciroppi Homemade</div>
       <div class="vnt-item-desc">Un percorso tecnico e pratico per capire, produrre e standardizzare sciroppi homemade professionali.</div>
-      <div class="vnt-code" id="copy-corsi">LEGEND20<span class="vnt-code-copy">copia</span></div>
       <a href="https://danielsportelli.github.io/academy" target="_blank" rel="noopener" class="vnt-link">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         Vai al corso
       </a>
     </div>
+    <!-- SPIRITS GENESIS — risorsa scaricabile -->
+    <a href="https://danielsportelli.github.io/cocktail-legend/spirits-genesis.pdf" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:.5rem;margin-top:1.1rem;background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.25);border-radius:12px;padding:.75rem .85rem;text-decoration:none;transition:border-color .2s;">
+      <div style="width:26px;height:26px;background:rgba(37,99,235,.2);border-radius:7px;display:grid;place-items:center;flex-shrink:0;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:.72rem;font-weight:700;color:#60a5fa;">Spirits Genesis</div>
+        <div style="font-size:.58rem;color:var(--dim);">Corso avanzato di merceologia</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.3rem;font-size:.6rem;font-weight:700;color:#60a5fa;background:rgba(37,99,235,.15);border-radius:6px;padding:.2rem .5rem;">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Scarica PDF
+      </div>
+    </a>
   </div>
 </div>
 
@@ -474,20 +482,6 @@
       </button>
       <div id="ris-glass-content"></div>
     </div>
-    <!-- SPIRITS GENESIS — risorsa scaricabile -->
-    <a href="https://danielsportelli.github.io/cocktail-legend/spirits-genesis.pdf" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:.5rem;margin-top:1.1rem;background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.25);border-radius:12px;padding:.75rem .85rem;text-decoration:none;transition:border-color .2s;">
-      <div style="width:26px;height:26px;background:rgba(37,99,235,.2);border-radius:7px;display:grid;place-items:center;flex-shrink:0;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      </div>
-      <div style="flex:1;">
-        <div style="font-size:.72rem;font-weight:700;color:#60a5fa;">Spirits Genesis</div>
-        <div style="font-size:.58rem;color:var(--dim);">Corso avanzato di merceologia</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:.3rem;font-size:.6rem;font-weight:700;color:#60a5fa;background:rgba(37,99,235,.15);border-radius:6px;padding:.2rem .5rem;">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Scarica PDF
-      </div>
-    </a>
   </div>
 </div>
 
