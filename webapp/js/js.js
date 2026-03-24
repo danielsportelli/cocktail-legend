@@ -3350,44 +3350,46 @@ function populateRisGlass(){
 
     modal.innerHTML =
       '<div style="background:#1e293b;border:1px solid rgba(255,255,255,.08);border-radius:20px;' +
-      'width:100%;max-width:360px;padding:1.75rem 1.5rem;position:relative;">' +
+      'width:100%;max-width:340px;padding:1.75rem 1.5rem;position:relative;">' +
 
         // Icona
-        '<div style="width:52px;height:52px;background:linear-gradient(135deg,rgba(37,99,235,.2),rgba(245,158,11,.15));' +
-        'border:1px solid rgba(245,158,11,.25);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">' +
-          '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+        '<div style="width:48px;height:48px;background:linear-gradient(135deg,rgba(37,99,235,.2),rgba(245,158,11,.15));' +
+        'border:1px solid rgba(245,158,11,.25);border-radius:13px;display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;">' +
+          '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
             '<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>' +
           '</svg>' +
         '</div>' +
 
-        // Titolo
-        '<div style="text-align:center;margin-bottom:1.25rem;">' +
-          '<div style="font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:#f1f5f9;margin-bottom:.35rem;">Scegli il tuo nickname</div>' +
+        // Titolo + sub
+        '<div style="text-align:center;margin-bottom:1.2rem;">' +
+          '<div style="font-size:1rem;font-weight:800;letter-spacing:-.02em;color:#f1f5f9;margin-bottom:.3rem;">Scegli il tuo nickname</div>' +
+          '<div style="font-size:.78rem;color:#94a3b8;line-height:1.5;">Sarà il tuo nome in classifica.<br>Unico, come su Instagram.</div>' +
         '</div>' +
 
         // Input
-        '<div style="position:relative;margin-bottom:.5rem;">' +
-          '<span style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);font-size:.85rem;color:#64748b;font-weight:600;">@</span>' +
-          '<input id="nick-modal-input" type="text" maxlength="24" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"' +
-          'placeholder="il_tuo_nickname"' +
+        '<div style="position:relative;margin-bottom:.4rem;">' +
+          '<span style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);font-size:.85rem;color:#64748b;font-weight:600;pointer-events:none;">@</span>' +
+          '<input id="nick-modal-input" type="text" maxlength="24" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ' +
+          'placeholder="il_tuo_nickname" ' +
           'style="width:100%;background:#0a0f1e;border:1.5px solid rgba(255,255,255,.1);border-radius:10px;' +
-          'padding:.65rem .75rem .65rem 1.75rem;font-size:.9rem;font-family:inherit;color:#f1f5f9;outline:none;' +
-          'transition:border-color .2s;-webkit-user-select:text;user-select:text;">' +
+          'padding:.62rem .75rem .62rem 1.75rem;font-size:.88rem;font-family:Inter,sans-serif;color:#f1f5f9;outline:none;' +
+          'transition:border-color .2s;-webkit-user-select:text;user-select:text;box-sizing:border-box;">' +
         '</div>' +
 
         // Feedback disponibilità
-        '<div id="nick-modal-feedback" style="font-size:.72rem;min-height:1.2rem;margin-bottom:.9rem;padding:0 .2rem;"></div>' +
+        '<div id="nick-modal-feedback" style="font-size:.72rem;min-height:1.1rem;margin-bottom:.65rem;padding:0 .15rem;"></div>' +
 
         // Regole
-        '<div style="font-size:.65rem;color:#64748b;margin-bottom:1.1rem;line-height:1.6;">' +
-          '3–24 caratteri · (lettere, numeri, punto e underscore)' +
+        '<div style="font-size:.63rem;color:#64748b;margin-bottom:1rem;line-height:1.6;text-align:center;">' +
+          '3–24 caratteri · lettere, numeri, punto, underscore' +
         '</div>' +
 
         // Bottone
-        '<button id="nick-modal-btn" disabled' +
-        'style="width:100%;padding:.75rem;border-radius:10px;border:none;cursor:not-allowed;font-family:inherit;' +
-        'font-size:.88rem;font-weight:700;letter-spacing:.01em;text-align:center;' +
-        'background:rgba(255,255,255,.06);color:#64748b;transition:all .2s;">' +
+        '<button id="nick-modal-btn" disabled ' +
+        'style="display:block;width:100%;padding:.72rem 1rem;border-radius:10px;border:none;' +
+        'font-family:Inter,sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.01em;' +
+        'text-align:center;cursor:not-allowed;' +
+        'background:rgba(255,255,255,.06);color:#64748b;transition:all .25s;">' +
           'Conferma' +
         '</button>' +
 
