@@ -422,7 +422,6 @@ function uniq(key) {
     var c=DATA[i];
     if(key==="sap"){for(var j=0;j<c.sapori.length;j++)s[c.sapori[j]]=1;}
     else if(key==="dis"){
-      for(var j=0;j<c.distillato.length;j++)s[c.distillato[j]]=1;
       for(var j=0;j<c.ingredienti.length;j++)s[c.ingredienti[j][1]]=1;
     }
     else if(key==="frz"){s[c.frizzante?"Si":"No"]=1;}
@@ -443,7 +442,6 @@ function uniqFromRes(key) {
     var c = src[i];
     if (key === "sap") { for (var j = 0; j < c.sapori.length; j++) s[c.sapori[j]] = 1; }
     else if (key === "dis") {
-      for (var j = 0; j < c.distillato.length; j++) s[c.distillato[j]] = 1;
       for (var j = 0; j < c.ingredienti.length; j++) s[c.ingredienti[j][1]] = 1;
     }
     else if (key === "frz") { s[c.frizzante ? "Si" : "No"] = 1; }
@@ -567,7 +565,6 @@ function initF() {
   var catSet = {}, ingSet = {}, sapSet = {}, bicSet = {};
   DATA.forEach(function(c){
     catSet[c.categoria] = 1;
-    c.distillato.forEach(function(d){ ingSet[d] = 1; });
     c.ingredienti.forEach(function(i){ ingSet[i[1]] = 1; });
     c.sapori.forEach(function(s){ sapSet[s] = 1; });
     bicSet[c.bicchiere] = 1;
