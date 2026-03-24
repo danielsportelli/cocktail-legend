@@ -214,9 +214,18 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", sap:"Sapore"
     });
     // tasto cerca/invio su tastiera mobile
     inp.addEventListener('search', function(){
-      closeSuggestions();
-      inp.blur();
-      render();
+      if(inp.value === '') {
+        // Ha cliccato la X → cancella ma tieni focus e tastiera aperta
+        Q = '';
+        closeSuggestions();
+        render();
+        inp.focus();
+      } else {
+        // Ha premuto Invio/Cerca → chiudi tastiera normalmente
+        closeSuggestions();
+        inp.blur();
+        render();
+      }
     });
 
     document.addEventListener('click', function(e){

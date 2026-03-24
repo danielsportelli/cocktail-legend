@@ -640,6 +640,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .drawer-back-btn:hover{ color:var(--txt2); border-color:var(--txt2); }
 .drawer-back-btn.visible{ display:inline-flex; }
 /* Nascondi scrollbar su desktop */
+#drawer-acc{z-index:1001;}
 .drawer{ scrollbar-width:none; }
 .drawer::-webkit-scrollbar{ display:none; }
 /* Nascondi scrollbar su desktop */
