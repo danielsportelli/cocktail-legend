@@ -1,5 +1,1272 @@
 [
-  {
+{
+  "id": "barbary_coast",
+  "name": "Barbary Coast",
+  "distillato": [
+    "Gin",
+    "Scotch whisky",
+    "Rum"
+  ],
+  "categoria": "After dinner",
+  "abv": "Medio",
+  "sapori": [
+    "Cremoso",
+    "Complesso",
+    "Dolce"
+  ],
+  "garnish": "Noce moscata",
+  "ingredienti": [
+    [
+      "22,5 ml",
+      "Gin"
+    ],
+    [
+      "22,5 ml",
+      "Scotch whisky blended"
+    ],
+    [
+      "22,5 ml",
+      "Rum"
+    ],
+    [
+      "22,5 ml",
+      "Liquore al cacao scuro"
+    ],
+    [
+      "22,5 ml",
+      "Panna fresca"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata",
+    "Grattugiare noce moscata sulla superficie"
+  ],
+  "storia": "Il Barbary Coast prende il nome dal famigerato quartiere portuale di San Francisco che tra la metà dell'Ottocento e i primi del Novecento era sinonimo di pericolo, vizio e vita notturna sfrenata. Il Barbary Coast era il cuore pulsante della città durante la corsa all'oro californiana del 1849, frequentato da marinai, cercatori d'oro, avventurieri e personaggi al limite della legalità. Il cocktail compare nei ricettari americani degli anni Venti, in pieno Proibizionismo, e il nome evocava quella tradizione di eccesso e avventura che aveva caratterizzato il quartiere. È uno dei drink che testimoniano come la toponomastica urbana americana si sia trasferita nella cultura del cocktail, trasformando luoghi mitologici in bevande.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/barbary_coast.webp",
+  "varianti": []
+},
+{
+  "id": "big_bamboo",
+  "name": "Big Bamboo",
+  "distillato": [
+    "Rum"
+  ],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": [
+    "Tropicale",
+    "Fruttato",
+    "Dolce"
+  ],
+  "garnish": "Fetta di ananas + Ciliegia",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Rum"
+    ],
+    [
+      "30 ml",
+      "Rum scuro"
+    ],
+    [
+      "30 ml",
+      "Succo di ananas"
+    ],
+    [
+      "30 ml",
+      "Succo di arancia"
+    ],
+    [
+      "22,5 ml",
+      "Succo di lime"
+    ],
+    [
+      "15 ml",
+      "Sciroppo di zucchero"
+    ],
+    [
+      "1 dash",
+      "Angostura bitters"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"
+  ],
+  "storia": "Il Big Bamboo è un cocktail tiki della tradizione caraibica giamaicana, diffuso nei resort e nei beach bar dell'isola a partire dagli anni Cinquanta e Sessanta, quando il turismo internazionale trasformò la Jamaica in una destinazione glamour frequentata da star di Hollywood e jet set internazionale. Il nome richiama la vegetazione rigogliosa dell'isola e l'atmosfera rilassata dei bar tropicali. È uno di quei drink nati più per raccontare un'atmosfera che per celebrare un inventore specifico — un classico del repertorio informale caraibico che si è diffuso nei tiki bar americani durante il grande boom della cultura esotica degli anni Cinquanta.",
+  "frizzante": false,
+  "bicchiere": "Highball",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/big_bamboo.webp",
+  "varianti": []
+},
+{
+  "id": "blinker",
+  "name": "Blinker",
+  "distillato": [
+    "Rye whiskey"
+  ],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": [
+    "Fruttato",
+    "Secco",
+    "Agrumato"
+  ],
+  "garnish": "Nessuna",
+  "ingredienti": [
+    [
+      "60 ml",
+      "Rye whiskey"
+    ],
+    [
+      "22,5 ml",
+      "Succo di pompelmo"
+    ],
+    [
+      "15 ml",
+      "Sciroppo di granatina"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Blinker compare per la prima volta nel libro \"The Flowing Bowl\" di Patrick Gavin Duffy del 1934, uno dei ricettari americani più importanti del periodo immediatamente successivo alla fine del Proibizionismo. Duffy era il barman del Ashland House di New York e il suo libro fu uno dei primi a documentare sistematicamente i cocktail dell'era post-Proibizionismo. Il Blinker appartiene alla famiglia dei whiskey sour con pompelmo — un formato che stava guadagnando popolarità negli anni Trenta man mano che il succo di pompelmo fresco diventava disponibile nei bar americani. Dimenticato per decenni, è stato riscoperto dagli appassionati di miscelazione storica negli anni Duemila.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/blinker.webp",
+  "varianti": []
+},
+{
+  "id": "bourbon_special",
+  "name": "Bourbon Special",
+  "distillato": [
+    "Bourbon whiskey"
+  ],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": [
+    "Fruttato",
+    "Speziato",
+    "Caldo"
+  ],
+  "garnish": "Fetta di arancia + Ciliegia",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Bourbon whiskey"
+    ],
+    [
+      "22,5 ml",
+      "Succo di arancia"
+    ],
+    [
+      "15 ml",
+      "Orange curaçao"
+    ],
+    [
+      "15 ml",
+      "Sciroppo di zucchero"
+    ],
+    [
+      "1 dash",
+      "Angostura bitters"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+  ],
+  "storia": "Il Bourbon Special è un cocktail americano della tradizione dei bourbon drinks arricchiti con agrumi, categoria diffusa nei bar del Sud degli Stati Uniti a partire dagli anni Quaranta e Cinquanta. Il Kentucky, cuore della produzione di bourbon, aveva sviluppato una cultura del bere locale in cui il distillato di mais veniva esaltato con ingredienti regionali — arance della Florida, spezie caraibiche arrivate via New Orleans. Non è attribuito a un inventore preciso, appartiene al repertorio informale dei bar americani del dopoguerra che cercavano di valorizzare il bourbon in chiave più accessibile rispetto ai classici stirred drinks.",
+  "frizzante": false,
+  "bicchiere": "Old fashioned",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bourbon_special.webp",
+  "varianti": []
+},
+{
+  "id": "breakfast_martini",
+  "name": "Breakfast Martini",
+  "distillato": [
+    "Gin"
+  ],
+  "categoria": "All day",
+  "abv": "Medio alto",
+  "sapori": [
+    "Agrumato",
+    "Fruttato",
+    "Secco"
+  ],
+  "garnish": "Zest di limone",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Gin"
+    ],
+    [
+      "15 ml",
+      "Triple sec"
+    ],
+    [
+      "22,5 ml",
+      "Succo di limone"
+    ],
+    [
+      "2 bspoon",
+      "Marmellata di arance amare"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Breakfast Martini nasce a Londra nel 1997, creato da Salvatore Calabrese — il bartender calabrese soprannominato The Maestro — al Lanesborough Hotel di Hyde Park Corner. La storia è documentata dallo stesso Calabrese: una mattina, mentre faceva colazione con la moglie, assaggiò la sua marmellata di arance amare su toast e decise di portarla dietro al bancone, creando al volo quello che sarebbe diventato uno dei suoi cocktail più famosi. Il Lanesborough era allora uno degli hotel più esclusivi di Londra, e il drink si diffuse rapidamente nei bar di lusso di tutto il mondo. È uno dei rari esempi di cocktail la cui ispirazione è documentata con precisione quasi quotidiana.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/breakfast_martini.webp",
+  "varianti": []
+},
+{
+  "id": "campari_shakerato",
+  "name": "Campari Shakerato",
+  "distillato": [],
+  "categoria": "Pre dinner",
+  "abv": "Medio",
+  "sapori": [
+    "Amaro",
+    "Agrumato",
+    "Fresco"
+  ],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    [
+      "60 ml",
+      "Campari"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio abbondante e con vigore",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Campari Shakerato è una preparazione italiana nata nei bar del nord Italia — Lombardia in testa — come alternativa estiva all'aperitivo classico. La tecnica dello shakerato applicata al Campari produce una schiuma fine e una texture fredda e setosa che trasforma radicalmente l'esperienza rispetto al semplice Campari on the rocks. Campari fu fondato da Gaspare Campari nel 1860 a Milano, e il suo bitter rosso è diventato uno dei simboli dell'aperitivo italiano nel mondo. Lo shakerato come tecnica si diffuse in Italia nel dopoguerra, applicata inizialmente all'espresso — il caffè shakerato — e poi trasferita ai liquori. È un esempio di come la cultura del bar italiano abbia sviluppato preparazioni originali a partire da prodotti già iconici.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/campari_shakerato.webp",
+  "varianti": []
+},
+{
+  "id": "charlie_chaplin",
+  "name": "Charlie Chaplin",
+  "distillato": [],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": [
+    "Fruttato",
+    "Dolce",
+    "Agrumato"
+  ],
+  "garnish": "Rondella di lime",
+  "ingredienti": [
+    [
+      "30 ml",
+      "Apricot brandy"
+    ],
+    [
+      "30 ml",
+      "Sloe gin"
+    ],
+    [
+      "30 ml",
+      "Succo di lime"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Charlie Chaplin nasce negli anni Venti del Novecento, battezzato in onore del comico britannico che era all'apice della sua fama nel cinema muto americano. Charlie Chaplin era la star più celebre al mondo in quel decennio, e la moda di dedicare cocktail a personaggi famosi dello spettacolo era diffusissima nei bar di New York e Londra. Il drink compare nel Savoy Cocktail Book di Harry Craddock del 1930, consacrandosi come classico dell'era d'oro. Chaplin stesso frequentava i locali più esclusivi di Hollywood e New York, e il drink che portava il suo nome era servito nei cocktail bar di lusso come tributo alla sua figura universalmente riconoscibile.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/charlie_chaplin.webp",
+  "varianti": []
+},
+{
+  "id": "division_bell",
+  "name": "Division Bell",
+  "distillato": [
+    "Mezcal"
+  ],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": [
+    "Affumicato",
+    "Fruttato",
+    "Complesso"
+  ],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    [
+      "22,5 ml",
+      "Mezcal"
+    ],
+    [
+      "22,5 ml",
+      "Aperol"
+    ],
+    [
+      "22,5 ml",
+      "Maraschino"
+    ],
+    [
+      "22,5 ml",
+      "Succo di lime"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Division Bell nasce nel 2014 al Meteorite di San Francisco, creato dal bartender Philip Ward — lo stesso che aveva creato il Death Flip e numerosi altri classici contemporanei. Il nome è un omaggio all'album dei Pink Floyd del 1994, The Division Bell, e riflette l'abitudine di molti bartender della scena americana degli anni Duemila e Dieci di battezzare i propri cocktail con riferimenti alla cultura pop e alla musica rock. Ward è una figura centrale della mixology newyorkese e californiana contemporanea, ex bartender del Death & Co di New York. Il Division Bell è strutturalmente una rivisitazione del Naked and Famous.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/division_bell.webp",
+  "varianti": []
+},
+{
+  "id": "east_india",
+  "name": "East India",
+  "distillato": [
+    "Cognac"
+  ],
+  "categoria": "After dinner",
+  "abv": "Alto",
+  "sapori": [
+    "Fruttato",
+    "Speziato",
+    "Complesso"
+  ],
+  "garnish": "Zest di limone",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Cognac"
+    ],
+    [
+      "15 ml",
+      "Orange curaçao"
+    ],
+    [
+      "15 ml",
+      "Ancho reyes"
+    ],
+    [
+      "2 dash",
+      "Angostura bitters"
+    ],
+    [
+      "1 dash",
+      "Peychaud's bitters"
+    ]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in una coppetta raffreddata"
+  ],
+  "storia": "L'East India compare nei ricettari della seconda metà dell'Ottocento, con alcune delle prime documentazioni nei libri di Harry Johnson e Jerry Thomas. Il nome richiama la East India Company — la compagnia commerciale britannica che dal 1600 al 1874 dominò il commercio tra Europa e Asia, portando in Occidente spezie, tè, stoffe e influenze culturali. Era comune nell'Ottocento battezzare cocktail con riferimenti alle rotte commerciali esotiche, evocando il fascino dell'Oriente. Il drink è costruito attorno al cognac francese arricchito da note di agrumi e spezie — una struttura che riflette proprio l'incontro tra la tradizione distillatoria europea e le spezie asiatiche che la East India Company aveva reso disponibili in tutto l'Occidente.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/east_india.webp",
+  "varianti": []
+},
+{
+  "id": "el_diablo",
+  "name": "El Diablo",
+  "distillato": [
+    "Tequila"
+  ],
+  "categoria": "All day",
+  "abv": "Alto",
+  "sapori": [
+    "Fruttato",
+    "Speziato",
+    "Vivace"
+  ],
+  "garnish": "Spicchio di lime",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Tequila reposado"
+    ],
+    [
+      "15 ml",
+      "Crème de cassis"
+    ],
+    [
+      "22,5 ml",
+      "Succo di lime"
+    ],
+    [
+      "Top",
+      "Ginger beer"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio (tranne la ginger beer)",
+    "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio",
+    "Completare con la ginger beer",
+    "Dare una leggera mescolata col bar spoon dal basso verso l'alto"
+  ],
+  "storia": "El Diablo — il diavolo — compare per la prima volta nel libro di Trader Vic del 1946, Trader Vic's Book of Food and Drink, come Mexican El Diablo. Victor Bergeron lo concepì come parte del suo repertorio di drink messicani esotici che si affiancavano ai tiki drinks caraibici nel suo menu. Negli anni Quaranta la tequila era ancora praticamente sconosciuta al grande pubblico americano, e Bergeron fu tra i primi bartender americani a valorizzarla in cocktail strutturati. Il nome richiama il carattere piccante e irrequieto del drink, con la ginger beer speziata che aggiunge il tocco diabolico. È incluso nella lista ufficiale IBA nella categoria Contemporary Classics.",
+  "frizzante": true,
+  "bicchiere": "Highball",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/el_diablo.webp",
+  "varianti": []
+},
+{
+  "id": "fancy_free",
+  "name": "Fancy Free",
+  "distillato": [
+    "Bourbon whiskey"
+  ],
+  "categoria": "After dinner",
+  "abv": "Molto alto",
+  "sapori": [
+    "Speziato",
+    "Aromatico",
+    "Secco"
+  ],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    [
+      "60 ml",
+      "Bourbon whiskey"
+    ],
+    [
+      "7,5 ml",
+      "Maraschino"
+    ],
+    [
+      "2 dash",
+      "Angostura bitters"
+    ],
+    [
+      "1 dash",
+      "Orange bitters"
+    ]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in una coppetta raffreddata"
+  ],
+  "storia": "Il Fancy Free compare in alcuni ricettari americani degli anni Quaranta ed è strutturalmente una variazione dell'Old Fashioned in cui il Maraschino sostituisce lo zucchero semplice. Il nome — libero e spensierato — riflette l'estetica dei cocktail del dopoguerra americano, quando la vittoria nella Seconda Guerra Mondiale aveva generato un diffuso senso di leggerezza e ottimismo. È un drink di scuola classica americana, costruito sulla formula del whiskey con dolcificante e bitters, che aggiunge complessità aromatica grazie alla nota ciliegina del Maraschino. Poco documentato riguardo a un inventore preciso, appartiene al ricco repertorio dei bourbon drinks stirred dell'era post-Proibizionismo.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fancy_free.webp",
+  "varianti": []
+},
+{
+  "id": "fitzgerald",
+  "name": "Fitzgerald",
+  "distillato": [
+    "Gin"
+  ],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": [
+    "Agrumato",
+    "Aromatico",
+    "Secco"
+  ],
+  "garnish": "Zest di limone",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Gin"
+    ],
+    [
+      "22,5 ml",
+      "Succo di limone"
+    ],
+    [
+      "15 ml",
+      "Sciroppo di zucchero"
+    ],
+    [
+      "2 dash",
+      "Angostura bitters"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Fitzgerald nasce al Gotham Bar and Grill di New York negli anni Novanta, creato da Dale DeGroff — il bartender soprannominato King Cocktail che più di chiunque altro contribuì al rinascimento della cocktail culture americana in quel decennio. DeGroff lo battezzò in onore di F. Scott Fitzgerald, lo scrittore americano simbolo dell'età del jazz e della Lost Generation che aveva immortalato la cultura del bere degli anni Venti nel Grande Gatsby. È strutturalmente un Gin Sour con l'aggiunta degli Angostura bitters, che aggiungono profondità aromatica senza alterare la struttura del drink. DeGroff è considerato il pioniere del movimento farm-to-bar americano, il primo a reintrodurre succhi freschi e ingredienti di qualità in un'epoca dominata dai mix industriali.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fitzgerald.webp",
+  "varianti": []
+},
+{
+  "id": "gin_lemon",
+  "name": "Gin Lemon",
+  "distillato": [
+    "Gin"
+  ],
+  "categoria": "All day",
+  "abv": "Medio basso",
+  "sapori": [
+    "Agrumato",
+    "Fresco",
+    "Dissetante"
+  ],
+  "garnish": "Fetta di limone",
+  "ingredienti": [
+    [
+      "50 ml",
+      "Gin"
+    ],
+    [
+      "150 ml",
+      "Soda al limone"
+    ]
+  ],
+  "prep": [
+    "Versare tutto in un bicchiere highball riempito di ghiaccio",
+      "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
+  ],
+  "storia": "Il Gin Lemon è una delle preparazioni più semplici e diffuse della tradizione dei gin drinks europei, particolarmente radicato nella cultura del bar italiano e tedesco. In Germania il Gin Lemon — o Gin-Lemon — è considerato un drink base della miscelazione informale, servito nei locali di ogni livello come alternativa al Gin Tonic. Non ha un inventore né una data di nascita documentata, appartiene alla categoria dei long drinks costruiti per esaltare la freschezza del gin in chiave agrumata e dissetante. La sua struttura essenziale — lo rende uno dei cocktail più facili da preparare e allo stesso tempo uno dei più difficili da bilanciare perfettamente.",
+  "frizzante": true,
+  "bicchiere": "Highball",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gin_lemon.webp",
+  "varianti": []
+},
+{
+  "id": "godchild",
+  "name": "Godchild",
+  "distillato": [
+    "Vodka"
+  ],
+  "categoria": "After dinner",
+  "abv": "Medio",
+  "sapori": [
+    "Dolce",
+    "Cremoso",
+    "Morbido"
+  ],
+  "garnish": "Nessuna",
+  "ingredienti": [
+    [
+      "30 ml",
+      "Vodka"
+    ],
+    [
+      "30 ml",
+      "Liquore all'amaretto"
+    ],
+    [
+      "30 ml",
+      "Panna fresca"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Godchild completa la trilogia della famiglia cinematografica di Coppola iniziata con il Godfather negli anni Settanta. Se il Godfather combina scotch e amaretto, e la Godmother sostituisce lo scotch con la vodka, il Godchild aggiunge la panna — trasformando la struttura da digestivo secco a dessert cocktail cremoso. È l'ultimo arrivato della famiglia, nato nei cocktail bar americani degli anni Ottanta quando i drink cremosi e dolci erano al culmine della moda. Non ha un inventore documentato, appartiene alla tradizione dei drink nati per estensione logica da un classico preesistente, sfruttando la notorietà del nome per garantirsi un posto nei menu.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/godchild.webp",
+  "varianti": []
+},
+{
+  "id": "greyhound",
+  "name": "Greyhound",
+  "distillato": [
+    "Vodka"
+  ],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": [
+    "Agrumato",
+    "Secco",
+    "Dissetante"
+  ],
+  "garnish": "Fetta di pompelmo rosa",
+  "ingredienti": [
+    [
+      "50 ml",
+      "Vodka"
+    ],
+    [
+      "120 ml",
+      "Succo di pompelmo rosa"
+    ]
+  ],
+  "prep": [
+    "Versare tutto in un bicchiere highball riempito di ghiaccio",
+    "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
+  ],
+  "storia": "Il Greyhound nasce negli anni Quaranta negli Stati Uniti come gin drink — la versione originale prevedeva il gin al posto della vodka — e compare per la prima volta nel 1945 in una pubblicità della Ocean Spray, la cooperativa agricola del Massachusetts che aveva già lanciato il Cape Codder. Il nome rimanda al levriero, il cane da corsa noto per la velocità e l'eleganza — una scelta che evocava lo stile dinamico del dopoguerra americano. La transizione dalla versione con gin a quella con vodka avvenne negli anni Cinquanta e Sessanta, quando la vodka iniziò a scalare le preferenze degli americani. La variante con bordo salato si chiama Salty Dog e nacque qualche anno dopo come personalizzazione dello stesso drink.",
+  "frizzante": false,
+  "bicchiere": "Highball",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/greyhound.webp",
+  "varianti": []
+},
+{
+  "id": "hemingway_breakfast",
+  "name": "Hemingway Breakfast",
+  "distillato": [
+    "Gin"
+  ],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": [
+    "Agrumato",
+    "Aromatico",
+    "Secco"
+  ],
+  "garnish": "Rondella di lime",
+  "ingredienti": [
+    [
+      "50 ml",
+      "Gin"
+    ],
+    [
+      15 ml",
+      "Succo di pompelmo rosa"
+    ],
+    [
+      "15 ml",
+      "Succo di lime"
+    ],
+    [
+      "15 ml",
+      "Maraschino"
+    ],
+    [
+      "7,5 ml",
+      "Sciroppo di zucchero"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "L'Hemingway Breakfast è una reinterpretazione con gin dell'Hemingway Special — il celebre Daiquiri senza zucchero e con pompelmo che Constantino Ribalaigua creò per Ernest Hemingway al Floridita di L'Avana. La versione con gin sostituisce il rum cubano con il distillato britannico, mantenendo la struttura agrumata e secca che caratterizzava le preferenze di Hemingway. Hemingway era noto per il suo disprezzo per i drink dolci e per la sua passione per il pompelmo, che compariva in quasi tutte le sue ordinazioni personalizzate. Il nome breakfast richiama l'abitudine dello scrittore di bere a qualsiasi ora, inclusa la mattina — uno dei tanti aneddoti che alimentarono la sua leggenda di bevitore irriducibile.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hemingway_breakfast.webp",
+  "varianti": []
+},
+{
+  "id": "honeysuckle",
+  "name": "Honeysuckle",
+  "distillato": [
+    "Rum"
+  ],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": [
+    "Dolce",
+    "Agrumato",
+    "Fresco"
+  ],
+  "garnish": "Rondella di lime",
+  "ingredienti": [
+    [
+      "60 ml",
+      "Rum bianco"
+    ],
+    [
+      "22,5 ml",
+      "Succo di lime"
+    ],
+    [
+      "22,5 ml",
+      "Miele"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "L'Honeysuckle — caprifoglio in italiano — è un cocktail cubano apparso nei ricettari americani degli anni Trenta, attribuito ai bar dell'Avana durante il Proibizionismo. È strutturalmente un Daiquiri in cui lo sciroppo di zucchero viene sostituito dal miele — la stessa operazione che il Gold Rush compie con il Whiskey Sour. La sostituzione non è puramente gustativa: in un'epoca in cui lo zucchero raffinato era un ingrediente industriale ancora relativamente recente, il miele aveva una tradizione d'uso nei punch e nelle bevande alcoliche che risaliva a secoli prima. Il nome evoca la dolcezza floreale del caprifoglio, pianta rampicante dal profumo intenso diffusa nei giardini tropicali caraibici.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/honeysuckle.webp",
+  "varianti": []
+},
+{
+  "id": "jack_rose",
+  "name": "Jack Rose",
+  "distillato": [
+    "Calvados"
+  ],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": [
+    "Fruttato",
+    "Agrumato",
+    "Secco"
+  ],
+  "garnish": "Zest di limone",
+  "ingredienti": [
+    [
+      "50 ml",
+      "Calvados"
+    ],
+    [
+      "22,5 ml",
+      "Succo di lime"
+    ],
+    [
+      "15 ml",
+      "Sciroppo di granatina"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Jack Rose è uno dei grandi classici americani di inizio Novecento, con le prime documentazioni che risalgono al 1905. Il nome è conteso: alcune fonti lo attribuiscono a un barman di nome Jack Rose attivo a New York nei primi anni del Novecento, altre al colore rosato del drink — jack come il nome proprio, rose come il rosa. Ernest Hemingway lo menziona nel romanzo \"Il sole sorge ancora\" del 1926, dove Jake Barnes lo ordina a Parigi, contribuendo a consolidarne lo status letterario. Compare nel Savoy Cocktail Book del 1930 di Harry Craddock. L'uso del calvados — l'acquavite di mele normanna — al posto del più comune applejack americano gli conferisce una dimensione europea che riflette l'influenza francese sulla miscelazione americana dell'epoca.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/jack_rose.webp",
+  "varianti": []
+},
+{
+  "id": "jasmine",
+  "name": "Jasmine",
+  "distillato": [
+    "Gin"
+  ],
+  "categoria": "All day",
+  "abv": "Medio alto",
+  "sapori": [
+    "Amaro",
+    "Agrumato",
+    "Secco"
+  ],
+  "garnish": "Zest di limone",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Gin"
+    ],
+    [
+      "15 ml",
+      "Campari"
+    ],
+    [
+      "15 ml",
+      "Triple sec"
+    ],
+    [
+      "15 ml",
+      "Succo di limone"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Jasmine nasce nel 1990 a San Francisco, creato da Paul Harrington — bartender e giornalista di cocktail che negli anni Novanta scrisse per la rivista Wired contribuendo a portare la cultura dei cocktail nell'ambiente tech della Silicon Valley. Harrington lo sviluppò al Townhouse Bar di Emeryville, California, e lo pubblicò in seguito nel suo libro Cocktail: The Drinks Bible for the 21st Century del 1998 — uno dei testi più influenti della cocktail renaissance americana. Il nome richiama il gelsomino, fiore dal profumo intenso e floreale, in contrasto ironico con il carattere amaricante del Campari che è uno degli ingredienti chiave. È considerato un proto-classico contemporaneo, nato prima della grande esplosione della mixology moderna.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/jasmine.webp",
+  "varianti": []
+},
+{
+  "id": "kona_coffee_grog",
+  "name": "Kona Coffee Grog",
+  "distillato": [
+    "Rum"
+  ],
+  "categoria": "After dinner",
+  "abv": "Medio basso",
+  "sapori": [
+    "Caffeinico",
+    "Tropicale",
+    "Caldo"
+  ],
+  "garnish": "Zest di arancia + Zest di pompelmo + Cannella",
+  "ingredienti": [
+    [
+      "15 ml",
+      "Rum scuro giamaicano"
+    ],
+    [
+      "15 ml",
+      "Rum blackstrap overproof 151"
+    ],
+    [
+      "180 ml",
+      "Caffè filtro caldo"
+    ],
+    [
+      "1",
+      "Zolletta di zucchero"
+    ],
+    [
+      "2",
+      "Chiodi di garofano"
+    ],
+    [
+      "1",
+      "Stecca di cannella"
+    ],
+    [
+      "1",
+      "Zest di arancia"
+    ],
+    [
+      "1",
+      "Zest di pompelmo"
+    ],
+    [
+      "1 bspoon",
+      "Gardenia mix"
+    ]
+  ],
+  "prep": [
+    "Mettere lo zucchero, i chiodi di garofano, il gardenia mix, il rum scuro e il caffè ben caldo in una tazza con manico preriscaldata con acqua bollente e miscela bene per sciogliore lo zucchero",
+    "In una lattiera, versare il rum overproof, le scorze e la cannella e dare dare fuoco con fiamma ossidrica",
+    "Dopo qualche secondo, estrarre le scorze e la cannella e posizionarle sul bordo della tazza come garnish",
+    "Infine versare sulla superficie (float) il rum overproof ancora incendiato e aspettare che la fiamma si spenga"
+  ],
+  "storia": "Il Kona Coffee Grog è un cocktail caldo ispirato alla tradizione del caffè hawaiano di Kona — la varietà di Coffea arabica coltivata sulle pendici vulcaniche del Monte Hualalai e del Mauna Loa nella contea di Kona, sull'isola delle Hawaii, considerata tra i caffè più pregiati al mondo. La coltivazione del caffè a Kona risale al 1828, quando il reverendo missionario Samuel Ruggles portò sull'isola le prime piantine dalla Brasile. La combinazione di rum scuro e caffè è radicata nella tradizione dei grog caldi tropicali che risale ai marinai britannici del XVIII secolo. Il drink unisce quella tradizione marinaresca con l'eredità agricola hawaiana, creando un hot drink che è diventato un classico delle destinazioni resort del Pacifico.",
+  "frizzante": false,
+  "bicchiere": "Tazza con manico",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/kona_coffee_grog.webp",
+  "varianti": []
+},
+{
+  "id": "leap_year",
+  "name": "Leap Year",
+  "distillato": [
+    "Gin"
+  ],
+  "categoria": "Pre dinner",
+  "abv": "Alto",
+  "sapori": [
+    "Agrumato",
+    "Aromatico",
+    "Dolce"
+  ],
+  "garnish": "Zest di limone",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Gin"
+    ],
+    [
+      "15 ml",
+      "Grand marnier"
+    ],
+    [
+      "15 ml",
+      "Vermouth rosso"
+    ],
+    [
+      "15 ml",
+      "Succo di limone"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Leap Year nasce il 29 febbraio 1928 — l'anno bisestile — creato da Harry Craddock al Savoy Hotel di Londra in occasione di una festa organizzata per celebrare quella data insolita. Craddock, head bartender del Savoy American Bar e futuro autore del Savoy Cocktail Book del 1930, era noto per la sua capacità di creare cocktail celebrativi per eventi specifici. Raccontò che il Leap Year fu responsabile di più proposte di matrimonio di qualsiasi altro cocktail nella storia del Savoy — una storia impossibile da verificare ma che contribuì a rendere il drink leggendario. Per tradizione, il 29 febbraio è il giorno in cui le donne possono fare la proposta di matrimonio agli uomini, e il cocktail si legò a questo folklore.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/leap_year.webp",
+  "varianti": []
+},
+{
+  "id": "left_hand",
+  "name": "Left Hand",
+  "distillato": [
+    "Bourbon whiskey"
+  ],
+  "categoria": "Pre dinner",
+  "abv": "Alto",
+  "sapori": [
+    "Amaro",
+    "Speziato",
+    "Complesso"
+  ],
+  "garnish": "Ciliegia",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Bourbon whiskey"
+    ],
+    [
+      "22,5 ml",
+      "Campari"
+    ],
+    [
+      "22,5 ml",
+      "Vermouth rosso"
+    ],
+    [
+      "2 dash",
+      "Bitters al cioccolato"
+    ]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in una coppetta raffreddata"
+  ],
+  "storia": "Il Left Hand nasce al Cure di New Orleans, creato da Neal Bodenheimer — il proprietario e bartender che ha trasformato quel locale in uno dei riferimenti della scena cocktail americana contemporanea. Il nome è un riferimento alla struttura speculare del drink rispetto al Boulevardier — che è a sua volta la versione con bourbon del Negroni. Se il Boulevardier usa bourbon, vermouth e Campari in un formato da Old Fashioned glass con ghiaccio, il Left Hand è stirred e servito in coppetta, con l'aggiunta dei chocolate bitters che aggiungono una dimensione aromatica inaspettata. È un esempio di come la scena di New Orleans — città con una lunga tradizione di miscelazione classica — continui a produrre cocktail di riferimento per la mixology internazionale.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/left_hand.webp",
+  "varianti": []
+},
+{
+  "id": "loaded_pistol",
+  "name": "Loaded Pistol",
+  "distillato": [
+    "Bourbon whiskey"
+  ],
+  "categoria": "After dinner",
+  "abv": "Molto alto",
+  "sapori": [
+    "Speziato",
+    "Caldo",
+    "Intenso"
+  ],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    [
+      "60 ml",
+      "Bourbon whiskey"
+    ],
+    [
+      "15 ml",
+      "Dom bénédictine"
+    ],
+    [
+      "2 dash",
+      "Angostura bitters"
+    ],
+    [
+      "1 dash",
+      "Orange bitters"
+    ]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+  ],
+  "storia": "Il Loaded Pistol appartiene alla tradizione dei bourbon drinks speziati e strutturati nati nella scena dei cocktail bar americani degli anni Duemila, quando il movimento neo-speakeasy stava rivalutando i classici stirred a base di whisky. Il nome evoca il carattere deciso e senza compromessi del drink — un pistol carico, pronto a esplodere. L'abbinamento tra bourbon single barrel e Bénédictine richiama la struttura del Bobby Burns scozzese e del Monte Carlo, ma qui applicata al whisky americano con una forza e una direttezza tipicamente statunitensi. Non è attribuito a un inventore documentato con precisione, appartiene al repertorio dei drink da bar americani del Sud.",
+  "frizzante": false,
+  "bicchiere": "Old fashioned",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/loaded_pistol.webp",
+  "varianti": []
+},
+{
+  "id": "macunaima",
+  "name": "Macunaima",
+  "distillato": [
+    "Cachaça"
+  ],
+  "categoria": "All day",
+  "abv": "Medio basso",
+  "sapori": [
+    "Tropicale",
+    "Fruttato",
+    "Vivace"
+  ],
+  "garnish": "Fetta di ananas + Ciliegia",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Cachaça"
+    ],
+    [
+      "30 ml",
+      "Estratto di ananas"
+    ],
+    [
+      "22,5 ml",
+      "Succo di lime"
+    ],
+    [
+      "15 ml",
+      "Sciroppo di zucchero"
+    ],
+    [
+      "2 dash",
+      "Angostura bitters"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"
+  ],
+  "storia": "Macunaíma prende il nome dall'omonimo romanzo del 1928 scritto dall'autore brasiliano Mário de Andrade — considerato uno dei capolavori della letteratura modernista brasiliana e manifesto del Movimento Modernista del 1922 che aveva ridefinito l'identità culturale del paese. Il protagonista, Macunaíma, è un personaggio folclorico di origine tupi che rappresenta lo spirito brasiliano nella sua complessità — pigro e geniale, melanconico e festoso allo stesso tempo. Il cocktail, costruito attorno alla cachaça come distillato nazionale, è un omaggio a quella tradizione letteraria e culturale che ha cercato di dare al Brasile una voce artistica autonoma e originale, distante dai modelli europei.",
+  "frizzante": false,
+  "bicchiere": "Highball",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/macunaima.webp",
+  "varianti": []
+},
+{
+  "id": "mamie_taylor",
+  "name": "Mamie Taylor",
+  "distillato": [
+    "Scotch whisky"
+  ],
+  "categoria": "All day",
+  "abv": "Alto",
+  "sapori": [
+    "Speziato",
+    "Agrumato",
+    "Dissetante"
+  ],
+  "garnish": "Rondella di lime",
+  "ingredienti": [
+    [
+      "60 ml",
+      "Scotch whisky blended"
+    ],
+    [
+      "15 ml",
+      "Succo di lime"
+    ],
+    [
+      "Top",
+      "Ginger beer"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio (tranne la ginger beer)",
+    "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio",
+    "Completare con la ginger beer",
+    "Dare una leggera mescolata col bar spoon dal basso verso l'alto"
+  ],
+  "storia": "Il Mamie Taylor nasce negli Stati Uniti intorno al 1899-1900 e prende il nome da Mary \"Mamie\" Taylor, una cantante d'opera americana popolare in quel periodo. Fu uno dei cocktail più ordinati nei bar americani dei primissimi anni del Novecento, prima che il Proibizionismo ne interrompesse la diffusione. È strutturalmente un Moscow Mule ante-litteram — scotch al posto della vodka, lime, ginger beer — nato quarant'anni prima che il Moscow Mule fosse inventato. Albert Stevens Crockett lo cita nel suo Old Waldorf-Astoria Bar Book del 1935 come uno dei drink più popolari dell'era edoardiana. La ginger beer speziata si abbinava allo scotch in un modo che i bevitori dell'epoca trovavano sorprendentemente armonioso.",
+  "frizzante": true,
+  "bicchiere": "Highball",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mamie_taylor.webp",
+  "varianti": []
+},
+{
+  "id": "midnight_stinger",
+  "name": "Midnight Stinger",
+  "distillato": [
+    "Bourbon whiskey"
+  ],
+  "categoria": "After dinner",
+  "abv": "Molto alto",
+  "sapori": [
+    "Mentolato",
+    "Caldo",
+    "Intenso"
+  ],
+  "garnish": "Ciuffo di menta",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Bourbon whiskey"
+    ],
+    [
+      "30 ml",
+      "Brancamenta"
+    ],
+    [
+      "15 ml",
+      "Liquore alla menta bianca"
+    ]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in una coppetta raffreddata"
+  ],
+  "storia": "Il Midnight Stinger è una variante scura e intensa dello Stinger classico — il digestivo americano a base di cognac e crème de menthe documentato già nel 1912 — in cui il bourbon sostituisce il cognac e il Fernet alla Menta aggiunge una dimensione amaricante e balsamica. Il nome midnight — mezzanotte — evoca l'ora tarda in cui si serve un digestivo impegnativo, qualcosa da sorseggiare lentamente a fine serata quando i sensi sono pronti per note più complesse e intense. Il Fernet alla Menta, prodotto dalla famiglia Branca come variante fresca del Fernet classico, è un ingrediente particolarmente amato nei cocktail bar del Sud America e in alcune regioni italiane.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/midnight_stinger.webp",
+  "varianti": []
+},
+{
+  "id": "millionaire",
+  "name": "Millionaire",
+  "distillato": [
+    "Bourbon whiskey"
+  ],
+  "categoria": "All day",
+  "abv": "Medio alto",
+  "sapori": [
+    "Fruttato",
+    "Dolce",
+    "Vellutato"
+  ],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Bourbon whiskey"
+    ],
+    [
+      "20 ml",
+      "Orange curaçao"
+    ],
+    [
+      "22,5 ml",
+      "Succo di limone"
+    ],
+    [
+      "15 ml",
+      "Sciroppo di granatina"
+    ], 
+    [
+      "q.b.",
+      "Albume d'uovo o foamer"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
+    "Aggiungere ghiaccio e shakerare nuovamente",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Millionaire compare in diverse versioni nei ricettari degli anni Venti e Trenta, con varianti che usano rum, rye whiskey o bourbon come base. Il nome — milionario — evocava il lusso e l'esclusività che caratterizzava i cocktail dell'era pre-Proibizionismo nei club più eleganti. Diverse versioni circolavano contemporaneamente, e la presenza dell'albume d'uovo — ingrediente che all'epoca era considerato un lusso nella miscelazione — contribuiva a giustificare il nome. Harry Craddock ne include una versione nel Savoy Cocktail Book del 1930. Il drink appartiene alla tradizione dei sour arricchiti con albume che erano al culmine della loro popolarità nei bar europei e americani degli anni Venti.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/millionaire.webp",
+  "varianti": []
+},
+{
+  "id": "mizuwari",
+  "name": "Mizuwari",
+  "distillato": [
+    "Japanese whisky"
+  ],
+  "categoria": "All day",
+  "abv": "Medio",
+  "sapori": [
+    "Leggero",
+    "Aromatico",
+    "Dissetante"
+  ],
+  "garnish": "Nessuna",
+  "ingredienti": [
+    [
+      "50 ml",
+      "Japanese whisky blended"
+    ],
+    [
+      "100",
+      "Soda"
+    ]
+  ],
+  "prep": [
+    "Versare il whisky in un bicchiere highball riempito di ghiaccio",
+    "Aggiungere delicatamente la soda",
+    "Mescolare con un solo movimento lento dal basso verso l'alto per non disperdere le bollicine"
+  ],
+  "storia": "Il Mizuwari — letteralmente acqua e whisky in giapponese — è il modo tradizionale di bere whisky in Giappone, radicato in una cultura del bere profondamente diversa da quella occidentale. In Giappone il whisky viene consumato quasi sempre diluito con acqua o ghiaccio, mai liscio come in Scozia o in America. La pratica del mizuwari risale agli anni Cinquanta e Sessanta, quando il whisky giapponese — prodotto da distillerie come Suntory e Nikka a partire dagli anni Venti — diventò la bevanda alcolica più consumata nel paese. Il rapporto tradizionale è di 1 parte di whisky per 2 parti di acqua, ma varia secondo il gusto personale. Il mizuwari è uno dei pilastri della cultura degli izakaya — i pub giapponesi — e del bere conviviale giapponese.",
+  "frizzante": true,
+  "bicchiere": "Highball",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mizuwari.webp",
+  "varianti": []
+},
+{
+  "id": "oaxaca_old_fashioned",
+  "name": "Oaxaca Old Fashioned",
+  "distillato": [
+    "Tequila",
+    "Mezcal"
+  ],
+  "categoria": "After dinner",
+  "abv": "Molto alto",
+  "sapori": [
+    "Affumicato",
+    "Speziato",
+    "Complesso"
+  ],
+  "garnish": "Zest di arancia + Cannella",
+  "ingredienti": [
+    [
+      "45 ml",
+      "Tequila reposado"
+    ],
+    [
+      "15 ml",
+      "Mezcal"
+    ],
+    [
+      "7,5 ml",
+      "Sciroppo di agave"
+    ],
+    [
+      "2 dash",
+      "Angostura bitters"
+    ]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+  ],
+  "storia": "L'Oaxaca Old Fashioned nasce nel 2007 al Death & Co di New York, creato da Phil Ward — uno dei bartender fondatori del locale che sarebbe diventato il centro della mixology americana contemporanea. Ward voleva creare un Old Fashioned che esprimesse l'anima del Messico invece di quella del Kentucky, sostituendo bourbon e zucchero con tequila reposado, mezcal e néctar di agave. Il risultato trasformò radicalmente il panorama dei cocktail americani: contribuì a portare il mezcal nell'attenzione internazionale anni prima che diventasse un fenomeno di massa, e dimostrò che la struttura di un classico come l'Old Fashioned poteva essere applicata a qualsiasi distillato di qualità. Il nome omaggia Oaxaca, lo stato messicano che è il cuore della produzione di mezcal artigianale.",
+  "frizzante": false,
+  "bicchiere": "Old fashioned",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/oaxaca_old_fashioned.webp",
+  "varianti": []
+},
+{
+  "id": "orgasmo",
+  "name": "Orgasmo",
+  "distillato": [
+    "Vodka"
+  ],
+  "categoria": "After dinner",
+  "abv": "Medio",
+  "sapori": [
+    "Cremoso",
+    "Dolce",
+    "Goloso"
+  ],
+  "garnish": "Cacao",
+  "ingredienti": [
+    [
+      "22,5 ml",
+      "Vodka"
+    ],
+    [
+      "22,5 ml",
+      "Baileys"
+    ],
+    [
+      "22,5 ml",
+      "Liquore al caffè"
+    ],
+    [
+      "22,5 ml",
+      "Panna fresca"
+    ]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata",
+    "Spoverata di cacao sulla superficie"
+  ],
+  "storia": "L'Orgasmo è uno dei cocktail più rappresentativi della cultura dei bar italiani degli anni Ottanta e Novanta — un'epoca in cui i nomi provocatori e i profili dolci e cremosi dominavano i menu dei locali notturni. Il drink nasce in Italia, probabilmente nei cocktail bar del nord del paese, e si diffuse rapidamente in tutta la penisola diventando un classico dell'after dinner italiano. Il nome audace era una strategia deliberata di marketing: in un'epoca in cui i cocktail con nomi trasgressivi come Sex on the Beach e Slippery Nipple erano alla moda internazionale, i barman italiani risposero con una propria versione di quel fenomeno. È rimasto nel menu di molti bar italiani come un classico nostalgico degli anni del boom della miscelazione domestica.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/orgasmo.webp",
+  "varianti": []
+},
+{
     "id": "1910",
     "name": "1910",
     "distillato": [
@@ -910,7 +2177,7 @@
       ],
       [
         "30 ml",
-        "Rum overproof 151"
+        "Rum blackstrap overproof 151"
       ],
       [
         "22,5 ml",
@@ -6576,7 +7843,7 @@
     ],
     "storia": "L'Hot Toddy ha origini britanniche e irlandesi che risalgono al XVIII secolo, anche se la parola toddy proviene dall'India coloniale — dal termine hindi tadi, la bevanda fermentata ricavata dalla palma. I britannici adottarono il termine e lo applicarono alle bevande calde a base di whisky, miele e spezie che erano comuni nei pub scozzesi e irlandesi fin dal Settecento. La leggenda più diffusa attribuisce la popolarizzazione del drink al medico Robert Bentley Todd — un clinico victoriano di Dublino che nel XIX secolo prescriveva ai suoi pazienti una bevanda a base di brandy, cannella, zucchero e acqua calda come rimedio per i malanni invernali — da cui il nome. In Scozia e Irlanda il hot toddy era anche la bevanda con cui si celebravano i defunti durante i wake — le veglie funebri — tradizione che ne ha consolidato il carattere di momento condiviso e rituale.",
     "frizzante": false,
-    "bicchiere": "Irish coffee",
+    "bicchiere": "Tazza con manico",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hot_toddy.webp",
     "varianti": []
   },
@@ -6912,7 +8179,7 @@
     ],
     "storia": "L'Irish Coffee nasce nel 1943 all'aeroporto di Foynes in Irlanda — allora il principale scalo europeo per i voli transatlantici — ad opera di Joe Sheridan, il cuoco del terminal. Una sera di inverno, un volo diretto a New York fu costretto a tornare indietro a causa del maltempo, e i passeggeri infreddoliti e delusi furono riportati al terminal. Sheridan preparò un caffè caldo con whisky irlandese, zucchero di canna e panna montata per scaldarli. Quando un passeggero americano chiese se stesse bevendo caffè brasiliano, Sheridan rispose: no, è caffè irlandese. Nel 1947 l'aeroporto di Foynes fu sostituito dall'aeroporto di Shannon, e Sheridan si trasferì lì portando la ricetta. Il giornalista americano Stanton Delaplane assaggiò il drink a Shannon nel 1952 e ne portò la ricetta al Buena Vista Cafe di San Francisco, dove il barman Jack Koeppler la perfezionò — il Buena Vista lo serve ancora oggi e ne ha preparati oltre 30 milioni.",
     "frizzante": false,
-    "bicchiere": "Irish coffee",
+    "bicchiere": "Tazza con manico",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/irish_coffee.webp",
     "varianti": []
   },
@@ -7114,7 +8381,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Rum blackstrap"
+        "Rum blackstrap overproof 151"
       ],
       [
         "15 ml",
@@ -8402,7 +9669,7 @@
       ],
       [
         "30 ml",
-        "Rum overproof 151"
+        "Rum backstrap overproof 151"
       ],
       [
         "22,5 ml",
@@ -9570,7 +10837,7 @@
       ],
       [
         "15 ml",
-        "Rum blackstrap"
+        "Rum blackstrap overproof 151"
       ],
       [
         "15 ml",
