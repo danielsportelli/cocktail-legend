@@ -139,7 +139,8 @@ Ogni cocktail deve avere esattamente questi campi, in questo ordine:
   "frizzante": false,
   "bicchiere": "Old fashioned",
   "img": "https://danielsportelli.github.io/cocktail-legend/immagini/nome_del_drink.webp",
-  "varianti": []
+  "varianti": [],
+  "iba": false
 }
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -230,7 +231,7 @@ REGOLE PER LE QUANTITA'
 REGOLE PER frizzante
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-true se il drink contiene uno o piu' di questi: Soda, Soda al limone, Soda al pompelmo rosa, Acqua tonica, Ginger beer, Ginger ale, Spumante, Prosecco, Champagne, Cola.
+true se il drink contiene uno o piu' di questi: Soda, Chinotto, Fanta, Sprite, Coca, Soda al limone, Soda al pompelmo rosa, Acqua tonica, Ginger beer, Ginger ale, Spumante, Prosecco, Champagne, Cola.
 false in tutti gli altri casi.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -277,7 +278,7 @@ GRADAZIONI DI RIFERIMENTO (valori medi da usare):
 - Prosecco: 11%
 - Spumante: Franciacorta / Trento doc / Champagne / Cava: 13,5%
 - Birra: 5%
-- Succhi, sciroppi, acqua, soda, ginger beer, ginger ale, soda al limone, fanta, sprite, chiotto, soda al pompelmo rosa, coca, cola, albume, foamer, tuorlo: 0%
+- Succhi, sciroppi, acqua, soda, ginger beer, ginger ale, soda al limone, fanta, sprite, chinotto, soda al pompelmo rosa, coca, cola, albume, foamer, tuorlo: 0%
 
 PASSO 2 - CALCOLA IL VOLUME TOTALE DEL DRINK (ml):
 Somma tutti gli ingredienti in ml.
@@ -980,7 +981,8 @@ ESEMPIO COMPLETO
   "frizzante": false,
   "bicchiere": "Coppetta",
   "img": "https://danielsportelli.github.io/cocktail-legend/immagini/toronto.webp",
-  "varianti": []
+  "varianti": [],
+  "iba": false
 }
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -996,6 +998,7 @@ OUTPUT 1 — FILE JSON (cocktail generati)
 - Nessun commento nel JSON (no // NUOVO, no // FONTE INCERTA, niente)
 - JSON pulito e pronto per import diretto nella webapp
 - L'ultimo record termina con },\n (virgola inclusa, nessuna riga vuota dopo)
+- Il campo "iba" è sempre presente e sempre impostato a false — sarà il gestore del database a modificarlo manualmente per i cocktail IBA ufficiali
 - Virgolette doppie " sempre — mai singole
 - Separatore decimale nelle quantita': virgola , (non punto)
 - Le fonti (IBA, Difford's Guide, ecc.) non vengono mai citate nel JSON —
