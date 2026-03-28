@@ -8,7 +8,7 @@
       "Rum"
     ],
     "categoria": "After dinner",
-    "abv": "Medio",
+    "abv": "Medio alto",
     "sapori": [
       "Cremoso",
       "Complesso",
@@ -56,7 +56,7 @@
       "Rum"
     ],
     "categoria": "All day",
-    "abv": "Medio",
+    "abv": "Medio basso",
     "sapori": [
       "Tropicale",
       "Fruttato",
@@ -349,7 +349,7 @@
       "Cognac"
     ],
     "categoria": "After dinner",
-    "abv": "Alto",
+    "abv": "Medio alto",
     "sapori": [
       "Fruttato",
       "Speziato",
@@ -397,7 +397,7 @@
       "Tequila"
     ],
     "categoria": "All day",
-    "abv": "Alto",
+    "abv": "Medio basso",
     "sapori": [
       "Fruttato",
       "Speziato",
@@ -603,7 +603,7 @@
       "Vodka"
     ],
     "categoria": "All day",
-    "abv": "Medio",
+    "abv": "Medio basso",
     "sapori": [
       "Agrumato",
       "Secco",
@@ -806,7 +806,7 @@
       "Rum"
     ],
     "categoria": "After dinner",
-    "abv": "Medio basso",
+    "abv": "Basso",
     "sapori": [
       "Caffeinico",
       "Tropicale",
@@ -871,7 +871,7 @@
       "Gin"
     ],
     "categoria": "Pre dinner",
-    "abv": "Alto",
+    "abv": "Medio alto",
     "sapori": [
       "Agrumato",
       "Aromatico",
@@ -1049,7 +1049,7 @@
       "Scotch whisky"
     ],
     "categoria": "All day",
-    "abv": "Alto",
+    "abv": "Medio",
     "sapori": [
       "Speziato",
       "Agrumato",
@@ -1090,7 +1090,7 @@
       "Bourbon whiskey"
     ],
     "categoria": "After dinner",
-    "abv": "Molto alto",
+    "abv": "Medio alto",
     "sapori": [
       "Mentolato",
       "Caldo",
@@ -1130,7 +1130,7 @@
       "Bourbon whiskey"
     ],
     "categoria": "All day",
-    "abv": "Medio alto",
+    "abv": "Medio",
     "sapori": [
       "Fruttato",
       "Dolce",
@@ -1178,7 +1178,7 @@
       "Japanese whisky"
     ],
     "categoria": "All day",
-    "abv": "Medio",
+    "abv": "Medio basso",
     "sapori": [
       "Leggero",
       "Aromatico",
@@ -1215,7 +1215,7 @@
       "Mezcal"
     ],
     "categoria": "After dinner",
-    "abv": "Molto alto",
+    "abv": "Alto",
     "sapori": [
       "Affumicato",
       "Speziato",
@@ -2209,7 +2209,7 @@
       "Rum"
     ],
     "categoria": "After dinner",
-    "abv": "Alto",
+    "abv": "Medio alto",
     "sapori": [
       "Intenso",
       "Speziato",
@@ -2476,7 +2476,7 @@
       "Analcolico"
     ],
     "categoria": "All day",
-    "abv": "Alto",
+    "abv": "Analcolico",
     "sapori": [
       "Dolce",
       "Agrumato",
@@ -2828,7 +2828,7 @@
       "Gin"
     ],
     "categoria": "All day",
-    "abv": "Alto",
+    "abv": "Medio basso",
     "sapori": [
       "Rinfrescante",
       "Agrumato",
@@ -3626,7 +3626,7 @@
       "Rum"
     ],
     "categoria": "All day",
-    "abv": "Molto alto",
+    "abv": "Medio",
     "sapori": [
       "Fresco",
       "Speziato",
@@ -4545,7 +4545,7 @@
       "Brandy"
     ],
     "categoria": "All day",
-    "abv": "Molto alto",
+    "abv": "Medio basso",
     "sapori": [
       "Speziato",
       "Effervescente",
@@ -4635,7 +4635,7 @@
       "Pimm's No.1"
     ],
     "categoria": "All day",
-    "abv": "Molto alto",
+    "abv": "Basso",
     "sapori": [
       "Rinfrescante",
       "Fruttato",
@@ -6250,7 +6250,7 @@
       "Pisco"
     ],
     "categoria": "All day",
-    "abv": "Molto alto",
+    "abv": "Medio basso",
     "sapori": [
       "Speziato",
       "Agrumato",
@@ -6595,7 +6595,7 @@
       "Rum"
     ],
     "categoria": "All day",
-    "abv": "Molto alto",
+    "abv": "Medio basso",
     "sapori": [
       "Esotico",
       "Speziato",
@@ -9734,7 +9734,7 @@
       "Vodka"
     ],
     "categoria": "All day",
-    "abv": "Molto alto",
+    "abv": "Medio basso",
     "sapori": [
       "Fresco",
       "Speziato",

@@ -98,6 +98,10 @@ ABV_REF = {
 
 # Lookup specifico (priorità assoluta)
 ABV_SPECIFIC = {
+    # Ginger e Sake — priorità su "gin" nel lookup parziale
+    "ginger ale": 0, "ginger beer": 0, "ginger beer artigianale": 0,
+    "ginger": 0, "zenzero fresco": 0, "zenzero grattugiato": 0,
+    "sake": 15, "sake ginjo": 15, "sake junmai": 15,
     "rye whiskey": 40, "rye whiskey americano": 40,
     "rye whiskey canadese": 40, "rye whiskey cask strength": 57,
     "bourbon whiskey": 40, "bourbon whiskey small batch": 40,
