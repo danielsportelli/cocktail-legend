@@ -54,6 +54,22 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
         }
       }
 
+      // Prendi anche la prossima domanda per l'anteprima
+      const prossimaSnap = await db
+        .collection("domande")
+        .where("usata", "==", false)
+        .orderBy("id")
+        .limit(2)
+        .get();
+
+      let prossima_categoria = null;
+      let prossima_difficolta = null;
+      if (prossimaSnap.docs.length >= 2) {
+        const prossimaDati = prossimaSnap.docs[1].data();
+        prossima_categoria = prossimaDati.categoria || null;
+        prossima_difficolta = prossimaDati.difficolta || null;
+      }
+
       await attualeRef.set({
         domanda_id: dati.id,
         testo: dati.domanda,
@@ -63,6 +79,8 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
         categoria: dati.categoria,
         difficolta: dati.difficolta,
         data_impostazione: oggi,
+        prossima_categoria: prossima_categoria,
+        prossima_difficolta: prossima_difficolta,
       });
 
       console.log("Nuova domanda del giorno: " + dati.id);
