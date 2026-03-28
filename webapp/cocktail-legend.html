@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230f172a' stroke='url(%23g)' stroke-width='3'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232563eb'/><stop offset='1' stop-color='%23f59e0b'/></linearGradient></defs><text x='50' y='67' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='42' fill='%23f59e0b'>CL</text></svg>"/>
 <title>Cocktail Legend</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0f1e">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cocktail Legend">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/css.css">
 <style>
@@ -1291,6 +1297,11 @@ function calcABV() {
   document.addEventListener('copy', function(e){ e.preventDefault(); return false; });
   // Blocca drag & drop immagini
   document.addEventListener('dragstart', function(e){ e.preventDefault(); return false; });
+</script>
+<script>
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('service-worker.js');
+}
 </script>
 </body>
 </html>
