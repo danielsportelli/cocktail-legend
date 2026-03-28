@@ -511,7 +511,7 @@ function buildDropdown(id, key, items) {
 function updateAllCounts() {
   // Pre-calcola i resSet per chiave una sola volta
   var _resSets = {};
-  ["cat","dis","abv","sap","frz","bic"].forEach(function(k){ _resSets[k] = uniqFromRes(k); });
+  ["cat","dis","abv","frz","bic","iba"].forEach(function(k){ _resSets[k] = uniqFromRes(k); });
   document.querySelectorAll(".ci").forEach(function(div){
     var k = div.dataset.key, v = div.dataset.val;
     var cnt = countFor(k, v);
@@ -687,16 +687,17 @@ function updateBadges() {
   badge.classList.toggle("show", total > 0);
 
   // contatori sui singoli btn
-  ["cat","dis","abv","sap","frz","bic"].forEach(function(k){
+  ["cat","dis","abv","frz","bic","iba"].forEach(function(k){
     var cnt = document.getElementById("cnt-"+k);
-    cnt.textContent = AF[k].length;
-    cnt.classList.toggle("show", AF[k].length > 0);
+    if(!cnt) return;
+    cnt.textContent = AF[k] ? AF[k].length : 0;
+    cnt.classList.toggle("show", AF[k] && AF[k].length > 0);
   });
 
   // tag rimovibili
   var tagsEl = document.getElementById("active-tags");
   tagsEl.innerHTML = "";
-  var allKeys = ["cat","dis","abv","sap"];
+  var allKeys = ["cat","dis","abv","frz","bic","iba"];
   for(var ki=0;ki<allKeys.length;ki++){
     var k=allKeys[ki];
     for(var vi=0;vi<AF[k].length;vi++){
