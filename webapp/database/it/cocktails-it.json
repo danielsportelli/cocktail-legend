@@ -1,1272 +1,1302 @@
 [
-{
-  "id": "barbary_coast",
-  "name": "Barbary Coast",
-  "distillato": [
-    "Gin",
-    "Scotch whisky",
-    "Rum"
-  ],
-  "categoria": "After dinner",
-  "abv": "Medio",
-  "sapori": [
-    "Cremoso",
-    "Complesso",
-    "Dolce"
-  ],
-  "garnish": "Noce moscata",
-  "ingredienti": [
-    [
-      "22,5 ml",
-      "Gin"
-    ],
-    [
-      "22,5 ml",
-      "Scotch whisky blended"
-    ],
-    [
-      "22,5 ml",
+  {
+    "id": "barbary_coast",
+    "name": "Barbary Coast",
+    "distillato": [
+      "Gin",
+      "Scotch whisky",
       "Rum"
     ],
-    [
-      "22,5 ml",
-      "Liquore al cacao scuro"
+    "categoria": "After dinner",
+    "abv": "Medio",
+    "sapori": [
+      "Cremoso",
+      "Complesso",
+      "Dolce"
     ],
-    [
-      "22,5 ml",
-      "Panna fresca"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata",
-    "Grattugiare noce moscata sulla superficie"
-  ],
-  "storia": "Il Barbary Coast prende il nome dal famigerato quartiere portuale di San Francisco che tra la metà dell'Ottocento e i primi del Novecento era sinonimo di pericolo, vizio e vita notturna sfrenata. Il Barbary Coast era il cuore pulsante della città durante la corsa all'oro californiana del 1849, frequentato da marinai, cercatori d'oro, avventurieri e personaggi al limite della legalità. Il cocktail compare nei ricettari americani degli anni Venti, in pieno Proibizionismo, e il nome evocava quella tradizione di eccesso e avventura che aveva caratterizzato il quartiere. È uno dei drink che testimoniano come la toponomastica urbana americana si sia trasferita nella cultura del cocktail, trasformando luoghi mitologici in bevande.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/barbary_coast.webp",
-  "varianti": []
-},
-{
-  "id": "big_bamboo",
-  "name": "Big Bamboo",
-  "distillato": [
-    "Rum"
-  ],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": [
-    "Tropicale",
-    "Fruttato",
-    "Dolce"
-  ],
-  "garnish": "Fetta di ananas + Ciliegia",
-  "ingredienti": [
-    [
-      "45 ml",
+    "garnish": "Noce moscata",
+    "ingredienti": [
+      [
+        "22,5 ml",
+        "Gin"
+      ],
+      [
+        "22,5 ml",
+        "Scotch whisky blended"
+      ],
+      [
+        "22,5 ml",
+        "Rum"
+      ],
+      [
+        "22,5 ml",
+        "Liquore al cacao scuro"
+      ],
+      [
+        "22,5 ml",
+        "Panna fresca"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata",
+      "Grattugiare noce moscata sulla superficie"
+    ],
+    "storia": "Il Barbary Coast prende il nome dal famigerato quartiere portuale di San Francisco che tra la metà dell'Ottocento e i primi del Novecento era sinonimo di pericolo, vizio e vita notturna sfrenata. Il Barbary Coast era il cuore pulsante della città durante la corsa all'oro californiana del 1849, frequentato da marinai, cercatori d'oro, avventurieri e personaggi al limite della legalità. Il cocktail compare nei ricettari americani degli anni Venti, in pieno Proibizionismo, e il nome evocava quella tradizione di eccesso e avventura che aveva caratterizzato il quartiere. È uno dei drink che testimoniano come la toponomastica urbana americana si sia trasferita nella cultura del cocktail, trasformando luoghi mitologici in bevande.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/barbary_coast.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "big_bamboo",
+    "name": "Big Bamboo",
+    "distillato": [
       "Rum"
     ],
-    [
-      "30 ml",
-      "Rum scuro"
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Tropicale",
+      "Fruttato",
+      "Dolce"
     ],
-    [
-      "30 ml",
-      "Succo di ananas"
+    "garnish": "Fetta di ananas + Ciliegia",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Rum"
+      ],
+      [
+        "30 ml",
+        "Rum scuro"
+      ],
+      [
+        "30 ml",
+        "Succo di ananas"
+      ],
+      [
+        "30 ml",
+        "Succo di arancia"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "1 dash",
+        "Angostura bitters"
+      ]
     ],
-    [
-      "30 ml",
-      "Succo di arancia"
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"
     ],
-    [
-      "22,5 ml",
-      "Succo di lime"
-    ],
-    [
-      "15 ml",
-      "Sciroppo di zucchero"
-    ],
-    [
-      "1 dash",
-      "Angostura bitters"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"
-  ],
-  "storia": "Il Big Bamboo è un cocktail tiki della tradizione caraibica giamaicana, diffuso nei resort e nei beach bar dell'isola a partire dagli anni Cinquanta e Sessanta, quando il turismo internazionale trasformò la Jamaica in una destinazione glamour frequentata da star di Hollywood e jet set internazionale. Il nome richiama la vegetazione rigogliosa dell'isola e l'atmosfera rilassata dei bar tropicali. È uno di quei drink nati più per raccontare un'atmosfera che per celebrare un inventore specifico — un classico del repertorio informale caraibico che si è diffuso nei tiki bar americani durante il grande boom della cultura esotica degli anni Cinquanta.",
-  "frizzante": false,
-  "bicchiere": "Highball",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/big_bamboo.webp",
-  "varianti": []
-},
-{
-  "id": "blinker",
-  "name": "Blinker",
-  "distillato": [
-    "Rye whiskey"
-  ],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": [
-    "Fruttato",
-    "Secco",
-    "Agrumato"
-  ],
-  "garnish": "Nessuna",
-  "ingredienti": [
-    [
-      "60 ml",
+    "storia": "Il Big Bamboo è un cocktail tiki della tradizione caraibica giamaicana, diffuso nei resort e nei beach bar dell'isola a partire dagli anni Cinquanta e Sessanta, quando il turismo internazionale trasformò la Jamaica in una destinazione glamour frequentata da star di Hollywood e jet set internazionale. Il nome richiama la vegetazione rigogliosa dell'isola e l'atmosfera rilassata dei bar tropicali. È uno di quei drink nati più per raccontare un'atmosfera che per celebrare un inventore specifico — un classico del repertorio informale caraibico che si è diffuso nei tiki bar americani durante il grande boom della cultura esotica degli anni Cinquanta.",
+    "frizzante": false,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/big_bamboo.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "blinker",
+    "name": "Blinker",
+    "distillato": [
       "Rye whiskey"
     ],
-    [
-      "22,5 ml",
-      "Succo di pompelmo"
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Fruttato",
+      "Secco",
+      "Agrumato"
     ],
-    [
-      "15 ml",
-      "Sciroppo di granatina"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Blinker compare per la prima volta nel libro \"The Flowing Bowl\" di Patrick Gavin Duffy del 1934, uno dei ricettari americani più importanti del periodo immediatamente successivo alla fine del Proibizionismo. Duffy era il barman del Ashland House di New York e il suo libro fu uno dei primi a documentare sistematicamente i cocktail dell'era post-Proibizionismo. Il Blinker appartiene alla famiglia dei whiskey sour con pompelmo — un formato che stava guadagnando popolarità negli anni Trenta man mano che il succo di pompelmo fresco diventava disponibile nei bar americani. Dimenticato per decenni, è stato riscoperto dagli appassionati di miscelazione storica negli anni Duemila.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/blinker.webp",
-  "varianti": []
-},
-{
-  "id": "bourbon_special",
-  "name": "Bourbon Special",
-  "distillato": [
-    "Bourbon whiskey"
-  ],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": [
-    "Fruttato",
-    "Speziato",
-    "Caldo"
-  ],
-  "garnish": "Fetta di arancia + Ciliegia",
-  "ingredienti": [
-    [
-      "45 ml",
+    "garnish": "Nessuna",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Rye whiskey"
+      ],
+      [
+        "22,5 ml",
+        "Succo di pompelmo"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di granatina"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Blinker compare per la prima volta nel libro \"The Flowing Bowl\" di Patrick Gavin Duffy del 1934, uno dei ricettari americani più importanti del periodo immediatamente successivo alla fine del Proibizionismo. Duffy era il barman del Ashland House di New York e il suo libro fu uno dei primi a documentare sistematicamente i cocktail dell'era post-Proibizionismo. Il Blinker appartiene alla famiglia dei whiskey sour con pompelmo — un formato che stava guadagnando popolarità negli anni Trenta man mano che il succo di pompelmo fresco diventava disponibile nei bar americani. Dimenticato per decenni, è stato riscoperto dagli appassionati di miscelazione storica negli anni Duemila.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/blinker.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "bourbon_special",
+    "name": "Bourbon Special",
+    "distillato": [
       "Bourbon whiskey"
     ],
-    [
-      "22,5 ml",
-      "Succo di arancia"
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Fruttato",
+      "Speziato",
+      "Caldo"
     ],
-    [
-      "15 ml",
-      "Orange curaçao"
+    "garnish": "Fetta di arancia + Ciliegia",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Bourbon whiskey"
+      ],
+      [
+        "22,5 ml",
+        "Succo di arancia"
+      ],
+      [
+        "15 ml",
+        "Orange curaçao"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "1 dash",
+        "Angostura bitters"
+      ]
     ],
-    [
-      "15 ml",
-      "Sciroppo di zucchero"
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
     ],
-    [
-      "1 dash",
-      "Angostura bitters"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
-  ],
-  "storia": "Il Bourbon Special è un cocktail americano della tradizione dei bourbon drinks arricchiti con agrumi, categoria diffusa nei bar del Sud degli Stati Uniti a partire dagli anni Quaranta e Cinquanta. Il Kentucky, cuore della produzione di bourbon, aveva sviluppato una cultura del bere locale in cui il distillato di mais veniva esaltato con ingredienti regionali — arance della Florida, spezie caraibiche arrivate via New Orleans. Non è attribuito a un inventore preciso, appartiene al repertorio informale dei bar americani del dopoguerra che cercavano di valorizzare il bourbon in chiave più accessibile rispetto ai classici stirred drinks.",
-  "frizzante": false,
-  "bicchiere": "Old fashioned",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bourbon_special.webp",
-  "varianti": []
-},
-{
-  "id": "breakfast_martini",
-  "name": "Breakfast Martini",
-  "distillato": [
-    "Gin"
-  ],
-  "categoria": "All day",
-  "abv": "Medio alto",
-  "sapori": [
-    "Agrumato",
-    "Fruttato",
-    "Secco"
-  ],
-  "garnish": "Zest di limone",
-  "ingredienti": [
-    [
-      "45 ml",
+    "storia": "Il Bourbon Special è un cocktail americano della tradizione dei bourbon drinks arricchiti con agrumi, categoria diffusa nei bar del Sud degli Stati Uniti a partire dagli anni Quaranta e Cinquanta. Il Kentucky, cuore della produzione di bourbon, aveva sviluppato una cultura del bere locale in cui il distillato di mais veniva esaltato con ingredienti regionali — arance della Florida, spezie caraibiche arrivate via New Orleans. Non è attribuito a un inventore preciso, appartiene al repertorio informale dei bar americani del dopoguerra che cercavano di valorizzare il bourbon in chiave più accessibile rispetto ai classici stirred drinks.",
+    "frizzante": false,
+    "bicchiere": "Old fashioned",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bourbon_special.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "breakfast_martini",
+    "name": "Breakfast Martini",
+    "distillato": [
       "Gin"
     ],
-    [
-      "15 ml",
-      "Triple sec"
+    "categoria": "All day",
+    "abv": "Medio alto",
+    "sapori": [
+      "Agrumato",
+      "Fruttato",
+      "Secco"
     ],
-    [
-      "22,5 ml",
-      "Succo di limone"
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Gin"
+      ],
+      [
+        "15 ml",
+        "Triple sec"
+      ],
+      [
+        "22,5 ml",
+        "Succo di limone"
+      ],
+      [
+        "2 bspoon",
+        "Marmellata di arance amare"
+      ]
     ],
-    [
-      "2 bspoon",
-      "Marmellata di arance amare"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Breakfast Martini nasce a Londra nel 1997, creato da Salvatore Calabrese — il bartender calabrese soprannominato The Maestro — al Lanesborough Hotel di Hyde Park Corner. La storia è documentata dallo stesso Calabrese: una mattina, mentre faceva colazione con la moglie, assaggiò la sua marmellata di arance amare su toast e decise di portarla dietro al bancone, creando al volo quello che sarebbe diventato uno dei suoi cocktail più famosi. Il Lanesborough era allora uno degli hotel più esclusivi di Londra, e il drink si diffuse rapidamente nei bar di lusso di tutto il mondo. È uno dei rari esempi di cocktail la cui ispirazione è documentata con precisione quasi quotidiana.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/breakfast_martini.webp",
-  "varianti": []
-},
-{
-  "id": "campari_shakerato",
-  "name": "Campari Shakerato",
-  "distillato": [],
-  "categoria": "Pre dinner",
-  "abv": "Medio",
-  "sapori": [
-    "Amaro",
-    "Agrumato",
-    "Fresco"
-  ],
-  "garnish": "Zest di arancia",
-  "ingredienti": [
-    [
-      "60 ml",
-      "Campari"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio abbondante e con vigore",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Campari Shakerato è una preparazione italiana nata nei bar del nord Italia — Lombardia in testa — come alternativa estiva all'aperitivo classico. La tecnica dello shakerato applicata al Campari produce una schiuma fine e una texture fredda e setosa che trasforma radicalmente l'esperienza rispetto al semplice Campari on the rocks. Campari fu fondato da Gaspare Campari nel 1860 a Milano, e il suo bitter rosso è diventato uno dei simboli dell'aperitivo italiano nel mondo. Lo shakerato come tecnica si diffuse in Italia nel dopoguerra, applicata inizialmente all'espresso — il caffè shakerato — e poi trasferita ai liquori. È un esempio di come la cultura del bar italiano abbia sviluppato preparazioni originali a partire da prodotti già iconici.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/campari_shakerato.webp",
-  "varianti": []
-},
-{
-  "id": "charlie_chaplin",
-  "name": "Charlie Chaplin",
-  "distillato": [],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": [
-    "Fruttato",
-    "Dolce",
-    "Agrumato"
-  ],
-  "garnish": "Rondella di lime",
-  "ingredienti": [
-    [
-      "30 ml",
-      "Apricot brandy"
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
     ],
-    [
-      "30 ml",
-      "Sloe gin"
+    "storia": "Il Breakfast Martini nasce a Londra nel 1997, creato da Salvatore Calabrese — il bartender calabrese soprannominato The Maestro — al Lanesborough Hotel di Hyde Park Corner. La storia è documentata dallo stesso Calabrese: una mattina, mentre faceva colazione con la moglie, assaggiò la sua marmellata di arance amare su toast e decise di portarla dietro al bancone, creando al volo quello che sarebbe diventato uno dei suoi cocktail più famosi. Il Lanesborough era allora uno degli hotel più esclusivi di Londra, e il drink si diffuse rapidamente nei bar di lusso di tutto il mondo. È uno dei rari esempi di cocktail la cui ispirazione è documentata con precisione quasi quotidiana.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/breakfast_martini.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "campari_shakerato",
+    "name": "Campari Shakerato",
+    "distillato": [],
+    "categoria": "Pre dinner",
+    "abv": "Medio",
+    "sapori": [
+      "Amaro",
+      "Agrumato",
+      "Fresco"
     ],
-    [
-      "30 ml",
-      "Succo di lime"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Charlie Chaplin nasce negli anni Venti del Novecento, battezzato in onore del comico britannico che era all'apice della sua fama nel cinema muto americano. Charlie Chaplin era la star più celebre al mondo in quel decennio, e la moda di dedicare cocktail a personaggi famosi dello spettacolo era diffusissima nei bar di New York e Londra. Il drink compare nel Savoy Cocktail Book di Harry Craddock del 1930, consacrandosi come classico dell'era d'oro. Chaplin stesso frequentava i locali più esclusivi di Hollywood e New York, e il drink che portava il suo nome era servito nei cocktail bar di lusso come tributo alla sua figura universalmente riconoscibile.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/charlie_chaplin.webp",
-  "varianti": []
-},
-{
-  "id": "division_bell",
-  "name": "Division Bell",
-  "distillato": [
-    "Mezcal"
-  ],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": [
-    "Affumicato",
-    "Fruttato",
-    "Complesso"
-  ],
-  "garnish": "Zest di arancia",
-  "ingredienti": [
-    [
-      "22,5 ml",
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Campari"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio abbondante e con vigore",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Campari Shakerato è una preparazione italiana nata nei bar del nord Italia — Lombardia in testa — come alternativa estiva all'aperitivo classico. La tecnica dello shakerato applicata al Campari produce una schiuma fine e una texture fredda e setosa che trasforma radicalmente l'esperienza rispetto al semplice Campari on the rocks. Campari fu fondato da Gaspare Campari nel 1860 a Milano, e il suo bitter rosso è diventato uno dei simboli dell'aperitivo italiano nel mondo. Lo shakerato come tecnica si diffuse in Italia nel dopoguerra, applicata inizialmente all'espresso — il caffè shakerato — e poi trasferita ai liquori. È un esempio di come la cultura del bar italiano abbia sviluppato preparazioni originali a partire da prodotti già iconici.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/campari_shakerato.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "charlie_chaplin",
+    "name": "Charlie Chaplin",
+    "distillato": [],
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Fruttato",
+      "Dolce",
+      "Agrumato"
+    ],
+    "garnish": "Rondella di lime",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Apricot brandy"
+      ],
+      [
+        "30 ml",
+        "Sloe gin"
+      ],
+      [
+        "30 ml",
+        "Succo di lime"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Charlie Chaplin nasce negli anni Venti del Novecento, battezzato in onore del comico britannico che era all'apice della sua fama nel cinema muto americano. Charlie Chaplin era la star più celebre al mondo in quel decennio, e la moda di dedicare cocktail a personaggi famosi dello spettacolo era diffusissima nei bar di New York e Londra. Il drink compare nel Savoy Cocktail Book di Harry Craddock del 1930, consacrandosi come classico dell'era d'oro. Chaplin stesso frequentava i locali più esclusivi di Hollywood e New York, e il drink che portava il suo nome era servito nei cocktail bar di lusso come tributo alla sua figura universalmente riconoscibile.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/charlie_chaplin.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "division_bell",
+    "name": "Division Bell",
+    "distillato": [
       "Mezcal"
     ],
-    [
-      "22,5 ml",
-      "Aperol"
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Affumicato",
+      "Fruttato",
+      "Complesso"
     ],
-    [
-      "22,5 ml",
-      "Maraschino"
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "22,5 ml",
+        "Mezcal"
+      ],
+      [
+        "22,5 ml",
+        "Aperol"
+      ],
+      [
+        "22,5 ml",
+        "Maraschino"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ]
     ],
-    [
-      "22,5 ml",
-      "Succo di lime"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Division Bell nasce nel 2014 al Meteorite di San Francisco, creato dal bartender Philip Ward — lo stesso che aveva creato il Death Flip e numerosi altri classici contemporanei. Il nome è un omaggio all'album dei Pink Floyd del 1994, The Division Bell, e riflette l'abitudine di molti bartender della scena americana degli anni Duemila e Dieci di battezzare i propri cocktail con riferimenti alla cultura pop e alla musica rock. Ward è una figura centrale della mixology newyorkese e californiana contemporanea, ex bartender del Death & Co di New York. Il Division Bell è strutturalmente una rivisitazione del Naked and Famous.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/division_bell.webp",
-  "varianti": []
-},
-{
-  "id": "east_india",
-  "name": "East India",
-  "distillato": [
-    "Cognac"
-  ],
-  "categoria": "After dinner",
-  "abv": "Alto",
-  "sapori": [
-    "Fruttato",
-    "Speziato",
-    "Complesso"
-  ],
-  "garnish": "Zest di limone",
-  "ingredienti": [
-    [
-      "45 ml",
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Division Bell nasce nel 2014 al Meteorite di San Francisco, creato dal bartender Philip Ward — lo stesso che aveva creato il Death Flip e numerosi altri classici contemporanei. Il nome è un omaggio all'album dei Pink Floyd del 1994, The Division Bell, e riflette l'abitudine di molti bartender della scena americana degli anni Duemila e Dieci di battezzare i propri cocktail con riferimenti alla cultura pop e alla musica rock. Ward è una figura centrale della mixology newyorkese e californiana contemporanea, ex bartender del Death & Co di New York. Il Division Bell è strutturalmente una rivisitazione del Naked and Famous.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/division_bell.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "east_india",
+    "name": "East India",
+    "distillato": [
       "Cognac"
     ],
-    [
-      "15 ml",
-      "Orange curaçao"
+    "categoria": "After dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Fruttato",
+      "Speziato",
+      "Complesso"
     ],
-    [
-      "15 ml",
-      "Ancho reyes"
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Cognac"
+      ],
+      [
+        "15 ml",
+        "Orange curaçao"
+      ],
+      [
+        "15 ml",
+        "Ancho reyes"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
+      ],
+      [
+        "1 dash",
+        "Peychaud's bitters"
+      ]
     ],
-    [
-      "2 dash",
-      "Angostura bitters"
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
     ],
-    [
-      "1 dash",
-      "Peychaud's bitters"
-    ]
-  ],
-  "prep": [
-    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
-    "Mescolare delicatamente per circa 20 secondi",
-    "Filtrare in una coppetta raffreddata"
-  ],
-  "storia": "L'East India compare nei ricettari della seconda metà dell'Ottocento, con alcune delle prime documentazioni nei libri di Harry Johnson e Jerry Thomas. Il nome richiama la East India Company — la compagnia commerciale britannica che dal 1600 al 1874 dominò il commercio tra Europa e Asia, portando in Occidente spezie, tè, stoffe e influenze culturali. Era comune nell'Ottocento battezzare cocktail con riferimenti alle rotte commerciali esotiche, evocando il fascino dell'Oriente. Il drink è costruito attorno al cognac francese arricchito da note di agrumi e spezie — una struttura che riflette proprio l'incontro tra la tradizione distillatoria europea e le spezie asiatiche che la East India Company aveva reso disponibili in tutto l'Occidente.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/east_india.webp",
-  "varianti": []
-},
-{
-  "id": "el_diablo",
-  "name": "El Diablo",
-  "distillato": [
-    "Tequila"
-  ],
-  "categoria": "All day",
-  "abv": "Alto",
-  "sapori": [
-    "Fruttato",
-    "Speziato",
-    "Vivace"
-  ],
-  "garnish": "Spicchio di lime",
-  "ingredienti": [
-    [
-      "45 ml",
-      "Tequila reposado"
+    "storia": "L'East India compare nei ricettari della seconda metà dell'Ottocento, con alcune delle prime documentazioni nei libri di Harry Johnson e Jerry Thomas. Il nome richiama la East India Company — la compagnia commerciale britannica che dal 1600 al 1874 dominò il commercio tra Europa e Asia, portando in Occidente spezie, tè, stoffe e influenze culturali. Era comune nell'Ottocento battezzare cocktail con riferimenti alle rotte commerciali esotiche, evocando il fascino dell'Oriente. Il drink è costruito attorno al cognac francese arricchito da note di agrumi e spezie — una struttura che riflette proprio l'incontro tra la tradizione distillatoria europea e le spezie asiatiche che la East India Company aveva reso disponibili in tutto l'Occidente.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/east_india.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "el_diablo",
+    "name": "El Diablo",
+    "distillato": [
+      "Tequila"
     ],
-    [
-      "15 ml",
-      "Crème de cassis"
+    "categoria": "All day",
+    "abv": "Alto",
+    "sapori": [
+      "Fruttato",
+      "Speziato",
+      "Vivace"
     ],
-    [
-      "22,5 ml",
-      "Succo di lime"
+    "garnish": "Spicchio di lime",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Tequila reposado"
+      ],
+      [
+        "15 ml",
+        "Crème de cassis"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ],
+      [
+        "Top",
+        "Ginger beer"
+      ]
     ],
-    [
-      "Top",
-      "Ginger beer"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio (tranne la ginger beer)",
-    "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio",
-    "Completare con la ginger beer",
-    "Dare una leggera mescolata col bar spoon dal basso verso l'alto"
-  ],
-  "storia": "El Diablo — il diavolo — compare per la prima volta nel libro di Trader Vic del 1946, Trader Vic's Book of Food and Drink, come Mexican El Diablo. Victor Bergeron lo concepì come parte del suo repertorio di drink messicani esotici che si affiancavano ai tiki drinks caraibici nel suo menu. Negli anni Quaranta la tequila era ancora praticamente sconosciuta al grande pubblico americano, e Bergeron fu tra i primi bartender americani a valorizzarla in cocktail strutturati. Il nome richiama il carattere piccante e irrequieto del drink, con la ginger beer speziata che aggiunge il tocco diabolico. È incluso nella lista ufficiale IBA nella categoria Contemporary Classics.",
-  "frizzante": true,
-  "bicchiere": "Highball",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/el_diablo.webp",
-  "varianti": []
-},
-{
-  "id": "fancy_free",
-  "name": "Fancy Free",
-  "distillato": [
-    "Bourbon whiskey"
-  ],
-  "categoria": "After dinner",
-  "abv": "Molto alto",
-  "sapori": [
-    "Speziato",
-    "Aromatico",
-    "Secco"
-  ],
-  "garnish": "Zest di arancia",
-  "ingredienti": [
-    [
-      "60 ml",
+    "prep": [
+      "Shakerare tutto con ghiaccio (tranne la ginger beer)",
+      "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio",
+      "Completare con la ginger beer",
+      "Dare una leggera mescolata col bar spoon dal basso verso l'alto"
+    ],
+    "storia": "El Diablo — il diavolo — compare per la prima volta nel libro di Trader Vic del 1946, Trader Vic's Book of Food and Drink, come Mexican El Diablo. Victor Bergeron lo concepì come parte del suo repertorio di drink messicani esotici che si affiancavano ai tiki drinks caraibici nel suo menu. Negli anni Quaranta la tequila era ancora praticamente sconosciuta al grande pubblico americano, e Bergeron fu tra i primi bartender americani a valorizzarla in cocktail strutturati. Il nome richiama il carattere piccante e irrequieto del drink, con la ginger beer speziata che aggiunge il tocco diabolico. È incluso nella lista ufficiale IBA nella categoria Contemporary Classics.",
+    "frizzante": true,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/el_diablo.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "fancy_free",
+    "name": "Fancy Free",
+    "distillato": [
       "Bourbon whiskey"
     ],
-    [
-      "7,5 ml",
-      "Maraschino"
+    "categoria": "After dinner",
+    "abv": "Molto alto",
+    "sapori": [
+      "Speziato",
+      "Aromatico",
+      "Secco"
     ],
-    [
-      "2 dash",
-      "Angostura bitters"
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Bourbon whiskey"
+      ],
+      [
+        "7,5 ml",
+        "Maraschino"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
+      ],
+      [
+        "1 dash",
+        "Orange bitters"
+      ]
     ],
-    [
-      "1 dash",
-      "Orange bitters"
-    ]
-  ],
-  "prep": [
-    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
-    "Mescolare delicatamente per circa 20 secondi",
-    "Filtrare in una coppetta raffreddata"
-  ],
-  "storia": "Il Fancy Free compare in alcuni ricettari americani degli anni Quaranta ed è strutturalmente una variazione dell'Old Fashioned in cui il Maraschino sostituisce lo zucchero semplice. Il nome — libero e spensierato — riflette l'estetica dei cocktail del dopoguerra americano, quando la vittoria nella Seconda Guerra Mondiale aveva generato un diffuso senso di leggerezza e ottimismo. È un drink di scuola classica americana, costruito sulla formula del whiskey con dolcificante e bitters, che aggiunge complessità aromatica grazie alla nota ciliegina del Maraschino. Poco documentato riguardo a un inventore preciso, appartiene al ricco repertorio dei bourbon drinks stirred dell'era post-Proibizionismo.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fancy_free.webp",
-  "varianti": []
-},
-{
-  "id": "fitzgerald",
-  "name": "Fitzgerald",
-  "distillato": [
-    "Gin"
-  ],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": [
-    "Agrumato",
-    "Aromatico",
-    "Secco"
-  ],
-  "garnish": "Zest di limone",
-  "ingredienti": [
-    [
-      "45 ml",
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
+    ],
+    "storia": "Il Fancy Free compare in alcuni ricettari americani degli anni Quaranta ed è strutturalmente una variazione dell'Old Fashioned in cui il Maraschino sostituisce lo zucchero semplice. Il nome — libero e spensierato — riflette l'estetica dei cocktail del dopoguerra americano, quando la vittoria nella Seconda Guerra Mondiale aveva generato un diffuso senso di leggerezza e ottimismo. È un drink di scuola classica americana, costruito sulla formula del whiskey con dolcificante e bitters, che aggiunge complessità aromatica grazie alla nota ciliegina del Maraschino. Poco documentato riguardo a un inventore preciso, appartiene al ricco repertorio dei bourbon drinks stirred dell'era post-Proibizionismo.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fancy_free.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "fitzgerald",
+    "name": "Fitzgerald",
+    "distillato": [
       "Gin"
     ],
-    [
-      "22,5 ml",
-      "Succo di limone"
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Agrumato",
+      "Aromatico",
+      "Secco"
     ],
-    [
-      "15 ml",
-      "Sciroppo di zucchero"
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Gin"
+      ],
+      [
+        "22,5 ml",
+        "Succo di limone"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
+      ]
     ],
-    [
-      "2 dash",
-      "Angostura bitters"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Fitzgerald nasce al Gotham Bar and Grill di New York negli anni Novanta, creato da Dale DeGroff — il bartender soprannominato King Cocktail che più di chiunque altro contribuì al rinascimento della cocktail culture americana in quel decennio. DeGroff lo battezzò in onore di F. Scott Fitzgerald, lo scrittore americano simbolo dell'età del jazz e della Lost Generation che aveva immortalato la cultura del bere degli anni Venti nel Grande Gatsby. È strutturalmente un Gin Sour con l'aggiunta degli Angostura bitters, che aggiungono profondità aromatica senza alterare la struttura del drink. DeGroff è considerato il pioniere del movimento farm-to-bar americano, il primo a reintrodurre succhi freschi e ingredienti di qualità in un'epoca dominata dai mix industriali.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fitzgerald.webp",
-  "varianti": []
-},
-{
-  "id": "gin_lemon",
-  "name": "Gin Lemon",
-  "distillato": [
-    "Gin"
-  ],
-  "categoria": "All day",
-  "abv": "Medio basso",
-  "sapori": [
-    "Agrumato",
-    "Fresco",
-    "Dissetante"
-  ],
-  "garnish": "Fetta di limone",
-  "ingredienti": [
-    [
-      "50 ml",
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Fitzgerald nasce al Gotham Bar and Grill di New York negli anni Novanta, creato da Dale DeGroff — il bartender soprannominato King Cocktail che più di chiunque altro contribuì al rinascimento della cocktail culture americana in quel decennio. DeGroff lo battezzò in onore di F. Scott Fitzgerald, lo scrittore americano simbolo dell'età del jazz e della Lost Generation che aveva immortalato la cultura del bere degli anni Venti nel Grande Gatsby. È strutturalmente un Gin Sour con l'aggiunta degli Angostura bitters, che aggiungono profondità aromatica senza alterare la struttura del drink. DeGroff è considerato il pioniere del movimento farm-to-bar americano, il primo a reintrodurre succhi freschi e ingredienti di qualità in un'epoca dominata dai mix industriali.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fitzgerald.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "gin_lemon",
+    "name": "Gin Lemon",
+    "distillato": [
       "Gin"
     ],
-    [
-      "150 ml",
-      "Soda al limone"
-    ]
-  ],
-  "prep": [
-    "Versare tutto in un bicchiere highball riempito di ghiaccio",
-    "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
-  ],
-  "storia": "Il Gin Lemon è una delle preparazioni più semplici e diffuse della tradizione dei gin drinks europei, particolarmente radicato nella cultura del bar italiano e tedesco. In Germania il Gin Lemon — o Gin-Lemon — è considerato un drink base della miscelazione informale, servito nei locali di ogni livello come alternativa al Gin Tonic. Non ha un inventore né una data di nascita documentata, appartiene alla categoria dei long drinks costruiti per esaltare la freschezza del gin in chiave agrumata e dissetante. La sua struttura essenziale — lo rende uno dei cocktail più facili da preparare e allo stesso tempo uno dei più difficili da bilanciare perfettamente.",
-  "frizzante": true,
-  "bicchiere": "Highball",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gin_lemon.webp",
-  "varianti": []
-},
-{
-  "id": "godchild",
-  "name": "Godchild",
-  "distillato": [
-    "Vodka"
-  ],
-  "categoria": "After dinner",
-  "abv": "Medio",
-  "sapori": [
-    "Dolce",
-    "Cremoso",
-    "Morbido"
-  ],
-  "garnish": "Nessuna",
-  "ingredienti": [
-    [
-      "30 ml",
+    "categoria": "All day",
+    "abv": "Medio basso",
+    "sapori": [
+      "Agrumato",
+      "Fresco",
+      "Dissetante"
+    ],
+    "garnish": "Fetta di limone",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Gin"
+      ],
+      [
+        "150 ml",
+        "Soda al limone"
+      ]
+    ],
+    "prep": [
+      "Versare tutto in un bicchiere highball riempito di ghiaccio",
+      "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
+    ],
+    "storia": "Il Gin Lemon è una delle preparazioni più semplici e diffuse della tradizione dei gin drinks europei, particolarmente radicato nella cultura del bar italiano e tedesco. In Germania il Gin Lemon — o Gin-Lemon — è considerato un drink base della miscelazione informale, servito nei locali di ogni livello come alternativa al Gin Tonic. Non ha un inventore né una data di nascita documentata, appartiene alla categoria dei long drinks costruiti per esaltare la freschezza del gin in chiave agrumata e dissetante. La sua struttura essenziale — lo rende uno dei cocktail più facili da preparare e allo stesso tempo uno dei più difficili da bilanciare perfettamente.",
+    "frizzante": true,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gin_lemon.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "godchild",
+    "name": "Godchild",
+    "distillato": [
       "Vodka"
     ],
-    [
-      "30 ml",
-      "Liquore all'amaretto"
+    "categoria": "After dinner",
+    "abv": "Medio",
+    "sapori": [
+      "Dolce",
+      "Cremoso",
+      "Morbido"
     ],
-    [
-      "30 ml",
-      "Panna fresca"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Godchild completa la trilogia della famiglia cinematografica di Coppola iniziata con il Godfather negli anni Settanta. Se il Godfather combina scotch e amaretto, e la Godmother sostituisce lo scotch con la vodka, il Godchild aggiunge la panna — trasformando la struttura da digestivo secco a dessert cocktail cremoso. È l'ultimo arrivato della famiglia, nato nei cocktail bar americani degli anni Ottanta quando i drink cremosi e dolci erano al culmine della moda. Non ha un inventore documentato, appartiene alla tradizione dei drink nati per estensione logica da un classico preesistente, sfruttando la notorietà del nome per garantirsi un posto nei menu.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/godchild.webp",
-  "varianti": []
-},
-{
-  "id": "greyhound",
-  "name": "Greyhound",
-  "distillato": [
-    "Vodka"
-  ],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": [
-    "Agrumato",
-    "Secco",
-    "Dissetante"
-  ],
-  "garnish": "Fetta di pompelmo rosa",
-  "ingredienti": [
-    [
-      "50 ml",
+    "garnish": "Nessuna",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Vodka"
+      ],
+      [
+        "30 ml",
+        "Liquore all'amaretto"
+      ],
+      [
+        "30 ml",
+        "Panna fresca"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Godchild completa la trilogia della famiglia cinematografica di Coppola iniziata con il Godfather negli anni Settanta. Se il Godfather combina scotch e amaretto, e la Godmother sostituisce lo scotch con la vodka, il Godchild aggiunge la panna — trasformando la struttura da digestivo secco a dessert cocktail cremoso. È l'ultimo arrivato della famiglia, nato nei cocktail bar americani degli anni Ottanta quando i drink cremosi e dolci erano al culmine della moda. Non ha un inventore documentato, appartiene alla tradizione dei drink nati per estensione logica da un classico preesistente, sfruttando la notorietà del nome per garantirsi un posto nei menu.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/godchild.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "greyhound",
+    "name": "Greyhound",
+    "distillato": [
       "Vodka"
     ],
-    [
-      "120 ml",
-      "Succo di pompelmo rosa"
-    ]
-  ],
-  "prep": [
-    "Versare tutto in un bicchiere highball riempito di ghiaccio",
-    "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
-  ],
-  "storia": "Il Greyhound nasce negli anni Quaranta negli Stati Uniti come gin drink — la versione originale prevedeva il gin al posto della vodka — e compare per la prima volta nel 1945 in una pubblicità della Ocean Spray, la cooperativa agricola del Massachusetts che aveva già lanciato il Cape Codder. Il nome rimanda al levriero, il cane da corsa noto per la velocità e l'eleganza — una scelta che evocava lo stile dinamico del dopoguerra americano. La transizione dalla versione con gin a quella con vodka avvenne negli anni Cinquanta e Sessanta, quando la vodka iniziò a scalare le preferenze degli americani. La variante con bordo salato si chiama Salty Dog e nacque qualche anno dopo come personalizzazione dello stesso drink.",
-  "frizzante": false,
-  "bicchiere": "Highball",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/greyhound.webp",
-  "varianti": []
-},
-{
-  "id": "hemingway_breakfast",
-  "name": "Hemingway Breakfast",
-  "distillato": [
-    "Gin"
-  ],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": [
-    "Agrumato",
-    "Aromatico",
-    "Secco"
-  ],
-  "garnish": "Rondella di lime",
-  "ingredienti": [
-    [
-      "50 ml",
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Agrumato",
+      "Secco",
+      "Dissetante"
+    ],
+    "garnish": "Fetta di pompelmo rosa",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Vodka"
+      ],
+      [
+        "120 ml",
+        "Succo di pompelmo rosa"
+      ]
+    ],
+    "prep": [
+      "Versare tutto in un bicchiere highball riempito di ghiaccio",
+      "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
+    ],
+    "storia": "Il Greyhound nasce negli anni Quaranta negli Stati Uniti come gin drink — la versione originale prevedeva il gin al posto della vodka — e compare per la prima volta nel 1945 in una pubblicità della Ocean Spray, la cooperativa agricola del Massachusetts che aveva già lanciato il Cape Codder. Il nome rimanda al levriero, il cane da corsa noto per la velocità e l'eleganza — una scelta che evocava lo stile dinamico del dopoguerra americano. La transizione dalla versione con gin a quella con vodka avvenne negli anni Cinquanta e Sessanta, quando la vodka iniziò a scalare le preferenze degli americani. La variante con bordo salato si chiama Salty Dog e nacque qualche anno dopo come personalizzazione dello stesso drink.",
+    "frizzante": false,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/greyhound.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "hemingway_breakfast",
+    "name": "Hemingway Breakfast",
+    "distillato": [
       "Gin"
     ],
-    [
-      "15 ml",
-      "Succo di pompelmo rosa"
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Agrumato",
+      "Aromatico",
+      "Secco"
     ],
-    [
-      "15 ml",
-      "Succo di lime"
+    "garnish": "Rondella di lime",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Gin"
+      ],
+      [
+        "15 ml",
+        "Succo di pompelmo rosa"
+      ],
+      [
+        "15 ml",
+        "Succo di lime"
+      ],
+      [
+        "15 ml",
+        "Maraschino"
+      ],
+      [
+        "7,5 ml",
+        "Sciroppo di zucchero"
+      ]
     ],
-    [
-      "15 ml",
-      "Maraschino"
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
     ],
-    [
-      "7,5 ml",
-      "Sciroppo di zucchero"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "L'Hemingway Breakfast è una reinterpretazione con gin dell'Hemingway Special — il celebre Daiquiri senza zucchero e con pompelmo che Constantino Ribalaigua creò per Ernest Hemingway al Floridita di L'Avana. La versione con gin sostituisce il rum cubano con il distillato britannico, mantenendo la struttura agrumata e secca che caratterizzava le preferenze di Hemingway. Hemingway era noto per il suo disprezzo per i drink dolci e per la sua passione per il pompelmo, che compariva in quasi tutte le sue ordinazioni personalizzate. Il nome breakfast richiama l'abitudine dello scrittore di bere a qualsiasi ora, inclusa la mattina — uno dei tanti aneddoti che alimentarono la sua leggenda di bevitore irriducibile.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hemingway_breakfast.webp",
-  "varianti": []
-},
-{
-  "id": "honeysuckle",
-  "name": "Honeysuckle",
-  "distillato": [
-    "Rum"
-  ],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": [
-    "Dolce",
-    "Agrumato",
-    "Fresco"
-  ],
-  "garnish": "Rondella di lime",
-  "ingredienti": [
-    [
-      "60 ml",
-      "Rum bianco"
+    "storia": "L'Hemingway Breakfast è una reinterpretazione con gin dell'Hemingway Special — il celebre Daiquiri senza zucchero e con pompelmo che Constantino Ribalaigua creò per Ernest Hemingway al Floridita di L'Avana. La versione con gin sostituisce il rum cubano con il distillato britannico, mantenendo la struttura agrumata e secca che caratterizzava le preferenze di Hemingway. Hemingway era noto per il suo disprezzo per i drink dolci e per la sua passione per il pompelmo, che compariva in quasi tutte le sue ordinazioni personalizzate. Il nome breakfast richiama l'abitudine dello scrittore di bere a qualsiasi ora, inclusa la mattina — uno dei tanti aneddoti che alimentarono la sua leggenda di bevitore irriducibile.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hemingway_breakfast.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "honeysuckle",
+    "name": "Honeysuckle",
+    "distillato": [
+      "Rum"
     ],
-    [
-      "22,5 ml",
-      "Succo di lime"
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Dolce",
+      "Agrumato",
+      "Fresco"
     ],
-    [
-      "22,5 ml",
-      "Miele"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "L'Honeysuckle — caprifoglio in italiano — è un cocktail cubano apparso nei ricettari americani degli anni Trenta, attribuito ai bar dell'Avana durante il Proibizionismo. È strutturalmente un Daiquiri in cui lo sciroppo di zucchero viene sostituito dal miele — la stessa operazione che il Gold Rush compie con il Whiskey Sour. La sostituzione non è puramente gustativa: in un'epoca in cui lo zucchero raffinato era un ingrediente industriale ancora relativamente recente, il miele aveva una tradizione d'uso nei punch e nelle bevande alcoliche che risaliva a secoli prima. Il nome evoca la dolcezza floreale del caprifoglio, pianta rampicante dal profumo intenso diffusa nei giardini tropicali caraibici.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/honeysuckle.webp",
-  "varianti": []
-},
-{
-  "id": "jack_rose",
-  "name": "Jack Rose",
-  "distillato": [
-    "Calvados"
-  ],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": [
-    "Fruttato",
-    "Agrumato",
-    "Secco"
-  ],
-  "garnish": "Zest di limone",
-  "ingredienti": [
-    [
-      "50 ml",
+    "garnish": "Rondella di lime",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Rum bianco"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ],
+      [
+        "22,5 ml",
+        "Miele"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "L'Honeysuckle — caprifoglio in italiano — è un cocktail cubano apparso nei ricettari americani degli anni Trenta, attribuito ai bar dell'Avana durante il Proibizionismo. È strutturalmente un Daiquiri in cui lo sciroppo di zucchero viene sostituito dal miele — la stessa operazione che il Gold Rush compie con il Whiskey Sour. La sostituzione non è puramente gustativa: in un'epoca in cui lo zucchero raffinato era un ingrediente industriale ancora relativamente recente, il miele aveva una tradizione d'uso nei punch e nelle bevande alcoliche che risaliva a secoli prima. Il nome evoca la dolcezza floreale del caprifoglio, pianta rampicante dal profumo intenso diffusa nei giardini tropicali caraibici.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/honeysuckle.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "jack_rose",
+    "name": "Jack Rose",
+    "distillato": [
       "Calvados"
     ],
-    [
-      "22,5 ml",
-      "Succo di lime"
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Fruttato",
+      "Agrumato",
+      "Secco"
     ],
-    [
-      "15 ml",
-      "Sciroppo di granatina"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Jack Rose è uno dei grandi classici americani di inizio Novecento, con le prime documentazioni che risalgono al 1905. Il nome è conteso: alcune fonti lo attribuiscono a un barman di nome Jack Rose attivo a New York nei primi anni del Novecento, altre al colore rosato del drink — jack come il nome proprio, rose come il rosa. Ernest Hemingway lo menziona nel romanzo \"Il sole sorge ancora\" del 1926, dove Jake Barnes lo ordina a Parigi, contribuendo a consolidarne lo status letterario. Compare nel Savoy Cocktail Book del 1930 di Harry Craddock. L'uso del calvados — l'acquavite di mele normanna — al posto del più comune applejack americano gli conferisce una dimensione europea che riflette l'influenza francese sulla miscelazione americana dell'epoca.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/jack_rose.webp",
-  "varianti": []
-},
-{
-  "id": "jasmine",
-  "name": "Jasmine",
-  "distillato": [
-    "Gin"
-  ],
-  "categoria": "All day",
-  "abv": "Medio alto",
-  "sapori": [
-    "Amaro",
-    "Agrumato",
-    "Secco"
-  ],
-  "garnish": "Zest di limone",
-  "ingredienti": [
-    [
-      "45 ml",
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Calvados"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di granatina"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Jack Rose è uno dei grandi classici americani di inizio Novecento, con le prime documentazioni che risalgono al 1905. Il nome è conteso: alcune fonti lo attribuiscono a un barman di nome Jack Rose attivo a New York nei primi anni del Novecento, altre al colore rosato del drink — jack come il nome proprio, rose come il rosa. Ernest Hemingway lo menziona nel romanzo \"Il sole sorge ancora\" del 1926, dove Jake Barnes lo ordina a Parigi, contribuendo a consolidarne lo status letterario. Compare nel Savoy Cocktail Book del 1930 di Harry Craddock. L'uso del calvados — l'acquavite di mele normanna — al posto del più comune applejack americano gli conferisce una dimensione europea che riflette l'influenza francese sulla miscelazione americana dell'epoca.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/jack_rose.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "jasmine",
+    "name": "Jasmine",
+    "distillato": [
       "Gin"
     ],
-    [
-      "15 ml",
-      "Campari"
+    "categoria": "All day",
+    "abv": "Medio alto",
+    "sapori": [
+      "Amaro",
+      "Agrumato",
+      "Secco"
     ],
-    [
-      "15 ml",
-      "Triple sec"
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Gin"
+      ],
+      [
+        "15 ml",
+        "Campari"
+      ],
+      [
+        "15 ml",
+        "Triple sec"
+      ],
+      [
+        "15 ml",
+        "Succo di limone"
+      ]
     ],
-    [
-      "15 ml",
-      "Succo di limone"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Jasmine nasce nel 1990 a San Francisco, creato da Paul Harrington — bartender e giornalista di cocktail che negli anni Novanta scrisse per la rivista Wired contribuendo a portare la cultura dei cocktail nell'ambiente tech della Silicon Valley. Harrington lo sviluppò al Townhouse Bar di Emeryville, California, e lo pubblicò in seguito nel suo libro Cocktail: The Drinks Bible for the 21st Century del 1998 — uno dei testi più influenti della cocktail renaissance americana. Il nome richiama il gelsomino, fiore dal profumo intenso e floreale, in contrasto ironico con il carattere amaricante del Campari che è uno degli ingredienti chiave. È considerato un proto-classico contemporaneo, nato prima della grande esplosione della mixology moderna.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/jasmine.webp",
-  "varianti": []
-},
-{
-  "id": "kona_coffee_grog",
-  "name": "Kona Coffee Grog",
-  "distillato": [
-    "Rum"
-  ],
-  "categoria": "After dinner",
-  "abv": "Medio basso",
-  "sapori": [
-    "Caffeinico",
-    "Tropicale",
-    "Caldo"
-  ],
-  "garnish": "Zest di arancia + Zest di pompelmo + Cannella",
-  "ingredienti": [
-    [
-      "15 ml",
-      "Rum scuro giamaicano"
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
     ],
-    [
-      "15 ml",
-      "Rum blackstrap overproof 151"
+    "storia": "Il Jasmine nasce nel 1990 a San Francisco, creato da Paul Harrington — bartender e giornalista di cocktail che negli anni Novanta scrisse per la rivista Wired contribuendo a portare la cultura dei cocktail nell'ambiente tech della Silicon Valley. Harrington lo sviluppò al Townhouse Bar di Emeryville, California, e lo pubblicò in seguito nel suo libro Cocktail: The Drinks Bible for the 21st Century del 1998 — uno dei testi più influenti della cocktail renaissance americana. Il nome richiama il gelsomino, fiore dal profumo intenso e floreale, in contrasto ironico con il carattere amaricante del Campari che è uno degli ingredienti chiave. È considerato un proto-classico contemporaneo, nato prima della grande esplosione della mixology moderna.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/jasmine.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "kona_coffee_grog",
+    "name": "Kona Coffee Grog",
+    "distillato": [
+      "Rum"
     ],
-    [
-      "180 ml",
-      "Caffè filtro caldo"
+    "categoria": "After dinner",
+    "abv": "Medio basso",
+    "sapori": [
+      "Caffeinico",
+      "Tropicale",
+      "Caldo"
     ],
-    [
-      "1",
-      "Zolletta di zucchero"
+    "garnish": "Zest di arancia + Zest di pompelmo + Cannella",
+    "ingredienti": [
+      [
+        "15 ml",
+        "Rum scuro giamaicano"
+      ],
+      [
+        "15 ml",
+        "Rum blackstrap overproof 151"
+      ],
+      [
+        "180 ml",
+        "Caffè filtro caldo"
+      ],
+      [
+        "1",
+        "Zolletta di zucchero"
+      ],
+      [
+        "2",
+        "Chiodi di garofano"
+      ],
+      [
+        "1",
+        "Stecca di cannella"
+      ],
+      [
+        "1",
+        "Zest di arancia"
+      ],
+      [
+        "1",
+        "Zest di pompelmo"
+      ],
+      [
+        "1 bspoon",
+        "Gardenia mix"
+      ]
     ],
-    [
-      "2",
-      "Chiodi di garofano"
+    "prep": [
+      "Mettere lo zucchero, i chiodi di garofano, il gardenia mix, il rum scuro e il caffè ben caldo in una tazza con manico preriscaldata con acqua bollente e miscela bene per sciogliore lo zucchero",
+      "In una lattiera, versare il rum overproof, le scorze e la cannella e dare dare fuoco con fiamma ossidrica",
+      "Dopo qualche secondo, estrarre le scorze e la cannella e posizionarle sul bordo della tazza come garnish",
+      "Infine versare sulla superficie (float) il rum overproof ancora incendiato e aspettare che la fiamma si spenga"
     ],
-    [
-      "1",
-      "Stecca di cannella"
-    ],
-    [
-      "1",
-      "Zest di arancia"
-    ],
-    [
-      "1",
-      "Zest di pompelmo"
-    ],
-    [
-      "1 bspoon",
-      "Gardenia mix"
-    ]
-  ],
-  "prep": [
-    "Mettere lo zucchero, i chiodi di garofano, il gardenia mix, il rum scuro e il caffè ben caldo in una tazza con manico preriscaldata con acqua bollente e miscela bene per sciogliore lo zucchero",
-    "In una lattiera, versare il rum overproof, le scorze e la cannella e dare dare fuoco con fiamma ossidrica",
-    "Dopo qualche secondo, estrarre le scorze e la cannella e posizionarle sul bordo della tazza come garnish",
-    "Infine versare sulla superficie (float) il rum overproof ancora incendiato e aspettare che la fiamma si spenga"
-  ],
-  "storia": "Il Kona Coffee Grog è un cocktail caldo ispirato alla tradizione del caffè hawaiano di Kona — la varietà di Coffea arabica coltivata sulle pendici vulcaniche del Monte Hualalai e del Mauna Loa nella contea di Kona, sull'isola delle Hawaii, considerata tra i caffè più pregiati al mondo. La coltivazione del caffè a Kona risale al 1828, quando il reverendo missionario Samuel Ruggles portò sull'isola le prime piantine dalla Brasile. La combinazione di rum scuro e caffè è radicata nella tradizione dei grog caldi tropicali che risale ai marinai britannici del XVIII secolo. Il drink unisce quella tradizione marinaresca con l'eredità agricola hawaiana, creando un hot drink che è diventato un classico delle destinazioni resort del Pacifico.",
-  "frizzante": false,
-  "bicchiere": "Tazza con manico",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/kona_coffee_grog.webp",
-  "varianti": []
-},
-{
-  "id": "leap_year",
-  "name": "Leap Year",
-  "distillato": [
-    "Gin"
-  ],
-  "categoria": "Pre dinner",
-  "abv": "Alto",
-  "sapori": [
-    "Agrumato",
-    "Aromatico",
-    "Dolce"
-  ],
-  "garnish": "Zest di limone",
-  "ingredienti": [
-    [
-      "45 ml",
+    "storia": "Il Kona Coffee Grog è un cocktail caldo ispirato alla tradizione del caffè hawaiano di Kona — la varietà di Coffea arabica coltivata sulle pendici vulcaniche del Monte Hualalai e del Mauna Loa nella contea di Kona, sull'isola delle Hawaii, considerata tra i caffè più pregiati al mondo. La coltivazione del caffè a Kona risale al 1828, quando il reverendo missionario Samuel Ruggles portò sull'isola le prime piantine dalla Brasile. La combinazione di rum scuro e caffè è radicata nella tradizione dei grog caldi tropicali che risale ai marinai britannici del XVIII secolo. Il drink unisce quella tradizione marinaresca con l'eredità agricola hawaiana, creando un hot drink che è diventato un classico delle destinazioni resort del Pacifico.",
+    "frizzante": false,
+    "bicchiere": "Tazza con manico",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/kona_coffee_grog.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "leap_year",
+    "name": "Leap Year",
+    "distillato": [
       "Gin"
     ],
-    [
-      "15 ml",
-      "Grand marnier"
+    "categoria": "Pre dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Agrumato",
+      "Aromatico",
+      "Dolce"
     ],
-    [
-      "15 ml",
-      "Vermouth rosso"
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Gin"
+      ],
+      [
+        "15 ml",
+        "Grand marnier"
+      ],
+      [
+        "15 ml",
+        "Vermouth rosso"
+      ],
+      [
+        "15 ml",
+        "Succo di limone"
+      ]
     ],
-    [
-      "15 ml",
-      "Succo di limone"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Leap Year nasce il 29 febbraio 1928 — l'anno bisestile — creato da Harry Craddock al Savoy Hotel di Londra in occasione di una festa organizzata per celebrare quella data insolita. Craddock, head bartender del Savoy American Bar e futuro autore del Savoy Cocktail Book del 1930, era noto per la sua capacità di creare cocktail celebrativi per eventi specifici. Raccontò che il Leap Year fu responsabile di più proposte di matrimonio di qualsiasi altro cocktail nella storia del Savoy — una storia impossibile da verificare ma che contribuì a rendere il drink leggendario. Per tradizione, il 29 febbraio è il giorno in cui le donne possono fare la proposta di matrimonio agli uomini, e il cocktail si legò a questo folklore.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/leap_year.webp",
-  "varianti": []
-},
-{
-  "id": "left_hand",
-  "name": "Left Hand",
-  "distillato": [
-    "Bourbon whiskey"
-  ],
-  "categoria": "Pre dinner",
-  "abv": "Alto",
-  "sapori": [
-    "Amaro",
-    "Speziato",
-    "Complesso"
-  ],
-  "garnish": "Ciliegia",
-  "ingredienti": [
-    [
-      "45 ml",
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Leap Year nasce il 29 febbraio 1928 — l'anno bisestile — creato da Harry Craddock al Savoy Hotel di Londra in occasione di una festa organizzata per celebrare quella data insolita. Craddock, head bartender del Savoy American Bar e futuro autore del Savoy Cocktail Book del 1930, era noto per la sua capacità di creare cocktail celebrativi per eventi specifici. Raccontò che il Leap Year fu responsabile di più proposte di matrimonio di qualsiasi altro cocktail nella storia del Savoy — una storia impossibile da verificare ma che contribuì a rendere il drink leggendario. Per tradizione, il 29 febbraio è il giorno in cui le donne possono fare la proposta di matrimonio agli uomini, e il cocktail si legò a questo folklore.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/leap_year.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "left_hand",
+    "name": "Left Hand",
+    "distillato": [
       "Bourbon whiskey"
     ],
-    [
-      "22,5 ml",
-      "Campari"
+    "categoria": "Pre dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Amaro",
+      "Speziato",
+      "Complesso"
     ],
-    [
-      "22,5 ml",
-      "Vermouth rosso"
+    "garnish": "Ciliegia",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Bourbon whiskey"
+      ],
+      [
+        "22,5 ml",
+        "Campari"
+      ],
+      [
+        "22,5 ml",
+        "Vermouth rosso"
+      ],
+      [
+        "2 dash",
+        "Bitters al cioccolato"
+      ]
     ],
-    [
-      "2 dash",
-      "Bitters al cioccolato"
-    ]
-  ],
-  "prep": [
-    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
-    "Mescolare delicatamente per circa 20 secondi",
-    "Filtrare in una coppetta raffreddata"
-  ],
-  "storia": "Il Left Hand nasce al Cure di New Orleans, creato da Neal Bodenheimer — il proprietario e bartender che ha trasformato quel locale in uno dei riferimenti della scena cocktail americana contemporanea. Il nome è un riferimento alla struttura speculare del drink rispetto al Boulevardier — che è a sua volta la versione con bourbon del Negroni. Se il Boulevardier usa bourbon, vermouth e Campari in un formato da Old Fashioned glass con ghiaccio, il Left Hand è stirred e servito in coppetta, con l'aggiunta dei chocolate bitters che aggiungono una dimensione aromatica inaspettata. È un esempio di come la scena di New Orleans — città con una lunga tradizione di miscelazione classica — continui a produrre cocktail di riferimento per la mixology internazionale.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/left_hand.webp",
-  "varianti": []
-},
-{
-  "id": "loaded_pistol",
-  "name": "Loaded Pistol",
-  "distillato": [
-    "Bourbon whiskey"
-  ],
-  "categoria": "After dinner",
-  "abv": "Molto alto",
-  "sapori": [
-    "Speziato",
-    "Caldo",
-    "Intenso"
-  ],
-  "garnish": "Zest di arancia",
-  "ingredienti": [
-    [
-      "60 ml",
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
+    ],
+    "storia": "Il Left Hand nasce al Cure di New Orleans, creato da Neal Bodenheimer — il proprietario e bartender che ha trasformato quel locale in uno dei riferimenti della scena cocktail americana contemporanea. Il nome è un riferimento alla struttura speculare del drink rispetto al Boulevardier — che è a sua volta la versione con bourbon del Negroni. Se il Boulevardier usa bourbon, vermouth e Campari in un formato da Old Fashioned glass con ghiaccio, il Left Hand è stirred e servito in coppetta, con l'aggiunta dei chocolate bitters che aggiungono una dimensione aromatica inaspettata. È un esempio di come la scena di New Orleans — città con una lunga tradizione di miscelazione classica — continui a produrre cocktail di riferimento per la mixology internazionale.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/left_hand.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "loaded_pistol",
+    "name": "Loaded Pistol",
+    "distillato": [
       "Bourbon whiskey"
     ],
-    [
-      "15 ml",
-      "Dom bénédictine"
+    "categoria": "After dinner",
+    "abv": "Molto alto",
+    "sapori": [
+      "Speziato",
+      "Caldo",
+      "Intenso"
     ],
-    [
-      "2 dash",
-      "Angostura bitters"
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Bourbon whiskey"
+      ],
+      [
+        "15 ml",
+        "Dom bénédictine"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
+      ],
+      [
+        "1 dash",
+        "Orange bitters"
+      ]
     ],
-    [
-      "1 dash",
-      "Orange bitters"
-    ]
-  ],
-  "prep": [
-    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
-    "Mescolare delicatamente per circa 20 secondi",
-    "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
-  ],
-  "storia": "Il Loaded Pistol appartiene alla tradizione dei bourbon drinks speziati e strutturati nati nella scena dei cocktail bar americani degli anni Duemila, quando il movimento neo-speakeasy stava rivalutando i classici stirred a base di whisky. Il nome evoca il carattere deciso e senza compromessi del drink — un pistol carico, pronto a esplodere. L'abbinamento tra bourbon single barrel e Bénédictine richiama la struttura del Bobby Burns scozzese e del Monte Carlo, ma qui applicata al whisky americano con una forza e una direttezza tipicamente statunitensi. Non è attribuito a un inventore documentato con precisione, appartiene al repertorio dei drink da bar americani del Sud.",
-  "frizzante": false,
-  "bicchiere": "Old fashioned",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/loaded_pistol.webp",
-  "varianti": []
-},
-{
-  "id": "macunaima",
-  "name": "Macunaima",
-  "distillato": [
-    "Cachaça"
-  ],
-  "categoria": "All day",
-  "abv": "Medio basso",
-  "sapori": [
-    "Tropicale",
-    "Fruttato",
-    "Vivace"
-  ],
-  "garnish": "Fetta di ananas + Ciliegia",
-  "ingredienti": [
-    [
-      "45 ml",
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+    ],
+    "storia": "Il Loaded Pistol appartiene alla tradizione dei bourbon drinks speziati e strutturati nati nella scena dei cocktail bar americani degli anni Duemila, quando il movimento neo-speakeasy stava rivalutando i classici stirred a base di whisky. Il nome evoca il carattere deciso e senza compromessi del drink — un pistol carico, pronto a esplodere. L'abbinamento tra bourbon single barrel e Bénédictine richiama la struttura del Bobby Burns scozzese e del Monte Carlo, ma qui applicata al whisky americano con una forza e una direttezza tipicamente statunitensi. Non è attribuito a un inventore documentato con precisione, appartiene al repertorio dei drink da bar americani del Sud.",
+    "frizzante": false,
+    "bicchiere": "Old fashioned",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/loaded_pistol.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "macunaima",
+    "name": "Macunaima",
+    "distillato": [
       "Cachaça"
     ],
-    [
-      "30 ml",
-      "Estratto di ananas"
+    "categoria": "All day",
+    "abv": "Medio basso",
+    "sapori": [
+      "Tropicale",
+      "Fruttato",
+      "Vivace"
     ],
-    [
-      "22,5 ml",
-      "Succo di lime"
+    "garnish": "Fetta di ananas + Ciliegia",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Cachaça"
+      ],
+      [
+        "30 ml",
+        "Estratto di ananas"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
+      ]
     ],
-    [
-      "15 ml",
-      "Sciroppo di zucchero"
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"
     ],
-    [
-      "2 dash",
-      "Angostura bitters"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio"
-  ],
-  "storia": "Macunaíma prende il nome dall'omonimo romanzo del 1928 scritto dall'autore brasiliano Mário de Andrade — considerato uno dei capolavori della letteratura modernista brasiliana e manifesto del Movimento Modernista del 1922 che aveva ridefinito l'identità culturale del paese. Il protagonista, Macunaíma, è un personaggio folclorico di origine tupi che rappresenta lo spirito brasiliano nella sua complessità — pigro e geniale, melanconico e festoso allo stesso tempo. Il cocktail, costruito attorno alla cachaça come distillato nazionale, è un omaggio a quella tradizione letteraria e culturale che ha cercato di dare al Brasile una voce artistica autonoma e originale, distante dai modelli europei.",
-  "frizzante": false,
-  "bicchiere": "Highball",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/macunaima.webp",
-  "varianti": []
-},
-{
-  "id": "mamie_taylor",
-  "name": "Mamie Taylor",
-  "distillato": [
-    "Scotch whisky"
-  ],
-  "categoria": "All day",
-  "abv": "Alto",
-  "sapori": [
-    "Speziato",
-    "Agrumato",
-    "Dissetante"
-  ],
-  "garnish": "Rondella di lime",
-  "ingredienti": [
-    [
-      "60 ml",
-      "Scotch whisky blended"
+    "storia": "Macunaíma prende il nome dall'omonimo romanzo del 1928 scritto dall'autore brasiliano Mário de Andrade — considerato uno dei capolavori della letteratura modernista brasiliana e manifesto del Movimento Modernista del 1922 che aveva ridefinito l'identità culturale del paese. Il protagonista, Macunaíma, è un personaggio folclorico di origine tupi che rappresenta lo spirito brasiliano nella sua complessità — pigro e geniale, melanconico e festoso allo stesso tempo. Il cocktail, costruito attorno alla cachaça come distillato nazionale, è un omaggio a quella tradizione letteraria e culturale che ha cercato di dare al Brasile una voce artistica autonoma e originale, distante dai modelli europei.",
+    "frizzante": false,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/macunaima.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "mamie_taylor",
+    "name": "Mamie Taylor",
+    "distillato": [
+      "Scotch whisky"
     ],
-    [
-      "15 ml",
-      "Succo di lime"
+    "categoria": "All day",
+    "abv": "Alto",
+    "sapori": [
+      "Speziato",
+      "Agrumato",
+      "Dissetante"
     ],
-    [
-      "Top",
-      "Ginger beer"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio (tranne la ginger beer)",
-    "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio",
-    "Completare con la ginger beer",
-    "Dare una leggera mescolata col bar spoon dal basso verso l'alto"
-  ],
-  "storia": "Il Mamie Taylor nasce negli Stati Uniti intorno al 1899-1900 e prende il nome da Mary \"Mamie\" Taylor, una cantante d'opera americana popolare in quel periodo. Fu uno dei cocktail più ordinati nei bar americani dei primissimi anni del Novecento, prima che il Proibizionismo ne interrompesse la diffusione. È strutturalmente un Moscow Mule ante-litteram — scotch al posto della vodka, lime, ginger beer — nato quarant'anni prima che il Moscow Mule fosse inventato. Albert Stevens Crockett lo cita nel suo Old Waldorf-Astoria Bar Book del 1935 come uno dei drink più popolari dell'era edoardiana. La ginger beer speziata si abbinava allo scotch in un modo che i bevitori dell'epoca trovavano sorprendentemente armonioso.",
-  "frizzante": true,
-  "bicchiere": "Highball",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mamie_taylor.webp",
-  "varianti": []
-},
-{
-  "id": "midnight_stinger",
-  "name": "Midnight Stinger",
-  "distillato": [
-    "Bourbon whiskey"
-  ],
-  "categoria": "After dinner",
-  "abv": "Molto alto",
-  "sapori": [
-    "Mentolato",
-    "Caldo",
-    "Intenso"
-  ],
-  "garnish": "Ciuffo di menta",
-  "ingredienti": [
-    [
-      "45 ml",
+    "garnish": "Rondella di lime",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Scotch whisky blended"
+      ],
+      [
+        "15 ml",
+        "Succo di lime"
+      ],
+      [
+        "Top",
+        "Ginger beer"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio (tranne la ginger beer)",
+      "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio",
+      "Completare con la ginger beer",
+      "Dare una leggera mescolata col bar spoon dal basso verso l'alto"
+    ],
+    "storia": "Il Mamie Taylor nasce negli Stati Uniti intorno al 1899-1900 e prende il nome da Mary \"Mamie\" Taylor, una cantante d'opera americana popolare in quel periodo. Fu uno dei cocktail più ordinati nei bar americani dei primissimi anni del Novecento, prima che il Proibizionismo ne interrompesse la diffusione. È strutturalmente un Moscow Mule ante-litteram — scotch al posto della vodka, lime, ginger beer — nato quarant'anni prima che il Moscow Mule fosse inventato. Albert Stevens Crockett lo cita nel suo Old Waldorf-Astoria Bar Book del 1935 come uno dei drink più popolari dell'era edoardiana. La ginger beer speziata si abbinava allo scotch in un modo che i bevitori dell'epoca trovavano sorprendentemente armonioso.",
+    "frizzante": true,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mamie_taylor.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "midnight_stinger",
+    "name": "Midnight Stinger",
+    "distillato": [
       "Bourbon whiskey"
     ],
-    [
-      "30 ml",
-      "Brancamenta"
+    "categoria": "After dinner",
+    "abv": "Molto alto",
+    "sapori": [
+      "Mentolato",
+      "Caldo",
+      "Intenso"
     ],
-    [
-      "15 ml",
-      "Liquore alla menta bianca"
-    ]
-  ],
-  "prep": [
-    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
-    "Mescolare delicatamente per circa 20 secondi",
-    "Filtrare in una coppetta raffreddata"
-  ],
-  "storia": "Il Midnight Stinger è una variante scura e intensa dello Stinger classico — il digestivo americano a base di cognac e crème de menthe documentato già nel 1912 — in cui il bourbon sostituisce il cognac e il Fernet alla Menta aggiunge una dimensione amaricante e balsamica. Il nome midnight — mezzanotte — evoca l'ora tarda in cui si serve un digestivo impegnativo, qualcosa da sorseggiare lentamente a fine serata quando i sensi sono pronti per note più complesse e intense. Il Fernet alla Menta, prodotto dalla famiglia Branca come variante fresca del Fernet classico, è un ingrediente particolarmente amato nei cocktail bar del Sud America e in alcune regioni italiane.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/midnight_stinger.webp",
-  "varianti": []
-},
-{
-  "id": "millionaire",
-  "name": "Millionaire",
-  "distillato": [
-    "Bourbon whiskey"
-  ],
-  "categoria": "All day",
-  "abv": "Medio alto",
-  "sapori": [
-    "Fruttato",
-    "Dolce",
-    "Vellutato"
-  ],
-  "garnish": "Zest di arancia",
-  "ingredienti": [
-    [
-      "45 ml",
+    "garnish": "Ciuffo di menta",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Bourbon whiskey"
+      ],
+      [
+        "30 ml",
+        "Brancamenta"
+      ],
+      [
+        "15 ml",
+        "Liquore alla menta bianca"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
+    ],
+    "storia": "Il Midnight Stinger è una variante scura e intensa dello Stinger classico — il digestivo americano a base di cognac e crème de menthe documentato già nel 1912 — in cui il bourbon sostituisce il cognac e il Fernet alla Menta aggiunge una dimensione amaricante e balsamica. Il nome midnight — mezzanotte — evoca l'ora tarda in cui si serve un digestivo impegnativo, qualcosa da sorseggiare lentamente a fine serata quando i sensi sono pronti per note più complesse e intense. Il Fernet alla Menta, prodotto dalla famiglia Branca come variante fresca del Fernet classico, è un ingrediente particolarmente amato nei cocktail bar del Sud America e in alcune regioni italiane.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/midnight_stinger.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "millionaire",
+    "name": "Millionaire",
+    "distillato": [
       "Bourbon whiskey"
     ],
-    [
-      "20 ml",
-      "Orange curaçao"
+    "categoria": "All day",
+    "abv": "Medio alto",
+    "sapori": [
+      "Fruttato",
+      "Dolce",
+      "Vellutato"
     ],
-    [
-      "22,5 ml",
-      "Succo di limone"
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Bourbon whiskey"
+      ],
+      [
+        "20 ml",
+        "Orange curaçao"
+      ],
+      [
+        "22,5 ml",
+        "Succo di limone"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di granatina"
+      ],
+      [
+        "q.b.",
+        "Albume d'uovo o foamer"
+      ]
     ],
-    [
-      "15 ml",
-      "Sciroppo di granatina"
-    ], 
-    [
-      "q.b.",
-      "Albume d'uovo o foamer"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
-    "Aggiungere ghiaccio e shakerare nuovamente",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Millionaire compare in diverse versioni nei ricettari degli anni Venti e Trenta, con varianti che usano rum, rye whiskey o bourbon come base. Il nome — milionario — evocava il lusso e l'esclusività che caratterizzava i cocktail dell'era pre-Proibizionismo nei club più eleganti. Diverse versioni circolavano contemporaneamente, e la presenza dell'albume d'uovo — ingrediente che all'epoca era considerato un lusso nella miscelazione — contribuiva a giustificare il nome. Harry Craddock ne include una versione nel Savoy Cocktail Book del 1930. Il drink appartiene alla tradizione dei sour arricchiti con albume che erano al culmine della loro popolarità nei bar europei e americani degli anni Venti.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/millionaire.webp",
-  "varianti": []
-},
-{
-  "id": "mizuwari",
-  "name": "Mizuwari",
-  "distillato": [
-    "Japanese whisky"
-  ],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": [
-    "Leggero",
-    "Aromatico",
-    "Dissetante"
-  ],
-  "garnish": "Nessuna",
-  "ingredienti": [
-    [
-      "50 ml",
-      "Japanese whisky blended"
+    "prep": [
+      "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
+      "Aggiungere ghiaccio e shakerare nuovamente",
+      "Filtrare (double strain) in una coppetta raffreddata"
     ],
-    [
-      "100 ml",
-      "Soda"
-    ]
-  ],
-  "prep": [
-    "Versare il whisky in un bicchiere highball riempito di ghiaccio",
-    "Aggiungere delicatamente la soda",
-    "Mescolare con un solo movimento lento dal basso verso l'alto per non disperdere le bollicine"
-  ],
-  "storia": "Il Mizuwari — letteralmente acqua e whisky in giapponese — è il modo tradizionale di bere whisky in Giappone, radicato in una cultura del bere profondamente diversa da quella occidentale. In Giappone il whisky viene consumato quasi sempre diluito con acqua o ghiaccio, mai liscio come in Scozia o in America. La pratica del mizuwari risale agli anni Cinquanta e Sessanta, quando il whisky giapponese — prodotto da distillerie come Suntory e Nikka a partire dagli anni Venti — diventò la bevanda alcolica più consumata nel paese. Il rapporto tradizionale è di 1 parte di whisky per 2 parti di acqua, ma varia secondo il gusto personale. Il mizuwari è uno dei pilastri della cultura degli izakaya — i pub giapponesi — e del bere conviviale giapponese.",
-  "frizzante": true,
-  "bicchiere": "Highball",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mizuwari.webp",
-  "varianti": []
-},
-{
-  "id": "oaxaca_old_fashioned",
-  "name": "Oaxaca Old Fashioned",
-  "distillato": [
-    "Tequila",
-    "Mezcal"
-  ],
-  "categoria": "After dinner",
-  "abv": "Molto alto",
-  "sapori": [
-    "Affumicato",
-    "Speziato",
-    "Complesso"
-  ],
-  "garnish": "Zest di arancia + Cannella",
-  "ingredienti": [
-    [
-      "45 ml",
-      "Tequila reposado"
+    "storia": "Il Millionaire compare in diverse versioni nei ricettari degli anni Venti e Trenta, con varianti che usano rum, rye whiskey o bourbon come base. Il nome — milionario — evocava il lusso e l'esclusività che caratterizzava i cocktail dell'era pre-Proibizionismo nei club più eleganti. Diverse versioni circolavano contemporaneamente, e la presenza dell'albume d'uovo — ingrediente che all'epoca era considerato un lusso nella miscelazione — contribuiva a giustificare il nome. Harry Craddock ne include una versione nel Savoy Cocktail Book del 1930. Il drink appartiene alla tradizione dei sour arricchiti con albume che erano al culmine della loro popolarità nei bar europei e americani degli anni Venti.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/millionaire.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "mizuwari",
+    "name": "Mizuwari",
+    "distillato": [
+      "Japanese whisky"
     ],
-    [
-      "15 ml",
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Leggero",
+      "Aromatico",
+      "Dissetante"
+    ],
+    "garnish": "Nessuna",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Japanese whisky blended"
+      ],
+      [
+        "100 ml",
+        "Soda"
+      ]
+    ],
+    "prep": [
+      "Versare il whisky in un bicchiere highball riempito di ghiaccio",
+      "Aggiungere delicatamente la soda",
+      "Mescolare con un solo movimento lento dal basso verso l'alto per non disperdere le bollicine"
+    ],
+    "storia": "Il Mizuwari — letteralmente acqua e whisky in giapponese — è il modo tradizionale di bere whisky in Giappone, radicato in una cultura del bere profondamente diversa da quella occidentale. In Giappone il whisky viene consumato quasi sempre diluito con acqua o ghiaccio, mai liscio come in Scozia o in America. La pratica del mizuwari risale agli anni Cinquanta e Sessanta, quando il whisky giapponese — prodotto da distillerie come Suntory e Nikka a partire dagli anni Venti — diventò la bevanda alcolica più consumata nel paese. Il rapporto tradizionale è di 1 parte di whisky per 2 parti di acqua, ma varia secondo il gusto personale. Il mizuwari è uno dei pilastri della cultura degli izakaya — i pub giapponesi — e del bere conviviale giapponese.",
+    "frizzante": true,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mizuwari.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "oaxaca_old_fashioned",
+    "name": "Oaxaca Old Fashioned",
+    "distillato": [
+      "Tequila",
       "Mezcal"
     ],
-    [
-      "7,5 ml",
-      "Sciroppo di agave"
+    "categoria": "After dinner",
+    "abv": "Molto alto",
+    "sapori": [
+      "Affumicato",
+      "Speziato",
+      "Complesso"
     ],
-    [
-      "2 dash",
-      "Angostura bitters"
-    ]
-  ],
-  "prep": [
-    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
-    "Mescolare delicatamente per circa 20 secondi",
-    "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
-  ],
-  "storia": "L'Oaxaca Old Fashioned nasce nel 2007 al Death & Co di New York, creato da Phil Ward — uno dei bartender fondatori del locale che sarebbe diventato il centro della mixology americana contemporanea. Ward voleva creare un Old Fashioned che esprimesse l'anima del Messico invece di quella del Kentucky, sostituendo bourbon e zucchero con tequila reposado, mezcal e néctar di agave. Il risultato trasformò radicalmente il panorama dei cocktail americani: contribuì a portare il mezcal nell'attenzione internazionale anni prima che diventasse un fenomeno di massa, e dimostrò che la struttura di un classico come l'Old Fashioned poteva essere applicata a qualsiasi distillato di qualità. Il nome omaggia Oaxaca, lo stato messicano che è il cuore della produzione di mezcal artigianale.",
-  "frizzante": false,
-  "bicchiere": "Old fashioned",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/oaxaca_old_fashioned.webp",
-  "varianti": []
-},
-{
-  "id": "orgasmo",
-  "name": "Orgasmo",
-  "distillato": [
-    "Vodka"
-  ],
-  "categoria": "After dinner",
-  "abv": "Medio",
-  "sapori": [
-    "Cremoso",
-    "Dolce",
-    "Goloso"
-  ],
-  "garnish": "Cacao",
-  "ingredienti": [
-    [
-      "22,5 ml",
+    "garnish": "Zest di arancia + Cannella",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Tequila reposado"
+      ],
+      [
+        "15 ml",
+        "Mezcal"
+      ],
+      [
+        "7,5 ml",
+        "Sciroppo di agave"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+    ],
+    "storia": "L'Oaxaca Old Fashioned nasce nel 2007 al Death & Co di New York, creato da Phil Ward — uno dei bartender fondatori del locale che sarebbe diventato il centro della mixology americana contemporanea. Ward voleva creare un Old Fashioned che esprimesse l'anima del Messico invece di quella del Kentucky, sostituendo bourbon e zucchero con tequila reposado, mezcal e néctar di agave. Il risultato trasformò radicalmente il panorama dei cocktail americani: contribuì a portare il mezcal nell'attenzione internazionale anni prima che diventasse un fenomeno di massa, e dimostrò che la struttura di un classico come l'Old Fashioned poteva essere applicata a qualsiasi distillato di qualità. Il nome omaggia Oaxaca, lo stato messicano che è il cuore della produzione di mezcal artigianale.",
+    "frizzante": false,
+    "bicchiere": "Old fashioned",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/oaxaca_old_fashioned.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "orgasmo",
+    "name": "Orgasmo",
+    "distillato": [
       "Vodka"
     ],
-    [
-      "22,5 ml",
-      "Baileys"
+    "categoria": "After dinner",
+    "abv": "Medio",
+    "sapori": [
+      "Cremoso",
+      "Dolce",
+      "Goloso"
     ],
-    [
-      "22,5 ml",
-      "Liquore al caffè"
+    "garnish": "Cacao",
+    "ingredienti": [
+      [
+        "22,5 ml",
+        "Vodka"
+      ],
+      [
+        "22,5 ml",
+        "Baileys"
+      ],
+      [
+        "22,5 ml",
+        "Liquore al caffè"
+      ],
+      [
+        "22,5 ml",
+        "Panna fresca"
+      ]
     ],
-    [
-      "22,5 ml",
-      "Panna fresca"
-    ]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata",
-    "Spolverata di cacao sulla superficie"
-  ],
-  "storia": "L'Orgasmo è uno dei cocktail più rappresentativi della cultura dei bar italiani degli anni Ottanta e Novanta — un'epoca in cui i nomi provocatori e i profili dolci e cremosi dominavano i menu dei locali notturni. Il drink nasce in Italia, probabilmente nei cocktail bar del nord del paese, e si diffuse rapidamente in tutta la penisola diventando un classico dell'after dinner italiano. Il nome audace era una strategia deliberata di marketing: in un'epoca in cui i cocktail con nomi trasgressivi come Sex on the Beach e Slippery Nipple erano alla moda internazionale, i barman italiani risposero con una propria versione di quel fenomeno. È rimasto nel menu di molti bar italiani come un classico nostalgico degli anni del boom della miscelazione domestica.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/orgasmo.webp",
-  "varianti": []
-},
-{
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata",
+      "Spolverata di cacao sulla superficie"
+    ],
+    "storia": "L'Orgasmo è uno dei cocktail più rappresentativi della cultura dei bar italiani degli anni Ottanta e Novanta — un'epoca in cui i nomi provocatori e i profili dolci e cremosi dominavano i menu dei locali notturni. Il drink nasce in Italia, probabilmente nei cocktail bar del nord del paese, e si diffuse rapidamente in tutta la penisola diventando un classico dell'after dinner italiano. Il nome audace era una strategia deliberata di marketing: in un'epoca in cui i cocktail con nomi trasgressivi come Sex on the Beach e Slippery Nipple erano alla moda internazionale, i barman italiani risposero con una propria versione di quel fenomeno. È rimasto nel menu di molti bar italiani come un classico nostalgico degli anni del boom della miscelazione domestica.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/orgasmo.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
     "id": "1910",
     "name": "1910",
     "distillato": [
@@ -1307,7 +1337,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/1910.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "absinthe_cocktail",
@@ -1354,7 +1385,8 @@
         "nome": "Improved Absinthe Cocktail",
         "note": "Variante classica con aggiunta di Maraschino e Peychaud's bitters, riportata da Jerry Thomas nel suo Bartender's Guide"
       }
-    ]
+    ],
+    "iba": false
   },
   {
     "id": "addington",
@@ -1394,7 +1426,8 @@
     "frizzante": true,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/addington.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "alamagoozlum",
@@ -1450,7 +1483,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/alamagoozlum.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "amaretto_sour",
@@ -1498,7 +1532,8 @@
         "nome": "Whiskey Amaretto Sour",
         "note": "Versione di Jeffrey Morgenthaler (Clyde Common, Portland) con aggiunta di bourbon, che ne ha ridefinito lo standard nel 2012"
       }
-    ]
+    ],
+    "iba": false
   },
   {
     "id": "angelo_azzurro",
@@ -1540,7 +1575,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/angelo_azzurro.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "apple_jack",
@@ -1588,7 +1624,8 @@
         "nome": "Applejack Rabbit",
         "note": "Variante sour con succo di arancia, succo di limone e sciroppo d'acero, riportata dal Savoy Cocktail Book del 1930"
       }
-    ]
+    ],
+    "iba": false
   },
   {
     "id": "archangel",
@@ -1626,7 +1663,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/archangel.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "toronto",
@@ -1669,7 +1707,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/toronto.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "trinidad_sour",
@@ -1711,7 +1750,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/trinidad_sour.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "turf_club",
@@ -1758,7 +1798,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/turf_club.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "tuxedo",
@@ -1805,7 +1846,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tuxedo.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "vampiro",
@@ -1863,7 +1905,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vampiro.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "vesper",
@@ -1902,7 +1945,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vesper.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "ward_eight",
@@ -1944,7 +1988,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/ward_eight.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "whiskey_sour",
@@ -1987,7 +2032,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/whiskey_sour.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "white_lady",
@@ -2030,7 +2076,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/white_lady.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "white_negroni",
@@ -2069,7 +2116,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/white_negroni.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "white_russian",
@@ -2108,7 +2156,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/white_russian.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "yellow_bird",
@@ -2150,7 +2199,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/yellow_bird.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "zombie",
@@ -2212,7 +2262,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/zombie.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "scofflaw",
@@ -2258,7 +2309,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/scofflaw.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "screwdriver",
@@ -2292,7 +2344,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/screwdriver.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "sea_breeze",
@@ -2330,7 +2383,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sea_breeze.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "sex_on_the_beach",
@@ -2372,7 +2426,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sex_on_the_beach.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "sherry_cobbler",
@@ -2411,7 +2466,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sherry_cobbler.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "shirley_temple",
@@ -2449,7 +2505,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/shirley_temple.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "sidecar",
@@ -2487,7 +2544,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sidecar.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "singapore_sling",
@@ -2545,7 +2603,8 @@
     "frizzante": false,
     "bicchiere": "Sling",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/singapore_sling.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "skinny_bitch",
@@ -2583,7 +2642,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/skinny_bitch.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "south_side",
@@ -2625,7 +2685,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/south_side.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "spicy_fifty",
@@ -2671,7 +2732,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/spicy_fifty.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "spritz",
@@ -2714,7 +2776,8 @@
         "note": "Campari, Select oppure Cynar"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/spritz.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/spritz.webp",
+    "iba": false
   },
   {
     "id": "stinger",
@@ -2754,7 +2817,8 @@
         "note": "Vodka al posto del Cognac"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/stinger.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/stinger.webp",
+    "iba": false
   },
   {
     "id": "suffering_bastard",
@@ -2803,7 +2867,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/suffering_bastard.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "sumatra_kula",
@@ -2849,7 +2914,8 @@
     "frizzante": false,
     "bicchiere": "Hurricane",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sumatra_kula.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "tequila_sunrise",
@@ -2888,7 +2954,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tequila_sunrise.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "three_dots_and_a_dash",
@@ -2948,7 +3015,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/three_dots_and_a_dash.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "ti_punch",
@@ -2987,7 +3055,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/ti_punch.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "tipperary",
@@ -3030,7 +3099,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tipperary.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "porn_star_martini",
@@ -3081,7 +3151,8 @@
     "frizzante": true,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/porn_star_martini.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "porto_flip",
@@ -3120,7 +3191,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/porto_flip.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "preakness",
@@ -3163,7 +3235,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/preakness.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "rabo_de_galo",
@@ -3202,7 +3275,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rabo_de_galo.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "ramos_fizz",
@@ -3266,7 +3340,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/ramos_fizz.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "rattlesnake",
@@ -3313,7 +3388,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rattlesnake.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "red_hook",
@@ -3352,7 +3428,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/red_hook.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "red_snapper",
@@ -3415,7 +3492,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/red_snapper.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "remember_the_maine",
@@ -3459,7 +3537,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/remember_the_maine.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "rob_roy",
@@ -3498,7 +3577,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rob_roy.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "rose",
@@ -3536,7 +3616,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rose.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "rum_cooler",
@@ -3588,7 +3669,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rum_cooler.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "rum_swizzle",
@@ -3639,7 +3721,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rum_swizzle.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "russian_spring_punch",
@@ -3687,7 +3770,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/russian_spring_punch.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "rusty_nail",
@@ -3722,7 +3806,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rusty_nail.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "salty_dog",
@@ -3761,7 +3846,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/salty_dog.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "saratoga",
@@ -3805,7 +3891,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/saratoga.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "sazerac",
@@ -3852,7 +3939,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sazerac.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "20th_century",
@@ -3894,7 +3982,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/20th_century.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "abbey",
@@ -3936,7 +4025,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/abbey.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "adonis",
@@ -3975,7 +4065,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/adonis.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "affinity",
@@ -4018,7 +4109,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/affinity.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "airmail",
@@ -4061,7 +4153,8 @@
     "frizzante": true,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/airmail.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "alabama_slammer",
@@ -4103,7 +4196,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/alabama_slammer.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "alabazam",
@@ -4149,7 +4243,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/alabazam.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "alaska",
@@ -4188,7 +4283,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/alaska.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "alexander",
@@ -4232,7 +4328,8 @@
         "note": "Brandy al posto del Cognac"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/alexander.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/alexander.webp",
+    "iba": false
   },
   {
     "id": "americano",
@@ -4270,7 +4367,8 @@
     "frizzante": true,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/americano.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "angel_face",
@@ -4308,7 +4406,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/angel_face.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "apple_martini",
@@ -4350,7 +4449,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/apple_martini.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "army_navy",
@@ -4392,7 +4492,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/army_and_navy.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "aviation",
@@ -4434,7 +4535,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/aviation.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "horses_neck",
@@ -4472,7 +4574,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/horses_neck.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "missionarys_downfall",
@@ -4522,7 +4625,8 @@
     "frizzante": false,
     "bicchiere": "Hurricane",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/missionarys_downfall.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "pimms_cup",
@@ -4556,7 +4660,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pimms_cup.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "planters_punch",
@@ -4595,7 +4700,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/planters_punch.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "poets_dream",
@@ -4634,7 +4740,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/poets_dream.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "satans_whiskers",
@@ -4684,7 +4791,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/satans_whiskers.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "tommys_margarita",
@@ -4722,7 +4830,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tommys_margarita.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "ve_n_to",
@@ -4769,7 +4878,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vento.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "vieux_carre",
@@ -4817,7 +4927,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vieux_carre.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bees_knees",
@@ -4860,7 +4971,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bees_knees.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "champs_elysees",
@@ -4906,7 +5018,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/champs_elysees.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "b_52",
@@ -4945,7 +5058,8 @@
     "frizzante": false,
     "bicchiere": "Shot",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/b_52.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bacardi_cocktail",
@@ -4983,7 +5097,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bacardi_cocktail.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bamboo",
@@ -5026,7 +5141,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bamboo.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "barracuda",
@@ -5074,7 +5190,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/barracuda.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "batanga",
@@ -5116,7 +5233,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/batanga.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bellini",
@@ -5151,7 +5269,8 @@
     "frizzante": true,
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bellini.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "between_the_sheets",
@@ -5194,7 +5313,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/between_the_sheets.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bijou",
@@ -5239,7 +5359,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bijou.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "black_russian",
@@ -5273,7 +5394,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/black_russian.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "blood_sand",
@@ -5315,7 +5437,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/blood_and_sand.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bloody_mary",
@@ -5366,7 +5489,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bloody_mary.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "blue_lagoon",
@@ -5404,7 +5528,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/blue_lagoon.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bobby_burns",
@@ -5443,7 +5568,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bobby_burns.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bosom_caresser",
@@ -5490,7 +5616,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bosom_caresser.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "boulevardier",
@@ -5529,7 +5656,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/boulevardier.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bradford",
@@ -5571,7 +5699,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bradford.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bramble",
@@ -5614,7 +5743,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bramble.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "brandy_crusta",
@@ -5669,7 +5799,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/brandy_crusta.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bronx",
@@ -5711,7 +5842,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bronx.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "brooklyn",
@@ -5754,7 +5886,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/brooklyn.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "caipirinha",
@@ -5807,7 +5940,8 @@
         "note": "Tequila al posto della Cachaça"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/caipirinha.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/caipirinha.webp",
+    "iba": false
   },
   {
     "id": "camerons_kick",
@@ -5855,7 +5989,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/camerons_kick.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "canchanchara",
@@ -5897,7 +6032,8 @@
     "frizzante": false,
     "bicchiere": "Cocotte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/canchanchara.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "cape_codder",
@@ -5931,7 +6067,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/cape_codder.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "cardinale",
@@ -5970,7 +6107,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/cardinale.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "casino",
@@ -6012,7 +6150,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/casino.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "champagne_cocktail",
@@ -6055,7 +6194,8 @@
     "frizzante": true,
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/champagne_cocktail.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "chartreuse_swizzle",
@@ -6100,7 +6240,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/chartreuse_swizzle.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "chilcano",
@@ -6142,7 +6283,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/chilcano.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "chrysanthemum",
@@ -6181,7 +6323,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/chrysanthemum.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "clover_club",
@@ -6224,7 +6367,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/clover_club.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "corpse_reviver_2",
@@ -6270,7 +6414,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/corpse_reviver_2.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "cosmopolitan",
@@ -6312,7 +6457,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/cosmopolitan.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "cuba_libre",
@@ -6350,7 +6496,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/cuba_libre.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "daiquiri",
@@ -6393,7 +6540,8 @@
         "note": "Frullare tutto con ghiaccio ed eventualmente frutta fresca a scelta"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/daiquiri.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/daiquiri.webp",
+    "iba": false
   },
   {
     "id": "daisy_de_santiago",
@@ -6437,7 +6585,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/daisy_de_santiago.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "dark_n_stormy",
@@ -6472,7 +6621,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/dark_and_stormy.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "dirty_martini",
@@ -6511,7 +6661,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/dirty_martini.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "doctor_funk",
@@ -6561,7 +6712,8 @@
     "frizzante": false,
     "bicchiere": "Sling",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/doctor_funk.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "dons_special_daiquiri",
@@ -6608,7 +6760,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/dons_special_daiquiri.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "derby",
@@ -6650,7 +6803,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/derby.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "eggnog",
@@ -6694,7 +6848,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/eggnog.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "el_presidente",
@@ -6736,7 +6891,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/el_presidente.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "enzoni",
@@ -6783,7 +6939,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/enzoni.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "espresso_martini",
@@ -6825,7 +6982,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/espresso_martini.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "fernandito",
@@ -6859,7 +7017,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fernandito.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "fleur_de_paradis",
@@ -6914,7 +7073,8 @@
     "frizzante": true,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fleur_de_paradis.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "florida",
@@ -6956,7 +7116,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/florida.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "fog_cutter",
@@ -7013,7 +7174,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fog_cutter.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "ford_cocktail",
@@ -7056,7 +7218,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/ford_cocktail.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "french_75",
@@ -7099,7 +7262,8 @@
     "frizzante": true,
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/french_75.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "french_connection",
@@ -7134,7 +7298,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/french_connection.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "french_martini",
@@ -7172,7 +7337,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/french_martini.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "garibaldi",
@@ -7206,7 +7372,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/garibaldi.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "gibson",
@@ -7241,7 +7408,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gibson.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "gimlet",
@@ -7284,7 +7452,8 @@
         "note": "Vodka al posto del Gin"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gimlet.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gimlet.webp",
+    "iba": false
   },
   {
     "id": "gin_basil_smash",
@@ -7326,7 +7495,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gin_basil_smash.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "gin_fizz",
@@ -7375,7 +7545,8 @@
         "note": "Aggiungere albume d'uovo o foamer e fare prima una dry shake"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gin_fizz.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gin_fizz.webp",
+    "iba": false
   },
   {
     "id": "gloria",
@@ -7418,7 +7589,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gloria.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "godfather",
@@ -7452,7 +7624,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/godfather.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "godmother",
@@ -7486,7 +7659,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/godmother.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "gold_rush",
@@ -7524,7 +7698,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gold_rush.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "golden_cadillac",
@@ -7563,7 +7738,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/golden_cadillac.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "golden_dream",
@@ -7605,7 +7781,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/golden_dream.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "grand_margarita",
@@ -7648,7 +7825,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/grand_margarita.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "grasshopper",
@@ -7687,7 +7865,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/grasshopper.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "hanky_panky",
@@ -7726,7 +7905,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hanky_panky.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "harvey_wallbanger",
@@ -7765,7 +7945,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/harvey_wallbanger.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "hemingway_special",
@@ -7807,7 +7988,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hemingway_special.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "hot_toddy",
@@ -7845,7 +8027,8 @@
     "frizzante": false,
     "bicchiere": "Tazza con manico",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hot_toddy.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "hugo",
@@ -7888,7 +8071,8 @@
         "note": "Liquore ai fiori di sambuco al posto dello sciroppo"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hugo.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hugo.webp",
+    "iba": false
   },
   {
     "id": "hurricane",
@@ -7926,7 +8110,8 @@
     "frizzante": false,
     "bicchiere": "Hurricane",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hurricane.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "iba_tiki",
@@ -7989,7 +8174,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/iba_tiki.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "illegal",
@@ -8045,7 +8231,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/illegal.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "income_tax",
@@ -8091,7 +8278,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/income_tax.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "infante",
@@ -8139,7 +8327,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/infante.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "irish_coffee",
@@ -8181,7 +8370,8 @@
     "frizzante": false,
     "bicchiere": "Tazza con manico",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/irish_coffee.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "japanese_cocktail",
@@ -8219,7 +8409,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/japanese_cocktail.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "japanese_iced_tea",
@@ -8277,7 +8468,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/japanese_iced_tea.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "japanese_slipper",
@@ -8315,7 +8507,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/japanese_slipper.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "john_collins",
@@ -8362,7 +8555,8 @@
         "note": "Mettere un Old Tom Gin anziché un Gin dry"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/john_collins.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/john_collins.webp",
+    "iba": false
   },
   {
     "id": "jungle_bird",
@@ -8409,7 +8603,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/jungle_bird.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "kamikaze",
@@ -8447,7 +8642,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/kamikaze.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "kir",
@@ -8490,7 +8686,8 @@
         "note": "Liquore al lampone al posto della Creme de cassis"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/kir.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/kir.webp",
+    "iba": false
   },
   {
     "id": "la_louisiane",
@@ -8537,7 +8734,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/la_louisiane.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "last_word",
@@ -8579,7 +8777,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/last_word.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "lemon_drop_martini",
@@ -8622,7 +8821,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/lemon_drop_martini.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "long_island_iced_tea",
@@ -8683,7 +8883,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/long_island_iced_tea.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "lynchburg_lemonade",
@@ -8727,7 +8928,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/lynchburg_lemonade.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "mai_tai",
@@ -8774,7 +8976,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mai_tai.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "manhattan",
@@ -8826,7 +9029,8 @@
         "note": "Invertire dosi tra il Rye whiskey e il Vermouth rosso"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/manhattan.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/manhattan.webp",
+    "iba": false
   },
   {
     "id": "margarita",
@@ -8878,7 +9082,8 @@
         "note": "Mezcal al posto della Tequila"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/margarita.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/margarita.webp",
+    "iba": false
   },
   {
     "id": "marigny",
@@ -8929,7 +9134,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/marigny.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "martinez",
@@ -8972,7 +9178,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/martinez.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "martini_dry",
@@ -9016,7 +9223,8 @@
         "note": "Mettere il ghiaccio nel mixing glass, aggiungere il Vermouth, raffreddare e scolare tutto (il vermouth e l'acqua che si è formata). In sostanza il Vermouth serve solo per aromatizzare il mixing glass e il ghiaccio prima di versare il gin dentro al mixing glass"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/martini_dry.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/martini_dry.webp",
+    "iba": false
   },
   {
     "id": "mary_pickford",
@@ -9058,7 +9266,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mary_pickford.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "metropole",
@@ -9101,7 +9310,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/metropole.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "miami_iced_tea",
@@ -9159,7 +9369,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/miami_iced_tea.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "michelada",
@@ -9211,7 +9422,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/michelada.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "milano_torino",
@@ -9246,7 +9458,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/milano_torino.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "mimosa",
@@ -9280,7 +9493,8 @@
     "frizzante": true,
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mimosa.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "mint_julep",
@@ -9325,7 +9539,8 @@
     "frizzante": false,
     "bicchiere": "Julep cup",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mint_julep.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "mojito",
@@ -9372,7 +9587,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mojito.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "monkey_gland",
@@ -9414,7 +9630,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/monkey_gland.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "monte_carlo",
@@ -9453,7 +9670,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/monte_carlo.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "morning_glory_fizz",
@@ -9506,7 +9724,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/morning_glory_fizz.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "moscow_mule",
@@ -9557,7 +9776,8 @@
         "note": "Tequila al posto della Vodka"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/moscow_mule.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/moscow_mule.webp",
+    "iba": false
   },
   {
     "id": "naked_famous",
@@ -9599,7 +9819,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/naked_and_famous.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "napoleon",
@@ -9642,7 +9863,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/napoleon.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "navy_grog",
@@ -9696,7 +9918,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/navy_grog.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "negroni",
@@ -9748,7 +9971,8 @@
         "note": "Prosecco al posto del Gin"
       }
     ],
-    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/negroni.webp"
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/negroni.webp",
+    "iba": false
   },
   {
     "id": "new_york_sour",
@@ -9796,7 +10020,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/new_york_sour.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "old_cuban",
@@ -9843,7 +10068,8 @@
     "frizzante": true,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/old_cuban.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "old_fashioned",
@@ -9887,7 +10113,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/old_fashioned.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "old_pal",
@@ -9926,7 +10153,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/old_pal.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "opera",
@@ -9973,7 +10201,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/opera.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "painkiller",
@@ -10016,7 +10245,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/painkiller.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "paloma",
@@ -10058,7 +10288,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/paloma.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "paper_plane",
@@ -10100,7 +10331,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/paper_plane.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "paradise",
@@ -10138,7 +10370,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/paradise.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "pegu_club",
@@ -10180,7 +10413,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pegu_club.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "penicillin",
@@ -10223,7 +10457,8 @@
     "frizzante": false,
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/penicillin.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "pina_colada",
@@ -10261,7 +10496,8 @@
     "frizzante": false,
     "bicchiere": "Hurricane",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pina_colada.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "pisco_punch",
@@ -10313,7 +10549,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pisco_punch.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "pisco_sour",
@@ -10357,7 +10594,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pisco_sour.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "bucks_fizz",
@@ -10391,7 +10629,8 @@
     "frizzante": true,
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bucks_fizz.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "tintoretto",
@@ -10426,7 +10665,8 @@
     "frizzante": true,
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tintoretto.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "rossini",
@@ -10461,7 +10701,8 @@
     "frizzante": true,
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rossini.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "gin_tonic",
@@ -10495,7 +10736,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gin_tonic.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "puccini",
@@ -10530,7 +10772,8 @@
     "frizzante": true,
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/puccini.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "tiziano",
@@ -10565,7 +10808,8 @@
     "frizzante": true,
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tiziano.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "texas_iced_tea",
@@ -10633,7 +10877,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/texas_iced_tea.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "montgomerys_martini",
@@ -10672,7 +10917,8 @@
     "frizzante": false,
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/montgomerys_martini.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "charro_negro",
@@ -10710,7 +10956,8 @@
     "frizzante": true,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/charro_negro.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "long_beach_iced_tea",
@@ -10766,7 +11013,8 @@
     "frizzante": false,
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/long_beach_iced_tea.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "tia_mia",
@@ -10814,7 +11062,8 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tia_mia.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   },
   {
     "id": "corn_and_oil",
@@ -10858,6 +11107,7 @@
     "frizzante": false,
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/corn_and_oil.webp",
-    "varianti": []
+    "varianti": [],
+    "iba": false
   }
 ]

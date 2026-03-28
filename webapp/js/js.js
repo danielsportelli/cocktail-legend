@@ -156,14 +156,14 @@ fetch("database/it/cocktails-it.json")
     render();
     updateAllCounts();
   });
-var AF = {cat:[], dis:[], abv:[], sap:[], frz:[], bic:[]};
+var AF = {cat:[], dis:[], abv:[], frz:[], bic:[], iba:[]};
 var Q = "";
 var RES = [];
 var USE_OZ = false;
 var LAST_IDX = 0;
 var AO = {"Analcolico":0,"Basso":1,"Medio basso":2,"Medio":3,"Medio alto":4,"Alto":5,"Molto alto":6};
-var FMAP = {cat:"categoria", dis:"distillato", abv:"abv"};
-var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", sap:"Sapore", frz:"Frizzante", bic:"Bicchiere"};
+var FMAP = {cat:"categoria", dis:"distillato", abv:"abv", iba:"iba"};
+var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzante", bic:"Bicchiere", iba:"IBA"};
 
 // ═══════════ RICERCA CON SUGGESTIONS ═══════════
 (function(){
@@ -425,6 +425,7 @@ function uniq(key) {
       for(var j=0;j<c.ingredienti.length;j++)s[c.ingredienti[j][1]]=1;
     }
     else if(key==="frz"){s[c.frizzante?"Si":"No"]=1;}
+    else if(key==="iba"){if(c.iba===true)s["Sì"]=1;}
     else if(key==="bic"){s[c.bicchiere]=1;}
     else{s[c[key]]=1;}
   }
@@ -445,6 +446,7 @@ function uniqFromRes(key) {
       for (var j = 0; j < c.ingredienti.length; j++) s[c.ingredienti[j][1]] = 1;
     }
     else if (key === "frz") { s[c.frizzante ? "Si" : "No"] = 1; }
+    else if (key === "iba") { if(c.iba===true) s["Sì"]=1; }
     else if (key === "bic") { s[c.bicchiere] = 1; }
     else { var f2 = key==="cat" ? "categoria" : key==="abv" ? "abv" : key; s[c[f2]] = 1; }
   }
@@ -457,7 +459,6 @@ function countFor(key, val) {
     if(AF.cat.length && key!=="cat" && AF.cat.indexOf(c.categoria)===-1) return false;
     if(AF.dis.length && key!=="dis"){var vl2;var ok=AF.dis.some(function(d){vl2=d.toLowerCase();return c.distillato.some(function(x){return x.toLowerCase()===vl2;})||c.ingredienti.some(function(i){return i[1].toLowerCase()===vl2;});});if(!ok)return false;}
     if(AF.abv.length && key!=="abv" && AF.abv.indexOf(c.abv)===-1) return false;
-    if(AF.sap.length && key!=="sap" && !AF.sap.some(function(s){return c.sapori.indexOf(s)!==-1;})) return false;
     if(AF.frz.length && key!=="frz" && AF.frz.indexOf(c.frizzante?"Si":"No")===-1) return false;
     if(AF.bic.length && key!=="bic" && AF.bic.indexOf(c.bicchiere)===-1) return false;
     if(FAV_ONLY){var favs=loadFavs();if(favs.indexOf(c.name)===-1)return false;}
@@ -468,6 +469,7 @@ function countFor(key, val) {
   if(key==="sap") return base.filter(function(c){return c.sapori.indexOf(val)!==-1;}).length;
   if(key==="dis"){var vl=val.toLowerCase();return base.filter(function(c){return c.distillato.some(function(x){return x.toLowerCase()===vl;})||c.ingredienti.some(function(i){return i[1].toLowerCase()===vl;});}).length;}
   if(key==="frz") return base.filter(function(c){return (c.frizzante?"Si":"No")===val;}).length;
+  if(key==="iba") return base.filter(function(c){return c.iba===true;}).length;
   if(key==="bic") return base.filter(function(c){return c.bicchiere===val;}).length;
   var field = FMAP[key] || key;
   return base.filter(function(c){return c[field]===val;}).length;
@@ -576,10 +578,10 @@ function initF() {
 
   buildDropdown("dd-cat","cat", cats);
   buildDropdown("dd-dis","dis", ings);
-  buildDropdown("dd-sap","sap", saps);
   buildDropdown("dd-frz","frz", ["Si","No"]);
   buildDropdown("dd-bic","bic", bics);
   buildDropdown("dd-abv","abv", ["Analcolico","Basso","Medio basso","Medio","Medio alto","Alto","Molto alto"]);
+  buildDropdown("dd-iba","iba", ["Sì"]);
 }
 
 // Dropdown toggle per ogni fg-btn
@@ -653,7 +655,7 @@ document.getElementById("btn-filters").addEventListener("click", function(e){
 document.addEventListener('DOMContentLoaded', function(){
   var resetBtn = document.getElementById('btn-reset');
   if(resetBtn) resetBtn.addEventListener('click', function(){
-    AF = {cat:[], dis:[], abv:[], sap:[], frz:[], bic:[]};
+    AF = {cat:[], dis:[], abv:[], frz:[], bic:[], iba:[]};
     Q = '';
     var srch = document.getElementById('srch');
     if(srch) srch.value = '';
@@ -679,7 +681,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function updateBadges() {
-  var total = AF.cat.length + AF.dis.length + AF.abv.length + AF.sap.length + AF.frz.length + AF.bic.length;
+  var total = AF.cat.length + AF.dis.length + AF.abv.length + AF.frz.length + AF.bic.length + AF.iba.length;
   var badge = document.getElementById("active-badge");
   badge.textContent = total;
   badge.classList.toggle("show", total > 0);
@@ -734,7 +736,7 @@ function render() {
   if(AF.abv.length){res=res.filter(function(c){return AF.abv.indexOf(c.abv)!==-1;});}
   if(AF.frz.length){res=res.filter(function(c){return AF.frz.indexOf(c.frizzante?"Si":"No")!==-1;});}  
   if(AF.bic.length){res=res.filter(function(c){return AF.bic.indexOf(c.bicchiere)!==-1;});}
-  if(AF.sap.length){res=res.filter(function(c){return AF.sap.some(function(s){return c.sapori.indexOf(s)!==-1;});});}
+  if(AF.iba.length){res=res.filter(function(c){return c.iba===true;});}
   if(FAV_ONLY){var favs=loadFavs();res=res.filter(function(c){return favs.indexOf(c.name)!==-1;});}
   var s=document.getElementById("srt").value;
   if(s==="az")res.sort(function(a,b){return a.name.localeCompare(b.name);});
@@ -775,12 +777,12 @@ function showCards(){
       '<div class="card-img"><div class="card-ph">&#127864;</div>'+
       '<img data-src="'+c.img+'" alt="'+c.name+'">'+
       '<button class="fav-heart" data-name="'+c.name.replace(/"/g,"&quot;")+'">'+(isFav(c.name)?HEART_ON:HEART_OFF)+'</button>'+
+      (c.iba?'<div class="card-iba-badge">IBA</div>':'')+
       '<div class="sap-strip">'+sapHtml+'</div></div>'+
       '<div class="card-body">'+
       '<div class="card-top"><div class="card-name">'+c.name+'</div></div>'+
       '<div class="card-meta">'+
-      '<div class="mrow">🥃&nbsp;'+(Array.isArray(c.distillato)?c.distillato[0]:c.distillato)+'</div>'+
-      '<div class="mrow mrow-garnish">🌿&nbsp;'+c.garnish+'</div>'+
+      '<div class="mrow">🥃&nbsp;'+(Array.isArray(c.distillato)&&c.distillato.length?c.distillato.join(', '):(c.distillato||'Analcolico'))+'</div>'+
       '</div>'+
       '<div class="abv-row"><span class="abv-lbl">ABV</span>'+
       '<span class="abv-v '+aclass(c.abv)+'">'+c.abv+'</span></div>'+
@@ -829,13 +831,12 @@ function openM(i){
   var stTitle=document.getElementById("m-sticky-title");
   if(stTitle)stTitle.textContent=c.name;
   document.getElementById("m-badges").innerHTML=
-    '<span class="m-badge '+bclass(c.categoria)+'">'+c.categoria+'</span>'+
-    '<span class="m-badge '+aclass(c.abv)+'">ABV: '+c.abv+'</span>';
+    (c.iba?'<span class="m-iba-badge">✦ IBA OFFICIAL COCKTAIL</span>':'');
   document.getElementById("m-grid").innerHTML=
-    '<div class="mi"><div class="mi-lbl">Distillato</div><div class="mi-val">'+(Array.isArray(c.distillato)?c.distillato.join(' + '):c.distillato)+'</div></div>'+
+    '<div class="mi"><div class="mi-lbl">Bicchiere</div><div class="mi-val">'+(c.bicchiere||'-')+'</div></div>'+
     '<div class="mi"><div class="mi-lbl">Garnish</div><div class="mi-val">'+c.garnish+'</div></div>'+
     '<div class="mi"><div class="mi-lbl">Categoria</div><div class="mi-val">'+c.categoria+'</div></div>'+
-    '<div class="mi"><div class="mi-lbl">Bicchiere</div><div class="mi-val">'+(c.bicchiere||'-')+'</div></div>';
+    '<div class="mi"><div class="mi-lbl">Tenore ABV</div><div class="mi-val '+aclass(c.abv)+'">'+c.abv+'</div></div>';
   var ingHtml="";
   for(var ii=0;ii<c.ingredienti.length;ii++){
     ingHtml+='<div class="ing-row"><span class="ing-q" data-raw="'+c.ingredienti[ii][0]+'">'+fmtQty(c.ingredienti[ii][0])+'</span><span class="ing-n">'+c.ingredienti[ii][1]+'</span></div>';
