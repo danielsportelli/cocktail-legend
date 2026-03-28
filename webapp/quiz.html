@@ -848,20 +848,21 @@ async function loadQuiz(user) {
 
   // Leggi domanda del giorno
   try {
-    // 1. Controlla se il quiz è attivo
-    const configSnap = await getDoc(doc(db, 'config', 'quiz'));
-    const config = configSnap.exists() ? configSnap.data() : {};
+    // 1. Leggi da quiz_del_giorno/attuale — se esiste, il quiz è attivo
+    const attualeSnap = await getDoc(doc(db, 'quiz_del_giorno', 'attuale'));
 
-    if (config.attivo === false) {
+    if (!attualeSnap.exists()) {
+      // Nessuna domanda pubblicata → Coming Soon
       showState('state-none');
       loadLeaderboard(currentLbTab);
       return;
     }
 
-    // 2. Leggi da quiz_del_giorno/attuale (scritto dalla Cloud Function)
-    const attualeSnap = await getDoc(doc(db, 'quiz_del_giorno', 'attuale'));
-
-    if (!attualeSnap.exists()) {
+    // 2. Controlla config solo come double-check (gestisce boolean e stringa)
+    const configSnap = await getDoc(doc(db, 'config', 'quiz'));
+    const config = configSnap.exists() ? configSnap.data() : {};
+    const attivo = config.attivo;
+    if (attivo === false || attivo === 'false' || attivo === 0) {
       showState('state-none');
       loadLeaderboard(currentLbTab);
       return;
@@ -871,13 +872,20 @@ async function loadQuiz(user) {
     const quizId = quizData.domanda_id || oggi;
 
     // Mappa i campi: la Cloud Function usa "testo" invece di "domanda"
+    // Le opzioni possono essere array o oggetto {A: "...", B: "..."}
+    let opzioni = quizData.opzioni || [];
+    if (!Array.isArray(opzioni) && typeof opzioni === 'object') {
+      // Converti oggetto {A: "Mais", B: "Segale"} in array ["Mais", "Segale"]
+      opzioni = Object.keys(opzioni).sort().map(function(k){ return opzioni[k]; });
+    }
+
     const datiNormalizzati = {
-      domanda:          quizData.testo || quizData.domanda || '—',
-      opzioni:          quizData.opzioni || [],
+      domanda:           quizData.testo || quizData.domanda || '—',
+      opzioni:           opzioni,
       risposta_corretta: quizData.risposta_corretta || '',
-      spiegazione:      quizData.spiegazione || '',
-      categoria:        quizData.categoria || 'Cocktail',
-      difficolta:       quizData.difficolta || 'facile',
+      spiegazione:       quizData.spiegazione || '',
+      categoria:         quizData.categoria || 'Cocktail',
+      difficolta:        quizData.difficolta || 'facile',
     };
 
     // Render quiz
