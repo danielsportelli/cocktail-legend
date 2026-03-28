@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230f172a' stroke='url(%23g)' stroke-width='3'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232563eb'/><stop offset='1' stop-color='%23f59e0b'/></linearGradient></defs><text x='50' y='67' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='42' fill='%23f59e0b'>CL</text></svg>"/>
 <title>Quiz del Giorno — Cocktail Legend</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -39,6 +39,19 @@ body{
   flex-direction:column;
   align-items:center;
 }
+.question-text{
+  font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:700;
+  line-height:1.5;color:var(--txt);margin-bottom:1.4rem;letter-spacing:-.01em;
+}
+.opt-letter{
+  width:30px;height:30px;border-radius:8px;
+  border:1.5px solid var(--surf2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:800;color:var(--txt2);
+  flex-shrink:0;transition:all .2s;font-family:'Inter',sans-serif;
+}
+.stat-val{font-size:.95rem;font-weight:800;color:var(--txt);font-family:'Inter',sans-serif;}
+.upcoming-time{font-size:.92rem;font-weight:800;color:var(--txt);font-family:'Inter',sans-serif;}
 
 /* GRID BG */
 body::before{
@@ -185,7 +198,7 @@ body::after{
   display:flex;flex-direction:column;align-items:center;gap:.75rem;
 }
 .done-icon{font-size:2.5rem;}
-.done-title{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);}
+.done-title{font-family:'Inter',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txt);}
 .done-sub{font-size:.82rem;color:var(--txt2);line-height:1.6;}
 .done-pts{
   display:inline-flex;align-items:center;gap:.35rem;
@@ -274,7 +287,7 @@ body::after{
 .cat-dot{width:5px;height:5px;border-radius:50%;background:var(--amber);flex-shrink:0;}
 
 .question-text{
-  font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;
+  font-family:'Inter',sans-serif;font-size:1.15rem;font-weight:700;
   line-height:1.45;color:var(--txt);margin-bottom:1.4rem;letter-spacing:-.01em;
 }
 
@@ -313,7 +326,7 @@ body::after{
   border:1.5px solid var(--surf2);
   display:flex;align-items:center;justify-content:center;
   font-size:.75rem;font-weight:800;color:var(--txt2);
-  flex-shrink:0;transition:all .2s;font-family:'Syne',sans-serif;
+  flex-shrink:0;transition:all .2s;font-family:'Inter',sans-serif;
 }
 .opt-text{font-size:.88rem;font-weight:500;color:var(--txt);line-height:1.4;}
 
@@ -345,7 +358,7 @@ body::after{
   padding:.85rem 0;gap:.1rem;border-right:1px solid var(--brd);
 }
 .stat-item:last-child{border-right:none;}
-.stat-val{font-size:.95rem;font-weight:800;color:var(--txt);font-family:'Syne',sans-serif;}
+.stat-val{font-size:.95rem;font-weight:800;color:var(--txt);font-family:'Inter',sans-serif;}
 .stat-lbl{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--txt2);}
 
 /* ── UPCOMING ── */
@@ -361,7 +374,7 @@ body::after{
   flex-shrink:0;font-size:1.1rem;
 }
 .upcoming-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt2);margin-bottom:.15rem;}
-.upcoming-time{font-size:.92rem;font-weight:800;color:var(--txt);font-family:'Syne',sans-serif;}
+.upcoming-time{font-size:.92rem;font-weight:800;color:var(--txt);font-family:'Inter',sans-serif;}
 .upcoming-sub{font-size:.68rem;color:var(--txt2);margin-top:.1rem;}
 
 /* ── COUNTDOWN ── */
@@ -371,7 +384,7 @@ body::after{
   display:flex;align-items:center;justify-content:space-between;
 }
 .countdown-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--txt2);}
-.countdown-timer{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--blue-l);}
+.countdown-timer{font-family:'Inter',sans-serif;font-size:1.1rem;font-weight:800;color:var(--blue-l);}
 
 /* PROTEZIONE */
 *{-webkit-user-select:none;user-select:none;}
@@ -926,14 +939,29 @@ function renderQuiz(data, quizId, uid, oggi) {
   const spiegazione = data.spiegazione || '';
   const letters = ['A','B','C','D'];
 
+  // rispostaCorretta può essere la lettera ("A") o il testo ("Mais")
+  // Determina il testo corretto e la lettera corretta
+  let testoCorretto = rispostaCorretta;
+  let letteraCorretta = rispostaCorretta;
+  if (rispostaCorretta.length === 1 && letters.includes(rispostaCorretta.toUpperCase())) {
+    // È una lettera — ricava il testo
+    const idx = letters.indexOf(rispostaCorretta.toUpperCase());
+    if (idx >= 0 && opzioni[idx]) testoCorretto = opzioni[idx];
+    letteraCorretta = rispostaCorretta.toUpperCase();
+  } else {
+    // È il testo — ricava la lettera
+    const idx = opzioni.indexOf(rispostaCorretta);
+    if (idx >= 0) letteraCorretta = letters[idx];
+  }
+
   opzioni.forEach(function(testo, i) {
-    const isCorrect = testo === rispostaCorretta;
+    const isCorrect = (letters[i] === letteraCorretta) || (testo === testoCorretto);
     const div = document.createElement('div');
     div.className = 'option';
     div.innerHTML = '<div class="opt-letter">' + (letters[i]||i+1) + '</div><div class="opt-text">' + escHtml(testo) + '</div>';
     div.addEventListener('click', function() {
       if (answered) return;
-      handleAnswer(div, isCorrect, rispostaCorretta, spiegazione, opzioni, uid, quizId, oggi);
+      handleAnswer(div, isCorrect, testoCorretto, spiegazione, opzioni, uid, quizId, oggi);
     });
     wrap.appendChild(div);
   });
@@ -943,16 +971,14 @@ function renderQuiz(data, quizId, uid, oggi) {
 
   // Avvia timer
   startTimer(function() {
-    // Timeout
     answered = true;
     document.querySelectorAll('.option').forEach(function(o){
       o.classList.add('disabled');
-      // Evidenzia risposta corretta
       const txt = o.querySelector('.opt-text').textContent;
-      if (txt === rispostaCorretta) o.classList.add('correct');
+      if (txt === testoCorretto) o.classList.add('correct');
       else o.classList.add('dimmed');
     });
-    showResult(false, true, 0, spiegazione, rispostaCorretta);
+    showResult(false, true, 0, spiegazione, testoCorretto);
     saveRisposta(uid, quizId, false, 0, oggi);
   });
 }
