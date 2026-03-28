@@ -245,7 +245,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 
 /* MODAL */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);
-  z-index:100;display:flex;align-items:center;justify-content:center;
+  z-index:1100;display:flex;align-items:center;justify-content:center;
   padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .25s}
 .overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--surf);border:1px solid rgba(37,99,235,.2);border-radius:16px;

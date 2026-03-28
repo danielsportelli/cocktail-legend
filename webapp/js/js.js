@@ -736,7 +736,7 @@ function render() {
   if(AF.abv.length){res=res.filter(function(c){return AF.abv.indexOf(c.abv)!==-1;});}
   if(AF.frz.length){res=res.filter(function(c){return AF.frz.indexOf(c.frizzante?"Si":"No")!==-1;});}  
   if(AF.bic.length){res=res.filter(function(c){return AF.bic.indexOf(c.bicchiere)!==-1;});}
-  if(AF.iba.length){res=res.filter(function(c){return c.iba===true;});}
+  if(AF.iba.length){res=res.filter(function(c){return c.iba===true||c.iba==="true";});}
   if(FAV_ONLY){var favs=loadFavs();res=res.filter(function(c){return favs.indexOf(c.name)!==-1;});}
   var s=document.getElementById("srt").value;
   if(s==="az")res.sort(function(a,b){return a.name.localeCompare(b.name);});
@@ -875,7 +875,6 @@ function openM(i){
   document.getElementById("m-stor").textContent=c.storia;
   document.getElementById("ov").classList.add("open");
   document.body.style.overflow="hidden";
-  var fb=document.getElementById("filter-bar");if(fb)fb.style.zIndex="0";
   // aggiorna cuoricino sticky bar
   var mh=document.getElementById("m-fav-heart");
   if(mh){
@@ -887,7 +886,7 @@ function openM(i){
 
 function closeModal(){var st=document.getElementById("tab-bar");if(st)st.style.display="";
   document.getElementById("ov").classList.remove("open");document.body.style.overflow="";
-  var fb=document.getElementById("filter-bar");if(fb)fb.style.zIndex="";}
+}
 
 document.getElementById("m-close").addEventListener("click",closeModal);
 document.getElementById("ov").addEventListener("click",function(e){if(e.target===this)closeModal();});
