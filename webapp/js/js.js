@@ -212,10 +212,27 @@ function switchAuthTab(tab) {
         _nickRegTimer = setTimeout(async function() {
           var db = window._fbDb;
           var fn = window._fbFunctions;
-          if (!db || !fn) return;
+          if (!db || !fn || !fn.query) {
+            // Firebase non ancora pronto, riprova tra 800ms
+            nickFeedback.style.color = 'var(--dim)';
+            nickFeedback.textContent = '⏳ Controllo...';
+            setTimeout(async function() {
+              db = window._fbDb; fn = window._fbFunctions;
+              if (!db || !fn || !fn.query) { nickFeedback.textContent = ''; return; }
+              try {
+                var q2 = fn.query(fn.collection(db, 'users'), fn.where('nickname', '==', val));
+                var snap2 = await fn.getDocs(q2);
+                if (nickInput.value.trim() !== val) return;
+                if (snap2.empty) { _nickRegValid=true; nickFeedback.style.color='#4ade80'; nickFeedback.textContent='✓ Nickname disponibile'; }
+                else { _nickRegValid=false; nickFeedback.style.color='#f87171'; nickFeedback.textContent='✗ Nickname già in uso'; }
+              } catch(e) { _nickRegValid=true; nickFeedback.textContent=''; }
+            }, 800);
+            return;
+          }
           try {
             var q = fn.query(fn.collection(db, 'users'), fn.where('nickname', '==', val));
             var snap = await fn.getDocs(q);
+            if (nickInput.value.trim() !== val) return;
             if (snap.empty) {
               _nickRegValid = true;
               nickFeedback.style.color = '#4ade80';

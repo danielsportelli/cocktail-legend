@@ -505,6 +505,16 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 /* Due colonne per nome/cognome e cap/provincia */
 .reg-row{display:flex;gap:.5rem;}
 .reg-row .login-input-wrap{flex:1;}
+/* Campi compatti civico/cap/prov */
+.reg-row .login-input-wrap .login-input,
+.reg-row .login-input-wrap .login-select{
+  padding-left:.55rem;
+  padding-right:.35rem;
+  font-size:.82rem;
+}
+.reg-row .login-input-wrap .login-select{
+  padding-right:1.3rem;
+}
 .login-sub{
   font-size:.82rem;color:var(--txt2);margin-bottom:1.8rem;line-height:1.5;
 }
