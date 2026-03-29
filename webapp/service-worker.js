@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════
 // SERVICE WORKER — Cocktail Legend PWA
 // ═══════════════════════════════════════════════════
-const CACHE_NAME = 'cocktail-legend-v1';
+const CACHE_NAME = 'cocktail-legend-v2';
 
 // File da cachare per uso offline
 const CACHE_FILES = [
