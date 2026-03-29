@@ -447,7 +447,6 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
     <!-- Stato: già risposto oggi -->
     <div class="quiz-done" id="state-done" style="display:none;">
       <div class="done-icon" id="done-icon">
-        <!-- icona corretta default -->
         <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
           <circle cx="24" cy="24" r="22" fill="rgba(34,197,94,.15)" stroke="#22c55e" stroke-width="2"/>
           <polyline points="14,24 21,31 34,17" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -479,20 +478,6 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
       <div class="quiz-body">
         <div class="cat-chip"><div class="cat-dot"></div><span id="q-categoria">—</span></div>
         <div class="question-text" id="q-testo">Caricamento…</div>
-        <!-- INFO PUNTI -->
-        <div style="display:flex;align-items:center;gap:.35rem;margin-bottom:1rem;cursor:pointer;" id="pts-info-btn">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="8.5"/><line x1="12" y1="11" x2="12" y2="16"/></svg>
-          <span style="font-size:.65rem;color:var(--dim);font-weight:600;">Rispondi veloce per più punti · max 150 pt</span>
-        </div>
-        <!-- POPUP PUNTI -->
-        <div id="pts-popup" style="display:none;background:var(--bg);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:.75rem .9rem;margin-bottom:1rem;">
-          <div style="font-size:.7rem;font-weight:700;color:var(--amber);margin-bottom:.4rem;">Come funzionano i punti</div>
-          <div style="font-size:.72rem;color:var(--txt2);line-height:1.7;">
-            ✓ Risposta corretta: <strong style="color:var(--txt);">100 pt base</strong><br>
-            ⚡ Bonus velocità: fino a <strong style="color:var(--txt);">+50 pt</strong> in base al tempo rimasto<br>
-            ✗ Risposta sbagliata o timeout: <strong style="color:var(--txt);">0 pt</strong>
-          </div>
-        </div>
         <div class="options" id="options-wrap"></div>
       </div>
 
@@ -504,24 +489,40 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
         </div>
         <div class="result-explanation" id="result-explanation"></div>
       </div>
+    </div>
 
-      <!-- STATS -->
-      <div class="quiz-stats">
-        <div class="stat-item">
-          <div class="stat-val" id="stat-correttezza">—</div>
-          <div class="stat-lbl">Correttezza</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-val" id="stat-giorni">0</div>
-          <div class="stat-lbl">Giorni giocati</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-val" id="stat-streak">0</div>
-          <div class="stat-lbl">Streak 🔥</div>
-        </div>
+    <!-- STATS — sempre visibili -->
+    <div class="quiz-stats" id="quiz-stats-bar">
+      <div class="stat-item">
+        <div class="stat-val" id="stat-correttezza">—</div>
+        <div class="stat-lbl">Correttezza</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val" id="stat-giorni">0</div>
+        <div class="stat-lbl">Giorni giocati</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val" id="stat-streak">0</div>
+        <div class="stat-lbl">Streak 🔥</div>
       </div>
     </div>
   </div><!-- /quiz-card -->
+
+  <!-- INFO PUNTI — sempre visibile -->
+  <div style="display:flex;flex-direction:column;gap:.5rem;">
+    <div style="display:flex;align-items:center;gap:.35rem;cursor:pointer;padding:.1rem 0;" id="pts-info-btn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="8.5"/><line x1="12" y1="11" x2="12" y2="16"/></svg>
+      <span style="font-size:.65rem;color:var(--dim);font-weight:600;">Come funzionano i punti?</span>
+    </div>
+    <div id="pts-popup" style="display:none;background:var(--surf);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:.85rem 1rem;">
+      <div style="font-size:.7rem;font-weight:700;color:var(--amber);margin-bottom:.5rem;">Come funzionano i punti</div>
+      <div style="font-size:.75rem;color:var(--txt2);line-height:1.8;">
+        ✓ Risposta corretta: <strong style="color:var(--txt);">100 pt base</strong><br>
+        ⚡ Bonus velocità: fino a <strong style="color:var(--txt);">+50 pt</strong> in base al tempo rimasto<br>
+        ✗ Risposta sbagliata o timeout: <strong style="color:var(--txt);">0 pt</strong>
+      </div>
+    </div>
+  </div>
 
   <!-- PROSSIMA DOMANDA -->
   <div class="upcoming-card" id="upcoming-card" style="display:none;">
