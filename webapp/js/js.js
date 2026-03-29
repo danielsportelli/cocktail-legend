@@ -186,21 +186,24 @@ function switchAuthTab(tab) {
     var regBtn  = document.getElementById('reg-btn');
     var regErr  = document.getElementById('reg-err');
     var regEye  = document.getElementById('reg-eye');
+    var regEye2 = document.getElementById('reg-eye2');
     var regPwd  = document.getElementById('reg-pwd');
     var regPwd2 = document.getElementById('reg-pwd2');
 
     if (!regBtn) return;
 
-    // Mostra/nascondi password registrazione
+    // Mostra/nascondi password
     if (regEye && regPwd) {
       regEye.addEventListener('click', function() {
-        if (regPwd.type === 'password') {
-          regPwd.type = 'text';
-          regEye.innerHTML = '&#128064;';
-        } else {
-          regPwd.type = 'password';
-          regEye.innerHTML = '&#128065;';
-        }
+        if (regPwd.type === 'password') { regPwd.type = 'text'; regEye.innerHTML = '&#128064;'; }
+        else { regPwd.type = 'password'; regEye.innerHTML = '&#128065;'; }
+      });
+    }
+    // Mostra/nascondi conferma password
+    if (regEye2 && regPwd2) {
+      regEye2.addEventListener('click', function() {
+        if (regPwd2.type === 'password') { regPwd2.type = 'text'; regEye2.innerHTML = '&#128064;'; }
+        else { regPwd2.type = 'password'; regEye2.innerHTML = '&#128065;'; }
       });
     }
 
@@ -215,6 +218,7 @@ function switchAuthTab(tab) {
       var email     = (document.getElementById('reg-email').value || '').trim();
       var tel       = (document.getElementById('reg-tel').value || '').trim();
       var via       = (document.getElementById('reg-via').value || '').trim();
+      var civico    = (document.getElementById('reg-civico').value || '').trim();
       var cap       = (document.getElementById('reg-cap').value || '').trim();
       var provincia = (document.getElementById('reg-provincia').value || '').trim();
       var paese     = (document.getElementById('reg-paese').value || '').trim();
@@ -263,6 +267,7 @@ function switchAuthTab(tab) {
             email:       email,
             tel:         tel,
             via:         via,
+            civico:      civico,
             cap:         cap,
             provincia:   provincia,
             paese:       paese,

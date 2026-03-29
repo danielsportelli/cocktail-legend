@@ -77,15 +77,121 @@
         <input class="login-input" type="text" id="reg-via" placeholder="Via / Indirizzo" autocomplete="street-address">
       </div>
       <div class="reg-row">
-        <div class="login-input-wrap">
+        <div class="login-input-wrap" style="flex:2;">
+          <input class="login-input" type="text" id="reg-civico" placeholder="N° civico" autocomplete="off">
+        </div>
+        <div class="login-input-wrap" style="flex:2;">
           <input class="login-input" type="text" id="reg-cap" placeholder="CAP" autocomplete="postal-code">
         </div>
-        <div class="login-input-wrap">
+        <div class="login-input-wrap" style="flex:2;">
           <input class="login-input" type="text" id="reg-provincia" placeholder="Provincia" autocomplete="address-level2">
         </div>
       </div>
       <div class="login-input-wrap">
-        <input class="login-input" type="text" id="reg-paese" placeholder="Paese" autocomplete="country-name">
+        <select class="login-input login-select" id="reg-paese" autocomplete="country-name">
+          <option value="Italia" selected>🇮🇹 Italia</option>
+          <option value="Afghanistan">Afghanistan</option>
+          <option value="Albania">Albania</option>
+          <option value="Algeria">Algeria</option>
+          <option value="Andorra">Andorra</option>
+          <option value="Angola">Angola</option>
+          <option value="Argentina">Argentina</option>
+          <option value="Armenia">Armenia</option>
+          <option value="Australia">Australia</option>
+          <option value="Austria">Austria</option>
+          <option value="Azerbaijan">Azerbaijan</option>
+          <option value="Bahrain">Bahrain</option>
+          <option value="Bangladesh">Bangladesh</option>
+          <option value="Belarus">Belarus</option>
+          <option value="Belgio">Belgio</option>
+          <option value="Bolivia">Bolivia</option>
+          <option value="Bosnia">Bosnia ed Erzegovina</option>
+          <option value="Brasile">Brasile</option>
+          <option value="Bulgaria">Bulgaria</option>
+          <option value="Canada">Canada</option>
+          <option value="Cile">Cile</option>
+          <option value="Cina">Cina</option>
+          <option value="Colombia">Colombia</option>
+          <option value="Corea del Sud">Corea del Sud</option>
+          <option value="Croazia">Croazia</option>
+          <option value="Danimarca">Danimarca</option>
+          <option value="Ecuador">Ecuador</option>
+          <option value="Egitto">Egitto</option>
+          <option value="Emirati Arabi Uniti">Emirati Arabi Uniti</option>
+          <option value="Estonia">Estonia</option>
+          <option value="Etiopia">Etiopia</option>
+          <option value="Filippine">Filippine</option>
+          <option value="Finlandia">Finlandia</option>
+          <option value="Francia">Francia</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Germania">Germania</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Giappone">Giappone</option>
+          <option value="Grecia">Grecia</option>
+          <option value="India">India</option>
+          <option value="Indonesia">Indonesia</option>
+          <option value="Iran">Iran</option>
+          <option value="Iraq">Iraq</option>
+          <option value="Irlanda">Irlanda</option>
+          <option value="Islanda">Islanda</option>
+          <option value="Israele">Israele</option>
+          <option value="Kazakhstan">Kazakhstan</option>
+          <option value="Kenya">Kenya</option>
+          <option value="Kosovo">Kosovo</option>
+          <option value="Lettonia">Lettonia</option>
+          <option value="Libano">Libano</option>
+          <option value="Libia">Libia</option>
+          <option value="Lituania">Lituania</option>
+          <option value="Lussemburgo">Lussemburgo</option>
+          <option value="Macedonia">Macedonia del Nord</option>
+          <option value="Malaysia">Malaysia</option>
+          <option value="Malta">Malta</option>
+          <option value="Marocco">Marocco</option>
+          <option value="Messico">Messico</option>
+          <option value="Moldova">Moldova</option>
+          <option value="Monaco">Monaco</option>
+          <option value="Montenegro">Montenegro</option>
+          <option value="Nigeria">Nigeria</option>
+          <option value="Norvegia">Norvegia</option>
+          <option value="Nuova Zelanda">Nuova Zelanda</option>
+          <option value="Paesi Bassi">Paesi Bassi</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="Panama">Panama</option>
+          <option value="Paraguay">Paraguay</option>
+          <option value="Peru">Perù</option>
+          <option value="Polonia">Polonia</option>
+          <option value="Portogallo">Portogallo</option>
+          <option value="Qatar">Qatar</option>
+          <option value="Repubblica Ceca">Repubblica Ceca</option>
+          <option value="Romania">Romania</option>
+          <option value="Russia">Russia</option>
+          <option value="Arabia Saudita">Arabia Saudita</option>
+          <option value="San Marino">San Marino</option>
+          <option value="Serbia">Serbia</option>
+          <option value="Singapore">Singapore</option>
+          <option value="Siria">Siria</option>
+          <option value="Slovacchia">Slovacchia</option>
+          <option value="Slovenia">Slovenia</option>
+          <option value="Somalia">Somalia</option>
+          <option value="Spagna">Spagna</option>
+          <option value="Sri Lanka">Sri Lanka</option>
+          <option value="Sudafrica">Sudafrica</option>
+          <option value="Svezia">Svezia</option>
+          <option value="Svizzera">Svizzera</option>
+          <option value="Taiwan">Taiwan</option>
+          <option value="Tanzania">Tanzania</option>
+          <option value="Thailandia">Thailandia</option>
+          <option value="Tunisia">Tunisia</option>
+          <option value="Turchia">Turchia</option>
+          <option value="Ucraina">Ucraina</option>
+          <option value="Uganda">Uganda</option>
+          <option value="Ungheria">Ungheria</option>
+          <option value="Uruguay">Uruguay</option>
+          <option value="USA">🇺🇸 USA</option>
+          <option value="Uzbekistan">Uzbekistan</option>
+          <option value="Venezuela">Venezuela</option>
+          <option value="Vietnam">Vietnam</option>
+        </select>
       </div>
       <div class="login-input-wrap">
         <input class="login-input" type="password" id="reg-pwd" placeholder="Password" autocomplete="new-password">
@@ -93,6 +199,7 @@
       </div>
       <div class="login-input-wrap">
         <input class="login-input" type="password" id="reg-pwd2" placeholder="Conferma password" autocomplete="new-password">
+        <button class="login-eye" id="reg-eye2" type="button">&#128065;</button>
       </div>
       <!-- Checkbox T&C (obbligatoria) -->
       <label class="reg-check-wrap" id="reg-check-tc-wrap">
