@@ -1751,7 +1751,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/trinidad_sour.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "turf_club",
@@ -1847,7 +1847,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tuxedo.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "vampiro",
@@ -1946,7 +1946,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vesper.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "ward_eight",
@@ -2033,7 +2033,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/whiskey_sour.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "white_lady",
@@ -2077,7 +2077,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/white_lady.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "white_negroni",
@@ -2263,7 +2263,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/zombie.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "scofflaw",
@@ -2384,7 +2384,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sea_breeze.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "sex_on_the_beach",
@@ -2427,7 +2427,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sex_on_the_beach.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "sherry_cobbler",
@@ -2467,7 +2467,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sherry_cobbler.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "shirley_temple",
@@ -2545,7 +2545,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sidecar.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "singapore_sling",
@@ -2604,7 +2604,7 @@
     "bicchiere": "Sling",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/singapore_sling.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "skinny_bitch",
@@ -2686,7 +2686,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/south_side.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "spicy_fifty",
@@ -2733,7 +2733,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/spicy_fifty.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "spritz",
@@ -2777,7 +2777,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/spritz.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "stinger",
@@ -2818,7 +2818,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/stinger.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "suffering_bastard",
@@ -2868,7 +2868,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/suffering_bastard.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "sumatra_kula",
@@ -2955,7 +2955,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tequila_sunrise.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "three_dots_and_a_dash",
@@ -3016,7 +3016,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/three_dots_and_a_dash.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "ti_punch",
@@ -3100,7 +3100,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tipperary.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "porn_star_martini",
@@ -3152,7 +3152,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/porn_star_martini.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "porto_flip",
@@ -3192,7 +3192,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/porto_flip.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "preakness",
@@ -3276,7 +3276,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rabo_de_galo.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "ramos_fizz",
@@ -3341,7 +3341,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/ramos_fizz.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "rattlesnake",
@@ -3538,7 +3538,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/remember_the_maine.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "rob_roy",
@@ -3771,7 +3771,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/russian_spring_punch.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "rusty_nail",
@@ -3807,7 +3807,7 @@
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rusty_nail.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "salty_dog",
@@ -3940,7 +3940,7 @@
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sazerac.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "20th_century",
@@ -4329,7 +4329,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/alexander.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "americano",
@@ -4368,7 +4368,7 @@
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/americano.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "angel_face",
@@ -4407,7 +4407,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/angel_face.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "apple_martini",
@@ -4536,7 +4536,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/aviation.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "horses_neck",
@@ -4575,7 +4575,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/horses_neck.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "missionarys_downfall",
@@ -4626,7 +4626,7 @@
     "bicchiere": "Hurricane",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/missionarys_downfall.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "pimms_cup",
@@ -4701,7 +4701,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/planters_punch.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "poets_dream",
@@ -4831,7 +4831,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tommys_margarita.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "ve_n_to",
@@ -4879,7 +4879,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vento.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "vieux_carre",
@@ -4928,7 +4928,7 @@
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vieux_carre.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "bees_knees",
@@ -4972,7 +4972,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bees_knees.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "champs_elysees",
@@ -5270,7 +5270,7 @@
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bellini.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "between_the_sheets",
@@ -5314,7 +5314,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/between_the_sheets.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "bijou",
@@ -5395,7 +5395,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/black_russian.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "blood_sand",
@@ -5490,7 +5490,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bloody_mary.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "blue_lagoon",
@@ -5657,7 +5657,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/boulevardier.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "bradford",
@@ -5744,7 +5744,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bramble.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "brandy_crusta",
@@ -5800,7 +5800,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/brandy_crusta.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "bronx",
@@ -5941,7 +5941,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/caipirinha.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "camerons_kick",
@@ -6033,7 +6033,7 @@
     "bicchiere": "Cocotte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/canchanchara.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "cape_codder",
@@ -6108,7 +6108,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/cardinale.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "casino",
@@ -6151,7 +6151,7 @@
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/casino.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "champagne_cocktail",
@@ -6195,7 +6195,7 @@
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/champagne_cocktail.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "chartreuse_swizzle",
@@ -6241,7 +6241,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/chartreuse_swizzle.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "chilcano",
@@ -6368,7 +6368,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/clover_club.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "corpse_reviver_2",
@@ -6415,7 +6415,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/corpse_reviver_2.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "cosmopolitan",
@@ -6458,7 +6458,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/cosmopolitan.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "cuba_libre",
@@ -6497,7 +6497,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/cuba_libre.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "daiquiri",
@@ -6541,7 +6541,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/daiquiri.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "daisy_de_santiago",
@@ -6622,7 +6622,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/dark_and_stormy.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "dirty_martini",
@@ -6761,7 +6761,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/dons_special_daiquiri.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "derby",
@@ -6983,7 +6983,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/espresso_martini.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "fernandito",
@@ -7018,7 +7018,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fernandito.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "fleur_de_paradis",
@@ -7263,7 +7263,7 @@
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/french_75.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "french_connection",
@@ -7299,7 +7299,7 @@
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/french_connection.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "french_martini",
@@ -7338,7 +7338,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/french_martini.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "garibaldi",
@@ -7373,7 +7373,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/garibaldi.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "gibson",
@@ -7496,7 +7496,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gin_basil_smash.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "gin_fizz",
@@ -7546,7 +7546,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gin_fizz.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "gloria",
@@ -7826,7 +7826,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/grand_margarita.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "grasshopper",
@@ -7866,7 +7866,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/grasshopper.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "hanky_panky",
@@ -7906,7 +7906,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hanky_panky.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "harvey_wallbanger",
@@ -7989,7 +7989,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/hemingway_special.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "hot_toddy",
@@ -8175,7 +8175,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/iba_tiki.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "illegal",
@@ -8232,7 +8232,7 @@
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/illegal.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "income_tax",
@@ -8371,7 +8371,7 @@
     "bicchiere": "Tazza con manico",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/irish_coffee.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "japanese_cocktail",
@@ -8556,7 +8556,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/john_collins.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "jungle_bird",
@@ -8604,7 +8604,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/jungle_bird.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "kamikaze",
@@ -8687,7 +8687,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/kir.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "la_louisiane",
@@ -8778,7 +8778,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/last_word.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "lemon_drop_martini",
@@ -8822,7 +8822,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/lemon_drop_martini.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "long_island_iced_tea",
@@ -8884,7 +8884,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/long_island_iced_tea.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "lynchburg_lemonade",
@@ -8977,7 +8977,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mai_tai.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "manhattan",
@@ -9030,7 +9030,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/manhattan.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "margarita",
@@ -9083,7 +9083,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/margarita.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "marigny",
@@ -9179,7 +9179,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/martinez.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "martini_dry",
@@ -9224,7 +9224,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/martini_dry.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "mary_pickford",
@@ -9267,7 +9267,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mary_pickford.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "metropole",
@@ -9494,7 +9494,7 @@
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mimosa.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "mint_julep",
@@ -9540,7 +9540,7 @@
     "bicchiere": "Julep cup",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mint_julep.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "mojito",
@@ -9588,7 +9588,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mojito.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "monkey_gland",
@@ -9631,7 +9631,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/monkey_gland.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "monte_carlo",
@@ -9777,7 +9777,7 @@
       }
     ],
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/moscow_mule.webp",
-    "iba": false
+    "iba": true
   },
   {
     "id": "naked_famous",
@@ -9820,7 +9820,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/naked_and_famous.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "napoleon",
@@ -10021,7 +10021,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/new_york_sour.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "old_cuban",
@@ -10069,7 +10069,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/old_cuban.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "old_fashioned",
@@ -10114,7 +10114,7 @@
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/old_fashioned.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "old_pal",
@@ -10289,7 +10289,7 @@
     "bicchiere": "Highball",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/paloma.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "paper_plane",
@@ -10332,7 +10332,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/paper_plane.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "paradise",
@@ -10371,7 +10371,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/paradise.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "pegu_club",
@@ -10458,7 +10458,7 @@
     "bicchiere": "Old fashioned",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/penicillin.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "pina_colada",
@@ -10497,7 +10497,7 @@
     "bicchiere": "Hurricane",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pina_colada.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "pisco_punch",
@@ -10550,7 +10550,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pisco_punch.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "pisco_sour",
@@ -10595,7 +10595,7 @@
     "bicchiere": "Coppetta",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pisco_sour.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "bucks_fizz",
@@ -10630,7 +10630,7 @@
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bucks_fizz.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "tintoretto",
@@ -10666,7 +10666,7 @@
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/tintoretto.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "rossini",
@@ -10702,7 +10702,7 @@
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rossini.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "gin_tonic",
@@ -10773,7 +10773,7 @@
     "bicchiere": "Flûte",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/puccini.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "tiziano",
