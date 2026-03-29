@@ -192,6 +192,48 @@ function switchAuthTab(tab) {
 
     if (!regBtn) return;
 
+    // ── Verifica nickname real-time (debounce 600ms) ──────────────
+    var _nickRegTimer = null;
+    var _nickRegValid = true;
+    var nickInput = document.getElementById('reg-nickname');
+    if (nickInput) {
+      var nickFeedback = document.createElement('div');
+      nickFeedback.style.cssText = 'font-size:.72rem;margin-top:-.5rem;margin-bottom:.5rem;min-height:1rem;padding-left:.2rem;';
+      nickInput.parentNode.insertAdjacentElement('afterend', nickFeedback);
+      nickInput.addEventListener('input', function() {
+        var val = nickInput.value.trim();
+        clearTimeout(_nickRegTimer);
+        nickFeedback.textContent = '';
+        _nickRegValid = true;
+        if (val.length < 3) {
+          if (val.length > 0) { nickFeedback.style.color = 'var(--dim)'; nickFeedback.textContent = 'Minimo 3 caratteri'; }
+          return;
+        }
+        nickFeedback.style.color = 'var(--dim)';
+        nickFeedback.textContent = '⏳ Controllo disponibilità...';
+        _nickRegTimer = setTimeout(async function() {
+          var db = window._fbDb;
+          var fn = window._fbFunctions;
+          if (!db || !fn) return;
+          try {
+            var q = fn.query(fn.collection(db, 'users'), fn.where('nickname', '==', val));
+            var snap = await fn.getDocs(q);
+            if (snap.empty) {
+              _nickRegValid = true;
+              nickFeedback.style.color = '#4ade80';
+              nickFeedback.textContent = '✓ Nickname disponibile';
+            } else {
+              _nickRegValid = false;
+              nickFeedback.style.color = '#f87171';
+              nickFeedback.textContent = '✗ Nickname già in uso, scegline un altro';
+              nickInput.style.borderColor = '#f87171';
+              setTimeout(function(){ nickInput.style.borderColor = ''; }, 2000);
+            }
+          } catch(e) { _nickRegValid = true; nickFeedback.textContent = ''; }
+        }, 600);
+      });
+    }
+
     // Mostra/nascondi password
     if (regEye && regPwd) {
       regEye.addEventListener('click', function() {
@@ -230,6 +272,7 @@ function switchAuthTab(tab) {
       // Validazioni
       if (!nome || !cognome)        { showRegErr('Inserisci nome e cognome.'); return; }
       if (!nickname)                { showRegErr('Scegli un nickname.'); return; }
+      if (!_nickRegValid)           { showRegErr('Il nickname scelto non è disponibile.'); return; }
       if (!email)                   { showRegErr('Inserisci la tua email.'); return; }
       if (!pwd || pwd.length < 6)   { showRegErr('La password deve avere almeno 6 caratteri.'); return; }
       if (pwd !== pwd2)             { showRegErr('Le password non coincidono.'); return; }
