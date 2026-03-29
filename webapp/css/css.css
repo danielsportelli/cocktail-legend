@@ -29,10 +29,19 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   background:rgba(10,15,30,.97);
   padding:.6rem 5%;
 }
-/* iPhone PWA standalone: aggiungi safe area notch solo su iOS */
+/* PWA standalone su iPhone: barra piena sopra che copre il notch */
 @media (display-mode: standalone) {
   .filter-bar{
-    padding-top:calc(.6rem + env(safe-area-inset-top));
+    padding-top:calc(.6rem + env(safe-area-inset-top, 0px));
+    background:rgb(10,15,30);
+  }
+  .filter-bar::before{
+    content:'';
+    position:fixed;
+    top:0;left:0;right:0;
+    height:env(safe-area-inset-top, 0px);
+    background:rgb(10,15,30);
+    z-index:1001;
   }
 }
 
@@ -173,7 +182,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .active-tag .x{font-size:.7rem;opacity:.7}
 
 /* MAIN */
-.main{padding:.75rem 5% 1.25rem}
+.main{padding:0 5% 1.25rem}
 .rbar{
   position:sticky;
   top:var(--fb-h, 56px);
