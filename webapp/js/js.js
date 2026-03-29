@@ -94,7 +94,19 @@ function mdToHtml(md){
     if (!auth || !signIn) { showErr("Errore di connessione. Riprova."); btn.disabled=false; btn.textContent="Accedi →"; return; }
 
     signIn(auth, email, pwd)
-      .then(function() {
+      .then(function(cred) {
+        var user = cred.user;
+        if (!user.emailVerified) {
+          // Email non verificata — logout e mostra messaggio
+          var signOutFn = window._fbFunctions.signOut;
+          signOutFn(auth).then(function() {
+            btn.disabled = false;
+            btn.textContent = 'Accedi →';
+            err.style.color = '#f59e0b';
+            err.innerHTML = 'Verifica prima la tua email.<br><small style="color:var(--dim)">Controlla anche la cartella spam.</small>';
+          });
+          return;
+        }
         localStorage.setItem('cl_logged', '1');
         overlay.style.transition = "opacity .35s";
         overlay.style.opacity = "0";
@@ -192,60 +204,61 @@ function switchAuthTab(tab) {
 
     if (!regBtn) return;
 
-    // ── Verifica nickname real-time (debounce 600ms) ──────────────
+    // ── Verifica nickname real-time (stessa logica popup) ──────────
     var _nickRegTimer = null;
-    var _nickRegValid = true;
+    var _nickRegValid = false;
     var nickInput    = document.getElementById('reg-nickname');
     var nickFeedback = document.getElementById('reg-nick-feedback');
+
+    function sanitizeNickReg(val) {
+      return val.replace(/[^a-zA-Z0-9_.]/g, '').slice(0, 24);
+    }
+    function isValidNickReg(val) {
+      return val.length >= 3 && val.length <= 24 && /^[a-zA-Z0-9_.]+$/.test(val);
+    }
+
     if (nickInput && nickFeedback) {
       nickInput.addEventListener('input', function() {
-        var val = nickInput.value.trim();
+        var raw = this.value;
+        var clean = sanitizeNickReg(raw);
+        if (clean !== raw) this.value = clean;
+
         clearTimeout(_nickRegTimer);
         nickFeedback.textContent = '';
-        _nickRegValid = true;
-        if (val.length < 3) {
-          if (val.length > 0) { nickFeedback.style.color = 'var(--dim)'; nickFeedback.textContent = 'Minimo 3 caratteri'; }
+        _nickRegValid = false;
+
+        if (!isValidNickReg(clean)) {
+          if (clean.length > 0 && clean.length < 3) {
+            nickFeedback.style.color = '#f87171';
+            nickFeedback.textContent = 'Minimo 3 caratteri · lettere, numeri, punto, underscore';
+          }
           return;
         }
-        nickFeedback.style.color = 'var(--dim)';
-        nickFeedback.textContent = '⏳ Controllo disponibilità...';
+
+        nickFeedback.style.color = '#60a5fa';
+        nickFeedback.textContent = 'Controllo disponibilità…';
+        var val = clean;
         _nickRegTimer = setTimeout(async function() {
           var db = window._fbDb;
           var fn = window._fbFunctions;
-          if (!db || !fn || !fn.query) {
-            // Firebase non ancora pronto, riprova tra 800ms
-            nickFeedback.style.color = 'var(--dim)';
-            nickFeedback.textContent = '⏳ Controllo...';
-            setTimeout(async function() {
-              db = window._fbDb; fn = window._fbFunctions;
-              if (!db || !fn || !fn.query) { nickFeedback.textContent = ''; return; }
-              try {
-                var q2 = fn.query(fn.collection(db, 'users'), fn.where('nickname', '==', val));
-                var snap2 = await fn.getDocs(q2);
-                if (nickInput.value.trim() !== val) return;
-                if (snap2.empty) { _nickRegValid=true; nickFeedback.style.color='#4ade80'; nickFeedback.textContent='✓ Nickname disponibile'; }
-                else { _nickRegValid=false; nickFeedback.style.color='#f87171'; nickFeedback.textContent='✗ Nickname già in uso'; }
-              } catch(e) { _nickRegValid=true; nickFeedback.textContent=''; }
-            }, 800);
-            return;
-          }
+          if (!db || !fn || !fn.query) { nickFeedback.textContent = ''; return; }
           try {
             var q = fn.query(fn.collection(db, 'users'), fn.where('nickname', '==', val));
             var snap = await fn.getDocs(q);
-            if (nickInput.value.trim() !== val) return;
+            if (sanitizeNickReg(nickInput.value) !== val) return; // utente ha cambiato
             if (snap.empty) {
               _nickRegValid = true;
-              nickFeedback.style.color = '#4ade80';
-              nickFeedback.textContent = '✓ Nickname disponibile';
+              nickFeedback.style.color = '#22c55e';
+              nickFeedback.textContent = '✓ @' + val + ' è disponibile';
             } else {
               _nickRegValid = false;
               nickFeedback.style.color = '#f87171';
-              nickFeedback.textContent = '✗ Nickname già in uso, scegline un altro';
+              nickFeedback.textContent = '✗ @' + val + ' non è disponibile';
               nickInput.style.borderColor = '#f87171';
               setTimeout(function(){ nickInput.style.borderColor = ''; }, 2000);
             }
-          } catch(e) { _nickRegValid = true; nickFeedback.textContent = ''; }
-        }, 600);
+          } catch(e) { _nickRegValid = false; nickFeedback.textContent = ''; }
+        }, 500);
       });
     }
 
@@ -341,7 +354,11 @@ function switchAuthTab(tab) {
             // Invia email di verifica
             return fns.sendEmailVerification(user);
           }).then(function() {
-            // Mostra schermata conferma
+            // Logout immediato — non deve entrare finché non verifica email
+            return fns.signOut(window._fbAuth);
+          }).then(function() {
+            localStorage.removeItem('cl_logged');
+            // Mostra schermata conferma con nota spam
             var verifyEmailSpan = document.getElementById('verify-email');
             if (verifyEmailSpan) verifyEmailSpan.textContent = email;
             switchAuthTab('verify');

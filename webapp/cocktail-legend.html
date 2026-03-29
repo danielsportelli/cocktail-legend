@@ -313,8 +313,13 @@
     <div id="form-verify" style="display:none;text-align:center;padding:1rem 0;">
       <div style="font-size:2rem;margin-bottom:.75rem;">📧</div>
       <div style="font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.5rem;">Controlla la tua email</div>
-      <p style="font-size:.8rem;color:var(--txt2);line-height:1.6;">Abbiamo inviato un link di conferma a <span id="verify-email" style="color:var(--amber);font-weight:700;"></span><br>Clicca il link per attivare il tuo account.</p>
-      <button class="login-btn" style="margin-top:1.5rem;" onclick="switchAuthTab('login')">Torna al Login</button>
+      <p style="font-size:.8rem;color:var(--txt2);line-height:1.6;">Abbiamo inviato un link di conferma a<br><span id="verify-email" style="color:var(--amber);font-weight:700;"></span></p>
+      <div style="margin-top:1rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.75rem 1rem;">
+        <p style="font-size:.75rem;color:var(--amber);font-weight:700;margin-bottom:.3rem;">⚠️ Non trovi l'email?</p>
+        <p style="font-size:.72rem;color:var(--txt2);line-height:1.5;">Controlla la cartella <strong style="color:var(--txt);">Spam</strong> o <strong style="color:var(--txt);">Posta indesiderata</strong>. L'email arriva da <em>noreply@cocktail-legend.firebaseapp.com</em></p>
+      </div>
+      <p style="font-size:.72rem;color:var(--txt2);margin-top:1rem;line-height:1.5;">Clicca il link nell'email per attivare il tuo account, poi accedi da qui.</p>
+      <button class="login-btn" style="margin-top:1.25rem;" onclick="switchAuthTab('login')">Vai al Login &rarr;</button>
     </div>
 
   </div>
