@@ -195,11 +195,9 @@ function switchAuthTab(tab) {
     // ── Verifica nickname real-time (debounce 600ms) ──────────────
     var _nickRegTimer = null;
     var _nickRegValid = true;
-    var nickInput = document.getElementById('reg-nickname');
-    if (nickInput) {
-      var nickFeedback = document.createElement('div');
-      nickFeedback.style.cssText = 'font-size:.72rem;margin-top:-.5rem;margin-bottom:.5rem;min-height:1rem;padding-left:.2rem;';
-      nickInput.parentNode.insertAdjacentElement('afterend', nickFeedback);
+    var nickInput    = document.getElementById('reg-nickname');
+    var nickFeedback = document.getElementById('reg-nick-feedback');
+    if (nickInput && nickFeedback) {
       nickInput.addEventListener('input', function() {
         var val = nickInput.value.trim();
         clearTimeout(_nickRegTimer);
@@ -258,7 +256,9 @@ function switchAuthTab(tab) {
       var cognome   = (document.getElementById('reg-cognome').value || '').trim();
       var nickname  = (document.getElementById('reg-nickname').value || '').trim();
       var email     = (document.getElementById('reg-email').value || '').trim();
-      var tel       = (document.getElementById('reg-tel').value || '').trim();
+      var prefix    = document.getElementById('reg-prefix') ? document.getElementById('reg-prefix').value : '+39';
+      var telRaw    = (document.getElementById('reg-tel').value || '').trim();
+      var tel       = telRaw ? prefix + ' ' + telRaw : '';
       var via       = (document.getElementById('reg-via').value || '').trim();
       var civico    = (document.getElementById('reg-civico').value || '').trim();
       var cap       = (document.getElementById('reg-cap').value || '').trim();

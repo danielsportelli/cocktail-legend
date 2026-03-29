@@ -545,7 +545,42 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   font-size:.7rem;color:var(--dim);margin-top:1.2rem;line-height:1.5;
 }
 
-.login-select{
+/* Telefono con prefisso integrato */
+.tel-wrap{
+  display:flex;align-items:center;
+  background:#0a0f1e;border:1px solid var(--brd);
+  border-radius:10px;overflow:hidden;
+  padding:0;
+  transition:border-color .2s,box-shadow .2s;
+}
+.tel-wrap:focus-within{
+  border-color:rgba(37,99,235,.5);
+  box-shadow:0 0 0 3px rgba(37,99,235,.1);
+}
+.tel-prefix{
+  background:transparent;border:none;outline:none;
+  color:var(--txt);font-family:'Inter',sans-serif;
+  font-size:.85rem;font-weight:600;
+  padding:.7rem .5rem .7rem .9rem;
+  cursor:pointer;flex-shrink:0;
+  appearance:none;-webkit-appearance:none;
+  white-space:nowrap;
+}
+.tel-prefix option{background:var(--surf);color:var(--txt);}
+.tel-divider{
+  width:1px;height:20px;
+  background:var(--brd);flex-shrink:0;
+}
+.tel-number{
+  flex:1;background:transparent;border:none;outline:none;
+  color:var(--txt);font-family:'Inter',sans-serif;
+  font-size:.85rem;padding:.7rem .7rem .7rem .6rem;
+}
+.tel-number::placeholder{color:var(--dim);}
+/* Fix font Inter su tutti gli elementi del form */
+.login-input,.login-select,.login-btn,.auth-tab,.reg-check-lbl{
+  font-family:'Inter',sans-serif !important;
+}
   appearance:none;-webkit-appearance:none;
   cursor:pointer;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
