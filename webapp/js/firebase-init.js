@@ -5,6 +5,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/fireba
 import {
   getAuth,
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
   sendPasswordResetEmail,
   onAuthStateChanged,
   signOut
@@ -41,6 +43,8 @@ window._fbAuth = auth;
 window._fbDb = db;
 window._fbFunctions = {
   signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
   sendPasswordResetEmail,
   onAuthStateChanged,
   signOut,

@@ -29,20 +29,98 @@
 
 <div class="login-overlay" id="login-overlay">
   <div class="login-box">
-    <div class="login-logo">Cocktail Legend</div>
+
     <div class="login-title">Cocktail Legend</div>
-    <p class="login-sub">Accedi al tuo account<br>per continuare.</p>
-    <div class="login-input-wrap" style="margin-bottom:10px;">
-      <input class="login-input" type="email" id="login-email" placeholder="Email" autocomplete="email">
+
+    <!-- Tab switcher -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Accedi</button>
+      <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Registrati</button>
     </div>
-    <div class="login-input-wrap">
-      <input class="login-input" type="password" id="login-pwd" placeholder="Password" autocomplete="current-password">
-      <button class="login-eye" id="login-eye" type="button">&#128065;</button>
+
+    <!-- ── FORM LOGIN ── -->
+    <div id="form-login">
+      <div class="login-input-wrap">
+        <input class="login-input" type="email" id="login-email" placeholder="Email" autocomplete="email">
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="password" id="login-pwd" placeholder="Password" autocomplete="current-password">
+        <button class="login-eye" id="login-eye" type="button">&#128065;</button>
+      </div>
+      <button class="login-btn" id="login-btn">Accedi &rarr;</button>
+      <div class="login-err" id="login-err"></div>
+      <p class="login-note" style="margin-top:12px;">
+        <a href="#" id="login-reset" style="color:var(--amber);text-decoration:none;font-size:0.82rem;">Password dimenticata?</a>
+      </p>
     </div>
-    <button class="login-btn" id="login-btn">Accedi &rarr;</button>
-    <div class="login-err" id="login-err"></div>
-    <p class="login-note" style="margin-top:12px;"><a href="#" id="login-reset" style="color:var(--amber);text-decoration:none;font-size:0.82rem;">Password dimenticata?</a></p>
-    <p class="login-note">Hai acquistato Cocktail Legend?<br>Usa l'email con cui hai acquistato.</p>
+
+    <!-- ── FORM REGISTRAZIONE ── -->
+    <div id="form-register" style="display:none;">
+      <div class="reg-row">
+        <div class="login-input-wrap">
+          <input class="login-input" type="text" id="reg-nome" placeholder="Nome" autocomplete="given-name">
+        </div>
+        <div class="login-input-wrap">
+          <input class="login-input" type="text" id="reg-cognome" placeholder="Cognome" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="text" id="reg-nickname" placeholder="Nickname (visibile in classifica)" autocomplete="off">
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="email" id="reg-email" placeholder="Email" autocomplete="email">
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="tel" id="reg-tel" placeholder="Telefono" autocomplete="tel">
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="text" id="reg-via" placeholder="Via / Indirizzo" autocomplete="street-address">
+      </div>
+      <div class="reg-row">
+        <div class="login-input-wrap">
+          <input class="login-input" type="text" id="reg-cap" placeholder="CAP" autocomplete="postal-code">
+        </div>
+        <div class="login-input-wrap">
+          <input class="login-input" type="text" id="reg-provincia" placeholder="Provincia" autocomplete="address-level2">
+        </div>
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="text" id="reg-paese" placeholder="Paese" autocomplete="country-name">
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="password" id="reg-pwd" placeholder="Password" autocomplete="new-password">
+        <button class="login-eye" id="reg-eye" type="button">&#128065;</button>
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="password" id="reg-pwd2" placeholder="Conferma password" autocomplete="new-password">
+      </div>
+      <!-- Checkbox T&C (obbligatoria) -->
+      <label class="reg-check-wrap" id="reg-check-tc-wrap">
+        <input type="checkbox" id="reg-tc" class="reg-check">
+        <span class="reg-check-box"></span>
+        <span class="reg-check-lbl">Ho letto e accetto i <a href="termini-condizioni.html" target="_blank">Termini e Condizioni</a> e la <a href="privacy-policy.html" target="_blank">Privacy Policy</a> *</span>
+      </label>
+
+      <!-- Checkbox Marketing (facoltativa) -->
+      <label class="reg-check-wrap">
+        <input type="checkbox" id="reg-marketing" class="reg-check">
+        <span class="reg-check-box"></span>
+        <span class="reg-check-lbl">Voglio rimanere aggiornato su novità, contenuti e aggiornamenti di Cocktail Legend</span>
+      </label>
+
+      <button class="login-btn" id="reg-btn">Crea account &rarr;</button>
+      <div class="login-err" id="reg-err"></div>
+      <p style="font-size:.65rem;color:var(--dim);margin-top:.6rem;">* Campo obbligatorio</p>
+    </div>
+
+    <!-- Messaggio conferma email -->
+    <div id="form-verify" style="display:none;text-align:center;padding:1rem 0;">
+      <div style="font-size:2rem;margin-bottom:.75rem;">📧</div>
+      <div style="font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.5rem;">Controlla la tua email</div>
+      <p style="font-size:.8rem;color:var(--txt2);line-height:1.6;">Abbiamo inviato un link di conferma a <span id="verify-email" style="color:var(--amber);font-weight:700;"></span><br>Clicca il link per attivare il tuo account.</p>
+      <button class="login-btn" style="margin-top:1.5rem;" onclick="switchAuthTab('login')">Torna al Login</button>
+    </div>
+
   </div>
 </div>
 
@@ -806,6 +884,12 @@
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="opacity:.4;"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         <div style="margin-top:.5rem;font-size:.7rem;">Caricamento...</div>
       </div>
+    </div>
+    <!-- Link legali in fondo al drawer Account -->
+    <div class="acc-legal-links">
+      <a href="termini-condizioni.html" target="_blank" class="acc-legal-link">Termini e Condizioni</a>
+      <span class="acc-legal-sep">·</span>
+      <a href="privacy-policy.html" target="_blank" class="acc-legal-link">Privacy Policy</a>
     </div>
   </div>
 </div>

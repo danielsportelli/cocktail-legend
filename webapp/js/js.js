@@ -147,6 +147,158 @@ function mdToHtml(md){
   }
 })();
 
+// ═══════════════════════════════════
+// AUTH TAB SWITCHER
+// ═══════════════════════════════════
+function switchAuthTab(tab) {
+  var formLogin    = document.getElementById('form-login');
+  var formRegister = document.getElementById('form-register');
+  var formVerify   = document.getElementById('form-verify');
+  var tabLogin     = document.getElementById('tab-login');
+  var tabRegister  = document.getElementById('tab-register');
+  var tabs         = document.querySelector('.auth-tabs');
+
+  formLogin.style.display    = 'none';
+  formRegister.style.display = 'none';
+  formVerify.style.display   = 'none';
+  tabLogin.classList.remove('active');
+  tabRegister.classList.remove('active');
+
+  if (tab === 'login') {
+    formLogin.style.display = '';
+    tabLogin.classList.add('active');
+    if (tabs) tabs.style.display = '';
+  } else if (tab === 'register') {
+    formRegister.style.display = '';
+    tabRegister.classList.add('active');
+    if (tabs) tabs.style.display = '';
+  } else if (tab === 'verify') {
+    formVerify.style.display = '';
+    if (tabs) tabs.style.display = 'none';
+  }
+}
+
+// ═══════════════════════════════════
+// REGISTRAZIONE
+// ═══════════════════════════════════
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var regBtn  = document.getElementById('reg-btn');
+    var regErr  = document.getElementById('reg-err');
+    var regEye  = document.getElementById('reg-eye');
+    var regPwd  = document.getElementById('reg-pwd');
+    var regPwd2 = document.getElementById('reg-pwd2');
+
+    if (!regBtn) return;
+
+    // Mostra/nascondi password registrazione
+    if (regEye && regPwd) {
+      regEye.addEventListener('click', function() {
+        if (regPwd.type === 'password') {
+          regPwd.type = 'text';
+          regEye.innerHTML = '&#128064;';
+        } else {
+          regPwd.type = 'password';
+          regEye.innerHTML = '&#128065;';
+        }
+      });
+    }
+
+    function showRegErr(msg) {
+      regErr.textContent = msg;
+    }
+
+    regBtn.addEventListener('click', function() {
+      var nome      = (document.getElementById('reg-nome').value || '').trim();
+      var cognome   = (document.getElementById('reg-cognome').value || '').trim();
+      var nickname  = (document.getElementById('reg-nickname').value || '').trim();
+      var email     = (document.getElementById('reg-email').value || '').trim();
+      var tel       = (document.getElementById('reg-tel').value || '').trim();
+      var via       = (document.getElementById('reg-via').value || '').trim();
+      var cap       = (document.getElementById('reg-cap').value || '').trim();
+      var provincia = (document.getElementById('reg-provincia').value || '').trim();
+      var paese     = (document.getElementById('reg-paese').value || '').trim();
+      var pwd       = regPwd ? regPwd.value : '';
+      var pwd2      = regPwd2 ? regPwd2.value : '';
+      var tcAccepted   = document.getElementById('reg-tc') ? document.getElementById('reg-tc').checked : false;
+      var marketing    = document.getElementById('reg-marketing') ? document.getElementById('reg-marketing').checked : false;
+
+      // Validazioni
+      if (!nome || !cognome)        { showRegErr('Inserisci nome e cognome.'); return; }
+      if (!nickname)                { showRegErr('Scegli un nickname.'); return; }
+      if (!email)                   { showRegErr('Inserisci la tua email.'); return; }
+      if (!pwd || pwd.length < 6)   { showRegErr('La password deve avere almeno 6 caratteri.'); return; }
+      if (pwd !== pwd2)             { showRegErr('Le password non coincidono.'); return; }
+      if (!tcAccepted) {
+        showRegErr('Devi accettare i Termini e Condizioni per continuare.');
+        var wrap = document.getElementById('reg-check-tc-wrap');
+        if (wrap) { wrap.classList.add('error'); setTimeout(function(){ wrap.classList.remove('error'); }, 2000); }
+        return;
+      }
+
+      regBtn.disabled = true;
+      regBtn.textContent = 'Creazione account...';
+      regErr.textContent = '';
+
+      var auth    = window._fbAuth;
+      var db      = window._fbDb;
+      var fns     = window._fbFunctions;
+
+      if (!auth || !fns || !fns.createUserWithEmailAndPassword) {
+        showRegErr('Errore di connessione. Riprova.');
+        regBtn.disabled = false;
+        regBtn.textContent = 'Crea account →';
+        return;
+      }
+
+      fns.createUserWithEmailAndPassword(auth, email, pwd)
+        .then(function(cred) {
+          var user = cred.user;
+          // Salva dati utente in Firestore
+          var userDoc = fns.doc(db, 'users', user.uid);
+          return fns.setDoc(userDoc, {
+            nome:        nome,
+            cognome:     cognome,
+            nickname:    nickname,
+            email:       email,
+            tel:         tel,
+            via:         via,
+            cap:         cap,
+            provincia:   provincia,
+            paese:       paese,
+            plan:        'free',
+            crediti:     0,
+            tc_accepted: true,
+            tc_date:     new Date().toISOString(),
+            marketing:   marketing,
+            createdAt:   new Date().toISOString()
+          }).then(function() {
+            // Invia email di verifica
+            return fns.sendEmailVerification(user);
+          }).then(function() {
+            // Mostra schermata conferma
+            var verifyEmailSpan = document.getElementById('verify-email');
+            if (verifyEmailSpan) verifyEmailSpan.textContent = email;
+            switchAuthTab('verify');
+          });
+        })
+        .catch(function(e) {
+          regBtn.disabled = false;
+          regBtn.textContent = 'Crea account →';
+          if (e.code === 'auth/email-already-in-use') {
+            regErr.innerHTML = 'Email già registrata. <a href="#" onclick="switchAuthTab(\u0027login\u0027);return false;" style="color:var(--blue-l);font-weight:700;text-decoration:underline;">Accedi →</a>';
+          } else if (e.code === 'auth/invalid-email') {
+            showRegErr('Email non valida.');
+          } else if (e.code === 'auth/weak-password') {
+            showRegErr('Password troppo debole (min. 6 caratteri).');
+          } else {
+            showRegErr('Errore: ' + e.message);
+          }
+        });
+    });
+  });
+})();
+
 var DATA = [];
 fetch("database/it/cocktails-it.json")
   .then(function(res){ return res.json(); })
