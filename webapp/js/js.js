@@ -546,7 +546,13 @@ function updateFbH(){
 }
 updateFbH();
 window.addEventListener('resize', updateFbH);
-window.addEventListener('load', function(){ updateFbH(); setTimeout(updateFbH, 300); });
+// Su iOS PWA la safe area viene applicata dopo il primo paint — ricalcola più volte
+window.addEventListener('load', function(){
+  updateFbH();
+  setTimeout(updateFbH, 100);
+  setTimeout(updateFbH, 300);
+  setTimeout(updateFbH, 600);
+});
 // Su desktop: ricalcola al primo scroll per catturare altezze non ancora stabilizzate
 (function(){
   var done = false;

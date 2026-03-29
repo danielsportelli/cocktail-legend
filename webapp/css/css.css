@@ -29,6 +29,12 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   background:rgba(10,15,30,.97);
   padding:.6rem 5%;
 }
+/* iPhone PWA standalone: aggiungi safe area notch solo su iOS */
+@media (display-mode: standalone) {
+  .filter-bar{
+    padding-top:calc(.6rem + env(safe-area-inset-top));
+  }
+}
 
 /* Riga superiore: search + pulsante filtri + reset */
 .filter-top{
