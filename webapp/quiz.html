@@ -446,7 +446,13 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
 
     <!-- Stato: già risposto oggi -->
     <div class="quiz-done" id="state-done" style="display:none;">
-      <div class="done-icon" id="done-icon">✅</div>
+      <div class="done-icon" id="done-icon">
+        <!-- icona corretta default -->
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" fill="rgba(34,197,94,.15)" stroke="#22c55e" stroke-width="2"/>
+          <polyline points="14,24 21,31 34,17" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
       <div class="done-title" id="done-title">Hai già risposto oggi!</div>
       <div class="done-sub" id="done-sub">La prossima domanda sarà disponibile domani alle 00:00.</div>
       <div class="done-pts" id="done-pts">+0 pt oggi</div>
@@ -473,6 +479,20 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
       <div class="quiz-body">
         <div class="cat-chip"><div class="cat-dot"></div><span id="q-categoria">—</span></div>
         <div class="question-text" id="q-testo">Caricamento…</div>
+        <!-- INFO PUNTI -->
+        <div style="display:flex;align-items:center;gap:.35rem;margin-bottom:1rem;cursor:pointer;" id="pts-info-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="8.5"/><line x1="12" y1="11" x2="12" y2="16"/></svg>
+          <span style="font-size:.65rem;color:var(--dim);font-weight:600;">Rispondi veloce per più punti · max 150 pt</span>
+        </div>
+        <!-- POPUP PUNTI -->
+        <div id="pts-popup" style="display:none;background:var(--bg);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:.75rem .9rem;margin-bottom:1rem;">
+          <div style="font-size:.7rem;font-weight:700;color:var(--amber);margin-bottom:.4rem;">Come funzionano i punti</div>
+          <div style="font-size:.72rem;color:var(--txt2);line-height:1.7;">
+            ✓ Risposta corretta: <strong style="color:var(--txt);">100 pt base</strong><br>
+            ⚡ Bonus velocità: fino a <strong style="color:var(--txt);">+50 pt</strong> in base al tempo rimasto<br>
+            ✗ Risposta sbagliata o timeout: <strong style="color:var(--txt);">0 pt</strong>
+          </div>
+        </div>
         <div class="options" id="options-wrap"></div>
       </div>
 
@@ -509,7 +529,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
     <div>
       <div class="upcoming-label">Prossima domanda</div>
       <div class="upcoming-time">Domani alle 00:00</div>
-      <div class="upcoming-sub" id="upcoming-sub">—</div>
+      <div class="upcoming-sub" id="upcoming-sub" style="display:none;">—</div>
     </div>
   </div>
 
@@ -715,23 +735,27 @@ function showResult(isCorrect, isTimeout, ptsEarned, spiegazione, rispostaCorret
   banner.classList.remove('correct-banner','wrong-banner');
   banner.classList.add('show');
 
+  const svgCorrect = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="7,12 10,15 17,9"/></svg>';
+  const svgWrong   = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+  const svgTime    = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>';
+
   if (isTimeout) {
     banner.classList.add('wrong-banner');
-    label.innerHTML = '⏱ Tempo scaduto!';
+    label.innerHTML = svgTime + ' Tempo scaduto!';
     label.className = 'result-label wrong-lbl';
     pts.textContent = '+0 pt';
     pts.className = 'result-pts zero';
     expl.innerHTML = 'Il tempo è scaduto. La risposta corretta era <strong>' + escHtml(rispostaCorretta) + '</strong>.' + (spiegazione ? ' ' + escHtml(spiegazione) : '');
   } else if (isCorrect) {
     banner.classList.add('correct-banner');
-    label.innerHTML = '✓ Risposta corretta!';
+    label.innerHTML = svgCorrect + ' Risposta corretta!';
     label.className = 'result-label correct-lbl';
     pts.textContent = '+' + ptsEarned + ' pt';
     pts.className = 'result-pts earned';
     expl.innerHTML = spiegazione ? escHtml(spiegazione) : '';
   } else {
     banner.classList.add('wrong-banner');
-    label.innerHTML = '✗ Risposta sbagliata';
+    label.innerHTML = svgWrong + ' Risposta sbagliata';
     label.className = 'result-label wrong-lbl';
     pts.textContent = '+0 pt';
     pts.className = 'result-pts zero';
@@ -842,11 +866,11 @@ async function loadQuiz(user) {
       const donePts = document.getElementById('done-pts');
 
       if (rd.corretta) {
-        doneIcon.textContent = '✅';
+        doneIcon.innerHTML = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="rgba(34,197,94,.15)" stroke="#22c55e" stroke-width="2"/><polyline points="14,24 21,31 34,17" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
         doneTitle.textContent = 'Risposta corretta!';
-        doneSub.textContent = 'Ottimo lavoro. La prossima domanda sarà disponibile domani dalle ore 00:00.';
+        doneSub.textContent = 'Ottimo lavoro. La prossima domanda sarà disponibile domani alle ore 00:00.';
       } else {
-        doneIcon.textContent = '❌';
+        doneIcon.innerHTML = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="rgba(239,68,68,.12)" stroke="#ef4444" stroke-width="2"/><line x1="16" y1="16" x2="32" y2="32" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/><line x1="32" y1="16" x2="16" y2="32" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/></svg>';
         doneTitle.textContent = 'Hai già risposto oggi';
         doneSub.textContent = 'Riprova domani per scalare la classifica. La costanza fa la differenza!';
       }
@@ -927,8 +951,9 @@ function renderQuiz(data, quizId, uid, oggi) {
   const upcomingSub = document.getElementById('upcoming-sub');
   if (data.prossima_categoria) {
     upcomingSub.textContent = 'Categoria: ' + data.prossima_categoria + (data.prossima_difficolta ? ' · Difficoltà: ' + data.prossima_difficolta : '');
+    upcomingSub.style.display = '';
   } else {
-    upcomingSub.textContent = 'Preparati per domani!';
+    upcomingSub.style.display = 'none';
   }
 
   // Opzioni
@@ -1009,11 +1034,20 @@ function handleAnswer(el, isCorrect, rispostaCorretta, spiegazione, opzioni, uid
 // ── AUTH GUARD ─────────────────────────────────────────
 onAuthStateChanged(auth, function(user) {
   if (!user) {
-    // Non loggato → rimanda all'app
     window.location.href = 'cocktail-legend.html';
     return;
   }
   loadQuiz(user);
+});
+
+// ── POPUP PUNTI ────────────────────────────────────────
+document.addEventListener('click', function(e) {
+  const btn = document.getElementById('pts-info-btn');
+  const popup = document.getElementById('pts-popup');
+  if (!btn || !popup) return;
+  if (btn.contains(e.target)) {
+    popup.style.display = popup.style.display === 'none' ? '' : 'none';
+  }
 });
 </script>
 
