@@ -3641,9 +3641,9 @@ function populateRisGlass(){
         // Input
         '<div style="position:relative;margin-bottom:.4rem;">' +
           '<span style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);font-size:.85rem;color:#64748b;font-weight:600;pointer-events:none;">@</span>' +
-          '<input id="nick-modal-input" type="text" maxlength="24" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="text-transform:lowercase;" ' +
+          '<input id="nick-modal-input" type="text" maxlength="24" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ' +
           'placeholder="il_tuo_nickname" ' +
-          'style="width:100%;background:#0a0f1e;border:1.5px solid rgba(255,255,255,.1);border-radius:10px;' +
+          'style="width:100%;background:#0a0f1e;border:1.5px solid rgba(255,255,255,.1);border-radius:10px;text-transform:lowercase;' +
           'padding:.62rem .75rem .62rem 1.75rem;font-size:.88rem;font-family:Inter,sans-serif;color:#f1f5f9;outline:none;' +
           'transition:border-color .2s;-webkit-user-select:text;user-select:text;box-sizing:border-box;">' +
         '</div>' +
