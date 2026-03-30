@@ -24,12 +24,14 @@
   }
 </style>
 <script>
+  // Utente già loggato — nascondi overlay subito
   if(localStorage.getItem('cl_logged')==='1'){document.write('<style>#login-overlay{display:none!important}</style>');}
-  // Nasconde il login overlay subito se stiamo arrivando da un link reset password
+  // Arriva da link reset password — nascondi overlay completamente, lo mostriamo noi dopo
   (function(){
     var p = new URLSearchParams(window.location.search);
     if(p.get('mode')==='resetPassword'){
-      document.write('<style>#login-overlay .auth-tabs,.auth-tabs{display:none!important}#form-login,#form-register,#form-verify{display:none!important}</style>');
+      document.write('<style>#login-overlay{opacity:0;pointer-events:none;}#login-overlay .login-box{opacity:0;}</style>');
+      window._isResetPasswordFlow = true;
     }
   })();
 </script>

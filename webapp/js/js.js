@@ -243,11 +243,7 @@ function switchAuthTab(tab) {
   tabLogin.classList.remove('active');
   tabRegister.classList.remove('active');
 
-  if (tab === 'login') {
-    formLogin.style.display = '';
-    tabLogin.classList.add('active');
-    if (tabs) tabs.style.display = '';
-  } else if (tab === 'register') {
+  if (tab === 'register') {
     formRegister.style.display = '';
     tabRegister.classList.add('active');
     if (tabs) tabs.style.display = '';
@@ -257,6 +253,21 @@ function switchAuthTab(tab) {
   } else if (tab === 'reset-confirm') {
     if (formResetConfirm) formResetConfirm.style.display = '';
     if (tabs) tabs.style.display = 'none';
+    // Rimuovi invisibilità se arrivato da link reset
+    var overlay = document.getElementById('login-overlay');
+    var box = overlay ? overlay.querySelector('.login-box') : null;
+    if (overlay) { overlay.style.opacity = '1'; overlay.style.pointerEvents = ''; }
+    if (box) box.style.opacity = '1';
+  } else if (tab === 'login') {
+    // Torna al login: assicurati che overlay sia visibile
+    formLogin.style.display = '';
+    tabLogin.classList.add('active');
+    if (tabs) tabs.style.display = '';
+    var overlay2 = document.getElementById('login-overlay');
+    var box2 = overlay2 ? overlay2.querySelector('.login-box') : null;
+    if (overlay2) { overlay2.style.opacity = '1'; overlay2.style.pointerEvents = ''; }
+    if (box2) box2.style.opacity = '1';
+    return; // evita doppia esecuzione del blocco login sopra
   }
 }
 
@@ -338,6 +349,7 @@ window._isRegistering = false;
       if (!nome || !cognome)        { showRegErr('Inserisci nome e cognome.'); return; }
       if (!email)                   { showRegErr('Inserisci la tua email.'); return; }
       if (!pwd || pwd.length < 6)   { showRegErr('La password deve avere almeno 6 caratteri.'); return; }
+      if (/\s/.test(pwd))               { showRegErr('La password non può contenere spazi.'); return; }
       if (pwd !== pwd2)             { showRegErr('Le password non coincidono.'); return; }
       if (!tcAccepted) {
         showRegErr('Devi accettare i Termini e Condizioni per continuare.');
@@ -4123,6 +4135,11 @@ function closeResetPasswordModal() {
       }
       if (!pwd1 || pwd1.length < 6) {
         showErr('La password deve avere almeno 6 caratteri.');
+        pwdNew && pwdNew.focus();
+        return;
+      }
+      if (/\s/.test(pwd1)) {
+        showErr('La password non può contenere spazi.');
         pwdNew && pwdNew.focus();
         return;
       }
