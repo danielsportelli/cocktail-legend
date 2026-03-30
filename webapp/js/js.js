@@ -1404,16 +1404,21 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         // Se premium, rimuovi tutti i badge lucchetto dal DOM
         if (window._userPlan === 'premium') {
           setTimeout(function() {
-            // Rimuovi badge lock dai bottoni AI e Calc (span con SVG lucchetto)
-            document.querySelectorAll('.ai-cmd-btn > span[style*="margin-left:auto"], .calc-cmd-btn > span[style*="margin-left:auto"]').forEach(function(el) {
-              el.remove();
+            // Badge lock = ultimo span figlio diretto dei bottoni AI e Calc
+            var lockIds = ['ai-btn-signature','ai-btn-twist','ai-btn-pairing','ai-btn-giorno','calc-btn-abv','calc-btn-batch'];
+            lockIds.forEach(function(id) {
+              var btn = document.getElementById(id);
+              if (!btn) return;
+              var last = btn.querySelector('span:last-child');
+              if (last && last.querySelector('svg')) last.remove();
             });
             // Rimuovi badge lock da Spirit Genesis
             var sgLink = document.getElementById('sg-pdf-link');
             if (sgLink) {
-              sgLink.querySelectorAll('span[style*="margin-left:auto"]').forEach(function(el) { el.remove(); });
+              var sgLast = sgLink.querySelector('span:last-child');
+              if (sgLast && sgLast.querySelector('svg')) sgLast.remove();
             }
-          }, 300);
+          }, 500);
         }
         var ai = data.aiUsage || {};
         var periodStart = ai.periodStart || data.createdAt || nowStr;
