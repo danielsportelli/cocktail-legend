@@ -59,15 +59,19 @@ function mdToHtml(md){
   if (mode === 'resetPassword' && oobCode) {
     window._resetOobCode = oobCode;
     window.history.replaceState({}, document.title, window.location.pathname);
-    // Mostra il form nuova password appena Firebase è pronto
+    // Mostra form nuova password — attende DOMContentLoaded per sicurezza
     function doShowResetForm() {
       if (typeof switchAuthTab === 'function') {
         switchAuthTab('reset-confirm');
       } else {
-        setTimeout(doShowResetForm, 300);
+        setTimeout(doShowResetForm, 100);
       }
     }
-    setTimeout(doShowResetForm, 600);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', doShowResetForm);
+    } else {
+      setTimeout(doShowResetForm, 50);
+    }
   }
 })();
 

@@ -23,7 +23,16 @@
     border-radius: 0 !important;
   }
 </style>
-<script>if(localStorage.getItem('cl_logged')==='1'){document.write('<style>#login-overlay{display:none!important}</style>');}</script>
+<script>
+  if(localStorage.getItem('cl_logged')==='1'){document.write('<style>#login-overlay{display:none!important}</style>');}
+  // Nasconde il login overlay subito se stiamo arrivando da un link reset password
+  (function(){
+    var p = new URLSearchParams(window.location.search);
+    if(p.get('mode')==='resetPassword'){
+      document.write('<style>#login-overlay .auth-tabs,.auth-tabs{display:none!important}#form-login,#form-register,#form-verify{display:none!important}</style>');
+    }
+  })();
+</script>
 </head>
 <body>
 
