@@ -57,9 +57,17 @@ function mdToHtml(md){
   }
 
   if (mode === 'resetPassword' && oobCode) {
-    // Gestione reset password — apri tab login con messaggio
     window._resetOobCode = oobCode;
     window.history.replaceState({}, document.title, window.location.pathname);
+    // Mostra il form nuova password appena Firebase è pronto
+    function doShowResetForm() {
+      if (typeof switchAuthTab === 'function') {
+        switchAuthTab('reset-confirm');
+      } else {
+        setTimeout(doShowResetForm, 300);
+      }
+    }
+    setTimeout(doShowResetForm, 600);
   }
 })();
 
@@ -216,16 +224,18 @@ function mdToHtml(md){
 // AUTH TAB SWITCHER
 // ═══════════════════════════════════
 function switchAuthTab(tab) {
-  var formLogin    = document.getElementById('form-login');
-  var formRegister = document.getElementById('form-register');
-  var formVerify   = document.getElementById('form-verify');
-  var tabLogin     = document.getElementById('tab-login');
-  var tabRegister  = document.getElementById('tab-register');
-  var tabs         = document.querySelector('.auth-tabs');
+  var formLogin         = document.getElementById('form-login');
+  var formRegister      = document.getElementById('form-register');
+  var formVerify        = document.getElementById('form-verify');
+  var formResetConfirm  = document.getElementById('form-reset-confirm');
+  var tabLogin          = document.getElementById('tab-login');
+  var tabRegister       = document.getElementById('tab-register');
+  var tabs              = document.querySelector('.auth-tabs');
 
-  formLogin.style.display    = 'none';
-  formRegister.style.display = 'none';
-  formVerify.style.display   = 'none';
+  formLogin.style.display        = 'none';
+  formRegister.style.display     = 'none';
+  formVerify.style.display       = 'none';
+  if (formResetConfirm) formResetConfirm.style.display = 'none';
   tabLogin.classList.remove('active');
   tabRegister.classList.remove('active');
 
@@ -239,6 +249,9 @@ function switchAuthTab(tab) {
     if (tabs) tabs.style.display = '';
   } else if (tab === 'verify') {
     formVerify.style.display = '';
+    if (tabs) tabs.style.display = 'none';
+  } else if (tab === 'reset-confirm') {
+    if (formResetConfirm) formResetConfirm.style.display = '';
     if (tabs) tabs.style.display = 'none';
   }
 }
@@ -4048,4 +4061,121 @@ function closeResetPasswordModal() {
         setFeedback(msg, false);
       });
   }
+})();
+
+// ═══════════════════════════════════════════════════════════
+// FORM CONFERMA NUOVA PASSWORD (da link email reset)
+// ═══════════════════════════════════════════════════════════
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var pwdNew     = document.getElementById('reset-pwd-new');
+    var pwdConfirm = document.getElementById('reset-pwd-confirm');
+    var eyeNew     = document.getElementById('reset-eye-new');
+    var eyeConfirm = document.getElementById('reset-eye-confirm');
+    var btn        = document.getElementById('reset-confirm-btn');
+    var errEl      = document.getElementById('reset-confirm-err');
+
+    if (!btn) return;
+
+    // Toggle mostra/nascondi password
+    if (eyeNew) {
+      eyeNew.addEventListener('click', function() {
+        if (pwdNew.type === 'password') { pwdNew.type = 'text'; eyeNew.innerHTML = '&#128064;'; }
+        else { pwdNew.type = 'password'; eyeNew.innerHTML = '&#128065;'; }
+      });
+    }
+    if (eyeConfirm) {
+      eyeConfirm.addEventListener('click', function() {
+        if (pwdConfirm.type === 'password') { pwdConfirm.type = 'text'; eyeConfirm.innerHTML = '&#128064;'; }
+        else { pwdConfirm.type = 'password'; eyeConfirm.innerHTML = '&#128065;'; }
+      });
+    }
+
+    function showErr(msg, isSuccess) {
+      errEl.style.color = isSuccess ? '#4ade80' : '#f87171';
+      errEl.textContent = msg;
+    }
+
+    function clearErr() { errEl.textContent = ''; }
+
+    // Enter su entrambi i campi
+    [pwdNew, pwdConfirm].forEach(function(el) {
+      if (el) el.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') doConfirmReset();
+      });
+    });
+
+    btn.addEventListener('click', doConfirmReset);
+
+    function doConfirmReset() {
+      clearErr();
+      var pwd1 = pwdNew ? pwdNew.value : '';
+      var pwd2 = pwdConfirm ? pwdConfirm.value : '';
+      var oobCode = window._resetOobCode;
+
+      if (!oobCode) {
+        showErr('Sessione scaduta. Richiedi un nuovo link di reset.');
+        return;
+      }
+      if (!pwd1 || pwd1.length < 6) {
+        showErr('La password deve avere almeno 6 caratteri.');
+        pwdNew && pwdNew.focus();
+        return;
+      }
+      if (pwd1 !== pwd2) {
+        showErr('Le password non coincidono.');
+        pwdConfirm && pwdConfirm.focus();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Salvataggio…';
+
+      function doReset() {
+        var auth = window._fbAuth;
+        var fn   = window._fbFunctions;
+        if (!auth || !fn || !fn.confirmPasswordReset) {
+          setTimeout(doReset, 300);
+          return;
+        }
+
+        fn.confirmPasswordReset(auth, oobCode, pwd1)
+          .then(function() {
+            window._resetOobCode = null;
+            showErr('✓ Password aggiornata! Ora puoi accedere.', true);
+            btn.textContent = 'Password salvata ✓';
+            btn.style.background = '#1e293b';
+            btn.style.color = '#64748b';
+            // Dopo 2 secondi torna al login
+            setTimeout(function() {
+              switchAuthTab('login');
+              btn.disabled = false;
+              btn.textContent = 'Salva nuova password →';
+              btn.style.background = '';
+              btn.style.color = '';
+              if (pwdNew) pwdNew.value = '';
+              if (pwdConfirm) pwdConfirm.value = '';
+              // Mostra messaggio successo nel form login
+              var loginErr = document.getElementById('login-err');
+              if (loginErr) {
+                loginErr.style.color = '#4ade80';
+                loginErr.textContent = '✓ Password aggiornata! Accedi con la nuova password.';
+                setTimeout(function() { loginErr.style.color = ''; loginErr.textContent = ''; }, 5000);
+              }
+            }, 2000);
+          })
+          .catch(function(e) {
+            btn.disabled = false;
+            btn.textContent = 'Salva nuova password →';
+            var msg = 'Qualcosa è andato storto. Riprova.';
+            if (e.code === 'auth/expired-action-code') msg = 'Link scaduto. Richiedi un nuovo reset dalla schermata di login.';
+            if (e.code === 'auth/invalid-action-code') msg = 'Link non valido o già usato. Richiedine uno nuovo.';
+            if (e.code === 'auth/weak-password')       msg = 'Password troppo debole. Usa almeno 6 caratteri.';
+            showErr(msg);
+          });
+      }
+
+      doReset();
+    }
+  });
 })();
