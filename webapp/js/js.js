@@ -3698,7 +3698,7 @@ function populateRisGlass(){
     input.addEventListener('input', function() {
       var raw = this.value;
       var clean = sanitizeNick(raw);
-      if (clean !== raw) { this.value = clean; }
+      if (clean !== raw) this.value = clean;
 
       setBtnEnabled(false);
       clearTimeout(_nickCheckTimer);
@@ -3885,7 +3885,7 @@ function populateRisGlass(){
     input.addEventListener('input', function() {
       var raw = this.value;
       var clean = sanitizeNick(raw);
-      if (clean !== raw) { this.value = clean; }
+      if (clean !== raw) this.value = clean;
 
       setSave(false);
       clearTimeout(_nickCheckTimer);
