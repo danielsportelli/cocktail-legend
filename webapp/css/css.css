@@ -1002,3 +1002,6 @@ button, a, input, textarea, select, .tab-btn, .ai-cmd-btn, .sig-pill, .ai-pill, 
 
 /* ── Valore ABV colorato nella card scheda completa ── */
 .mi-val.abv-high { color: var(--amber); font-weight: 700; }
+
+/* Nascondi scrollbar modal premium su webkit */
+#premium-modal > div::-webkit-scrollbar { display: none; }

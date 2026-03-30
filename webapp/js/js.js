@@ -1043,7 +1043,11 @@ function showCards(){
   if(!RES.length){
     var em=document.createElement("div");em.className="empty";
     if(FAV_ONLY){
-      em.innerHTML='<div class="ico">❤️</div><h3>Lista preferiti vuota</h3><p>Tocca il cuore su un cocktail per aggiungerlo ai tuoi preferiti</p>';
+      if(typeof isPremium === 'function' && !isPremium()){
+        em.innerHTML='<div class="ico" style="font-size:2.5rem;">🔒</div><h3 style="margin:.5rem 0 .3rem;">Funzione Premium</h3><p>I preferiti sono disponibili con il piano Premium.<br>Passa a Premium per salvare i tuoi cocktail preferiti.</p><button onclick="showPremiumModal()" style="margin-top:1rem;padding:.6rem 1.4rem;background:#f59e0b;color:#0f172a;border:none;border-radius:10px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;">Scopri Premium →</button>';
+      } else {
+        em.innerHTML='<div class="ico">❤️</div><h3>Lista preferiti vuota</h3><p>Tocca il cuore su un cocktail per aggiungerlo ai tuoi preferiti</p>';
+      }
     } else {
       em.innerHTML='<div class="ico">&#128269;</div><h3>Nessun cocktail trovato</h3><p>Modifica i filtri per ampliare la ricerca</p>';
     }
@@ -4226,7 +4230,7 @@ function showPremiumModal() {
   modal.style.cssText = 'position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem;';
 
   modal.innerHTML = `
-    <div style="background:#1e293b;border:1px solid rgba(245,158,11,0.3);border-radius:24px;padding:2rem 1.75rem;width:100%;max-width:420px;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.6);">
+    <div style="background:#1e293b;border:1px solid rgba(245,158,11,0.3);border-radius:24px;padding:2rem 1.75rem;width:100%;max-width:420px;max-height:88vh;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.6);">
 
       <!-- Chiudi -->
       <button id="premium-modal-close" style="position:absolute;top:1rem;right:1.1rem;background:none;border:none;color:#64748b;font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s;" onmouseover="this.style.color='#f1f5f9'" onmouseout="this.style.color='#64748b'">×</button>
@@ -4242,8 +4246,8 @@ function showPremiumModal() {
 
       <!-- Prezzo -->
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04));border:1px solid rgba(245,158,11,0.25);border-radius:16px;padding:1.1rem 1.25rem;margin-bottom:1.5rem;text-align:center;">
-        <div style="font-size:2rem;font-weight:900;color:#f59e0b;letter-spacing:-.03em;">19,99€<span style="font-size:1rem;font-weight:500;color:#94a3b8;">/anno</span></div>
-        <div style="font-size:.75rem;color:#64748b;margin-top:.25rem;">Primo anno · poi 9,99€/anno · inclusi 30 crediti AI/mese</div>
+        <div style="font-size:2rem;font-weight:900;color:#f59e0b;letter-spacing:-.03em;">19,99€<span style="font-size:.95rem;font-weight:500;color:#94a3b8;"> / primo anno</span></div>
+        <div style="font-size:.75rem;color:#64748b;margin-top:.3rem;line-height:1.6;">Dal secondo anno in poi 9,99€/anno<br>Inclusi 30 crediti AI/mese</div>
       </div>
 
       <!-- Lista benefici -->
@@ -4300,7 +4304,7 @@ function showPremiumModal() {
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div>
-            <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Classifica Mensile</div>
+            <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Premi Quiz Mensili</div>
             <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">1° → 1000 crediti · 2° → 200 crediti · 3° → 50 crediti</div>
           </div>
         </div>
