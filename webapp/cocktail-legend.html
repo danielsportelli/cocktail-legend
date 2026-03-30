@@ -64,10 +64,7 @@
           <input class="login-input" type="text" id="reg-cognome" placeholder="Cognome *" autocomplete="family-name">
         </div>
       </div>
-      <div class="login-input-wrap">
-        <input class="login-input" type="text" id="reg-nickname" placeholder="Nickname * (visibile in classifica)" autocomplete="off">
-      </div>
-      <div id="reg-nick-feedback" style="font-size:.72rem;margin-top:-.4rem;margin-bottom:.5rem;min-height:1rem;padding-left:.2rem;font-family:'Inter',sans-serif;"></div>
+
       <div class="login-input-wrap">
         <input class="login-input" type="email" id="reg-email" placeholder="Email *" autocomplete="email">
       </div>
@@ -316,7 +313,7 @@
       <p style="font-size:.8rem;color:var(--txt2);line-height:1.6;">Abbiamo inviato un link di conferma a<br><span id="verify-email" style="color:var(--amber);font-weight:700;"></span></p>
       <div style="margin-top:1rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.75rem 1rem;">
         <p style="font-size:.75rem;color:var(--amber);font-weight:700;margin-bottom:.3rem;">⚠️ Non trovi l'email?</p>
-        <p style="font-size:.72rem;color:var(--txt2);line-height:1.5;">Controlla la cartella <strong style="color:var(--txt);">Spam</strong> o <strong style="color:var(--txt);">Posta indesiderata</strong>. L'email arriva da <em>noreply@cocktail-legend.firebaseapp.com</em></p>
+        <p style="font-size:.72rem;color:var(--txt2);line-height:1.5;">Controlla la cartella <strong style="color:var(--txt);">Spam</strong> o <strong style="color:var(--txt);">Posta indesiderata</strong>. L'email arriva da <em><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5836372a3d283421183b373b332c39313475343d3f3d363c763e312a3d3a392b3d392828763b3735">[email&#160;protected]</a></em></p>
       </div>
       <p style="font-size:.72rem;color:var(--txt2);margin-top:1rem;line-height:1.5;">Clicca il link nell'email per attivare il tuo account, poi accedi da qui.</p>
       <button class="login-btn" style="margin-top:1.25rem;" onclick="switchAuthTab('login')">Vai al Login &rarr;</button>
@@ -1352,7 +1349,7 @@
 <!-- TOAST COPIA -->
 <div class="copied-toast" id="copied-toast">Codice copiato! ✓</div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ═══ KEYBOARD DETECTION — evita lampeggio drawer ═══
 (function(){
   var initialHeight = window.innerHeight;
@@ -1582,13 +1579,4 @@ function calcABV() {
   document.addEventListener('selectstart', function(e){ e.preventDefault(); return false; });
   // Blocca copia (Ctrl+C)
   document.addEventListener('copy', function(e){ e.preventDefault(); return false; });
-  // Blocca drag & drop immagini
-  document.addEventListener('dragstart', function(e){ e.preventDefault(); return false; });
-</script>
-<script>
-if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('service-worker.js');
-}
-</script>
-</body>
-</html>
+  // Blocca 
