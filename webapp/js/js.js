@@ -4442,10 +4442,10 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.addEventListener('click', function(e) {
       if (!isPremium()) {
         e.preventDefault();
-        e.stopImmediatePropagation();
+        e.stopPropagation();
         requirePremium(item.nome);
       }
-    }, true); // capture phase — intercetta prima degli altri listener
+    });
   });
 
   // ── Calcolatori ABV e Pre-Batch ───────────────────────────
@@ -4459,10 +4459,10 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.addEventListener('click', function(e) {
       if (!isPremium()) {
         e.preventDefault();
-        e.stopImmediatePropagation();
+        e.stopPropagation();
         requirePremium(item.nome);
       }
-    }, true);
+    });
   });
 
   // ── Spirit Genesis PDF ────────────────────────────────────
@@ -4471,10 +4471,10 @@ document.addEventListener('DOMContentLoaded', function() {
     sgLink.addEventListener('click', function(e) {
       if (!isPremium()) {
         e.preventDefault();
-        e.stopImmediatePropagation();
+        e.stopPropagation();
         requirePremium('Spirit Genesis');
       }
-    }, true);
+    });
     // Aggiungi badge lock visivo vicino al link
     var lockSg = document.createElement('span');
     lockSg.style.cssText = 'display:inline-flex;align-items:center;gap:.3rem;font-size:.68rem;font-weight:700;color:#f59e0b;margin-left:auto;';
