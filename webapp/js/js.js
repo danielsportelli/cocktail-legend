@@ -202,18 +202,12 @@ function mdToHtml(md){
     }
   });
 
-  // Password dimenticata
+  // Password dimenticata — apre modal
   if (resetLnk) {
-    resetLnk.addEventListener("click", function(e) {
+    resetLnk.addEventListener('click', function(e) {
       e.preventDefault();
-      var email = emailIn.value.trim();
-      if (!email) { showErr("Inserisci la tua email prima."); return; }
-      var auth = window._fbAuth;
-      var resetPwd = window._fbFunctions.sendPasswordResetEmail;
-      if (!auth || !resetPwd) return;
-      resetPwd(auth, email)
-        .then(function() { err.style.color="#4ade80"; err.textContent = "Email di reset inviata!"; setTimeout(function(){ err.style.color=""; err.textContent=""; },4000); })
-        .catch(function() { showErr("Email non trovata."); });
+      var emailGiaInserita = emailIn ? emailIn.value.trim() : '';
+      openResetPasswordModal(emailGiaInserita);
     });
   }
 })();
@@ -3940,4 +3934,118 @@ function populateRisGlass(){
     });
   };
 
+})();
+
+// ═══════════════════════════════════════════════════════════
+// MODAL RESET PASSWORD
+// ═══════════════════════════════════════════════════════════
+function openResetPasswordModal(prefillEmail) {
+  var modal   = document.getElementById('resetPasswordModal');
+  var input   = document.getElementById('resetEmailInput');
+  var feedback = document.getElementById('resetFeedback');
+  var btn     = document.getElementById('resetSendBtn');
+  if (!modal) return;
+
+  // Reset stato
+  input.value = prefillEmail || '';
+  feedback.style.display = 'none';
+  feedback.textContent = '';
+  btn.disabled = false;
+  btn.textContent = 'Invia link di reset →';
+  btn.style.background = '#f59e0b';
+  btn.style.color = '#0f172a';
+
+  modal.style.display = 'flex';
+  setTimeout(function() { input.focus(); }, 120);
+}
+
+function closeResetPasswordModal() {
+  var modal = document.getElementById('resetPasswordModal');
+  if (modal) modal.style.display = 'none';
+}
+
+(function initResetModal() {
+  var modal   = document.getElementById('resetPasswordModal');
+  var closeBtn = document.getElementById('resetModalClose');
+  var input   = document.getElementById('resetEmailInput');
+  var sendBtn = document.getElementById('resetSendBtn');
+  var feedback = document.getElementById('resetFeedback');
+  if (!modal) return;
+
+  // Chiudi cliccando fuori dal panel
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeResetPasswordModal();
+  });
+
+  // Chiudi con pulsante ×
+  if (closeBtn) closeBtn.addEventListener('click', closeResetPasswordModal);
+
+  // Chiudi con Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeResetPasswordModal();
+  });
+
+  // Invio con Enter dall'input
+  if (input) {
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') doSendReset();
+    });
+  }
+
+  // Click sul bottone
+  if (sendBtn) sendBtn.addEventListener('click', doSendReset);
+
+  function setFeedback(msg, isSuccess) {
+    if (!feedback) return;
+    feedback.style.display = 'block';
+    if (isSuccess) {
+      feedback.style.background = 'rgba(34,197,94,0.12)';
+      feedback.style.border = '1px solid rgba(34,197,94,0.25)';
+      feedback.style.color = '#86efac';
+    } else {
+      feedback.style.background = 'rgba(239,68,68,0.12)';
+      feedback.style.border = '1px solid rgba(239,68,68,0.25)';
+      feedback.style.color = '#fca5a5';
+    }
+    feedback.textContent = msg;
+  }
+
+  function doSendReset() {
+    var email = input ? input.value.trim() : '';
+    var auth  = window._fbAuth;
+    var resetFn = window._fbFunctions && window._fbFunctions.sendPasswordResetEmail;
+
+    if (!email) {
+      setFeedback('Inserisci la tua email prima di continuare.', false);
+      input && input.focus();
+      return;
+    }
+    if (!auth || !resetFn) {
+      setFeedback('Servizio non disponibile. Riprova tra qualche secondo.', false);
+      return;
+    }
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Invio in corso…';
+
+    resetFn(auth, email)
+      .then(function() {
+        setFeedback('✓ Email inviata! Controlla la casella di posta (anche spam/junk). Riceverai un link per reimpostare la password.', true);
+        sendBtn.textContent = 'Email inviata ✓';
+        sendBtn.style.background = '#1e293b';
+        sendBtn.style.color = '#64748b';
+        sendBtn.style.border = '1px solid rgba(255,255,255,0.08)';
+      })
+      .catch(function(error) {
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Invia link di reset →';
+        sendBtn.style.background = '#f59e0b';
+        sendBtn.style.color = '#0f172a';
+        var msg = 'Qualcosa è andato storto. Riprova.';
+        if (error.code === 'auth/user-not-found')   msg = 'Nessun account trovato con questa email.';
+        if (error.code === 'auth/invalid-email')     msg = 'Email non valida. Controllala e riprova.';
+        if (error.code === 'auth/too-many-requests') msg = 'Troppi tentativi. Aspetta qualche minuto e riprova.';
+        setFeedback(msg, false);
+      });
+  }
 })();
