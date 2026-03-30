@@ -732,8 +732,9 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   box-shadow:0 -8px 40px rgba(0,0,0,.5);
   transform:translateZ(0);
   will-change:transform;
+  pointer-events:none;
 }
-.drawer.open{bottom:calc(var(--tab-bar-h, 56px) - 6px);}
+.drawer.open{bottom:calc(var(--tab-bar-h, 56px) - 6px);pointer-events:auto;}
 .drawer.keyboard-open{
   bottom:0 !important;
   max-height:50vh;
