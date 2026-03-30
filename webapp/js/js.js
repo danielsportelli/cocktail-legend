@@ -59,7 +59,9 @@ function mdToHtml(md){
   if (mode === 'resetPassword' && oobCode) {
     window._resetOobCode = oobCode;
     window.history.replaceState({}, document.title, window.location.pathname);
-    // Mostra form nuova password — attende DOMContentLoaded per sicurezza
+    // switchAuthTab viene chiamato dopo DOMContentLoaded, garantito
+    // L'HTML nasconde overlay/form in un altro listener DOMContentLoaded
+    // Usiamo setTimeout 0 per essere sicuri di eseguire DOPO tutti i DOMContentLoaded
     function doShowResetForm() {
       if (typeof switchAuthTab === 'function') {
         switchAuthTab('reset-confirm');
@@ -68,9 +70,11 @@ function mdToHtml(md){
       }
     }
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', doShowResetForm);
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(doShowResetForm, 0);
+      });
     } else {
-      setTimeout(doShowResetForm, 50);
+      setTimeout(doShowResetForm, 0);
     }
   }
 })();

@@ -29,18 +29,21 @@
     var p = new URLSearchParams(window.location.search);
     if(p.get('mode')==='resetPassword'){
       window._isResetPasswordFlow = true;
-      // Nasconde i form via style inline dopo DOM ready — così il JS può riattivarli
+      // Nasconde overlay SUBITO prima del render (sincrono)
+      document.write('<style>#login-overlay{visibility:hidden}</style>');
+      // Dopo DOM ready: nasconde form via style inline (reversibile) e mostra overlay
       document.addEventListener('DOMContentLoaded', function(){
         var overlay = document.getElementById('login-overlay');
         var formLogin = document.getElementById('form-login');
         var formRegister = document.getElementById('form-register');
         var formVerify = document.getElementById('form-verify');
         var tabs = document.querySelector('.auth-tabs');
-        if(overlay) overlay.style.opacity = '0';
         if(formLogin) formLogin.style.display = 'none';
         if(formRegister) formRegister.style.display = 'none';
         if(formVerify) formVerify.style.display = 'none';
         if(tabs) tabs.style.display = 'none';
+        // Ora mostra overlay (form reset-confirm sarà mostrato da switchAuthTab)
+        if(overlay) overlay.style.visibility = 'visible';
       });
     }
   })();
