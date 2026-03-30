@@ -1665,6 +1665,22 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         '<div style="font-size:.8rem;color:var(--txt2);font-weight:600;">'+user.email+'</div>'+
       '</div>'+
       '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Piano attuale</div>'+
+        (window._userPlan === 'premium'
+          ? '<div style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(245,158,11,.05));border:1px solid rgba(245,158,11,.35);border-radius:10px;padding:.5rem .9rem;">' +
+              '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' +
+              '<span style="font-size:.82rem;font-weight:800;color:#f59e0b;">Premium</span>' +
+            '</div>'
+          : '<div style="display:flex;align-items:center;justify-content:space-between;gap:.75rem;">' +
+              '<div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(100,116,139,.12);border:1px solid rgba(100,116,139,.25);border-radius:10px;padding:.5rem .9rem;">' +
+                '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
+                '<span style="font-size:.82rem;font-weight:700;color:#94a3b8;">Free</span>' +
+              '</div>' +
+              '<button onclick="showPremiumModal()" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;border:none;border-radius:10px;padding:.5rem .9rem;font-size:.78rem;font-weight:800;cursor:pointer;font-family:inherit;white-space:nowrap;">Passa a Premium →</button>' +
+            '</div>'
+        )+
+      '</div>'+
+      '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
         '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.7rem;">Crediti mensili</div>'+
         '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'+
           '<span style="font-size:.75rem;color:var(--txt2);">'+monthly+' / '+MAX+' usati</span>'+
@@ -4453,38 +4469,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Aggiungi badge lock visivo vicino al link
     var lockSg = document.createElement('span');
     lockSg.style.cssText = 'display:inline-flex;align-items:center;gap:.3rem;font-size:.68rem;font-weight:700;color:#f59e0b;margin-left:auto;';
-    lockSg.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Premium';
+    lockSg.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
     sgLink.style.position = 'relative';
     sgLink.appendChild(lockSg);
   }
 
-  // ── Preferiti — cuoricino disattivato per free ────────────
-  // I fav-heart sono generati dinamicamente, intercettiamo con event delegation
-  document.addEventListener('click', function(e) {
-    var heart = e.target.closest('.fav-heart, .m-sticky-heart, #m-fav-heart, #btn-favonly');
-    if (!heart) return;
-    // btn-favonly è il filtro "solo preferiti" — non bloccare
-    if (heart.id === 'btn-favonly') return;
-    if (!isPremium()) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      requirePremium('Preferiti');
-    }
-  }, true);
-
-  // Stile visivo cuoricini disattivati per utenti free
-  function updateFavLockStyle() {
-    if (isPremium()) return;
-    var hearts = document.querySelectorAll('.fav-heart, .m-sticky-heart, #m-fav-heart');
-    hearts.forEach(function(h) {
-      h.style.opacity = '0.35';
-      h.style.cursor = 'not-allowed';
-    });
-  }
-  // Aggiorna quando cambiano i cuoricini (dopo caricamento cocktail)
-  setTimeout(updateFavLockStyle, 1500);
-  window.addEventListener('fb-auth-ready', function() {
-    setTimeout(updateFavLockStyle, 800);
-  });
+  // Cuoricini liberi per tutti — il blocco è solo sulla sezione preferiti raggruppati
 
 });
