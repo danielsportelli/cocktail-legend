@@ -59,15 +59,7 @@ function mdToHtml(md){
   if (mode === 'resetPassword' && oobCode) {
     window._resetOobCode = oobCode;
     window.history.replaceState({}, document.title, window.location.pathname);
-
-    // Fallback sicurezza: se dopo 4s body è ancora hidden, mostralo comunque
-    setTimeout(function() {
-      if (document.body && document.body.style.visibility === 'hidden' || 
-          getComputedStyle(document.body).visibility === 'hidden') {
-        document.body.style.visibility = 'visible';
-      }
-    }, 4000);
-
+    // Mostra form nuova password — attende DOMContentLoaded per sicurezza
     function doShowResetForm() {
       if (typeof switchAuthTab === 'function') {
         switchAuthTab('reset-confirm');
@@ -76,9 +68,7 @@ function mdToHtml(md){
       }
     }
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(doShowResetForm, 50);
-      });
+      document.addEventListener('DOMContentLoaded', doShowResetForm);
     } else {
       setTimeout(doShowResetForm, 50);
     }
@@ -246,12 +236,12 @@ function switchAuthTab(tab) {
   var tabRegister       = document.getElementById('tab-register');
   var tabs              = document.querySelector('.auth-tabs');
 
-  if (formLogin)    formLogin.style.display    = 'none';
-  if (formRegister) formRegister.style.display = 'none';
-  if (formVerify)   formVerify.style.display   = 'none';
+  formLogin.style.display        = 'none';
+  formRegister.style.display     = 'none';
+  formVerify.style.display       = 'none';
   if (formResetConfirm) formResetConfirm.style.display = 'none';
-  if (tabLogin)    tabLogin.classList.remove('active');
-  if (tabRegister) tabRegister.classList.remove('active');
+  tabLogin.classList.remove('active');
+  tabRegister.classList.remove('active');
 
   if (tab === 'register') {
     formRegister.style.display = '';
@@ -263,12 +253,9 @@ function switchAuthTab(tab) {
   } else if (tab === 'reset-confirm') {
     if (formResetConfirm) formResetConfirm.style.display = '';
     if (tabs) tabs.style.display = 'none';
-    // Ripristina visibilità body e overlay (nascosti durante reset flow)
-    document.body.style.visibility = 'visible';
-    var overlay = document.getElementById('login-overlay');
-    var box = overlay ? overlay.querySelector('.login-box') : null;
-    if (overlay) { overlay.style.opacity = '1'; overlay.style.pointerEvents = ''; }
-    if (box) box.style.opacity = '1';
+    // Fade-in overlay (era opacity:0 durante il caricamento)
+    var overlayRC = document.getElementById('login-overlay');
+    if (overlayRC) overlayRC.style.opacity = '1';
   } else if (tab === 'login') {
     // Torna al login: assicurati che overlay sia visibile
     formLogin.style.display = '';
