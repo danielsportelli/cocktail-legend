@@ -1005,3 +1005,10 @@ button, a, input, textarea, select, .tab-btn, .ai-cmd-btn, .sig-pill, .ai-pill, 
 
 /* Nascondi scrollbar modal premium su webkit */
 #premium-modal > div::-webkit-scrollbar { display: none; }
+
+/* Nascondi badge lucchetto per utenti premium */
+body.user-premium .ai-cmd-btn > span:last-child,
+body.user-premium .calc-cmd-btn > span:last-child,
+body.user-premium #sg-pdf-link > span:last-child {
+  display: none !important;
+}

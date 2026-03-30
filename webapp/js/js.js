@@ -1401,24 +1401,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var data = snap.data();
         // ── Salva piano utente globalmente ──
         window._userPlan = data.plan || 'free';
-        // Se premium, rimuovi tutti i badge lucchetto dal DOM
+        // Se premium, aggiunge classe al body — CSS nasconde tutti i badge lock
         if (window._userPlan === 'premium') {
-          setTimeout(function() {
-            // Badge lock = ultimo span figlio diretto dei bottoni AI e Calc
-            var lockIds = ['ai-btn-signature','ai-btn-twist','ai-btn-pairing','ai-btn-giorno','calc-btn-abv','calc-btn-batch'];
-            lockIds.forEach(function(id) {
-              var btn = document.getElementById(id);
-              if (!btn) return;
-              var last = btn.querySelector('span:last-child');
-              if (last && last.querySelector('svg')) last.remove();
-            });
-            // Rimuovi badge lock da Spirit Genesis
-            var sgLink = document.getElementById('sg-pdf-link');
-            if (sgLink) {
-              var sgLast = sgLink.querySelector('span:last-child');
-              if (sgLast && sgLast.querySelector('svg')) sgLast.remove();
-            }
-          }, 500);
+          document.body.classList.add('user-premium');
+        } else {
+          document.body.classList.remove('user-premium');
         }
         var ai = data.aiUsage || {};
         var periodStart = ai.periodStart || data.createdAt || nowStr;
