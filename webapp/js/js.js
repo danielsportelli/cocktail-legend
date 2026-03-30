@@ -4394,3 +4394,93 @@ function requirePremium(featureName) {
   s.textContent = '@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';
   document.head.appendChild(s);
 })();
+
+// ═══════════════════════════════════════════════════════════
+// INTERCETTAZIONE CLICK FUNZIONI PREMIUM
+// ═══════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function() {
+
+  // ── AI buttons (tutti e 4 bloccati) ──────────────────────
+  var aiPremiumBtns = [
+    { id: 'ai-btn-signature', nome: 'Crea un Signature' },
+    { id: 'ai-btn-twist',     nome: 'Twist on Classic'  },
+    { id: 'ai-btn-pairing',   nome: 'Food Pairing'      },
+    { id: 'ai-btn-giorno',    nome: 'Cocktail del Giorno'},
+  ];
+  aiPremiumBtns.forEach(function(item) {
+    var btn = document.getElementById(item.id);
+    if (!btn) return;
+    btn.addEventListener('click', function(e) {
+      if (!isPremium()) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        requirePremium(item.nome);
+      }
+    }, true); // capture phase — intercetta prima degli altri listener
+  });
+
+  // ── Calcolatori ABV e Pre-Batch ───────────────────────────
+  var calcPremiumBtns = [
+    { id: 'calc-btn-abv',   nome: 'Calcolatore ABV'      },
+    { id: 'calc-btn-batch', nome: 'Calcolatore Pre-Batch' },
+  ];
+  calcPremiumBtns.forEach(function(item) {
+    var btn = document.getElementById(item.id);
+    if (!btn) return;
+    btn.addEventListener('click', function(e) {
+      if (!isPremium()) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        requirePremium(item.nome);
+      }
+    }, true);
+  });
+
+  // ── Spirit Genesis PDF ────────────────────────────────────
+  var sgLink = document.getElementById('sg-pdf-link');
+  if (sgLink) {
+    sgLink.addEventListener('click', function(e) {
+      if (!isPremium()) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        requirePremium('Spirit Genesis');
+      }
+    }, true);
+    // Aggiungi badge lock visivo vicino al link
+    var lockSg = document.createElement('span');
+    lockSg.style.cssText = 'display:inline-flex;align-items:center;gap:.3rem;font-size:.68rem;font-weight:700;color:#f59e0b;margin-left:auto;';
+    lockSg.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Premium';
+    sgLink.style.position = 'relative';
+    sgLink.appendChild(lockSg);
+  }
+
+  // ── Preferiti — cuoricino disattivato per free ────────────
+  // I fav-heart sono generati dinamicamente, intercettiamo con event delegation
+  document.addEventListener('click', function(e) {
+    var heart = e.target.closest('.fav-heart, .m-sticky-heart, #m-fav-heart, #btn-favonly');
+    if (!heart) return;
+    // btn-favonly è il filtro "solo preferiti" — non bloccare
+    if (heart.id === 'btn-favonly') return;
+    if (!isPremium()) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      requirePremium('Preferiti');
+    }
+  }, true);
+
+  // Stile visivo cuoricini disattivati per utenti free
+  function updateFavLockStyle() {
+    if (isPremium()) return;
+    var hearts = document.querySelectorAll('.fav-heart, .m-sticky-heart, #m-fav-heart');
+    hearts.forEach(function(h) {
+      h.style.opacity = '0.35';
+      h.style.cursor = 'not-allowed';
+    });
+  }
+  // Aggiorna quando cambiano i cuoricini (dopo caricamento cocktail)
+  setTimeout(updateFavLockStyle, 1500);
+  window.addEventListener('fb-auth-ready', function() {
+    setTimeout(updateFavLockStyle, 800);
+  });
+
+});
