@@ -1491,9 +1491,14 @@ document.querySelectorAll('.drawer-handle').forEach(function(handle) {
   }, {passive:true});
 });
 
-// Overlay click — delay per dare precedenza al click sulle tab
+// Blocca propagazione click sui tab-btn → l'overlay non riceve mai il click
+document.querySelectorAll('.tab-btn').forEach(function(b){
+  b.addEventListener('click', function(e){ e.stopPropagation(); });
+});
+
+// Overlay click — chiude drawer
 document.getElementById('drawer-overlay').addEventListener('click', function(){
-  setTimeout(closeAllDrawers, 50);
+  closeAllDrawers();
 });
 
 // ═══ COPIA CODICE (Vantaggi drawer) ═══
