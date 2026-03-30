@@ -253,7 +253,8 @@ function switchAuthTab(tab) {
   } else if (tab === 'reset-confirm') {
     if (formResetConfirm) formResetConfirm.style.display = '';
     if (tabs) tabs.style.display = 'none';
-    // Rimuovi invisibilità se arrivato da link reset
+    // Ripristina visibilità body e overlay (nascosti durante reset flow)
+    document.body.style.visibility = 'visible';
     var overlay = document.getElementById('login-overlay');
     var box = overlay ? overlay.querySelector('.login-box') : null;
     if (overlay) { overlay.style.opacity = '1'; overlay.style.pointerEvents = ''; }
