@@ -28,7 +28,7 @@
   (function(){
     var p = new URLSearchParams(window.location.search);
     if(p.get('mode')==='resetPassword'){
-      document.write('<style>#login-overlay{opacity:0;transition:opacity 0.2s;}#form-login,#form-register,#form-verify,.auth-tabs{display:none!important}</style>');
+      document.write('<style>#login-overlay{opacity:0;transition:opacity 0.3s;}#form-login,#form-register,#form-verify,.auth-tabs{display:none}</style>');
       window._isResetPasswordFlow = true;
     }
   })();
