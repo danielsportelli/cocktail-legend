@@ -64,7 +64,10 @@
           <input class="login-input" type="text" id="reg-cognome" placeholder="Cognome *" autocomplete="family-name">
         </div>
       </div>
-
+      <div class="login-input-wrap">
+        <input class="login-input" type="text" id="reg-nickname" placeholder="Nickname * (visibile in classifica)" autocomplete="off">
+      </div>
+      <div id="reg-nick-feedback" style="font-size:.72rem;margin-top:-.4rem;margin-bottom:.5rem;min-height:1rem;padding-left:.2rem;font-family:'Inter',sans-serif;"></div>
       <div class="login-input-wrap">
         <input class="login-input" type="email" id="reg-email" placeholder="Email *" autocomplete="email">
       </div>
@@ -308,14 +311,24 @@
 
     <!-- Messaggio conferma email -->
     <div id="form-verify" style="display:none;text-align:center;padding:1rem 0;">
-      <div style="font-size:2rem;margin-bottom:.75rem;">📧</div>
-      <div style="font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.5rem;">Controlla la tua email</div>
-      <p style="font-size:.8rem;color:var(--txt2);line-height:1.6;">Abbiamo inviato un link di conferma a<br><span id="verify-email" style="color:var(--amber);font-weight:700;"></span></p>
-      <div style="margin-top:1rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.75rem 1rem;">
-        <p style="font-size:.75rem;color:var(--amber);font-weight:700;margin-bottom:.3rem;">⚠️ Non trovi l'email?</p>
-        <p style="font-size:.72rem;color:var(--txt2);line-height:1.5;">Controlla la cartella <strong style="color:var(--txt);">Spam</strong> o <strong style="color:var(--txt);">Posta indesiderata</strong>. L'email arriva da <em><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5836372a3d283421183b373b332c39313475343d3f3d363c763e312a3d3a392b3d392828763b3735">[email&#160;protected]</a></em></p>
+      <div style="margin-bottom:1rem;">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="20" height="16" rx="2" stroke="#60a5fa" stroke-width="1.5"/>
+          <path d="M2 7l10 7 10-7" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="18" cy="17" r="4" fill="#0a0f1e" stroke="#f59e0b" stroke-width="1.5"/>
+          <path d="M16.5 17l1 1 2-2" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
-      <p style="font-size:.72rem;color:var(--txt2);margin-top:1rem;line-height:1.5;">Clicca il link nell'email per attivare il tuo account, poi accedi da qui.</p>
+      <div style="font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.5rem;">Controlla la tua email</div>
+      <p style="font-size:.8rem;color:var(--txt2);line-height:1.6;margin-bottom:.75rem;">Abbiamo inviato il link di conferma a<br><span id="verify-email" style="color:var(--amber);font-weight:700;"></span></p>
+      <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.85rem 1rem;text-align:left;">
+        <p style="font-size:.75rem;color:var(--amber);font-weight:700;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Non trovi l'email?
+        </p>
+        <p style="font-size:.72rem;color:var(--txt2);line-height:1.7;">• Controlla la cartella <strong style="color:var(--txt);">Spam</strong> o <strong style="color:var(--txt);">Posta indesiderata</strong><br>• Se l'indirizzo sopra è sbagliato, <a href="#" onclick="switchAuthTab('register');return false;" style="color:var(--blue-l);text-decoration:underline;">torna indietro</a> e registrati di nuovo</p>
+      </div>
+      <p style="font-size:.72rem;color:var(--txt2);margin-top:.85rem;line-height:1.5;">Dopo aver cliccato il link, torna qui e accedi.</p>
       <button class="login-btn" style="margin-top:1.25rem;" onclick="switchAuthTab('login')">Vai al Login &rarr;</button>
     </div>
 
