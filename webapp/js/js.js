@@ -3556,7 +3556,7 @@ function populateRisGlass(){
   // ── UTILS ─────────────────────────────────────────────────────
   function sanitizeNick(val) {
     // Rimuove spazi, caratteri speciali — solo lettere, numeri, underscore, punto
-    return val.replace(/[^a-zA-Z0-9_.]/g, '').slice(0, 24);
+    return val.replace(/[^a-zA-Z0-9_.]/g, '').toLowerCase().slice(0, 24);
   }
 
   function isValidNick(val) {
@@ -3641,7 +3641,7 @@ function populateRisGlass(){
         // Input
         '<div style="position:relative;margin-bottom:.4rem;">' +
           '<span style="position:absolute;left:.75rem;top:50%;transform:translateY(-50%);font-size:.85rem;color:#64748b;font-weight:600;pointer-events:none;">@</span>' +
-          '<input id="nick-modal-input" type="text" maxlength="24" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" ' +
+          '<input id="nick-modal-input" type="text" maxlength="24" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="text-transform:lowercase;" ' +
           'placeholder="il_tuo_nickname" ' +
           'style="width:100%;background:#0a0f1e;border:1.5px solid rgba(255,255,255,.1);border-radius:10px;' +
           'padding:.62rem .75rem .62rem 1.75rem;font-size:.88rem;font-family:Inter,sans-serif;color:#f1f5f9;outline:none;' +
@@ -3698,7 +3698,7 @@ function populateRisGlass(){
     input.addEventListener('input', function() {
       var raw = this.value;
       var clean = sanitizeNick(raw);
-      if (clean !== raw) this.value = clean;
+      if (clean !== raw) { this.value = clean; }
 
       setBtnEnabled(false);
       clearTimeout(_nickCheckTimer);
@@ -3885,7 +3885,7 @@ function populateRisGlass(){
     input.addEventListener('input', function() {
       var raw = this.value;
       var clean = sanitizeNick(raw);
-      if (clean !== raw) this.value = clean;
+      if (clean !== raw) { this.value = clean; }
 
       setSave(false);
       clearTimeout(_nickCheckTimer);
