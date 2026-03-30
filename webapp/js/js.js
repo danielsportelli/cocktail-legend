@@ -236,36 +236,33 @@ function switchAuthTab(tab) {
   var tabRegister       = document.getElementById('tab-register');
   var tabs              = document.querySelector('.auth-tabs');
 
-  formLogin.style.display        = 'none';
-  formRegister.style.display     = 'none';
-  formVerify.style.display       = 'none';
+  if (formLogin)    formLogin.style.display    = 'none';
+  if (formRegister) formRegister.style.display = 'none';
+  if (formVerify)   formVerify.style.display   = 'none';
   if (formResetConfirm) formResetConfirm.style.display = 'none';
-  tabLogin.classList.remove('active');
-  tabRegister.classList.remove('active');
+  if (tabLogin)    tabLogin.classList.remove('active');
+  if (tabRegister) tabRegister.classList.remove('active');
 
-  if (tab === 'register') {
-    formRegister.style.display = '';
-    tabRegister.classList.add('active');
-    if (tabs) tabs.style.display = '';
+  var overlay = document.getElementById('login-overlay');
+
+  if (tab === 'login') {
+    if (formLogin)  formLogin.style.display = '';
+    if (tabLogin)   tabLogin.classList.add('active');
+    if (tabs)       tabs.style.display = '';
+    if (overlay)    overlay.style.opacity = '1';
+  } else if (tab === 'register') {
+    if (formRegister)  formRegister.style.display = '';
+    if (tabRegister)   tabRegister.classList.add('active');
+    if (tabs)          tabs.style.display = '';
+    if (overlay)       overlay.style.opacity = '1';
   } else if (tab === 'verify') {
-    formVerify.style.display = '';
-    if (tabs) tabs.style.display = 'none';
+    if (formVerify) formVerify.style.display = '';
+    if (tabs)       tabs.style.display = 'none';
+    if (overlay)    overlay.style.opacity = '1';
   } else if (tab === 'reset-confirm') {
     if (formResetConfirm) formResetConfirm.style.display = '';
-    if (tabs) tabs.style.display = 'none';
-    // Fade-in overlay (era opacity:0 durante il caricamento)
-    var overlayRC = document.getElementById('login-overlay');
-    if (overlayRC) overlayRC.style.opacity = '1';
-  } else if (tab === 'login') {
-    // Torna al login: assicurati che overlay sia visibile
-    formLogin.style.display = '';
-    tabLogin.classList.add('active');
-    if (tabs) tabs.style.display = '';
-    var overlay2 = document.getElementById('login-overlay');
-    var box2 = overlay2 ? overlay2.querySelector('.login-box') : null;
-    if (overlay2) { overlay2.style.opacity = '1'; overlay2.style.pointerEvents = ''; }
-    if (box2) box2.style.opacity = '1';
-    return; // evita doppia esecuzione del blocco login sopra
+    if (tabs)       tabs.style.display = 'none';
+    if (overlay)    overlay.style.opacity = '1';
   }
 }
 
