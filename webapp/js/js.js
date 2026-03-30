@@ -2167,8 +2167,6 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     // Bottoni comando principali
     document.querySelectorAll('.ai-cmd-btn').forEach(function(b){
       b.addEventListener('click',function(){ selectCmd(this.dataset.cmd); });
-      b.addEventListener('mouseenter',function(){ this.style.borderColor='rgba(37,99,235,.4)'; this.style.background='rgba(37,99,235,.06)'; });
-      b.addEventListener('mouseleave',function(){ this.style.borderColor='var(--brd)'; this.style.background='var(--bg)'; });
     });
 
     // Pill signature (multi-step)

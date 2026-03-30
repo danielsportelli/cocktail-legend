@@ -1012,3 +1012,17 @@ body.user-premium .calc-cmd-btn > span:last-child,
 body.user-premium #sg-pdf-link > span:last-child {
   display: none !important;
 }
+
+/* Badge lock non intercetta tocchi/click — li passa al bottone padre */
+.ai-cmd-btn > span:last-child,
+.calc-cmd-btn > span:last-child {
+  pointer-events: none;
+}
+
+/* Hover bottoni AI — solo su dispositivi con mouse, non mobile */
+@media (hover: hover) {
+  .ai-cmd-btn:hover {
+    border-color: rgba(37,99,235,.4) !important;
+    background: rgba(37,99,235,.06) !important;
+  }
+}
