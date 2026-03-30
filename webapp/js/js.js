@@ -1390,6 +1390,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var nowStr = now.toISOString().split('T')[0];
       if(snap.exists()){
         var data = snap.data();
+        // ── Salva piano utente globalmente ──
+        window._userPlan = data.plan || 'free';
         var ai = data.aiUsage || {};
         var periodStart = ai.periodStart || data.createdAt || nowStr;
         // Controlla se il periodo di 30gg è scaduto
@@ -4198,4 +4200,197 @@ function closeResetPasswordModal() {
       doReset();
     }
   });
+})();
+
+// ═══════════════════════════════════════════════════════════
+// SISTEMA PREMIUM — Modal + Toast + Lock
+// ═══════════════════════════════════════════════════════════
+
+// Traccia se modal già mostrato in questa sessione (per toast)
+window._premiumModalShownThisSession = false;
+
+function isPremium() {
+  return window._userPlan === 'premium';
+}
+
+// ── MODAL PREMIUM COMPLETO ───────────────────────────────
+function showPremiumModal() {
+  if (document.getElementById('premium-modal')) {
+    document.getElementById('premium-modal').style.display = 'flex';
+    window._premiumModalShownThisSession = true;
+    return;
+  }
+
+  var modal = document.createElement('div');
+  modal.id = 'premium-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem;';
+
+  modal.innerHTML = `
+    <div style="background:#1e293b;border:1px solid rgba(245,158,11,0.3);border-radius:24px;padding:2rem 1.75rem;width:100%;max-width:420px;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.6);">
+
+      <!-- Chiudi -->
+      <button id="premium-modal-close" style="position:absolute;top:1rem;right:1.1rem;background:none;border:none;color:#64748b;font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s;" onmouseover="this.style.color='#f1f5f9'" onmouseout="this.style.color='#64748b'">×</button>
+
+      <!-- Header -->
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h2 style="font-size:1.4rem;font-weight:900;color:#f1f5f9;margin:0 0 .4rem;letter-spacing:-.02em;">Passa a Premium</h2>
+        <p style="font-size:.85rem;color:#94a3b8;margin:0;">Sblocca tutte le funzioni di Cocktail Legend</p>
+      </div>
+
+      <!-- Prezzo -->
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04));border:1px solid rgba(245,158,11,0.25);border-radius:16px;padding:1.1rem 1.25rem;margin-bottom:1.5rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:900;color:#f59e0b;letter-spacing:-.03em;">19,99€<span style="font-size:1rem;font-weight:500;color:#94a3b8;">/anno</span></div>
+        <div style="font-size:.75rem;color:#64748b;margin-top:.25rem;">Primo anno · poi 9,99€/anno · inclusi 30 crediti AI/mese</div>
+      </div>
+
+      <!-- Lista benefici -->
+      <div style="margin-bottom:1.5rem;">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f59e0b;margin-bottom:.85rem;">Cosa sblocchi</div>
+
+        <!-- Spirit Genesis -->
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Spirit Genesis</div>
+            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Accesso completo + download PDF</div>
+          </div>
+        </div>
+
+        <!-- AI -->
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Funzioni AI (4 strumenti)</div>
+            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Cocktail del Giorno · Crea Signature · Twist on Classic · Food Pairing</div>
+          </div>
+        </div>
+
+        <!-- Calcolatori -->
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Calcolatori avanzati</div>
+            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Calcolatore ABV · Calcolatore Pre-Batch</div>
+          </div>
+        </div>
+
+        <!-- Preferiti -->
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Preferiti</div>
+            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Salva i tuoi cocktail preferiti</div>
+          </div>
+        </div>
+
+        <!-- Classifica mensile -->
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Classifica Mensile</div>
+            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">1° → 1000 crediti · 2° → 200 crediti · 3° → 50 crediti</div>
+          </div>
+        </div>
+
+        <!-- Crediti -->
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">30 crediti AI / mese</div>
+            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Inclusi ogni mese, si rinnovano automaticamente</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <button id="premium-cta-btn" style="width:100%;padding:1rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-weight:800;font-size:1rem;border:none;border-radius:12px;cursor:pointer;transition:all .2s;letter-spacing:.01em;font-family:inherit;">
+        Acquista Premium →
+      </button>
+      <p style="text-align:center;font-size:.72rem;color:#475569;margin-top:.75rem;">Rinnovo automatico · Disdici quando vuoi</p>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  window._premiumModalShownThisSession = true;
+
+  // Chiudi con ×
+  document.getElementById('premium-modal-close').addEventListener('click', function() {
+    modal.style.display = 'none';
+  });
+
+  // Chiudi cliccando fuori
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+
+  // Chiudi con Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display !== 'none') modal.style.display = 'none';
+  });
+
+  // CTA — per ora placeholder
+  document.getElementById('premium-cta-btn').addEventListener('click', function() {
+    // TODO: collegare Stripe
+    alert('Pagamento in arrivo! Stripe verrà collegato a breve.');
+  });
+}
+
+// ── TOAST PREMIUM (volte successive) ────────────────────
+function showPremiumToast(msg) {
+  msg = msg || 'Funzione riservata al piano Premium';
+  var existing = document.getElementById('premium-toast');
+  if (existing) { existing.remove(); }
+
+  var toast = document.createElement('div');
+  toast.id = 'premium-toast';
+  toast.style.cssText = 'position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);z-index:99999;background:#1e293b;border:1px solid rgba(245,158,11,0.4);border-radius:12px;padding:.65rem 1.1rem;display:flex;align-items:center;gap:.6rem;box-shadow:0 8px 30px rgba(0,0,0,0.4);animation:toastIn .25s ease;white-space:nowrap;';
+  toast.innerHTML = `
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <span style="font-size:.82rem;font-weight:600;color:#f1f5f9;">${msg}</span>
+    <span style="font-size:.75rem;color:#f59e0b;font-weight:700;cursor:pointer;margin-left:.3rem;" id="toast-upgrade-link">Upgrade →</span>
+  `;
+  document.body.appendChild(toast);
+
+  document.getElementById('toast-upgrade-link').addEventListener('click', function() {
+    toast.remove();
+    showPremiumModal();
+  });
+
+  setTimeout(function() {
+    if (toast.parentNode) toast.style.opacity = '0';
+    setTimeout(function() { if (toast.parentNode) toast.remove(); }, 300);
+  }, 3000);
+}
+
+// ── FUNZIONE PRINCIPALE: gestisce click su feature premium ──
+function requirePremium(featureName) {
+  if (isPremium()) return true; // utente premium, passa
+  if (!window._premiumModalShownThisSession) {
+    showPremiumModal();
+  } else {
+    showPremiumToast(featureName ? featureName + ' — solo Piano Premium' : null);
+  }
+  return false;
+}
+
+// Aggiungi stile animazione toast
+(function() {
+  var s = document.createElement('style');
+  s.textContent = '@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';
+  document.head.appendChild(s);
 })();
