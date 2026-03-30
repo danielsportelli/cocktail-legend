@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  applyActionCode,
   sendPasswordResetEmail,
   onAuthStateChanged,
   signOut
@@ -45,6 +46,7 @@ window._fbFunctions = {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  applyActionCode,
   sendPasswordResetEmail,
   onAuthStateChanged,
   signOut,
@@ -65,6 +67,5 @@ window._currentUser = null;
 
 onAuthStateChanged(auth, function(user) {
   window._currentUser = user;
-  // Dispatch evento custom così js.js sa quando l'utente è pronto
   window.dispatchEvent(new CustomEvent('fb-auth-ready', { detail: { user: user } }));
 });

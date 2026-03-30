@@ -25,6 +25,44 @@ function mdToHtml(md){
 }
 // ────────────────────────────────────────────────────────────────
 
+// ═══════════════════════════════════════════════════════════════
+// GESTIONE LINK DI VERIFICA EMAIL (da URL action Firebase)
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var mode = params.get('mode');
+  var oobCode = params.get('oobCode');
+
+  if (mode === 'verifyEmail' && oobCode) {
+    // Pulisci URL subito
+    window.history.replaceState({}, document.title, window.location.pathname);
+
+    // Aspetta Firebase e completa la verifica
+    function doVerify() {
+      var auth = window._fbAuth;
+      var fn = window._fbFunctions;
+      if (!auth || !fn || !fn.applyActionCode) { setTimeout(doVerify, 300); return; }
+
+      fn.applyActionCode(auth, oobCode)
+        .then(function() {
+          window._emailVerified = true;
+          if (auth.currentUser) auth.currentUser.reload();
+        })
+        .catch(function(e) {
+          console.warn('verifyEmail error:', e.code);
+          window._emailVerifyError = true;
+        });
+    }
+    setTimeout(doVerify, 500);
+  }
+
+  if (mode === 'resetPassword' && oobCode) {
+    // Gestione reset password — apri tab login con messaggio
+    window._resetOobCode = oobCode;
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+})();
+
 // ═══════════════════════════════════
 // LOGIN FIREBASE — email + password
 // ═══════════════════════════════════
@@ -36,6 +74,19 @@ function mdToHtml(md){
   var err     = document.getElementById("login-err");
   var eye     = document.getElementById("login-eye");
   var resetLnk= document.getElementById("login-reset");
+
+  // Mostra messaggio verifica email se arrivato dal link
+  setTimeout(function() {
+    if (window._emailVerified) {
+      err.style.color = '#4ade80';
+      err.innerHTML = '✓ Email verificata! Ora puoi accedere.';
+      window._emailVerified = false;
+    } else if (window._emailVerifyError) {
+      err.style.color = '#f87171';
+      err.innerHTML = 'Link non valido o scaduto. Prova a registrarti di nuovo.';
+      window._emailVerifyError = false;
+    }
+  }, 800);
 
   // Se l'utente era già loggato, nascondi overlay subito senza aspettare Firebase
   if (localStorage.getItem('cl_logged') === '1') {
@@ -215,7 +266,27 @@ window._isRegistering = false;
 
     if (!regBtn) return;
 
-    
+    // ── CAP: solo numeri ─────────────────────────────────────────
+    var capInput = document.getElementById('reg-cap');
+    if (capInput) {
+      capInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, '').slice(0, 5);
+      });
+      capInput.addEventListener('keypress', function(e) {
+        if (!/[0-9]/.test(e.key)) e.preventDefault();
+      });
+    }
+    // ── TEL: solo numeri ─────────────────────────────────────────
+    var telInput = document.getElementById('reg-tel');
+    if (telInput) {
+      telInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+      });
+      telInput.addEventListener('keypress', function(e) {
+        if (!/[0-9]/.test(e.key)) e.preventDefault();
+      });
+    }
+
     // Mostra/nascondi password
     if (regEye && regPwd) {
       regEye.addEventListener('click', function() {
