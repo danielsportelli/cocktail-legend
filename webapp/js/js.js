@@ -47,7 +47,9 @@ function mdToHtml(md){
 
   // Attendi che Firebase sia pronto
   window.addEventListener('fb-auth-ready', function(e) {
+    if (window._isRegistering) return; // ignora durante registrazione
     if (e.detail.user) {
+      if (!e.detail.user.emailVerified) return; // non verificato, ignora
       localStorage.setItem('cl_logged', '1');
       overlay.style.transition = "opacity .35s";
       overlay.style.opacity = "0";
@@ -190,6 +192,9 @@ function switchAuthTab(tab) {
   }
 }
 
+// Flag globale: blocca onAuthStateChanged durante la registrazione
+window._isRegistering = false;
+
 // ═══════════════════════════════════
 // REGISTRAZIONE
 // ═══════════════════════════════════
@@ -256,6 +261,7 @@ function switchAuthTab(tab) {
       regBtn.disabled = true;
       regBtn.textContent = 'Creazione account...';
       regErr.textContent = '';
+      window._isRegistering = true; // blocca onAuthStateChanged
 
       var auth    = window._fbAuth;
       var db      = window._fbDb;
@@ -296,6 +302,7 @@ function switchAuthTab(tab) {
             // Logout immediato — non deve entrare finché non verifica email
             return fns.signOut(window._fbAuth);
           }).then(function() {
+            window._isRegistering = false; // riattiva onAuthStateChanged
             localStorage.removeItem('cl_logged');
             // Mostra schermata conferma con nota spam
             var verifyEmailSpan = document.getElementById('verify-email');
@@ -304,6 +311,7 @@ function switchAuthTab(tab) {
           });
         })
         .catch(function(e) {
+          window._isRegistering = false;
           regBtn.disabled = false;
           regBtn.textContent = 'Crea account →';
           if (e.code === 'auth/email-already-in-use') {
