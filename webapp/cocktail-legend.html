@@ -64,10 +64,7 @@
           <input class="login-input" type="text" id="reg-cognome" placeholder="Cognome *" autocomplete="family-name">
         </div>
       </div>
-      <div class="login-input-wrap">
-        <input class="login-input" type="text" id="reg-nickname" placeholder="Nickname * (visibile in classifica)" autocomplete="off">
-      </div>
-      <div id="reg-nick-feedback" style="font-size:.72rem;margin-top:-.4rem;margin-bottom:.5rem;min-height:1rem;padding-left:.2rem;font-family:'Inter',sans-serif;"></div>
+
       <div class="login-input-wrap">
         <input class="login-input" type="email" id="reg-email" placeholder="Email *" autocomplete="email">
       </div>
@@ -121,7 +118,7 @@
           <option value="+212" data-flag="🇲🇦">🇲🇦 +212</option>
         </select>
         <div class="tel-divider"></div>
-        <input class="tel-number" type="tel" id="reg-tel" placeholder="Telefono *" autocomplete="tel-national">
+        <input class="tel-number" type="tel" id="reg-tel" placeholder="Telefono *" autocomplete="tel-national" maxlength="10" inputmode="numeric">
       </div>
       <div class="login-input-wrap">
         <input class="login-input" type="text" id="reg-via" placeholder="Via / Indirizzo *" autocomplete="street-address">
@@ -131,7 +128,7 @@
           <input class="login-input" type="text" id="reg-civico" placeholder="N° *" autocomplete="off">
         </div>
         <div class="login-input-wrap" style="flex:2;">
-          <input class="login-input" type="text" id="reg-cap" placeholder="CAP *" autocomplete="postal-code">
+          <input class="login-input" type="text" id="reg-cap" placeholder="CAP *" autocomplete="postal-code" maxlength="5" inputmode="numeric" pattern="[0-9]{5}">
         </div>
         <div class="login-input-wrap" style="flex:1.8;">
           <select class="login-input login-select" id="reg-provincia" autocomplete="address-level2">
@@ -326,7 +323,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           Non trovi l'email?
         </p>
-        <p style="font-size:.72rem;color:var(--txt2);line-height:1.7;">• Controlla la cartella <strong style="color:var(--txt);">Spam</strong> o <strong style="color:var(--txt);">Posta indesiderata</strong><br>• Se l'indirizzo sopra è sbagliato, <a href="#" onclick="switchAuthTab('register');return false;" style="color:var(--blue-l);text-decoration:underline;">torna indietro</a> e registrati di nuovo</p>
+        <p style="font-size:.72rem;color:var(--txt2);line-height:1.7;">&#x2022; Controlla la cartella <strong style="color:var(--txt);">Spam</strong> o <strong style="color:var(--txt);">Posta indesiderata</strong><br>&#x2022; Se l'indirizzo sopra è sbagliato, <a href="#" onclick="switchAuthTab('register');return false;" style="color:var(--blue-l);text-decoration:underline;">torna indietro</a> e registrati di nuovo</p>
       </div>
       <p style="font-size:.72rem;color:var(--txt2);margin-top:.85rem;line-height:1.5;">Dopo aver cliccato il link, torna qui e accedi.</p>
       <button class="login-btn" style="margin-top:1.25rem;" onclick="switchAuthTab('login')">Vai al Login &rarr;</button>
