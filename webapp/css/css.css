@@ -1026,3 +1026,24 @@ body.user-premium #sg-pdf-link > span:last-child {
     background: rgba(37,99,235,.06) !important;
   }
 }
+
+/* Tab AI — mantiene amber e glow con struttura semplice */
+.tab-btn-ai .tab-btn-ico-ai svg {
+  color: var(--amber);
+  fill: var(--amber);
+  filter: drop-shadow(0 0 5px rgba(245,158,11,.55));
+  transition: filter .2s;
+}
+.tab-btn-ai.dim .tab-btn-ico-ai svg {
+  fill: var(--dim);
+  color: var(--dim);
+  filter: none;
+}
+.tab-btn-ai .tab-btn-lbl {
+  color: var(--amber);
+  font-weight: 700;
+}
+.tab-btn-ai.dim .tab-btn-lbl {
+  color: var(--dim);
+  font-weight: 400;
+}
