@@ -59,7 +59,15 @@ function mdToHtml(md){
   if (mode === 'resetPassword' && oobCode) {
     window._resetOobCode = oobCode;
     window.history.replaceState({}, document.title, window.location.pathname);
-    // Mostra form nuova password — attende DOMContentLoaded per sicurezza
+
+    // Fallback sicurezza: se dopo 4s body è ancora hidden, mostralo comunque
+    setTimeout(function() {
+      if (document.body && document.body.style.visibility === 'hidden' || 
+          getComputedStyle(document.body).visibility === 'hidden') {
+        document.body.style.visibility = 'visible';
+      }
+    }, 4000);
+
     function doShowResetForm() {
       if (typeof switchAuthTab === 'function') {
         switchAuthTab('reset-confirm');
@@ -68,7 +76,9 @@ function mdToHtml(md){
       }
     }
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', doShowResetForm);
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(doShowResetForm, 50);
+      });
     } else {
       setTimeout(doShowResetForm, 50);
     }
@@ -236,12 +246,12 @@ function switchAuthTab(tab) {
   var tabRegister       = document.getElementById('tab-register');
   var tabs              = document.querySelector('.auth-tabs');
 
-  formLogin.style.display        = 'none';
-  formRegister.style.display     = 'none';
-  formVerify.style.display       = 'none';
+  if (formLogin)    formLogin.style.display    = 'none';
+  if (formRegister) formRegister.style.display = 'none';
+  if (formVerify)   formVerify.style.display   = 'none';
   if (formResetConfirm) formResetConfirm.style.display = 'none';
-  tabLogin.classList.remove('active');
-  tabRegister.classList.remove('active');
+  if (tabLogin)    tabLogin.classList.remove('active');
+  if (tabRegister) tabRegister.classList.remove('active');
 
   if (tab === 'register') {
     formRegister.style.display = '';
