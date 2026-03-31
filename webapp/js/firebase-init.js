@@ -11,7 +11,8 @@ import {
   sendPasswordResetEmail,
   confirmPasswordReset,
   onAuthStateChanged,
-  signOut
+  signOut,
+  updateProfile
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 import {
   getFirestore,
@@ -52,6 +53,7 @@ window._fbFunctions = {
   confirmPasswordReset,
   onAuthStateChanged,
   signOut,
+  updateProfile,
   doc,
   getDoc,
   setDoc,
