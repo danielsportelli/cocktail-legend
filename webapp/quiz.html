@@ -590,7 +590,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
         <span id="free-rank-txt" style="font-size:.72rem;color:var(--txt2);margin-left:.3rem;">— saresti ?°</span>
       </div>
       <div style="font-size:.68rem;color:var(--dim);line-height:1.5;margin-bottom:.6rem;">Passa a Premium per partecipare e vincere i premi mensili.</div>
-      <button onclick="window.location.href='cocktail-legend.html#premium'" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.72rem;border:none;border-radius:8px;padding:.4rem .9rem;cursor:pointer;font-family:inherit;">Passa a Premium →</button>
+      <button onclick="showPremiumModal()" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.72rem;border:none;border-radius:8px;padding:.4rem .9rem;cursor:pointer;font-family:inherit;">Passa a Premium →</button>
     </div>
   </div><!-- /leaderboard section -->
 
@@ -1157,6 +1157,86 @@ document.addEventListener('click', function(e) {
     popup.style.display = 'none';
   }
 });
+// ── MODAL PREMIUM ────────────────────────────────────────
+window._premiumModalShownThisSession = false;
+
+function showPremiumModal() {
+  if (document.getElementById('premium-modal')) {
+    document.getElementById('premium-modal').style.display = 'flex';
+    window._premiumModalShownThisSession = true;
+    return;
+  }
+
+  var modal = document.createElement('div');
+  modal.id = 'premium-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem;';
+
+  modal.innerHTML = `
+    <div style="background:#1e293b;border:1px solid rgba(245,158,11,0.3);border-radius:24px;padding:2rem 1.75rem;width:100%;max-width:420px;max-height:88vh;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.6);">
+      <button id="premium-modal-close" style="position:absolute;top:1rem;right:1.1rem;background:none;border:none;color:#64748b;font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s;" onmouseover="this.style.color='#f1f5f9'" onmouseout="this.style.color='#64748b'">×</button>
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h2 style="font-size:1.4rem;font-weight:900;color:#f1f5f9;margin:0 0 .4rem;letter-spacing:-.02em;">Passa a Premium</h2>
+        <p style="font-size:.85rem;color:#94a3b8;margin:0;">Sblocca tutte le funzioni di Cocktail Legend</p>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04));border:1px solid rgba(245,158,11,0.25);border-radius:16px;padding:1.1rem 1.25rem;margin-bottom:1.5rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:900;color:#f59e0b;letter-spacing:-.03em;">19,99€<span style="font-size:.95rem;font-weight:500;color:#94a3b8;"> / primo anno</span></div>
+        <div style="font-size:.75rem;color:#64748b;margin-top:.3rem;line-height:1.6;">Dal secondo anno in poi 9,99€/anno<br>Inclusi 30 crediti AI/mese</div>
+      </div>
+      <div style="margin-bottom:1.5rem;">
+        <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f59e0b;margin-bottom:.85rem;">Cosa sblocchi</div>
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Spirit Genesis</div><div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Accesso completo + download PDF</div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Funzioni AI (4 strumenti)</div><div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Cocktail del Giorno · Crea Signature · Twist on Classic · Food Pairing</div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Calcolatori avanzati</div><div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Calcolatore ABV · Calcolatore Pre-Batch</div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Preferiti</div><div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Salva i tuoi cocktail preferiti</div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Premi Quiz Mensili</div><div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">1° → 1000 crediti · 2° → 200 crediti · 3° → 50 crediti</div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;">
+          <div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">30 crediti AI / mese</div><div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Inclusi ogni mese, si rinnovano automaticamente</div></div>
+        </div>
+      </div>
+      <button id="premium-cta-btn" style="width:100%;padding:1rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-weight:800;font-size:1rem;border:none;border-radius:12px;cursor:pointer;transition:all .2s;letter-spacing:.01em;font-family:inherit;">
+        Acquista Premium →
+      </button>
+      <p style="text-align:center;font-size:.72rem;color:#475569;margin-top:.75rem;">Rinnovo automatico · Disdici quando vuoi</p>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  window._premiumModalShownThisSession = true;
+
+  document.getElementById('premium-modal-close').addEventListener('click', function() {
+    modal.style.display = 'none';
+  });
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display !== 'none') modal.style.display = 'none';
+  });
+  document.getElementById('premium-cta-btn').addEventListener('click', function() {
+    // TODO: collegare Stripe
+    alert('Pagamento in arrivo! Stripe verrà collegato a breve.');
+  });
+}
+
 </script>
 
 </body>
