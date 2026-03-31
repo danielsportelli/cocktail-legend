@@ -1160,7 +1160,7 @@ document.addEventListener('click', function(e) {
 // ── MODAL PREMIUM ────────────────────────────────────────
 window._premiumModalShownThisSession = false;
 
-function showPremiumModal() {
+window.showPremiumModal = function showPremiumModal() {
   if (document.getElementById('premium-modal')) {
     document.getElementById('premium-modal').style.display = 'flex';
     window._premiumModalShownThisSession = true;
