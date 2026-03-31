@@ -92,30 +92,7 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
 );
 
 // ═══════════════════════════════════════════════════
-// RESET SETTIMANALE — ogni lunedì alle 00:00 (Roma)
-// ═══════════════════════════════════════════════════
-exports.resetSettimanale = onSchedule(
-  {
-    schedule: "0 0 * * 1",
-    timeZone: "Europe/Rome",
-    region: "europe-west1",
-  },
-  async () => {
-    const db = getFirestore();
-    const snapshot = await db.collection("users").get();
-    if (snapshot.empty) return;
-
-    const batch = db.batch();
-    snapshot.forEach((doc) => {
-      batch.update(doc.ref, { pts_week: 0 });
-    });
-    await batch.commit();
-    console.log("Reset settimanale completato — " + snapshot.size + " utenti");
-  }
-);
-
-// ═══════════════════════════════════════════════════
-// RESET MENSILE — ogni 1° del mese alle 00:00 (Roma)
+// RESET MENSILE + PREMI — ogni 1° del mese alle 00:00 (Roma)
 // ═══════════════════════════════════════════════════
 exports.resetMensile = onSchedule(
   {
@@ -125,6 +102,42 @@ exports.resetMensile = onSchedule(
   },
   async () => {
     const db = getFirestore();
+
+    // ── 1. Trova i top 5 premium per pts_month ──────
+    const premiMap = { 0: 1000, 1: 200, 2: 50, 3: 50, 4: 50 };
+
+    try {
+      const topSnap = await db.collection("users")
+        .where("plan", "==", "premium")
+        .orderBy("pts_month", "desc")
+        .limit(5)
+        .get();
+
+      if (!topSnap.empty) {
+        const premiBatch = db.batch();
+        topSnap.docs.forEach((doc, i) => {
+          const crediti = premiMap[i] || 0;
+          const userData = doc.data();
+          const aiUsage = userData.aiUsage || {};
+          const extraCreditsAttuali = aiUsage.extraCredits || 0;
+          premiBatch.set(doc.ref, {
+            aiUsage: {
+              ...aiUsage,
+              extraCredits: extraCreditsAttuali + crediti,
+            }
+          }, { merge: true });
+          console.log(`Premio ${i+1}° posto: ${doc.data().nickname} → +${crediti} crediti`);
+        });
+        await premiBatch.commit();
+        console.log("Premi mensili distribuiti.");
+      } else {
+        console.log("Nessun utente premium in classifica — nessun premio.");
+      }
+    } catch(e) {
+      console.error("Errore distribuzione premi:", e);
+    }
+
+    // ── 2. Reset pts_month per tutti ────────────────
     const snapshot = await db.collection("users").get();
     if (snapshot.empty) return;
 
