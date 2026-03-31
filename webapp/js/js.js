@@ -1394,9 +1394,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var docFn = window._fbFunctions ? window._fbFunctions.doc : null;
     var getDoc = window._fbFunctions ? window._fbFunctions.getDoc : null;
     var setDoc = window._fbFunctions ? window._fbFunctions.setDoc : null;
+    var onSnapshot = window._fbFunctions ? window._fbFunctions.onSnapshot : null;
     if(!db || !docFn || !getDoc) return;
     var userDoc = docFn(db, 'users', user.uid);
-    getDoc(userDoc).then(function(snap){
+
+    function processSnap(snap) {
       var now = new Date();
       var nowStr = now.toISOString().split('T')[0];
       if(snap.exists()){
@@ -1413,7 +1415,6 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var periodStart = ai.periodStart || data.createdAt || nowStr;
         // Controlla se il periodo di 30gg è scaduto
         if(_isPeriodExpired(periodStart)){
-          // Calcola nuovo periodStart (avanza di 30gg finché non è nel futuro)
           var start = new Date(periodStart);
           while(_isPeriodExpired(start.toISOString().split('T')[0])){
             start.setDate(start.getDate() + 30);
@@ -1424,7 +1425,6 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
             extraCredits: ai.extraCredits || 0,
             periodStart: newPeriodStart
           };
-          // Salva reset su Firestore
           setDoc(userDoc, { aiUsage: _usageCache }, { merge: true })
             .catch(function(e){ console.warn('reset period err', e); });
         } else {
@@ -1445,12 +1445,18 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       }
       renderUsage();
       renderAccountTab();
-      // Esponi globalmente per il modulo nickname
       window._renderAccountTab = renderAccountTab;
-    }).catch(function(e){
-      console.warn('loadUsage err', e);
-      _usageCache = { monthlyCount: 0, extraCredits: 0, periodStart: new Date().toISOString().split('T')[0] };
-    });
+    }
+
+    // Usa onSnapshot se disponibile (aggiornamento real-time), altrimenti getDoc
+    if(onSnapshot) {
+      onSnapshot(userDoc, processSnap, function(e){ console.warn('onSnapshot err', e); });
+    } else {
+      getDoc(userDoc).then(processSnap).catch(function(e){
+        console.warn('loadUsage err', e);
+        _usageCache = { monthlyCount: 0, extraCredits: 0, periodStart: new Date().toISOString().split('T')[0] };
+      });
+    }
   });
   function renderUsage(){
     var monthly = getMonthlyUsed();
