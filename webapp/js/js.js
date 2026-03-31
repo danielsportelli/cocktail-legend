@@ -1410,6 +1410,19 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         } else {
           document.body.classList.remove('user-premium');
         }
+
+        // ── Se premium e aiUsage non esiste → crea automaticamente ──
+        if (window._userPlan === 'premium' && !data.aiUsage) {
+          var newUsage = { monthlyCount: 0, extraCredits: 0, periodStart: nowStr };
+          setDoc(userDoc, { aiUsage: newUsage }, { merge: true })
+            .catch(function(e){ console.warn('auto-create aiUsage err', e); });
+          _usageCache = newUsage;
+          renderUsage();
+          renderAccountTab();
+          window._renderAccountTab = renderAccountTab;
+          return;
+        }
+
         var ai = data.aiUsage || {};
         var periodStart = ai.periodStart || data.createdAt || nowStr;
         // Controlla se il periodo di 30gg è scaduto
