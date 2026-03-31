@@ -144,6 +144,15 @@ body::after{
 .lb-reset-txt{font-size:.65rem;color:var(--txt2);}
 .lb-reset-txt span{color:var(--blue-l);font-weight:600;}
 
+/* Lista classifica — altezza fissa, scroll interno senza scrollbar */
+#lb-list{
+  max-height:600px;
+  overflow-y:auto;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+#lb-list::-webkit-scrollbar{display:none;}
+
 .lb-row{
   display:grid;grid-template-columns:28px 1fr auto;
   align-items:center;gap:.7rem;
@@ -782,6 +791,14 @@ async function loadLeaderboard(tab) {
     }
 
     list.innerHTML = html;
+
+    // Scroll automatico sulla riga dell'utente se non è in top visibile
+    const meRow = list.querySelector('.lb-row.me');
+    if (meRow) {
+      setTimeout(function() {
+        meRow.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }, 150);
+    }
 
     // Banner free: mostra solo su tab mensile se utente è free
     const freeBanner = document.getElementById('lb-free-banner');
