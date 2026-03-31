@@ -401,7 +401,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
   <!-- BACK -->
   <button class="nav-back" onclick="window.location.href='cocktail-legend.html'">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    Torna all'app
+    Chiudi quiz
   </button>
 
   <!-- HEADER -->
@@ -412,7 +412,6 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
 
   <!-- LEADERBOARD TABS -->
   <div class="lb-tabs">
-    <div class="lb-tab" onclick="switchLbTab(this,'weekly')">Settimanale</div>
     <div class="lb-tab active" onclick="switchLbTab(this,'monthly')">Mensile</div>
     <div class="lb-tab" onclick="switchLbTab(this,'alltime')">All Time</div>
   </div>
@@ -422,6 +421,25 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
     <div class="lb-header">
       <div class="lb-title" id="lb-title">Classifica Mensile</div>
       <div class="lb-reset-txt" id="lb-reset-txt">Reset <span id="lb-reset-date">1° Aprile</span></div>
+    </div>
+    <!-- Banner premi mensili — sempre visibile -->
+    <div id="lb-prizes" style="display:none;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.65rem .9rem;margin-bottom:.75rem;">
+      <div style="font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:.45rem;">🏆 Premi mensili</div>
+      <div style="display:flex;flex-direction:column;gap:.25rem;">
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
+          <span style="font-size:.9rem;">🥇</span><span style="color:var(--txt);font-weight:700;">1°</span><span style="color:var(--amber);font-weight:800;">1.000 crediti</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
+          <span style="font-size:.9rem;">🥈</span><span style="color:var(--txt);font-weight:700;">2°</span><span style="color:var(--amber);font-weight:800;">200 crediti</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
+          <span style="font-size:.9rem;">🥉</span><span style="color:var(--txt);font-weight:700;">3°</span><span style="color:var(--amber);font-weight:800;">50 crediti</span>
+        </div>
+      </div>
+    </div>
+    <!-- Nota premium per classifica mensile -->
+    <div id="lb-premium-note" style="display:none;font-size:.65rem;color:var(--dim);margin-bottom:.5rem;padding:.4rem .6rem;background:rgba(37,99,235,.06);border-radius:7px;border:1px solid rgba(37,99,235,.15);">
+      ⭐ Solo gli utenti <strong style="color:var(--blue-l);">Premium</strong> partecipano attivamente alla classifica mensile.
     </div>
     <div id="lb-list">
       <div class="lb-row lb-loading">Caricamento classifica…</div>
@@ -455,6 +473,14 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
       <div class="done-title" id="done-title">Hai già risposto oggi!</div>
       <div class="done-sub" id="done-sub">La prossima domanda sarà disponibile domani alle 00:00.</div>
       <div class="done-pts" id="done-pts">+0 pt oggi</div>
+    </div>
+
+    <!-- Stato: pronto a giocare -->
+    <div id="state-start" style="display:none;text-align:center;padding:1.5rem 1rem;">
+      <div style="font-size:2.2rem;margin-bottom:.6rem;">⭐</div>
+      <div style="font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.3rem;">Pronto?</div>
+      <div style="font-size:.75rem;color:var(--dim);margin-bottom:1.2rem;line-height:1.5;">Hai 30 secondi per rispondere.<br>Più sei veloce, più punti guadagni.</div>
+      <button id="btn-gioca-ora" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.9rem;border:none;border-radius:12px;padding:.75rem 2rem;cursor:pointer;font-family:inherit;letter-spacing:.02em;transition:background .2s;">Gioca ora →</button>
     </div>
 
     <!-- Stato: quiz attivo -->
@@ -590,7 +616,7 @@ function calcPts(secondsLeft, isCorrect) {
 }
 
 function showState(id) {
-  ['state-loading','state-none','state-done','state-quiz'].forEach(function(s){
+  ['state-loading','state-none','state-done','state-quiz','state-start'].forEach(function(s){
     document.getElementById(s).style.display = (s === id) ? '' : 'none';
   });
 }
@@ -719,6 +745,11 @@ async function loadLeaderboard(tab) {
 window.switchLbTab = function(el, tab) {
   document.querySelectorAll('.lb-tab').forEach(function(t){ t.classList.remove('active'); });
   el.classList.add('active');
+  // Mostra banner premi e nota premium solo su tab mensile
+  const prizes = document.getElementById('lb-prizes');
+  const premNote = document.getElementById('lb-premium-note');
+  if (prizes) prizes.style.display = tab === 'monthly' ? '' : 'none';
+  if (premNote) premNote.style.display = tab === 'monthly' ? '' : 'none';
   loadLeaderboard(tab);
 };
 
@@ -935,6 +966,11 @@ async function loadQuiz(user) {
   }
 
   loadLeaderboard(currentLbTab);
+  // Mostra banner premi al caricamento (tab default: mensile)
+  const prizesEl = document.getElementById('lb-prizes');
+  const premNoteEl = document.getElementById('lb-premium-note');
+  if (prizesEl) prizesEl.style.display = '';
+  if (premNoteEl) premNoteEl.style.display = '';
 }
 
 function renderQuiz(data, quizId, uid, oggi) {
@@ -992,21 +1028,24 @@ function renderQuiz(data, quizId, uid, oggi) {
     wrap.appendChild(div);
   });
 
-  showState('state-quiz');
+  showState('state-start');
   answered = false;
 
-  // Avvia timer
-  startTimer(function() {
-    answered = true;
-    document.querySelectorAll('.option').forEach(function(o){
-      o.classList.add('disabled');
-      const txt = o.querySelector('.opt-text').textContent;
-      if (txt === testoCorretto) o.classList.add('correct');
-      else o.classList.add('dimmed');
+  // Timer parte solo quando l'utente clicca "Gioca ora"
+  document.getElementById('btn-gioca-ora').onclick = function() {
+    showState('state-quiz');
+    startTimer(function() {
+      answered = true;
+      document.querySelectorAll('.option').forEach(function(o){
+        o.classList.add('disabled');
+        const txt = o.querySelector('.opt-text').textContent;
+        if (txt === testoCorretto) o.classList.add('correct');
+        else o.classList.add('dimmed');
+      });
+      showResult(false, true, 0, spiegazione, testoCorretto);
+      saveRisposta(uid, quizId, false, 0, oggi);
     });
-    showResult(false, true, 0, spiegazione, testoCorretto);
-    saveRisposta(uid, quizId, false, 0, oggi);
-  });
+  };
 }
 
 function handleAnswer(el, isCorrect, rispostaCorretta, spiegazione, opzioni, uid, quizId, oggi) {
