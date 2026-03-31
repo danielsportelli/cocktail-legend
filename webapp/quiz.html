@@ -146,7 +146,7 @@ body::after{
 
 /* Lista classifica — altezza fissa, scroll interno senza scrollbar */
 #lb-list{
-  max-height:600px;
+  max-height:340px;
   overflow-y:auto;
   scrollbar-width:none;
   -ms-overflow-style:none;
@@ -512,7 +512,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
     <div id="state-start" style="display:none;text-align:center;padding:1.5rem 1rem;">
       <!-- Contenuto pronto -->
       <div id="start-content">
-        <div style="font-size:2.2rem;margin-bottom:.6rem;">⭐</div>
+        <div style="font-size:2.2rem;margin-bottom:.6rem;">⚡</div>
         <div style="font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.3rem;">Pronto?</div>
         <div style="font-size:.75rem;color:var(--dim);margin-bottom:1.2rem;line-height:1.5;">Hai 30 secondi per rispondere.<br>Più sei veloce, più punti guadagni.</div>
         <button id="btn-gioca-ora" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.9rem;border:none;border-radius:12px;padding:.75rem 2rem;cursor:pointer;font-family:inherit;letter-spacing:.02em;transition:background .2s;">Gioca ora →</button>
@@ -780,9 +780,9 @@ async function loadLeaderboard(tab) {
       const label = tab==='alltime' ? 'corrette' : 'punti';
       const metaTxt = d.last_played ? (d.last_played===todayKey()?'Risposto oggi':'Risposto ieri') : '—';
       if (isMe) { myPtsVal=pts; myNick=d.nickname||'Tu'; myMetaTxt=metaTxt; }
-      // Righe > 5 nascoste inizialmente (tranne la riga "me" se è oltre il 5°)
-      const isHidden = rank > 5;
-      html += `<div class="lb-row${isMe?' me':''}"${isHidden?' style="display:none;" data-full="1"':''}>
+      // Righe > 5 nascoste inizialmente tramite opacità ridotta per permettere scroll
+      const isBeyond5 = rank > 5;
+      html += `<div class="lb-row${isMe?' me':''}" data-rank="${rank}">
         <div class="lb-rank ${rankCls}">${rank}</div>
         <div class="lb-user">
           <div class="lb-name">${escHtml(d.nickname||'Utente')}${isMe?'<span class="you-badge">Tu</span>':''}</div>
@@ -792,12 +792,12 @@ async function loadLeaderboard(tab) {
       </div>`;
     });
 
-    // Utente non in top20 — riga nascosta in fondo (solo se deve apparire)
+    // Utente non in top20 — aggiungilo in fondo sempre visibile
     if (!meFound && currentUid && window._quizUserData && (tab!=='monthly' || isPremiumUser)) {
       const ud = window._quizUserData;
       const pts = tab==='alltime' ? (ud.pct_correttezza?Math.round(ud.pct_correttezza)+'%':'—') : (ud[meta.field]||0);
       myRank = rank+1; myPtsVal = pts; myNick = ud.nickname||'Tu'; myMetaTxt = 'Il tuo punteggio';
-      html += `<div class="lb-row me" data-full="1" style="display:none;">
+      html += `<div class="lb-row me" data-rank="${myRank}">
         <div class="lb-rank">…</div>
         <div class="lb-user">
           <div class="lb-name">${escHtml(ud.nickname||'Tu')}<span class="you-badge">Tu</span></div>
@@ -807,10 +807,10 @@ async function loadLeaderboard(tab) {
       </div>`;
     }
 
-    // Scrivi HTML una sola volta
+    // Scrivi HTML
     list.innerHTML = html;
 
-    // Riga sticky "Tu" sotto i top 5 — solo se non sei nei top 5
+    // Riga sticky "Tu" — appare quando non sei visibile nella viewport iniziale
     if (myRank && myRank > 5 && myPtsVal !== null) {
       const label = tab==='alltime' ? 'corrette' : 'punti';
       const stickyEl = document.createElement('div');
@@ -825,13 +825,16 @@ async function loadLeaderboard(tab) {
       </div>`;
       lbContainer.appendChild(stickyEl);
 
-      // Scroll listener — usa AbortController per poterlo rimuovere al prossimo reload
+      // Scroll listener — sticky sparisce quando la riga "me" è visibile
       if (list._scrollController) list._scrollController.abort();
       list._scrollController = new AbortController();
       list.addEventListener('scroll', function() {
-        const scrolled = list.scrollTop > 10;
-        list.querySelectorAll('[data-full="1"]').forEach(function(r){ r.style.display = scrolled?'':'none'; });
-        stickyEl.style.display = scrolled ? 'none' : '';
+        const meRow = list.querySelector('.lb-row.me');
+        if (!meRow) return;
+        const listRect = list.getBoundingClientRect();
+        const meRect = meRow.getBoundingClientRect();
+        const meVisible = meRect.top >= listRect.top && meRect.bottom <= listRect.bottom;
+        stickyEl.style.display = meVisible ? 'none' : '';
       }, { passive:true, signal: list._scrollController.signal });
     }
 
@@ -1148,7 +1151,7 @@ function renderQuiz(data, quizId, uid, oggi) {
 
   // Timer parte solo quando l'utente clicca "Gioca ora"
   document.getElementById('btn-gioca-ora').onclick = function() {
-    var count = 3;
+    var count = 5;
     var numEl = document.getElementById('countdown-num');
     var startContent = document.getElementById('start-content');
     var startCountdown = document.getElementById('start-countdown');
