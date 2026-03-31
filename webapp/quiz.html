@@ -733,9 +733,14 @@ async function loadLeaderboard(tab) {
 
   list.innerHTML = '<div class="lb-row lb-loading">Caricamento…</div>';
 
+  // Rimuovi sticky precedente
+  const lbContainer = list.parentElement;
+  const oldSticky = lbContainer.querySelector('.lb-sticky-me');
+  if (oldSticky) oldSticky.remove();
+
   const tabMeta = {
-    weekly:  { title:'Classifica Settimanale', reset:'Ogni Lunedì', field:'pts_week' },
-    monthly: { title:'Classifica Mensile',     reset:'1° del mese', field:'pts_month' },
+    weekly:  { title:'Classifica Settimanale', reset:'Ogni Lunedì',   field:'pts_week'  },
+    monthly: { title:'Classifica Mensile',     reset:'1° del mese',   field:'pts_month' },
     alltime: { title:'All Time — % Correttezza', reset:'Non si resetta', field:'pts_total' }
   };
   const meta = tabMeta[tab];
@@ -745,18 +750,9 @@ async function loadLeaderboard(tab) {
   try {
     let q;
     if (tab === 'monthly') {
-      q = query(
-        collection(db, 'users'),
-        where('plan', '==', 'premium'),
-        orderBy(meta.field, 'desc'),
-        limit(20)
-      );
+      q = query(collection(db,'users'), where('plan','==','premium'), orderBy(meta.field,'desc'), limit(20));
     } else {
-      q = query(
-        collection(db, 'users'),
-        orderBy(meta.field, 'desc'),
-        limit(20)
-      );
+      q = query(collection(db,'users'), orderBy(meta.field,'desc'), limit(20));
     }
     const snap = await getDocs(q);
 
@@ -766,13 +762,11 @@ async function loadLeaderboard(tab) {
     }
 
     const currentUid = window._quizUid || '';
+    const isPremiumUser = window._quizUserData && window._quizUserData.plan === 'premium';
     let html = '';
     let rank = 0;
     let meFound = false;
-    let myRank = null;
-    let myPtsVal = null;
-    let myNick = null;
-    let myMetaTxt = null;
+    let myRank = null, myPtsVal = null, myNick = null, myMetaTxt = null;
 
     snap.forEach(function(docSnap) {
       rank++;
@@ -780,114 +774,82 @@ async function loadLeaderboard(tab) {
       const isMe = docSnap.id === currentUid;
       if (isMe) { meFound = true; myRank = rank; }
       const rankCls = rank===1?'gold':rank===2?'silver':rank===3?'bronze':(rank<=5&&tab==='monthly')?'prize':'';
-      const pts = tab === 'alltime'
-        ? (d.pct_correttezza ? Math.round(d.pct_correttezza)+'%' : '—')
-        : (d[meta.field] || 0);
-      const label = tab === 'alltime' ? 'corrette' : 'punti';
-      const metaTxt = d.last_played
-        ? (d.last_played === todayKey() ? 'Risposto oggi' : 'Risposto ieri')
-        : '—';
-
-      if (isMe) { myPtsVal = pts; myNick = d.nickname||'Tu'; myMetaTxt = metaTxt; }
-
-      // Mostra solo top 5 inizialmente — il resto è in lista completa
-      const hidden = rank > 5 && !isMe ? ' style="display:none;" data-full="1"' : '';
-      html += `<div class="lb-row${isMe?' me':''}"${hidden}>
+      const pts = tab==='alltime' ? (d.pct_correttezza ? Math.round(d.pct_correttezza)+'%' : '—') : (d[meta.field]||0);
+      const label = tab==='alltime' ? 'corrette' : 'punti';
+      const metaTxt = d.last_played ? (d.last_played===todayKey()?'Risposto oggi':'Risposto ieri') : '—';
+      if (isMe) { myPtsVal=pts; myNick=d.nickname||'Tu'; myMetaTxt=metaTxt; }
+      // Righe > 5 nascoste inizialmente (tranne la riga "me" se è oltre il 5°)
+      const isHidden = rank > 5 && !isMe;
+      html += `<div class="lb-row${isMe?' me':''}"${isHidden?' style="display:none;" data-full="1"':''}>
         <div class="lb-rank ${rankCls}">${rank}</div>
         <div class="lb-user">
           <div class="lb-name">${escHtml(d.nickname||'Utente')}${isMe?'<span class="you-badge">Tu</span>':''}</div>
           <div class="lb-meta">${metaTxt}</div>
         </div>
-        <div class="lb-score">
-          <span class="lb-pts">${pts}</span>
-          <span class="lb-pts-label">${label}</span>
-        </div>
+        <div class="lb-score"><span class="lb-pts">${pts}</span><span class="lb-pts-label">${label}</span></div>
       </div>`;
     });
 
-    // Se utente non è in top20, aggiungilo come riga nascosta in fondo
-    const isPremiumUser = window._quizUserData && window._quizUserData.plan === 'premium';
-    if (!meFound && currentUid && window._quizUserData && (tab !== 'monthly' || isPremiumUser)) {
+    // Utente non in top20 — riga nascosta in fondo (solo se deve apparire)
+    if (!meFound && currentUid && window._quizUserData && (tab!=='monthly' || isPremiumUser)) {
       const ud = window._quizUserData;
-      const pts = tab === 'alltime'
-        ? (ud.pct_correttezza ? Math.round(ud.pct_correttezza)+'%' : '—')
-        : (ud[meta.field] || 0);
-      myRank = rank + 1; myPtsVal = pts; myNick = ud.nickname||'Tu';
+      const pts = tab==='alltime' ? (ud.pct_correttezza?Math.round(ud.pct_correttezza)+'%':'—') : (ud[meta.field]||0);
+      myRank = rank+1; myPtsVal = pts; myNick = ud.nickname||'Tu'; myMetaTxt = 'Il tuo punteggio';
       html += `<div class="lb-row me" data-full="1" style="display:none;">
         <div class="lb-rank">…</div>
         <div class="lb-user">
           <div class="lb-name">${escHtml(ud.nickname||'Tu')}<span class="you-badge">Tu</span></div>
           <div class="lb-meta">Il tuo punteggio</div>
         </div>
-        <div class="lb-score">
-          <span class="lb-pts">${pts}</span>
-          <span class="lb-pts-label">${tab==='alltime'?'corrette':'punti'}</span>
-        </div>
+        <div class="lb-score"><span class="lb-pts">${pts}</span><span class="lb-pts-label">${tab==='alltime'?'corrette':'punti'}</span></div>
       </div>`;
     }
 
+    // Scrivi HTML una sola volta
     list.innerHTML = html;
 
-    // Riga "Tu" sticky sotto i top 5 (solo se non sei nei top 5)
-    const lbContainer = list.parentElement;
-    let stickyMe = lbContainer.querySelector('.lb-sticky-me');
-    if (stickyMe) stickyMe.remove();
-
+    // Riga sticky "Tu" sotto i top 5 — solo se non sei nei top 5
     if (myRank && myRank > 5 && myPtsVal !== null) {
-      const label = tab === 'alltime' ? 'corrette' : 'punti';
-      const rankCls = (myRank <= 5 && tab === 'monthly') ? 'prize' : '';
-      stickyMe = document.createElement('div');
-      stickyMe.className = 'lb-sticky-me';
-      stickyMe.innerHTML = `<div class="lb-row me" style="border-top:2px solid rgba(37,99,235,.3);margin:0;">
-        <div class="lb-rank ${rankCls}">${myRank <= 20 ? myRank : '…'}</div>
+      const label = tab==='alltime' ? 'corrette' : 'punti';
+      const stickyEl = document.createElement('div');
+      stickyEl.className = 'lb-sticky-me';
+      stickyEl.innerHTML = `<div class="lb-row me" style="margin:0;">
+        <div class="lb-rank">${myRank<=20?myRank:'…'}</div>
         <div class="lb-user">
           <div class="lb-name">${escHtml(myNick)}<span class="you-badge">Tu</span></div>
-          <div class="lb-meta">${myMetaTxt || 'Il tuo punteggio'}</div>
+          <div class="lb-meta">${myMetaTxt||'Il tuo punteggio'}</div>
         </div>
-        <div class="lb-score">
-          <span class="lb-pts">${myPtsVal}</span>
-          <span class="lb-pts-label">${label}</span>
-        </div>
+        <div class="lb-score"><span class="lb-pts">${myPtsVal}</span><span class="lb-pts-label">${label}</span></div>
       </div>`;
-      lbContainer.appendChild(stickyMe);
+      lbContainer.appendChild(stickyEl);
 
-      // Scroll: quando scorre → mostra tutto e nascondi sticky; torna su → ripristina top5+sticky
+      // Scroll listener — usa AbortController per poterlo rimuovere al prossimo reload
+      if (list._scrollController) list._scrollController.abort();
+      list._scrollController = new AbortController();
       list.addEventListener('scroll', function() {
         const scrolled = list.scrollTop > 10;
-        if (scrolled) {
-          // Mostra tutti
-          list.querySelectorAll('[data-full="1"]').forEach(function(r){ r.style.display = ''; });
-          if (stickyMe) stickyMe.style.display = 'none';
-        } else {
-          // Torna a top 5
-          list.querySelectorAll('[data-full="1"]').forEach(function(r){ r.style.display = 'none'; });
-          if (stickyMe) stickyMe.style.display = '';
-        }
-      }, { passive: true });
+        list.querySelectorAll('[data-full="1"]').forEach(function(r){ r.style.display = scrolled?'':'none'; });
+        stickyEl.style.display = scrolled ? 'none' : '';
+      }, { passive:true, signal: list._scrollController.signal });
     }
 
-    list.innerHTML = html;
-
-    // Banner free: mostra solo su tab mensile se utente è free
+    // Banner free mensile
     const freeBanner = document.getElementById('lb-free-banner');
     if (freeBanner) {
-      const isPremium = window._quizUserData && window._quizUserData.plan === 'premium';
-      if (tab === 'monthly' && !isPremium && window._quizUserData) {
-        const myPts = window._quizUserData.pts_month || 0;
-        // Calcola posizione virtuale confrontando con i premium in classifica
+      const isPremium = window._quizUserData && window._quizUserData.plan==='premium';
+      if (tab==='monthly' && !isPremium && window._quizUserData) {
+        const myPts = window._quizUserData.pts_month||0;
         let virtualRank = 1;
-        snap.forEach(function(ds) {
-          if ((ds.data().pts_month || 0) > myPts) virtualRank++;
-        });
+        snap.forEach(function(ds){ if((ds.data().pts_month||0)>myPts) virtualRank++; });
         document.getElementById('free-pts-val').textContent = myPts;
-        document.getElementById('free-rank-txt').textContent = '— saresti ' + virtualRank + '°';
+        document.getElementById('free-rank-txt').textContent = '— saresti '+virtualRank+'°';
         freeBanner.style.display = '';
       } else {
         freeBanner.style.display = 'none';
       }
     }
+
   } catch(e) {
-    // Se il campo non esiste ancora (nessun utente ha ancora punti), mostra messaggio amichevole
     list.innerHTML = '<div class="lb-row lb-loading">Nessun punteggio ancora — sii il primo! 🏆</div>';
     console.warn('Leaderboard:', e.message);
   }
