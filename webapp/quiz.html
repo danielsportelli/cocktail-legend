@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230f172a' stroke='url(%23g)' stroke-width='3'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232563eb'/><stop offset='1' stop-color='%23f59e0b'/></linearGradient></defs><text x='50' y='67' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='42' fill='%23f59e0b'>CL</text></svg>"/>
+<link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
 <title>Quiz del Giorno — Cocktail Legend</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
@@ -213,16 +216,17 @@ body::after{
 }
 .done-next{
   width:100%;display:flex;flex-direction:column;gap:.3rem;
+  align-items:center;text-align:center;
 }
 .done-next-label{
   font-size:.58rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--dim);margin-bottom:.1rem;
+  color:var(--dim);margin-bottom:.1rem;text-align:center;width:100%;
 }
 .done-next-time{
-  font-size:.9rem;font-weight:700;color:var(--txt);
+  font-size:.9rem;font-weight:700;color:var(--txt);text-align:center;width:100%;
 }
 .done-next-meta{
-  font-size:.72rem;color:var(--txt2);font-weight:500;
+  font-size:.72rem;color:var(--txt2);font-weight:500;text-align:center;width:100%;
 }
 
 /* coming soon */
@@ -757,7 +761,9 @@ async function loadLeaderboard(tab) {
     });
 
     // Se l'utente corrente non è in top10 e ha dati, aggiungilo in fondo
-    if (!meFound && currentUid && window._quizUserData) {
+    // Solo su alltime — su mensile i free non compaiono in lista (hanno il banner separato)
+    const isPremiumUser = window._quizUserData && window._quizUserData.plan === 'premium';
+    if (!meFound && currentUid && window._quizUserData && (tab !== 'monthly' || isPremiumUser)) {
       const ud = window._quizUserData;
       const pts = tab === 'alltime'
         ? (ud.pct_correttezza ? Math.round(ud.pct_correttezza)+'%' : '—')
