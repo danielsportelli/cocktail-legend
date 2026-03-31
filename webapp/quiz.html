@@ -78,7 +78,15 @@ body::after{
   display:flex;flex-direction:column;gap:1.25rem;
 }
 
-/* ── BACK NAV ── */
+/* ── STICKY HEADER ── */
+.quiz-sticky-header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:var(--bg);
+  padding:.6rem 0 .4rem;
+  margin-bottom:-.5rem;
+}
 .nav-back{
   display:inline-flex;align-items:center;gap:.5rem;
   color:var(--txt2);font-size:.8rem;font-weight:600;
@@ -461,16 +469,16 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
 
 <div class="wrapper">
 
-  <!-- BACK -->
-  <button class="nav-back" onclick="window.location.href='cocktail-legend.html'">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    Chiudi quiz
-  </button>
-
-  <!-- HEADER -->
-  <div class="app-header">
-    <div class="logo">Quiz del Giorno</div>
-    <div class="streak-pill" id="streak-pill">🔥 — giorni</div>
+  <!-- STICKY HEADER -->
+  <div class="quiz-sticky-header">
+    <button class="nav-back" onclick="window.location.href='cocktail-legend.html'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Chiudi quiz
+    </button>
+    <div class="app-header">
+      <div class="logo">Quiz del Giorno</div>
+      <div class="streak-pill" id="streak-pill">🔥 — giorni</div>
+    </div>
   </div>
 
   <!-- QUIZ CARD -->
@@ -602,9 +610,9 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
     <div style="font-size:.65rem;color:var(--dim);line-height:1.5;margin-bottom:.85rem;">I crediti sono utilizzabili nelle funzioni AI di Cocktail Legend.</div>
     <div style="font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-l);margin-bottom:.6rem;">Classifica All Time</div>
     <div style="font-size:.75rem;color:var(--txt2);line-height:1.7;margin-bottom:.5rem;">
-      Premia chi risponde <strong style="color:var(--txt);">bene</strong> ed è <strong style="color:var(--txt);">costante</strong> nel tempo.<br>
+      Premia chi risponde bene ed è costante nel tempo.<br>
       Il punteggio si calcola così:<br>
-      <span style="color:var(--blue-l);font-weight:700;">% risposte corrette × log(domande risposte)</span>
+      <span style="color:var(--txt);font-weight:600;">% risposte corrette × log(domande risposte)</span>
     </div>
     <div style="font-size:.72rem;color:var(--txt2);line-height:1.8;">
       ✓ Alta % di correttezza = punteggio più alto<br>
@@ -753,9 +761,9 @@ async function loadLeaderboard(tab) {
   if (oldSticky) oldSticky.remove();
 
   const tabMeta = {
-    weekly:  { title:'Classifica Settimanale', reset:'Ogni Lunedì',   field:'pts_week'    },
-    monthly: { title:'Classifica Mensile',     reset:'1° del mese',   field:'pts_month'   },
-    alltime: { title:'All Time — Qualità & Costanza', reset:'Non si resetta', field:'pts_alltime' }
+    weekly:  { title:'Classifica Settimanale', reset:'Ogni Lunedì',   field:'pts_week'  },
+    monthly: { title:'Classifica Mensile',     reset:'1° del mese',   field:'pts_month' },
+    alltime: { title:'All Time — % Correttezza', reset:'Non si resetta', field:'pts_total' }
   };
   const meta = tabMeta[tab];
   title.textContent = meta.title;
@@ -765,8 +773,6 @@ async function loadLeaderboard(tab) {
     let q;
     if (tab === 'monthly') {
       q = query(collection(db,'users'), where('plan','==','premium'), orderBy(meta.field,'desc'), limit(20));
-    } else if (tab === 'alltime') {
-      q = query(collection(db,'users'), orderBy(meta.field,'desc'), limit(50));
     } else {
       q = query(collection(db,'users'), orderBy(meta.field,'desc'), limit(20));
     }
@@ -785,17 +791,17 @@ async function loadLeaderboard(tab) {
     let myRank = null, myPtsVal = null, myNick = null, myMetaTxt = null;
 
     snap.forEach(function(docSnap) {
-      const d = docSnap.data();
-      // All Time: mostra solo chi ha almeno 30 risposte
-      if (tab === 'alltime' && (d.tot_risposte || 0) < 30) return;
       rank++;
+      const d = docSnap.data();
       const isMe = docSnap.id === currentUid;
       if (isMe) { meFound = true; myRank = rank; }
       const rankCls = rank===1?'gold':rank===2?'silver':rank===3?'bronze':(rank<=5&&tab==='monthly')?'prize':'';
-      const pts = tab==='alltime' ? (d.pts_alltime || '—') : (d[meta.field]||0);
-      const label = tab==='alltime' ? 'pt' : 'punti';
+      const pts = tab==='alltime' ? (d.pct_correttezza ? Math.round(d.pct_correttezza)+'%' : '—') : (d[meta.field]||0);
+      const label = tab==='alltime' ? 'corrette' : 'punti';
       const metaTxt = d.last_played ? (d.last_played===todayKey()?'Risposto oggi':'Risposto ieri') : '—';
       if (isMe) { myPtsVal=pts; myNick=d.nickname||'Tu'; myMetaTxt=metaTxt; }
+      // Righe > 5 nascoste inizialmente tramite opacità ridotta per permettere scroll
+      const isBeyond5 = rank > 5;
       html += `<div class="lb-row${isMe?' me':''}" data-rank="${rank}">
         <div class="lb-rank ${rankCls}">${rank}</div>
         <div class="lb-user">
@@ -806,22 +812,19 @@ async function loadLeaderboard(tab) {
       </div>`;
     });
 
+    // Utente non in top20 — aggiungilo in fondo sempre visibile
     if (!meFound && currentUid && window._quizUserData && (tab!=='monthly' || isPremiumUser)) {
       const ud = window._quizUserData;
-      const pts = tab==='alltime' ? (ud.pts_alltime||'—') : (ud[meta.field]||0);
-      const label = tab==='alltime' ? 'pt' : 'punti';
-      // Per alltime mostra solo se ha almeno 30 risposte
-      if (tab !== 'alltime' || (ud.tot_risposte||0) >= 30) {
-        myRank = rank+1; myPtsVal = pts; myNick = ud.nickname||'Tu'; myMetaTxt = 'Il tuo punteggio';
-        html += `<div class="lb-row me" data-rank="${myRank}">
-          <div class="lb-rank">…</div>
-          <div class="lb-user">
-            <div class="lb-name">${escHtml(ud.nickname||'Tu')}<span class="you-badge">Tu</span></div>
-            <div class="lb-meta">Il tuo punteggio</div>
-          </div>
-          <div class="lb-score"><span class="lb-pts">${pts}</span><span class="lb-pts-label">${label}</span></div>
-        </div>`;
-      }
+      const pts = tab==='alltime' ? (ud.pct_correttezza?Math.round(ud.pct_correttezza)+'%':'—') : (ud[meta.field]||0);
+      myRank = rank+1; myPtsVal = pts; myNick = ud.nickname||'Tu'; myMetaTxt = 'Il tuo punteggio';
+      html += `<div class="lb-row me" data-rank="${myRank}">
+        <div class="lb-rank">…</div>
+        <div class="lb-user">
+          <div class="lb-name">${escHtml(ud.nickname||'Tu')}<span class="you-badge">Tu</span></div>
+          <div class="lb-meta">Il tuo punteggio</div>
+        </div>
+        <div class="lb-score"><span class="lb-pts">${pts}</span><span class="lb-pts-label">${tab==='alltime'?'corrette':'punti'}</span></div>
+      </div>`;
     }
 
     // Scrivi HTML
@@ -957,10 +960,6 @@ async function saveRisposta(uid, quizId, isCorrect, ptsEarned, oggi) {
     const totCorrette = (userData.tot_corrette || 0) + (isCorrect ? 1 : 0);
     const pctCorrettezza = Math.round((totCorrette / totRisposte) * 100);
 
-    // Calcola pts_alltime: pct_correttezza × log(tot_risposte + 1)
-    // Appare in classifica solo dopo 30 risposte
-    const ptsAlltime = Math.round(pctCorrettezza * Math.log(totRisposte + 1));
-
     // Calcola streak
     const ieri = new Date();
     ieri.setDate(ieri.getDate() - 1);
@@ -980,7 +979,6 @@ async function saveRisposta(uid, quizId, isCorrect, ptsEarned, oggi) {
       tot_risposte: totRisposte,
       tot_corrette: totCorrette,
       pct_correttezza: pctCorrettezza,
-      pts_alltime: ptsAlltime,
       streak: streak,
       pts_total: (userData.pts_total || 0) + ptsEarned,
       pts_week: (userData.pts_week || 0) + ptsEarned,
