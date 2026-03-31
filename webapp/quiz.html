@@ -410,42 +410,6 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
     <div class="streak-pill" id="streak-pill">🔥 — giorni</div>
   </div>
 
-  <!-- LEADERBOARD TABS -->
-  <div class="lb-tabs">
-    <div class="lb-tab active" onclick="switchLbTab(this,'monthly')">Mensile</div>
-    <div class="lb-tab" onclick="switchLbTab(this,'alltime')">All Time</div>
-  </div>
-
-  <!-- LEADERBOARD -->
-  <div class="leaderboard">
-    <div class="lb-header">
-      <div class="lb-title" id="lb-title">Classifica Mensile</div>
-      <div class="lb-reset-txt" id="lb-reset-txt">Reset <span id="lb-reset-date">1° Aprile</span></div>
-    </div>
-    <!-- Banner premi mensili — sempre visibile -->
-    <div id="lb-prizes" style="display:none;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.65rem .9rem;margin-bottom:.75rem;">
-      <div style="font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:.45rem;">🏆 Premi mensili</div>
-      <div style="display:flex;flex-direction:column;gap:.25rem;">
-        <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
-          <span style="font-size:.9rem;">🥇</span><span style="color:var(--txt);font-weight:700;">1°</span><span style="color:var(--amber);font-weight:800;">1.000 crediti</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
-          <span style="font-size:.9rem;">🥈</span><span style="color:var(--txt);font-weight:700;">2°</span><span style="color:var(--amber);font-weight:800;">200 crediti</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
-          <span style="font-size:.9rem;">🥉</span><span style="color:var(--txt);font-weight:700;">3°</span><span style="color:var(--amber);font-weight:800;">50 crediti</span>
-        </div>
-      </div>
-    </div>
-    <!-- Nota premium per classifica mensile -->
-    <div id="lb-premium-note" style="display:none;font-size:.65rem;color:var(--dim);margin-bottom:.5rem;padding:.4rem .6rem;background:rgba(37,99,235,.06);border-radius:7px;border:1px solid rgba(37,99,235,.15);">
-      ⭐ Solo gli utenti <strong style="color:var(--blue-l);">Premium</strong> partecipano attivamente alla classifica mensile.
-    </div>
-    <div id="lb-list">
-      <div class="lb-row lb-loading">Caricamento classifica…</div>
-    </div>
-  </div>
-
   <!-- QUIZ CARD -->
   <div class="quiz-card" id="quiz-card">
     <!-- Stato: loading -->
@@ -533,6 +497,59 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
       </div>
     </div>
   </div><!-- /quiz-card -->
+
+  <!-- LEADERBOARD TABS -->
+  <div class="lb-tabs">
+    <div class="lb-tab active" onclick="switchLbTab(this,'monthly')">Mensile</div>
+    <div class="lb-tab" onclick="switchLbTab(this,'alltime')">All Time</div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div class="leaderboard">
+    <div class="lb-header">
+      <div class="lb-title" id="lb-title">Classifica Mensile</div>
+      <div class="lb-reset-txt" id="lb-reset-txt">Reset <span id="lb-reset-date">1° Aprile</span></div>
+    </div>
+    <!-- Banner premi mensili -->
+    <div id="lb-prizes" style="display:none;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.65rem .9rem;margin-bottom:.75rem;">
+      <div style="font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:.45rem;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--amber)" style="vertical-align:middle;margin-right:3px;"><path d="M12 2l2.09 6.26H22l-6.18 4.49 2.35 7.25L12 16.27l-6.17 3.73 2.35-7.25L2 8.26h7.91z"/></svg>
+        Premi mensili
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.25rem;">
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#FFD700" stroke="#b8970a" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial" fill="#7a5f00">1</text></svg>
+          <span style="color:var(--txt);font-weight:700;">1°</span><span style="color:var(--amber);font-weight:800;">1.000 crediti</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#C0C0C0" stroke="#8a8a8a" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial" fill="#444">2</text></svg>
+          <span style="color:var(--txt);font-weight:700;">2°</span><span style="color:var(--amber);font-weight:800;">200 crediti</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#CD7F32" stroke="#8a4f1a" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial" fill="#fff">3</text></svg>
+          <span style="color:var(--txt);font-weight:700;">3°</span><span style="color:var(--amber);font-weight:800;">50 crediti</span>
+        </div>
+      </div>
+    </div>
+    <!-- Nota premium -->
+    <div id="lb-premium-note" style="display:none;font-size:.65rem;color:var(--dim);margin-bottom:.5rem;padding:.4rem .6rem;background:rgba(37,99,235,.06);border-radius:7px;border:1px solid rgba(37,99,235,.15);">
+      ⭐ Solo gli utenti <strong style="color:var(--blue-l);">Premium</strong> partecipano attivamente alla classifica mensile.
+    </div>
+    <div id="lb-list">
+      <div class="lb-row lb-loading">Caricamento classifica…</div>
+    </div>
+    <!-- Banner free utente — visibile solo agli utenti free su tab mensile -->
+    <div id="lb-free-banner" style="display:none;margin-top:.75rem;background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(37,99,235,.04));border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:.75rem .9rem;">
+      <div style="font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-l);margin-bottom:.5rem;">I tuoi punti mensili</div>
+      <div style="display:flex;align-items:baseline;gap:.4rem;margin-bottom:.3rem;">
+        <span id="free-pts-val" style="font-size:1.4rem;font-weight:900;color:var(--txt);">0</span>
+        <span style="font-size:.72rem;color:var(--dim);font-weight:600;">pt</span>
+        <span id="free-rank-txt" style="font-size:.72rem;color:var(--txt2);margin-left:.3rem;">— saresti ?°</span>
+      </div>
+      <div style="font-size:.68rem;color:var(--dim);line-height:1.5;margin-bottom:.6rem;">Passa a Premium per partecipare e vincere i premi mensili.</div>
+      <button onclick="window.location.href='cocktail-legend.html#premium'" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.72rem;border:none;border-radius:8px;padding:.4rem .9rem;cursor:pointer;font-family:inherit;">Passa a Premium →</button>
+    </div>
+  </div>
 
   <!-- INFO PUNTI — sempre visibile -->
   <div style="display:flex;flex-direction:column;gap:.5rem;">
@@ -672,11 +689,21 @@ async function loadLeaderboard(tab) {
   resetDate.textContent = meta.reset;
 
   try {
-    const q = query(
-      collection(db, 'users'),
-      orderBy(meta.field, 'desc'),
-      limit(10)
-    );
+    let q;
+    if (tab === 'monthly') {
+      q = query(
+        collection(db, 'users'),
+        where('plan', '==', 'premium'),
+        orderBy(meta.field, 'desc'),
+        limit(10)
+      );
+    } else {
+      q = query(
+        collection(db, 'users'),
+        orderBy(meta.field, 'desc'),
+        limit(10)
+      );
+    }
     const snap = await getDocs(q);
 
     if (snap.empty) {
@@ -735,6 +762,25 @@ async function loadLeaderboard(tab) {
     }
 
     list.innerHTML = html;
+
+    // Banner free: mostra solo su tab mensile se utente è free
+    const freeBanner = document.getElementById('lb-free-banner');
+    if (freeBanner) {
+      const isPremium = window._quizUserData && window._quizUserData.plan === 'premium';
+      if (tab === 'monthly' && !isPremium && window._quizUserData) {
+        const myPts = window._quizUserData.pts_month || 0;
+        // Calcola posizione virtuale confrontando con i premium in classifica
+        let virtualRank = 1;
+        snap.forEach(function(ds) {
+          if ((ds.data().pts_month || 0) > myPts) virtualRank++;
+        });
+        document.getElementById('free-pts-val').textContent = myPts;
+        document.getElementById('free-rank-txt').textContent = '— saresti ' + virtualRank + '°';
+        freeBanner.style.display = '';
+      } else {
+        freeBanner.style.display = 'none';
+      }
+    }
   } catch(e) {
     // Se il campo non esiste ancora (nessun utente ha ancora punti), mostra messaggio amichevole
     list.innerHTML = '<div class="lb-row lb-loading">Nessun punteggio ancora — sii il primo! 🏆</div>';
@@ -745,11 +791,12 @@ async function loadLeaderboard(tab) {
 window.switchLbTab = function(el, tab) {
   document.querySelectorAll('.lb-tab').forEach(function(t){ t.classList.remove('active'); });
   el.classList.add('active');
-  // Mostra banner premi e nota premium solo su tab mensile
   const prizes = document.getElementById('lb-prizes');
   const premNote = document.getElementById('lb-premium-note');
+  const freeBanner = document.getElementById('lb-free-banner');
   if (prizes) prizes.style.display = tab === 'monthly' ? '' : 'none';
   if (premNote) premNote.style.display = tab === 'monthly' ? '' : 'none';
+  if (freeBanner) freeBanner.style.display = 'none'; // reset, loadLeaderboard lo gestisce
   loadLeaderboard(tab);
 };
 
@@ -986,8 +1033,10 @@ function renderQuiz(data, quizId, uid, oggi) {
 
   // Prossima domanda upcoming
   const upcomingSub = document.getElementById('upcoming-sub');
-  if (data.prossima_categoria) {
-    upcomingSub.textContent = 'Categoria: ' + data.prossima_categoria + (data.prossima_difficolta ? ' · Difficoltà: ' + data.prossima_difficolta : '');
+  const cat = data.prossima_categoria || data.categoria || '';
+  const diff2 = data.prossima_difficolta || data.difficolta || '';
+  if (cat || diff2) {
+    upcomingSub.textContent = 'Categoria: ' + cat + (diff2 ? ' · Difficoltà: ' + diff2 : '');
     upcomingSub.style.display = '';
   } else {
     upcomingSub.style.display = 'none';
