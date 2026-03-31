@@ -510,15 +510,17 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
 
     <!-- Stato: pronto a giocare -->
     <div id="state-start" style="display:none;text-align:center;padding:1.5rem 1rem;">
-      <div style="font-size:2.2rem;margin-bottom:.6rem;">⭐</div>
-      <div style="font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.3rem;">Pronto?</div>
-      <div style="font-size:.75rem;color:var(--dim);margin-bottom:1.2rem;line-height:1.5;">Hai 30 secondi per rispondere.<br>Più sei veloce, più punti guadagni.</div>
-      <button id="btn-gioca-ora" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.9rem;border:none;border-radius:12px;padding:.75rem 2rem;cursor:pointer;font-family:inherit;letter-spacing:.02em;transition:background .2s;">Gioca ora →</button>
-    </div>
-
-    <!-- Stato: countdown -->
-    <div id="state-countdown" style="display:none;text-align:center;padding:2.5rem 1rem;">
-      <div class="countdown-num" id="countdown-num">3</div>
+      <!-- Contenuto pronto -->
+      <div id="start-content">
+        <div style="font-size:2.2rem;margin-bottom:.6rem;">⭐</div>
+        <div style="font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.3rem;">Pronto?</div>
+        <div style="font-size:.75rem;color:var(--dim);margin-bottom:1.2rem;line-height:1.5;">Hai 30 secondi per rispondere.<br>Più sei veloce, più punti guadagni.</div>
+        <button id="btn-gioca-ora" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.9rem;border:none;border-radius:12px;padding:.75rem 2rem;cursor:pointer;font-family:inherit;letter-spacing:.02em;transition:background .2s;">Gioca ora →</button>
+      </div>
+      <!-- Countdown — appare al posto del contenuto pronto -->
+      <div id="start-countdown" style="display:none;padding:1rem 0;">
+        <div class="countdown-num" id="countdown-num">3</div>
+      </div>
     </div>
 
     <!-- Stato: quiz attivo -->
@@ -687,7 +689,7 @@ function calcPts(secondsLeft, isCorrect) {
 }
 
 function showState(id) {
-  ['state-loading','state-none','state-done','state-quiz','state-start','state-countdown'].forEach(function(s){
+  ['state-loading','state-none','state-done','state-quiz','state-start'].forEach(function(s){
     document.getElementById(s).style.display = (s === id) ? '' : 'none';
   });
 }
@@ -779,7 +781,7 @@ async function loadLeaderboard(tab) {
       const metaTxt = d.last_played ? (d.last_played===todayKey()?'Risposto oggi':'Risposto ieri') : '—';
       if (isMe) { myPtsVal=pts; myNick=d.nickname||'Tu'; myMetaTxt=metaTxt; }
       // Righe > 5 nascoste inizialmente (tranne la riga "me" se è oltre il 5°)
-      const isHidden = rank > 5 && !isMe;
+      const isHidden = rank > 5;
       html += `<div class="lb-row${isMe?' me':''}"${isHidden?' style="display:none;" data-full="1"':''}>
         <div class="lb-rank ${rankCls}">${rank}</div>
         <div class="lb-user">
@@ -1146,12 +1148,15 @@ function renderQuiz(data, quizId, uid, oggi) {
 
   // Timer parte solo quando l'utente clicca "Gioca ora"
   document.getElementById('btn-gioca-ora').onclick = function() {
-    // Countdown 3→2→1 dentro la card
     var count = 3;
     var numEl = document.getElementById('countdown-num');
-    showState('state-countdown');
+    var startContent = document.getElementById('start-content');
+    var startCountdown = document.getElementById('start-countdown');
+
+    // Nasconde il contenuto "pronto" e mostra il numero — card rimane visibile
+    startContent.style.display = 'none';
+    startCountdown.style.display = '';
     numEl.textContent = count;
-    // Forza re-animazione
     numEl.classList.remove('countdown-num');
     void numEl.offsetWidth;
     numEl.classList.add('countdown-num');
@@ -1160,6 +1165,9 @@ function renderQuiz(data, quizId, uid, oggi) {
       count--;
       if (count <= 0) {
         clearInterval(cdInterval);
+        // Ripristina stato start per eventuali riusi
+        startContent.style.display = '';
+        startCountdown.style.display = 'none';
         showState('state-quiz');
         startTimer(function() {
           answered = true;
