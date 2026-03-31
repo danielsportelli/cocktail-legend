@@ -376,6 +376,8 @@ window._isRegistering = false;
       fns.createUserWithEmailAndPassword(auth, email, pwd)
         .then(function(cred) {
           var user = cred.user;
+          // Salva nome+cognome su Firebase Auth
+          fns.updateProfile(user, { displayName: nome + ' ' + cognome });
           // Salva dati utente in Firestore
           var userDoc = fns.doc(db, 'users', user.uid);
           return fns.setDoc(userDoc, {
