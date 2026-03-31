@@ -391,7 +391,6 @@ window._isRegistering = false;
             provincia:   provincia,
             paese:       paese,
             plan:        'free',
-            crediti:     0,
             tc_accepted: true,
             tc_date:     new Date().toISOString(),
             marketing:   marketing,
