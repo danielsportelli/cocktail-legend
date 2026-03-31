@@ -372,11 +372,11 @@ body::after{
   border-top:1px solid rgba(255,255,255,.07);
   padding-top:.6rem;margin-top:.1rem;
   display:flex;flex-direction:column;gap:.15rem;
-  align-items:center;text-align:center;
+  align-items:center;text-align:center;width:100%;
 }
-.result-next-label{font-size:.58rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
-.result-next-time{font-size:.82rem;font-weight:700;color:var(--txt);}
-.result-next-meta{font-size:.7rem;color:var(--txt2);}
+.result-next-label{font-size:.58rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center;width:100%;}
+.result-next-time{font-size:.82rem;font-weight:700;color:var(--txt);text-align:center;width:100%;}
+.result-next-meta{font-size:.7rem;color:var(--txt2);text-align:center;width:100%;}
 
 /* ── STATS ── */
 .quiz-stats{display:flex;border-top:1px solid var(--brd);}
@@ -435,33 +435,6 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
   <div class="app-header">
     <div class="logo">Quiz del Giorno</div>
     <div class="streak-pill" id="streak-pill">🔥 — giorni</div>
-  </div>
-
-  <!-- BADGE PUNTI & PREMI -->
-  <div style="display:flex;justify-content:center;">
-    <button id="prizes-btn" style="display:inline-flex;align-items:center;gap:.35rem;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:99px;padding:.3rem .85rem;cursor:pointer;font-family:inherit;font-size:.68rem;font-weight:700;color:var(--amber);letter-spacing:.02em;">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--amber)"><path d="M12 2l2.09 6.26H22l-6.18 4.49 2.35 7.25L12 16.27l-6.17 3.73 2.35-7.25L2 8.26h7.91z"/></svg>
-      Punti & Premi
-    </button>
-  </div>
-
-  <!-- POPUP PUNTI & PREMI -->
-  <div id="prizes-popup" style="display:none;background:var(--surf);border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:1rem 1.1rem;">
-    <div style="font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:.75rem;">Come funzionano i punti</div>
-    <div style="font-size:.75rem;color:var(--txt2);line-height:1.9;margin-bottom:.85rem;">
-      ✓ Risposta corretta: <strong style="color:var(--txt);">100 pt base</strong><br>
-      ⚡ Bonus velocità: fino a <strong style="color:var(--txt);">+50 pt</strong> in base al tempo rimasto<br>
-      ✗ Risposta sbagliata o timeout: <strong style="color:var(--txt);">0 pt</strong>
-    </div>
-    <div style="font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:.6rem;">Premi mensili</div>
-    <div style="font-size:.72rem;color:var(--txt2);line-height:1;display:flex;flex-direction:column;gap:.45rem;margin-bottom:.7rem;">
-      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#fbbf24;min-width:1.2rem;">1°</span><span style="color:var(--txt);">1.000 crediti</span></div>
-      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#94a3b8;min-width:1.2rem;">2°</span><span style="color:var(--txt);">200 crediti</span></div>
-      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#d97706;min-width:1.2rem;">3°</span><span style="color:var(--txt);">50 crediti</span></div>
-      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#38bdf8;min-width:1.2rem;">4°</span><span style="color:var(--txt);">50 crediti</span></div>
-      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#38bdf8;min-width:1.2rem;">5°</span><span style="color:var(--txt);">50 crediti</span></div>
-    </div>
-    <div style="font-size:.65rem;color:var(--dim);line-height:1.5;">I crediti si utilizzano nelle funzioni AI di Cocktail Legend.</div>
   </div>
 
   <!-- QUIZ CARD -->
@@ -538,7 +511,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
           <div class="result-pts" id="result-pts">+0 pt</div>
         </div>
         <div class="result-explanation" id="result-explanation"></div>
-        <div class="result-next" style="text-align:center;align-items:center;">
+        <div class="result-next">
           <div class="result-next-label">🕛 Prossima domanda</div>
           <div class="result-next-time">Domani alle 00:00</div>
           <div class="result-next-meta" id="result-next-meta">—</div>
@@ -562,6 +535,29 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
       </div>
     </div>
   </div><!-- /quiz-card -->
+
+  <!-- BADGE PUNTI & PREMI -->
+  <button id="prizes-btn" style="width:100%;display:flex;align-items:center;justify-content:center;gap:.4rem;background:rgba(37,99,235,.07);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:.55rem 1rem;cursor:pointer;font-family:inherit;font-size:.72rem;font-weight:700;color:var(--blue-l);letter-spacing:.02em;">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--blue-l)"><path d="M12 2l2.09 6.26H22l-6.18 4.49 2.35 7.25L12 16.27l-6.17 3.73 2.35-7.25L2 8.26h7.91z"/></svg>
+    Punti & Premi
+  </button>
+  <div id="prizes-popup" style="display:none;background:var(--surf);border:1px solid rgba(96,165,250,.2);border-radius:14px;padding:1rem 1.1rem;">
+    <div style="font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-l);margin-bottom:.75rem;">Come funzionano i punti</div>
+    <div style="font-size:.75rem;color:var(--txt2);line-height:1.9;margin-bottom:.85rem;">
+      ✓ Risposta corretta: <strong style="color:var(--txt);">100 pt base</strong><br>
+      ⚡ Bonus velocità: fino a <strong style="color:var(--txt);">+50 pt</strong> in base al tempo rimasto<br>
+      ✗ Risposta sbagliata o timeout: <strong style="color:var(--txt);">0 pt</strong>
+    </div>
+    <div style="font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-l);margin-bottom:.6rem;">Premi mensili — dedicati agli utenti Premium</div>
+    <div style="font-size:.72rem;color:var(--txt2);line-height:1;display:flex;flex-direction:column;gap:.45rem;margin-bottom:.7rem;">
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#fbbf24;min-width:1.2rem;">1°</span><span style="color:var(--txt);">1.000 crediti</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#94a3b8;min-width:1.2rem;">2°</span><span style="color:var(--txt);">200 crediti</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#d97706;min-width:1.2rem;">3°</span><span style="color:var(--txt);">50 crediti</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#38bdf8;min-width:1.2rem;">4°</span><span style="color:var(--txt);">50 crediti</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#38bdf8;min-width:1.2rem;">5°</span><span style="color:var(--txt);">50 crediti</span></div>
+    </div>
+    <div style="font-size:.65rem;color:var(--dim);line-height:1.5;">I crediti sono utilizzabili nelle funzioni AI di Cocktail Legend.</div>
+  </div>
 
   <!-- LEADERBOARD SECTION (tabs + card ravvicinati) -->
   <div style="display:flex;flex-direction:column;gap:.35rem;">
