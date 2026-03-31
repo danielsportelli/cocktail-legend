@@ -498,6 +498,9 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
     </div>
   </div><!-- /quiz-card -->
 
+  <!-- LEADERBOARD SECTION (tabs + card ravvicinati) -->
+  <div style="display:flex;flex-direction:column;gap:.35rem;">
+
   <!-- LEADERBOARD TABS -->
   <div class="lb-tabs">
     <div class="lb-tab active" onclick="switchLbTab(this,'monthly')">Mensile</div>
@@ -511,7 +514,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
       <div class="lb-reset-txt" id="lb-reset-txt">Reset <span id="lb-reset-date">1° Aprile</span></div>
     </div>
     <!-- Banner premi mensili -->
-    <div id="lb-prizes" style="display:none;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.65rem .9rem;margin-bottom:.75rem;">
+    <div id="lb-prizes" style="display:none;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.65rem .9rem;margin:0.5rem .5rem .75rem .5rem;">
       <div style="font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:.45rem;">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--amber)" style="vertical-align:middle;margin-right:3px;"><path d="M12 2l2.09 6.26H22l-6.18 4.49 2.35 7.25L12 16.27l-6.17 3.73 2.35-7.25L2 8.26h7.91z"/></svg>
         Premi mensili
@@ -519,20 +522,20 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
       <div style="display:flex;flex-direction:column;gap:.25rem;">
         <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#FFD700" stroke="#b8970a" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial" fill="#7a5f00">1</text></svg>
-          <span style="color:var(--txt);font-weight:700;">1°</span><span style="color:var(--amber);font-weight:800;">1.000 crediti</span>
+          <span style="color:var(--amber);font-weight:800;">1.000 crediti</span>
         </div>
         <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#C0C0C0" stroke="#8a8a8a" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial" fill="#444">2</text></svg>
-          <span style="color:var(--txt);font-weight:700;">2°</span><span style="color:var(--amber);font-weight:800;">200 crediti</span>
+          <span style="color:var(--amber);font-weight:800;">200 crediti</span>
         </div>
         <div style="display:flex;align-items:center;gap:.5rem;font-size:.72rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#CD7F32" stroke="#8a4f1a" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial" fill="#fff">3</text></svg>
-          <span style="color:var(--txt);font-weight:700;">3°</span><span style="color:var(--amber);font-weight:800;">50 crediti</span>
+          <span style="color:var(--amber);font-weight:800;">50 crediti</span>
         </div>
       </div>
     </div>
     <!-- Nota premium -->
-    <div id="lb-premium-note" style="display:none;font-size:.65rem;color:var(--dim);margin-bottom:.5rem;padding:.4rem .6rem;background:rgba(37,99,235,.06);border-radius:7px;border:1px solid rgba(37,99,235,.15);">
+    <div id="lb-premium-note" style="display:none;font-size:.65rem;color:var(--dim);margin:0 .5rem .5rem .5rem;padding:.4rem .6rem;background:rgba(37,99,235,.06);border-radius:7px;border:1px solid rgba(37,99,235,.15);">
       ⭐ Solo gli utenti <strong style="color:var(--blue-l);">Premium</strong> partecipano attivamente alla classifica mensile.
     </div>
     <div id="lb-list">
@@ -549,7 +552,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
       <div style="font-size:.68rem;color:var(--dim);line-height:1.5;margin-bottom:.6rem;">Passa a Premium per partecipare e vincere i premi mensili.</div>
       <button onclick="window.location.href='cocktail-legend.html#premium'" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.72rem;border:none;border-radius:8px;padding:.4rem .9rem;cursor:pointer;font-family:inherit;">Passa a Premium →</button>
     </div>
-  </div>
+  </div><!-- /leaderboard section -->
 
   <!-- INFO PUNTI — sempre visibile -->
   <div style="display:flex;flex-direction:column;gap:.5rem;">
@@ -588,7 +591,7 @@ import {
 import {
   getFirestore,
   doc, getDoc, setDoc, updateDoc,
-  collection, query, orderBy, limit, getDocs,
+  collection, query, where, orderBy, limit, getDocs,
   increment, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
