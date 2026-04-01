@@ -406,11 +406,11 @@
     <!-- AI — accent amber, top -->
     <button class="bsheet-item bsheet-item--ai" id="bsheet-ai-btn" onclick="closeNavMenu();openDrawer('ai')">
       <div class="bsheet-item-ico bsheet-item-ico--ai">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.09 6.26L20.18 10l-6.09 1.74L12 18l-2.09-6.26L3.82 10l6.09-1.74Z" stroke="#f59e0b"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C11.5 6.5 9.5 9.5 2 12C9.5 14.5 11.5 17.5 12 22C12.5 17.5 14.5 14.5 22 12C14.5 9.5 12.5 6.5 12 2Z" fill="#f59e0b"/></svg>
       </div>
       <div class="bsheet-ai-text">
         <span class="bsheet-item-lbl bsheet-item-lbl--ai">Barman AI</span>
-        <span class="bsheet-ai-sub">Crea cocktail con l'intelligenza artificiale</span>
+        <span class="bsheet-ai-sub">Chiedi al nostro barman intelligente</span>
       </div>
       <span class="bsheet-ai-cta">Apri →</span>
     </button>
@@ -1801,11 +1801,23 @@ function calcABV() {
 
   // AI e Account ora sono nel bottom sheet — lente apre searchbar
   var srchBtn = document.getElementById('hdr-srch-btn');
-  if (srchBtn) {
+  var filterBar = document.getElementById('filter-bar');
+  var srchOpen = false;
+  if (srchBtn && filterBar) {
+    // Nascondi filter-bar di default se si vuole toggle — ma solo se era nascosta
     srchBtn.addEventListener('click', function() {
-      closeAllDrawers();
-      var inp = document.getElementById('srch');
-      if (inp) { inp.focus(); inp.scrollIntoView({behavior:'smooth', block:'center'}); }
+      srchOpen = !srchOpen;
+      if (srchOpen) {
+        filterBar.classList.remove('hidden');
+        srchBtn.classList.add('active');
+        setTimeout(function(){ 
+          var inp = document.getElementById('srch');
+          if (inp) inp.focus();
+        }, 310);
+      } else {
+        filterBar.classList.add('hidden');
+        srchBtn.classList.remove('active');
+      }
     });
   }
 

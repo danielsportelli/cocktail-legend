@@ -19,7 +19,6 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   background:rgba(10,15,30,.98);
   backdrop-filter:blur(16px);
   border-bottom:1px solid var(--brd);
-  box-shadow:0 2px 12px rgba(0,0,0,.45);
   display:flex;align-items:center;justify-content:space-between;
 }
 @media (display-mode: standalone) {
@@ -63,7 +62,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .hdr-fav-btn.active svg path{stroke:var(--amber);fill:rgba(245,158,11,.2);}
 /* Lente search header */
 .hdr-srch-btn svg{stroke:var(--txt2);}
-.hdr-srch-btn.active svg{stroke:var(--blue-l);}
+.hdr-srch-btn.active svg{stroke:var(--amber);}
 
 /* Hamburger */
 .hdr-menu-btn{
@@ -181,6 +180,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .bsheet-ai-text{
   flex:1;display:flex;flex-direction:column;gap:.15rem;
+  align-items:flex-start;
 }
 .bsheet-item-lbl--ai{
   color:var(--amber);font-size:.95rem;font-weight:700;
@@ -267,6 +267,17 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   position:sticky;top:var(--hdr-h);z-index:1000;
   background:rgba(10,15,30,.97);
   padding:.6rem 5%;
+  overflow:hidden;
+  max-height:200px;
+  transition:max-height .3s cubic-bezier(.4,0,.2,1), opacity .25s ease, padding .3s ease;
+  opacity:1;
+}
+.filter-bar.hidden{
+  max-height:0;
+  opacity:0;
+  padding-top:0;
+  padding-bottom:0;
+  pointer-events:none;
 }
 @media (display-mode: standalone) {
   .filter-bar{
