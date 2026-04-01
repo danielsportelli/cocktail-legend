@@ -187,6 +187,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .bsheet-ai-sub{
   font-size:.72rem;color:var(--dim);font-weight:500;
+  text-align:left;
 }
 .bsheet-ai-cta{
   font-size:.78rem;font-weight:700;color:var(--amber);
@@ -210,7 +211,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   border-radius:0 0 18px 18px;
   border-top:none;
   border-bottom:1px solid rgba(37,99,235,.15);
-  transform:translateY(-100%);
+  transform:translateY(-110%);
   transition:transform .32s cubic-bezier(.4,0,.2,1) !important;
   box-shadow:0 8px 40px rgba(0,0,0,.5);
   z-index:1050;
@@ -237,7 +238,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   border-radius:0 0 18px 18px;
   border-top:none;
   border-bottom:1px solid rgba(37,99,235,.15);
-  transform:translateY(-100%);
+  transform:translateY(-110%);
   transition:transform .32s cubic-bezier(.4,0,.2,1) !important;
   box-shadow:0 8px 40px rgba(0,0,0,.5);
   z-index:1050;
@@ -267,17 +268,20 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   position:sticky;top:var(--hdr-h);z-index:1000;
   background:rgba(10,15,30,.97);
   padding:.6rem 5%;
-  overflow:hidden;
-  max-height:200px;
-  transition:max-height .3s cubic-bezier(.4,0,.2,1), opacity .25s ease, padding .3s ease;
+  transform:translateY(0);
   opacity:1;
+  transition:transform .3s cubic-bezier(.4,0,.2,1), opacity .25s ease;
+  transform-origin:top center;
+  overflow:hidden;
 }
 .filter-bar.hidden{
-  max-height:0;
+  transform:translateY(-110%);
   opacity:0;
-  padding-top:0;
-  padding-bottom:0;
   pointer-events:none;
+  position:fixed;
+  top:var(--hdr-h);
+  left:0;right:0;
+  z-index:999;
 }
 @media (display-mode: standalone) {
   .filter-bar{
@@ -917,7 +921,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   border-radius:0 0 18px 18px;
   max-height:calc(100vh - var(--hdr-h));
   overflow-y:auto;
-  transform:translateY(-100%);
+  transform:translateY(-110%);
   transition:transform .32s cubic-bezier(.4,0,.2,1);
   box-shadow:0 8px 40px rgba(0,0,0,.5);
   will-change:transform;
