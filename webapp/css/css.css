@@ -19,7 +19,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   background:rgba(10,15,30,.97);
   backdrop-filter:blur(16px);
   border-bottom:1px solid var(--brd);
-  display:flex;align-items:center;justify-content:space-between;
+  display:flex;align-items:stretch;justify-content:space-between;
 }
 @media (display-mode: standalone) {
   .hdr{
@@ -27,7 +27,10 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
     padding-top:env(safe-area-inset-top, 0px);
   }
 }
-.hdr-inner{display:flex;flex-direction:column;align-items:flex-start;padding-left:3%;}
+.hdr-inner{
+  display:flex;flex-direction:column;justify-content:center;
+  align-items:flex-start;padding-left:3%;
+}
 .hdr-lbl{display:none;}
 .hdr h1{
   font-size:1.1rem;font-weight:900;letter-spacing:-.03em;
@@ -43,15 +46,28 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 /* Header actions — gruppo icone destra */
 .hdr-actions{
   display:flex;align-items:center;gap:.15rem;
-  height:100%;
 }
 
-/* Hamburger menu button */
+/* Icone header generiche */
+.hdr-icon-btn{
+  background:none;border:none;cursor:pointer;
+  padding:.4rem;
+  display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;
+}
+.hdr-icon-btn svg{stroke:var(--txt2);fill:none;transition:stroke .2s, fill .2s;}
+.hdr-icon-btn.active svg{stroke:var(--amber);}
+/* Cuore preferiti attivo */
+.hdr-fav-btn.active svg path{stroke:var(--amber);fill:rgba(245,158,11,.2);}
+/* Icona AI */
+.hdr-ai-btn svg{stroke:var(--txt2);fill:none;}
+.hdr-ai-btn.active svg{stroke:var(--amber);fill:var(--amber);}
+
+/* Hamburger */
 .hdr-menu-btn{
   background:none;border:none;cursor:pointer;
-  color:var(--txt2);padding:.4rem;
-  display:flex;flex-direction:column;justify-content:center;gap:5px;
-  height:100%;
+  padding:.4rem;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
   -webkit-tap-highlight-color:transparent;
 }
 .hdr-menu-btn span{
@@ -79,22 +95,6 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   transition:color .2s;
 }
 .nav-menu-close:hover{color:var(--txt);}
-
-/* Header actions — icone generiche */
-.hdr-icon-btn{
-  background:none;border:none;cursor:pointer;
-  padding:.4rem;
-  display:flex;align-items:center;justify-content:center;
-  height:100%;
-  -webkit-tap-highlight-color:transparent;
-}
-.hdr-icon-btn svg{stroke:var(--txt2);fill:none;transition:stroke .2s, fill .2s;}
-.hdr-icon-btn.active svg{stroke:var(--amber);}
-/* Cuore preferiti attivo */
-.hdr-fav-btn.active svg path{stroke:var(--amber);fill:rgba(245,158,11,.2);}
-/* Icona AI — outline di default, piena amber quando attiva */
-.hdr-ai-btn svg{stroke:var(--txt2);fill:none;}
-.hdr-ai-btn.active svg{stroke:var(--amber);fill:var(--amber);}
 
 /* Drawer AI — scende dall'alto (stesso schema acc) */
 #drawer-ai{
