@@ -383,10 +383,22 @@
 
 <header class="hdr">
   <div class="hdr-inner">
-    <h1>Cocktail Legend</h1>
-    <p>La prima app per bartender professionisti</p>
+    <h1>
+      <span class="l1">Cocktail</span>
+      <span class="l2">Legend</span>
+    </h1>
   </div>
+  <button class="hdr-menu-btn" id="hdr-menu-btn" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </header>
+
+<!-- MODAL MENU FULLSCREEN -->
+<div class="nav-menu-modal" id="nav-menu-modal">
+  <button class="nav-menu-close" id="nav-menu-close">✕</button>
+</div>
 
 <!-- BARRA FILTRI STICKY -->
 <a href="quiz.html" class="sg-banner">
@@ -1695,6 +1707,22 @@ function calcABV() {
   document.addEventListener('keydown', function(e){
     if (e.key === 'PrintScreen' || e.keyCode === 44) { e.preventDefault(); return false; }
   });
+
+  // ── HAMBURGER MENU ──────────────────────────────────
+  var menuBtn = document.getElementById('hdr-menu-btn');
+  var menuModal = document.getElementById('nav-menu-modal');
+  var menuClose = document.getElementById('nav-menu-close');
+  if (menuBtn && menuModal && menuClose) {
+    menuBtn.addEventListener('click', function() {
+      menuModal.classList.add('open');
+    });
+    menuClose.addEventListener('click', function() {
+      menuModal.classList.remove('open');
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') menuModal.classList.remove('open');
+    });
+  }
 </script>
 
 </body>
