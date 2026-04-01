@@ -1,0 +1,1799 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cocktail Legend</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0f1e">
+<link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cocktail Legend">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/css.css">
+<script>
+  if(localStorage.getItem('cl_logged')==='1'){document.write('<style>#login-overlay{display:none!important}</style>');}
+  (function(){
+    var p = new URLSearchParams(window.location.search);
+    if(p.get('mode')==='resetPassword'){
+      window._isResetPasswordFlow = true;
+      // Nasconde overlay SUBITO prima del render (sincrono)
+      document.write('<style>#login-overlay{visibility:hidden}</style>');
+      // Dopo DOM ready: nasconde form via style inline (reversibile) e mostra overlay
+      document.addEventListener('DOMContentLoaded', function(){
+        var overlay = document.getElementById('login-overlay');
+        var formLogin = document.getElementById('form-login');
+        var formRegister = document.getElementById('form-register');
+        var formVerify = document.getElementById('form-verify');
+        var tabs = document.querySelector('.auth-tabs');
+        if(formLogin) formLogin.style.display = 'none';
+        if(formRegister) formRegister.style.display = 'none';
+        if(formVerify) formVerify.style.display = 'none';
+        if(tabs) tabs.style.display = 'none';
+        // Ora mostra overlay (form reset-confirm sarà mostrato da switchAuthTab)
+        if(overlay) overlay.style.visibility = 'visible';
+      });
+    }
+  })();
+</script>
+</head>
+<body>
+
+<div class="login-overlay" id="login-overlay">
+  <div class="login-box">
+
+    <div class="login-title">Cocktail Legend</div>
+
+    <!-- Tab switcher -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Accedi</button>
+      <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Registrati</button>
+    </div>
+
+    <!-- ── FORM LOGIN ── -->
+    <div id="form-login">
+      <div class="login-input-wrap">
+        <input class="login-input" type="email" id="login-email" placeholder="Email" autocomplete="email">
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="password" id="login-pwd" placeholder="Password" autocomplete="current-password">
+        <button class="login-eye" id="login-eye" type="button">&#128065;</button>
+      </div>
+      <button class="login-btn" id="login-btn">Accedi &rarr;</button>
+      <div class="login-err" id="login-err"></div>
+      <p class="login-note" style="margin-top:12px;">
+        <a href="#" id="login-reset" style="color:var(--amber);text-decoration:none;font-size:0.82rem;">Password dimenticata?</a>
+      </p>
+    </div>
+
+    <!-- ── FORM REGISTRAZIONE ── -->
+    <div id="form-register" style="display:none;">
+      <div class="reg-row">
+        <div class="login-input-wrap">
+          <input class="login-input" type="text" id="reg-nome" placeholder="Nome *" autocomplete="given-name">
+        </div>
+        <div class="login-input-wrap">
+          <input class="login-input" type="text" id="reg-cognome" placeholder="Cognome *" autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="login-input-wrap">
+        <input class="login-input" type="email" id="reg-email" placeholder="Email *" autocomplete="email">
+      </div>
+      <div class="login-input-wrap tel-wrap">
+        <select class="tel-prefix" id="reg-prefix">
+          <option value="+39" data-flag="🇮🇹" selected>🇮🇹 +39</option>
+          <option value="+1" data-flag="🇺🇸">🇺🇸 +1</option>
+          <option value="+44" data-flag="🇬🇧">🇬🇧 +44</option>
+          <option value="+33" data-flag="🇫🇷">🇫🇷 +33</option>
+          <option value="+49" data-flag="🇩🇪">🇩🇪 +49</option>
+          <option value="+34" data-flag="🇪🇸">🇪🇸 +34</option>
+          <option value="+351" data-flag="🇵🇹">🇵🇹 +351</option>
+          <option value="+41" data-flag="🇨🇭">🇨🇭 +41</option>
+          <option value="+43" data-flag="🇦🇹">🇦🇹 +43</option>
+          <option value="+32" data-flag="🇧🇪">🇧🇪 +32</option>
+          <option value="+31" data-flag="🇳🇱">🇳🇱 +31</option>
+          <option value="+352" data-flag="🇱🇺">🇱🇺 +352</option>
+          <option value="+30" data-flag="🇬🇷">🇬🇷 +30</option>
+          <option value="+48" data-flag="🇵🇱">🇵🇱 +48</option>
+          <option value="+420" data-flag="🇨🇿">🇨🇿 +420</option>
+          <option value="+36" data-flag="🇭🇺">🇭🇺 +36</option>
+          <option value="+40" data-flag="🇷🇴">🇷🇴 +40</option>
+          <option value="+359" data-flag="🇧🇬">🇧🇬 +359</option>
+          <option value="+385" data-flag="🇭🇷">🇭🇷 +385</option>
+          <option value="+386" data-flag="🇸🇮">🇸🇮 +386</option>
+          <option value="+381" data-flag="🇷🇸">🇷🇸 +381</option>
+          <option value="+382" data-flag="🇲🇪">🇲🇪 +382</option>
+          <option value="+387" data-flag="🇧🇦">🇧🇦 +387</option>
+          <option value="+355" data-flag="🇦🇱">🇦🇱 +355</option>
+          <option value="+389" data-flag="🇲🇰">🇲🇰 +389</option>
+          <option value="+90" data-flag="🇹🇷">🇹🇷 +90</option>
+          <option value="+380" data-flag="🇺🇦">🇺🇦 +380</option>
+          <option value="+7" data-flag="🇷🇺">🇷🇺 +7</option>
+          <option value="+55" data-flag="🇧🇷">🇧🇷 +55</option>
+          <option value="+54" data-flag="🇦🇷">🇦🇷 +54</option>
+          <option value="+52" data-flag="🇲🇽">🇲🇽 +52</option>
+          <option value="+57" data-flag="🇨🇴">🇨🇴 +57</option>
+          <option value="+56" data-flag="🇨🇱">🇨🇱 +56</option>
+          <option value="+51" data-flag="🇵🇪">🇵🇪 +51</option>
+          <option value="+58" data-flag="🇻🇪">🇻🇪 +58</option>
+          <option value="+61" data-flag="🇦🇺">🇦🇺 +61</option>
+          <option value="+64" data-flag="🇳🇿">🇳🇿 +64</option>
+          <option value="+81" data-flag="🇯🇵">🇯🇵 +81</option>
+          <option value="+82" data-flag="🇰🇷">🇰🇷 +82</option>
+          <option value="+86" data-flag="🇨🇳">🇨🇳 +86</option>
+          <option value="+91" data-flag="🇮🇳">🇮🇳 +91</option>
+          <option value="+971" data-flag="🇦🇪">🇦🇪 +971</option>
+          <option value="+966" data-flag="🇸🇦">🇸🇦 +966</option>
+          <option value="+20" data-flag="🇪🇬">🇪🇬 +20</option>
+          <option value="+27" data-flag="🇿🇦">🇿🇦 +27</option>
+          <option value="+212" data-flag="🇲🇦">🇲🇦 +212</option>
+        </select>
+        <div class="tel-divider"></div>
+        <input class="tel-number" type="tel" id="reg-tel" placeholder="Telefono *" autocomplete="tel-national" maxlength="10" inputmode="numeric">
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="text" id="reg-via" placeholder="Via / Indirizzo *" autocomplete="street-address">
+      </div>
+      <div class="reg-row">
+        <div class="login-input-wrap" style="flex:1.3;">
+          <input class="login-input" type="text" id="reg-civico" placeholder="N° *" autocomplete="off">
+        </div>
+        <div class="login-input-wrap" style="flex:2;">
+          <input class="login-input" type="text" id="reg-cap" placeholder="CAP *" autocomplete="postal-code" maxlength="5" inputmode="numeric" pattern="[0-9]{5}">
+        </div>
+        <div class="login-input-wrap" style="flex:1.8;">
+          <select class="login-input login-select" id="reg-provincia" autocomplete="address-level2">
+            <option value="" disabled selected>Prov. *</option>
+            <option value="AG">AG</option><option value="AL">AL</option><option value="AN">AN</option>
+            <option value="AO">AO</option><option value="AP">AP</option><option value="AQ">AQ</option>
+            <option value="AR">AR</option><option value="AT">AT</option><option value="AV">AV</option>
+            <option value="BA">BA</option><option value="BG">BG</option><option value="BI">BI</option>
+            <option value="BL">BL</option><option value="BN">BN</option><option value="BO">BO</option>
+            <option value="BR">BR</option><option value="BS">BS</option><option value="BT">BT</option>
+            <option value="BZ">BZ</option><option value="CA">CA</option><option value="CB">CB</option>
+            <option value="CE">CE</option><option value="CH">CH</option><option value="CL">CL</option>
+            <option value="CN">CN</option><option value="CO">CO</option><option value="CR">CR</option>
+            <option value="CS">CS</option><option value="CT">CT</option><option value="CZ">CZ</option>
+            <option value="EN">EN</option><option value="FC">FC</option><option value="FE">FE</option>
+            <option value="FG">FG</option><option value="FI">FI</option><option value="FM">FM</option>
+            <option value="FR">FR</option><option value="GE">GE</option><option value="GO">GO</option>
+            <option value="GR">GR</option><option value="IM">IM</option><option value="IS">IS</option>
+            <option value="KR">KR</option><option value="LC">LC</option><option value="LE">LE</option>
+            <option value="LI">LI</option><option value="LO">LO</option><option value="LT">LT</option>
+            <option value="LU">LU</option><option value="MB">MB</option><option value="MC">MC</option>
+            <option value="ME">ME</option><option value="MI">MI</option><option value="MN">MN</option>
+            <option value="MO">MO</option><option value="MS">MS</option><option value="MT">MT</option>
+            <option value="NA">NA</option><option value="NO">NO</option><option value="NU">NU</option>
+            <option value="OR">OR</option><option value="PA">PA</option><option value="PC">PC</option>
+            <option value="PD">PD</option><option value="PE">PE</option><option value="PG">PG</option>
+            <option value="PI">PI</option><option value="PM">PM</option><option value="PN">PN</option>
+            <option value="PO">PO</option><option value="PR">PR</option><option value="PT">PT</option>
+            <option value="PU">PU</option><option value="PV">PV</option><option value="PZ">PZ</option>
+            <option value="RA">RA</option><option value="RC">RC</option><option value="RE">RE</option>
+            <option value="RG">RG</option><option value="RI">RI</option><option value="RM">RM</option>
+            <option value="RN">RN</option><option value="RO">RO</option><option value="SA">SA</option>
+            <option value="SI">SI</option><option value="SO">SO</option><option value="SP">SP</option>
+            <option value="-">--</option>
+            <option value="SR">SR</option><option value="SS">SS</option><option value="SU">SU</option>
+            <option value="SV">SV</option><option value="TA">TA</option><option value="TE">TE</option>
+            <option value="TN">TN</option><option value="TO">TO</option><option value="TP">TP</option>
+            <option value="TR">TR</option><option value="TS">TS</option><option value="TV">TV</option>
+            <option value="UD">UD</option><option value="VA">VA</option><option value="VB">VB</option>
+            <option value="VC">VC</option><option value="VE">VE</option><option value="VI">VI</option>
+            <option value="VR">VR</option><option value="VT">VT</option><option value="VV">VV</option>
+          </select>
+        </div>
+      </div>
+      <div class="login-input-wrap">
+        <select class="login-input login-select" id="reg-paese" autocomplete="country-name">
+          <option value="Italia" selected>🇮🇹 Italia</option>
+          <option value="Afghanistan">Afghanistan</option>
+          <option value="Albania">Albania</option>
+          <option value="Algeria">Algeria</option>
+          <option value="Andorra">Andorra</option>
+          <option value="Angola">Angola</option>
+          <option value="Argentina">Argentina</option>
+          <option value="Armenia">Armenia</option>
+          <option value="Australia">Australia</option>
+          <option value="Austria">Austria</option>
+          <option value="Azerbaijan">Azerbaijan</option>
+          <option value="Bahrain">Bahrain</option>
+          <option value="Bangladesh">Bangladesh</option>
+          <option value="Belarus">Belarus</option>
+          <option value="Belgio">Belgio</option>
+          <option value="Bolivia">Bolivia</option>
+          <option value="Bosnia">Bosnia ed Erzegovina</option>
+          <option value="Brasile">Brasile</option>
+          <option value="Bulgaria">Bulgaria</option>
+          <option value="Canada">Canada</option>
+          <option value="Cile">Cile</option>
+          <option value="Cina">Cina</option>
+          <option value="Colombia">Colombia</option>
+          <option value="Corea del Sud">Corea del Sud</option>
+          <option value="Croazia">Croazia</option>
+          <option value="Danimarca">Danimarca</option>
+          <option value="Ecuador">Ecuador</option>
+          <option value="Egitto">Egitto</option>
+          <option value="Emirati Arabi Uniti">Emirati Arabi Uniti</option>
+          <option value="Estonia">Estonia</option>
+          <option value="Etiopia">Etiopia</option>
+          <option value="Filippine">Filippine</option>
+          <option value="Finlandia">Finlandia</option>
+          <option value="Francia">Francia</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Germania">Germania</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Giappone">Giappone</option>
+          <option value="Grecia">Grecia</option>
+          <option value="India">India</option>
+          <option value="Indonesia">Indonesia</option>
+          <option value="Iran">Iran</option>
+          <option value="Iraq">Iraq</option>
+          <option value="Irlanda">Irlanda</option>
+          <option value="Islanda">Islanda</option>
+          <option value="Israele">Israele</option>
+          <option value="Kazakhstan">Kazakhstan</option>
+          <option value="Kenya">Kenya</option>
+          <option value="Kosovo">Kosovo</option>
+          <option value="Lettonia">Lettonia</option>
+          <option value="Libano">Libano</option>
+          <option value="Libia">Libia</option>
+          <option value="Lituania">Lituania</option>
+          <option value="Lussemburgo">Lussemburgo</option>
+          <option value="Macedonia">Macedonia del Nord</option>
+          <option value="Malaysia">Malaysia</option>
+          <option value="Malta">Malta</option>
+          <option value="Marocco">Marocco</option>
+          <option value="Messico">Messico</option>
+          <option value="Moldova">Moldova</option>
+          <option value="Monaco">Monaco</option>
+          <option value="Montenegro">Montenegro</option>
+          <option value="Nigeria">Nigeria</option>
+          <option value="Norvegia">Norvegia</option>
+          <option value="Nuova Zelanda">Nuova Zelanda</option>
+          <option value="Paesi Bassi">Paesi Bassi</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="Panama">Panama</option>
+          <option value="Paraguay">Paraguay</option>
+          <option value="Peru">Perù</option>
+          <option value="Polonia">Polonia</option>
+          <option value="Portogallo">Portogallo</option>
+          <option value="Qatar">Qatar</option>
+          <option value="Repubblica Ceca">Repubblica Ceca</option>
+          <option value="Romania">Romania</option>
+          <option value="Russia">Russia</option>
+          <option value="Arabia Saudita">Arabia Saudita</option>
+          <option value="San Marino">San Marino</option>
+          <option value="Serbia">Serbia</option>
+          <option value="Singapore">Singapore</option>
+          <option value="Siria">Siria</option>
+          <option value="Slovacchia">Slovacchia</option>
+          <option value="Slovenia">Slovenia</option>
+          <option value="Somalia">Somalia</option>
+          <option value="Spagna">Spagna</option>
+          <option value="Sri Lanka">Sri Lanka</option>
+          <option value="Sudafrica">Sudafrica</option>
+          <option value="Svezia">Svezia</option>
+          <option value="Svizzera">Svizzera</option>
+          <option value="Taiwan">Taiwan</option>
+          <option value="Tanzania">Tanzania</option>
+          <option value="Thailandia">Thailandia</option>
+          <option value="Tunisia">Tunisia</option>
+          <option value="Turchia">Turchia</option>
+          <option value="Ucraina">Ucraina</option>
+          <option value="Uganda">Uganda</option>
+          <option value="Ungheria">Ungheria</option>
+          <option value="Uruguay">Uruguay</option>
+          <option value="USA">🇺🇸 USA</option>
+          <option value="Uzbekistan">Uzbekistan</option>
+          <option value="Venezuela">Venezuela</option>
+          <option value="Vietnam">Vietnam</option>
+        </select>
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="password" id="reg-pwd" placeholder="Password" autocomplete="new-password">
+        <button class="login-eye" id="reg-eye" type="button">&#128065;</button>
+      </div>
+      <div class="login-input-wrap">
+        <input class="login-input" type="password" id="reg-pwd2" placeholder="Conferma password" autocomplete="new-password">
+        <button class="login-eye" id="reg-eye2" type="button">&#128065;</button>
+      </div>
+      <!-- Checkbox T&C (obbligatoria) -->
+      <label class="reg-check-wrap" id="reg-check-tc-wrap">
+        <input type="checkbox" id="reg-tc" class="reg-check">
+        <span class="reg-check-box"></span>
+        <span class="reg-check-lbl">Ho letto e accetto i <a href="termini-condizioni.html" target="_blank">Termini e Condizioni</a> e la <a href="privacy-policy.html" target="_blank">Privacy Policy</a> *</span>
+      </label>
+
+      <!-- Checkbox Marketing (facoltativa) -->
+      <label class="reg-check-wrap">
+        <input type="checkbox" id="reg-marketing" class="reg-check">
+        <span class="reg-check-box"></span>
+        <span class="reg-check-lbl">Voglio rimanere aggiornato su novità, contenuti e aggiornamenti di Cocktail Legend</span>
+      </label>
+
+      <button class="login-btn" id="reg-btn">Crea account &rarr;</button>
+      <div class="login-err" id="reg-err"></div>
+      <p style="font-size:.65rem;color:var(--dim);margin-top:.6rem;">* Campo obbligatorio</p>
+    </div>
+
+    <!-- Messaggio conferma email -->
+    <!-- ── FORM NUOVA PASSWORD (da link reset) ── -->
+    <div id="form-reset-confirm" style="display:none;padding:.5rem 0;">
+      <div style="text-align:center;margin-bottom:1.25rem;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="11" width="14" height="10" rx="2" stroke="#f59e0b" stroke-width="1.5"/>
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="12" cy="16" r="1.5" fill="#f59e0b"/>
+        </svg>
+        <div style="font-size:1rem;font-weight:800;color:var(--txt);margin:.6rem 0 .3rem;">Nuova password</div>
+        <p style="font-size:.8rem;color:var(--txt2);line-height:1.5;">Scegli una password sicura per il tuo account.</p>
+      </div>
+
+      <div class="login-input-wrap">
+        <input class="login-input" type="password" id="reset-pwd-new" placeholder="Nuova password" autocomplete="new-password">
+        <button class="login-eye" id="reset-eye-new" type="button">&#128065;</button>
+      </div>
+      <div class="login-input-wrap" style="margin-top:.6rem;">
+        <input class="login-input" type="password" id="reset-pwd-confirm" placeholder="Conferma password" autocomplete="new-password">
+        <button class="login-eye" id="reset-eye-confirm" type="button">&#128065;</button>
+      </div>
+
+      <button class="login-btn" id="reset-confirm-btn" style="margin-top:1rem;">Salva nuova password &rarr;</button>
+      <div class="login-err" id="reset-confirm-err" style="margin-top:.6rem;"></div>
+    </div>
+
+    <div id="form-verify" style="display:none;text-align:center;padding:1rem 0;">
+      <div style="margin-bottom:1rem;">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="20" height="16" rx="2" stroke="#60a5fa" stroke-width="1.5"/>
+          <path d="M2 7l10 7 10-7" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="18" cy="17" r="4" fill="#0a0f1e" stroke="#f59e0b" stroke-width="1.5"/>
+          <path d="M16.5 17l1 1 2-2" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div style="font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.5rem;">Controlla la tua email</div>
+      <p style="font-size:.8rem;color:var(--txt2);line-height:1.6;margin-bottom:.75rem;">Abbiamo inviato il link di conferma a<br><span id="verify-email" style="color:var(--amber);font-weight:700;"></span></p>
+      <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.85rem 1rem;text-align:left;">
+        <p style="font-size:.75rem;color:var(--amber);font-weight:700;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Non trovi l'email?
+        </p>
+        <p style="font-size:.72rem;color:var(--txt2);line-height:1.7;">&#x2022; Controlla la cartella <strong style="color:var(--txt);">Spam</strong> o <strong style="color:var(--txt);">Posta indesiderata</strong><br>&#x2022; Se l'indirizzo sopra è sbagliato, <a href="#" onclick="switchAuthTab('register');return false;" style="color:var(--blue-l);text-decoration:underline;">torna indietro</a> e registrati di nuovo</p>
+      </div>
+      <p style="font-size:.72rem;color:var(--txt2);margin-top:.85rem;line-height:1.5;">Dopo aver cliccato il link, torna qui e accedi.</p>
+      <button class="login-btn" style="margin-top:1.25rem;" onclick="switchAuthTab('login')">Vai al Login &rarr;</button>
+    </div>
+
+  </div>
+</div>
+
+<header class="hdr">
+  <div class="hdr-inner">
+    <h1>
+      <span class="l1">Cocktail</span>
+      <span class="l2">Legend</span>
+    </h1>
+  </div>
+  <div class="hdr-actions">
+    <!-- AI -->
+    <button class="hdr-icon-btn hdr-ai-btn" id="hdr-ai-btn" aria-label="Barman AI">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.09 6.26L20.18 10l-6.09 1.74L12 18l-2.09-6.26L3.82 10l6.09-1.74Z"/></svg>
+    </button>
+    <!-- Preferiti -->
+    <button class="hdr-icon-btn hdr-fav-btn" id="hdr-fav-btn" aria-label="Preferiti">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </button>
+    <!-- Account -->
+    <button class="hdr-icon-btn hdr-acc-btn" id="hdr-acc-btn" aria-label="Account">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </button>
+    <!-- Hamburger -->
+    <button class="hdr-menu-btn" id="hdr-menu-btn" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MODAL MENU FULLSCREEN -->
+<div class="nav-menu-modal" id="nav-menu-modal">
+  <button class="nav-menu-close" id="nav-menu-close">✕</button>
+  <div class="nav-menu-items">
+    <button class="nav-menu-item" onclick="closeNavMenu();openDrawer('calc')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><rect x="7" y="5" width="10" height="4" rx="1"/><circle cx="8" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="8" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1" fill="currentColor" stroke="none"/></svg>
+      Calcolatori
+    </button>
+    <button class="nav-menu-item" onclick="closeNavMenu();openDrawer('ris')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      Risorse
+    </button>
+    <button class="nav-menu-item" onclick="closeNavMenu();openDrawer('vnt')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
+      Academy
+    </button>
+  </div>
+</div>
+
+<!-- BOTTOM TAB BAR -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="filter-bar" id="filter-bar">
+  <div class="filter-top">
+    <form class="srch-wrap" onsubmit="return false;" role="search">
+      <svg class="srch-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" class="srch-inp" id="srch" placeholder="Cerca un cocktail per nome..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <div class="srch-suggestions" id="srch-suggestions"></div>
+    </form>
+    <button class="btn-toggle-filters" id="btn-filters">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+      Filtri
+      <span class="active-badge" id="active-badge">0</span>
+      <span class="arrow">&#9660;</span>
+    </button>
+    <button class="btn-reset-sm" id="btn-reset">Reset</button>
+  </div>
+  <!-- btn-favonly nascosto, usato dal JS header -->
+  <button class="btn-favonly" id="btn-favonly" style="display:none;"></button>
+
+  <!-- Pannello a tendina -->
+  <div class="filter-panel" id="filter-panel">
+    <div class="filter-panel-inner">
+      <div class="filter-groups">
+        <div class="fg">
+          <button class="fg-btn" data-fg="cat">
+            Categoria <span class="cnt" id="cnt-cat">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-cat"></div>
+        </div>
+        <div class="fg">
+          <button class="fg-btn" data-fg="dis">
+            Ingredienti <span class="cnt" id="cnt-dis">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-dis"></div>
+        </div>
+        <div class="fg">
+          <button class="fg-btn" data-fg="abv">
+            Tenore ABV <span class="cnt" id="cnt-abv">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-abv"></div>
+        </div>
+        <div class="fg">
+          <button class="fg-btn" data-fg="frz">
+            Frizzante <span class="cnt" id="cnt-frz">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-frz"></div>
+        </div>
+        <div class="fg">
+          <button class="fg-btn" data-fg="bic">
+            Bicchiere <span class="cnt" id="cnt-bic">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-bic"></div>
+        </div>
+        <div class="fg">
+          <button class="fg-btn fg-btn-iba" data-fg="iba">
+            IBA <span class="cnt" id="cnt-iba">0</span>
+            <span class="fg-arrow">&#9660;</span>
+          </button>
+          <div class="fg-dropdown" id="dd-iba"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="rbar" id="rbar">
+  <div>
+    <span class="rcnt" id="rcnt">0</span>
+    <span class="rlbl">cocktail trovati</span>
+  </div>
+  <div class="rbar-right">
+    <div class="sort-wrap" style="width:100%">
+      <div class="sort-lbl">⇅ Ordina per</div>
+      <select class="sort-sel" id="srt">
+        <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
+        <option value="abv+">ABV crescente</option>
+        <option value="abv-">ABV decrescente</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="active-tags" id="active-tags" style="margin-bottom:.5rem"></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<!-- MODAL -->
+<div class="overlay" id="ov">
+  <div class="modal">
+    <div class="m-sticky-bar">
+      <button class="m-sticky-heart" id="m-fav-heart" title="Preferito"></button>
+      <div class="m-sticky-title" id="m-sticky-title"></div>
+      <button class="m-sticky-close" id="m-close">&#x2715;</button>
+    </div>
+    <div class="m-img">
+      <div class="m-img-ph">&#127864;</div>
+      <img id="m-img" src="" alt="" oncontextmenu="return false;" draggable="false" style="-webkit-user-select:none;user-select:none;">
+      <div class="m-sap"><div class="m-sap-tags" id="m-sap"></div></div>
+    </div>
+    <div class="m-body">
+      <div class="m-hdr">
+        <div class="m-name" id="m-name"></div>
+      </div>
+      <div class="unit-toggle">
+        <button class="unit-btn active" id="btn-ml">ml</button>
+        <button class="unit-btn" id="btn-oz">oz</button>
+      </div>
+      <div class="m-badges" id="m-badges"></div>
+      <div class="m-grid" id="m-grid"></div>
+      <div class="sec">Ingredienti</div>
+      <div class="ing-list" id="m-ing"></div>
+      <div id="m-varianti-wrap"></div>
+      <div class="sec">Preparazione</div>
+      <div class="prep-list" id="m-prep"></div>
+      <div class="sec" style="margin-top:1.1rem">Storia</div>
+      <div class="storia" id="m-stor"></div>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER: ACADEMY -->
+<div class="drawer" id="drawer-vnt">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">ACADEMY</div>
+    <p style="font-size:.72rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Corsi avanzati di mixology per portare le tue competenze al livello successivo.</p>
+    <div class="vnt-item">
+      <div class="vnt-item-title"><span style="font-size:.65rem;font-weight:800;color:var(--amber);letter-spacing:.08em;margin-right:7px;opacity:.9;">01</span>Sciroppi Homemade</div>
+      <div class="vnt-item-desc">Un percorso tecnico e pratico per capire, produrre e standardizzare sciroppi homemade professionali.</div>
+      <a href="https://danielsportelli.github.io/academy/sciroppi-homemade/sciroppi-homemade.html?utm_source=academy&utm_medium=hub&utm_content=sciroppi-homemade" target="_blank" rel="noopener" class="vnt-link">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        Scopri il corso
+      </a>
+    </div>
+    <!-- SPIRITS GENESIS — risorsa scaricabile -->
+    <a id="sg-pdf-link" href="https://danielsportelli.github.io/cocktail-legend/spirits-genesis.pdf" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:.5rem;margin-top:1.1rem;background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.25);border-radius:12px;padding:.75rem .85rem;text-decoration:none;transition:border-color .2s;">
+      <div style="width:26px;height:26px;background:rgba(37,99,235,.2);border-radius:7px;display:grid;place-items:center;flex-shrink:0;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:.72rem;font-weight:700;color:#60a5fa;">Spirits Genesis</div>
+        <div style="font-size:.58rem;color:var(--dim);">Corso avanzato di merceologia</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.3rem;font-size:.6rem;font-weight:700;color:#60a5fa;background:rgba(37,99,235,.15);border-radius:6px;padding:.2rem .5rem;">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Scarica PDF
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- DRAWER: TEMPERATURE -->
+<div class="drawer" id="drawer-tmp">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">Temperatura &amp; Sentori</div>
+    <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Come la temperatura influenza la percezione aromatica. Pi&#xF9; il distillato &egrave; complesso, pi&#xF9; calore serve per esprimersi.</p>
+    <div id="tmp-zones-drawer"></div>
+    <div style="margin-top:.8rem;padding:.75rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;font-size:.65rem;color:var(--dim);line-height:1.7;">
+      <strong style="color:var(--txt2);display:block;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.1em;">Principi chiave</strong>
+      &#x2744;&#xFE0F; Freddo &rarr; meno molecole aromatiche &rarr; profumo debole<br>
+      &#x1F525; Calore &rarr; aromi si liberano, ma troppo fa dominare l&rsquo;alcol<br>
+      &#x1F943; Pi&#xF9; il distillato &egrave; complesso, pi&#xF9; richiede temperatura elevata
+    </div>
+
+    <div style="margin-top:.8rem;padding:.85rem;background:var(--bg);border:1px solid rgba(201,151,42,.2);border-radius:10px;font-size:.65rem;color:var(--dim);line-height:1.75;">
+      <strong style="color:var(--txt2);display:block;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.1em;">Note di degustazione</strong>
+      <strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Lascia respirare il distillato</strong>
+      Dopo aver versato, lascia riposare il bicchiere senza agitarlo &mdash; in inglese si chiama <em>letting it breathe</em>. La regola empirica: <strong style="color:var(--txt)">1 minuto per ogni anno di invecchiamento</strong>. Un 12 anni &rarr; 12 minuti. Serve a far evaporare le note alcoliche pi&ugrave; pungenti e lasciar emergere la complessit&agrave;.<br><br>
+      <strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Non agitare</strong>
+      A differenza del vino, i distillati vanno tenuti fermi. Agitare il bicchiere disperde gli aromi pi&ugrave; fini e accentua la percezione alcolica.<br><br>
+      <strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Poche gocce d&rsquo;acqua</strong>
+      Aggiungi 2&ndash;3 gocce di acqua fredda direttamente nel bicchiere. Servono a rompere i <em>cluster molecolari</em> che si formano tra etanolo e acqua nel distillato: i composti aromatici intrappolati in queste strutture vengono liberati, diventando pi&ugrave; percepibili al naso e al palato. Questo serve ad aprire il distillato.<br><br>
+      <strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Acqua a parte per il palato</strong>
+      Un bicchiere d&rsquo;acqua fredda tra un assaggio e l&rsquo;altro resetta il palato, evitando che l&rsquo;alcol del sorso precedente copra le note del successivo.<br><br>
+      <strong style="color:var(--amber);display:block;margin-bottom:.2rem;">Il primo sorso non conta</strong>
+      Il palato ha bisogno di scaldarsi. Il primo sorso prepara le mucose: &egrave; il secondo quello in cui percepisci davvero il distillato.
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER: GLOSSARIO -->
+<div class="drawer" id="drawer-glos">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">Glossario</div>
+    <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Tutti i termini essenziali del mondo bar, dalla A alla Z.</p>
+
+    <!-- A -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.4rem 0 .5rem;">A</div>
+    <div class="vnt-item"><div class="vnt-item-title">ABV (Alcohol by Volume)</div><div class="vnt-item-desc">Percentuale di alcol presente in una bevanda.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Aging</div><div class="vnt-item-desc">Invecchiamento di distillati o cocktail in botti o contenitori.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Aromatizzanti</div><div class="vnt-item-desc">Ingredienti come bitter o liquori usati per aggiungere complessità aromatica.</div></div>
+
+    <!-- B -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">B</div>
+    <div class="vnt-item"><div class="vnt-item-title">Barback</div><div class="vnt-item-desc">Assistente del bartender che si occupa di rifornire il banco bar, oltre a mantenere l'area di lavoro organizzata e pulita.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Batching</div><div class="vnt-item-desc">Preparazione anticipata di cocktail in grandi quantità.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Bitters</div><div class="vnt-item-desc">Estratti concentrati di erbe, spezie e radici, usati in piccole dosi.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Blended</div><div class="vnt-item-desc">Ha due significati: nel mondo dei distillati indica una bottiglia composta da distillati provenienti da diversi produttori o distillerie (es. Blended Whisky). Nel mondo della miscelazione indica i drink frullati con ghiaccio, come i Frozen e le Coladas.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Bouncer</div><div class="vnt-item-desc">Tecnica per interrompere il flusso del liquido abbassando la bottiglia durante la versata.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Build</div><div class="vnt-item-desc">Tecnica di preparazione in cui si versano direttamente gli ingredienti nel bicchiere, senza l'utilizzo di shaker o mixing glass.</div></div>
+
+    <!-- C -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">C</div>
+    <div class="vnt-item"><div class="vnt-item-title">Chiarificazione</div><div class="vnt-item-desc">Tecniche per rendere limpido un cocktail.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Cocktail Glass</div><div class="vnt-item-desc">Coppetta per servire cocktail "straight up".</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Colada</div><div class="vnt-item-desc">Come i frozen ma con consistenza simile al frappé.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Crusta</div><div class="vnt-item-desc">Decorazione del bordo del bicchiere.</div></div>
+
+    <!-- D -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">D</div>
+    <div class="vnt-item"><div class="vnt-item-title">Dash</div><div class="vnt-item-desc">Piccolissima quantità di un ingrediente (es. bitters).</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Diluizione</div><div class="vnt-item-desc">Quantità di acqua che si incorpora in un drink tramite ghiaccio o miscelazione.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Dirty Dump</div><div class="vnt-item-desc">Tecnica di servizio in cui tutto il contenuto dello shaker viene versato direttamente nel bicchiere senza filtrare.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Double Strain</div><div class="vnt-item-desc">Filtrazione doppia con l'utilizzo del Fine Strainer per eliminare residui solidi e ghiaccio.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Drop</div><div class="vnt-item-desc">Micro quantità di un liquido, dosata goccia a goccia.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Dry Shake</div><div class="vnt-item-desc">Tecnica per emulsionare albume o aquafaba senza ghiaccio prima di shakerare con ghiaccio.</div></div>
+
+    <!-- F -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">F</div>
+    <div class="vnt-item"><div class="vnt-item-title">Fast Shake</div><div class="vnt-item-desc">Shakerata rapida usata con ghiaccio pilé, spesso in abbinata alla tecnica Dirty Dump.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Fat Washing</div><div class="vnt-item-desc">Tecnica per infondere sapori grassi (es. burro, bacon) in distillati.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Fine Strainer</div><div class="vnt-item-desc">Colino a maglia fine utilizzato per effettuare la double strain.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Flair Bartending</div><div class="vnt-item-desc">Tecniche acrobatiche di bartending con lanci di bottiglie e attrezzi.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Float</div><div class="vnt-item-desc">Tecnica con cui un ingrediente viene versato delicatamente sopra al drink finito, creando uno strato galleggiante. Lo si può versare utilizzando la stessa tecnica con cui vengono creati i drink layered, versando lentamente il liquido sul dorso del bar spoon.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Free Pouring</div><div class="vnt-item-desc">Tecnica di versata senza l'uso del jigger, basata sul conteggio mentale del tempo. È alla base dell'American bartending e garantisce velocità e precisione allo stesso tempo.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Frozen</div><div class="vnt-item-desc">Cocktail frullato con ghiaccio fino a ottenere una consistenza simile a un sorbetto.</div></div>
+
+    <!-- G -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">G</div>
+    <div class="vnt-item"><div class="vnt-item-title">Garnish</div><div class="vnt-item-desc">Decorazione che completa e arricchisce il cocktail.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Ghiaccio Pilé</div><div class="vnt-item-desc">Ghiaccio tritato a scaglie irregolari, ottenuto frantumando cubetti di ghiaccio.</div></div>
+
+    <!-- H -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">H</div>
+    <div class="vnt-item"><div class="vnt-item-title">Hard Shake</div><div class="vnt-item-desc">Shakerata vigorosa usata per creare una texture cremosa. Tecnica codificata e resa famosa dal leggendario bartender giapponese Kazuo Uyeda del Tender Bar di Tokyo.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Highball</div><div class="vnt-item-desc">Ha due significati: il bicchiere alto e stretto usato per i long drink, e una tipologia di cocktail composta da un distillato allungato con acqua gassata o soda (es. Whisky Highball, Tequila Highball), servita in bicchiere alto con ghiaccio.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Homemade</div><div class="vnt-item-desc">Preparazioni fatte in casa (sciroppi, premix ecc).</div></div>
+
+    <!-- I -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">I</div>
+    <div class="vnt-item"><div class="vnt-item-title">Infusione</div><div class="vnt-item-desc">Tecnica per aromatizzare alcolici o per creare alcolati, estraendo aromi e proprietà organolettiche da frutta, erbe e spezie mediante macerazione.</div></div>
+
+    <!-- J -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">J</div>
+    <div class="vnt-item"><div class="vnt-item-title">Jigger</div><div class="vnt-item-desc">Strumento di precisione per dosare i liquidi.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Julep Strainer</div><div class="vnt-item-desc">Strainer a forma di cucchiaio forato usato per filtrare cocktail stir &amp; strain. Nato originariamente come accessorio per bere il Mint Julep — veniva appoggiato sopra il ghiaccio pilé per permettere di sorseggiare il drink senza ingerire il ghiaccio.</div></div>
+
+    <!-- L -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">L</div>
+    <div class="vnt-item"><div class="vnt-item-title">Layered</div><div class="vnt-item-desc">Cocktail composto da strati di liquidi con densità diverse, ottenuti versando lentamente ogni ingrediente sul dorso del bar spoon.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Long Drink</div><div class="vnt-item-desc">Cocktail con grande quantità di parte analcolica, servito in bicchiere alto.</div></div>
+
+    <!-- M -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">M</div>
+    <div class="vnt-item"><div class="vnt-item-title">Mixing Glass</div><div class="vnt-item-desc">Contenitore di vetro o acciaio usato per miscelare cocktail con ghiaccio tramite bar spoon, mediante la tecnica dello stir &amp; strain.</div></div>
+
+    <!-- N -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">N</div>
+    <div class="vnt-item"><div class="vnt-item-title">Naked</div><div class="vnt-item-desc">Cocktail servito senza garnish o decorazioni.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Neat</div><div class="vnt-item-desc">Distillato, amaro o liquore servito liscio, a temperatura ambiente, senza ghiaccio o acqua.</div></div>
+
+    <!-- O -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">O</div>
+    <div class="vnt-item"><div class="vnt-item-title">Old Fashioned</div><div class="vnt-item-desc">Bicchiere basso in stile vintage, usato generalmente per i drink spirit forward.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">On the Rocks</div><div class="vnt-item-desc">Bevanda o cocktail servito con ghiaccio.</div></div>
+
+    <!-- P -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">P</div>
+    <div class="vnt-item"><div class="vnt-item-title">Premix</div><div class="vnt-item-desc">Miscela analcolica (generalmente con frutta fresca) già pronta usata per velocizzare il servizio.</div></div>
+
+    <!-- R -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">R</div>
+    <div class="vnt-item"><div class="vnt-item-title">Rinse</div><div class="vnt-item-desc">Tecnica che consiste nel versare poche gocce o uno spruzzo di un liquido — solitamente un liquore o bitter aromatico — nel bicchiere, ruotarlo per rivestirne le pareti e scartare l'eccesso. Serve ad aromatizzare il bicchiere prima di costruire il drink. Esempio classico: il Sazerac con l'assenzio.</div></div>
+
+    <!-- S -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">S</div>
+    <div class="vnt-item"><div class="vnt-item-title">Shake &amp; Strain</div><div class="vnt-item-desc">Tecnica in cui si shakera il cocktail con ghiaccio e in seguito si filtra con l'utilizzo di uno strainer direttamente nel bicchiere.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Short Drink</div><div class="vnt-item-desc">Cocktail con minor volume di liquido rispetto a un long drink, generalmente servito in un bicchiere piccolo o coppetta, a gradazione più alta. Es. Margarita, Daiquiri.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Spirit Forward</div><div class="vnt-item-desc">Tipologia di short drink in cui il distillato è l'elemento predominante sia a livello di gusto che di struttura. Composto da sola parte alcolica, senza succhi, sciroppi o componenti analcoliche (es. Negroni, Manhattan, Old Fashioned).</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Straight Up</div><div class="vnt-item-desc">Cocktail raffreddato mediante tecnica shake &amp; strain o stir &amp; strain e servito senza ghiaccio, generalmente in coppetta.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Sweet &amp; Sour</div><div class="vnt-item-desc">Premix solitamente composto da succo di limone e sciroppo di zucchero, che costituisce la base dei drink bilanciati tra acidità e dolcezza.</div></div>
+
+    <!-- T -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">T</div>
+    <div class="vnt-item"><div class="vnt-item-title">Throwing</div><div class="vnt-item-desc">Tecnica elegante e scenica per miscelare e ossigenare il drink, versandolo più volte tra due contenitori. Viene utilizzata prevalentemente per il Bloody Mary.</div></div>
+    <div class="vnt-item"><div class="vnt-item-title">Twist on Classic</div><div class="vnt-item-desc">Versione modificata di un cocktail classico, senza stravolgerne la struttura di base. Altrimenti non si parla più di un twist sul classico.</div></div>
+
+    <!-- Z -->
+    <div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:.9rem 0 .5rem;">Z</div>
+    <div class="vnt-item"><div class="vnt-item-title">Zest</div><div class="vnt-item-desc">Scorza di agrume usata come garnish per il drink, e a volte anche per aromatizzarlo sprizzandone gli oli essenziali direttamente sulla superficie (questa tecnica di sprizzare gli oli essenziali si chiama fare il twist).</div></div>
+  </div>
+</div>
+
+<!-- DRAWER: CALCOLATORE ABV -->
+<div class="drawer" id="drawer-abv">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">Calcolatore ABV%</div>
+    <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Calcola la gradazione alcolica stimata del tuo cocktail in base agli ingredienti.</p>
+    <div id="abv-ingredients">
+      <div class="abv-row-calc" data-idx="0">
+        <input type="number" class="abv-ml" placeholder="ml" min="0" max="500" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+        <span style="color:var(--dim);font-size:.75rem;">ml</span>
+        <input type="number" class="abv-pct" placeholder="%" min="0" max="100" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+        <span style="color:var(--dim);font-size:.75rem;">%</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:.6rem;margin-top:.8rem;">
+      <button id="abv-add-row" style="flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem;color:var(--txt2);font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer;">+ Aggiungi ingrediente</button>
+      <button id="abv-reset" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem .8rem;color:var(--dim);font-size:.75rem;font-family:inherit;cursor:pointer;">Reset</button>
+    </div>
+    <div style="margin-top:1rem;padding:1rem;background:var(--bg);border:1px solid rgba(245,158,11,.2);border-radius:12px;text-align:center;will-change:contents;transform:translateZ(0);">
+      <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem;">ABV stimato</div>
+      <div id="abv-result" style="font-size:2.2rem;font-weight:900;color:var(--amber);line-height:1;">—</div>
+      <div id="abv-desc" style="font-size:.68rem;color:var(--txt2);margin-top:.3rem;"></div>
+      <div id="abv-alcol" style="font-size:.72rem;color:var(--dim);margin-top:.4rem;"></div>
+    </div>
+    <div style="margin-top:.85rem;padding:.75rem 1rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;font-size:.65rem;color:var(--dim);line-height:1.6;">
+      <span style="color:var(--txt2);font-weight:700;">💡 ABV vs Alcol etilico</span><br>
+      L'ABV indica la <em>percentuale</em> di alcol sul volume totale del drink — non quanto alcol hai ingerito. Uno shot da 50ml di Gin 40° e un Gin Tonic con gli stessi 50ml di Gin hanno <strong style="color:var(--txt)">identici ml di alcol etilico (20ml)</strong>, ma ABV diverso (40% vs ~10%). Ai fini del tasso alcolemico ciò che conta è la quantità assoluta di alcol etilico, non l'ABV del drink.
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER: RISORSE -->
+<div class="drawer" id="drawer-ris">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header" id="ris-drawer-header"><span id="ris-header-title">Risorse</span><button class="drawer-back-btn" id="ris-back-header-btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>Torna</button></div>
+
+    <!-- GRIGLIA 2 COMANDI -->
+    <div id="ris-step-cmds">
+      <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.6rem;">Cosa vuoi consultare?</div>
+      <div style="display:grid;grid-template-columns:1fr;gap:.55rem;">
+        <button class="ris-cmd-btn" data-cmd="tmp" style="display:flex;flex-direction:row;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round"><rect x="10" y="3" width="4" height="11" rx="2"/><circle cx="12" cy="17" r="3.5"/><line x1="12" y1="14" x2="12" y2="9"/></svg>
+          <div style="display:flex;flex-direction:column;gap:.15rem;">
+            <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Temperature</span>
+            <span style="font-size:.68rem;color:var(--dim);">Servizio & sentori</span>
+          </div>
+        </button>
+        <button class="ris-cmd-btn" data-cmd="bic" style="display:flex;flex-direction:row;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <div style="display:flex;flex-direction:column;gap:.15rem;">
+            <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Glossario</span>
+            <span style="font-size:.68rem;color:var(--dim);">Termini A → Z</span>
+          </div>
+        </button>
+        <button class="ris-cmd-btn" data-cmd="glass" style="display:flex;flex-direction:row;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3h16L12 14z"/><line x1="12" y1="14" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>
+          <div style="display:flex;flex-direction:column;gap:.15rem;">
+            <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Bicchieri</span>
+            <span style="font-size:.68rem;color:var(--dim);">Guida completa</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- CONTENUTO TEMPERATURE (riusa drawer-tmp inner) -->
+    <div id="ris-step-tmp" style="display:none;">
+      <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:.65rem;">Come la temperatura influenza la percezione aromatica. Più il distillato è complesso, più calore serve per esprimersi.</p>
+      <button id="ris-tmp-tips-btn" style="display:flex;align-items:center;gap:.4rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:.35rem .75rem;font-family:inherit;font-size:.65rem;font-weight:700;color:var(--amber);cursor:pointer;margin-bottom:.85rem;letter-spacing:.06em;transition:all .2s;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Tips
+      </button>
+      <div id="ris-tmp-zones"></div>
+      <div style="margin-top:.8rem;padding:.75rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;font-size:.65rem;color:var(--dim);line-height:1.7;">
+        <strong style="color:var(--txt2);display:block;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.1em;">Principi chiave</strong>
+        ❄️ Freddo → meno molecole aromatiche → profumo debole<br>
+        🔥 Calore → aromi si liberano, ma troppo fa dominare l'alcol<br>
+        🍹 Più il distillato è complesso, più richiede temperatura elevata
+      </div>
+    </div>
+
+    <!-- CONTENUTO GLOSSARIO -->
+    <div id="ris-step-bic" style="display:none;">
+      <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Tutti i termini essenziali del mondo bar, dalla A alla Z.</p>
+      <div id="ris-glossario-content"></div>
+    </div>
+
+    <!-- CONTENUTO BICCHIERI -->
+    <div id="ris-step-glass" style="display:none;">
+      <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:.65rem;">Guida completa alle tipologie di bicchieri usati nella mixology moderna e classica.</p>
+      <button id="ris-glass-tips-btn" style="display:flex;align-items:center;gap:.4rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:.35rem .75rem;font-family:inherit;font-size:.65rem;font-weight:700;color:var(--amber);cursor:pointer;margin-bottom:.85rem;letter-spacing:.06em;transition:all .2s;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Tips
+      </button>
+      <div id="ris-glass-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER: CALCOLATORI -->
+<div class="drawer" id="drawer-calc">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header" id="calc-drawer-header"><span id="calc-header-title">Calcolatori</span><button class="drawer-back-btn" id="calc-back-header-btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>Torna</button></div>
+
+    <!-- GRIGLIA 2 COMANDI -->
+    <div id="calc-step-cmds">
+      <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.6rem;">Cosa vuoi calcolare?</div>
+      <div style="display:grid;grid-template-columns:1fr;gap:.55rem;">
+        <button class="calc-cmd-btn" id="calc-btn-abv" data-cmd="abv" style="display:flex;flex-direction:row;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round"><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+          <div style="display:flex;flex-direction:column;gap:.15rem;">
+            <span style="font-size:.8rem;font-weight:700;color:var(--txt);">ABV</span>
+            <span style="font-size:.68rem;color:var(--dim);">Gradazione cocktail</span>
+          </div>
+          <span style="margin-left:auto;display:flex;align-items:center;justify-content:center;width:20px;height:20px;background:rgba(245,158,11,0.15);border-radius:6px;flex-shrink:0;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        </button>
+        <button class="calc-cmd-btn" data-cmd="cost" style="display:flex;flex-direction:row;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <div style="display:flex;flex-direction:column;gap:.15rem;">
+            <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Drink Cost</span>
+            <span style="font-size:.68rem;color:var(--dim);">Costo per drink</span>
+          </div>
+        </button>
+        <button class="calc-cmd-btn" id="calc-btn-batch" data-cmd="batch" style="display:flex;flex-direction:row;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="1" width="6" height="3" rx="1"/><path d="M8 4h8c1 2 2 3 2 6v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-9c0-3 1-4 2-6z"/><rect x="8.5" y="11" width="7" height="4" rx=".5" fill="rgba(245,158,11,.25)" stroke="var(--amber)" stroke-width="1.2"/></svg>
+          <div style="display:flex;flex-direction:column;gap:.15rem;">
+            <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Pre-Batch</span>
+            <span style="font-size:.68rem;color:var(--dim);">Dosi per bottiglia</span>
+          </div>
+          <span style="margin-left:auto;display:flex;align-items:center;justify-content:center;width:20px;height:20px;background:rgba(245,158,11,0.15);border-radius:6px;flex-shrink:0;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- CONTENUTO ABV -->
+    <div id="calc-step-abv" style="display:none;">
+      <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Calcola la gradazione alcolica stimata del tuo cocktail in base agli ingredienti.</p>
+      <div id="calc-abv-ingredients">
+        <div class="calc-abv-row" style="display:flex;align-items:center;gap:.4rem;">
+          <input type="number" class="cabv-ml" placeholder="ml" autocomplete="off" inputmode="decimal" min="0" max="500" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+          <span style="color:var(--dim);font-size:.75rem;">ml</span>
+          <input type="number" class="cabv-pct" placeholder="%" autocomplete="off" inputmode="decimal" min="0" max="100" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+          <span style="color:var(--dim);font-size:.75rem;">%</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:.6rem;margin-top:.8rem;">
+        <button id="calc-abv-add" style="flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem;color:var(--txt2);font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer;">+ Aggiungi ingrediente</button>
+        <button id="calc-abv-reset" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem .8rem;color:var(--dim);font-size:.75rem;font-family:inherit;cursor:pointer;">Reset</button>
+      </div>
+      <div style="margin-top:1rem;padding:1rem;background:var(--bg);border:1px solid rgba(245,158,11,.2);border-radius:12px;text-align:center;">
+        <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem;">ABV stimato</div>
+        <div id="calc-abv-result" style="font-size:2.2rem;font-weight:900;color:var(--amber);line-height:1;">—</div>
+        <div id="calc-abv-desc" style="font-size:.68rem;color:var(--txt2);margin-top:.3rem;"></div>
+        <div id="calc-abv-alcol" style="font-size:.72rem;color:var(--dim);margin-top:.4rem;"></div>
+      </div>
+      <div style="margin-top:.85rem;padding:.75rem 1rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;font-size:.65rem;color:var(--dim);line-height:1.6;">
+        <span style="color:var(--txt2);font-weight:700;">💡 ABV vs Alcol etilico</span><br>
+        L'ABV indica la <em>percentuale</em> di alcol sul volume totale del drink — non quanto alcol hai ingerito. Uno shot da 50ml di Gin 40° e un Gin Tonic con gli stessi 50ml di Gin hanno <strong style="color:var(--txt)">identici ml di alcol etilico (20ml)</strong>, ma ABV diverso (40% vs ~10%).
+      </div>
+    </div>
+
+    <!-- CONTENUTO DRINK COST -->
+    <div id="calc-step-cost" style="display:none;">
+      <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:.65rem;">Calcola il costo esatto di ogni drink e il prezzo di vendita consigliato.</p>
+
+      <!-- Pulsante Tips -->
+      <button id="calc-cost-tips-btn" style="display:flex;align-items:center;gap:.4rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:.35rem .75rem;font-family:inherit;font-size:.65rem;font-weight:700;color:var(--amber);cursor:pointer;margin-bottom:.85rem;letter-spacing:.06em;transition:all .2s;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Tips
+      </button>
+
+      <!-- Header colonne -->
+      <div style="display:grid;grid-template-columns:1fr .7fr .65fr .55fr auto;gap:.3rem;padding:0 .1rem;margin-bottom:.3rem;">
+        <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Prodotto</span>
+        <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Formato ml</span>
+        <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Prezzo €</span>
+        <span style="font-size:.55rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Dose ml</span>
+        <span style="width:18px;display:block;"></span>
+      </div>
+
+      <!-- Righe ingredienti -->
+      <div id="cost-ingredients"></div>
+
+      <!-- Azioni -->
+      <div style="display:flex;gap:.6rem;margin-top:.7rem;">
+        <button id="cost-add-row" style="flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem;color:var(--txt2);font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer;">+ Aggiungi ingrediente</button>
+        <button id="cost-reset" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem .8rem;color:var(--dim);font-size:.75rem;font-family:inherit;cursor:pointer;">Reset</button>
+      </div>
+
+      <!-- Voci aggiuntive -->
+      <div style="margin-top:.9rem;">
+        <div style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.5rem;">Voci aggiuntive</div>
+
+        <!-- Garnish -->
+        <div class="cost-extra-row" id="extra-garnish-row" style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.55rem .75rem;margin-bottom:.4rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <button class="cost-extra-toggle" id="toggle-garnish" data-active="0" style="width:34px;height:18px;border-radius:99px;border:none;background:var(--brd);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;">
+                <span style="position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s;display:block;"></span>
+              </button>
+              <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Garnish</span>
+            </div>
+            <span id="garnish-cost-label" style="font-size:.68rem;font-weight:700;color:var(--dim);">off</span>
+          </div>
+          <div id="garnish-options" style="display:none;margin-top:.55rem;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.35rem;margin-bottom:.4rem;">
+              <button class="garnish-opt-btn" data-val="0.05" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .3rem;font-size:.62rem;font-family:inherit;color:var(--txt2);cursor:pointer;text-align:center;transition:all .2s;">
+                <div style="font-weight:700;">Semplice</div>
+                <div style="color:var(--dim);font-size:.58rem;margin-top:.1rem;">scorza · fetta · agrume</div>
+                <div style="color:var(--amber);font-weight:700;margin-top:.15rem;">€0.05</div>
+              </button>
+              <button class="garnish-opt-btn" data-val="0.12" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .3rem;font-size:.62rem;font-family:inherit;color:var(--txt2);cursor:pointer;text-align:center;transition:all .2s;">
+                <div style="font-weight:700;">Media</div>
+                <div style="color:var(--dim);font-size:.58rem;margin-top:.1rem;">disidratata · fiore edibile</div>
+                <div style="color:var(--amber);font-weight:700;margin-top:.15rem;">€0.12</div>
+              </button>
+              <button class="garnish-opt-btn" data-val="0.20" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .3rem;font-size:.62rem;font-family:inherit;color:var(--txt2);cursor:pointer;text-align:center;transition:all .2s;">
+                <div style="font-weight:700;">Elaborata</div>
+                <div style="color:var(--dim);font-size:.58rem;margin-top:.1rem;">cioccolato · pasta · complessa</div>
+                <div style="color:var(--amber);font-weight:700;margin-top:.15rem;">€0.20</div>
+              </button>
+              <button class="garnish-opt-btn" data-val="custom" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .3rem;font-size:.62rem;font-family:inherit;color:var(--txt2);cursor:pointer;text-align:center;transition:all .2s;">
+                <div style="font-weight:700;">Custom</div>
+                <div style="color:var(--dim);font-size:.58rem;margin-top:.1rem;">inserisci il tuo valore</div>
+                <div style="color:var(--amber);font-weight:700;margin-top:.15rem;">€ —</div>
+              </button>
+            </div>
+            <input id="garnish-custom-input" type="number" min="0" step="0.01" autocomplete="off" inputmode="decimal" placeholder="€ valore custom" style="display:none;width:100%;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .6rem;color:var(--txt);font-family:inherit;font-size:.75rem;outline:none;box-sizing:border-box;">
+          </div>
+        </div>
+
+        <!-- Ghiaccio chunk/sfera -->
+        <div class="cost-extra-row" id="extra-ghiaccio-row" style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.55rem .75rem;margin-bottom:.4rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <button class="cost-extra-toggle" id="toggle-ghiaccio" data-active="0" style="width:34px;height:18px;border-radius:99px;border:none;background:var(--brd);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;">
+                <span style="position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s;display:block;"></span>
+              </button>
+              <div>
+                <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Ghiaccio chunk / sfera</span>
+                <div style="font-size:.58rem;color:var(--dim);margin-top:.05rem;">costo per pezzo</div>
+              </div>
+            </div>
+            <span id="ghiaccio-cost-label" style="font-size:.68rem;font-weight:700;color:var(--dim);">off</span>
+          </div>
+          <div id="ghiaccio-options" style="display:none;margin-top:.5rem;display:none;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <span style="font-size:.7rem;color:var(--txt2);">€</span>
+              <input id="ghiaccio-price" type="number" min="0" step="0.05" value="0.75" autocomplete="off" inputmode="decimal" style="width:90px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;font-weight:700;outline:none;">
+              <span style="font-size:.6rem;color:var(--dim);">a pezzo — modifica se necessario</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Foamer -->
+        <div class="cost-extra-row" id="extra-foamer-row" style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.55rem .75rem;margin-bottom:.4rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <button class="cost-extra-toggle" id="toggle-foamer" data-active="0" style="width:34px;height:18px;border-radius:99px;border:none;background:var(--brd);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;">
+                <span style="position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s;display:block;"></span>
+              </button>
+              <div>
+                <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Foamer</span>
+                <div style="font-size:.58rem;color:var(--dim);margin-top:.05rem;">foamer artificiale — ~5 dash o ~10 gocce per drink</div>
+              </div>
+            </div>
+            <span id="foamer-cost-label" style="font-size:.68rem;font-weight:700;color:var(--dim);">off</span>
+          </div>
+          <div id="foamer-options" style="display:none;margin-top:.5rem;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <span style="font-size:.7rem;color:var(--txt2);">€</span>
+              <input id="foamer-price" type="number" min="0" step="0.01" value="0.18" autocomplete="off" inputmode="decimal" style="width:90px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;font-weight:700;outline:none;">
+              <span style="font-size:.6rem;color:var(--dim);">a dose — modifica se necessario</span>
+            </div>
+            <div style="margin-top:.4rem;font-size:.6rem;color:var(--dim);line-height:1.5;font-style:italic;">Se usi albume o aquafaba il costo è trascurabile — non includere in questo campo.</div>
+          </div>
+        </div>
+
+        <!-- Ghiaccio a cubetti -->
+        <div class="cost-extra-row" id="extra-ghiaccio-normale-row" style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.55rem .75rem;margin-bottom:.4rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <button class="cost-extra-toggle" id="toggle-ghiaccio-normale" data-active="0" style="width:34px;height:18px;border-radius:99px;border:none;background:var(--brd);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;">
+                <span style="position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s;display:block;"></span>
+              </button>
+              <div>
+                <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Ghiaccio a cubetti</span>
+                <div style="font-size:.58rem;color:var(--dim);margin-top:.05rem;">solo se acquistato per l'occasione</div>
+              </div>
+            </div>
+            <span id="ghiaccio-normale-cost-label" style="font-size:.68rem;font-weight:700;color:var(--dim);">off</span>
+          </div>
+          <div id="ghiaccio-normale-options" style="display:none;margin-top:.5rem;">
+            <div style="display:flex;align-items:center;gap:.5rem;">
+              <span style="font-size:.7rem;color:var(--txt2);">€</span>
+              <input id="ghiaccio-normale-price" type="number" min="0" step="0.05" value="0.50" autocomplete="off" inputmode="decimal" style="width:90px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.4rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;font-weight:700;outline:none;">
+              <span style="font-size:.6rem;color:var(--dim);">a drink — modifica se necessario</span>
+            </div>
+            <div style="margin-top:.4rem;font-size:.6rem;color:var(--dim);line-height:1.5;font-style:italic;">Attiva solo se devi acquistare il ghiaccio (catering, eventi, privati). Se hai una macchina del ghiaccio è un costo variabile non imputabile al singolo drink.</div>
+          </div>
+        </div>
+
+        <!-- Disclaimer prezzi indicativi -->
+        <div style="font-size:.6rem;color:var(--dim);line-height:1.5;padding:.4rem .2rem;font-style:italic;">
+          I valori di default sono prezzi medi indicativi. Modifica i campi con i tuoi costi reali. Dettagli sul calcolo nelle Tips.
+        </div>
+      </div>
+
+      <!-- Risultato costo -->
+      <div style="margin-top:1rem;padding:1rem;background:var(--bg);border:1px solid rgba(245,158,11,.2);border-radius:12px;text-align:center;">
+        <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem;">Costo del drink</div>
+        <div id="cost-result" style="font-size:2.2rem;font-weight:900;color:var(--amber);line-height:1;">—</div>
+        <div id="cost-result-detail" style="font-size:.65rem;color:var(--dim);margin-top:.35rem;line-height:1.5;"></div>
+      </div>
+
+      <!-- Prezzi consigliati -->
+      <div id="cost-suggested" style="display:none;margin-top:.7rem;">
+        <div style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Prezzi di vendita consigliati</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;">
+          <div style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.6rem .5rem;text-align:center;">
+            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×4 — Minimo</div>
+            <div id="cost-x4" style="font-size:1.1rem;font-weight:900;color:#60a5fa;">—</div>
+            <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">drink cost 25%</div>
+          </div>
+          <div style="background:var(--bg);border:1px solid rgba(96,165,250,.3);border-radius:10px;padding:.6rem .5rem;text-align:center;">
+            <div style="font-size:.58rem;color:#60a5fa;margin-bottom:.2rem;">×4.5 — Bilanciato</div>
+            <div id="cost-x45" style="font-size:1.1rem;font-weight:900;color:#60a5fa;">—</div>
+            <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">drink cost 22%</div>
+          </div>
+          <div style="background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.6rem .5rem;text-align:center;">
+            <div style="font-size:.58rem;color:var(--dim);margin-bottom:.2rem;">×5 — Ottimale</div>
+            <div id="cost-x5" style="font-size:1.1rem;font-weight:900;color:#60a5fa;">—</div>
+            <div style="font-size:.55rem;color:var(--dim);margin-top:.15rem;">drink cost 20%</div>
+          </div>
+        </div>
+        <!-- Nota prodotti di pregio -->
+        <div id="cost-pregio-note" style="display:none;margin-top:.5rem;padding:.55rem .7rem;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.2);border-radius:8px;font-size:.62rem;color:var(--dim);line-height:1.55;">
+          <strong style="color:#60a5fa;">Drink di pregio</strong> — Con un costo elevato il moltiplicatore fisso può portare a prezzi fuori mercato. Valuta un margine fisso in € sul costo reale invece di applicare ×4/×5.
+        </div>
+      </div>
+
+      <!-- Prezzo personalizzato -->
+      <div id="cost-custom-wrap" style="display:none;margin-top:.7rem;padding:.85rem;background:var(--bg);border:1px solid var(--brd);border-radius:12px;">
+        <div style="font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.55rem;">A quanto vorresti venderlo?</div>
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <span style="font-size:.85rem;color:var(--txt2);font-weight:700;">€</span>
+          <input id="cost-custom-price" type="number" min="0" step="0.5" placeholder="es. 12.00" autocomplete="off" inputmode="decimal" style="flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.45rem .6rem;color:var(--txt);font-family:inherit;font-size:.85rem;font-weight:700;outline:none;">
+        </div>
+        <div id="cost-custom-result" style="margin-top:.65rem;font-size:.7rem;line-height:1.7;color:var(--txt2);min-height:1.2rem;"></div>
+      </div>
+    </div>
+
+
+    <!-- CONTENUTO PRE-BATCH -->
+    <div id="calc-step-batch" style="display:none;">
+      <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Calcola le dosi di ogni ingrediente per riempire una bottiglia. Inserisci la ricetta base e la dimensione della bottiglia target.</p>
+      <div style="margin-bottom:1rem;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.45rem;">
+          <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">Dimensione bottiglia target</div>
+          <span style="font-size:.58rem;color:#60a5fa;">min. 250 ml</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">
+          <input type="number" id="batch-bottle-ml" placeholder="es. 750" inputmode="decimal" min="250" max="10000" style="width:90px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+          <span style="color:var(--dim);font-size:.75rem;">ml</span>
+          <button class="batch-preset" data-ml="500" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">500ml</button>
+          <button class="batch-preset" data-ml="750" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">750ml</button>
+          <button class="batch-preset" data-ml="1000" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">1L</button>
+          <div id="batch-bottle-err" style="display:none;width:100%;margin-top:.3rem;font-size:.62rem;color:#f87171;">⚠️ La bottiglia deve essere almeno 250 ml</div>
+          <button class="batch-preset" data-ml="1500" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.25rem .5rem;font-size:.62rem;color:var(--txt2);font-family:inherit;cursor:pointer;">1.5L</button>
+        </div>
+      </div>
+      <div style="font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Ingredienti ricetta base</div>
+      <div id="batch-ingredients">
+        <div class="batch-row" style="display:flex;align-items:center;gap:.4rem;margin-bottom:.4rem;">
+          <input type="text" class="batch-name" placeholder="Ingrediente" autocomplete="off" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;outline:none;">
+          <input type="number" class="batch-ml" placeholder="ml" inputmode="decimal" min="0" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+          <span style="color:var(--dim);font-size:.72rem;">ml</span>
+          <button class="batch-del-row" style="background:none;border:none;color:var(--dim);font-size:1.1rem;cursor:pointer;padding:0 .2rem;line-height:1;">&#215;</button>
+        </div>
+        <div class="batch-row" style="display:flex;align-items:center;gap:.4rem;margin-bottom:.4rem;">
+          <input type="text" class="batch-name" placeholder="Ingrediente" autocomplete="off" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.78rem;outline:none;">
+          <input type="number" class="batch-ml" placeholder="ml" inputmode="decimal" min="0" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+          <span style="color:var(--dim);font-size:.72rem;">ml</span>
+          <button class="batch-del-row" style="background:none;border:none;color:var(--dim);font-size:1.1rem;cursor:pointer;padding:0 .2rem;line-height:1;">&#215;</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:.6rem;margin-top:.5rem;margin-bottom:1rem;">
+        <button id="batch-add-row" style="flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem;color:var(--txt2);font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer;">+ Aggiungi ingrediente</button>
+        <button id="batch-reset" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem .8rem;color:var(--dim);font-size:.75rem;font-family:inherit;cursor:pointer;">Reset</button>
+      </div>
+      <div id="batch-result-wrap" style="display:none;background:var(--bg);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:1rem;">
+        <div style="font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.65rem;">Dosi per bottiglia da <span id="batch-result-size" style="color:var(--amber);"></span></div>
+        <div id="batch-result-rows"></div>
+        <div style="margin-top:.7rem;padding-top:.7rem;border-top:1px solid var(--brd);display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:.65rem;color:var(--dim);">Totale ricetta base</span>
+          <span id="batch-total-base" style="font-size:.75rem;font-weight:700;color:var(--txt2);"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DRAWER: ACCOUNT -->
+<div class="drawer" id="drawer-acc">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header">Account <button class="drawer-close-btn" id="acc-close-btn">✕</button></div>
+    <div id="acc-content" style="padding:.2rem 0;">
+      <div style="text-align:center;padding:2rem 1rem;color:var(--dim);font-size:.78rem;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="opacity:.4;"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <div style="margin-top:.5rem;font-size:.7rem;">Caricamento...</div>
+      </div>
+    </div>
+    <!-- Link legali in fondo al drawer Account -->
+    <div class="acc-legal-links">
+      <a href="termini-condizioni.html" target="_blank" class="acc-legal-link">Termini e Condizioni</a>
+      <span class="acc-legal-sep">·</span>
+      <a href="privacy-policy.html" target="_blank" class="acc-legal-link">Privacy Policy</a>
+    </div>
+  </div>
+</div>
+
+<!-- DRAWER CHIEDI AL BARMAN -->
+<div class="drawer" id="drawer-ai">
+  <div class="drawer-handle"></div>
+  <div class="drawer-inner">
+    <div class="drawer-header" id="ai-drawer-header"><span id="ai-header-title">Chiedi al Barman</span><div style="display:flex;align-items:center;gap:.5rem;"><button class="drawer-back-btn" id="ai-back-header-btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>Torna</button><button class="drawer-close-btn" id="ai-close-btn">✕</button></div></div>
+
+    <!-- USAGE BAR -->
+    <div id="ai-usage-bar" style="display:flex;align-items:center;gap:8px;margin-bottom:1.1rem;font-size:.65rem;color:var(--dim);">
+      <span>Ricerche mese:</span>
+      <div style="flex:1;height:3px;background:var(--brd);border-radius:99px;overflow:hidden;">
+        <div id="ai-usage-fill" style="height:100%;background:var(--amber);border-radius:99px;width:0%;transition:width .4s;"></div>
+      </div>
+      <span id="ai-usage-txt">0/30</span>
+    </div>
+
+    <!-- TASTO TIPS (visibile solo dentro una funzione) -->
+    <button id="ai-tips-btn" style="display:none;align-items:center;gap:.4rem;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:.35rem .75rem;font-family:inherit;font-size:.65rem;font-weight:700;color:var(--amber);cursor:pointer;margin-bottom:.85rem;letter-spacing:.06em;transition:all .2s;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Tips
+    </button>
+
+    <!-- GRIGLIA 5 COMANDI -->
+    <div id="ai-step-cmds">
+      <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.6rem;">Cosa vuoi fare?</div>
+
+      <!-- Riga 1: Signature + Twist -->
+      <div style="display:grid;grid-template-columns:1fr;gap:.55rem;margin-bottom:.55rem;">
+        <button class="ai-cmd-btn" id="ai-btn-signature" data-cmd="signature" style="display:flex;flex-direction:row;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 22v-7"/><path d="M3 3l7 9h4l7-9z"/></svg>
+          <div style="display:flex;flex-direction:column;gap:.15rem;">
+            <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Crea un signature</span>
+            <span style="font-size:.68rem;color:var(--dim);">Drink su misura</span>
+          </div>
+          <span style="margin-left:auto;display:flex;align-items:center;justify-content:center;width:20px;height:20px;background:rgba(245,158,11,0.15);border-radius:6px;flex-shrink:0;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        </button>
+        <button class="ai-cmd-btn" id="ai-btn-twist" data-cmd="twist" style="display:flex;flex-direction:row;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          <div style="display:flex;flex-direction:column;gap:.15rem;">
+            <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Twist on classic</span>
+            <span style="font-size:.68rem;color:var(--dim);">3 reinterpretazioni</span>
+          </div>
+          <span style="margin-left:auto;display:flex;align-items:center;justify-content:center;width:20px;height:20px;background:rgba(245,158,11,0.15);border-radius:6px;flex-shrink:0;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        </button>
+        <button class="ai-cmd-btn" id="ai-btn-pairing" data-cmd="pairing" style="display:flex;flex-direction:row;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          <div style="display:flex;flex-direction:column;gap:.15rem;">
+            <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Food pairing</span>
+            <span style="font-size:.68rem;color:var(--dim);">3 abbinamenti al piatto</span>
+          </div>
+          <span style="margin-left:auto;display:flex;align-items:center;justify-content:center;width:20px;height:20px;background:rgba(245,158,11,0.15);border-radius:6px;flex-shrink:0;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        </button>
+        <button class="ai-cmd-btn" id="ai-btn-giorno" data-cmd="giorno" style="display:flex;flex-direction:row;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .75rem;cursor:pointer;transition:all .2s;text-align:left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="16" r="2" fill="var(--amber)" stroke="none"/></svg>
+          <div style="display:flex;flex-direction:column;gap:.15rem;">
+            <span style="font-size:.8rem;font-weight:700;color:var(--txt);">Cocktail del giorno</span>
+            <span style="font-size:.68rem;color:var(--dim);">Stagionale, per oggi</span>
+          </div>
+          <span style="margin-left:auto;display:flex;align-items:center;justify-content:center;width:20px;height:20px;background:rgba(245,158,11,0.15);border-radius:6px;flex-shrink:0;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        </button>
+      </div>
+      <!-- CARD SALVATI AI — stile Spirits Genesis -->
+      <div id="ai-saved-card" style="display:none;margin-top:1.1rem;background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.25);border-radius:12px;padding:.75rem .85rem;">
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem;">
+          <div style="width:26px;height:26px;background:rgba(37,99,235,.2);border-radius:7px;display:grid;place-items:center;flex-shrink:0;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div>
+            <div style="font-size:.72rem;font-weight:700;color:#60a5fa;">Le tue ricerche salvate</div>
+            <div style="font-size:.58rem;color:var(--dim);">Raggruppate per funzione</div>
+          </div>
+        </div>
+        <div id="saved-list"></div>
+      </div>
+    </div>
+
+    <!-- SIGNATURE MULTI-STEP -->
+    <div id="ai-step-signature" style="display:none;">
+
+      <!-- Step 1: cosa creiamo -->
+      <div id="sig-step-1">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Cosa creiamo?</div>
+        <div style="display:flex;gap:.45rem;">
+          <button class="sig-pill" data-step="1" data-val="alcolico" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.75rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Alcolico</button>
+          <button class="sig-pill" data-step="1" data-val="analcolico" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.75rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Analcolico</button>
+        </div>
+      </div>
+
+      <!-- Step 2a: tipo drink (solo alcolico) -->
+      <div id="sig-step-2a" style="display:none;margin-top:.8rem;">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Che tipo di drink?</div>
+        <div style="display:flex;gap:.45rem;">
+          <button class="sig-pill" data-step="2a" data-val="pre dinner" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Pre dinner</button>
+          <button class="sig-pill" data-step="2a" data-val="after dinner" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">After dinner</button>
+          <button class="sig-pill" data-step="2a" data-val="all day" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">All day</button>
+        </div>
+      </div>
+
+      <!-- Step 2b: profilo gusto (solo analcolico) -->
+      <div id="sig-step-2b" style="display:none;margin-top:.8rem;">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Profilo gusto</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem;">
+          <button class="sig-pill" data-step="2b" data-val="dolce" style="background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Dolce</button>
+          <button class="sig-pill" data-step="2b" data-val="aspro" style="background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Aspro</button>
+          <button class="sig-pill" data-step="2b" data-val="amaro" style="background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Amaro</button>
+          <button class="sig-pill" data-step="2b" data-val="fresco" style="background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Fresco</button>
+        </div>
+      </div>
+
+      <!-- Step 3: tenore alcolico (solo alcolico) -->
+      <div id="sig-step-3" style="display:none;margin-top:.8rem;">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Tenore alcolico</div>
+        <div style="display:flex;gap:.45rem;">
+          <button class="sig-pill" data-step="3" data-val="basso" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Basso</button>
+          <button class="sig-pill" data-step="3" data-val="medio" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Medio</button>
+          <button class="sig-pill" data-step="3" data-val="alto" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Alto</button>
+        </div>
+      </div>
+
+      <!-- Step 4: bicchiere -->
+      <div id="sig-step-4" style="display:none;margin-top:.8rem;">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">In quale bicchiere?</div>
+        <div style="display:flex;gap:.45rem;">
+          <button class="sig-pill" data-step="4" data-val="coppetta" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Coppetta</button>
+          <button class="sig-pill" data-step="4" data-val="tumbler" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Tumbler</button>
+          <button class="sig-pill" data-step="4" data-val="highball" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Highball</button>
+        </div>
+      </div>
+
+      <!-- Step 5: ingredienti -->
+      <div id="sig-step-5" style="display:none;margin-top:.8rem;">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Con quali ingredienti vuoi farlo?</div>
+        <textarea id="sig-input" rows="2"
+          style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"
+          placeholder="es. gin, lime, rosmarino... aggiungi note se vuoi: frizzante, secco, cremoso"></textarea>
+        <button id="sig-btn" disabled
+          style="margin-top:.65rem;width:100%;padding:.75rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">
+          ✦ Chiedi al Barman
+        </button>
+      </div>
+    </div>
+
+    <!-- INPUT ALTRI 5 COMANDI -->
+    <div id="ai-step-input" style="display:none;">
+      <!-- Label universale per comandi non-giorno -->
+      <div id="ai-input-label" style="display:none;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;"></div>
+      <!-- Step 1 giorno: alcolico / analcolico -->
+      <div id="giorno-step-1" style="display:none;">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Alcolico o analcolico?</div>
+        <div style="display:flex;gap:.55rem;">
+          <button class="giorno-tipo-pill sig-pill" data-val="alcolico" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.75rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Alcolico</button>
+          <button class="giorno-tipo-pill sig-pill" data-val="analcolico" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.75rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Analcolico</button>
+        </div>
+      </div>
+      <!-- Step 2 giorno: stile (solo se alcolico) -->
+      <div id="giorno-step-2" style="display:none;margin-top:.75rem;">
+        <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">In che stile lo vuoi?</div>
+        <div id="ai-pills" style="display:none;gap:.55rem;">
+          <button class="ai-pill" data-val="pre dinner" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">Pre dinner</button>
+          <button class="ai-pill" data-val="after dinner" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">After dinner</button>
+          <button class="ai-pill" data-val="all day" style="flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s;font-family:inherit;">All day</button>
+        </div>
+      </div>
+      <textarea id="ai-input" rows="2" placeholder=""
+        style="display:none;width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
+      <button id="ai-btn" disabled
+        style="margin-top:.75rem;width:100%;padding:.75rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">
+        ✦ Chiedi al Barman
+      </button>
+    </div>
+
+    <!-- EXHAUSTED -->
+    <div id="ai-exhausted" style="display:none;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:.75rem;text-align:center;margin-bottom:.85rem;margin-top:1.2rem;">
+      <p style="font-size:.72rem;color:#f87171;line-height:1.5;">🚫 Hai esaurito le 30 ricerche mensili.</p>
+      <p id="ai-reset-date" style="font-size:.62rem;color:var(--dim);margin-top:.3rem;"></p>
+    </div>
+
+    <!-- RISPOSTA -->
+    <div id="ai-response" style="display:none;margin-top:1rem;border-top:1px solid var(--brd);padding-top:1rem;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:.75rem;font-size:.68rem;color:var(--dim);">
+        <span class="ai-star-icon" style="width:24px;height:24px;background:var(--amber);border-radius:50%;display:grid;place-items:center;color:#0a0f1e;flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></span>
+        Il barman risponde
+      </div>
+      <div id="ai-body" style="font-size:.78rem;line-height:1.75;color:var(--txt);"></div>
+
+      <!-- FOLLOW-UP DINAMICO — gestito dal JS in base al comando -->
+      <div id="fu-block" style="display:none;margin-top:1.1rem;padding-top:.9rem;border-top:1px solid var(--brd);">
+
+        <!-- Tipo A: SI/NO (signature, giorno) -->
+        <div id="fu-type-sino" style="display:none;">
+          <div style="font-size:.68rem;color:var(--dim);margin-bottom:.5rem;">Se sei soddisfatto, salva la proposta!</div>
+          <div style="display:flex;gap:.45rem;margin-bottom:.6rem;">
+            <button id="fu-save" style="flex:1;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--amber);cursor:pointer;font-family:inherit;transition:all .2s;">Salva</button>
+          </div>
+          <div style="font-size:.62rem;color:var(--dim);margin-bottom:.45rem;">Altrimenti:</div>
+          <div style="display:flex;gap:.45rem;">
+            <button id="fu-lavora" style="flex:1;background:var(--surf);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.55rem;font-size:.7rem;font-weight:600;color:var(--txt);cursor:pointer;font-family:inherit;transition:all .2s;">Lavoriamo su questa</button>
+            <button id="fu-nuova" style="flex:1;background:var(--surf);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.55rem;font-size:.7rem;font-weight:600;color:var(--txt);cursor:pointer;font-family:inherit;transition:all .2s;">Nuova proposta</button>
+          </div>
+        </div>
+
+        <!-- Tipo B: 3 proposte (twist, pairing) -->
+        <div id="fu-type-tre" style="display:none;">
+          <div id="fu-tre-opts">
+            <div style="font-size:.68rem;color:var(--dim);margin-bottom:.5rem;">Se sei soddisfatto, salva le proposte!</div>
+            <div style="display:flex;gap:.45rem;margin-bottom:.6rem;">
+              <button id="fu-save-tre" style="flex:1;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:.55rem;font-size:.72rem;font-weight:600;color:var(--amber);cursor:pointer;font-family:inherit;transition:all .2s;">Salva</button>
+            </div>
+            <div style="font-size:.62rem;color:var(--dim);margin-bottom:.45rem;">Altrimenti:</div>
+            <div style="display:flex;gap:.45rem;">
+              <button id="fu-modifica-tre" style="flex:1;background:var(--surf);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.55rem;font-size:.68rem;font-weight:600;color:var(--txt);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;">Modifica una proposta</button>
+              <button id="fu-altre-tre" style="flex:1;background:var(--surf);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.55rem;font-size:.68rem;font-weight:600;color:var(--txt);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;">Altre 3 varianti</button>
+            </div>
+          </div>
+          <!-- Scelta quale drink modificare -->
+          <div id="fu-scelta-drink" style="display:none;margin-top:.75rem;">
+            <div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin-bottom:.5rem;">Su quale proposta vuoi lavorare?</div>
+            <div style="display:flex;gap:.45rem;">
+              <button class="fu-scelta-num" data-num="1" style="flex:1;background:var(--surf);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.6rem .4rem;font-size:.7rem;font-weight:700;color:var(--txt);cursor:pointer;font-family:inherit;transition:all .2s;">Prima</button>
+              <button class="fu-scelta-num" data-num="2" style="flex:1;background:var(--surf);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.6rem .4rem;font-size:.7rem;font-weight:700;color:var(--txt);cursor:pointer;font-family:inherit;transition:all .2s;">Seconda</button>
+              <button class="fu-scelta-num" data-num="3" style="flex:1;background:var(--surf);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:.6rem .4rem;font-size:.7rem;font-weight:700;color:var(--txt);cursor:pointer;font-family:inherit;transition:all .2s;">Terza</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat continua (usata da lavora/altre varianti/dopo scelta drink) -->
+        <div id="fu-chat-cont" style="display:none;margin-top:.75rem;">
+          <textarea id="fu-cont-inp" rows="2" placeholder="Dimmi cosa vuoi che faccia..."
+            style="width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.5rem .75rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;resize:none;line-height:1.5;box-sizing:border-box;"></textarea>
+          <button id="fu-cont-send" disabled style="margin-top:.5rem;width:100%;padding:.7rem;background:var(--surf);color:var(--dim);border:1px solid var(--brd);border-radius:10px;font-family:inherit;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:not-allowed;transition:all .25s;">✦ Modifica</button>
+        </div>
+
+      </div>
+
+      <button id="ai-new" style="margin-top:1rem;display:inline-flex;align-items:center;gap:.35rem;background:var(--bg);border:1px solid var(--brd);border-radius:7px;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:.3rem .65rem;transition:all .2s;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Torna ai comandi
+      </button>
+    </div>
+
+    <div id="ai-error" style="display:none;margin-top:.75rem;padding:.65rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;font-size:.72rem;color:#f87171;"></div>
+
+  </div>
+</div>
+
+<!-- POPUP TIPS -->
+<div id="tips-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:1.2rem;">
+  <div id="tips-box" style="background:#0f172a;border:1px solid rgba(245,158,11,.25);border-radius:16px;width:100%;max-width:360px;max-height:80vh;overflow-y:auto;padding:1.25rem 1.1rem 1rem;position:relative;box-shadow:0 8px 40px rgba(0,0,0,.6);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;">
+      <div style="display:flex;align-items:center;gap:.45rem;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="tips-title" style="font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);">Come usarla</span>
+      </div>
+      <button id="tips-close" style="background:none;border:none;color:var(--dim);font-size:1rem;cursor:pointer;padding:.1rem .3rem;line-height:1;">&#x2715;</button>
+    </div>
+    <div id="tips-content" style="font-size:.75rem;color:var(--txt2);line-height:1.7;"></div>
+  </div>
+</div>
+
+<!-- TOAST COPIA -->
+<div class="copied-toast" id="copied-toast">Codice copiato! ✓</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ═══ KEYBOARD DETECTION — evita lampeggio drawer ═══
+(function(){
+  var initialHeight = window.innerHeight;
+  window.addEventListener('resize', function(){
+    var drawers = document.querySelectorAll('.drawer');
+    if (window.innerHeight < initialHeight * 0.85) {
+      // tastiera aperta
+      drawers.forEach(function(d){ if(d.classList.contains('open')) d.classList.add('keyboard-open'); });
+    } else {
+      // tastiera chiusa
+      drawers.forEach(function(d){ d.classList.remove('keyboard-open'); });
+      initialHeight = window.innerHeight;
+    }
+  });
+})();
+
+// ═══ DRAWER SYSTEM ═══
+var CURRENT_DRAWER = null;
+
+function openDrawer(id) {
+  var drawer = document.getElementById('drawer-' + id);
+  var overlay = document.getElementById('drawer-overlay');
+  var btn = document.getElementById('tbtn-' + id);
+  if (!drawer) return;
+  if (CURRENT_DRAWER === id) {
+    closeAllDrawers();
+    return;
+  }
+  var allDrawers = document.querySelectorAll('.drawer');
+  allDrawers.forEach(function(d){ d.style.transition = 'none'; });
+  allDrawers.forEach(function(d){ d.classList.remove('open'); });
+  drawer.classList.add('open');
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      allDrawers.forEach(function(d){ d.style.transition = ''; });
+    });
+  });
+  overlay.classList.add('show');
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  CURRENT_DRAWER = id;
+  var creabtn = document.getElementById('tbtn-ai');
+  if(creabtn){
+    if(id === 'ai'){ creabtn.classList.remove('dim'); }
+    else { creabtn.classList.add('dim'); }
+  }
+  var fb=document.getElementById('filter-bar');if(fb)fb.style.zIndex='40';
+  var rb=document.getElementById('rbar');if(rb)rb.style.zIndex='40';
+}
+
+function closeAllDrawers(silent) {
+  document.querySelectorAll('.drawer').forEach(function(d){ d.classList.remove('open'); });
+  document.getElementById('drawer-overlay').classList.remove('show');
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  if (!silent) CURRENT_DRAWER = null;
+  // In riposo: AI torna evidenziata
+  if (!silent){
+    var creabtn = document.getElementById('tbtn-ai');
+    if(creabtn) creabtn.classList.remove('dim');
+  }
+  // Ripristina z-index solo se chiusura definitiva
+  if (!silent) {
+    var fb=document.getElementById('filter-bar');if(fb)fb.style.zIndex='';
+    var rb=document.getElementById('rbar');if(rb)rb.style.zIndex='';
+  }
+}
+
+// Swipe down per chiudere
+document.querySelectorAll('.drawer-handle').forEach(function(handle) {
+  var startY = 0;
+  handle.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
+  handle.addEventListener('touchend', function(e){
+    if (e.changedTouches[0].clientY - startY > 40) closeAllDrawers();
+  }, {passive:true});
+});
+
+// Blocca propagazione click sui tab-btn → l'overlay non riceve mai il click
+document.querySelectorAll('.tab-btn').forEach(function(b){
+  b.addEventListener('click', function(e){ e.stopPropagation(); });
+});
+
+// Overlay click — chiude drawer
+document.getElementById('drawer-overlay').addEventListener('click', function(){
+  closeAllDrawers();
+});
+
+// ═══ COPIA CODICE (Vantaggi drawer) ═══
+(function(){
+  var toast = document.getElementById('copied-toast');
+  function copyCode(id, code) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', function(){
+      var inp = document.createElement('input');
+      inp.value = code;
+      inp.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+      document.body.appendChild(inp);
+      inp.focus(); inp.setSelectionRange(0, code.length);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch(e){}
+      document.body.removeChild(inp);
+      if (!ok && navigator.clipboard) navigator.clipboard.writeText(code).catch(function(){});
+      // Feedback visivo sul pulsante stesso
+      var span = el.querySelector('.vnt-code-copy');
+      var origText = span ? span.textContent : '';
+      var origBg = el.style.background;
+      var origBorder = el.style.borderColor;
+      var origColor = el.style.color;
+      el.style.background = 'rgba(34,197,94,.15)';
+      el.style.borderColor = 'rgba(34,197,94,.5)';
+      el.style.color = '#4ade80';
+      if(span){ span.textContent = '✓ copiato'; span.style.color = '#4ade80'; }
+      setTimeout(function(){
+        el.style.background = origBg;
+        el.style.borderColor = origBorder;
+        el.style.color = origColor;
+        if(span){ span.textContent = origText; span.style.color = ''; }
+      }, 2000);
+    });
+  }
+  copyCode('copy-corsi',  'LEGEND20');
+  copyCode('copy-lumian', 'LEGEND20');
+})();
+
+// ═══ TEMPERATURE DRAWER ═══
+(function(){
+  var zonesEl = document.getElementById('tmp-zones-drawer');
+  if (!zonesEl) return;
+  var ZONES = [
+    { range:'< 0\u00b0C',    name:'Sotto Zero',       color:'#4a7acc', sentori:'Percezione quasi nulla. Solo note mentolate ed eucaliptolici resistono.', dist:'Non consigliato per distillati di qualit\u00e0' },
+    { range:'0\u20135\u00b0C',  name:'Freddo da frigo',  color:'#3ab8d4', sentori:'Agrumato, mentolato. Note leggere e volatili ancora percepibili.',        dist:'Vodka ghiacciata' },
+    { range:'4\u20138\u00b0C',  name:'Servizio freddo',  color:'#2da89a', sentori:'Erbe fresche, agrumi, fiori bianchi leggeri. Calore alcolico ridotto.',   dist:'Gin \u00b7 Vodka' },
+    { range:'8\u201313\u00b0C', name:'Fresco temperato', color:'#4db86a', sentori:'Verdi: fico, basilico, erba tagliata. Fruttate fresche: mela verde, pera. Floreali leggeri.', dist:'Grappa giovane \u00b7 Acquaviti bianche \u00b7 Pisco' },
+    { range:'13\u201315\u00b0C',name:'Temperato',        color:'#88bb2a', sentori:'Floreali leggeri, lavanda, spezie dolci. Buon equilibrio freschezza e aroma.', dist:'Rum bianco \u00b7 Tequila blanco \u00b7 Mezcal \u00b7 Sotol \u00b7 Cacha\u00e7a' },
+    { range:'16\u201318\u00b0C',name:'Caldo moderato',   color:'#d4a020', sentori:'Caramello, fruttato maturo, spezie calde, note cerealicole. Complessit\u00e0 emergente.', dist:'Bourbon \u00b7 Rye Whiskey \u00b7 Irish Whiskey \u00b7 Scotch blended \u00b7 Japanese Whisky \u00b7 Tequila reposado \u00b7 Rum a\u00f1ejo \u00b7 Grappa barricata' },
+    { range:'18\u201322\u00b0C',name:'Caldo espressivo', color:'#e8701a', sentori:'Torba, cuoio, frutta secca, spezie intense. Massima espressione aromatica.', dist:'Scotch single malt \u00b7 Whisky torbato \u00b7 Tequila a\u00f1ejo \u00b7 Cognac VS-VSOP \u00b7 Armagnac \u00b7 Calvados' },
+    { range:'20\u201324\u00b0C',name:'Caldo profondo',   color:'#c83820', sentori:'Legnoso, resinoso, balsamico, ambra, vaniglia, cacao. Aromi ricchi e persistenti.', dist:'Cognac XO \u00b7 Armagnac millesimato \u00b7 Rum XO \u00b7 Brandy Riserva-XO' }
+  ];
+  ZONES.forEach(function(z){
+    var d = document.createElement('div');
+    d.className = 'vnt-item';
+    d.style.borderLeft = '3px solid ' + z.color;
+    d.innerHTML = '<div class="vnt-item-title" style="color:' + z.color + '">' + z.range + ' \u2014 ' + z.name + '</div>'
+      + '<div class="vnt-item-desc" style="font-style:italic">' + z.sentori + '</div>'
+      + '<div style="font-size:.68rem;font-weight:600;color:' + z.color + '">' + z.dist + '</div>';
+    zonesEl.appendChild(d);
+  });
+})();
+
+// ═══ CALCOLATORE ABV ═══
+(function(){
+  var wrap = document.getElementById('abv-ingredients');
+  var result = document.getElementById('abv-result');
+  var desc = document.getElementById('abv-desc');
+  var rowIdx = 1;
+
+  function addRow() {
+    var row = document.createElement('div');
+    row.className = 'abv-row-calc';
+    row.style.cssText = 'display:flex;align-items:center;gap:.4rem;margin-top:.5rem;';
+    row.innerHTML = '<input type="number" class="abv-ml" placeholder="ml" min="0" max="500" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
+      + '<span style="color:var(--dim);font-size:.75rem;">ml</span>'
+      + '<input type="number" class="abv-pct" placeholder="%" min="0" max="100" style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">'
+      + '<span style="color:var(--dim);font-size:.75rem;">%</span>'
+      + '<button onclick="this.parentElement.remove();debouncedCalc();" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:.9rem;padding:0 .2rem;">✕</button>';
+    wrap.appendChild(row);
+    row.querySelectorAll('input').forEach(function(i){ i.addEventListener('input', debouncedCalc); });
+  }
+
+  // Style prima riga
+  var firstRow = wrap.querySelector('.abv-row-calc');
+  if (firstRow) firstRow.style.cssText = 'display:flex;align-items:center;gap:.4rem;';
+
+  document.getElementById('abv-add-row').addEventListener('click', addRow);
+  document.getElementById('abv-reset').addEventListener('click', function(){
+    wrap.innerHTML = '';
+    addRow(); addRow();
+    result.textContent = '\u2014';
+    desc.textContent = '';
+    var ae=document.getElementById('abv-alcol');if(ae)ae.textContent='';
+  });
+
+  wrap.querySelectorAll('input').forEach(function(i){ i.addEventListener('input', debouncedCalc); });
+
+  // Aggiungi una seconda riga di default
+  addRow();
+})();
+
+var _abvTimer = null;
+function debouncedCalc(){ clearTimeout(_abvTimer); _abvTimer = setTimeout(calcABV, 400); }
+
+function calcABV() {
+  var rows = document.querySelectorAll('#abv-ingredients .abv-row-calc');
+  var totalVol = 0, totalAlc = 0;
+  rows.forEach(function(row){
+    var ml = parseFloat(row.querySelector('.abv-ml').value) || 0;
+    var pct = parseFloat(row.querySelector('.abv-pct').value) || 0;
+    totalVol += ml;
+    totalAlc += ml * (pct / 100);
+  });
+  var result = document.getElementById('abv-result');
+  var desc = document.getElementById('abv-desc');
+  if (totalVol <= 0) {
+    result.textContent = '\u2014';
+    desc.textContent = '';
+    var ae=document.getElementById('abv-alcol');if(ae)ae.textContent='';
+    return;
+  }
+  var abv = (totalAlc / totalVol * 100).toFixed(1);
+  var label = abv < 10 ? 'Basso' : abv < 20 ? 'Medio' : abv < 30 ? 'Medio-alto' : 'Alto';
+  // Aggiorna solo se il valore è cambiato, evita repaint inutili
+  var newText = abv + '%';
+  var newDesc = label + ' \u2014 ' + totalVol.toFixed(0) + ' ml totali';
+  var newAlcol = 'Alcol etilico puro: ' + totalAlc.toFixed(1) + ' ml';
+  if (result.textContent !== newText) result.textContent = newText;
+  if (desc.textContent !== newDesc) desc.textContent = newDesc;
+  var alcolEl = document.getElementById('abv-alcol');
+  if (alcolEl) alcolEl.textContent = newAlcol;
+}
+
+</script>
+
+<!-- ══ MODAL RESET PASSWORD ══ -->
+<div id="resetPasswordModal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+  <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.10);border-radius:20px;padding:2rem 1.8rem;width:92%;max-width:390px;position:relative;box-shadow:0 25px 60px rgba(0,0,0,0.5);">
+
+    <!-- Chiudi -->
+    <button id="resetModalClose" style="position:absolute;top:1rem;right:1.1rem;background:none;border:none;color:#64748b;font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s;" onmouseover="this.style.color='#f1f5f9'" onmouseout="this.style.color='#64748b'">×</button>
+
+    <!-- Header -->
+    <div style="margin-bottom:1.4rem;">
+      <p style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f59e0b;margin-bottom:.4rem;">Account</p>
+      <h3 style="color:#f1f5f9;font-size:1.15rem;font-weight:800;margin:0 0 .4rem;">Password dimenticata?</h3>
+      <p style="color:#94a3b8;font-size:.83rem;line-height:1.5;margin:0;">Inserisci la tua email. Ti mandiamo un link per reimpostare la password.</p>
+    </div>
+
+    <!-- Input email -->
+    <div style="position:relative;margin-bottom:.9rem;">
+      <input
+        id="resetEmailInput"
+        type="email"
+        placeholder="La tua email"
+        style="width:100%;padding:.85rem 1rem;background:#0f172a;border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#f1f5f9;font-size:.93rem;outline:none;box-sizing:border-box;font-family:inherit;transition:border-color .2s;"
+        onfocus="this.style.borderColor='rgba(245,158,11,0.5)'"
+        onblur="this.style.borderColor='rgba(255,255,255,0.12)'"
+      />
+    </div>
+
+    <!-- Feedback -->
+    <div id="resetFeedback" style="display:none;font-size:.82rem;margin-bottom:.9rem;padding:.7rem 1rem;border-radius:8px;line-height:1.5;"></div>
+
+    <!-- Bottone -->
+    <button
+      id="resetSendBtn"
+      style="width:100%;padding:.9rem;background:#f59e0b;color:#0f172a;font-weight:800;font-size:.93rem;border:none;border-radius:10px;cursor:pointer;transition:all .2s;font-family:inherit;letter-spacing:.01em;"
+      onmouseover="if(!this.disabled)this.style.background='#d97706'"
+      onmouseout="if(!this.disabled)this.style.background='#f59e0b'"
+    >
+      Invia link di reset &rarr;
+    </button>
+
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script type="module" src="js/firebase-init.js"></script>
+<script src="js/js.js" defer></script>
+
+<!-- PROTEZIONE CONTENUTI -->
+<script>
+  // Blocca tasto destro ovunque
+  document.addEventListener('contextmenu', function(e){ e.preventDefault(); return false; });
+  // Blocca selezione testo da tastiera (Ctrl+A)
+  document.addEventListener('selectstart', function(e){ e.preventDefault(); return false; });
+  // Blocca copia (Ctrl+C)
+  document.addEventListener('copy', function(e){ e.preventDefault(); return false; });
+  // Blocca F3 e PrintScreen
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'PrintScreen' || e.keyCode === 44) { e.preventDefault(); return false; }
+  });
+
+  // ── HAMBURGER MENU ──────────────────────────────────
+  var menuBtn = document.getElementById('hdr-menu-btn');
+  var menuModal = document.getElementById('nav-menu-modal');
+  var menuClose = document.getElementById('nav-menu-close');
+
+  window.closeNavMenu = function() {
+    if (menuModal) menuModal.classList.remove('open');
+  };
+
+  if (menuBtn && menuModal && menuClose) {
+    menuBtn.addEventListener('click', function() {
+      menuModal.classList.add('open');
+    });
+    menuClose.addEventListener('click', function() {
+      menuModal.classList.remove('open');
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') menuModal.classList.remove('open');
+    });
+  }
+
+  // ── HELPER: rimuovi active da tutte le icone header ──
+  function clearHdrActive() {
+    ['hdr-ai-btn','hdr-fav-btn','hdr-acc-btn'].forEach(function(id){
+      var b = document.getElementById(id);
+      if (b) b.classList.remove('active');
+    });
+  }
+
+  // ── ICONE HEADER — toggle drawer ─────────────────────
+  function hdrDrawerToggle(btnId, drawerId, closeBtnId) {
+    var btn = document.getElementById(btnId);
+    var closeBtn = document.getElementById(closeBtnId);
+    if (btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var drawer = document.getElementById('drawer-' + drawerId);
+        var isOpen = drawer && drawer.classList.contains('open');
+        if (isOpen) {
+          closeAllDrawers();
+        } else {
+          clearHdrActive();
+          openDrawer(drawerId);
+          btn.classList.add('active');
+        }
+      });
+    }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        closeAllDrawers();
+      });
+    }
+  }
+
+  hdrDrawerToggle('hdr-ai-btn',  'ai',  'ai-close-btn');
+  hdrDrawerToggle('hdr-acc-btn', 'acc', 'acc-close-btn');
+
+  // ── ICONA PREFERITI — chiude drawer aperto + toggle filtro ──
+  var favBtn = document.getElementById('hdr-fav-btn');
+  var favOnlyBtn = document.getElementById('btn-favonly');
+  if (favBtn) {
+    favBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (typeof isPremium === 'function' && !isPremium()) {
+        requirePremium('Preferiti');
+        return;
+      }
+      // Chiudi qualsiasi drawer aperto
+      closeAllDrawers();
+      // Toggle filtro preferiti
+      if (favOnlyBtn) favOnlyBtn.click();
+      // Sincronizza stato active (FAV_ONLY aggiornato dal click su favOnlyBtn)
+      setTimeout(function(){
+        favBtn.classList.toggle('active', !!window.FAV_ONLY);
+      }, 0);
+    });
+  }
+
+  // ── PATCH closeAllDrawers — rimuovi active icone header ──
+  if (typeof closeAllDrawers === 'function') {
+    var _patchedClose = closeAllDrawers;
+    window.closeAllDrawers = function(silent) {
+      _patchedClose(silent);
+      clearHdrActive();
+    };
+  }
+</script>
+
+<!-- QUIZ BAR — fixed bottom -->
+<a href="quiz.html" class="sg-banner" id="quiz-bar">
+  <div class="sg-banner-ico">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="#60a5fa" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+  </div>
+  <div class="sg-banner-text">
+    <span class="sg-banner-title">Quiz del giorno</span>
+    <span class="sg-banner-sub">Rispondi e scala la classifica</span>
+  </div>
+  <div class="sg-banner-dl">
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    Gioca
+  </div>
+</a>
+
+</body>
+</html>

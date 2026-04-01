@@ -5,7 +5,8 @@
   --txt:#f1f5f9;--txt2:#cbd5e1;--brd:rgba(255,255,255,.08);--dim:#64748b
 }
 :root{--hdr-h:73px;}
-body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;padding-top:var(--hdr-h);}
+:root{--quiz-bar-h:48px;}
+body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;padding-top:var(--hdr-h);padding-bottom:var(--quiz-bar-h);}
 @media (display-mode: standalone) {
   body{padding-top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));}
 }
@@ -16,9 +17,10 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   z-index:1100;
   height:var(--hdr-h);
   padding:0 4%;
-  background:rgba(10,15,30,.97);
+  background:rgba(10,15,30,.98);
   backdrop-filter:blur(16px);
   border-bottom:1px solid var(--brd);
+  box-shadow:0 2px 12px rgba(0,0,0,.45);
   display:flex;align-items:center;justify-content:space-between;
 }
 @media (display-mode: standalone) {
@@ -816,15 +818,22 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 
 .sg-banner{
-  background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(96,165,250,.06));
-  border-bottom:1px solid rgba(37,99,235,.15);
-  padding:.28rem 5%;
-  margin-top:.4rem;
+  position:fixed;bottom:0;left:0;right:0;
+  z-index:1090;
+  background:linear-gradient(135deg,rgba(14,22,50,.97),rgba(10,15,30,.97));
+  backdrop-filter:blur(14px);
+  border-top:1px solid rgba(37,99,235,.25);
+  box-shadow:0 -4px 20px rgba(0,0,0,.4);
+  padding:.4rem 5%;
+  padding-bottom:calc(.4rem + env(safe-area-inset-bottom, 0px));
   display:flex;align-items:center;justify-content:center;gap:.6rem;
   text-decoration:none;
   transition:background .2s;
 }
-.sg-banner:hover{background:linear-gradient(135deg,rgba(37,99,235,.2),rgba(96,165,250,.1));}
+.sg-banner:hover{background:linear-gradient(135deg,rgba(20,32,70,.98),rgba(15,20,40,.98));}
+@media (display-mode: standalone) {
+  .sg-banner{padding-bottom:calc(.4rem + env(safe-area-inset-bottom, 12px));}
+}
 .sg-banner-ico{
   width:24px;height:24px;border-radius:6px;
   background:rgba(37,99,235,.2);
