@@ -73,21 +73,41 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .nav-menu-close:hover{color:var(--txt);}
 
-/* Header actions (destra) */
-.hdr-actions{
-  display:flex;align-items:center;gap:.5rem;
-}
-
-/* Icona omino header */
-.hdr-acc-btn{
+/* Header actions — icone generiche */
+.hdr-icon-btn{
   background:none;border:none;cursor:pointer;
   padding:.4rem;
   display:flex;align-items:center;justify-content:center;
   -webkit-tap-highlight-color:transparent;
-  transition:color .2s;
 }
-.hdr-acc-btn svg{stroke:var(--txt2);transition:stroke .2s;}
-.hdr-acc-btn.active svg{stroke:var(--amber);}
+.hdr-icon-btn svg{stroke:var(--txt2);transition:stroke .2s, fill .2s;}
+.hdr-icon-btn.active svg{stroke:var(--amber);}
+/* Cuore preferiti attivo — fill */
+.hdr-fav-btn.active svg path{stroke:var(--amber);fill:rgba(245,158,11,.2);}
+/* Stellina AI attiva */
+.hdr-ai-btn.active svg{stroke:var(--amber);}
+
+/* Drawer AI — scende dall'alto (stesso schema acc) */
+#drawer-ai{
+  top:var(--hdr-h);
+  bottom:auto !important;
+  max-height:calc(100vh - var(--hdr-h));
+  border-radius:0 0 18px 18px;
+  border-top:none;
+  border-bottom:1px solid rgba(37,99,235,.15);
+  transform:translateY(-110%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1) !important;
+  box-shadow:0 8px 40px rgba(0,0,0,.5);
+}
+#drawer-ai.open{
+  transform:translateY(0) !important;
+}
+@media (display-mode: standalone) {
+  #drawer-ai{
+    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));
+    max-height:calc(100vh - var(--hdr-h) - env(safe-area-inset-top, 0px));
+  }
+}
 
 /* Drawer Account — scende dall'alto */
 #drawer-acc{

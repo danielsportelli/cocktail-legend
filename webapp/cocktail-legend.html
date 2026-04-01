@@ -389,9 +389,19 @@
     </h1>
   </div>
   <div class="hdr-actions">
-    <button class="hdr-acc-btn" id="hdr-acc-btn" aria-label="Account">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    <!-- AI -->
+    <button class="hdr-icon-btn hdr-ai-btn" id="hdr-ai-btn" aria-label="Barman AI">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
     </button>
+    <!-- Preferiti -->
+    <button class="hdr-icon-btn hdr-fav-btn" id="hdr-fav-btn" aria-label="Preferiti">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </button>
+    <!-- Account -->
+    <button class="hdr-icon-btn hdr-acc-btn" id="hdr-acc-btn" aria-label="Account">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </button>
+    <!-- Hamburger -->
     <button class="hdr-menu-btn" id="hdr-menu-btn" aria-label="Menu">
       <span></span>
       <span></span>
@@ -1174,7 +1184,7 @@
 <div class="drawer" id="drawer-ai">
   <div class="drawer-handle"></div>
   <div class="drawer-inner">
-    <div class="drawer-header" id="ai-drawer-header"><span id="ai-header-title">Chiedi al Barman</span><button class="drawer-back-btn" id="ai-back-header-btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>Torna</button></div>
+    <div class="drawer-header" id="ai-drawer-header"><span id="ai-header-title">Chiedi al Barman</span><div style="display:flex;align-items:center;gap:.5rem;"><button class="drawer-back-btn" id="ai-back-header-btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>Torna</button><button class="drawer-close-btn" id="ai-close-btn">✕</button></div></div>
 
     <!-- USAGE BAR -->
     <div id="ai-usage-bar" style="display:flex;align-items:center;gap:8px;margin-bottom:1.1rem;font-size:.65rem;color:var(--dim);">
@@ -1729,42 +1739,59 @@ function calcABV() {
     });
   }
 
-  // ── ICONA OMINO HEADER → DRAWER ACCOUNT ─────────────
-  var accBtn = document.getElementById('hdr-acc-btn');
-  var accCloseBtn = document.getElementById('acc-close-btn');
-
-  function isAccOpen() {
-    var d = document.getElementById('drawer-acc');
-    return d && d.classList.contains('open');
-  }
-
-  if (accBtn) {
-    accBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (isAccOpen()) {
+  // ── ICONE HEADER — helper generico ───────────────────
+  function hdrDrawerToggle(btnId, drawerId, closeBtnId) {
+    var btn = document.getElementById(btnId);
+    var closeBtn = document.getElementById(closeBtnId);
+    if (btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var drawer = document.getElementById('drawer-' + drawerId);
+        var isOpen = drawer && drawer.classList.contains('open');
+        if (isOpen) {
+          closeAllDrawers();
+        } else {
+          openDrawer(drawerId);
+          btn.classList.add('active');
+        }
+      });
+    }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
         closeAllDrawers();
-        accBtn.classList.remove('active');
-      } else {
-        openDrawer('acc');
-        accBtn.classList.add('active');
+      });
+    }
+  }
+
+  hdrDrawerToggle('hdr-ai-btn',  'ai',  'ai-close-btn');
+  hdrDrawerToggle('hdr-acc-btn', 'acc', 'acc-close-btn');
+
+  // ── ICONA PREFERITI — toggle filtro ──────────────────
+  var favBtn = document.getElementById('hdr-fav-btn');
+  var favOnlyBtn = document.getElementById('btn-favonly');
+  if (favBtn) {
+    favBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (typeof isPremium === 'function' && !isPremium()) {
+        requirePremium('Preferiti');
+        return;
       }
+      // Simula click sul btn-favonly esistente
+      if (favOnlyBtn) favOnlyBtn.click();
+      // Sincronizza stato active
+      favBtn.classList.toggle('active', FAV_ONLY);
     });
   }
 
-  if (accCloseBtn) {
-    accCloseBtn.addEventListener('click', function() {
-      closeAllDrawers();
-      if (accBtn) accBtn.classList.remove('active');
-    });
-  }
-
-  // Quando si chiudono tutti i drawer, rimuovi active dall'omino
-  var _origCloseAll = window.closeAllDrawers;
+  // ── PATCH closeAllDrawers — rimuovi active da tutte le icone header ──
   if (typeof closeAllDrawers === 'function') {
     var _patchedClose = closeAllDrawers;
     window.closeAllDrawers = function(silent) {
       _patchedClose(silent);
-      if (accBtn) accBtn.classList.remove('active');
+      ['hdr-ai-btn','hdr-acc-btn'].forEach(function(id){
+        var b = document.getElementById(id);
+        if (b) b.classList.remove('active');
+      });
     };
   }
 </script>
