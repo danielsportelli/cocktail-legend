@@ -388,11 +388,16 @@
       <span class="l2">Legend</span>
     </h1>
   </div>
-  <button class="hdr-menu-btn" id="hdr-menu-btn" aria-label="Menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+  <div class="hdr-actions">
+    <button class="hdr-acc-btn" id="hdr-acc-btn" aria-label="Account">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </button>
+    <button class="hdr-menu-btn" id="hdr-menu-btn" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
 </header>
 
 <!-- MODAL MENU FULLSCREEN -->
@@ -1149,7 +1154,7 @@
 <div class="drawer" id="drawer-acc">
   <div class="drawer-handle"></div>
   <div class="drawer-inner">
-    <div class="drawer-header">Account</div>
+    <div class="drawer-header">Account <button class="drawer-close-btn" id="acc-close-btn">✕</button></div>
     <div id="acc-content" style="padding:.2rem 0;">
       <div style="text-align:center;padding:2rem 1rem;color:var(--dim);font-size:.78rem;">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="opacity:.4;"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -1722,6 +1727,45 @@ function calcABV() {
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') menuModal.classList.remove('open');
     });
+  }
+
+  // ── ICONA OMINO HEADER → DRAWER ACCOUNT ─────────────
+  var accBtn = document.getElementById('hdr-acc-btn');
+  var accCloseBtn = document.getElementById('acc-close-btn');
+
+  function isAccOpen() {
+    var d = document.getElementById('drawer-acc');
+    return d && d.classList.contains('open');
+  }
+
+  if (accBtn) {
+    accBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (isAccOpen()) {
+        closeAllDrawers();
+        accBtn.classList.remove('active');
+      } else {
+        openDrawer('acc');
+        accBtn.classList.add('active');
+      }
+    });
+  }
+
+  if (accCloseBtn) {
+    accCloseBtn.addEventListener('click', function() {
+      closeAllDrawers();
+      if (accBtn) accBtn.classList.remove('active');
+    });
+  }
+
+  // Quando si chiudono tutti i drawer, rimuovi active dall'omino
+  var _origCloseAll = window.closeAllDrawers;
+  if (typeof closeAllDrawers === 'function') {
+    var _patchedClose = closeAllDrawers;
+    window.closeAllDrawers = function(silent) {
+      _patchedClose(silent);
+      if (accBtn) accBtn.classList.remove('active');
+    };
   }
 </script>
 

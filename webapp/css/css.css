@@ -73,7 +73,53 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .nav-menu-close:hover{color:var(--txt);}
 
-/* ═══ BARRA FILTRI — layout orizzontale fisso in cima ═══ */
+/* Header actions (destra) */
+.hdr-actions{
+  display:flex;align-items:center;gap:.5rem;
+}
+
+/* Icona omino header */
+.hdr-acc-btn{
+  background:none;border:none;cursor:pointer;
+  padding:.4rem;
+  display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;
+  transition:color .2s;
+}
+.hdr-acc-btn svg{stroke:var(--txt2);transition:stroke .2s;}
+.hdr-acc-btn.active svg{stroke:var(--amber);}
+
+/* Drawer Account — scende dall'alto */
+#drawer-acc{
+  top:var(--hdr-h);
+  bottom:auto !important;
+  max-height:calc(100vh - var(--hdr-h));
+  border-radius:0 0 18px 18px;
+  border-top:none;
+  border-bottom:1px solid rgba(37,99,235,.15);
+  transform:translateY(-110%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1) !important;
+  box-shadow:0 8px 40px rgba(0,0,0,.5);
+}
+#drawer-acc.open{
+  transform:translateY(0) !important;
+}
+@media (display-mode: standalone) {
+  #drawer-acc{
+    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));
+    max-height:calc(100vh - var(--hdr-h) - env(safe-area-inset-top, 0px));
+  }
+}
+
+/* X chiudi nel drawer-acc */
+.drawer-close-btn{
+  background:none;border:none;cursor:pointer;
+  color:var(--dim);font-size:1.1rem;line-height:1;
+  padding:.1rem .2rem;
+  -webkit-tap-highlight-color:transparent;
+  transition:color .2s;flex-shrink:0;
+}
+.drawer-close-btn:hover{color:var(--txt);}
 .filter-bar{
   position:sticky;top:var(--hdr-h);z-index:1000;
   background:rgba(10,15,30,.97);
@@ -812,7 +858,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .drawer-back-btn:hover{ color:var(--txt2); border-color:var(--txt2); }
 .drawer-back-btn.visible{ display:inline-flex; }
 /* Nascondi scrollbar su desktop */
-#drawer-acc{z-index:1001;}
+#drawer-acc{z-index:1101;}
 .drawer{ scrollbar-width:none; }
 .drawer::-webkit-scrollbar{ display:none; }
 /* Nascondi scrollbar su desktop */
