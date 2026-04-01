@@ -95,20 +95,32 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .nav-menu-close:hover{color:var(--txt);}
 
-/* Voci menu hamburger */
+/* Voci menu hamburger — card con bordo amber */
 .nav-menu-items{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  flex:1;width:100%;gap:2rem;
+  flex:1;width:100%;gap:1.2rem;
 }
 .nav-menu-item{
-  background:none;border:none;cursor:pointer;
-  font-family:inherit;font-size:1.6rem;font-weight:800;
-  color:var(--txt2);letter-spacing:-.02em;
-  padding:.5rem 1rem;
-  transition:color .2s;
+  background:var(--bg);
+  border:1px solid rgba(245,158,11,.4);
+  border-radius:16px;
+  cursor:pointer;
+  font-family:inherit;font-size:1.2rem;font-weight:700;
+  color:var(--txt);
+  width:85%;max-width:360px;
+  padding:1.1rem 1.5rem;
+  display:flex;align-items:center;gap:1rem;
+  transition:border-color .2s, background .2s;
   -webkit-tap-highlight-color:transparent;
+  letter-spacing:-.01em;
 }
-.nav-menu-item:hover{color:var(--txt);}
+.nav-menu-item:hover{
+  border-color:var(--amber);
+  background:rgba(245,158,11,.06);
+}
+.nav-menu-item svg{
+  stroke:var(--txt2);flex-shrink:0;
+}
 
 /* Drawer AI — scende dall'alto (stesso schema acc) */
 #drawer-ai{
@@ -830,56 +842,35 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   padding:.18rem .5rem;border-radius:20px;
 }
 
-/* ═══ BOTTOM TAB BAR ═══ */
-.tab-bar{
-  position:fixed;bottom:0;left:0;right:0;
-  z-index:600;
-  background:rgba(18,24,40,.96);
-  backdrop-filter:blur(16px);
-  border-top:1px solid rgba(96,165,250,.3);
-  box-shadow:0 -4px 20px rgba(0,0,0,.45);
-  display:flex;
-  padding-bottom:env(safe-area-inset-bottom);
-}
-.tab-btn{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:.2rem;padding:.55rem .3rem .45rem;
-  background:none;border:none;cursor:pointer;
-  color:var(--dim);font-family:inherit;
-  transition:color .2s;
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
-}
-.tab-btn:hover{color:var(--txt2);}
-.tab-btn.active{color:var(--amber);}
-.tab-btn-ico{line-height:1;display:flex;align-items:center;justify-content:center;}
-.tab-btn-ico svg{transition:all .2s;}
-.tab-btn.active .tab-btn-ico svg{stroke:var(--amber);}
-.tab-btn.active .tab-btn-ico svg rect,.tab-btn.active .tab-btn-ico svg polygon{fill:var(--amber);fill-opacity:0.15;}
-.tab-btn.active .tab-btn-ico svg circle{fill:var(--amber);}
-.tab-btn.active .tab-btn-ico svg .filled-circle{fill:var(--amber);}
-.tab-btn-lbl{font-size:.58rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
-
-/* Drawer (sale dal basso) */
+/* Drawer (scende dall'alto — tutti i drawer) */
 .drawer{
-  position:fixed;left:0;right:0;bottom:-100%;
-  z-index:500;
+  position:fixed;left:0;right:0;
+  top:var(--hdr-h);
+  bottom:auto !important;
+  z-index:1050;
   background:var(--surf);
-  border-top:1px solid rgba(37,99,235,.15);
-  border-radius:18px 18px 0 0;
-  max-height:82vh;
+  border-bottom:1px solid rgba(37,99,235,.15);
+  border-radius:0 0 18px 18px;
+  max-height:calc(100vh - var(--hdr-h));
   overflow-y:auto;
-  transition:bottom .32s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 -8px 40px rgba(0,0,0,.5);
-  transform:translateZ(0);
+  transform:translateY(-100%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 8px 40px rgba(0,0,0,.5);
   will-change:transform;
   pointer-events:none;
 }
-.drawer.open{bottom:calc(var(--tab-bar-h, 56px) - 6px);pointer-events:auto;}
+.drawer.open{
+  transform:translateY(0);
+  pointer-events:auto;
+}
 .drawer.keyboard-open{
-  bottom:0 !important;
   max-height:50vh;
-  border-radius:0;
+}
+@media (display-mode: standalone) {
+  .drawer{
+    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));
+    max-height:calc(100vh - var(--hdr-h) - env(safe-area-inset-top, 0px));
+  }
 }
 .drawer-handle{
   display:flex;justify-content:center;padding:.7rem 0 .3rem;
@@ -911,26 +902,18 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .drawer-back-btn:hover{ color:var(--txt2); border-color:var(--txt2); }
 .drawer-back-btn.visible{ display:inline-flex; }
-/* Nascondi scrollbar su desktop */
-#drawer-acc{z-index:1050;}
-.drawer{ scrollbar-width:none; }
-.drawer::-webkit-scrollbar{ display:none; }
-/* Nascondi scrollbar su desktop */
 .drawer{ scrollbar-width:none; }
 .drawer::-webkit-scrollbar{ display:none; }
 /* overlay scuro dietro drawer */
 .drawer-overlay{
   position:fixed;inset:0;
-  bottom:var(--tab-bar-h, 56px);
+  top:var(--hdr-h);
   z-index:499;
   background:rgba(0,0,0,.45);
   opacity:0;pointer-events:none;
   transition:opacity .3s;
 }
 .drawer-overlay.show{opacity:1;pointer-events:auto;}
-
-/* padding body per non finire sotto la tab bar */
-body{padding-bottom:56px;}
 
 /* mantieni vnt-item, vnt-code etc invariati */
 
