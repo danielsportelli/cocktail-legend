@@ -5,11 +5,11 @@ const { getFirestore } = require("firebase-admin/firestore");
 initializeApp();
 
 // ═══════════════════════════════════════════════════
-// DOMANDA DEL GIORNO — ogni notte alle 00:00 (Roma)
+// DOMANDA DEL GIORNO — ogni notte alle 00:10 (Roma)
 // ═══════════════════════════════════════════════════
 exports.aggiornaDomandaDelGiorno = onSchedule(
   {
-    schedule: "0 0 * * *",
+    schedule: "10 0 * * *",
     timeZone: "Europe/Rome",
     region: "europe-west1",
   },
@@ -25,11 +25,12 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
         return;
       }
 
+      // Prendi le prime 2 domande non usate in una sola query
       const snapshot = await db
         .collection("domande")
         .where("usata", "==", false)
         .orderBy("id")
-        .limit(1)
+        .limit(2)
         .get();
 
       if (snapshot.empty) {
@@ -37,39 +38,22 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
         return;
       }
 
-      const prossimaDomanda = snapshot.docs[0];
-      const dati = prossimaDomanda.data();
       const oggi = new Date().toISOString().split("T")[0];
 
-      const attualeRef = db.collection("quiz_del_giorno").doc("attuale");
-      const attualeSnap = await attualeRef.get();
-
-      if (attualeSnap.exists) {
-        const idPrecedente = attualeSnap.data().domanda_id;
-        if (idPrecedente) {
-          await db.collection("domande").doc(idPrecedente).update({
-            usata: true,
-            data_utilizzo: oggi,
-          });
-        }
-      }
-
-      // Prendi anche la prossima domanda per l'anteprima
-      const prossimaSnap = await db
-        .collection("domande")
-        .where("usata", "==", false)
-        .orderBy("id")
-        .limit(2)
-        .get();
+      // docs[0] = domanda di oggi, docs[1] = anteprima domani
+      const dati = snapshot.docs[0].data();
+      const domandaOggiId = snapshot.docs[0].id;
 
       let prossima_categoria = null;
       let prossima_difficolta = null;
-      if (prossimaSnap.docs.length >= 2) {
-        const prossimaDati = prossimaSnap.docs[1].data();
+      if (snapshot.docs.length >= 2) {
+        const prossimaDati = snapshot.docs[1].data();
         prossima_categoria = prossimaDati.categoria || null;
         prossima_difficolta = prossimaDati.difficolta || null;
       }
 
+      // Imposta la domanda del giorno
+      const attualeRef = db.collection("quiz_del_giorno").doc("attuale");
       await attualeRef.set({
         domanda_id: dati.id,
         testo: dati.domanda,
@@ -81,6 +65,12 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
         data_impostazione: oggi,
         prossima_categoria: prossima_categoria,
         prossima_difficolta: prossima_difficolta,
+      });
+
+      // Marca subito la domanda di oggi come usata
+      await db.collection("domande").doc(domandaOggiId).update({
+        usata: true,
+        data_utilizzo: oggi,
       });
 
       console.log("Nuova domanda del giorno: " + dati.id);
