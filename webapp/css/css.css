@@ -15,7 +15,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   position:fixed;top:0;left:0;right:0;
   z-index:1100;
   height:var(--hdr-h);
-  padding:0 5%;
+  padding:0 4%;
   background:rgba(10,15,30,.97);
   backdrop-filter:blur(16px);
   border-bottom:1px solid var(--brd);
@@ -27,7 +27,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
     padding-top:env(safe-area-inset-top, 0px);
   }
 }
-.hdr-inner{display:flex;flex-direction:column;align-items:flex-start;}
+.hdr-inner{display:flex;flex-direction:column;align-items:flex-start;padding-left:3%;}
 .hdr-lbl{display:none;}
 .hdr h1{
   font-size:1.1rem;font-weight:900;letter-spacing:-.03em;
@@ -39,6 +39,11 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .hdr h1 span.l1{display:block;text-align:center;}
 .hdr h1 span.l2{display:block;text-align:center;}
 .hdr p{display:none;}
+
+/* Header actions — gruppo icone destra */
+.hdr-actions{
+  display:flex;align-items:center;gap:.15rem;
+}
 
 /* Hamburger menu button */
 .hdr-menu-btn{
@@ -84,8 +89,9 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .hdr-icon-btn.active svg{stroke:var(--amber);}
 /* Cuore preferiti attivo — fill */
 .hdr-fav-btn.active svg path{stroke:var(--amber);fill:rgba(245,158,11,.2);}
-/* Stellina AI attiva */
-.hdr-ai-btn.active svg{stroke:var(--amber);}
+/* Icona AI — usa fill, non stroke */
+.hdr-ai-btn svg{stroke:none;fill:var(--txt2);}
+.hdr-ai-btn.active svg{stroke:none;fill:var(--amber);}
 
 /* Drawer AI — scende dall'alto (stesso schema acc) */
 #drawer-ai{
@@ -98,6 +104,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   transform:translateY(-110%);
   transition:transform .32s cubic-bezier(.4,0,.2,1) !important;
   box-shadow:0 8px 40px rgba(0,0,0,.5);
+  z-index:1050;
 }
 #drawer-ai.open{
   transform:translateY(0) !important;
@@ -773,7 +780,8 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .sg-banner{
   background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(96,165,250,.06));
   border-bottom:1px solid rgba(37,99,235,.15);
-  padding:.55rem 5%;
+  padding:.38rem 5%;
+  margin-top:.5rem;
   display:flex;align-items:center;justify-content:center;gap:.7rem;
   text-decoration:none;
   transition:background .2s;
@@ -878,7 +886,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .drawer-back-btn:hover{ color:var(--txt2); border-color:var(--txt2); }
 .drawer-back-btn.visible{ display:inline-flex; }
 /* Nascondi scrollbar su desktop */
-#drawer-acc{z-index:1101;}
+#drawer-acc{z-index:1050;}
 .drawer{ scrollbar-width:none; }
 .drawer::-webkit-scrollbar{ display:none; }
 /* Nascondi scrollbar su desktop */
