@@ -402,22 +402,46 @@
   </div>
 </header>
 
-<!-- MODAL MENU FULLSCREEN -->
-<div class="nav-menu-modal" id="nav-menu-modal">
-  <button class="nav-menu-close" id="nav-menu-close">✕</button>
-  <div class="nav-menu-items">
-    <button class="nav-menu-item" onclick="closeNavMenu();openDrawer('calc')">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><rect x="7" y="5" width="10" height="4" rx="1"/><circle cx="8" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="8" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1" fill="currentColor" stroke="none"/></svg>
-      Calcolatori
+<!-- BOTTOM SHEET MENU -->
+<div class="bsheet-overlay" id="bsheet-overlay"></div>
+<div class="bsheet" id="nav-menu-modal">
+  <div class="bsheet-handle"></div>
+  <div class="bsheet-items">
+    <button class="bsheet-item" onclick="closeNavMenu();openDrawer('calc')">
+      <div class="bsheet-item-ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><rect x="7" y="5" width="10" height="4" rx="1"/><circle cx="8" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="8" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <span class="bsheet-item-lbl">Calcolatori</span>
+      <svg class="bsheet-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
-    <button class="nav-menu-item" onclick="closeNavMenu();openDrawer('ris')">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      Risorse
+    <div class="bsheet-divider"></div>
+    <button class="bsheet-item" onclick="closeNavMenu();openDrawer('ris')">
+      <div class="bsheet-item-ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <span class="bsheet-item-lbl">Risorse</span>
+      <svg class="bsheet-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
-    <button class="nav-menu-item" onclick="closeNavMenu();openDrawer('vnt')">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
-      Academy
+    <div class="bsheet-divider"></div>
+    <button class="bsheet-item" onclick="closeNavMenu();openDrawer('vnt')">
+      <div class="bsheet-item-ico">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
+      </div>
+      <span class="bsheet-item-lbl">Academy</span>
+      <svg class="bsheet-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
+    <!-- Quiz — separato, accent blu -->
+    <div class="bsheet-quiz-sep"></div>
+    <a href="quiz.html" class="bsheet-item bsheet-item--quiz" onclick="closeNavMenu()">
+      <div class="bsheet-item-ico bsheet-item-ico--quiz">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#60a5fa" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div class="bsheet-quiz-text">
+        <span class="bsheet-item-lbl bsheet-item-lbl--quiz">Quiz del giorno</span>
+        <span class="bsheet-quiz-sub">Rispondi e scala la classifica</span>
+      </div>
+      <span class="bsheet-quiz-cta">Gioca →</span>
+    </a>
   </div>
 </div>
 
@@ -1692,25 +1716,36 @@ function calcABV() {
     if (e.key === 'PrintScreen' || e.keyCode === 44) { e.preventDefault(); return false; }
   });
 
-  // ── HAMBURGER MENU ──────────────────────────────────
-  var menuBtn = document.getElementById('hdr-menu-btn');
-  var menuModal = document.getElementById('nav-menu-modal');
-  var menuClose = document.getElementById('nav-menu-close');
+  // ── BOTTOM SHEET MENU ───────────────────────────────
+  var menuBtn     = document.getElementById('hdr-menu-btn');
+  var bsheet      = document.getElementById('nav-menu-modal');
+  var bsheetOvl   = document.getElementById('bsheet-overlay');
+
+  function openBSheet() {
+    if (bsheet)    bsheet.classList.add('open');
+    if (bsheetOvl) bsheetOvl.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
 
   window.closeNavMenu = function() {
-    if (menuModal) menuModal.classList.remove('open');
+    if (bsheet)    bsheet.classList.remove('open');
+    if (bsheetOvl) bsheetOvl.classList.remove('open');
+    document.body.style.overflow = '';
   };
 
-  if (menuBtn && menuModal && menuClose) {
-    menuBtn.addEventListener('click', function() {
-      menuModal.classList.add('open');
-    });
-    menuClose.addEventListener('click', function() {
-      menuModal.classList.remove('open');
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') menuModal.classList.remove('open');
-    });
+  if (menuBtn) menuBtn.addEventListener('click', openBSheet);
+  if (bsheetOvl) bsheetOvl.addEventListener('click', window.closeNavMenu);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') window.closeNavMenu();
+  });
+
+  // Swipe down per chiudere
+  if (bsheet) {
+    var tsY = 0;
+    bsheet.addEventListener('touchstart', function(e){ tsY = e.touches[0].clientY; }, {passive:true});
+    bsheet.addEventListener('touchend', function(e){
+      if (e.changedTouches[0].clientY - tsY > 60) window.closeNavMenu();
+    }, {passive:true});
   }
 
   // ── HELPER: rimuovi active da tutte le icone header ──
@@ -1780,20 +1815,6 @@ function calcABV() {
   }
 </script>
 
-<!-- QUIZ BAR — fixed bottom -->
-<a href="quiz.html" class="sg-banner" id="quiz-bar">
-  <div class="sg-banner-ico">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="#60a5fa" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-  </div>
-  <div class="sg-banner-text">
-    <span class="sg-banner-title">Quiz del giorno</span>
-    <span class="sg-banner-sub">Rispondi e scala la classifica</span>
-  </div>
-  <div class="sg-banner-dl">
-    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-    Gioca
-  </div>
-</a>
 
 </body>
 </html>
