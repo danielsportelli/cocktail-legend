@@ -61,9 +61,9 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .hdr-icon-btn.active svg{stroke:var(--amber);}
 /* Cuore preferiti attivo */
 .hdr-fav-btn.active svg path{stroke:var(--amber);fill:rgba(245,158,11,.2);}
-/* Icona AI */
-.hdr-ai-btn svg{stroke:var(--txt2);fill:none;}
-.hdr-ai-btn.active svg{stroke:var(--amber);fill:var(--amber);}
+/* Lente search header */
+.hdr-srch-btn svg{stroke:var(--txt2);}
+.hdr-srch-btn.active svg{stroke:var(--blue-l);}
 
 /* Hamburger */
 .hdr-menu-btn{
@@ -166,6 +166,36 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   font-size:.78rem;font-weight:700;color:var(--blue-l);
   background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.3);
   padding:.22rem .65rem;border-radius:20px;flex-shrink:0;
+}
+/* AI card — accent amber */
+.bsheet-item--ai{
+  background:rgba(245,158,11,.08);
+  margin:.5rem .7rem .2rem;
+  border-radius:14px;
+  border:1px solid rgba(245,158,11,.25);
+  padding:.85rem 1rem;
+}
+.bsheet-item--ai:active{background:rgba(245,158,11,.15);}
+.bsheet-item-ico--ai{
+  background:rgba(245,158,11,.15);
+}
+.bsheet-ai-text{
+  flex:1;display:flex;flex-direction:column;gap:.15rem;
+}
+.bsheet-item-lbl--ai{
+  color:var(--amber);font-size:.95rem;font-weight:700;
+}
+.bsheet-ai-sub{
+  font-size:.72rem;color:var(--dim);font-weight:500;
+}
+.bsheet-ai-cta{
+  font-size:.78rem;font-weight:700;color:var(--amber);
+  background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);
+  padding:.22rem .65rem;border-radius:20px;flex-shrink:0;
+}
+.bsheet-ai-sep{
+  height:1px;background:rgba(245,158,11,.15);
+  margin:.2rem 1.4rem .4rem;
 }
 
 
