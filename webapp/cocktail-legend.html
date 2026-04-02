@@ -464,7 +464,7 @@
 </div>
 
 <!-- BOTTOM TAB BAR -->
-<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeAllDrawers()"></div>
 <div class="filter-bar hidden" id="filter-bar">
   <div class="filter-top">
     <form class="srch-wrap" onsubmit="return false;" role="search">
@@ -1499,8 +1499,7 @@ function openDrawer(id) {
     if(id === 'ai'){ creabtn.classList.remove('dim'); }
     else { creabtn.classList.add('dim'); }
   }
-  var fb=document.getElementById('filter-bar');if(fb)fb.style.zIndex='40';
-  var rb=document.getElementById('rbar');if(rb)rb.style.zIndex='40';
+  // Non alterare z-index di filter-bar e rbar — ora sono fixed e gestiti da CSS
 }
 
 function closeAllDrawers(silent) {
@@ -1508,24 +1507,19 @@ function closeAllDrawers(silent) {
   document.getElementById('drawer-overlay').classList.remove('show');
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   if (!silent) CURRENT_DRAWER = null;
-  // In riposo: AI torna evidenziata
   if (!silent){
     var creabtn = document.getElementById('tbtn-ai');
     if(creabtn) creabtn.classList.remove('dim');
   }
-  // Ripristina z-index solo se chiusura definitiva
-  if (!silent) {
-    var fb=document.getElementById('filter-bar');if(fb)fb.style.zIndex='';
-    var rb=document.getElementById('rbar');if(rb)rb.style.zIndex='';
-  }
 }
 
-// Swipe down per chiudere
-document.querySelectorAll('.drawer-handle').forEach(function(handle) {
+// Swipe down per chiudere (su handle e su drawer intero)
+document.querySelectorAll('.drawer').forEach(function(drawer) {
   var startY = 0;
-  handle.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
-  handle.addEventListener('touchend', function(e){
-    if (e.changedTouches[0].clientY - startY > 40) closeAllDrawers();
+  drawer.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
+  drawer.addEventListener('touchend', function(e){
+    // Swipe verso il basso di almeno 60px chiude
+    if (e.changedTouches[0].clientY - startY > 60) closeAllDrawers();
   }, {passive:true});
 });
 
