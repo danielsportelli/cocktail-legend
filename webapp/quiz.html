@@ -955,9 +955,9 @@ function showResult(isCorrect, isTimeout, ptsEarned, spiegazione, rispostaCorret
   // Mostra info prossima domanda nel banner risultato
   const nextMeta = document.getElementById('result-next-meta');
   if (nextMeta && window._quizData) {
-    // Mostra solo se abbiamo dati della prossima domanda — mai usare quelli della corrente
-    const cat = window._quizData.prossima_categoria || '';
-    const dif = window._quizData.prossima_difficolta || '';
+    // Mostra categoria e difficoltà della domanda corrente
+    const cat = window._quizData.categoria || '';
+    const dif = window._quizData.difficolta || '';
     nextMeta.textContent = cat ? 'Categoria: ' + cat + (dif ? ' · Difficoltà: ' + dif : '') : '';
   }
 }
@@ -1082,8 +1082,8 @@ async function loadQuiz(user) {
           const attualeRef = await getDoc(doc(db, 'quiz_del_giorno', 'attuale'));
           if (attualeRef.exists()) {
             const qd = attualeRef.data();
-            const cat = qd.prossima_categoria || '';
-            const dif = qd.prossima_difficolta || '';
+            const cat = qd.categoria || '';
+            const dif = qd.difficolta || '';
             doneNextMeta.textContent = cat ? 'Categoria: ' + cat + (dif ? ' · Difficoltà: ' + dif : '') : '';
           }
         } catch(e) {}
