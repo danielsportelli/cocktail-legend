@@ -506,26 +506,45 @@
     <span class="rlbl">cocktail trovati</span>
   </div>
   <div class="rbar-right">
-    <div class="sort-wrap" id="sort-wrap" style="width:100%">
-      <button class="sort-btn" id="sort-btn" type="button">
-        <span class="sort-btn-ico">⇅</span>
-        <span class="sort-btn-lbl" id="sort-btn-lbl">Ordina per</span>
-        <span class="sort-btn-arr">&#9660;</span>
-      </button>
-      <div class="sort-dropdown" id="sort-dropdown">
-        <button class="sort-opt sort-opt--active" data-val="az" type="button">A → Z</button>
-        <button class="sort-opt" data-val="za" type="button">Z → A</button>
-        <button class="sort-opt" data-val="abv+" type="button">ABV crescente</button>
-        <button class="sort-opt" data-val="abv-" type="button">ABV decrescente</button>
-      </div>
-      <!-- hidden select per compatibilità con render() -->
-      <select id="srt" style="display:none">
-        <option value="az">A → Z</option>
-        <option value="za">Z → A</option>
-        <option value="abv+">ABV crescente</option>
-        <option value="abv-">ABV decrescente</option>
-      </select>
-    </div>
+    <button class="sort-btn" id="sort-btn" type="button">
+      <span class="sort-btn-ico">⇅</span>
+      <span class="sort-btn-lbl" id="sort-btn-lbl">Ordina per</span>
+      <span class="sort-btn-arr">&#9660;</span>
+    </button>
+    <select id="srt" style="display:none">
+      <option value="az">A → Z</option>
+      <option value="za">Z → A</option>
+      <option value="abv+">ABV crescente</option>
+      <option value="abv-">ABV decrescente</option>
+    </select>
+  </div>
+</div>
+
+<!-- SORT BOTTOM SHEET -->
+<div class="fsheet-overlay" id="ssheet-overlay"></div>
+<div class="fsheet" id="ssheet">
+  <div class="fsheet-handle" id="ssheet-handle"></div>
+  <div class="fsheet-header">
+    <span class="fsheet-title">Ordina per</span>
+    <button class="fsheet-done" id="ssheet-done">Fatto</button>
+  </div>
+  <div class="fsheet-body" id="ssheet-body">
+    <button class="sort-sopt sort-sopt--active" data-val="az" type="button">
+      <span class="sort-sopt-lbl">A → Z</span>
+      <svg class="sort-sopt-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </button>
+    <button class="sort-sopt" data-val="za" type="button">
+      <span class="sort-sopt-lbl">Z → A</span>
+      <svg class="sort-sopt-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </button>
+    <button class="sort-sopt" data-val="abv+" type="button">
+      <span class="sort-sopt-lbl">ABV crescente</span>
+      <svg class="sort-sopt-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </button>
+    <button class="sort-sopt" data-val="abv-" type="button">
+      <span class="sort-sopt-lbl">ABV decrescente</span>
+      <svg class="sort-sopt-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </button>
   </div>
 </div>
 
@@ -1855,86 +1874,79 @@ function calcABV() {
     });
   }
 
-  // ── SORT active state — funziona su mobile e desktop ──
-  (function(){
-    var srt = document.getElementById('srt');
-    if (!srt) return;
-    function setActive(){ srt.classList.add('active'); srt.parentElement.classList.add('active'); }
-    function setInactive(){ srt.classList.remove('active'); srt.parentElement.classList.remove('active'); }
-    srt.addEventListener('mousedown', setActive);
-    srt.addEventListener('touchstart', setActive, {passive:true});
-    srt.addEventListener('change', setInactive);
-    // Su desktop blur funziona, su mobile no — usiamo click fuori
-    document.addEventListener('click', function(e){
-      if (e.target !== srt) setInactive();
-    });
-    document.addEventListener('touchend', function(e){
-      if (e.target !== srt) setInactive();
-    }, {passive:true});
-  })();
-
-  // ── CUSTOM SORT DROPDOWN ────────────────────────────
+  // ── SORT BOTTOM SHEET ───────────────────────────────
   (function(){
     var btn      = document.getElementById('sort-btn');
-    var dropdown = document.getElementById('sort-dropdown');
+    var ssheet   = document.getElementById('ssheet');
+    var ssOvl    = document.getElementById('ssheet-overlay');
+    var ssDone   = document.getElementById('ssheet-done');
+    var ssHandle = document.getElementById('ssheet-handle');
     var lbl      = document.getElementById('sort-btn-lbl');
     var srt      = document.getElementById('srt');
-    var wrap     = document.getElementById('sort-wrap');
-    if (!btn || !dropdown || !srt) return;
+    if (!btn || !ssheet) return;
 
-    var labels = { 'az':'Ordina per', 'za':'Z → A', 'abv+':'ABV ↑', 'abv-':'ABV ↓' };
-    var currentVal = 'az';
+    var sortLabels = {'az':'Ordina per','za':'Z → A','abv+':'ABV ↑','abv-':'ABV ↓'};
 
-    function openSort() {
-      dropdown.classList.add('open');
+    function openSsheet() {
+      ssheet.classList.add('open');
+      if (ssOvl) ssOvl.classList.add('open');
       btn.classList.add('active');
-      wrap.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
-    function closeSort() {
-      dropdown.classList.remove('open');
+    function closeSsheet() {
+      ssheet.classList.remove('open');
+      if (ssOvl) ssOvl.classList.remove('open');
       btn.classList.remove('active');
-      wrap.classList.remove('active');
-    }
-    function toggleSort(e) {
-      e.stopPropagation();
-      dropdown.classList.contains('open') ? closeSort() : openSort();
+      document.body.style.overflow = '';
     }
 
-    btn.addEventListener('click', toggleSort);
-    btn.addEventListener('touchend', function(e){ e.preventDefault(); toggleSort(e); });
+    btn.addEventListener('click', function(e){ e.stopPropagation(); openSsheet(); });
+    if (ssOvl)  ssOvl.addEventListener('click', closeSsheet);
+    if (ssDone) ssDone.addEventListener('click', closeSsheet);
 
-    dropdown.querySelectorAll('.sort-opt').forEach(function(opt) {
-      opt.addEventListener('click', function(e) {
-        e.stopPropagation();
-        var val = this.dataset.val;
-        currentVal = val;
-        srt.value = val;
-        lbl.textContent = labels[val] || 'Ordina per';
-        dropdown.querySelectorAll('.sort-opt').forEach(function(o){ o.classList.remove('sort-opt--active'); });
-        this.classList.add('sort-opt--active');
-        closeSort();
+    // Handle: click + swipe down
+    if (ssHandle) {
+      ssHandle.addEventListener('click', closeSsheet);
+      var _ssY = 0;
+      ssHandle.addEventListener('touchstart', function(e){ _ssY = e.touches[0].clientY; }, {passive:true});
+      ssHandle.addEventListener('touchend', function(e){
+        if (e.changedTouches[0].clientY - _ssY > 40) closeSsheet();
+      }, {passive:true});
+    }
+
+    // Opzioni sort
+    document.querySelectorAll('.sort-sopt').forEach(function(opt) {
+      function selectOpt() {
+        var val = opt.dataset.val;
+        if (srt) srt.value = val;
+        if (lbl) lbl.textContent = sortLabels[val] || 'Ordina per';
+        document.querySelectorAll('.sort-sopt').forEach(function(o){ o.classList.remove('sort-sopt--active'); });
+        opt.classList.add('sort-sopt--active');
+        closeSsheet();
         render();
-      });
-      // Touch: previeni ghost click e chiudi sempre
-      opt.addEventListener('touchend', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var val = this.dataset.val;
-        currentVal = val;
-        srt.value = val;
-        lbl.textContent = labels[val] || 'Ordina per';
-        dropdown.querySelectorAll('.sort-opt').forEach(function(o){ o.classList.remove('sort-opt--active'); });
-        this.classList.add('sort-opt--active');
-        closeSort();
-        render();
-      });
+      }
+      opt.addEventListener('click', selectOpt);
+      opt.addEventListener('touchend', function(e){ e.preventDefault(); selectOpt(); });
     });
-
-    // Chiudi cliccando fuori
-    document.addEventListener('click', function(){ closeSort(); });
-    document.addEventListener('touchend', function(){ closeSort(); }, {passive:true});
-    dropdown.addEventListener('click', function(e){ e.stopPropagation(); });
   })();
+
+  // ── PADDING-TOP DINAMICO ────────────────────────────
+  function updateBodyPadding() {
+    var hdr   = document.querySelector('.hdr');
+    var rbar  = document.getElementById('rbar');
+    var pills = document.getElementById('pills-bar');
+    var main  = document.querySelector('.main');
+    if (!main) return;
+    var hH = hdr   ? hdr.offsetHeight   : 73;
+    var rH = rbar  ? rbar.offsetHeight  : 44;
+    var pH = pills ? pills.offsetHeight : 38;
+    main.style.paddingTop = (hH + rH + pH + 8) + 'px';
+  }
+  window.addEventListener('load', function(){
+    setTimeout(updateBodyPadding, 100);
+    setTimeout(updateBodyPadding, 400);
+  });
+  document.addEventListener('DOMContentLoaded', updateBodyPadding);
 
   // ── PATCH closeAllDrawers — rimuovi active icone header ──
   if (typeof closeAllDrawers === 'function') {

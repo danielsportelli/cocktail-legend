@@ -831,18 +831,15 @@ function updateHeaderVisibility() {
   if (!_cachedHdrH) _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
 
   if (currentY > _lastScrollY && currentY > _cachedHdrH && !_hdrHidden) {
-    // Scroll giù: header sparisce, rbar sale subito (no transition)
     _hdrHidden = true;
     hdr.classList.add('hdr--hidden');
     updateRbarTop();
   } else if (currentY < _lastScrollY && _hdrHidden) {
-    // Scroll su: header riscende con transition — sincronizza rbar
     _hdrHidden = false;
     hdr.classList.remove('hdr--hidden');
-    // Attiva transition sulla rbar PRIMA di aggiornare top
+    // Attiva transition su rbar E pills simultaneamente
     document.body.classList.add('hdr-animating');
     updateRbarTop();
-    // Rimuovi classe dopo che la transition è finita (.28s)
     setTimeout(function(){ document.body.classList.remove('hdr-animating'); }, 300);
   }
   _lastScrollY = currentY;
