@@ -542,10 +542,7 @@
   <div class="rbar-right">
     <div class="sort-wrap" style="width:100%">
       <div class="sort-lbl">⇅ Ordina per</div>
-      <select class="sort-sel" id="srt"
-        onfocus="this.classList.add('active');this.parentElement.classList.add('active')"
-        onblur="this.classList.remove('active');this.parentElement.classList.remove('active')"
-        onchange="render()">
+      <select class="sort-sel" id="srt" onchange="render()">
         <option value="az">A → Z</option>
         <option value="za">Z → A</option>
         <option value="abv+">ABV crescente</option>
@@ -1884,6 +1881,24 @@ function calcABV() {
       }, 0);
     });
   }
+
+  // ── SORT active state — funziona su mobile e desktop ──
+  (function(){
+    var srt = document.getElementById('srt');
+    if (!srt) return;
+    function setActive(){ srt.classList.add('active'); srt.parentElement.classList.add('active'); }
+    function setInactive(){ srt.classList.remove('active'); srt.parentElement.classList.remove('active'); }
+    srt.addEventListener('mousedown', setActive);
+    srt.addEventListener('touchstart', setActive, {passive:true});
+    srt.addEventListener('change', setInactive);
+    // Su desktop blur funziona, su mobile no — usiamo click fuori
+    document.addEventListener('click', function(e){
+      if (e.target !== srt) setInactive();
+    });
+    document.addEventListener('touchend', function(e){
+      if (e.target !== srt) setInactive();
+    }, {passive:true});
+  })();
 
   // ── PATCH closeAllDrawers — rimuovi active icone header ──
   if (typeof closeAllDrawers === 'function') {

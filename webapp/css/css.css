@@ -34,8 +34,6 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .hdr-inner{
   display:flex;flex-direction:column;align-items:flex-start;padding-left:3%;
-  justify-content:center;
-  height:100%;
 }
 .hdr-lbl{display:none;}
 .hdr h1{
@@ -52,8 +50,6 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 /* Header actions — gruppo icone destra */
 .hdr-actions{
   display:flex;align-items:center;gap:.15rem;
-  height:100%;
-  align-self:stretch;
 }
 
 /* Icone header generiche */
