@@ -818,34 +818,73 @@ function updateAllCounts() {
   });
 }
 
-// Aggiorna --fb-h dinamicamente (altezza filter-bar sticky)
-function updateFbH(){
-  var fb=document.getElementById('filter-bar');
-  if(!fb) return;
-  void fb.offsetHeight; // forza reflow
-  document.documentElement.style.setProperty('--fb-h', fb.offsetHeight+'px');
+// ── SCROLL HIDE/SHOW HEADER ─────────────────────────
+var _lastScrollY = 0;
+var _hdrHidden = false;
+var _scrollTicking = false;
+
+function updateHeaderVisibility() {
+  var hdr = document.getElementById? document.querySelector('.hdr') : null;
+  if (!hdr) return;
+  var currentY = window.scrollY || window.pageYOffset;
+  var hdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
+
+  if (currentY > _lastScrollY && currentY > hdrH && !_hdrHidden) {
+    // Scroll giù — nascondi header
+    _hdrHidden = true;
+    hdr.classList.add('hdr--hidden');
+    document.documentElement.style.setProperty('--hdr-offset', '0px');
+  } else if (currentY < _lastScrollY && _hdrHidden) {
+    // Scroll su — mostra header
+    _hdrHidden = false;
+    hdr.classList.remove('hdr--hidden');
+    document.documentElement.style.setProperty('--hdr-offset', hdrH + 'px');
+  }
+  _lastScrollY = currentY;
+  updateRbarTop();
 }
+
+window.addEventListener('scroll', function(){
+  if (!_scrollTicking) {
+    requestAnimationFrame(function(){
+      updateHeaderVisibility();
+      _scrollTicking = false;
+    });
+    _scrollTicking = true;
+  }
+}, {passive: true});
+
+// Aggiorna --fb-h e --rbar-top dinamicamente
+function updateFbH(){
+  var fb = document.getElementById('filter-bar');
+  if (!fb) return;
+  void fb.offsetHeight;
+  var fbH = fb.classList.contains('hidden') ? 0 : fb.offsetHeight;
+  document.documentElement.style.setProperty('--fb-h', fbH + 'px');
+  updateRbarTop();
+}
+
+function updateRbarTop(){
+  var hdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
+  var fbH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--fb-h')) || 0;
+  var offset = _hdrHidden ? 0 : hdrH;
+  document.documentElement.style.setProperty('--hdr-offset', offset + 'px');
+  document.documentElement.style.setProperty('--rbar-top', (offset + fbH) + 'px');
+}
+
 updateFbH();
-window.addEventListener('resize', updateFbH);
-// Su iOS PWA la safe area viene applicata dopo il primo paint — ricalcola più volte
+window.addEventListener('resize', function(){ updateFbH(); updateHeaderVisibility(); });
 window.addEventListener('load', function(){
   updateFbH();
   setTimeout(updateFbH, 100);
   setTimeout(updateFbH, 300);
   setTimeout(updateFbH, 600);
 });
-// Su desktop: ricalcola al primo scroll per catturare altezze non ancora stabilizzate
-(function(){
-  var done = false;
-  window.addEventListener('scroll', function(){
-    if(!done){ done=true; updateFbH(); }
-  }, {passive:true, once:true});
-})();
 // Aggiorna anche quando il pannello filtri si apre/chiude
 var _fpObs = new MutationObserver(updateFbH);
 document.addEventListener('DOMContentLoaded', function(){
-  var fp=document.getElementById('filter-panel');
-  if(fp) _fpObs.observe(fp, {attributes:true, attributeFilter:['class']});
+  var fp = document.getElementById('filter-panel');
+  if (fp) _fpObs.observe(fp, {attributes:true, attributeFilter:['class']});
   updateFbH();
 });
 

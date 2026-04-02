@@ -1812,15 +1812,16 @@ function calcABV() {
         setTimeout(function(){
           var inp = document.getElementById('srch');
           if (inp) inp.focus();
+          if (typeof updateFbH === 'function') updateFbH();
         }, 320);
       } else {
         filterBar.classList.add('hidden');
         srchBtn.classList.remove('active');
-        // Chiudi anche pannello filtri aperto
         var panel = document.getElementById('filter-panel');
         var btnF = document.getElementById('btn-filters');
         if (panel) panel.classList.remove('open');
         if (btnF) btnF.classList.remove('open');
+        if (typeof updateFbH === 'function') updateFbH();
       }
     });
   }
