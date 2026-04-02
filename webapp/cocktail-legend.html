@@ -1514,22 +1514,39 @@ function closeAllDrawers(silent) {
 }
 
 // Handle cliccabile — chiude drawer e tutto
-document.querySelectorAll('.drawer-handle').forEach(function(handle) {
-  handle.addEventListener('click', function() {
+// Usa document per intercettare dinamicamente (event delegation)
+document.addEventListener('click', function(e) {
+  var handle = e.target.closest('.drawer-handle');
+  if (handle) {
     closeAllDrawers();
-    // Assicura che anche il menu sia chiuso
     window.closeNavMenu && window.closeNavMenu();
-  });
-  // Swipe down sul drawer — chiude tutto
-  var startY = 0;
-  handle.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; }, {passive:true});
-  handle.addEventListener('touchend', function(e){
-    if (e.changedTouches[0].clientY - startY > 50) {
-      closeAllDrawers();
-      window.closeNavMenu && window.closeNavMenu();
-    }
-  }, {passive:true});
+  }
 });
+
+// Swipe down sul trattino — chiude tutto (event delegation)
+(function() {
+  var _swipeStartY = 0;
+  var _swipeHandle = null;
+  document.addEventListener('touchstart', function(e) {
+    var handle = e.target.closest('.drawer-handle');
+    if (handle) {
+      _swipeHandle = handle;
+      _swipeStartY = e.touches[0].clientY;
+    } else {
+      _swipeHandle = null;
+    }
+  }, {passive: true});
+  document.addEventListener('touchend', function(e) {
+    if (_swipeHandle) {
+      var dy = e.changedTouches[0].clientY - _swipeStartY;
+      if (dy > 40) {
+        closeAllDrawers();
+        window.closeNavMenu && window.closeNavMenu();
+      }
+      _swipeHandle = null;
+    }
+  }, {passive: true});
+})();
 
 // Blocca propagazione click sui tab-btn → l'overlay non riceve mai il click
 document.querySelectorAll('.tab-btn').forEach(function(b){

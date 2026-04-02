@@ -234,32 +234,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 
 /* Drawer Account — scende dall'alto */
-#drawer-acc{
-  top:auto;
-  bottom:0;
-  left:0;right:0;
-  position:fixed;
-  max-height:88vh;
-  border-radius:20px 20px 0 0;
-  border-top:1px solid rgba(255,255,255,.08);
-  border-bottom:none;
-  transform:translateY(110%);
-  transition:transform .32s cubic-bezier(.4,0,.2,1) !important;
-  box-shadow:none;
-  z-index:1050;
-  pointer-events:none;
-}
-#drawer-acc.open{
-  transform:translateY(0) !important;
-  pointer-events:auto;
-  box-shadow:0 -8px 40px rgba(0,0,0,.6);
-}
-@media (display-mode: standalone) {
-  #drawer-acc{
-    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));
-    max-height:calc(100vh - var(--hdr-h) - env(safe-area-inset-top, 0px));
-  }
-}
+
 
 /* X chiudi nel drawer-acc */
 .drawer-close-btn{
@@ -458,7 +433,6 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   padding:.5rem 5%;
   border-bottom:1px solid var(--brd);
   gap:.5rem;
-  transition:top .28s cubic-bezier(.4,0,.2,1);
 }
 .rcnt{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;
   color:var(--amber);}
@@ -943,7 +917,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   background:var(--surf);
   border-top:1px solid rgba(255,255,255,.08);
   border-radius:20px 20px 0 0;
-  max-height:88vh;
+  max-height:calc(100vh - var(--rbar-top, var(--hdr-h)) - var(--rbar-h, 44px));
   overflow-y:auto;
   transform:translateY(110%);
   transition:transform .32s cubic-bezier(.4,0,.2,1);
@@ -1002,6 +976,8 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .drawer-back-btn:hover{ color:var(--txt2); border-color:var(--txt2); }
 .drawer-back-btn.visible{ display:inline-flex; }
 .drawer-back-btn--main{ display:inline-flex; }
+#ris-back-header-btn{ display:inline-flex; }
+#calc-back-header-btn{ display:inline-flex; }
 .drawer{ scrollbar-width:none; }
 .drawer::-webkit-scrollbar{ display:none; }
 /* overlay scuro dietro drawer */

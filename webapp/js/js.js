@@ -845,13 +845,8 @@ function updateHeaderVisibility() {
 }
 
 window.addEventListener('scroll', function(){
-  if (!_scrollTicking) {
-    requestAnimationFrame(function(){
-      updateHeaderVisibility();
-      _scrollTicking = false;
-    });
-    _scrollTicking = true;
-  }
+  // Aggiorna immediatamente senza rAF per evitare ritardo visivo su rbar
+  updateHeaderVisibility();
 }, {passive: true});
 
 // Aggiorna --fb-h e --rbar-top dinamicamente
