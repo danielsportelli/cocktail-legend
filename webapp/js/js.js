@@ -1019,6 +1019,13 @@ document.addEventListener('DOMContentLoaded', function(){
     updateFbH();
     var _fbTimer2 = setInterval(updateFbH, 30);
     setTimeout(function(){ clearInterval(_fbTimer2); updateFbH(); }, 350);
+    // Reset sort ad A→Z e rimuovi active
+    var srtEl = document.getElementById('srt');
+    if (srtEl) {
+      srtEl.value = 'az';
+      srtEl.classList.remove('active');
+      if (srtEl.parentElement) srtEl.parentElement.classList.remove('active');
+    }
     updateBadges();
     render();
     updateAllCounts();

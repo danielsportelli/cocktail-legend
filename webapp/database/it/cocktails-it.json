@@ -2157,7 +2157,7 @@
     "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/white_russian.webp",
     "varianti": [],
-    "iba": false
+    "iba": true
   },
   {
     "id": "yellow_bird",

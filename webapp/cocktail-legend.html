@@ -542,7 +542,10 @@
   <div class="rbar-right">
     <div class="sort-wrap" style="width:100%">
       <div class="sort-lbl">⇅ Ordina per</div>
-      <select class="sort-sel" id="srt">
+      <select class="sort-sel" id="srt"
+        onfocus="this.classList.add('active');this.parentElement.classList.add('active')"
+        onblur="this.classList.remove('active');this.parentElement.classList.remove('active')"
+        onchange="render()">
         <option value="az">A → Z</option>
         <option value="za">Z → A</option>
         <option value="abv+">ABV crescente</option>
