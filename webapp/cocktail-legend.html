@@ -463,76 +463,42 @@
   </div>
 </div>
 
-<!-- BOTTOM TAB BAR -->
+<!-- OVERLAY DRAWER -->
 <div class="drawer-overlay" id="drawer-overlay" onclick="closeAllDrawers()"></div>
+
+<!-- SEARCH BAR (toggle via lente) -->
 <div class="filter-bar hidden" id="filter-bar">
-  <div class="filter-top">
-    <form class="srch-wrap" onsubmit="return false;" role="search">
-      <svg class="srch-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="search" class="srch-inp" id="srch" placeholder="Cerca un cocktail per nome..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-      <div class="srch-suggestions" id="srch-suggestions"></div>
-    </form>
-    <button class="btn-toggle-filters" id="btn-filters">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
-      Filtri
-      <span class="active-badge" id="active-badge">0</span>
-      <span class="arrow">&#9660;</span>
-    </button>
-    <button class="btn-reset-sm" id="btn-reset">Reset</button>
-  </div>
-  <!-- btn-favonly nascosto, usato dal JS header -->
+  <form class="srch-wrap" onsubmit="return false;" role="search">
+    <svg class="srch-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="search" class="srch-inp" id="srch" placeholder="Cerca un cocktail per nome..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    <div class="srch-suggestions" id="srch-suggestions"></div>
+  </form>
+  <!-- btn-favonly nascosto -->
   <button class="btn-favonly" id="btn-favonly" style="display:none;"></button>
+</div>
 
-  <!-- Pannello a tendina -->
-  <div class="filter-panel" id="filter-panel">
-    <div class="filter-panel-inner">
-      <div class="filter-groups">
-        <div class="fg">
-          <button class="fg-btn" data-fg="cat">
-            Categoria <span class="cnt" id="cnt-cat">0</span>
-            <span class="fg-arrow">&#9660;</span>
-          </button>
-          <div class="fg-dropdown" id="dd-cat"></div>
-        </div>
-        <div class="fg">
-          <button class="fg-btn" data-fg="dis">
-            Ingredienti <span class="cnt" id="cnt-dis">0</span>
-            <span class="fg-arrow">&#9660;</span>
-          </button>
-          <div class="fg-dropdown" id="dd-dis"></div>
-        </div>
-        <div class="fg">
-          <button class="fg-btn" data-fg="abv">
-            Tenore ABV <span class="cnt" id="cnt-abv">0</span>
-            <span class="fg-arrow">&#9660;</span>
-          </button>
-          <div class="fg-dropdown" id="dd-abv"></div>
-        </div>
-        <div class="fg">
-          <button class="fg-btn" data-fg="frz">
-            Frizzante <span class="cnt" id="cnt-frz">0</span>
-            <span class="fg-arrow">&#9660;</span>
-          </button>
-          <div class="fg-dropdown" id="dd-frz"></div>
-        </div>
-        <div class="fg">
-          <button class="fg-btn" data-fg="bic">
-            Bicchiere <span class="cnt" id="cnt-bic">0</span>
-            <span class="fg-arrow">&#9660;</span>
-          </button>
-          <div class="fg-dropdown" id="dd-bic"></div>
-        </div>
-        <div class="fg">
-          <button class="fg-btn fg-btn-iba" data-fg="iba">
-            IBA <span class="cnt" id="cnt-iba">0</span>
-            <span class="fg-arrow">&#9660;</span>
-          </button>
-          <div class="fg-dropdown" id="dd-iba"></div>
-        </div>
-      </div>
-    </div>
+<!-- PILLS BAR — sempre visibile sotto rbar -->
+<div class="pills-bar" id="pills-bar">
+  <div class="pills-scroll" id="pills-scroll">
+    <button class="fpill" id="fpill-cat" data-key="cat">Categoria</button>
+    <button class="fpill" id="fpill-dis" data-key="dis">Ingredienti</button>
+    <button class="fpill" id="fpill-abv" data-key="abv">ABV</button>
+    <button class="fpill" id="fpill-bic" data-key="bic">Bicchiere</button>
+    <button class="fpill" id="fpill-frz" data-key="frz">Frizzante</button>
+    <button class="fpill" id="fpill-iba" data-key="iba">IBA</button>
+    <button class="fpill fpill--reset hidden" id="fpill-reset">✕ Reset</button>
   </div>
+</div>
 
+<!-- BOTTOM SHEET FILTRO (aperto da pill) -->
+<div class="fsheet-overlay" id="fsheet-overlay"></div>
+<div class="fsheet" id="fsheet">
+  <div class="fsheet-handle"></div>
+  <div class="fsheet-header">
+    <span class="fsheet-title" id="fsheet-title">Filtro</span>
+    <button class="fsheet-done" id="fsheet-done">Fatto</button>
+  </div>
+  <div class="fsheet-body" id="fsheet-body"></div>
 </div>
 <div class="rbar" id="rbar">
   <div>
@@ -1863,10 +1829,6 @@ function calcABV() {
       } else {
         filterBar.classList.add('hidden');
         srchBtn.classList.remove('active');
-        var panel = document.getElementById('filter-panel');
-        var btnF = document.getElementById('btn-filters');
-        if (panel) panel.classList.remove('open');
-        if (btnF) btnF.classList.remove('open');
         if (typeof updateFbH === 'function') updateFbH();
       }
     });

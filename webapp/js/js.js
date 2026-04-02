@@ -876,11 +876,17 @@ document.addEventListener('DOMContentLoaded', function(){
 
 var _cachedHdrH = 73;
 var _cachedFbH = 0;
+var _cachedRbarH = 44; // altezza rbar approssimativa
 
 function updateRbarTop(){
   var offset = _hdrHidden ? 0 : _cachedHdrH;
   document.documentElement.style.setProperty('--hdr-offset', offset + 'px');
-  document.documentElement.style.setProperty('--rbar-top', (offset + _cachedFbH) + 'px');
+  var rbarTop = offset + _cachedFbH;
+  document.documentElement.style.setProperty('--rbar-top', rbarTop + 'px');
+  // pills-bar sta sotto la rbar
+  var rbar = document.getElementById('rbar');
+  if (rbar) _cachedRbarH = rbar.offsetHeight || 44;
+  document.documentElement.style.setProperty('--pills-top', (rbarTop + _cachedRbarH) + 'px');
 }
 
 // Inizializza cache hdrH al load
@@ -907,93 +913,214 @@ document.addEventListener('DOMContentLoaded', function(){
   updateFbH();
 });
 
-function initF() {
-  // Tutto costruito da DATA — zero fetch aggiuntivi
-  var catSet = {}, ingSet = {}, sapSet = {}, bicSet = {};
-  DATA.forEach(function(c){
-    catSet[c.categoria] = 1;
-    c.ingredienti.forEach(function(i){ ingSet[i[1]] = 1; });
-    c.sapori.forEach(function(s){ sapSet[s] = 1; });
-    bicSet[c.bicchiere] = 1;
+// ═══ PILLS FILTER SYSTEM ═══════════════════════════
+var PILL_LABELS = {
+  cat: 'Categoria',
+  dis: 'Ingredienti',
+  abv: 'ABV',
+  bic: 'Bicchiere',
+  frz: 'Frizzante',
+  iba: 'IBA'
+};
+
+var ABV_OPTS = ['Analcolico','Basso','Medio basso','Medio','Medio alto','Alto','Molto alto'];
+var FRZ_OPTS = ['Si','No'];
+var IBA_OPTS = ['Sì'];
+
+var _fsheetKey = null; // chiave filtro attivo nel bottom sheet
+
+function getOptsForKey(key) {
+  // Restituisce le opzioni disponibili CONTESTUALMENTE (solo quelle con count > 0 o selezionate)
+  var opts = [];
+  if (key === 'abv') opts = ABV_OPTS;
+  else if (key === 'frz') opts = FRZ_OPTS;
+  else if (key === 'iba') opts = IBA_OPTS;
+  else if (key === 'cat') {
+    var s = {};
+    DATA.forEach(function(c){ s[c.categoria] = 1; });
+    opts = Object.keys(s).sort(function(a,b){ return a.localeCompare(b,'it'); });
+  } else if (key === 'dis') {
+    var s = {};
+    DATA.forEach(function(c){ c.ingredienti.forEach(function(i){ s[i[1]] = 1; }); });
+    opts = Object.keys(s).sort(function(a,b){ return a.localeCompare(b,'it'); });
+  } else if (key === 'bic') {
+    var s = {};
+    DATA.forEach(function(c){ s[c.bicchiere] = 1; });
+    opts = Object.keys(s).sort(function(a,b){ return a.localeCompare(b,'it'); });
+  }
+  return opts;
+}
+
+function openFsheet(key) {
+  _fsheetKey = key;
+  var fsheet  = document.getElementById('fsheet');
+  var overlay = document.getElementById('fsheet-overlay');
+  var title   = document.getElementById('fsheet-title');
+  var body    = document.getElementById('fsheet-body');
+  if (!fsheet || !body) return;
+
+  title.textContent = PILL_LABELS[key] || key;
+  body.innerHTML = '';
+
+  var opts = getOptsForKey(key);
+  opts.forEach(function(val) {
+    var cnt = countFor(key, val);
+    var isOn = AF[key] && AF[key].indexOf(val) !== -1;
+    // Nascondi opzioni con 0 risultati che non sono selezionate
+    if (cnt === 0 && !isOn) return;
+
+    var div = document.createElement('div');
+    div.className = 'ci' + (isOn ? ' on' : '') + (cnt === 0 ? ' ci-disabled' : '');
+    div.dataset.key = key;
+    div.dataset.val = val;
+    div.style.opacity = cnt === 0 ? '0.4' : '';
+    div.innerHTML =
+      '<div class="cb' + (isOn ? ' on' : '') + '">' +
+        '<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">' +
+          '<polyline points="20 6 9 17 4 12"/>' +
+        '</svg>' +
+      '</div>' +
+      '<span class="ci-lbl">' + val + '</span>' +
+      '<span class="ci-n">' + cnt + '</span>';
+
+    div.addEventListener('click', function() {
+      if (this.classList.contains('ci-disabled')) return;
+      var k = this.dataset.key, v = this.dataset.val;
+      var arr = AF[k], idx = arr.indexOf(v);
+      var cb = this.querySelector('.cb');
+      if (idx === -1) {
+        arr.push(v);
+        cb.classList.add('on');
+        this.classList.add('on');
+      } else {
+        arr.splice(idx, 1);
+        cb.classList.remove('on');
+        this.classList.remove('on');
+      }
+      updateBadges();
+      render();
+      // Ricalcola conteggi e aggiorna le opzioni nel sheet
+      refreshFsheetCounts(key);
+      updatePills();
+    });
+    body.appendChild(div);
   });
-  var cats = Object.keys(catSet).sort(function(a,b){ return a.localeCompare(b,"it"); });
-  var ings = Object.keys(ingSet).sort(function(a,b){ return a.localeCompare(b,"it"); });
-  var saps = Object.keys(sapSet).sort(function(a,b){ return a.localeCompare(b,"it"); });
-  var bics = Object.keys(bicSet).sort(function(a,b){ return a.localeCompare(b,"it"); });
 
-  buildDropdown("dd-cat","cat", cats);
-  buildDropdown("dd-dis","dis", ings);
-  buildDropdown("dd-frz","frz", ["Si","No"]);
-  buildDropdown("dd-bic","bic", bics);
-  buildDropdown("dd-abv","abv", ["Analcolico","Basso","Medio basso","Medio","Medio alto","Alto","Molto alto"]);
-  buildDropdown("dd-iba","iba", ["Sì"]);
+  overlay.classList.add('open');
+  fsheet.classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
-// Dropdown toggle per ogni fg-btn
-var _activeBtn = null;
-
-function positionDropdown(btn, dd) {
-  var rect = btn.getBoundingClientRect();
-  var top = rect.bottom + 6;
-  var left = rect.left;
-  // Assicura che non esca dallo schermo a destra
-  var maxLeft = window.innerWidth - 210;
-  if(left > maxLeft) left = maxLeft;
-  dd.style.position = "fixed";
-  dd.style.top = top + "px";
-  dd.style.left = left + "px";
-  dd.style.minWidth = Math.max(rect.width, 200) + "px";
-  dd.classList.remove("repositioning");
+function closeFsheet() {
+  var fsheet  = document.getElementById('fsheet');
+  var overlay = document.getElementById('fsheet-overlay');
+  if (fsheet)  fsheet.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  _fsheetKey = null;
 }
 
-document.querySelectorAll(".fg-btn").forEach(function(btn){
-  btn.addEventListener("click", function(e){
-    e.stopPropagation();
-    var key = this.dataset.fg;
-    var dd = document.getElementById("dd-"+key);
-    var isOpen = dd.classList.contains("open");
-    // chiudi tutti
-    document.querySelectorAll(".fg-dropdown").forEach(function(d){d.classList.remove("open");});
-    document.querySelectorAll(".fg-btn").forEach(function(b){b.classList.remove("open");});
-    _activeBtn = null;
-  if(!isOpen){
-      dd.classList.add("open");
-      this.classList.add("open");
-      _activeBtn = { btn: this, dd: dd };
-      positionDropdown(this, dd);
-      updateAllCounts();
+function refreshFsheetCounts(key) {
+  // Aggiorna i conteggi nelle opzioni già visibili nel sheet
+  var body = document.getElementById('fsheet-body');
+  if (!body) return;
+  body.querySelectorAll('.ci').forEach(function(div) {
+    var k = div.dataset.key, v = div.dataset.val;
+    var cnt = countFor(k, v);
+    var el = div.querySelector('.ci-n');
+    if (el) el.textContent = cnt;
+    var isOn = AF[k] && AF[k].indexOf(v) !== -1;
+    if (cnt === 0 && !isOn) {
+      div.style.opacity = '0.4';
+      div.classList.add('ci-disabled');
+    } else {
+      div.style.opacity = '';
+      div.classList.remove('ci-disabled');
     }
   });
-});
+}
 
-window.addEventListener("scroll", function(){
-  if(_activeBtn){
-    positionDropdown(_activeBtn.btn, _activeBtn.dd);
+function updatePills() {
+  // Aggiorna stato visivo pill (attive/inattive) e mostra pill reset
+  var anyActive = false;
+  Object.keys(PILL_LABELS).forEach(function(key) {
+    var pill = document.getElementById('fpill-' + key);
+    if (!pill) return;
+    var count = AF[key] ? AF[key].length : 0;
+    var isActive = count > 0;
+    if (isActive) anyActive = true;
+    pill.classList.toggle('active', isActive);
+    // Aggiorna testo pill con contatore se attiva
+    var badge = pill.querySelector('.fpill-cnt');
+    if (isActive) {
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'fpill-cnt';
+        pill.appendChild(badge);
+      }
+      badge.textContent = count;
+    } else {
+      if (badge) badge.remove();
+    }
+  });
+  // Mostra/nascondi pill reset
+  var resetPill = document.getElementById('fpill-reset');
+  if (resetPill) resetPill.classList.toggle('hidden', !anyActive);
+  // Riordina: pill attive prima
+  reorderPills();
+}
+
+function reorderPills() {
+  var scroll = document.getElementById('pills-scroll');
+  if (!scroll) return;
+  var pills = Array.from(scroll.querySelectorAll('.fpill[data-key]'));
+  var resetPill = document.getElementById('fpill-reset');
+  // Separa attive e inattive
+  var active = pills.filter(function(p){ return p.classList.contains('active'); });
+  var inactive = pills.filter(function(p){ return !p.classList.contains('active'); });
+  // Riposiziona: attive → inattive → reset
+  active.forEach(function(p){ scroll.appendChild(p); });
+  inactive.forEach(function(p){ scroll.appendChild(p); });
+  if (resetPill) scroll.appendChild(resetPill);
+}
+
+function initF() {
+  // Listener pills
+  document.querySelectorAll('.fpill[data-key]').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      openFsheet(this.dataset.key);
+    });
+  });
+
+  // Pill reset
+  var resetPill = document.getElementById('fpill-reset');
+  if (resetPill) {
+    resetPill.addEventListener('click', function() {
+      // Reset tutti i filtri
+      AF = {cat:[], dis:[], abv:[], frz:[], bic:[], iba:[]};
+      updateBadges();
+      render();
+      updatePills();
+    });
   }
-}, {passive:true});
 
-// Chiudi dropdown cliccando fuori
-document.addEventListener("click", function(){
-  document.querySelectorAll(".fg-dropdown").forEach(function(d){d.classList.remove("open");});
-  document.querySelectorAll(".fg-btn").forEach(function(b){b.classList.remove("open");});
-});
-
-// Toggle pannello filtri
-document.getElementById("btn-filters").addEventListener("click", function(e){
-  e.stopPropagation();
-  var panel = document.getElementById("filter-panel");
-  var open = panel.classList.toggle("open");
-  this.classList.toggle("open", open);
-  // Chiudi tutte le tendine aperte
-  if (!open) {
-    document.querySelectorAll(".fg-btn.open").forEach(function(btn){ btn.classList.remove("open"); });
-    document.querySelectorAll(".fg-dropdown.open").forEach(function(dd){ dd.classList.remove("open"); });
+  // Fsheet: done button e overlay e handle
+  var fsheetDone = document.getElementById('fsheet-done');
+  var fsheetOvl  = document.getElementById('fsheet-overlay');
+  var fsheetHandle = document.querySelector('#fsheet .fsheet-handle');
+  if (fsheetDone) fsheetDone.addEventListener('click', closeFsheet);
+  if (fsheetOvl)  fsheetOvl.addEventListener('click', closeFsheet);
+  if (fsheetHandle) {
+    fsheetHandle.addEventListener('click', closeFsheet);
+    var _fsY = 0;
+    fsheetHandle.addEventListener('touchstart', function(e){ _fsY = e.touches[0].clientY; }, {passive:true});
+    fsheetHandle.addEventListener('touchend', function(e){
+      if (e.changedTouches[0].clientY - _fsY > 40) closeFsheet();
+    }, {passive:true});
   }
-  // Ricalcola altezza filter-bar — polling durante tutta l'animazione (280ms)
-  updateFbH();
-  var _fbTimer = setInterval(updateFbH, 30);
-  setTimeout(function(){ clearInterval(_fbTimer); updateFbH(); }, 350);
-});
+
+  updatePills();
+}
 
 
 // ═══ RESET COMPLETO (filtri + ricerca) ═══
@@ -1005,51 +1132,22 @@ document.addEventListener('DOMContentLoaded', function(){
     Q = '';
     var srch = document.getElementById('srch');
     if(srch) srch.value = '';
-    document.querySelectorAll('.ci.on').forEach(function(ci){
-      ci.classList.remove('on');
-      var cb = ci.querySelector('.cb');
-      if(cb) cb.classList.remove('on');
-    });
-    document.querySelectorAll('.fg-btn.open').forEach(function(b){ b.classList.remove('open'); });
-    document.querySelectorAll('.fg-dropdown.open').forEach(function(d){ d.classList.remove('open'); });
-    var panel = document.getElementById('filter-panel');
-    var btnF = document.getElementById('btn-filters');
-    if(panel){ panel.classList.remove('open'); }
-    if(btnF){ btnF.classList.remove('open'); }
-    updateFbH();
-    var _fbTimer2 = setInterval(updateFbH, 30);
-    setTimeout(function(){ clearInterval(_fbTimer2); updateFbH(); }, 350);
-    // Reset sort ad A→Z e rimuovi active
+    // Reset sort ad A→Z
     var srtEl = document.getElementById('srt');
-    if (srtEl) {
-      srtEl.value = 'az';
-      srtEl.classList.remove('active');
-      if (srtEl.parentElement) srtEl.parentElement.classList.remove('active');
-    }
+    if (srtEl) { srtEl.value = 'az'; }
     updateBadges();
     render();
-    updateAllCounts();
+    if (typeof updatePills === 'function') updatePills();
     // Micro-animazione conferma reset
     self.classList.remove('did-reset');
-    void self.offsetWidth; // forza reflow per riavviare animazione
+    void self.offsetWidth;
     self.classList.add('did-reset');
     setTimeout(function(){ self.classList.remove('did-reset'); }, 400);
   });
 });
 
 function updateBadges() {
-  var total = AF.cat.length + AF.dis.length + AF.abv.length + AF.frz.length + AF.bic.length + AF.iba.length;
-  var badge = document.getElementById("active-badge");
-  badge.textContent = total;
-  badge.classList.toggle("show", total > 0);
-
-  // contatori sui singoli btn
-  ["cat","dis","abv","frz","bic","iba"].forEach(function(k){
-    var cnt = document.getElementById("cnt-"+k);
-    if(!cnt) return;
-    cnt.textContent = AF[k] ? AF[k].length : 0;
-    cnt.classList.toggle("show", AF[k] && AF[k].length > 0);
-  });
+  // tag rimovibili
 
   // tag rimovibili
   var tagsEl = document.getElementById("active-tags");
