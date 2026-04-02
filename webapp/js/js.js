@@ -942,6 +942,7 @@ document.getElementById("btn-filters").addEventListener("click", function(e){
 document.addEventListener('DOMContentLoaded', function(){
   var resetBtn = document.getElementById('btn-reset');
   if(resetBtn) resetBtn.addEventListener('click', function(){
+    var self = this;
     AF = {cat:[], dis:[], abv:[], frz:[], bic:[], iba:[]};
     Q = '';
     var srch = document.getElementById('srch');
@@ -953,7 +954,6 @@ document.addEventListener('DOMContentLoaded', function(){
     });
     document.querySelectorAll('.fg-btn.open').forEach(function(b){ b.classList.remove('open'); });
     document.querySelectorAll('.fg-dropdown.open').forEach(function(d){ d.classList.remove('open'); });
-    // Chiudi anche il pannello filtri e ricalcola altezza
     var panel = document.getElementById('filter-panel');
     var btnF = document.getElementById('btn-filters');
     if(panel){ panel.classList.remove('open'); }
@@ -964,6 +964,11 @@ document.addEventListener('DOMContentLoaded', function(){
     updateBadges();
     render();
     updateAllCounts();
+    // Micro-animazione conferma reset
+    self.classList.remove('did-reset');
+    void self.offsetWidth; // forza reflow per riavviare animazione
+    self.classList.add('did-reset');
+    setTimeout(function(){ self.classList.remove('did-reset'); }, 400);
   });
 });
 

@@ -465,7 +465,7 @@
 
 <!-- BOTTOM TAB BAR -->
 <div class="drawer-overlay" id="drawer-overlay"></div>
-<div class="filter-bar" id="filter-bar">
+<div class="filter-bar hidden" id="filter-bar">
   <div class="filter-top">
     <form class="srch-wrap" onsubmit="return false;" role="search">
       <svg class="srch-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -1799,10 +1799,10 @@ function calcABV() {
     }
   }
 
-  // AI e Account ora sono nel bottom sheet — lente apre searchbar
+  // Lente — toggle search+filtri, parte chiusa
   var srchBtn = document.getElementById('hdr-srch-btn');
   var filterBar = document.getElementById('filter-bar');
-  var srchOpen = true; // parte aperta di default
+  var srchOpen = false;
   if (srchBtn && filterBar) {
     srchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
@@ -1812,10 +1812,15 @@ function calcABV() {
         setTimeout(function(){
           var inp = document.getElementById('srch');
           if (inp) inp.focus();
-        }, 310);
+        }, 320);
       } else {
         filterBar.classList.add('hidden');
         srchBtn.classList.remove('active');
+        // Chiudi anche pannello filtri aperto
+        var panel = document.getElementById('filter-panel');
+        var btnF = document.getElementById('btn-filters');
+        if (panel) panel.classList.remove('open');
+        if (btnF) btnF.classList.remove('open');
       }
     });
   }

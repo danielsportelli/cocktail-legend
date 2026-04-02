@@ -59,7 +59,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .hdr-icon-btn svg{stroke:var(--txt2);fill:none;transition:stroke .2s, fill .2s;}
 .hdr-icon-btn.active svg{stroke:var(--amber);}
 /* Cuore preferiti attivo */
-.hdr-fav-btn.active svg path{stroke:var(--amber);fill:rgba(245,158,11,.2);}
+.hdr-fav-btn.active svg path{stroke:var(--amber);fill:none;}
 /* Lente search header */
 .hdr-srch-btn svg{stroke:var(--txt2);}
 .hdr-srch-btn.active svg{stroke:var(--amber);}
@@ -268,20 +268,17 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   position:sticky;top:var(--hdr-h);z-index:1000;
   background:rgba(10,15,30,.97);
   padding:.6rem 5%;
-  transform:translateY(0);
-  opacity:1;
-  transition:transform .3s cubic-bezier(.4,0,.2,1), opacity .25s ease;
-  transform-origin:top center;
   overflow:hidden;
+  max-height:300px;
+  opacity:1;
+  transition:max-height .32s cubic-bezier(.4,0,.2,1), opacity .25s ease, padding .3s ease;
 }
 .filter-bar.hidden{
-  transform:translateY(-110%);
+  max-height:0;
   opacity:0;
+  padding-top:0;
+  padding-bottom:0;
   pointer-events:none;
-  position:fixed;
-  top:var(--hdr-h);
-  left:0;right:0;
-  z-index:999;
 }
 @media (display-mode: standalone) {
   .filter-bar{
@@ -314,6 +311,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   color:var(--txt2);padding:.52rem .85rem;border-radius:9px;
   font-size:.78rem;font-weight:600;font-family:inherit;cursor:pointer;
   transition:all .2s;white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
 }
 .btn-toggle-filters:hover,.btn-toggle-filters.open{
   border-color:rgba(37,99,235,.5);color:var(--blue-l);background:rgba(37,99,235,.08)
@@ -361,7 +359,8 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   background:var(--surf);border:1px solid var(--brd);
   color:var(--txt2);padding:.4rem .75rem;border-radius:8px;
   font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer;
-  transition:all .2s;white-space:nowrap
+  transition:all .2s;white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
 }
 .fg-btn:hover,.fg-btn.open{border-color:rgba(37,99,235,.4);color:var(--blue-l);background:rgba(37,99,235,.06)}
 .fg-btn .cnt{
@@ -393,9 +392,18 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   background:transparent;border:none;color:var(--dim);
   font-size:.75rem;font-weight:600;font-family:inherit;
   cursor:pointer;padding:.4rem .5rem;border-radius:7px;
-  transition:all .2s;white-space:nowrap;flex-shrink:0
+  transition:color .2s;white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
 }
-.btn-reset-sm:hover{color:#f87171}
+.btn-reset-sm:hover{color:var(--txt2);}
+.btn-reset-sm.did-reset{
+  animation:reset-pulse .35s ease forwards;
+}
+@keyframes reset-pulse{
+  0%{transform:scale(1);color:var(--dim);}
+  40%{transform:scale(.88);color:var(--amber);}
+  100%{transform:scale(1);color:var(--dim);}
+}
 
 /* Checkbox item */
 .ci-disabled{cursor:default !important;}
@@ -430,8 +438,8 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .main{padding:0 5% 1.25rem}
 .rbar{
   position:sticky;
-  top:var(--fb-h, 56px);
-  z-index:95;
+  top:var(--hdr-h);
+  z-index:99;
   background:var(--bg);
   display:flex;align-items:center;justify-content:space-between;
   padding:.5rem 5%;
@@ -439,8 +447,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   gap:.5rem;
 }
 .rcnt{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;
-  background:linear-gradient(135deg,var(--blue-l),var(--amber));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  color:var(--amber);}
 .rlbl{font-size:.83rem;color:var(--txt2);font-weight:500;margin-left:.3rem}
 .sort-wrap{position:relative;display:flex;align-items:center;}
 .sort-lbl{
@@ -455,6 +462,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   padding:.42rem .75rem;
   outline:none;cursor:pointer;
   appearance:none;-webkit-appearance:none;
+  -webkit-tap-highlight-color:transparent;
   width:100%;
 }
 .sort-sel option{color:var(--txt);background:var(--surf);}
