@@ -2809,6 +2809,64 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       b.addEventListener('click',showCalcCmds);
     });
 
+    // ── Torna sui drawer principali → chiude drawer + riapre menu ──
+    function tornaSuMenu() {
+      closeAllDrawers();
+      // Breve delay per far completare l'animazione di chiusura
+      setTimeout(function() {
+        var bsheet = document.getElementById('nav-menu-modal');
+        var overlay = document.getElementById('bsheet-overlay');
+        if (bsheet) bsheet.classList.add('open');
+        if (overlay) overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }, 180);
+    }
+
+    // Torna su Risorse (livello lista → menu)
+    var risBackMain = document.getElementById('ris-back-header-btn');
+    if (risBackMain) {
+      // Override: se siamo sulla lista comandi, Torna = torna al menu
+      // Se siamo dentro una funzione, Torna = torna alla lista
+      var _origShowRisCmds = showRisCmds;
+      document.getElementById('ris-back-header-btn').removeEventListener('click', showRisCmds);
+      document.getElementById('ris-back-header-btn').addEventListener('click', function() {
+        var btn = this;
+        if (btn.classList.contains('visible')) {
+          // Dentro una funzione → torna alla lista
+          showRisCmds();
+        } else {
+          // Sulla lista → torna al menu
+          tornaSuMenu();
+        }
+      });
+    }
+
+    // Torna su Calcolatori
+    var calcBackMain = document.getElementById('calc-back-header-btn');
+    if (calcBackMain) {
+      document.getElementById('calc-back-header-btn').removeEventListener('click', showCalcCmds);
+      document.getElementById('calc-back-header-btn').addEventListener('click', function() {
+        var btn = this;
+        if (btn.classList.contains('visible')) {
+          showCalcCmds();
+        } else {
+          tornaSuMenu();
+        }
+      });
+    }
+
+    // Torna su Academy
+    var vntBack = document.getElementById('vnt-back-header-btn');
+    if (vntBack) {
+      vntBack.addEventListener('click', tornaSuMenu);
+    }
+
+    // Torna su Account
+    var accBack = document.getElementById('acc-back-header-btn');
+    if (accBack) {
+      accBack.addEventListener('click', tornaSuMenu);
+    }
+
     // ─── Tips popup per Temperature e Bicchieri ───
     var TIPS_RIS = {
       tmp: '<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Lascia respirare il distillato</strong>'

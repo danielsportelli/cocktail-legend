@@ -243,15 +243,16 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   border-radius:20px 20px 0 0;
   border-top:1px solid rgba(255,255,255,.08);
   border-bottom:none;
-  transform:translateY(100%);
+  transform:translateY(110%);
   transition:transform .32s cubic-bezier(.4,0,.2,1) !important;
-  box-shadow:0 -8px 40px rgba(0,0,0,.5);
+  box-shadow:none;
   z-index:1050;
   pointer-events:none;
 }
 #drawer-acc.open{
   transform:translateY(0) !important;
   pointer-events:auto;
+  box-shadow:0 -8px 40px rgba(0,0,0,.6);
 }
 @media (display-mode: standalone) {
   #drawer-acc{
@@ -944,9 +945,9 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   border-radius:20px 20px 0 0;
   max-height:88vh;
   overflow-y:auto;
-  transform:translateY(100%);
+  transform:translateY(110%);
   transition:transform .32s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 -8px 40px rgba(0,0,0,.5);
+  box-shadow:none;
   will-change:transform;
   pointer-events:none;
   padding-bottom:env(safe-area-inset-bottom, 0px);
@@ -954,6 +955,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .drawer.open{
   transform:translateY(0);
   pointer-events:auto;
+  box-shadow:0 -8px 40px rgba(0,0,0,.6);
 }
 .drawer.keyboard-open{
   max-height:60vh;
@@ -964,12 +966,18 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   }
 }
 .drawer-handle{
-  display:flex;justify-content:center;padding:.75rem 0 .35rem;
+  display:flex;justify-content:center;padding:.85rem 0 .45rem;
   position:sticky;top:0;background:var(--surf);z-index:3;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 .drawer-handle::before{
   content:'';width:36px;height:4px;
-  background:rgba(255,255,255,.15);border-radius:2px;
+  background:rgba(255,255,255,.2);border-radius:2px;
+  transition:background .2s;
+}
+.drawer-handle:active::before{
+  background:rgba(255,255,255,.4);
 }
 .drawer-inner{padding:0 1.2rem 2rem;}
 .drawer-header{
@@ -993,6 +1001,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .drawer-back-btn:hover{ color:var(--txt2); border-color:var(--txt2); }
 .drawer-back-btn.visible{ display:inline-flex; }
+.drawer-back-btn--main{ display:inline-flex; }
 .drawer{ scrollbar-width:none; }
 .drawer::-webkit-scrollbar{ display:none; }
 /* overlay scuro dietro drawer */
