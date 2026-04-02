@@ -952,12 +952,11 @@ function showResult(isCorrect, isTimeout, ptsEarned, spiegazione, rispostaCorret
     expl.innerHTML = 'La risposta corretta era <strong>' + escHtml(rispostaCorretta) + '</strong>.' + (spiegazione ? ' ' + escHtml(spiegazione) : '');
   }
 
-  // Mostra info prossima domanda nel banner risultato
+  // Mostra anteprima prossima domanda nel banner risultato
   const nextMeta = document.getElementById('result-next-meta');
   if (nextMeta && window._quizData) {
-    // Mostra categoria e difficoltà della domanda corrente
-    const cat = window._quizData.categoria || '';
-    const dif = window._quizData.difficolta || '';
+    const cat = window._quizData.prossima_categoria || '';
+    const dif = window._quizData.prossima_difficolta || '';
     nextMeta.textContent = cat ? 'Categoria: ' + cat + (dif ? ' · Difficoltà: ' + dif : '') : '';
   }
 }
@@ -1082,8 +1081,8 @@ async function loadQuiz(user) {
           const attualeRef = await getDoc(doc(db, 'quiz_del_giorno', 'attuale'));
           if (attualeRef.exists()) {
             const qd = attualeRef.data();
-            const cat = qd.categoria || '';
-            const dif = qd.difficolta || '';
+            const cat = qd.prossima_categoria || '';
+            const dif = qd.prossima_difficolta || '';
             doneNextMeta.textContent = cat ? 'Categoria: ' + cat + (dif ? ' · Difficoltà: ' + dif : '') : '';
           }
         } catch(e) {}
@@ -1129,12 +1128,14 @@ async function loadQuiz(user) {
     }
 
     const datiNormalizzati = {
-      domanda:           quizData.testo || quizData.domanda || '—',
-      opzioni:           opzioni,
-      risposta_corretta: quizData.risposta_corretta || '',
-      spiegazione:       quizData.spiegazione || '',
-      categoria:         quizData.categoria || 'Cocktail',
-      difficolta:        quizData.difficolta || 'facile',
+      domanda:             quizData.testo || quizData.domanda || '—',
+      opzioni:             opzioni,
+      risposta_corretta:   quizData.risposta_corretta || '',
+      spiegazione:         quizData.spiegazione || '',
+      categoria:           quizData.categoria || 'Cocktail',
+      difficolta:          quizData.difficolta || 'facile',
+      prossima_categoria:  quizData.prossima_categoria || null,
+      prossima_difficolta: quizData.prossima_difficolta || null,
     };
 
     // Render quiz
