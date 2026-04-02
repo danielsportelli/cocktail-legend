@@ -255,10 +255,9 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   overflow:hidden;
   max-height:300px;
   opacity:1;
-  transition:max-height .32s cubic-bezier(.4,0,.2,1),
-             opacity .25s ease,
-             padding .3s ease,
-             top .28s cubic-bezier(.4,0,.2,1);
+  transition:max-height .28s cubic-bezier(.4,0,.2,1),
+             opacity .2s ease,
+             padding .28s ease;
 }
 .filter-bar.hidden{
   max-height:0;
@@ -912,12 +911,11 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .drawer{
   position:fixed;left:0;right:0;
   bottom:0;
-  top:auto;
+  top:var(--rbar-top, var(--hdr-h));
   z-index:1050;
   background:var(--surf);
   border-top:1px solid rgba(255,255,255,.08);
   border-radius:20px 20px 0 0;
-  max-height:calc(100vh - var(--rbar-top, var(--hdr-h)) - var(--rbar-h, 44px));
   overflow-y:auto;
   transform:translateY(110%);
   transition:transform .32s cubic-bezier(.4,0,.2,1);

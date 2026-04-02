@@ -827,18 +827,15 @@ function updateHeaderVisibility() {
   var hdr = document.getElementById? document.querySelector('.hdr') : null;
   if (!hdr) return;
   var currentY = window.scrollY || window.pageYOffset;
-  var hdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
+  // Usa cache per evitare getComputedStyle ad ogni scroll
+  if (!_cachedHdrH) _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
 
-  if (currentY > _lastScrollY && currentY > hdrH && !_hdrHidden) {
-    // Scroll giù — nascondi header
+  if (currentY > _lastScrollY && currentY > _cachedHdrH && !_hdrHidden) {
     _hdrHidden = true;
     hdr.classList.add('hdr--hidden');
-    document.documentElement.style.setProperty('--hdr-offset', '0px');
   } else if (currentY < _lastScrollY && _hdrHidden) {
-    // Scroll su — mostra header
     _hdrHidden = false;
     hdr.classList.remove('hdr--hidden');
-    document.documentElement.style.setProperty('--hdr-offset', hdrH + 'px');
   }
   _lastScrollY = currentY;
   updateRbarTop();
@@ -854,21 +851,41 @@ function updateFbH(){
   var fb = document.getElementById('filter-bar');
   if (!fb) return;
   void fb.offsetHeight;
-  var fbH = fb.classList.contains('hidden') ? 0 : fb.offsetHeight;
-  document.documentElement.style.setProperty('--fb-h', fbH + 'px');
+  // Se hidden, usa 0 direttamente senza leggere offsetHeight (che è in transizione)
+  _cachedFbH = fb.classList.contains('hidden') ? 0 : fb.offsetHeight;
+  document.documentElement.style.setProperty('--fb-h', _cachedFbH + 'px');
   updateRbarTop();
 }
 
+// Aggiorna rbar anche al termine della transizione filter-bar
+document.addEventListener('DOMContentLoaded', function(){
+  var fb = document.getElementById('filter-bar');
+  if (fb) {
+    fb.addEventListener('transitionend', function(e){
+      if (e.propertyName === 'max-height') updateFbH();
+    });
+  }
+});
+
+var _cachedHdrH = 73;
+var _cachedFbH = 0;
+
 function updateRbarTop(){
-  var hdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
-  var fbH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--fb-h')) || 0;
-  var offset = _hdrHidden ? 0 : hdrH;
+  var offset = _hdrHidden ? 0 : _cachedHdrH;
   document.documentElement.style.setProperty('--hdr-offset', offset + 'px');
-  document.documentElement.style.setProperty('--rbar-top', (offset + fbH) + 'px');
+  document.documentElement.style.setProperty('--rbar-top', (offset + _cachedFbH) + 'px');
 }
 
+// Inizializza cache hdrH al load
+window.addEventListener('DOMContentLoaded', function(){
+  _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
+});
 updateFbH();
-window.addEventListener('resize', function(){ updateFbH(); updateHeaderVisibility(); });
+window.addEventListener('resize', function(){
+  _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
+  updateFbH();
+  updateHeaderVisibility();
+});
 window.addEventListener('load', function(){
   updateFbH();
   setTimeout(updateFbH, 100);
@@ -2851,15 +2868,22 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     }
 
     // Torna su Academy
+    // Torna su Academy
     var vntBack = document.getElementById('vnt-back-header-btn');
     if (vntBack) {
-      vntBack.addEventListener('click', tornaSuMenu);
+      vntBack.addEventListener('click', function(e) {
+        e.stopPropagation();
+        tornaSuMenu();
+      });
     }
 
     // Torna su Account
     var accBack = document.getElementById('acc-back-header-btn');
     if (accBack) {
-      accBack.addEventListener('click', tornaSuMenu);
+      accBack.addEventListener('click', function(e) {
+        e.stopPropagation();
+        tornaSuMenu();
+      });
     }
 
     // ─── Tips popup per Temperature e Bicchieri ───

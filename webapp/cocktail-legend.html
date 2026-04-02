@@ -1514,7 +1514,6 @@ function closeAllDrawers(silent) {
 }
 
 // Handle cliccabile — chiude drawer e tutto
-// Usa document per intercettare dinamicamente (event delegation)
 document.addEventListener('click', function(e) {
   var handle = e.target.closest('.drawer-handle');
   if (handle) {
@@ -1523,28 +1522,37 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// Swipe down sul trattino — chiude tutto (event delegation)
+// Swipe down su QUALSIASI drawer aperto — chiude tutto
 (function() {
   var _swipeStartY = 0;
-  var _swipeHandle = null;
+  var _swipeDrawer = null;
+  var _swipeActive = false;
+
   document.addEventListener('touchstart', function(e) {
-    var handle = e.target.closest('.drawer-handle');
-    if (handle) {
-      _swipeHandle = handle;
+    // Controlla se il touch parte dentro un drawer aperto
+    var drawer = e.target.closest('.drawer.open');
+    if (drawer) {
+      _swipeDrawer = drawer;
       _swipeStartY = e.touches[0].clientY;
+      _swipeActive = true;
     } else {
-      _swipeHandle = null;
+      _swipeActive = false;
+      _swipeDrawer = null;
     }
   }, {passive: true});
+
   document.addEventListener('touchend', function(e) {
-    if (_swipeHandle) {
+    if (_swipeActive && _swipeDrawer) {
       var dy = e.changedTouches[0].clientY - _swipeStartY;
-      if (dy > 40) {
+      // Swipe down di almeno 80px e il drawer è scrollato in cima
+      var scrollTop = _swipeDrawer.scrollTop;
+      if (dy > 80 && scrollTop <= 0) {
         closeAllDrawers();
         window.closeNavMenu && window.closeNavMenu();
       }
-      _swipeHandle = null;
     }
+    _swipeActive = false;
+    _swipeDrawer = null;
   }, {passive: true});
 })();
 
