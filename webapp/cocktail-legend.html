@@ -540,9 +540,20 @@
     <span class="rlbl">cocktail trovati</span>
   </div>
   <div class="rbar-right">
-    <div class="sort-wrap" style="width:100%">
-      <div class="sort-lbl">⇅ Ordina per</div>
-      <select class="sort-sel" id="srt" onchange="render()">
+    <div class="sort-wrap" id="sort-wrap" style="width:100%">
+      <button class="sort-btn" id="sort-btn" type="button">
+        <span class="sort-btn-ico">⇅</span>
+        <span class="sort-btn-lbl" id="sort-btn-lbl">Ordina per</span>
+        <span class="sort-btn-arr">&#9660;</span>
+      </button>
+      <div class="sort-dropdown" id="sort-dropdown">
+        <button class="sort-opt sort-opt--active" data-val="az" type="button">A → Z</button>
+        <button class="sort-opt" data-val="za" type="button">Z → A</button>
+        <button class="sort-opt" data-val="abv+" type="button">ABV crescente</button>
+        <button class="sort-opt" data-val="abv-" type="button">ABV decrescente</button>
+      </div>
+      <!-- hidden select per compatibilità con render() -->
+      <select id="srt" style="display:none">
         <option value="az">A → Z</option>
         <option value="za">Z → A</option>
         <option value="abv+">ABV crescente</option>
@@ -1898,6 +1909,69 @@ function calcABV() {
     document.addEventListener('touchend', function(e){
       if (e.target !== srt) setInactive();
     }, {passive:true});
+  })();
+
+  // ── CUSTOM SORT DROPDOWN ────────────────────────────
+  (function(){
+    var btn      = document.getElementById('sort-btn');
+    var dropdown = document.getElementById('sort-dropdown');
+    var lbl      = document.getElementById('sort-btn-lbl');
+    var srt      = document.getElementById('srt');
+    var wrap     = document.getElementById('sort-wrap');
+    if (!btn || !dropdown || !srt) return;
+
+    var labels = { 'az':'Ordina per', 'za':'Z → A', 'abv+':'ABV ↑', 'abv-':'ABV ↓' };
+    var currentVal = 'az';
+
+    function openSort() {
+      dropdown.classList.add('open');
+      btn.classList.add('active');
+      wrap.classList.add('active');
+    }
+    function closeSort() {
+      dropdown.classList.remove('open');
+      btn.classList.remove('active');
+      wrap.classList.remove('active');
+    }
+    function toggleSort(e) {
+      e.stopPropagation();
+      dropdown.classList.contains('open') ? closeSort() : openSort();
+    }
+
+    btn.addEventListener('click', toggleSort);
+    btn.addEventListener('touchend', function(e){ e.preventDefault(); toggleSort(e); });
+
+    dropdown.querySelectorAll('.sort-opt').forEach(function(opt) {
+      opt.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var val = this.dataset.val;
+        currentVal = val;
+        srt.value = val;
+        lbl.textContent = labels[val] || 'Ordina per';
+        dropdown.querySelectorAll('.sort-opt').forEach(function(o){ o.classList.remove('sort-opt--active'); });
+        this.classList.add('sort-opt--active');
+        closeSort();
+        render();
+      });
+      // Touch: previeni ghost click e chiudi sempre
+      opt.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var val = this.dataset.val;
+        currentVal = val;
+        srt.value = val;
+        lbl.textContent = labels[val] || 'Ordina per';
+        dropdown.querySelectorAll('.sort-opt').forEach(function(o){ o.classList.remove('sort-opt--active'); });
+        this.classList.add('sort-opt--active');
+        closeSort();
+        render();
+      });
+    });
+
+    // Chiudi cliccando fuori
+    document.addEventListener('click', function(){ closeSort(); });
+    document.addEventListener('touchend', function(){ closeSort(); }, {passive:true});
+    dropdown.addEventListener('click', function(e){ e.stopPropagation(); });
   })();
 
   // ── PATCH closeAllDrawers — rimuovi active icone header ──

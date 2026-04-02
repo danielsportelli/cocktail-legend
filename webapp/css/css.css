@@ -444,31 +444,44 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   color:var(--amber);}
 .rlbl{font-size:.83rem;color:var(--txt2);font-weight:500;margin-left:.3rem}
 .sort-wrap{position:relative;display:flex;align-items:center;}
-.sort-lbl{
-  position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
-  display:flex;align-items:center;justify-content:center;gap:.35rem;
-  font-size:.78rem;font-weight:600;color:var(--txt2);
-  pointer-events:none;white-space:nowrap;
-}
-.sort-sel{
+/* Custom sort button */
+.sort-btn{
+  display:flex;align-items:center;gap:.35rem;
   background:var(--surf);border:1px solid var(--brd);border-radius:9px;
-  color:transparent;font-family:inherit;font-size:.78rem;
-  padding:.42rem .75rem;
-  outline:none;cursor:pointer;
-  appearance:none;-webkit-appearance:none;
+  color:var(--txt2);font-family:inherit;font-size:.78rem;font-weight:600;
+  padding:.42rem .75rem;cursor:pointer;white-space:nowrap;
+  width:100%;justify-content:center;
+  transition:border-color .2s, background .2s, color .2s;
   -webkit-tap-highlight-color:transparent;
-  width:100%;
-  transition:border-color .2s, background .2s;
 }
-.sort-sel option{color:var(--txt);background:var(--surf);}
-.sort-sel.active{
+.sort-btn.active{
   border-color:rgba(37,99,235,.5);
   background:rgba(37,99,235,.08);
-}
-.sort-sel.active + .sort-lbl,
-.sort-wrap.active .sort-lbl{
   color:var(--blue-l);
 }
+.sort-btn-arr{font-size:.6rem;opacity:.6;}
+.sort-btn.active .sort-btn-arr{opacity:1;}
+/* Custom sort dropdown */
+.sort-dropdown{
+  display:none;
+  position:absolute;top:calc(100% + 6px);right:0;
+  background:var(--surf);border:1px solid rgba(37,99,235,.2);
+  border-radius:11px;padding:.4rem;
+  min-width:160px;z-index:2100;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);
+  animation:fdrop .18s ease;
+}
+.sort-dropdown.open{display:block;}
+.sort-opt{
+  display:block;width:100%;text-align:left;
+  background:none;border:none;
+  color:var(--txt2);font-family:inherit;font-size:.78rem;font-weight:500;
+  padding:.45rem .7rem;border-radius:7px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .15s, color .15s;
+}
+.sort-opt:hover,.sort-opt:active{background:rgba(37,99,235,.1);color:var(--blue-l);}
+.sort-opt--active{color:var(--blue-l);font-weight:700;}
 .rbar-right{display:flex;flex-direction:column;align-items:stretch;gap:.4rem;width:calc(35% - .43rem)}
 
 /* GRID */
