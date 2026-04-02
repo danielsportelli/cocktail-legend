@@ -1481,6 +1481,9 @@ function openDrawer(id) {
     closeAllDrawers();
     return;
   }
+  // Forza aggiornamento --rbar-top PRIMA di aprire
+  // Garantisce altezza corretta su tutti i device (Android/iOS)
+  if (typeof updateRbarTop === 'function') updateRbarTop();
   var allDrawers = document.querySelectorAll('.drawer');
   allDrawers.forEach(function(d){ d.style.transition = 'none'; });
   allDrawers.forEach(function(d){ d.classList.remove('open'); });
@@ -1499,7 +1502,6 @@ function openDrawer(id) {
     if(id === 'ai'){ creabtn.classList.remove('dim'); }
     else { creabtn.classList.add('dim'); }
   }
-  // Non alterare z-index di filter-bar e rbar — ora sono fixed e gestiti da CSS
 }
 
 function closeAllDrawers(silent) {
@@ -1784,8 +1786,14 @@ function calcABV() {
     if (e.key === 'Escape') window.closeNavMenu();
   });
 
-  // Swipe down per chiudere
+  // Trattino bsheet: click chiude, swipe down chiude
   if (bsheet) {
+    var bsheetHandle = bsheet.querySelector('.bsheet-handle');
+    if (bsheetHandle) {
+      bsheetHandle.addEventListener('click', function() {
+        window.closeNavMenu();
+      });
+    }
     var tsY = 0;
     bsheet.addEventListener('touchstart', function(e){ tsY = e.touches[0].clientY; }, {passive:true});
     bsheet.addEventListener('touchend', function(e){

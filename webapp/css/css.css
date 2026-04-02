@@ -110,6 +110,12 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   width:40px;height:4px;border-radius:2px;
   background:rgba(255,255,255,.18);
   margin:12px auto 4px;
+  cursor:pointer;
+  transition:background .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.bsheet-handle:active{
+  background:rgba(255,255,255,.5);
 }
 .bsheet-items{
   display:flex;flex-direction:column;
@@ -432,6 +438,9 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   padding:.5rem 5%;
   border-bottom:1px solid var(--brd);
   gap:.5rem;
+}
+.hdr-animating .rbar{
+  transition:top .28s cubic-bezier(.4,0,.2,1);
 }
 .rcnt{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;
   color:var(--amber);}
@@ -917,6 +926,8 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   border-top:1px solid rgba(255,255,255,.08);
   border-radius:20px 20px 0 0;
   overflow-y:auto;
+  overscroll-behavior:none;
+  -webkit-overflow-scrolling:touch;
   transform:translateY(110%);
   transition:transform .32s cubic-bezier(.4,0,.2,1);
   box-shadow:none;
