@@ -1107,26 +1107,18 @@ function initF() {
   // Fsheet: done button e overlay e handle
   var fsheetDone   = document.getElementById('fsheet-done');
   var fsheetOvl    = document.getElementById('fsheet-overlay');
-  var fsheetEl     = document.getElementById('fsheet');
   var fsheetHandle = document.querySelector('#fsheet .fsheet-handle');
   if (fsheetDone) fsheetDone.addEventListener('click', closeFsheet);
   if (fsheetOvl)  fsheetOvl.addEventListener('click', closeFsheet);
   if (fsheetHandle) {
-    fsheetHandle.addEventListener('click', closeFsheet);
-    fsheetHandle.addEventListener('touchstart', function(){
-      this.style.background = 'rgba(255,255,255,.55)';
-    }, {passive:true});
-    fsheetHandle.addEventListener('touchend', function(){
-      this.style.background = '';
-    }, {passive:true});
-  }
-  // Swipe UP su tutto il fsheet per chiudere
-  if (fsheetEl) {
     var _fsY = 0;
-    fsheetEl.addEventListener('touchstart', function(e){
+    fsheetHandle.addEventListener('click', closeFsheet);
+    fsheetHandle.addEventListener('touchstart', function(e){
+      this.style.background = 'rgba(255,255,255,.55)';
       _fsY = e.touches[0].clientY;
     }, {passive:true});
-    fsheetEl.addEventListener('touchend', function(e){
+    fsheetHandle.addEventListener('touchend', function(e){
+      this.style.background = '';
       if (_fsY - e.changedTouches[0].clientY > 40) closeFsheet();
     }, {passive:true});
   }

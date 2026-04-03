@@ -311,7 +311,12 @@ body::before{
 .hdr-animating .pills-bar{
   transition:top .28s cubic-bezier(.4,0,.2,1);
 }
-/* Icona lente fissa a sinistra nella pills bar */
+.hdr-animating .filter-bar{
+  transition:top .28s cubic-bezier(.4,0,.2,1),
+             max-height .28s cubic-bezier(.4,0,.2,1),
+             opacity .2s ease,
+             padding .28s ease;
+}
 .pills-srch-btn{
   flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
@@ -325,9 +330,6 @@ body::before{
 }
 .pills-srch-btn.active{color:var(--amber);}
 .pills-srch-btn svg{display:block;}
-.hdr-animating .pills-bar{
-  transition:top .28s cubic-bezier(.4,0,.2,1);
-}
 .pills-scroll{
   display:flex;
   gap:.45rem;
