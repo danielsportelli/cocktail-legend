@@ -395,7 +395,7 @@ body::before{
 /* FILTER BOTTOM SHEET */
 .fsheet-overlay{
   display:none;position:fixed;inset:0;
-  z-index:95;
+  z-index:1048;
   background:rgba(0,0,0,.5);
   backdrop-filter:blur(3px);
   -webkit-backdrop-filter:blur(3px);
@@ -406,7 +406,7 @@ body::before{
   position:fixed;
   top:var(--hdr-offset, var(--hdr-h));
   left:0;right:0;
-  z-index:96;
+  z-index:1049;
   background:var(--surf);
   border-radius:0 0 20px 20px;
   border-bottom:1px solid rgba(255,255,255,.08);
