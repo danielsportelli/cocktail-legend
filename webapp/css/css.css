@@ -70,7 +70,6 @@ body::before{
 .hdr-icon-btn{
   background:none;border:none;cursor:pointer;
   padding:.4rem;
-  height:44px;
   display:flex;align-items:center;justify-content:center;
   -webkit-tap-highlight-color:transparent;
 }
@@ -86,7 +85,6 @@ body::before{
 .hdr-menu-btn{
   background:none;border:none;cursor:pointer;
   padding:.4rem;
-  height:44px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
   -webkit-tap-highlight-color:transparent;
 }
