@@ -2989,12 +2989,12 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       });
     }
 
-    // Torna su Account
+    // Chiudi su Account — chiude solo il drawer
     var accBack = document.getElementById('acc-back-header-btn');
     if (accBack) {
       accBack.addEventListener('click', function(e) {
         e.stopPropagation();
-        tornaSuMenu();
+        closeAllDrawers();
       });
     }
 
