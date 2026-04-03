@@ -1683,9 +1683,9 @@
   });
   document.addEventListener('copy', e => e.preventDefault());
 
-  // ── AUTH CHECK — usa stessa architettura di cocktail-legend ──
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+  // ── AUTH CHECK ───────────────────────────────────────────
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
   import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -1697,11 +1697,19 @@
     appId: "1:237023162237:web:8a35e5421521171e2fa614"
   };
 
-  const app = initializeApp(firebaseConfig);
+  // Evita doppia inizializzazione se già presente
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  onAuthStateChanged(auth, async user => {
+  // Forza persistenza locale (stessa che usa cocktail-legend)
+  await setPersistence(auth, browserLocalPersistence);
+
+  // onAuthStateChanged si attiva una volta sola:
+  // — null se non loggato (redirect a login)
+  // — user se loggato (controlla plan)
+  const unsubscribe = onAuthStateChanged(auth, async user => {
+    unsubscribe(); // ascolta solo il primo evento
     if (!user) {
       window.location.href = 'cocktail-legend.html?source=genesis&error=auth';
       return;
