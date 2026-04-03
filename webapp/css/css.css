@@ -40,6 +40,7 @@ body::before{
 }
 .hdr-inner{
   display:flex;align-items:center;
+  align-self:stretch;
 }
 .hdr-lbl{display:none;}
 .hdr-logo{
@@ -64,6 +65,7 @@ body::before{
 /* Header actions — gruppo icone destra */
 .hdr-actions{
   display:flex;align-items:center;gap:.15rem;
+  align-self:stretch;
 }
 
 /* Icone header generiche */
@@ -106,14 +108,14 @@ body::before{
 }
 .bsheet-overlay.open{display:block;opacity:1;}
 .bsheet{
-  position:fixed;left:0;right:0;bottom:0;
+  position:fixed;left:.75rem;right:.75rem;bottom:.75rem;
   z-index:9000;
   background:var(--surf);
-  border-radius:20px 20px 0 0;
-  border-top:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.08);
   box-shadow:0 -8px 40px rgba(0,0,0,.5);
   padding:0 0 env(safe-area-inset-bottom,0px);
-  transform:translateY(100%);
+  transform:translateY(110%);
   transition:transform .32s cubic-bezier(.4,0,.2,1);
   will-change:transform;
 }
@@ -393,7 +395,7 @@ body::before{
 /* FILTER BOTTOM SHEET */
 .fsheet-overlay{
   display:none;position:fixed;inset:0;
-  z-index:1048;
+  z-index:95;
   background:rgba(0,0,0,.5);
   backdrop-filter:blur(3px);
   -webkit-backdrop-filter:blur(3px);
@@ -402,12 +404,11 @@ body::before{
 .fsheet-overlay.open{display:block;opacity:1;}
 .fsheet{
   position:fixed;
-  top:var(--pills-bottom, calc(var(--hdr-h) + 80px));
+  top:var(--hdr-offset, var(--hdr-h));
   left:0;right:0;
-  z-index:1049;
+  z-index:96;
   background:var(--surf);
   border-radius:0 0 20px 20px;
-  border-top:none;
   border-bottom:1px solid rgba(255,255,255,.08);
   max-height:70vh;
   display:flex;flex-direction:column;
@@ -416,7 +417,7 @@ body::before{
   box-shadow:none;
 }
 .fsheet.open{
-  transform:translateY(0);
+  transform:translateY(var(--pills-h-px, 40px));
   box-shadow:0 8px 40px rgba(0,0,0,.5);
 }
 /* header fsheet in cima */

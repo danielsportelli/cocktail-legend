@@ -879,8 +879,9 @@ function updateRbarTop(){
   document.documentElement.style.setProperty('--hdr-offset', offset + 'px');
   // pills-bar sta direttamente sotto l'header (niente rbar)
   var pillsBar = document.getElementById('pills-bar');
-  var pillsH = pillsBar ? pillsBar.offsetHeight : 36;
+  var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
   document.documentElement.style.setProperty('--pills-bottom', (offset + pillsH) + 'px');
+  document.documentElement.style.setProperty('--pills-h-px', pillsH + 'px');
   // search bar sta sotto pills
   var fbH = _cachedFbH;
   // padding-top main
