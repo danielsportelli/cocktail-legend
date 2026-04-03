@@ -448,18 +448,24 @@ body::before{
   order:1;
 }
 .fsheet-body::-webkit-scrollbar{display:none;}
+/* footer fsheet — fascia touch per swipe up e tap */
+.fsheet-footer{
+  width:100%;
+  padding:.5rem 0 .65rem;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  order:2;
+}
 /* handle in fondo */
 .fsheet-handle{
   width:36px;height:4px;border-radius:2px;
   background:rgba(255,255,255,.18);
-  margin:.4rem auto .7rem;
-  flex-shrink:0;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
+  pointer-events:none;
   transition:background .2s;
-  order:2;
 }
-.fsheet-handle:active{background:rgba(255,255,255,.55);}
+.fsheet-footer:active .fsheet-handle{background:rgba(255,255,255,.55);}
 
 .srch-wrap{position:relative;flex:1;}
 .srch-ico{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--dim);pointer-events:none}
