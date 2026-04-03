@@ -6,11 +6,6 @@
   <title>Spirits Genesis — Corso Avanzato di Merceologia</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1678,8 +1673,7 @@
   </main>
 </div><!-- /sg-layout -->
 
-<script src="js/firebase-init.js"></script>
-<script>
+<script type="module">
   // ── CONTENT PROTECTION ──────────────────────────────────
   document.addEventListener('contextmenu', e => e.preventDefault());
   document.addEventListener('keydown', e => {
@@ -1689,28 +1683,42 @@
   });
   document.addEventListener('copy', e => e.preventDefault());
 
-  // ── AUTH CHECK ───────────────────────────────────────────
-  function checkAuth() {
-    firebase.auth().onAuthStateChanged(async user => {
-      if (!user) {
-        window.location.href = 'cocktail-legend.html?source=genesis&error=auth';
+  // ── AUTH CHECK — usa stessa architettura di cocktail-legend ──
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDkIK5KD-LHCdAhxHVS-bbnwP9Qak2vTxc",
+    authDomain: "cocktail-legend.firebaseapp.com",
+    projectId: "cocktail-legend",
+    storageBucket: "cocktail-legend.firebasestorage.app",
+    messagingSenderId: "237023162237",
+    appId: "1:237023162237:web:8a35e5421521171e2fa614"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  onAuthStateChanged(auth, async user => {
+    if (!user) {
+      window.location.href = 'cocktail-legend.html?source=genesis&error=auth';
+      return;
+    }
+    try {
+      const snap = await getDoc(doc(db, 'users', user.uid));
+      if (!snap.exists() || snap.data().plan !== 'premium') {
+        window.location.href = 'cocktail-legend.html?source=genesis&error=premium';
         return;
       }
-      try {
-        const doc = await firebase.firestore().collection('users').doc(user.uid).get();
-        if (!doc.exists || doc.data().plan !== 'premium') {
-          window.location.href = 'cocktail-legend.html?source=genesis&error=premium';
-          return;
-        }
-        // Auth OK — show content
-        document.getElementById('auth-gate').classList.remove('visible');
-      } catch(err) {
-        console.error('Auth check error:', err);
-        window.location.href = 'cocktail-legend.html?source=genesis&error=auth';
-      }
-    });
-  }
-  checkAuth();
+      // Auth OK — mostra contenuto
+      document.getElementById('auth-gate').classList.remove('visible');
+    } catch(err) {
+      console.error('Auth check error:', err);
+      window.location.href = 'cocktail-legend.html?source=genesis&error=auth';
+    }
+  });
 
   // ── PROGRESS BAR ─────────────────────────────────────────
   function updateProgress() {
