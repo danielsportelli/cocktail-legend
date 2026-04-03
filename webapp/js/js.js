@@ -884,6 +884,12 @@ function updateRbarTop(){
   var rbar = document.getElementById('rbar');
   if (rbar) _cachedRbarH = rbar.offsetHeight || 44;
   document.documentElement.style.setProperty('--pills-top', (rbarTop + _cachedRbarH) + 'px');
+  // Aggiorna padding-top main dinamicamente
+  var pillsBar = document.getElementById('pills-bar');
+  var pillsH = pillsBar ? pillsBar.offsetHeight : 36;
+  var mainPad = rbarTop + _cachedRbarH + pillsH;
+  var main = document.querySelector('.main');
+  if (main) main.style.paddingTop = (mainPad + 12) + 'px';
 }
 
 // Inizializza cache hdrH al load
