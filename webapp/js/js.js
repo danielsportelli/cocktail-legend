@@ -1118,7 +1118,8 @@ function initF() {
     }, {passive:true});
     fsheetHandle.addEventListener('touchend', function(e){
       this.style.background = '';
-      if (e.changedTouches[0].clientY - _fsY > 40) closeFsheet();
+      // swipe UP per chiudere (handle è in fondo, si tira su)
+      if (_fsY - e.changedTouches[0].clientY > 40) closeFsheet();
     }, {passive:true});
   }
 
