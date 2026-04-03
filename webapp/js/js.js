@@ -1193,7 +1193,7 @@ function render() {
   if(AF.bic.length){res=res.filter(function(c){return AF.bic.indexOf(c.bicchiere)!==-1;});}
   if(AF.iba.length){res=res.filter(function(c){return c.iba===true||c.iba==="true";});}
   if(FAV_ONLY){var favs=loadFavs();res=res.filter(function(c){return favs.indexOf(c.name)!==-1;});}
-  var s=document.getElementById("srt").value;
+  var _srtEl=document.getElementById("srt"); var s=_srtEl?_srtEl.value:"az";
   if(s==="az")res.sort(function(a,b){return a.name.localeCompare(b.name);});
   else if(s==="za")res.sort(function(a,b){return b.name.localeCompare(a.name);});
   else if(s==="abv+")res.sort(function(a,b){return(AO[a.abv]||0)-(AO[b.abv]||0);});
@@ -1206,7 +1206,7 @@ function render() {
 
 function showCards(){
   var g=document.getElementById("grid");
-  document.getElementById("rcnt").textContent=RES.length;
+  var rcntEl = document.getElementById("rcnt"); if(rcntEl) rcntEl.textContent=RES.length;
   g.innerHTML="";
   if(!RES.length){
     var em=document.createElement("div");em.className="empty";
