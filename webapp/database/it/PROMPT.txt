@@ -137,7 +137,7 @@ Ogni cocktail deve avere esattamente questi campi, in questo ordine:
   ],
   "storia": "Testo della storia del cocktail.",
   "frizzante": false,
-  "bicchiere": "Old fashioned",
+  "bicchiere": "Tumbler basso",
   "img": "https://danielsportelli.github.io/cocktail-legend/immagini/nome_del_drink.webp",
   "varianti": [],
   "iba": false
@@ -335,11 +335,11 @@ T01 — STIR & STRAIN → coppetta
 "Filtrare in una coppetta raffreddata"
 
 ─────────────────────────────────────────
-T02 — STIR & STRAIN → old fashioned con ghiaccio
+T02 — STIR & STRAIN → tumbler basso con ghiaccio
 ─────────────────────────────────────────
 "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
 "Mescolare delicatamente per circa 20 secondi",
-"Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+"Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
 
 ─────────────────────────────────────────
 T03 — STIR & STRAIN → tumbler basso con ghiaccio
@@ -381,10 +381,10 @@ T08 — SHAKE & STRAIN → tumbler basso con ghiaccio (double strain)
 "Filtrare (double strain) in un tumbler basso riempito di ghiaccio"
 
 ─────────────────────────────────────────
-T09 — SHAKE & STRAIN → old fashioned con ghiaccio (double strain)
+T09 — SHAKE & STRAIN → tumbler basso con ghiaccio (double strain)
 ─────────────────────────────────────────
 "Shakerare tutto con ghiaccio",
-"Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+"Filtrare (double strain) in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
 
 ─────────────────────────────────────────
 T10 — SHAKE & STRAIN → hurricane con ghiaccio (double strain)
@@ -525,10 +525,10 @@ T28 — SHAKE + highball tritato (tranne soda)
 "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio tritato"
 
 ─────────────────────────────────────────
-T29 — SHAKE + FLOAT → old fashioned (es. Penicillin, New York Sour)
+T29 — SHAKE + FLOAT → tumbler basso (es. Penicillin, New York Sour)
 ─────────────────────────────────────────
 "Shakerare tutto con ghiaccio (tranne [ingrediente float])",
-"Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio",
+"Filtrare (double strain) in un tumbler basso riempito di ghiaccio",
 "Versare delicatamente il [ingrediente float] come float per creare uno strato galleggiante"
 
 ─────────────────────────────────────────
@@ -577,15 +577,15 @@ T36 — BUILD → collins con ghiaccio + mescolata
 "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
 
 ─────────────────────────────────────────
-T37 — BUILD → old fashioned con ghiaccio + mescolata
+T37 — BUILD → tumbler basso con ghiaccio + mescolata
 ─────────────────────────────────────────
-"Versare tutto in un bicchiere old fashioned riempito di ghiaccio",
+"Versare tutto in un tumbler basso riempito di ghiaccio",
 "Mescolare delicatamente con un bar spoon"
 
 ─────────────────────────────────────────
-T38 — BUILD → old fashioned con ghiaccio chunk + mescolata
+T38 — BUILD → tumbler basso con ghiaccio chunk + mescolata
 ─────────────────────────────────────────
-"Versare tutto in un bicchiere old fashioned riempito di ghiaccio (meglio se chunk)",
+"Versare tutto in un tumbler basso riempito di ghiaccio (meglio se chunk)",
 "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
 
 ─────────────────────────────────────────
@@ -626,9 +626,9 @@ T44 — BUILD → flute: succo + spumante (es. Bellini, Rossini)
 "Mescolare delicatamente con un barspoon"
 
 ─────────────────────────────────────────
-T45 — BUILD + FLOAT crema → old fashioned (es. White Russian)
+T45 — BUILD + FLOAT crema → tumbler basso (es. White Russian)
 ─────────────────────────────────────────
-"Versare tutto in un bicchiere old fashioned riempito di ghiaccio",
+"Versare tutto in un tumbler basso riempito di ghiaccio",
 "Mescolare delicatamente con un bar spoon dal basso verso l'alto",
 "Infine versare come top la panna fresca semi montata"
 
@@ -808,12 +808,12 @@ T70 — OLD FASHIONED METHOD → mixing glass (es. Old Fashioned)
 "In un mixing glass mettere la zolletta di zucchero e l'angostura",
 "Aggiungere un po' d'acqua e mescolare fino a sciogliere lo zucchero",
 "Aggiungere il whiskey e il ghiaccio e mescolare delicatamente per circa 20 secondi",
-"Filtrare e versare in un bicchiere old fashioned riempito di ghiaccio (meglio se chunk)"
+"Filtrare e versare in un tumbler basso riempito di ghiaccio (meglio se chunk)"
 
 ─────────────────────────────────────────
-T71 — SAZERAC METHOD → old fashioned (es. Sazerac)
+T71 — SAZERAC METHOD → tumbler basso (es. Sazerac)
 ─────────────────────────────────────────
-"In un bicchiere old fashioned metti il ghiaccio, l'assenzio, miscela bene e lasciar riposare",
+"In un tumbler basso metti il ghiaccio, l'assenzio, miscela bene e lasciar riposare",
 "Nel frattempo satura la zolletta di zucchero con il bitters, mettila nel mixing glass, aggiungi l'acqua e sciogli bene lo zucchero. Aggiungi poi il whiskey, il ghiaccio e mescola bene per circo 20 secondi",
 "Infine, elimina il contenuto del bicchiere (ghiaccio e assenzio), riempilo con un cubo di ghiaccio chunk e versa il drink"
 
@@ -873,11 +873,11 @@ T79 — STIR + FLOAT rum blackstrap → tumbler basso ghiaccio tritato
 "Versare il rum blackstrap lasciandolo galleggiare in superficie (float) senza mescolare"
 
 ─────────────────────────────────────────
-T80 — DRY SHAKE (tranne vino) + FLOAT vino rosso → old fashioned chunk
+T80 — DRY SHAKE (tranne vino) + FLOAT vino rosso → tumbler basso chunk
 ─────────────────────────────────────────
 "Shakerare tutti gli ingredienti (tranne vino rosso) senza ghiaccio (dry shake)",
 "Aggiungere ghiaccio e shakerare nuovamente",
-"Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)",
+"Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)",
 "Versare delicatamente il vino rosso sopra il cocktail per creare un effetto galleggiante (float)"
 
 ─────────────────────────────────────────

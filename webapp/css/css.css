@@ -40,7 +40,6 @@ body::before{
 }
 .hdr-inner{
   display:flex;align-items:center;
-  align-self:stretch;
 }
 .hdr-lbl{display:none;}
 .hdr-logo{
@@ -65,7 +64,6 @@ body::before{
 /* Header actions — gruppo icone destra */
 .hdr-actions{
   display:flex;align-items:center;gap:.15rem;
-  align-self:stretch;
 }
 
 /* Icone header generiche */
@@ -410,7 +408,7 @@ body::before{
   left:0;right:0;
   z-index:1049;
   background:var(--surf);
-  border-radius:0 0 20px 20px;
+  border-radius:20px;
   border-bottom:1px solid rgba(255,255,255,.08);
   max-height:70vh;
   display:flex;flex-direction:column;
@@ -437,8 +435,10 @@ body::before{
   background:var(--blue);color:#fff;
   border:none;border-radius:8px;
   font-family:inherit;font-size:.75rem;font-weight:700;
-  padding:.3rem .8rem;cursor:pointer;
+  padding:.4rem 1rem;cursor:pointer;
   -webkit-tap-highlight-color:transparent;
+  min-height:36px;
+  touch-action:manipulation;
 }
 .fsheet-body{
   overflow-y:auto;padding:.6rem 1.2rem 1rem;

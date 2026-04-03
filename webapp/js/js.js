@@ -1108,7 +1108,10 @@ function initF() {
   var fsheetDone   = document.getElementById('fsheet-done');
   var fsheetOvl    = document.getElementById('fsheet-overlay');
   var fsheetFooter = document.getElementById('fsheet-footer');
-  if (fsheetDone) fsheetDone.addEventListener('click', closeFsheet);
+  if (fsheetDone) {
+    fsheetDone.addEventListener('click', closeFsheet);
+    fsheetDone.addEventListener('touchend', function(e){ e.preventDefault(); closeFsheet(); });
+  }
   if (fsheetOvl)  fsheetOvl.addEventListener('click', closeFsheet);
   // Tap + swipe up solo dal footer (fascia del trattino)
   if (fsheetFooter) {
