@@ -35,19 +35,20 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   }
 }
 .hdr-inner{
-  display:flex;flex-direction:column;align-items:flex-start;padding-left:3%;
+  display:flex;align-items:center;padding-left:3%;
 }
 .hdr-lbl{display:none;}
 .hdr-logo{
-  font-size:1.05rem;font-weight:900;letter-spacing:.02em;
+  font-size:1.05rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
   color:var(--amber);
   -webkit-text-fill-color:var(--amber);
-  line-height:1.2;
+  line-height:1;
   display:inline-block;
-  padding:.3rem .7rem;
+  padding:.32rem .75rem;
   border-radius:8px;
   position:relative;
   background:#0a0f1e;
+  white-space:nowrap;
 }
 /* Bordo gradiente continuo con angoli arrotondati */
 .hdr-logo::before{
@@ -310,7 +311,7 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   z-index:97;
   background:var(--surf);
   border-bottom:1px solid var(--brd);
-  box-shadow:0 4px 12px rgba(0,0,0,.35);
+  box-shadow:0 6px 18px rgba(0,0,0,.6);
   padding:.3rem 0 .35rem 5%;
 }
 .hdr-animating .pills-bar{
@@ -523,8 +524,8 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 }
 .rcnt{font-size:1.1rem;font-weight:800;letter-spacing:-.03em;
   color:transparent;
-  -webkit-text-stroke:.6px var(--amber);
-  text-stroke:.6px var(--amber);
+  -webkit-text-stroke:.4px var(--amber);
+  text-stroke:.4px var(--amber);
 }
 .rlbl{font-size:.88rem;color:var(--txt);font-weight:500;margin-left:.25rem}
 .sort-wrap{position:relative;display:flex;align-items:center;}
