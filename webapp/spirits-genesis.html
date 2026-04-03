@@ -1892,10 +1892,13 @@
   // ── BACK TO TOP ───────────────────────────────────────────
   const backBtn = document.getElementById('back-to-top');
   window.addEventListener('scroll', () => {
-    backBtn.classList.toggle('visible', window.scrollY > 400);
+    backBtn.classList.toggle('visible', window.scrollY > 900);
   }, { passive: true });
   backBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    backBtn.style.background = '';
+    backBtn.style.borderColor = '';
+    backBtn.querySelector('svg').style.stroke = '';
   });
 
   // ── SEARCH ────────────────────────────────────────────────
