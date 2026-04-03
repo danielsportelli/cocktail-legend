@@ -40,6 +40,7 @@ body::before{
 }
 .hdr-inner{
   display:flex;align-items:center;
+  height:100%;
 }
 .hdr-lbl{display:none;}
 .hdr-logo{
@@ -64,6 +65,7 @@ body::before{
 /* Header actions — gruppo icone destra */
 .hdr-actions{
   display:flex;align-items:center;gap:.15rem;
+  height:100%;
 }
 
 /* Icone header generiche */
