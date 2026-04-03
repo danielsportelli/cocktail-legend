@@ -262,26 +262,128 @@
       margin-bottom: 1.5rem;
     }
     .sg-hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.5rem;
     }
     .sg-hero-stat {
       display: flex;
       flex-direction: column;
-      gap: 0.2rem;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.9rem 0.5rem;
+      text-align: center;
+      transition: border-color 0.2s;
     }
+    .sg-hero-stat:hover { border-color: rgba(245,158,11,0.3); }
     .sg-hero-stat strong {
-      font-size: 1.1rem;
-      font-weight: 800;
+      font-size: 1.3rem;
+      font-weight: 900;
       color: var(--text);
+      letter-spacing: -0.02em;
     }
     .sg-hero-stat span {
-      font-size: 0.72rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
     }
+    /* ── SEARCH BAR ── */
+    #sg-search-bar {
+      position: fixed;
+      top: var(--header-h);
+      left: 0; right: 0;
+      z-index: 99;
+      background: rgba(10,15,30,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 0.65rem 1rem;
+      display: none;
+      flex-direction: column;
+      backdrop-filter: blur(12px);
+    }
+    #sg-search-bar.open { display: flex; }
+    #sg-search-input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.55rem 0.85rem;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+    }
+    #sg-search-input:focus { border-color: var(--primary-light); }
+    #sg-search-input::placeholder { color: var(--text-muted); }
+    #sg-search-results {
+      max-height: 260px;
+      overflow-y: auto;
+      margin-top: 0.5rem;
+      display: none;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    #sg-search-results.has-results { display: flex; }
+    .sg-search-result {
+      padding: 0.55rem 0.75rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      transition: border-color 0.15s;
+    }
+    .sg-search-result:hover { border-color: var(--primary-light); color: var(--text); }
+    .sg-result-section {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.2rem;
+    }
+    .sg-search-result mark {
+      background: rgba(245,158,11,0.25);
+      color: var(--accent);
+      border-radius: 2px;
+      padding: 0 1px;
+    }
+    .sg-search-empty {
+      padding: 0.55rem 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    /* ── BACK TO TOP ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.25rem;
+      width: 40px; height: 40px;
+      background: rgba(30,41,59,0.75);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 90;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s, transform 0.25s;
+      backdrop-filter: blur(8px);
+      -webkit-tap-highlight-color: transparent;
+    }
+    #back-to-top.visible { opacity: 1; transform: translateY(0); }
+    #back-to-top svg { width: 16px; height: 16px; stroke: #94a3b8; }
+    #back-to-top:hover { background: rgba(37,99,235,0.3); border-color: var(--primary-light); }
+    #back-to-top:hover svg { stroke: var(--primary-light); }
 
     /* ── CHAPTER SECTIONS ── */
     .sg-chapter {
@@ -699,6 +801,9 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="16" y2="12"/><line x1="3" y1="18" x2="12" y2="18"/></svg>
     Indice
   </button>
+  <button id="search-toggle" aria-label="Cerca" style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </button>
   <div style="flex:1;"></div>
   <div class="sg-premium-badge">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -706,6 +811,15 @@
   </div>
 </header>
 
+<!-- Search bar -->
+<div id="sg-search-bar">
+  <input type="text" id="sg-search-input" placeholder="Cerca nel corso… (es. vodka, fermentazione, gin)" autocomplete="off" spellcheck="false"/>
+  <div id="sg-search-results"></div>
+</div>
+<!-- Back to top -->
+<button id="back-to-top" aria-label="Torna in cima">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 <!-- Layout -->
 <div class="sg-layout">
 
@@ -768,7 +882,6 @@
         <div class="sg-hero-stat"><strong>10</strong><span>Capitoli</span></div>
         <div class="sg-hero-stat"><strong>12+</strong><span>Distillati</span></div>
         <div class="sg-hero-stat"><strong>Avanzato</strong><span>Livello</span></div>
-        <div class="sg-hero-stat"><strong>Daniel Sportelli</strong><span>Autore</span></div>
       </div>
     </section>
 
@@ -1060,7 +1173,7 @@
         </ul>
         <div class="sg-infobox">
           <h4>Regolamento (CE) n. 110/2008</h4>
-          <p>Definisce le categorie legali, le modalità di produzione, l'etichettatura e la denominazione dei distillati nell'Unione Europea, stabilendo criteri uniformi validi per tutti gli Stati membri.</p>
+          <p>Definisce le categorie legali, le modalità di produzione, l'etichettatura e la denominazione dei distillati nell'Unione Europea, stabilendo criteri uniformi validi per tutti gli Stati membri. <em>Aggiornato dal Reg. UE 2019/787 — rimane il riferimento principale nella didattica professionale.</em></p>
         </div>
       </div>
 
@@ -1775,6 +1888,115 @@
       if (window.innerWidth <= 768) closeToc();
     });
   });
+
+  // ── BACK TO TOP ───────────────────────────────────────────
+  const backBtn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    backBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  backBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── SEARCH ────────────────────────────────────────────────
+  const searchToggle = document.getElementById('search-toggle');
+  const searchBar = document.getElementById('sg-search-bar');
+  const searchInput = document.getElementById('sg-search-input');
+  const searchResults = document.getElementById('sg-search-results');
+
+  function buildIndex() {
+    const index = [];
+    document.querySelectorAll('.sg-chapter').forEach(chapter => {
+      const chTitle = chapter.querySelector('.chapter-header h2')?.textContent?.trim() || '';
+      chapter.querySelectorAll('.sg-section, .spirit-card, .sg-infobox, .sg-warning').forEach(el => {
+        const secTitle = el.querySelector('h3')?.textContent?.trim() || chTitle;
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        let text = '';
+        let node;
+        while ((node = walker.nextNode())) text += ' ' + node.textContent;
+        text = text.replace(/\s+/g, ' ').trim();
+        if (text.length > 20) index.push({ el, label: secTitle, chLabel: chTitle, text });
+      });
+    });
+    return index;
+  }
+
+  let searchIndex = null;
+
+  function doSearch(query) {
+    if (!query || query.length < 2) {
+      searchResults.innerHTML = '';
+      searchResults.classList.remove('has-results');
+      return;
+    }
+    if (!searchIndex) searchIndex = buildIndex();
+    const q = query.toLowerCase();
+    const re = new RegExp(query.replace(/[.*+?^${}()|[\]\]/g, '\$&'), 'gi');
+    const seen = new Set();
+    const matches = [];
+    searchIndex.forEach(item => {
+      const idx = item.text.toLowerCase().indexOf(q);
+      if (idx === -1) return;
+      const key = item.label + item.chLabel;
+      if (seen.has(key)) return;
+      seen.add(key);
+      const start = Math.max(0, idx - 55);
+      const end = Math.min(item.text.length, idx + query.length + 55);
+      let snippet = (start > 0 ? '…' : '') + item.text.slice(start, end) + (end < item.text.length ? '…' : '');
+      snippet = snippet.replace(re, m => '<mark>' + m + '</mark>');
+      matches.push({ label: item.label, chLabel: item.chLabel, snippet, el: item.el });
+    });
+    if (matches.length === 0) {
+      searchResults.innerHTML = '<div class="sg-search-empty">Nessun risultato per "<strong>' + query + '</strong>"</div>';
+    } else {
+      searchResults.innerHTML = matches.slice(0, 12).map((m, i) =>
+        '<div class="sg-search-result" data-i="' + i + '">' +
+        '<div class="sg-result-section">' + m.chLabel + ' — ' + m.label + '</div>' +
+        '<div>' + m.snippet + '</div></div>'
+      ).join('');
+      matches.slice(0, 12).forEach((m, i) => {
+        searchResults.querySelector('[data-i="' + i + '"]').addEventListener('click', () => {
+          closeSearch();
+          setTimeout(() => m.el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+        });
+      });
+    }
+    searchResults.classList.add('has-results');
+  }
+
+  function openSearch() {
+    searchBar.classList.add('open');
+    searchToggle.querySelector('svg').style.stroke = 'var(--primary-light)';
+    searchToggle.style.borderColor = 'rgba(96,165,250,0.4)';
+    setTimeout(() => searchInput.focus(), 80);
+  }
+  function closeSearch() {
+    searchBar.classList.remove('open');
+    searchInput.value = '';
+    searchResults.innerHTML = '';
+    searchResults.classList.remove('has-results');
+    searchToggle.querySelector('svg').style.stroke = '#94a3b8';
+    searchToggle.style.borderColor = '';
+  }
+
+  searchToggle?.addEventListener('click', () => {
+    searchBar.classList.contains('open') ? closeSearch() : openSearch();
+  });
+
+  let searchTimer;
+  searchInput?.addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => doSearch(searchInput.value.trim()), 200);
+  });
+
+  searchInput?.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+
+  const searchObs = new MutationObserver(() => {
+    const h = searchBar.classList.contains('open') ? searchBar.offsetHeight : 0;
+    document.querySelector('.sg-layout').style.paddingTop = h ? 'calc(var(--header-h) + ' + h + 'px)' : 'var(--header-h)';
+    document.querySelector('.sg-sidebar').style.top = h ? 'calc(var(--header-h) + ' + h + 'px)' : 'var(--header-h)';
+  });
+  searchObs.observe(searchBar, { attributes: true, attributeFilter: ['class'] });
 </script>
 </body>
 </html>
