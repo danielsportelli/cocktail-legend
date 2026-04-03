@@ -378,10 +378,6 @@
     <h1 class="hdr-logo">Cocktail Legend</h1>
   </div>
   <div class="hdr-actions">
-    <!-- Cerca -->
-    <button class="hdr-icon-btn hdr-srch-btn" id="hdr-srch-btn" aria-label="Cerca">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    </button>
     <!-- Preferiti -->
     <button class="hdr-icon-btn hdr-fav-btn" id="hdr-fav-btn" aria-label="Preferiti">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -474,8 +470,11 @@
   <button class="btn-favonly" id="btn-favonly" style="display:none;"></button>
 </div>
 
-<!-- PILLS BAR — sempre visibile sotto rbar -->
+<!-- PILLS BAR — sempre visibile sotto header -->
 <div class="pills-bar" id="pills-bar">
+  <button class="pills-srch-btn" id="pills-srch-btn" aria-label="Cerca">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </button>
   <div class="pills-scroll" id="pills-scroll">
     <button class="fpill" id="fpill-cat" data-key="cat">Categoria</button>
     <button class="fpill" id="fpill-dis" data-key="dis">Ingredienti</button>
@@ -497,55 +496,14 @@
   </div>
   <div class="fsheet-body" id="fsheet-body"></div>
 </div>
-<div class="rbar" id="rbar">
-  <div>
-    <span class="rcnt" id="rcnt">0</span>
-    <span class="rlbl">cocktail trovati</span>
-  </div>
-  <div class="rbar-right">
-    <button class="sort-btn" id="sort-btn" type="button">
-      <span class="sort-btn-ico">⇅</span>
-      <span class="sort-btn-lbl" id="sort-btn-lbl">Ordina per</span>
-      <span class="sort-btn-arr">&#9660;</span>
-    </button>
-    <select id="srt" style="display:none">
-      <option value="az">A → Z</option>
-      <option value="za">Z → A</option>
-      <option value="abv+">ABV crescente</option>
-      <option value="abv-">ABV decrescente</option>
-    </select>
-  </div>
-</div>
-
-<!-- SORT BOTTOM SHEET -->
-<div class="fsheet-overlay" id="ssheet-overlay"></div>
-<div class="fsheet" id="ssheet">
-  <div class="fsheet-handle" id="ssheet-handle"></div>
-  <div class="fsheet-header">
-    <span class="fsheet-title">Ordina per</span>
-    <button class="fsheet-done" id="ssheet-done">Fatto</button>
-  </div>
-  <div class="fsheet-body" id="ssheet-body">
-    <button class="sort-sopt sort-sopt--active" data-val="az" type="button">
-      <span class="sort-sopt-lbl">A → Z</span>
-      <svg class="sort-sopt-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-    </button>
-    <button class="sort-sopt" data-val="za" type="button">
-      <span class="sort-sopt-lbl">Z → A</span>
-      <svg class="sort-sopt-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-    </button>
-    <button class="sort-sopt" data-val="abv+" type="button">
-      <span class="sort-sopt-lbl">ABV crescente</span>
-      <svg class="sort-sopt-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-    </button>
-    <button class="sort-sopt" data-val="abv-" type="button">
-      <span class="sort-sopt-lbl">ABV decrescente</span>
-      <svg class="sort-sopt-ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-    </button>
-  </div>
-</div>
 
 <!-- MAIN -->
+<select id="srt" style="display:none">
+  <option value="az">A → Z</option>
+  <option value="za">Z → A</option>
+  <option value="abv+">ABV crescente</option>
+  <option value="abv-">ABV decrescente</option>
+</select>
 <main class="main">
   <div class="active-tags" id="active-tags" style="margin-bottom:.5rem"></div>
   <div class="grid" id="grid"></div>
@@ -1827,16 +1785,16 @@ function calcABV() {
     }
   }
 
-  // Lente — toggle search+filtri, parte chiusa
-  var srchBtn = document.getElementById('hdr-srch-btn');
+  // Lente pills-bar — toggle search bar sotto pills
+  var pillsSrchBtn = document.getElementById('pills-srch-btn');
   var filterBar = document.getElementById('filter-bar');
   var srchOpen = false;
-  if (srchBtn && filterBar) {
-    srchBtn.addEventListener('click', function() {
+  if (pillsSrchBtn && filterBar) {
+    pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
         filterBar.classList.remove('hidden');
-        srchBtn.classList.add('active');
+        pillsSrchBtn.classList.add('active');
         setTimeout(function(){
           var inp = document.getElementById('srch');
           if (inp) inp.focus();
@@ -1844,7 +1802,9 @@ function calcABV() {
         }, 320);
       } else {
         filterBar.classList.add('hidden');
-        srchBtn.classList.remove('active');
+        pillsSrchBtn.classList.remove('active');
+        var inp = document.getElementById('srch');
+        if (inp && inp.value) { inp.value = ''; Q = ''; render(); }
         if (typeof updateFbH === 'function') updateFbH();
       }
     });

@@ -873,23 +873,19 @@ document.addEventListener('DOMContentLoaded', function(){
 
 var _cachedHdrH = 73;
 var _cachedFbH = 0;
-var _cachedRbarH = 44; // altezza rbar approssimativa
 
 function updateRbarTop(){
   var offset = _hdrHidden ? 0 : _cachedHdrH;
   document.documentElement.style.setProperty('--hdr-offset', offset + 'px');
-  var rbarTop = offset + _cachedFbH;
-  document.documentElement.style.setProperty('--rbar-top', rbarTop + 'px');
-  // pills-bar sta sotto la rbar
-  var rbar = document.getElementById('rbar');
-  if (rbar) _cachedRbarH = rbar.offsetHeight || 44;
-  document.documentElement.style.setProperty('--pills-top', (rbarTop + _cachedRbarH) + 'px');
-  // Aggiorna padding-top main dinamicamente
+  // pills-bar sta direttamente sotto l'header (niente rbar)
   var pillsBar = document.getElementById('pills-bar');
   var pillsH = pillsBar ? pillsBar.offsetHeight : 36;
-  var mainPad = rbarTop + _cachedRbarH + pillsH;
+  document.documentElement.style.setProperty('--pills-bottom', (offset + pillsH) + 'px');
+  // search bar sta sotto pills
+  var fbH = _cachedFbH;
+  // padding-top main
   var main = document.querySelector('.main');
-  if (main) main.style.paddingTop = (mainPad + 12) + 'px';
+  if (main) main.style.paddingTop = (offset + pillsH + fbH + 12) + 'px';
 }
 
 // Inizializza cache hdrH al load
