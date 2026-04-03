@@ -428,7 +428,6 @@ body::before{
   padding:.6rem 1.2rem .5rem;
   border-bottom:1px solid var(--brd);
   flex-shrink:0;
-  order:0;
 }
 .fsheet-title{
   font-size:.7rem;font-weight:800;
@@ -445,7 +444,6 @@ body::before{
   overflow-y:auto;padding:.6rem 1.2rem 1rem;
   flex:1;
   scrollbar-width:none;
-  order:1;
 }
 .fsheet-body::-webkit-scrollbar{display:none;}
 /* footer fsheet — fascia touch per swipe up e tap */
@@ -456,7 +454,6 @@ body::before{
   flex-shrink:0;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
-  order:2;
 }
 /* handle in fondo */
 .fsheet-handle{
