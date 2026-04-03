@@ -1110,8 +1110,12 @@ function initF() {
   if (fsheetHandle) {
     fsheetHandle.addEventListener('click', closeFsheet);
     var _fsY = 0;
-    fsheetHandle.addEventListener('touchstart', function(e){ _fsY = e.touches[0].clientY; }, {passive:true});
+    fsheetHandle.addEventListener('touchstart', function(e){
+      this.style.background = 'rgba(255,255,255,.55)';
+      _fsY = e.touches[0].clientY;
+    }, {passive:true});
     fsheetHandle.addEventListener('touchend', function(e){
+      this.style.background = '';
       if (e.changedTouches[0].clientY - _fsY > 40) closeFsheet();
     }, {passive:true});
   }
@@ -1163,13 +1167,9 @@ function updateBadges() {
         var kk=this.dataset.key, vv=this.dataset.val;
         var idx=AF[kk].indexOf(vv);
         if(idx!==-1) AF[kk].splice(idx,1);
-        // aggiorna checkbox visiva
-        var cbs=document.querySelectorAll("#dd-"+kk+" .ci");
-        cbs.forEach(function(ci){
-          if(ci.dataset.val===vv){ci.classList.remove("on");ci.querySelector(".cb").classList.remove("on");}
-        });
         updateBadges();
         render();
+        if (typeof updatePills === 'function') updatePills();
       });
       tagsEl.appendChild(tag);
     }

@@ -4,7 +4,7 @@
   --bg:#0a0f1e;--surf:#1e293b;--surf2:#334155;
   --txt:#f1f5f9;--txt2:#cbd5e1;--brd:rgba(255,255,255,.08);--dim:#64748b
 }
-:root{--hdr-h:73px;--rbar-h:44px;--pills-h:40px;}
+:root{--hdr-h:73px;--rbar-h:38px;--pills-h:36px;}
 body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;padding-top:calc(var(--hdr-h) + var(--rbar-h) + var(--pills-h));}
 @media (display-mode: standalone) {
   body{padding-top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));}
@@ -284,7 +284,8 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   top:var(--pills-top, calc(var(--hdr-h) + 44px));
   left:0;right:0;
   z-index:97;
-  background:var(--bg);
+  background:var(--surf);
+  border-bottom:1px solid var(--brd);
   padding:.3rem 0 .35rem 5%;
 }
 .hdr-animating .pills-bar{
@@ -387,7 +388,9 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
   flex-shrink:0;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
+  transition:background .2s;
 }
+.fsheet-handle:active{background:rgba(255,255,255,.55);}
 .fsheet-header{
   display:flex;align-items:center;justify-content:space-between;
   padding:.6rem 1.2rem .5rem;
@@ -479,23 +482,23 @@ body{font-family:"Inter",sans-serif;background:var(--bg);color:var(--txt);-webki
 .active-tag .x{font-size:.7rem;opacity:.7}
 
 /* MAIN */
-.main{padding:0 5% 1.25rem}
+.main{padding:.75rem 5% 1.25rem}
 .rbar{
   position:fixed;
   top:var(--rbar-top, var(--hdr-h));
   left:0;right:0;
   z-index:98;
-  background:var(--bg);
+  background:var(--surf);
   display:flex;align-items:center;justify-content:space-between;
-  padding:.45rem 5% .35rem;
+  padding:.4rem 5% .3rem;
   gap:.5rem;
 }
 .hdr-animating .rbar{
   transition:top .28s cubic-bezier(.4,0,.2,1);
 }
-.rcnt{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;
+.rcnt{font-size:1.1rem;font-weight:800;letter-spacing:-.03em;
   color:var(--amber);}
-.rlbl{font-size:.83rem;color:var(--txt2);font-weight:500;margin-left:.3rem}
+.rlbl{font-size:.75rem;color:var(--dim);font-weight:500;margin-left:.25rem}
 .sort-wrap{position:relative;display:flex;align-items:center;}
 /* Custom sort button */
 .sort-btn{

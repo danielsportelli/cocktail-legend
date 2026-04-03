@@ -1904,12 +1904,16 @@ function calcABV() {
     if (ssOvl)  ssOvl.addEventListener('click', closeSsheet);
     if (ssDone) ssDone.addEventListener('click', closeSsheet);
 
-    // Handle: click + swipe down
+    // Handle: click + swipe down + micro-animazione
     if (ssHandle) {
       ssHandle.addEventListener('click', closeSsheet);
+      ssHandle.addEventListener('touchstart', function(){
+        this.style.background = 'rgba(255,255,255,.55)';
+      }, {passive:true});
       var _ssY = 0;
       ssHandle.addEventListener('touchstart', function(e){ _ssY = e.touches[0].clientY; }, {passive:true});
       ssHandle.addEventListener('touchend', function(e){
+        this.style.background = '';
         if (e.changedTouches[0].clientY - _ssY > 40) closeSsheet();
       }, {passive:true});
     }
@@ -1929,24 +1933,6 @@ function calcABV() {
       opt.addEventListener('touchend', function(e){ e.preventDefault(); selectOpt(); });
     });
   })();
-
-  // ── PADDING-TOP DINAMICO ────────────────────────────
-  function updateBodyPadding() {
-    var hdr   = document.querySelector('.hdr');
-    var rbar  = document.getElementById('rbar');
-    var pills = document.getElementById('pills-bar');
-    var main  = document.querySelector('.main');
-    if (!main) return;
-    var hH = hdr   ? hdr.offsetHeight   : 73;
-    var rH = rbar  ? rbar.offsetHeight  : 44;
-    var pH = pills ? pills.offsetHeight : 38;
-    main.style.paddingTop = (hH + rH + pH + 8) + 'px';
-  }
-  window.addEventListener('load', function(){
-    setTimeout(updateBodyPadding, 100);
-    setTimeout(updateBodyPadding, 400);
-  });
-  document.addEventListener('DOMContentLoaded', updateBodyPadding);
 
   // ── PATCH closeAllDrawers — rimuovi active icone header ──
   if (typeof closeAllDrawers === 'function') {
