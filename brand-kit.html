@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Design Kit — Daniel Sportelli</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* ── PALETTE ORIGINALE ── */
+      --primary:        #2563eb;
+      --primary-dark:   #1e40af;
+      --primary-light:  #60a5fa;
+      --accent:         #f59e0b;
+      --accent-dark:    #d97706;
+      --bg:             #0f172a;
+      --surface:        #1e293b;
+      --surface-light:  #334155;
+      --text:           #f1f5f9;
+      --text-muted:     #cbd5e1;
+      --border:         rgba(255,255,255,0.08);
+      --disclaimer:     #64748b;
+    }
+
+    body {
+      background: #0a0f1e;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    /* ─── LAYOUT ─── */
+    .kit-header {
+      padding: 4rem 6% 3rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(245,158,11,0.04));
+    }
+    .kit-header h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+    .kit-header p {
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+    .kit-header .meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .kit-header .meta span { color: var(--primary-light); font-weight: 600; }
+
+    main { padding: 0 6% 6rem; }
+
+    /* ─── SECTION TITLES ─── */
+    .section {
+      padding-top: 4rem;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .section-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      max-width: 560px;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1rem 0 0;
+    }
+
+    /* ─── COLORI ─── */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+    .swatch {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .swatch-color {
+      height: 80px;
+      width: 100%;
+    }
+    .swatch-info {
+      background: var(--surface);
+      padding: 0.75rem;
+    }
+    .swatch-name {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .swatch-var {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-family: 'Courier New', monospace;
+      margin-bottom: 0.2rem;
+    }
+    .swatch-hex {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--primary-light);
+      font-family: 'Courier New', monospace;
+    }
+    .role-badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-top: 0.4rem;
+    }
+    .role-bg    { background: rgba(37,99,235,0.15); color: var(--primary-light); }
+    .role-text  { background: rgba(241,245,249,0.1); color: #f1f5f9; }
+    .role-cta   { background: rgba(245,158,11,0.2); color: var(--accent); }
+    .role-surf  { background: rgba(100,116,139,0.2); color: #94a3b8; }
+
+    /* ─── TIPOGRAFIA ─── */
+    .type-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .type-table th {
+      text-align: left;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      padding: 0 1rem 1rem 0;
+    }
+    .type-table td {
+      padding: 1rem 1rem 1rem 0;
+      border-top: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .type-preview { color: var(--text); }
+    .type-code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: var(--primary-light);
+      background: rgba(37,99,235,0.08);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+    .type-role-cell {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── SPAZIATURE ─── */
+    .spacing-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .spacing-bar-wrap {
+      flex: 1;
+      height: 20px;
+      background: var(--surface);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .spacing-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      border-radius: 4px;
+    }
+    .spacing-label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      color: var(--primary-light);
+      min-width: 55px;
+    }
+    .spacing-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      min-width: 200px;
+    }
+    .spacing-px {
+      font-size: 0.72rem;
+      color: var(--disclaimer);
+      min-width: 50px;
+      text-align: right;
+    }
+
+    /* ─── RAGGI & BORDI ─── */
+    .radius-grid {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .radius-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .radius-box {
+      background: var(--surface);
+      border: 1.5px solid var(--primary);
+      width: 80px;
+      height: 80px;
+    }
+    .radius-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+    }
+    .radius-val {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-family: monospace;
+      text-align: center;
+    }
+
+    /* ─── OMBRE ─── */
+    .shadow-grid {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .shadow-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .shadow-box {
+      width: 120px;
+      height: 80px;
+      background: var(--surface);
+      border-radius: 12px;
+    }
+    .shadow-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .shadow-code {
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      font-family: monospace;
+      max-width: 160px;
+      line-height: 1.5;
+    }
+
+    /* ─── COMPONENTI ─── */
+    .comp-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    .comp-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .comp-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0.75rem 1.5rem;
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid var(--border);
+    }
+    .comp-demo {
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+    /* Buttons */
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 1rem 2.5rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 20px rgba(245,158,11,0.3);
+      cursor: default;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      padding: 1rem 2.5rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 1.5px solid var(--border);
+      display: inline-block;
+      cursor: default;
+    }
+    /* Badge */
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(37,99,235,0.1);
+      border: 1px solid rgba(37,99,235,0.25);
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--primary-light);
+      text-transform: uppercase;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; }
+    .tag-chip {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      background: rgba(37,99,235,0.15);
+      color: var(--primary-light);
+    }
+    .bundle-badge-demo {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--bg);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+    }
+    .verified-badge-demo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px; height: 16px;
+      background: var(--primary-light);
+      border-radius: 50%;
+      color: var(--bg);
+      font-size: 10px;
+      font-weight: 900;
+    }
+    /* Card */
+    .mini-card {
+      background: var(--surface);
+      border: 1px solid var(--primary);
+      border-radius: 16px;
+      overflow: hidden;
+      width: 260px;
+      box-shadow: 0 20px 40px rgba(37,99,235,0.2);
+    }
+    .mini-card-body { padding: 1.5rem; }
+    .mini-card-foot {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .price-demo { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+    /* Stat */
+    .stat-demo {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      min-width: 120px;
+    }
+    .stat-n-demo { font-size: 2.5rem; font-weight: 800; color: var(--accent); line-height: 1; display: block; }
+    .stat-l-demo { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.5rem; display: block; }
+    /* Feat */
+    .feat-demo {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .feat-demo svg { color: var(--accent); width: 1.8rem; height: 1.8rem; margin-bottom: 0.5rem; }
+    .feat-demo p { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); line-height: 1.3; }
+
+    /* ─── GRADIENTI CARTA ─── */
+    .card-grad-grid {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .card-grad {
+      width: 100px;
+      height: 70px;
+      border-radius: 10px;
+      display: flex;
+      align-items: flex-end;
+      padding: 0.4rem 0.6rem;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .card-grad span { font-size: 0.62rem; color: rgba(255,255,255,0.6); font-weight: 600; }
+
+    /* ─── EFFETTI SPECIALI ─── */
+    .effects-grid {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .effect-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .effect-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .effect-desc {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      max-width: 150px;
+      line-height: 1.5;
+    }
+    .gradient-text-demo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glow-avatar {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border: 1px solid rgba(96,165,250,0.3);
+      box-shadow: 0 0 20px rgba(96,165,250,0.6), 0 0 40px rgba(96,165,250,0.3);
+    }
+    .grid-bg-demo {
+      width: 150px; height: 80px;
+      border-radius: 10px;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 15px 15px;
+      background-color: var(--bg);
+      border: 1px solid var(--border);
+    }
+    .radial-bg-demo {
+      width: 150px; height: 80px;
+      border-radius: 10px;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(37,99,235,0.15) 0%, rgba(37,99,235,0.06) 50%, transparent 100%), var(--bg);
+      border: 1px solid var(--border);
+    }
+    .highlight-text {
+      color: var(--primary-light);
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    /* ─── LAYOUT SYSTEM ─── */
+    .layout-row {
+      display: flex;
+      gap: 1rem;
+      align-items: stretch;
+      margin-bottom: 1rem;
+    }
+    .layout-box {
+      background: rgba(37,99,235,0.1);
+      border: 1px dashed rgba(37,99,235,0.3);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.72rem;
+      color: var(--primary-light);
+      font-weight: 600;
+    }
+    .layout-box.full { flex: 1; }
+    .layout-box.aside { width: 240px; }
+
+    /* ─── TOKENS TABLE ─── */
+    .tokens-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    .tokens-table th {
+      text-align: left;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      padding: 0.5rem 1rem 0.75rem 0;
+    }
+    .tokens-table td {
+      padding: 0.6rem 1rem 0.6rem 0;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: middle;
+    }
+    .tokens-table td:nth-child(2) {
+      font-family: monospace;
+      color: var(--primary-light);
+      font-size: 0.78rem;
+    }
+    .tokens-table td:nth-child(3) {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+    .color-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 6px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ─── FOOTER ─── */
+    .kit-footer {
+      margin-top: 5rem;
+      padding: 2.5rem 6%;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .kit-footer strong { color: var(--primary-light); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="kit-header">
+  <h1>Design Kit</h1>
+  <p>Elementi visivi distintivi estratti da <strong style="color:var(--text)">danielsportelli.it</strong></p>
+  <div class="meta">
+    <span>Font: <span>Inter</span></span>
+    <span>Tema: <span>Dark</span></span>
+    <span>Brand: <span>Daniel Sportelli — Barman & Formatore</span></span>
+  </div>
+</div>
+
+<main>
+
+  <!-- ══════════════════════════════════════
+       01 · PALETTE COLORI
+  ══════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">01</div>
+    <div class="section-title">Palette Colori</div>
+    <p class="section-desc">Tutti i token di colore definiti nelle CSS variables del sito, con il loro ruolo semantico.</p>
+    <hr class="divider"/>
+
+    <br/>
+    <div class="palette-grid">
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0f172a;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Background</div>
+          <div class="swatch-var">--bg</div>
+          <div class="swatch-hex">#0f172a</div>
+          <span class="role-badge role-bg">Sfondo pagina</span>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1e293b;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface</div>
+          <div class="swatch-var">--surface</div>
+          <div class="swatch-hex">#1e293b</div>
+          <span class="role-badge role-surf">Card / Pannelli</span>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#334155;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Surface Light</div>
+          <div class="swatch-var">--surface-light</div>
+          <div class="swatch-hex">#334155</div>
+          <span class="role-badge role-surf">Hover / Bordi</span>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#2563eb;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Primary</div>
+          <div class="swatch-var">--primary</div>
+          <div class="swatch-hex">#2563eb</div>
+          <span class="role-badge role-bg">Bordi card / Link</span>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1e40af;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Primary Dark</div>
+          <div class="swatch-var">--primary-dark</div>
+          <div class="swatch-hex">#1e40af</div>
+          <span class="role-badge role-bg">Hover Primary</span>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#60a5fa;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Primary Light</div>
+          <div class="swatch-var">--primary-light</div>
+          <div class="swatch-hex">#60a5fa</div>
+          <span class="role-badge role-bg">Tag / Gradient</span>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f59e0b;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Accent</div>
+          <div class="swatch-var">--accent</div>
+          <div class="swatch-hex">#f59e0b</div>
+          <span class="role-badge role-cta">CTA principale</span>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#d97706;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Accent Dark</div>
+          <div class="swatch-var">--accent-dark</div>
+          <div class="swatch-hex">#d97706</div>
+          <span class="role-badge role-cta">Hover Accent</span>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f1f5f9;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Text</div>
+          <div class="swatch-var">--text</div>
+          <div class="swatch-hex">#f1f5f9</div>
+          <span class="role-badge role-text">Testo principale</span>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#cbd5e1;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Text Muted</div>
+          <div class="swatch-var">--text-muted</div>
+          <div class="swatch-hex">#cbd5e1</div>
+          <span class="role-badge role-text">Secondario</span>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:#64748b;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Disclaimer</div>
+          <div class="swatch-var">(hardcoded)</div>
+          <div class="swatch-hex">#64748b</div>
+          <span class="role-badge role-surf">Footer legale</span>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-color" style="background:rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Border</div>
+          <div class="swatch-var">--border</div>
+          <div class="swatch-hex">rgba(255,255,255,0.08)</div>
+          <span class="role-badge role-surf">Separatori</span>
+        </div>
+      </div>
+
+    </div><!-- /palette-grid -->
+
+    <br/><br/>
+    <!-- Gradienti speciali card corsi -->
+    <p style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:1rem;">Gradienti Radiali Card Corsi (1–6)</p>
+    <div class="card-grad-grid">
+      <div class="card-grad" style="background:radial-gradient(ellipse 120% 100% at top right, rgba(220,100,50,0.5) 0%, rgba(220,100,50,0.2) 40%, #1e293b 75%);"><span>01 Rum</span></div>
+      <div class="card-grad" style="background:radial-gradient(ellipse 120% 100% at top right, rgba(120,50,80,0.5) 0%, rgba(120,50,80,0.2) 40%, #1e293b 75%);"><span>02 Wine</span></div>
+      <div class="card-grad" style="background:radial-gradient(ellipse 120% 100% at top right, rgba(100,180,230,0.5) 0%, rgba(100,180,230,0.2) 40%, #1e293b 75%);"><span>03 Ice</span></div>
+      <div class="card-grad" style="background:radial-gradient(ellipse 120% 100% at top right, rgba(180,80,200,0.5) 0%, rgba(180,80,200,0.2) 40%, #1e293b 75%);"><span>04 Violet</span></div>
+      <div class="card-grad" style="background:radial-gradient(ellipse 120% 100% at top right, rgba(80,200,120,0.5) 0%, rgba(80,200,120,0.2) 40%, #1e293b 75%);"><span>05 Green</span></div>
+      <div class="card-grad" style="background:radial-gradient(ellipse 120% 100% at top right, rgba(200,150,80,0.5) 0%, rgba(200,150,80,0.2) 40%, #1e293b 75%);"><span>06 Gold</span></div>
+    </div>
+  </div><!-- /section 01 -->
+
+
+  <!-- ══════════════════════════════════════
+       02 · TIPOGRAFIA
+  ══════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">02</div>
+    <div class="section-title">Tipografia</div>
+    <p class="section-desc">Un'unica famiglia: <strong style="color:var(--text)">Inter</strong> (Google Fonts) — pesi usati: 300, 400, 500, 600, 700, 800, 900. Line-height base: <code style="color:var(--primary-light)">1.6</code>.</p>
+    <hr class="divider"/>
+
+    <br/>
+    <table class="type-table">
+      <thead>
+        <tr>
+          <th style="width:35%">Preview</th>
+          <th>Stile</th>
+          <th>Proprietà CSS</th>
+          <th>Ruolo</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:clamp(2.5rem,6vw,4rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;">Heading 1</span></td>
+          <td><span class="type-code">H1</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            clamp(2.5rem, 6vw, 4.5rem)<br/>
+            weight: 800<br/>
+            lh: 1.1 &nbsp;|&nbsp; ls: -0.02em
+          </td>
+          <td class="type-role-cell">Titolo hero principale</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-0.02em;line-height:1.2;">Heading 2</span></td>
+          <td><span class="type-code">H2 .s-title</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            clamp(2rem, 4vw, 3rem)<br/>
+            weight: 800<br/>
+            lh: 1.2 &nbsp;|&nbsp; ls: -0.02em
+          </td>
+          <td class="type-role-cell">Titoli sezione</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:2rem;font-weight:800;letter-spacing:-0.01em;">Heading 3</span></td>
+          <td><span class="type-code">.a-name</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            2rem &nbsp;|&nbsp; weight: 800<br/>
+            ls: -0.01em
+          </td>
+          <td class="type-role-cell">Titolo about</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:1.8rem;font-weight:800;letter-spacing:-0.02em;">Bundle Title</span></td>
+          <td><span class="type-code">.bundle-title / .f-name-bold</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            1.8–2rem &nbsp;|&nbsp; weight: 800<br/>
+            ls: -0.02em
+          </td>
+          <td class="type-role-cell">Card bundle, Footer nome</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.01em;">Heading 4</span></td>
+          <td><span class="type-code">H3 divider</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            1.5rem &nbsp;|&nbsp; weight: 700
+          </td>
+          <td class="type-role-cell">Sottotitoli divisori</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:1.25rem;font-weight:700;line-height:1.3;">Card Title</span></td>
+          <td><span class="type-code">.c-title</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            1.25rem &nbsp;|&nbsp; weight: 700<br/>
+            lh: 1.3
+          </td>
+          <td class="type-role-cell">Titolo singola card corso</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:1.15rem;color:var(--text-muted);line-height:1.7;">Hero subtitle body copy</span></td>
+          <td><span class="type-code">.hero-sub</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            1.15rem &nbsp;|&nbsp; weight: 400<br/>
+            lh: 1.7 &nbsp;|&nbsp; color: muted
+          </td>
+          <td class="type-role-cell">Sottotitolo hero</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:1.05rem;color:var(--text-muted);line-height:1.7;">Body copy description text</span></td>
+          <td><span class="type-code">.s-sub / .a-text</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            1.05rem &nbsp;|&nbsp; weight: 400<br/>
+            lh: 1.7–1.8
+          </td>
+          <td class="type-role-cell">Body sezioni</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:1rem;font-weight:700;">Button / CTA text</span></td>
+          <td><span class="type-code">.btn-primary / .btn-ghost</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            1rem &nbsp;|&nbsp; weight: 700
+          </td>
+          <td class="type-role-cell">Etichette pulsanti</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:0.95rem;color:var(--text-muted);">Card description secondary</span></td>
+          <td><span class="type-code">.c-desc</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            0.95rem &nbsp;|&nbsp; weight: 400<br/>
+            lh: 1.6
+          </td>
+          <td class="type-role-cell">Descrizione card</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:0.9rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);">BARMAN & FORMATORE</span></td>
+          <td><span class="type-code">.a-role / .nav-sub</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            0.75–0.9rem &nbsp;|&nbsp; weight: 500–600<br/>
+            uppercase &nbsp;|&nbsp; ls: 0.02–0.05em
+          </td>
+          <td class="type-role-cell">Sottotitoli ruolo</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:2.5rem;font-weight:800;color:var(--accent);">97%</span></td>
+          <td><span class="type-code">.stat-n / .price / .bundle-price-value</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            1.5–2.5rem &nbsp;|&nbsp; weight: 800<br/>
+            color: accent
+          </td>
+          <td class="type-role-cell">Numeri statistiche e prezzi</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);">LABEL SEZIONE</span></td>
+          <td><span class="type-code">.s-label</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            0.85rem &nbsp;|&nbsp; weight: 700<br/>
+            uppercase &nbsp;|&nbsp; ls: 0.1em
+          </td>
+          <td class="type-role-cell">Eyebrow label sezioni</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:0.8rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--primary-light);">● BARMAN PROFESSIONISTA</span></td>
+          <td><span class="type-code">.badge (pill)</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            0.8rem &nbsp;|&nbsp; weight: 600<br/>
+            uppercase &nbsp;|&nbsp; ls: 0.05em
+          </td>
+          <td class="type-role-cell">Badge hero</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--primary-light);">TAG CORSO</span></td>
+          <td><span class="type-code">.tag / .bundle-badge</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            0.7–0.75rem &nbsp;|&nbsp; weight: 700–800<br/>
+            uppercase &nbsp;|&nbsp; ls: 0.08em
+          </td>
+          <td class="type-role-cell">Tag / chip corsi</td>
+        </tr>
+
+        <tr>
+          <td class="type-preview"><span style="font-size:0.6rem;font-weight:300;color:#64748b;">Testo disclaimer legale piccolo</span></td>
+          <td><span class="type-code">.f-disclaimer</span></td>
+          <td style="font-size:0.75rem; color:var(--text-muted); font-family:monospace; line-height:1.8;">
+            0.6rem &nbsp;|&nbsp; weight: 300<br/>
+            color: #64748b
+          </td>
+          <td class="type-role-cell">Footer disclaimer</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div><!-- /section 02 -->
+
+
+  <!-- ══════════════════════════════════════
+       03 · SPAZIATURE
+  ══════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">03</div>
+    <div class="section-title">Spaziature</div>
+    <p class="section-desc">Il sito usa una scala basata su <strong style="color:var(--text)">rem</strong> (1rem = 16px). Nessun design token esplicito — ecco i valori ricorrenti estratti dal CSS.</p>
+    <hr class="divider"/>
+
+    <br/>
+    <div class="spacing-grid">
+      <div class="spacing-row"><div class="spacing-label">0.3rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:2%"></div></div><div class="spacing-px">≈ 5px</div><div class="spacing-desc">Gap micro (badge-dot, letterspacing offset)</div></div>
+      <div class="spacing-row"><div class="spacing-label">0.4rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:3%"></div></div><div class="spacing-px">≈ 6px</div><div class="spacing-desc">Badge padding v, gap icone piccole</div></div>
+      <div class="spacing-row"><div class="spacing-label">0.5rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4%"></div></div><div class="spacing-px">≈ 8px</div><div class="spacing-desc">Stat label margin-top, badge padding v</div></div>
+      <div class="spacing-row"><div class="spacing-label">0.6rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:5%"></div></div><div class="spacing-px">≈ 10px</div><div class="spacing-desc">Gap badge interni, nav-text gap</div></div>
+      <div class="spacing-row"><div class="spacing-label">0.75rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:6%"></div></div><div class="spacing-px">≈ 12px</div><div class="spacing-desc">Gap c-meta, card-body padding bottom</div></div>
+      <div class="spacing-row"><div class="spacing-label">1rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8%"></div></div><div class="spacing-px">≈ 16px</div><div class="spacing-desc">Nav-logo gap, btn gap, base unit</div></div>
+      <div class="spacing-row"><div class="spacing-label">1.2rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:10%"></div></div><div class="spacing-px">≈ 19px</div><div class="spacing-desc">Badge padding h, feat padding</div></div>
+      <div class="spacing-row"><div class="spacing-label">1.5rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:12%"></div></div><div class="spacing-px">≈ 24px</div><div class="spacing-desc">Hero-stats gap, bundle-badge mb, card-foot padding</div></div>
+      <div class="spacing-row"><div class="spacing-label">2rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16%"></div></div><div class="spacing-px">≈ 32px</div><div class="spacing-desc">Card-body padding, section gap standard</div></div>
+      <div class="spacing-row"><div class="spacing-label">2.5rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:20%"></div></div><div class="spacing-px">≈ 40px</div><div class="spacing-desc">Btn padding h, hero-sub mb, f-subtitle mb</div></div>
+      <div class="spacing-row"><div class="spacing-label">3rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24%"></div></div><div class="spacing-px">≈ 48px</div><div class="spacing-desc">Bundle padding, footer padding top</div></div>
+      <div class="spacing-row"><div class="spacing-label">4rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32%"></div></div><div class="spacing-px">≈ 64px</div><div class="spacing-desc">Section-header mb, section padding top</div></div>
+      <div class="spacing-row"><div class="spacing-label">6rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:48%"></div></div><div class="spacing-px">≈ 96px</div><div class="spacing-desc">Hero padding v, section padding</div></div>
+      <div class="spacing-row"><div class="spacing-label">8rem</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:64%"></div></div><div class="spacing-px">≈ 128px</div><div class="spacing-desc">Section padding bottom principale</div></div>
+      <div class="spacing-row"><div class="spacing-label">6% (h)</div><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:6%; background: linear-gradient(90deg, var(--accent-dark), var(--accent));"></div></div><div class="spacing-px">variabile</div><div class="spacing-desc">Padding orizzontale globale pagina (gutter)</div></div>
+    </div>
+  </div><!-- /section 03 -->
+
+
+  <!-- ══════════════════════════════════════
+       04 · RAGGI & BORDI
+  ══════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">04</div>
+    <div class="section-title">Border Radius & Bordi</div>
+    <p class="section-desc">Valori usati nel sito per arrotondare gli angoli. Nessun token — hardcoded nel CSS.</p>
+    <hr class="divider"/>
+
+    <br/>
+    <div class="radius-grid">
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:4px;"></div>
+        <div class="radius-name">4px</div>
+        <div class="radius-val">code snippet, role</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:6px;"></div>
+        <div class="radius-name">6px</div>
+        <div class="radius-val">.tag / .bundle-badge</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:10px;"></div>
+        <div class="radius-name">10px</div>
+        <div class="radius-val">.btn-primary / ghost</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:12px;"></div>
+        <div class="radius-name">12px</div>
+        <div class="radius-val">.stat / .feat</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:16px;"></div>
+        <div class="radius-name">16px</div>
+        <div class="radius-val">.card (corso)</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:20px;"></div>
+        <div class="radius-name">20px</div>
+        <div class="radius-val">.bundle-card</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:999px; width:80px; height:36px;"></div>
+        <div class="radius-name">999px</div>
+        <div class="radius-val">.badge (pill)</div>
+      </div>
+      <div class="radius-item">
+        <div class="radius-box" style="border-radius:50%; width:80px;"></div>
+        <div class="radius-name">50%</div>
+        <div class="radius-val">Avatar / foto</div>
+      </div>
+    </div>
+
+    <br/><br/>
+    <p style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:1rem;">Stili Bordo</p>
+    <table class="tokens-table" style="max-width:600px;">
+      <thead><tr><th>Elemento</th><th>Valore</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Card corso</td><td>1px solid #2563eb</td><td>Sempre visibile, blu primario</td></tr>
+        <tr><td>Bundle card</td><td>2px solid #f59e0b</td><td>Accento dorato, più spesso</td></tr>
+        <tr><td>Stat / Feat</td><td>1px solid rgba(255,255,255,0.08)</td><td>--border standard</td></tr>
+        <tr><td>Btn ghost</td><td>1.5px solid rgba(255,255,255,0.08)</td><td>Leggero, trasparente</td></tr>
+        <tr><td>Badge pill</td><td>1px solid rgba(37,99,235,0.25)</td><td>Primary trasparente</td></tr>
+        <tr><td>Nav photo</td><td>1px solid rgba(96,165,250,0.3)</td><td>Primary-light trasparente</td></tr>
+        <tr><td>Avatar about</td><td>4px solid rgba(37,99,235,0.3)</td><td>Spesso, primary</td></tr>
+        <tr><td>Separatori</td><td>1px solid var(--border)</td><td>Card-foot, footer</td></tr>
+      </tbody>
+    </table>
+  </div><!-- /section 04 -->
+
+
+  <!-- ══════════════════════════════════════
+       05 · OMBRE & GLOW
+  ══════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">05</div>
+    <div class="section-title">Ombre & Glow</div>
+    <p class="section-desc">Le ombre usate nel sito sono sempre colorate (non grigie) — creano profondità e rimandano alla palette brand.</p>
+    <hr class="divider"/>
+
+    <br/>
+    <div class="shadow-grid">
+      <div class="shadow-item">
+        <div class="shadow-box" style="box-shadow: 0 4px 20px rgba(245,158,11,0.3);"></div>
+        <div class="shadow-name">CTA Default</div>
+        <div class="shadow-code">0 4px 20px rgba(245,158,11,0.3)</div>
+      </div>
+      <div class="shadow-item">
+        <div class="shadow-box" style="box-shadow: 0 8px 30px rgba(245,158,11,0.4);"></div>
+        <div class="shadow-name">CTA Hover</div>
+        <div class="shadow-code">0 8px 30px rgba(245,158,11,0.4)</div>
+      </div>
+      <div class="shadow-item">
+        <div class="shadow-box" style="box-shadow: 0 20px 40px rgba(37,99,235,0.2);"></div>
+        <div class="shadow-name">Card Default</div>
+        <div class="shadow-code">0 20px 40px rgba(37,99,235,0.2)</div>
+      </div>
+      <div class="shadow-item">
+        <div class="shadow-box" style="box-shadow: 0 25px 50px rgba(37,99,235,0.3);"></div>
+        <div class="shadow-name">Card Hover</div>
+        <div class="shadow-code">0 25px 50px rgba(37,99,235,0.3)</div>
+      </div>
+      <div class="shadow-item">
+        <div class="shadow-box" style="box-shadow: 0 0 20px rgba(96,165,250,0.6), 0 0 40px rgba(96,165,250,0.3); border-radius:50%; width:80px; height:80px; background:linear-gradient(135deg,var(--primary),var(--primary-light));"></div>
+        <div class="shadow-name">Avatar Glow</div>
+        <div class="shadow-code">0 0 20px rgba(96,165,250,0.6),<br/>0 0 40px rgba(96,165,250,0.3)</div>
+      </div>
+    </div>
+  </div><!-- /section 05 -->
+
+
+  <!-- ══════════════════════════════════════
+       06 · COMPONENTI
+  ══════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">06</div>
+    <div class="section-title">Componenti UI</div>
+    <p class="section-desc">I componenti riutilizzabili del sito con i loro stili esatti.</p>
+    <hr class="divider"/>
+
+    <br/>
+    <div class="comp-grid">
+
+      <!-- BUTTONS -->
+      <div class="comp-block">
+        <div class="comp-label">Pulsanti</div>
+        <div class="comp-demo">
+          <a class="btn-primary">Scopri i Corsi →</a>
+          <a class="btn-ghost">Chi sono</a>
+        </div>
+      </div>
+
+      <!-- BADGES & TAGS -->
+      <div class="comp-block">
+        <div class="comp-label">Badge, Tag, Chip</div>
+        <div class="comp-demo">
+          <span class="badge-pill"><span class="badge-dot"></span>Barman Professionista</span>
+          <span class="tag-chip">Spirits</span>
+          <span class="bundle-badge-demo">Bundle Completo</span>
+          <span style="display:inline-flex;align-items:center;gap:0.5rem;font-size:0.9rem;font-weight:600;color:var(--text);">Daniel <span class="verified-badge-demo">✓</span></span>
+        </div>
+      </div>
+
+      <!-- CARD CORSO -->
+      <div class="comp-block">
+        <div class="comp-label">Card Corso</div>
+        <div class="comp-demo">
+          <div class="mini-card">
+            <div class="mini-card-body">
+              <span class="tag-chip">Spirits</span>
+              <p style="font-size:1.1rem;font-weight:700;color:var(--text);margin:0.75rem 0 0.5rem;line-height:1.3;">Rum: Dal Campo alla Bottiglia</p>
+              <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.6;">Esplora l'universo del rum con tecniche professionali.</p>
+            </div>
+            <div class="mini-card-foot">
+              <span class="price-demo">€49 <small style="font-size:0.7rem;color:var(--text-muted);font-weight:400;">iva incl.</small></span>
+              <a style="font-size:0.85rem;font-weight:700;color:var(--accent);text-decoration:none;">Scopri →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAT BOX -->
+      <div class="comp-block">
+        <div class="comp-label">Stat Box</div>
+        <div class="comp-demo">
+          <div class="stat-demo">
+            <span class="stat-n-demo">15+</span>
+            <span class="stat-l-demo">Anni di Esperienza</span>
+          </div>
+          <div class="stat-demo">
+            <span class="stat-n-demo">97%</span>
+            <span class="stat-l-demo">Soddisfazione</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEAT BOX -->
+      <div class="comp-block">
+        <div class="comp-label">Feature Box (2×2 grid)</div>
+        <div class="comp-demo">
+          <div class="feat-demo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <p>Accesso<br/>a Vita</p>
+          </div>
+          <div class="feat-demo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <p>Rilascio<br/>Certificato</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /comp-grid -->
+  </div><!-- /section 06 -->
+
+
+  <!-- ══════════════════════════════════════
+       07 · EFFETTI SPECIALI
+  ══════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">07</div>
+    <div class="section-title">Effetti Speciali & Texture</div>
+    <p class="section-desc">Tecniche visive usate per dare profondità e carattere alle sezioni.</p>
+    <hr class="divider"/>
+
+    <br/>
+    <div class="effects-grid">
+
+      <div class="effect-item">
+        <div class="gradient-text-demo">Testo Gradient</div>
+        <div class="effect-name">Gradient Text (H1 highlight)</div>
+        <div class="effect-desc">linear-gradient(135deg, #60a5fa → #f59e0b) su clip testo</div>
+      </div>
+
+      <div class="effect-item">
+        <div class="highlight-text">Testo Highlight</div>
+        <div class="effect-name">Highlight H2 sezione</div>
+        <div class="effect-desc">color: var(--primary-light) su span .highlight</div>
+      </div>
+
+      <div class="effect-item">
+        <div class="glow-avatar"></div>
+        <div class="effect-name">Glow Avatar (nav)</div>
+        <div class="effect-desc">Doppio box-shadow blu su foto circolare</div>
+      </div>
+
+      <div class="effect-item">
+        <div class="grid-bg-demo"></div>
+        <div class="effect-name">Grid Texture (hero)</div>
+        <div class="effect-desc">background-image linee bianche 2% su 60×60px grid con mask fade</div>
+      </div>
+
+      <div class="effect-item">
+        <div class="radial-bg-demo"></div>
+        <div class="effect-name">Radial Glow (hero bg)</div>
+        <div class="effect-desc">radial-gradient ellisse blu 8% opacity sopra --bg</div>
+      </div>
+
+      <div class="effect-item">
+        <div style="background:linear-gradient(to bottom, rgba(15,23,42,1) 0%, rgba(15,23,42,0.7) 60%, transparent 100%); backdrop-filter:blur(20px); width:120px; height:80px; border-radius:10px; border: 1px solid var(--border);"></div>
+        <div class="effect-name">Nav Fade + Blur</div>
+        <div class="effect-desc">gradient-to-bottom su nav + backdrop-filter: blur(20px)</div>
+      </div>
+
+    </div>
+  </div><!-- /section 07 -->
+
+
+  <!-- ══════════════════════════════════════
+       08 · ANIMAZIONI & TRANSIZIONI
+  ══════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">08</div>
+    <div class="section-title">Animazioni & Transizioni</div>
+    <p class="section-desc">Il sito usa transizioni CSS leggere e uniformi su tutti gli elementi interattivi.</p>
+    <hr class="divider"/>
+
+    <br/>
+    <table class="tokens-table" style="max-width:700px;">
+      <thead><tr><th>Elemento</th><th>Transizione</th><th>Effetto hover</th></tr></thead>
+      <tbody>
+        <tr><td>Tutti (base)</td><td>transition: all 0.3s</td><td>Standard</td></tr>
+        <tr><td>.btn-primary / .bundle-cta</td><td>all 0.3s</td><td>translateY(-2px) + shadow più grande</td></tr>
+        <tr><td>.btn-ghost</td><td>all 0.3s</td><td>border-color → primary, color → primary-light</td></tr>
+        <tr><td>.card</td><td>all 0.3s</td><td>translateY(-5px) + shadow più intensa</td></tr>
+        <tr><td>.stat / .feat</td><td>all 0.3s</td><td>translateY(-2px) + border-color → primary</td></tr>
+        <tr><td>.c-link</td><td>gap 0.2s</td><td>gap 0.4rem → 0.8rem (→ si sposta)</td></tr>
+        <tr><td>Scroll behavior</td><td>smooth</td><td>Navigazione anchor fluida</td></tr>
+      </tbody>
+    </table>
+  </div><!-- /section 08 -->
+
+
+  <!-- ══════════════════════════════════════
+       09 · LAYOUT SYSTEM
+  ══════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">09</div>
+    <div class="section-title">Layout & Grid</div>
+    <p class="section-desc">Il sito usa Flexbox e CSS Grid nativi, senza framework. Breakpoint mobile: 768px.</p>
+    <hr class="divider"/>
+
+    <br/>
+    <div class="layout-row">
+      <div class="layout-box full">Pagina: padding 0 6% (gutter orizzontale fisso)</div>
+    </div>
+    <div class="layout-row">
+      <div class="layout-box full" style="background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.3);color:var(--accent);">Hero: flex align-center | max-width content 720px | min-height 90vh</div>
+    </div>
+    <div class="layout-row">
+      <div class="layout-box full" style="font-size:0.72rem;">Corsi: grid auto-fill minmax(320px, 1fr) | gap: 2rem</div>
+    </div>
+    <div class="layout-row">
+      <div class="layout-box" style="flex:1;font-size:0.72rem;">Feat grid: repeat(2, 1fr) | max-width 600px centrato | gap 1.2rem</div>
+      <div class="layout-box" style="flex:1;font-size:0.72rem;">About: flex column centrato | max-width 700px</div>
+    </div>
+    <div class="layout-row">
+      <div class="layout-box full" style="background:rgba(100,116,139,0.1);border-color:rgba(100,116,139,0.2);color:#94a3b8;font-size:0.72rem;">Hero Stats: flex gap 1.5rem | mt 7.5rem | ogni stat flex:1</div>
+    </div>
+
+    <br/>
+    <table class="tokens-table" style="max-width:600px;">
+      <thead><tr><th>Max-width usati</th><th>Dove</th></tr></thead>
+      <tbody>
+        <tr><td>900px</td><td>Footer disclaimer</td></tr>
+        <tr><td>720px</td><td>Hero content</td></tr>
+        <tr><td>700px</td><td>About section</td></tr>
+        <tr><td>600px</td><td>Section-header, bundle-desc, Feat grid, f-copy</td></tr>
+        <tr><td>560px</td><td>Hero subtitle (.hero-sub)</td></tr>
+      </tbody>
+    </table>
+  </div><!-- /section 09 -->
+
+
+  <!-- ══════════════════════════════════════
+       10 · RIEPILOGO TOKEN CSS
+  ══════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">10</div>
+    <div class="section-title">CSS Variables — Copia & Incolla</div>
+    <p class="section-desc">Blocco :root completo pronto per essere riutilizzato in qualsiasi progetto.</p>
+    <hr class="divider"/>
+
+    <br/>
+    <pre style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;font-family:'Courier New',monospace;font-size:0.8rem;color:var(--primary-light);line-height:1.9;overflow-x:auto;"><span style="color:var(--text-muted);">:root {</span>
+  <span style="color:#94a3b8;">/* Colore primario (blu) */</span>
+  --primary:        #2563eb;
+  --primary-dark:   #1e40af;
+  --primary-light:  #60a5fa;
+
+  <span style="color:#94a3b8;">/* Colore accento (ambra / dorato) — CTA */</span>
+  --accent:         #f59e0b;
+  --accent-dark:    #d97706;
+
+  <span style="color:#94a3b8;">/* Sfondi */</span>
+  --bg:             #0f172a;
+  --surface:        #1e293b;
+  --surface-light:  #334155;
+
+  <span style="color:#94a3b8;">/* Testi */</span>
+  --text:           #f1f5f9;
+  --text-muted:     #cbd5e1;
+
+  <span style="color:#94a3b8;">/* Bordi */</span>
+  --border:         rgba(255, 255, 255, 0.08);
+<span style="color:var(--text-muted);">}</span>
+
+<span style="color:#94a3b8;">/* Font */</span>
+<span style="color:var(--text-muted);">body {</span>
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+<span style="color:var(--text-muted);">}</span></pre>
+  </div><!-- /section 10 -->
+
+</main>
+
+<div class="kit-footer">
+  Design kit estratto da <strong>danielsportelli.it</strong> — Generato automaticamente da analisi CSS sorgente
+</div>
+
+</body>
+</html>
