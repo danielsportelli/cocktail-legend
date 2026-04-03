@@ -411,18 +411,8 @@
       </div>
       <span class="bsheet-ai-cta">Apri →</span>
     </button>
-    <!-- Separatore -->
-    <div class="bsheet-ai-sep"></div>
-    <!-- Account -->
-    <button class="bsheet-item" id="bsheet-acc-btn" onclick="closeNavMenu();openDrawer('acc')">
-      <div class="bsheet-item-ico">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      </div>
-      <span class="bsheet-item-lbl">Account</span>
-      <svg class="bsheet-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
     <div class="bsheet-divider"></div>
-    <button class="bsheet-item" onclick="closeNavMenu();openDrawer('calc')">
+    <button class="bsheet-item" onclick="closeNavMenu();openDrawer('calc')"
       <div class="bsheet-item-ico">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><rect x="7" y="5" width="10" height="4" rx="1"/><circle cx="8" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="8" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1" fill="currentColor" stroke="none"/></svg>
       </div>
@@ -1454,6 +1444,9 @@ function openDrawer(id) {
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
   CURRENT_DRAWER = id;
+  // Omino header: amber se drawer acc aperto
+  var hdrAcc = document.getElementById('hdr-acc-btn');
+  if (hdrAcc) hdrAcc.classList.toggle('active', id === 'acc');
   var creabtn = document.getElementById('tbtn-ai');
   if(creabtn){
     if(id === 'ai'){ creabtn.classList.remove('dim'); }
@@ -1466,6 +1459,9 @@ function closeAllDrawers(silent) {
   document.getElementById('drawer-overlay').classList.remove('show');
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   if (!silent) CURRENT_DRAWER = null;
+  // Omino header: torna bianco
+  var hdrAcc = document.getElementById('hdr-acc-btn');
+  if (hdrAcc) hdrAcc.classList.remove('active');
   if (!silent){
     var creabtn = document.getElementById('tbtn-ai');
     if(creabtn) creabtn.classList.remove('dim');
