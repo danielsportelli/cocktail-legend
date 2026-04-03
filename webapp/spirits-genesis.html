@@ -1931,7 +1931,8 @@
     }
     if (!searchIndex) searchIndex = buildIndex();
     const q = query.toLowerCase();
-    const re = new RegExp(query.replace(/[.*+?^${}()|[\]\]/g, '\$&'), 'gi');
+    const esc = query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    const re = new RegExp(esc, 'gi');
     const seen = new Set();
     const matches = [];
     searchIndex.forEach(item => {
