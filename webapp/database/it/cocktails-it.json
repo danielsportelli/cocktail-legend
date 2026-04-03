@@ -445,11 +445,11 @@
     ],
     "prep": [
       "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
     ],
     "storia": "Il Bourbon Special è un cocktail americano della tradizione dei bourbon drinks arricchiti con agrumi, categoria diffusa nei bar del Sud degli Stati Uniti a partire dagli anni Quaranta e Cinquanta. Il Kentucky, cuore della produzione di bourbon, aveva sviluppato una cultura del bere locale in cui il distillato di mais veniva esaltato con ingredienti regionali — arance della Florida, spezie caraibiche arrivate via New Orleans. Non è attribuito a un inventore preciso, appartiene al repertorio informale dei bar americani del dopoguerra che cercavano di valorizzare il bourbon in chiave più accessibile rispetto ai classici stirred drinks.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bourbon_special.webp",
     "varianti": [],
     "iba": false
@@ -1250,11 +1250,11 @@
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
     ],
     "storia": "Il Loaded Pistol appartiene alla tradizione dei bourbon drinks speziati e strutturati nati nella scena dei cocktail bar americani degli anni Duemila, quando il movimento neo-speakeasy stava rivalutando i classici stirred a base di whisky. Il nome evoca il carattere deciso e senza compromessi del drink — un pistol carico, pronto a esplodere. L'abbinamento tra bourbon single barrel e Bénédictine richiama la struttura del Bobby Burns scozzese e del Monte Carlo, ma qui applicata al whisky americano con una forza e una direttezza tipicamente statunitensi. Non è attribuito a un inventore documentato con precisione, appartiene al repertorio dei drink da bar americani del Sud.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/loaded_pistol.webp",
     "varianti": [],
     "iba": false
@@ -1507,11 +1507,11 @@
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
     ],
     "storia": "L'Oaxaca Old Fashioned nasce nel 2007 al Death & Co di New York, creato da Phil Ward — uno dei bartender fondatori del locale che sarebbe diventato il centro della mixology americana contemporanea. Ward voleva creare un Old Fashioned che esprimesse l'anima del Messico invece di quella del Kentucky, sostituendo bourbon e zucchero con tequila reposado, mezcal e néctar di agave. Il risultato trasformò radicalmente il panorama dei cocktail americani: contribuì a portare il mezcal nell'attenzione internazionale anni prima che diventasse un fenomeno di massa, e dimostrò che la struttura di un classico come l'Old Fashioned poteva essere applicata a qualsiasi distillato di qualità. Il nome omaggia Oaxaca, lo stato messicano che è il cuore della produzione di mezcal artigianale.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/oaxaca_old_fashioned.webp",
     "varianti": [],
     "iba": false
@@ -2374,11 +2374,11 @@
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
     ],
     "storia": "Il White Negroni nasce nel 2001, attribuito al bartender britannico Wayne Collins durante un viaggio a Bordeaux per un evento dedicato agli aperitivi francesi. Cercando un modo per omaggiare il Negroni usando prodotti locali, Collins sostituì alcuni elementi della ricetta originale con Lillet Blanc e Suze — un aperitivo a base di genziana tipicamente francese — ottenendo un drink dalla struttura simile al classico ma dal colore completamente diverso. La coincidenza geografica non è casuale: la Francia è il paese di origine di molti degli ingredienti che definiscono il White Negroni, e il drink porta con sé quella doppia identità anglo-italiana reinterpretata attraverso una lente francese. In pochi anni dalla creazione il White Negroni era già presente nelle carte dei cocktail bar europei e americani, diventando uno dei twist più studiati e replicati del repertorio contemporaneo.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/white_negroni.webp",
     "varianti": [],
     "iba": false
@@ -2412,7 +2412,7 @@
       ]
     ],
     "prep": [
-      "Versare tutto in un bicchiere old fashioned riempito di ghiaccio",
+      "Versare tutto in un tumbler basso riempito di ghiaccio",
       "Mescolare delicatamente con un bar spoon dal basso verso l'alto",
       "Infine versare come top la panna fresca semi montata"
     ],
@@ -4064,11 +4064,11 @@
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
     ],
     "storia": "Il Rusty Nail compare nei ricettari americani a partire dagli anni Cinquanta, ma la sua vera popolarità esplose negli anni Sessanta grazie al Rat Pack — il gruppo di entertainer capitanato da Frank Sinatra che includeva Dean Martin, Sammy Davis Jr., Peter Lawford e Joey Bishop. Il Rusty Nail era uno dei drink preferiti di quel circolo, e la sua associazione con Sinatra e compagni lo trasformò in un simbolo di mascolinità elegante e stile hollywoodiano. Il Drambuie — il liquore scozzese a base di whisky, miele ed erbe secondo una ricetta attribuita a una formula giacobita del XVIII secolo — era già un prodotto di nicchia apprezzato in Scozia, ma fu il Rusty Nail a portarlo alla notorietà internazionale. L'International Bartenders Association lo include tra i classici della categoria Contemporary Classics.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rusty_nail.webp",
     "varianti": [],
     "iba": true
@@ -4195,13 +4195,13 @@
       ]
     ],
     "prep": [
-      "In un bicchiere old fashioned metti il ghiaccio, l'assenzio, miscela bene e lasciar riposare",
+      "In un tumbler basso metti il ghiaccio, l'assenzio, miscela bene e lasciar riposare",
       "Nel frattempo satura la zolletta di zucchero con il bitters, mettila nel mixing glass, aggiungi l'acqua e sciogli bene lo zucchero. Aggiungi poi il whiskey, il ghiaccio e mescola bene per circo 20 secondi",
       "Infine, elimina il contenuto del bicchiere (ghiaccio e assenzio), riempilo con un cubo di ghiaccio chunk e versa il drink"
     ],
     "storia": "Il Sazerac è considerato il cocktail più antico degli Stati Uniti e nel 2008 è stato ufficialmente designato dal parlamento della Louisiana come cocktail ufficiale della città di New Orleans. Le origini risalgono agli anni 1830-1840, quando Antoine Amédée Peychaud — farmacista creolo di origini haitiane — serviva cognac aromatizzato con i suoi bitters medicinali nello studio di farmacia su Royal Street nel French Quarter. Il nome deriva dal cognac Sazerac-de-Forge et Fils, il marchio preferito da Peychaud. Quando una grave crisi della fillossera distrusse i vigneti europei negli anni 1870-1880 rendendo il cognac introvabile, la ricetta fu adattata con il rye whiskey americano — un cambiamento che definì il drink nella forma conosciuta oggi. L'assenzio, usato per aromatizzare il bicchiere, fu sostituito dal Herbsaint dopo il bando dell'assenzio del 1912.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/sazerac.webp",
     "varianti": [],
     "iba": true
@@ -4624,12 +4624,12 @@
       ]
     ],
     "prep": [
-      "Versare tutto in un bicchiere old fashioned riempito di ghiaccio",
+      "Versare tutto in un tumbler basso riempito di ghiaccio",
       "Mescolare delicatamente con un bar spoon"
     ],
     "storia": "L’Americano incarna lo spirito dell’aperitivo italiano, nato nel 1860 quando Gaspare Campari servì un drink chiamato Milano-Torino nel suo bar di Milano. Il nome derivava dall’origine degli ingredienti principali: Milano e Torino. Divenne popolare tra i viaggiatori americani negli anni ’20-’30 durante il Proibizionismo, tanto da essere ribattezzato “Americano” in loro onore. È considerato il precursore del Negroni, creato successivamente con l’aggiunta di gin. James Bond lo ordina in Casino Royale di Ian Fleming, definendolo perfetto per calde serate estive. Tra i primi cocktail inclusi nella lista ufficiale dell’IBA, consolidò il suo status di classico mondiale. La bassa gradazione alcolica lo rende ideale come aperitivo, perfetto per stuzzicare l’appetito senza sovrastarlo, celebrato durante l’International Vermouth Day.",
     "frizzante": true,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/americano.webp",
     "varianti": [],
     "iba": true
@@ -5185,11 +5185,11 @@
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
     ],
     "storia": "Il Vieux Carré nasce nel 1938 al Carousel Bar dell'Hotel Monteleone nel French Quarter di New Orleans, creato da Walter Bergeron, head bartender del locale. Il nome significa letteralmente \"quartiere vecchio\" in francese — il nome originale del French Quarter, il cuore storico di New Orleans fondato dai coloni francesi nel 1718. Il Carousel Bar, con il suo bancone rotante a forma di giostra, è ancora oggi uno dei bar più iconici degli Stati Uniti. Il drink è un esempio straordinario di sintesi culturale: combina rye whiskey americano, cognac francese, vermouth dolce italiano, Bénédictine francese e Peychaud's bitters creoli in un unico bicchiere che racconta le stratificazioni culturali di New Orleans — città francese, spagnola, africana e americana allo stesso tempo. Charles H. Baker Jr. lo menzionò entusiasticamente nel suo \"The Gentleman's Companion\" del 1939.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vieux_carre.webp",
     "varianti": [],
     "iba": true
@@ -6408,11 +6408,11 @@
     ],
     "prep": [
       "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio"
+      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio"
     ],
     "storia": "Il Casino compare nel Savoy Cocktail Book di Harry Craddock del 1930, senza attribuzione a un inventore specifico. È costruito sulla struttura dell'Old Tom Gin — una tipologia di gin leggermente dolcificata, tipica dell'Inghilterra del XIX secolo, che aveva quasi scomparso dal mercato prima di tornare in produzione negli anni Duemila — con l'aggiunta di Maraschino, succo di limone e orange bitters. Il nome evoca i casinò e i luoghi di gioco d'azzardo, una scelta che riflette l'estetica dei cocktail dell'era pre-Proibizionismo americano, dove i locali notturni, il gioco e il bere erano intimamente connessi. È uno dei drink del Savoy Cocktail Book che richiedono l'Old Tom Gin originale per essere preparati correttamente — la sua dolcezza naturale è parte integrante dell'equilibrio della ricetta — e questo lo ha reso difficile da replicare per decenni, finché la produzione dell'Old Tom è ripresa.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/casino.webp",
     "varianti": [],
     "iba": true
@@ -7556,11 +7556,11 @@
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
     ],
     "storia": "Il French Connection nasce negli anni Settanta, probabilmente ispirato dall'omonimo film del 1971 di William Friedkin — il poliziesco premiato con cinque Oscar. Il nome del drink gioca sul doppio senso: il collegamento francese tra il cognac — distillato francese per eccellenza — e l'amaretto italiano — creando un ponte tra due tradizioni europee. Non ha un inventore documentato con precisione, appartiene alla categoria dei drink nati spontaneamente nei bar americani degli anni Settanta sull'onda di un fenomeno culturale. La struttura è intenzionalmente minimalista — due ingredienti, nessuna guarnizione — riflettendo l'estetica diretta dei cocktail di quell'era.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/french_connection.webp",
     "varianti": [],
     "iba": true
@@ -7881,12 +7881,12 @@
       ]
     ],
     "prep": [
-      "Versare tutto in un bicchiere old fashioned riempito di ghiaccio (meglio se chunk)",
+      "Versare tutto in un tumbler basso riempito di ghiaccio (meglio se chunk)",
       "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
     ],
     "storia": "Il Godfather nasce negli anni Settanta, direttamente ispirato dall'omonimo film di Francis Ford Coppola del 1972 — uno dei film più importanti della storia del cinema americano, vincitore di tre Oscar. Il drink cattura l'estetica del film: lo Scotch whisky per la potenza e la tradizione, l'amaretto per il carattere italiano — esattamente come la famiglia Corleone, immigrati siciliani nell'America degli affari. Non ha un inventore documentato con precisione, appartiene alla categoria dei drink nati spontaneamente nei bar americani sull'onda di un fenomeno culturale. La struttura è volutamente minimalista — due ingredienti, nessuna guarnizione — un'essenzialità che rispecchia il carattere diretto del film. La variante con vodka al posto dello scotch si chiama Godmother.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/godfather.webp",
     "varianti": [],
     "iba": false
@@ -7916,12 +7916,12 @@
       ]
     ],
     "prep": [
-      "Versare tutto in un bicchiere old fashioned riempito di ghiaccio (meglio se chunk)",
+      "Versare tutto in un tumbler basso riempito di ghiaccio (meglio se chunk)",
       "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
     ],
     "storia": "Il Godmother è la variante femminile del Godfather, nata negli stessi anni Settanta e costruita sulla stessa logica: sostituire lo Scotch whisky con la vodka per un drink dalla struttura identica ma dal carattere più morbido e neutro. Il nome segue la logica della famiglia cinematografica di Coppola — se il Godfather è il padrino, la Godmother è la madrina. Non ha un inventore documentato, appartiene alla stessa categoria di drink nati spontaneamente nei bar americani degli anni Settanta sull'onda del successo del Godfather. La coppia Godfather-Godmother è uno degli esempi più riusciti di drink costruiti come varianti speculari — stesso schema, distillato cambiato — una tecnica che la miscelazione americana degli anni Settanta e Ottanta usò spesso per ampliare i menu senza complicare le ricette.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/godmother.webp",
     "varianti": [],
     "iba": false
@@ -7956,11 +7956,11 @@
     ],
     "prep": [
       "Shakerare tutto con ghiaccio",
-      "Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
     ],
     "storia": "Il Gold Rush nasce nel 2000 al leggendario Milk & Honey di New York per mano di T. J. Siegal, come evoluzione del Whiskey Sour con lo sciroppo di miele al posto dello zucchero. Ispirato alla corsa all'oro americana, il cocktail unisce bourbon, limone e miele creando un equilibrio tra dolcezza e acidità che ne fa un classico contemporaneo e accessibile. La sua semplicità richiede precisione nella preparazione e ha ispirato numerose varianti, contribuendo al revival del bourbon nei bar artigianali di tutto il mondo. Fresco, morbido e versatile, il Gold Rush accompagna after dinner, serate conviviali e chi si avvicina per la prima volta al bourbon, offrendo un'esperienza raffinata dove tradizione e modernità si incontrano in ogni sorso.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gold_rush.webp",
     "varianti": [],
     "iba": false
@@ -8489,11 +8489,11 @@
     "prep": [
       "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
       "Aggiungere ghiaccio e shakerare nuovamente",
-      "Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio"
+      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio"
     ],
     "storia": "L'Illegal è un cocktail moderno creato da Phil Ward al Death & Co di New York — lo speakeasy aperto nel 2006 nell'East Village che ha definito l'estetica della mixology americana contemporanea. Ward è uno dei bartender più influenti della sua generazione e ha contribuito a diffondere la cultura del mezcal negli Stati Uniti in un periodo in cui il distillato messicano era ancora poco conosciuto fuori dal Messico. Il nome Illegal è un riferimento diretto al mezcal prodotto artigianalmente nelle zone rurali del Oaxaca senza licenza o documentazione formale — una realtà comune nel Messico di quegli anni, dove i piccoli produttori tradizionali operavano al di fuori del sistema di certificazione ufficiale. Il cocktail è costruito attorno all'incontro tra mezcal, Cointreau e succo di lime, una struttura da sour che valorizza le note affumicate del distillato.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/illegal.webp",
     "varianti": [],
     "iba": true
@@ -9928,11 +9928,11 @@
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
     ],
     "storia": "Il Monte Carlo appare nel 1948 in The Fine Art of Mixing Drinks di David A. Embury, avvocato newyorkese e appassionato di cocktail che scrisse uno dei testi teorici più influenti della miscelazione americana del dopoguerra. Embury non era un bartender professionista ma un bevitore colto e metodico, e il suo libro si distingueva dagli altri manuali dell'epoca per l'approccio analitico e opinionato. Il Monte Carlo è un esempio della sua filosofia: un Manhattan reinterpretato con il Bénédictine D.O.M. — il liquore erboristico dei monaci benedettini di Fécamp in Normandia, prodotto secondo una ricetta del 1510 — al posto del vermouth. Il nome richiama il principato di Monaco, evocazione di lusso e raffinatezza europea che Embury amava associare ai drink più eleganti del suo repertorio.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/monte_carlo.webp",
     "varianti": [],
     "iba": false
@@ -10216,11 +10216,11 @@
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
     ],
     "storia": "Il Negroni nasce a Firenze nel 1919 al Caffè Casoni — oggi Caffè Giacosa — in Via della Vigna Nuova. Secondo la storia più documentata, il conte Camillo Negroni chiese al barista Fosco Scarselli di rafforzare il suo solito Americano sostituendo il seltz con il gin. Scarselli aggiunse anche una fetta d'arancia al posto del limone, distinguendola dalla guarnizione dell'Americano. Il conte Negroni aveva vissuto a lungo in America e in Canada, dove aveva lavorato come cowboy e giocatore d'azzardo, e aveva sviluppato il gusto per i drink alcolici più robusti. La famiglia Negroni fondò successivamente una distilleria a Treviso producendo un gin prefabbricato chiamato Antico Negroni. Il Negroni è oggi uno dei cocktail più ordinati al mondo e dal 2013 viene celebrato ogni anno durante la Negroni Week — una settimana di eventi nei bar di tutto il mondo in cui parte dei proventi va in beneficenza.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "varianti": [
       {
         "nome": "Mezcal Negroni",
@@ -10277,7 +10277,7 @@
     "prep": [
       "Shakerare tutti gli ingredienti (tranne vino rosso) senza ghiaccio (dry shake)",
       "Aggiungere ghiaccio e shakerare nuovamente",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)",
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)",
       "Versare delicatamente il vino rosso sopra il cocktail per creare un effetto galleggiante (float)"
     ],
     "storia": "Il New York Sour nasce nella seconda metà dell'Ottocento, con alcune fonti che ne attribuiscono la creazione a un bartender di Chicago negli anni 1880 — rendendo il nome geograficamente ironico. La versione più citata lo colloca nei bar di New York di fine secolo, dove l'usanza di completare i drink con un float di vino rosso era una pratica diffusa nei saloon di fascia alta. L'idea di abbinare il vino al whiskey sour aveva probabilmente radici nelle abitudini enogastronomiche degli immigrati europei — francesi e italiani in particolare — che avevano portato con sé la cultura del vino a tavola e al bancone. Il float di vino rosso che galleggia in superficie senza mescolarsi è anche un effetto visivo di grande impatto, e probabilmente contribuì non poco alla sua popolarità in un'epoca in cui l'estetica del drink stava diventando parte dell'esperienza.",
@@ -10371,11 +10371,11 @@
       "In un mixing glass mettere la zolletta di zucchero e l'angostura",
       "Aggiungere l'acqua e mescolare fino a sciogliere lo zucchero",
       "Aggiungere il whiskey e il ghiaccio e mescolare delicatamente per circa 20 secondi",
-      "Filtrare e versare in un bicchiere old fashioned riempito di ghiaccio (meglio se chunk)"
+      "Filtrare e versare in un tumbler basso riempito di ghiaccio (meglio se chunk)"
     ],
     "storia": "L'Old Fashioned è probabilmente il cocktail più antico ancora in uso regolare nei bar di tutto il mondo. La sua struttura — distillato, zucchero, acqua e bitters — corrisponde quasi alla prima definizione scritta di cocktail apparsa sul giornale The Balance and Columbian Repository di Hudson, New York, il 13 maggio 1806. Il nome Old Fashioned iniziò a circolare verso la fine dell'Ottocento, quando i clienti dei bar americani cominciarono a chiedere esplicitamente un cocktail fatto alla vecchia maniera — in contrasto con le preparazioni sempre più elaborate e cariche di ingredienti che dominavano i menu dell'epoca. Il Pendennis Club di Louisville, Kentucky, ne rivendica la paternità nella forma moderna, attribuendolo al bartender James E. Pepper negli anni 1880. La serie televisiva Mad Men, andata in onda dal 2007 al 2015, ne ha moltiplicato la popolarità contemporanea rendendolo il drink identitario di Don Draper. Si celebra ogni anno il 6 novembre nella Giornata Mondiale dell'Old Fashioned.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/old_fashioned.webp",
     "varianti": [],
     "iba": true
@@ -10411,11 +10411,11 @@
     "prep": [
       "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
       "Mescolare delicatamente per circa 20 secondi",
-      "Filtrare in un bicchiere old fashioned riempito di ghiaccio (meglio se con chunk)"
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
     ],
     "storia": "L'Old Pal compare per la prima volta nel Harry's ABC of Mixing Cocktails di Harry MacElhone del 1922, dedicato a William Sparrow Robertson — giornalista sportivo del New York Herald Tribune a Parigi che MacElhone chiamava affettuosamente old pal, vecchio amico. MacElhone aprì il suo bar a Parigi nel 1923 — l'Harry's New York Bar, ancora oggi aperto in Rue Daunou — e il drink fu probabilmente creato lì o poco prima. È strutturalmente identico al Boulevardier — rye whiskey, Campari, vermouth — con l'unica differenza che usa il vermouth dry invece del rosso dolce, producendo un drink più secco e meno avvolgente. La differenza tra i due è sottile ma significativa: lo stesso scheletro, due caratteri opposti. Come il Boulevardier, rimase oscuro per decenni prima di essere riscoperto con il revival della miscelazione classica.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/old_pal.webp",
     "varianti": [],
     "iba": false
@@ -10714,12 +10714,12 @@
     ],
     "prep": [
       "Shakerare tutto con ghiaccio (tranne whisky torbato)",
-      "Filtrare (double strain) in un bicchiere old fashioned riempito di ghiaccio",
+      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio",
       "Versare delicatamente il whisky torbato come float per creare uno strato galleggiante"
     ],
     "storia": "Il Penicillin nasce nel 2005 al Milk & Honey di New York, creato da Sam Ross — lo stesso bartender che avrebbe poi creato il Paper Plane. Ross si ispirò alla struttura del Gold Rush di T.J. Siegal — whisky, limone, miele — ma volle aggiungere una dimensione affumicata usando lo Scotch torbato come float finale, creando un drink che evolveva nel bicchiere man mano che il whisky torbato si mescolava agli strati sottostanti. Il nome richiama la penicillina — l'antibiotico scoperto da Alexander Fleming nel 1928 — e la reputazione tradizionale del whisky scozzese come rimedio per i malanni invernali, specialmente nella cultura scozzese e irlandese. Nonostante sia un cocktail del 2005, è già considerato uno dei classici moderni più importanti della storia recente della miscelazione e uno dei pochi contemporanei ad essere universalmente riconosciuto come capolavoro del suo genere.",
     "frizzante": false,
-    "bicchiere": "Old fashioned",
+    "bicchiere": "Tumbler basso",
     "img": "https://danielsportelli.github.io/cocktail-legend/immagini/penicillin.webp",
     "varianti": [],
     "iba": true
