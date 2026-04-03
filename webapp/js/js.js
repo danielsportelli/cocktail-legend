@@ -1108,18 +1108,27 @@ function initF() {
   var fsheetDone   = document.getElementById('fsheet-done');
   var fsheetOvl    = document.getElementById('fsheet-overlay');
   var fsheetHandle = document.querySelector('#fsheet .fsheet-handle');
+  var fsheetEl     = document.getElementById('fsheet');
   if (fsheetDone) fsheetDone.addEventListener('click', closeFsheet);
   if (fsheetOvl)  fsheetOvl.addEventListener('click', closeFsheet);
+  // Micro-animazione trattino al tocco
   if (fsheetHandle) {
-    var _fsY = 0;
     fsheetHandle.addEventListener('click', closeFsheet);
-    fsheetHandle.addEventListener('touchstart', function(e){
+    fsheetHandle.addEventListener('touchstart', function(){
       this.style.background = 'rgba(255,255,255,.55)';
+    }, {passive:true});
+    fsheetHandle.addEventListener('touchend', function(){
+      this.style.background = '';
+    }, {passive:true});
+  }
+  // Swipe UP su tutto il fsheet per chiudere (stessa logica bsheet swipe down)
+  if (fsheetEl) {
+    var _fsY = 0;
+    fsheetEl.addEventListener('touchstart', function(e){
       _fsY = e.touches[0].clientY;
     }, {passive:true});
-    fsheetHandle.addEventListener('touchend', function(e){
-      this.style.background = '';
-      if (_fsY - e.changedTouches[0].clientY > 40) closeFsheet();
+    fsheetEl.addEventListener('touchend', function(e){
+      if (_fsY - e.changedTouches[0].clientY > 60) closeFsheet();
     }, {passive:true});
   }
 
