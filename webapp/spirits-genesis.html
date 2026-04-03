@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     :root {
       --primary:        #2563eb;
@@ -76,7 +76,7 @@
     /* ── HEADER ── */
     .sg-header {
       position: fixed;
-      top: 3px; left: 0; right: 0;
+      top: 0; left: 0; right: 0;
       height: var(--header-h);
       background: rgba(10,15,30,0.92);
       backdrop-filter: blur(16px);
@@ -151,7 +151,7 @@
     /* ── LAYOUT ── */
     .sg-layout {
       display: flex;
-      padding-top: calc(var(--header-h) + 3px);
+      padding-top: var(--header-h);
       min-height: 100vh;
     }
 
@@ -160,7 +160,7 @@
       width: var(--sidebar-w);
       flex-shrink: 0;
       position: fixed;
-      top: calc(var(--header-h) + 3px);
+      top: var(--header-h);
       left: 0;
       bottom: 0;
       overflow-y: auto;
@@ -695,7 +695,6 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Torna
   </a>
-  <div class="sg-header-title">Spirits <span>Genesis</span></div>
   <button class="toc-mobile-toggle" id="toc-toggle" aria-label="Indice">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="16" y2="12"/><line x1="3" y1="18" x2="12" y2="18"/></svg>
     Indice
@@ -761,7 +760,7 @@
 
     <!-- Hero -->
     <section class="sg-hero">
-      <div class="sg-hero-eyebrow">Botanic Academy · Corso Avanzato</div>
+      <div class="sg-hero-eyebrow">Corso avanzato di merceologia</div>
       <h1>Spirits<br><span class="gradient">Genesis</span></h1>
       <p>Il percorso completo sulla merceologia degli spirits: dai processi base alla classificazione, dai principali distillati alla degustazione professionale.</p>
       <div class="sg-hero-meta">
@@ -1685,7 +1684,7 @@
 
   // ── AUTH CHECK ───────────────────────────────────────────
   import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
   import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -1697,36 +1696,31 @@
     appId: "1:237023162237:web:8a35e5421521171e2fa614"
   };
 
-  // Evita doppia inizializzazione se già presente
   const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  // Forza persistenza locale (stessa che usa cocktail-legend)
-  await setPersistence(auth, browserLocalPersistence);
+  // authStateReady() aspetta che Firebase abbia letto la sessione
+  // persistita da localStorage — evita il redirect prematuro
+  await auth.authStateReady();
+  const user = auth.currentUser;
 
-  // onAuthStateChanged si attiva una volta sola:
-  // — null se non loggato (redirect a login)
-  // — user se loggato (controlla plan)
-  const unsubscribe = onAuthStateChanged(auth, async user => {
-    unsubscribe(); // ascolta solo il primo evento
-    if (!user) {
-      window.location.href = 'cocktail-legend.html?source=genesis&error=auth';
-      return;
-    }
+  if (!user) {
+    window.location.href = 'cocktail-legend.html?source=genesis&error=auth';
+  } else {
     try {
       const snap = await getDoc(doc(db, 'users', user.uid));
       if (!snap.exists() || snap.data().plan !== 'premium') {
         window.location.href = 'cocktail-legend.html?source=genesis&error=premium';
-        return;
+      } else {
+        // Auth OK — mostra contenuto
+        document.getElementById('auth-gate').classList.remove('visible');
       }
-      // Auth OK — mostra contenuto
-      document.getElementById('auth-gate').classList.remove('visible');
     } catch(err) {
       console.error('Auth check error:', err);
       window.location.href = 'cocktail-legend.html?source=genesis&error=auth';
     }
-  });
+  }
 
   // ── PROGRESS BAR ─────────────────────────────────────────
   function updateProgress() {
