@@ -886,7 +886,7 @@ function updateRbarTop(){
   var fbH = _cachedFbH;
   // padding-top main
   var main = document.querySelector('.main');
-  if (main) main.style.paddingTop = (offset + pillsH + fbH + 12) + 'px';
+  if (main) main.style.paddingTop = (offset + pillsH + fbH + 22) + 'px';
 }
 
 // Inizializza cache hdrH al load
@@ -4804,3 +4804,30 @@ document.addEventListener('DOMContentLoaded', function() {
   // Cuoricini liberi per tutti — il blocco è solo sulla sezione preferiti raggruppati
 
 });
+
+// ── BACK TO TOP ───────────────────────────────────────────────────
+// Appare dopo 1200px di scroll — stile Spirit Genesis
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    // Mostra/nascondi al scroll
+    window.addEventListener('scroll', function(){
+      btn.classList.toggle('visible', (window.scrollY || window.pageYOffset) > 1200);
+    }, { passive: true });
+
+    // Click: scroll smooth to top
+    var _bttTouched = false;
+    btn.addEventListener('touchstart', function(){ _bttTouched = true; }, { passive: true });
+    btn.addEventListener('touchend', function(e){
+      e.preventDefault();
+      _bttTouched = false;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    btn.addEventListener('click', function(){
+      if (_bttTouched) { _bttTouched = false; return; }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+})();

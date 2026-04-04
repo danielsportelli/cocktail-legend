@@ -557,7 +557,11 @@ body::before{
 .active-tag .x{font-size:.7rem;opacity:.7}
 
 /* MAIN */
-.main{padding:.75rem 5% 1.25rem;padding-top:calc(var(--hdr-h) + var(--pills-h) + 22px)}
+.main{
+  padding:.75rem 5% 1.25rem;
+  padding-top:calc(var(--hdr-h) + var(--pills-h) + 22px);
+  transition:padding-top .28s cubic-bezier(.4,0,.2,1);
+}
 
 /* Custom sort button */
 .sort-btn{
@@ -1414,4 +1418,50 @@ body.user-premium #sg-pdf-link > span:last-child {
 .tab-btn-ai.dim .tab-btn-lbl {
   color: var(--dim);
   font-weight: 400;
+}
+
+/* ── BACK TO TOP ─────────────────────────────────────────────────
+   Stile da Spirit Genesis — appare dopo 1200px di scroll */
+#back-to-top {
+  position: fixed;
+  bottom: 5.5rem; /* sopra la nav tab bar */
+  right: 1.1rem;
+  width: 40px;
+  height: 40px;
+  background: rgba(15,23,42,0.82);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 200;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .25s ease, transform .25s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: none;
+  touch-action: manipulation;
+}
+#back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+#back-to-top svg {
+  width: 16px;
+  height: 16px;
+  stroke: #94a3b8;
+  display: block;
+}
+@media (hover:hover) and (pointer:fine) {
+  #back-to-top:hover {
+    background: rgba(37,99,235,0.3);
+    border-color: var(--blue-l);
+  }
+  #back-to-top:hover svg {
+    stroke: var(--blue-l);
+  }
 }

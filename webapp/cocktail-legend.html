@@ -509,6 +509,11 @@
   <div class="grid" id="grid"></div>
 </main>
 
+<!-- BACK TO TOP -->
+<button id="back-to-top" aria-label="Torna in cima">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
 <!-- MODAL -->
 <div class="overlay" id="ov">
   <div class="modal">
@@ -1799,17 +1804,27 @@ function calcABV() {
       if (srchOpen) {
         filterBar.classList.remove('hidden');
         pillsSrchBtn.classList.add('active');
+        // Aggiorna subito il padding-top in sincronia con la transizione CSS della filter-bar
+        if (typeof updateFbH === 'function') {
+          requestAnimationFrame(function(){
+            updateFbH();
+          });
+        }
         setTimeout(function(){
           var inp = document.getElementById('srch');
           if (inp) inp.focus();
-          if (typeof updateFbH === 'function') updateFbH();
-        }, 320);
+        }, 280);
       } else {
         filterBar.classList.add('hidden');
         pillsSrchBtn.classList.remove('active');
         var inp = document.getElementById('srch');
         if (inp && inp.value) { inp.value = ''; Q = ''; render(); }
-        if (typeof updateFbH === 'function') updateFbH();
+        // Aggiorna subito
+        if (typeof updateFbH === 'function') {
+          requestAnimationFrame(function(){
+            updateFbH();
+          });
+        }
       }
     });
   }
