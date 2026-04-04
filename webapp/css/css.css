@@ -439,7 +439,7 @@ body::before{
 }
 .fsheet-done{
   background:var(--blue);color:#fff;
-  border:2px solid transparent;border-radius:8px;
+  border:none;border-radius:8px;
   font-family:inherit;font-size:.75rem;font-weight:700;
   padding:.4rem 1rem;
   cursor:pointer;
@@ -459,13 +459,13 @@ body::before{
   justify-content:center;
   pointer-events:auto;
 }
-/* Espande area touch invisibile di 8px — nessun effetto visivo */
+/* Espande area touch invisibile — nessun effetto visivo, non altera il layout */
 .fsheet-done::after{
   content:'';
   position:absolute;
-  inset:-8px;
+  inset:-6px;
+  border-radius:12px;
 }
-/* Nessun :active/:focus persistente */
 .fsheet-done:focus{ outline:none; box-shadow:none; }
 .fsheet-done:active{ background:var(--blue); color:#fff; }
 .fsheet-body{

@@ -1109,8 +1109,7 @@ function initF() {
 
 
 // ═══ FSHEET DONE/OVERLAY/FOOTER — inizializzato al DOM ready ═══
-// IMPORTANTE: separato da initF() che dipende dal fetch JSON.
-// Il bottone FATTO deve funzionare subito, anche prima che il JSON sia caricato.
+// Separato da initF() che dipende dal fetch JSON — funziona subito al primo caricamento
 document.addEventListener('DOMContentLoaded', function() {
   var fsheetDone   = document.getElementById('fsheet-done');
   var fsheetOvl    = document.getElementById('fsheet-overlay');
@@ -1118,12 +1117,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── FATTO ─────────────────────────────────────────────────────
   if (fsheetDone) {
+
     function _fsheetDoneFlash() {
       fsheetDone.classList.remove('btn-flash');
       void fsheetDone.offsetWidth;
       fsheetDone.classList.add('btn-flash');
       setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); fsheetDone.blur(); }, 300);
     }
+
     function _fsheetDoneAction() {
       _fsheetDoneFlash();
       closeFsheet();
@@ -1131,19 +1132,25 @@ document.addEventListener('DOMContentLoaded', function() {
       if (typeof render === 'function') render();
       if (typeof updatePills === 'function') updatePills();
     }
-    // pointerdown: flash immediato e azione — un solo evento, nessun double-fire
-    // Funziona su iOS Safari 13+, Android Chrome, Samsung Browser, PWA
-    var _fsheetDoneActed = false;
-    fsheetDone.addEventListener('pointerdown', function(e) {
-      e.preventDefault();
-      if (_fsheetDoneActed) return;
-      _fsheetDoneActed = true;
-      _fsheetDoneAction();
-      setTimeout(function(){ _fsheetDoneActed = false; }, 400);
+
+    var _acted = false;
+
+    // pointerdown: solo flash visivo immediato (nessun preventDefault — non blocca iOS)
+    fsheetDone.addEventListener('pointerdown', function() {
+      _fsheetDoneFlash();
     });
-    // click come fallback per browser senza PointerEvent o mouse desktop
-    fsheetDone.addEventListener('click', function(e) {
-      if (_fsheetDoneActed) { return; }
+
+    // pointerup: esegue l'azione — unico trigger, anti double-fire
+    fsheetDone.addEventListener('pointerup', function() {
+      if (_acted) return;
+      _acted = true;
+      _fsheetDoneAction();
+      setTimeout(function(){ _acted = false; }, 400);
+    });
+
+    // click: fallback per browser senza PointerEvent
+    fsheetDone.addEventListener('click', function() {
+      if (_acted) return;
       _fsheetDoneAction();
     });
   }
