@@ -276,26 +276,20 @@ body::before{
   box-shadow:0 6px 20px rgba(0,0,0,.5);
   padding:.5rem 5%;
   overflow:visible;
-  max-height:200px;
   opacity:1;
-  transition:max-height .28s cubic-bezier(.4,0,.2,1),
+  transform:translateY(0);
+  /* Transita su top (sync con pills-bar) + transform (slide) + opacity */
+  transition:transform .28s cubic-bezier(.4,0,.2,1),
              opacity .2s ease,
-             padding .28s ease,
              top .28s cubic-bezier(.4,0,.2,1);
 }
 .filter-bar.hidden{
-  max-height:0;
+  transform:translateY(-110%);
   opacity:0;
-  padding-top:0;
-  padding-bottom:0;
   pointer-events:none;
-  overflow:hidden;
 }
 @media (display-mode: standalone) {
-  .filter-bar{
-    top:calc(var(--pills-bottom, calc(var(--hdr-h) + 80px)));
-    background:rgb(30,41,59);
-  }
+  .filter-bar{ background:rgb(30,41,59); }
 }
 
 .pills-bar{
@@ -310,15 +304,8 @@ body::before{
   padding:.3rem 0 .35rem;
   transition:top .28s cubic-bezier(.4,0,.2,1);
 }
-.hdr-animating .pills-bar{
-  transition:top .28s cubic-bezier(.4,0,.2,1);
-}
-.hdr-animating .filter-bar{
-  transition:top .28s cubic-bezier(.4,0,.2,1),
-             max-height .28s cubic-bezier(.4,0,.2,1),
-             opacity .2s ease,
-             padding .28s ease;
-}
+/* .hdr-animating già ha transition identica — nessuna override necessaria */
+
 .pills-srch-btn{
   flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
@@ -441,15 +428,15 @@ body::before{
 }
 .fsheet-done{
   background:var(--blue);color:#fff;
-  border:none;border-radius:8px;
-  font-family:inherit;font-size:.75rem;font-weight:700;
-  padding:.4rem 1rem;
+  border:1px solid var(--blue);border-radius:6px;
+  font-family:inherit;font-size:.62rem;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;
+  padding:.35rem .65rem;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
   -webkit-appearance:none;
   appearance:none;
   outline:none;
-  min-height:36px;
   box-sizing:border-box;
   touch-action:manipulation;
   user-select:none;
@@ -652,14 +639,15 @@ body::before{
   max-width:520px;width:100%;max-height:90vh;overflow-y:auto;
   overflow-x:hidden;
   isolation:isolate;
+  /* clip universale per border-radius su content scrollabile — funziona su iOS/Android/desktop */
+  clip-path:inset(0 round 16px);
   -webkit-mask-image:-webkit-radial-gradient(white,black);
   will-change:transform;
   transform:translateY(20px) scale(.97);transition:transform .25s}
 .overlay.open .modal{transform:translateY(0) scale(1)}
 .modal::-webkit-scrollbar{display:none}
 .modal{-ms-overflow-style:none;scrollbar-width:none;}
-/* border-radius:16px 16px 0 0 — clipa l'immagine agli angoli arrotondati della modale */
-.m-img{width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;border-radius:16px 16px 0 0;background:var(--bg)}
+.m-img{width:100%;aspect-ratio:1/1;position:relative;overflow:hidden;border-radius:0;background:var(--bg)}
 .m-img img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
 .m-img-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:.2;z-index:0}
 .m-sap{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:1.5rem 1.2rem .85rem;
@@ -675,10 +663,14 @@ body::before{
   position:sticky;top:0;z-index:20;
   display:flex;align-items:center;justify-content:space-between;
   padding:.55rem .7rem;
+  /* Nessun border-radius — il clip è sulla .modal; margin-top negativo copre
+     il gap tra bordo modale e sticky bar durante lo scroll */
   background:rgb(30,41,59);
   border-bottom:1px solid rgba(255,255,255,.07);
-  border-radius:16px 16px 0 0;
-  overflow:hidden;
+  /* Estendi lateralmente e in alto per coprire perfettamente il bordo modale */
+  margin:-1px -1px 0 -1px;
+  padding-left:calc(.7rem + 1px);
+  padding-right:calc(.7rem + 1px);
 }
 .m-sticky-title{
   font-size:.82rem;font-weight:700;color:var(--txt2);
@@ -1122,7 +1114,6 @@ body::before{
   font-family:inherit;cursor:pointer;
   padding:.35rem .65rem;border-radius:6px;
   letter-spacing:.05em;text-transform:uppercase;
-  /* Nessuna transition: evita che lo stato resti visibile su mobile dopo il tap */
   transition:none;
   flex-shrink:0;
   -webkit-tap-highlight-color:transparent;
@@ -1130,16 +1121,12 @@ body::before{
   outline:none;
   touch-action:manipulation;
   position:relative;
-  /* Forza lo stato a non persistere su iOS/Android */
   user-select:none;
   -webkit-user-select:none;
 }
-/* Area touch espansa invisibile — nessun effetto visivo, non altera il layout */
+/* Area touch espansa — non modifica layout visivo */
 .drawer-back-btn::after{
-  content:'';
-  position:absolute;
-  inset:-8px;
-  border-radius:12px;
+  content:'';position:absolute;inset:-8px;border-radius:14px;
 }
 .drawer-back-btn svg{pointer-events:none;}
 /* Hover solo su dispositivi con puntatore preciso (mouse desktop) */

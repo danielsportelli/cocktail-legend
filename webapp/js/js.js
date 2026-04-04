@@ -854,8 +854,8 @@ window.addEventListener('scroll', function(){
 function updateFbH(){
   var fb = document.getElementById('filter-bar');
   if (!fb) return;
-  void fb.offsetHeight;
-  // Se hidden, usa 0 direttamente senza leggere offsetHeight (che è in transizione)
+  // Con translateY la filter-bar ha sempre la sua altezza reale nel layout.
+  // Usiamo 0 quando hidden (è fuori schermo), altezza reale quando visibile.
   _cachedFbH = fb.classList.contains('hidden') ? 0 : fb.offsetHeight;
   document.documentElement.style.setProperty('--fb-h', _cachedFbH + 'px');
   updateRbarTop();
@@ -866,7 +866,7 @@ document.addEventListener('DOMContentLoaded', function(){
   var fb = document.getElementById('filter-bar');
   if (fb) {
     fb.addEventListener('transitionend', function(e){
-      if (e.propertyName === 'max-height') updateFbH();
+      if (e.propertyName === 'transform' || e.propertyName === 'opacity') updateFbH();
     });
   }
 });
@@ -1125,33 +1125,20 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); fsheetDone.blur(); }, 300);
     }
 
-    function _fsheetDoneAction() {
+    // Flash immediato al tocco — pointerdown+touchstart per massima compatibilità
+    fsheetDone.addEventListener('pointerdown', function() {
       _fsheetDoneFlash();
+    }, {passive: true});
+    fsheetDone.addEventListener('touchstart', function() {
+      if (!window.PointerEvent) _fsheetDoneFlash();
+    }, {passive: true});
+
+    // click: unico trigger per l'azione — garantito su tutti i browser e al primo tap
+    fsheetDone.addEventListener('click', function() {
       closeFsheet();
       if (typeof updateBadges === 'function') updateBadges();
       if (typeof render === 'function') render();
       if (typeof updatePills === 'function') updatePills();
-    }
-
-    var _acted = false;
-
-    // pointerdown: solo flash visivo immediato (nessun preventDefault — non blocca iOS)
-    fsheetDone.addEventListener('pointerdown', function() {
-      _fsheetDoneFlash();
-    });
-
-    // pointerup: esegue l'azione — unico trigger, anti double-fire
-    fsheetDone.addEventListener('pointerup', function() {
-      if (_acted) return;
-      _acted = true;
-      _fsheetDoneAction();
-      setTimeout(function(){ _acted = false; }, 400);
-    });
-
-    // click: fallback per browser senza PointerEvent
-    fsheetDone.addEventListener('click', function() {
-      if (_acted) return;
-      _fsheetDoneAction();
     });
   }
 
@@ -2918,28 +2905,10 @@ function flashBtn(el) {
   setTimeout(function(){ el.classList.remove('btn-flash'); el.blur(); }, 300);
 }
 
-// Aggancia pointerdown/pointerup su tutti i drawer-back-btn
-// pointerdown: flash visivo immediato cross-platform (iOS Safari, Android Chrome, PWA, desktop)
-// Anti-double-fire: flag _btnActed sull'elemento, resettato dopo 400ms
+// Aggancia touchstart per feedback visivo immediato su tutti i drawer-back-btn
 document.addEventListener('DOMContentLoaded', function(){
   document.querySelectorAll('.drawer-back-btn').forEach(function(btn){
-    btn._btnActed = false;
-
-    // Flash visivo immediato al tocco — pointerdown garantisce risposta prima del click
-    btn.addEventListener('pointerdown', function(){
-      flashBtn(this);
-    });
-
-    // Fallback touchstart per browser senza PointerEvent completo (iOS Safari vecchi)
-    btn.addEventListener('touchstart', function(){
-      if (!window.PointerEvent) flashBtn(this);
-    }, {passive:true});
-
-    // Marca azione avvenuta su pointerup — i listener click specifici leggeranno questo flag
-    btn.addEventListener('pointerup', function(){
-      btn._btnActed = true;
-      setTimeout(function(){ btn._btnActed = false; }, 400);
-    });
+    btn.addEventListener('touchstart', function(){ flashBtn(this); }, {passive:true});
   });
 });
 
@@ -3042,7 +3011,6 @@ document.addEventListener('DOMContentLoaded', function(){
       var _origShowRisCmds = showRisCmds;
       document.getElementById('ris-back-header-btn').removeEventListener('click', showRisCmds);
       document.getElementById('ris-back-header-btn').addEventListener('click', function() {
-        if (this._btnActed) return;
         this.blur();
         flashBtn(this);
         var btn = this;
@@ -3059,7 +3027,6 @@ document.addEventListener('DOMContentLoaded', function(){
     if (calcBackMain) {
       document.getElementById('calc-back-header-btn').removeEventListener('click', showCalcCmds);
       document.getElementById('calc-back-header-btn').addEventListener('click', function() {
-        if (this._btnActed) return;
         this.blur();
         flashBtn(this);
         var btn = this;
@@ -3076,7 +3043,6 @@ document.addEventListener('DOMContentLoaded', function(){
     var vntBack = document.getElementById('vnt-back-header-btn');
     if (vntBack) {
       vntBack.addEventListener('click', function(e) {
-        if (this._btnActed) return;
         e.stopPropagation();
         flashBtn(this);
         this.blur();
@@ -3088,7 +3054,6 @@ document.addEventListener('DOMContentLoaded', function(){
     var accBack = document.getElementById('acc-back-header-btn');
     if (accBack) {
       accBack.addEventListener('click', function(e) {
-        if (this._btnActed) return;
         this.blur();
         flashBtn(this);
         e.stopPropagation();
