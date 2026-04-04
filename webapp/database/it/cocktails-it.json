@@ -109,7 +109,7 @@
 {
   "id": "blue_hawaii",
   "name": "Blue Hawaii",
-  "distillato": ["Rum bianco", "Vodka"],
+  "distillato": ["Rum", "Vodka"],
   "categoria": "All day",
   "abv": "Medio basso",
   "sapori": ["Tropicale", "Dolce", "Fruttato"],
@@ -161,7 +161,7 @@
 {
   "id": "carajillo",
   "name": "Carajillo",
-  "distillato": ["Liquore spagnolo"],
+  "distillato": ["Licor 43"],
   "categoria": "After dinner",
   "abv": "Medio basso",
   "sapori": ["Caffeinico", "Amaro", "Caldo"],
@@ -500,7 +500,7 @@
   {
     "id": "campari_shakerato",
     "name": "Campari Shakerato",
-    "distillato": [],
+    "distillato": ["Campari"],
     "categoria": "Pre dinner",
     "abv": "Medio",
     "sapori": [
@@ -529,7 +529,7 @@
   {
     "id": "charlie_chaplin",
     "name": "Charlie Chaplin",
-    "distillato": [],
+    "distillato": ["Sloe gin"],
     "categoria": "All day",
     "abv": "Medio",
     "sapori": [
@@ -4598,9 +4598,7 @@
   {
     "id": "americano",
     "name": "Americano",
-    "distillato": [
-      "Bitter rosso"
-    ],
+    "distillato": ["Campari", "Vermouth rosso"],
     "categoria": "Pre dinner",
     "abv": "Medio basso",
     "sapori": [
@@ -4931,7 +4929,7 @@
     "id": "planters_punch",
     "name": "Planter's Punch",
     "distillato": [
-      "Rum giamaicano"
+      "Rum"
     ],
     "categoria": "All day",
     "abv": "Medio",
@@ -5584,9 +5582,7 @@
     "id": "bijou",
     "name": "Bijou",
     "distillato": [
-      "Gin",
-      "Chartreuse verde",
-      "Vermouth rosso"
+      "Gin"
     ],
     "categoria": "Pre dinner",
     "abv": "Molto alto",
@@ -7608,7 +7604,7 @@
     "id": "garibaldi",
     "name": "Garibaldi",
     "distillato": [
-      "Bitter rosso"
+      "Campari"
     ],
     "categoria": "All day",
     "abv": "Basso",
@@ -9693,7 +9689,7 @@
     "id": "milano_torino",
     "name": "Milano Torino",
     "distillato": [
-      "Bitter rosso"
+      "Campari", "Vermouth rosso"
     ],
     "categoria": "Pre dinner",
     "abv": "Medio",
