@@ -524,7 +524,19 @@ body::before{
 
 /* Tag filtri attivi visibili */
 .active-tags{
-  display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem;
+  display:flex;gap:.4rem;flex-wrap:wrap;
+}
+
+/* Riga contatore + pill attive */
+.result-count-row{
+  display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;
+  margin-bottom:.5rem;
+}
+/* Contatore cocktail live */
+.result-count{
+  font-size:.72rem;font-weight:800;
+  color:#60a5fa;letter-spacing:.01em;
+  white-space:nowrap;flex-shrink:0;
 }
 .active-tag{
   display:flex;align-items:center;gap:.3rem;
@@ -1086,6 +1098,27 @@ body::before{
 .drawer-back-btn--main{ display:inline-flex; }
 #ris-back-header-btn{ display:inline-flex; }
 #calc-back-header-btn{ display:inline-flex; }
+
+/* Micro-animazione flash per TORNA / CHIUDI / FATTO
+   Cross-platform: iOS Safari, Android Chrome, PWA
+   Non usa :active per evitare lo stato permanente su mobile */
+@keyframes btnFlash{
+  0%  { color:var(--dim);  border-color:var(--dim);  background:transparent; }
+  30% { color:#fff;        border-color:#fff;         background:rgba(255,255,255,.15); }
+  100%{ color:var(--dim);  border-color:var(--dim);  background:transparent; }
+}
+.drawer-back-btn.btn-flash{
+  animation:btnFlash .22s ease forwards;
+}
+/* Variante per fsheet-done (sfondo blu, flash bianco) */
+@keyframes btnFlashDone{
+  0%  { background:var(--blue); color:#fff; }
+  30% { background:#fff;        color:var(--blue); }
+  100%{ background:var(--blue); color:#fff; }
+}
+.fsheet-done.btn-flash{
+  animation:btnFlashDone .22s ease forwards;
+}
 .drawer{ scrollbar-width:none; }
 .drawer::-webkit-scrollbar{ display:none; }
 /* overlay scuro dietro drawer */

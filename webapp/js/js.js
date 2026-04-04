@@ -1109,8 +1109,29 @@ function initF() {
   var fsheetOvl    = document.getElementById('fsheet-overlay');
   var fsheetFooter = document.getElementById('fsheet-footer');
   if (fsheetDone) {
-    fsheetDone.addEventListener('click', closeFsheet);
-    fsheetDone.addEventListener('touchend', function(e){ e.preventDefault(); closeFsheet(); });
+    function _fsheetDoneAction() {
+      // Micro-animazione flash bianco → stato normale
+      fsheetDone.classList.remove('btn-flash');
+      void fsheetDone.offsetWidth; // force reflow
+      fsheetDone.classList.add('btn-flash');
+      setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); }, 220);
+      // Chiude sempre, con o senza selezione
+      closeFsheet();
+      updateBadges();
+      render();
+      if (typeof updatePills === 'function') updatePills();
+    }
+    var _fsheetDoneTouched = false;
+    fsheetDone.addEventListener('touchstart', function(){ _fsheetDoneTouched = true; }, {passive:true});
+    fsheetDone.addEventListener('touchend', function(e){
+      e.preventDefault();
+      _fsheetDoneTouched = false;
+      _fsheetDoneAction();
+    });
+    fsheetDone.addEventListener('click', function(){
+      if(_fsheetDoneTouched){ _fsheetDoneTouched=false; return; }
+      _fsheetDoneAction();
+    });
   }
   if (fsheetOvl)  fsheetOvl.addEventListener('click', closeFsheet);
   // Tap + swipe up solo dal footer (fascia del trattino)
@@ -1210,7 +1231,9 @@ function render() {
 
 function showCards(){
   var g=document.getElementById("grid");
-  var rcntEl = document.getElementById("rcnt"); if(rcntEl) rcntEl.textContent=RES.length;
+  // Aggiorna contatore risultati
+  var rcntEl = document.getElementById("result-count");
+  if(rcntEl) rcntEl.textContent = RES.length + ' cocktail';
   g.innerHTML="";
   if(!RES.length){
     var em=document.createElement("div");em.className="empty";
@@ -2421,6 +2444,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     // Bottoni back (tutti quelli con .ai-back-btn)
     document.querySelectorAll('.ai-back-btn').forEach(function(b){
       b.addEventListener('click',function(){
+        flashBtn(this);
+        this.blur();
         var target=this.dataset.target;
         if(target==='cmds') showCmds();
       });
@@ -2685,6 +2710,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         // Bottoni back (tutti quelli con .ai-back-btn)
     document.querySelectorAll('.ai-back-btn').forEach(function(b){
       b.addEventListener('click',function(){
+        flashBtn(this);
+        this.blur();
         var target=this.dataset.target;
         if(target==='cmds') showCmds();
       });
@@ -2857,6 +2884,17 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
   });
 })();
+// ── Utility micro-animazione flash per bottoni TORNA/CHIUDI ──────
+// Cross-platform: funziona su iOS Safari, Android Chrome, PWA
+// Aggiunge classe .btn-flash che anima → bianco → torna grigio, mai persistente
+function flashBtn(el) {
+  if (!el) return;
+  el.classList.remove('btn-flash');
+  void el.offsetWidth; // force reflow per re-triggerare keyframe
+  el.classList.add('btn-flash');
+  setTimeout(function(){ el.classList.remove('btn-flash'); }, 220);
+}
+
 // ═══ RISORSE E CALCOLATORI DRAWER ═══
 (function(){
 
@@ -2957,12 +2995,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       document.getElementById('ris-back-header-btn').removeEventListener('click', showRisCmds);
       document.getElementById('ris-back-header-btn').addEventListener('click', function() {
         this.blur();
+        flashBtn(this);
         var btn = this;
         if (btn.classList.contains('visible')) {
-          // Dentro una funzione → torna alla lista
           showRisCmds();
         } else {
-          // Sulla lista → torna al menu
           tornaSuMenu();
         }
       });
@@ -2974,6 +3011,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       document.getElementById('calc-back-header-btn').removeEventListener('click', showCalcCmds);
       document.getElementById('calc-back-header-btn').addEventListener('click', function() {
         this.blur();
+        flashBtn(this);
         var btn = this;
         if (btn.classList.contains('visible')) {
           showCalcCmds();
@@ -2989,6 +3027,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if (vntBack) {
       vntBack.addEventListener('click', function(e) {
         e.stopPropagation();
+        flashBtn(this);
+        this.blur();
         tornaSuMenu();
       });
     }
@@ -2998,6 +3038,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if (accBack) {
       accBack.addEventListener('click', function(e) {
         this.blur();
+        flashBtn(this);
         e.stopPropagation();
         closeAllDrawers();
       });
