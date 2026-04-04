@@ -1110,11 +1110,11 @@ function initF() {
   var fsheetFooter = document.getElementById('fsheet-footer');
   if (fsheetDone) {
     function _fsheetDoneAction() {
-      // Micro-animazione flash bianco → stato normale
+      // Micro-animazione flash — rimossa dopo 300ms (> 250ms durata)
       fsheetDone.classList.remove('btn-flash');
-      void fsheetDone.offsetWidth; // force reflow
+      void fsheetDone.offsetWidth;
       fsheetDone.classList.add('btn-flash');
-      setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); }, 220);
+      setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); fsheetDone.blur(); }, 300);
       // Chiude sempre, con o senza selezione
       closeFsheet();
       updateBadges();
@@ -1122,11 +1122,21 @@ function initF() {
       if (typeof updatePills === 'function') updatePills();
     }
     var _fsheetDoneTouched = false;
-    fsheetDone.addEventListener('touchstart', function(){ _fsheetDoneTouched = true; }, {passive:true});
+    // touchstart: flash visivo immediato
+    fsheetDone.addEventListener('touchstart', function(){
+      _fsheetDoneTouched = true;
+      fsheetDone.classList.remove('btn-flash');
+      void fsheetDone.offsetWidth;
+      fsheetDone.classList.add('btn-flash');
+    }, {passive:true});
     fsheetDone.addEventListener('touchend', function(e){
       e.preventDefault();
       _fsheetDoneTouched = false;
-      _fsheetDoneAction();
+      setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); fsheetDone.blur(); }, 300);
+      closeFsheet();
+      updateBadges();
+      render();
+      if (typeof updatePills === 'function') updatePills();
     });
     fsheetDone.addEventListener('click', function(){
       if(_fsheetDoneTouched){ _fsheetDoneTouched=false; return; }
@@ -2885,15 +2895,24 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
   });
 })();
 // ── Utility micro-animazione flash per bottoni TORNA/CHIUDI ──────
-// Cross-platform: funziona su iOS Safari, Android Chrome, PWA
-// Aggiunge classe .btn-flash che anima → bianco → torna grigio, mai persistente
+// Cross-platform: iOS Safari, Android Chrome, PWA
+// Usa touchstart per feedback immediato, rimuove sempre la classe dopo l'animazione
 function flashBtn(el) {
   if (!el) return;
   el.classList.remove('btn-flash');
-  void el.offsetWidth; // force reflow per re-triggerare keyframe
+  // Force reflow — necessario per re-triggerare il keyframe sullo stesso elemento
+  void el.offsetWidth;
   el.classList.add('btn-flash');
-  setTimeout(function(){ el.classList.remove('btn-flash'); }, 220);
+  // Rimuoviamo a 300ms (> durata animazione 250ms) per garantire che sia tornato grigio
+  setTimeout(function(){ el.classList.remove('btn-flash'); el.blur(); }, 300);
 }
+
+// Aggancia touchstart per feedback visivo immediato su tutti i drawer-back-btn
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.drawer-back-btn').forEach(function(btn){
+    btn.addEventListener('touchstart', function(){ flashBtn(this); }, {passive:true});
+  });
+});
 
 // ═══ RISORSE E CALCOLATORI DRAWER ═══
 (function(){

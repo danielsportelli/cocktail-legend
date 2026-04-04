@@ -15,7 +15,7 @@ body::before{
   z-index:9999;
 }
 @media (display-mode: standalone) {
-  .main{padding-top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px) + var(--pills-h) + 12px);}
+  .main{padding-top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px) + var(--pills-h) + 22px);}
 }
 
 /* HEADER */
@@ -439,13 +439,21 @@ body::before{
 }
 .fsheet-done{
   background:var(--blue);color:#fff;
-  border:none;border-radius:8px;
+  border:2px solid transparent;border-radius:8px;
   font-family:inherit;font-size:.75rem;font-weight:700;
   padding:.4rem 1rem;cursor:pointer;
   -webkit-tap-highlight-color:transparent;
+  -webkit-appearance:none;
+  outline:none;
   min-height:36px;
   touch-action:manipulation;
+  user-select:none;
+  -webkit-user-select:none;
+  transition:none;
 }
+/* Nessun :active persistente su mobile */
+.fsheet-done:focus{ outline:none; }
+.fsheet-done:active{ background:var(--blue); color:#fff; }
 .fsheet-body{
   overflow-y:auto;padding:.6rem 1.2rem 1rem;
   flex:1;
@@ -535,7 +543,7 @@ body::before{
 /* Contatore cocktail live */
 .result-count{
   font-size:.72rem;font-weight:800;
-  color:#60a5fa;letter-spacing:.01em;
+  color:#f1f5f9;letter-spacing:.01em;
   white-space:nowrap;flex-shrink:0;
 }
 .active-tag{
@@ -549,7 +557,7 @@ body::before{
 .active-tag .x{font-size:.7rem;opacity:.7}
 
 /* MAIN */
-.main{padding:.75rem 5% 1.25rem;padding-top:calc(var(--hdr-h) + var(--pills-h) + 12px)}
+.main{padding:.75rem 5% 1.25rem;padding-top:calc(var(--hdr-h) + var(--pills-h) + 22px)}
 
 /* Custom sort button */
 .sort-btn{
@@ -1088,36 +1096,52 @@ body::before{
   font-family:inherit;cursor:pointer;
   padding:.35rem .65rem;border-radius:6px;
   letter-spacing:.05em;text-transform:uppercase;
-  transition:color .15s, border-color .15s;flex-shrink:0;
+  /* Nessuna transition: evita che lo stato resti visibile su mobile dopo il tap */
+  transition:none;
+  flex-shrink:0;
   -webkit-tap-highlight-color:transparent;
+  -webkit-appearance:none;
+  outline:none;
   touch-action:manipulation;
+  /* Forza lo stato a non persistere su iOS/Android */
+  user-select:none;
+  -webkit-user-select:none;
 }
 .drawer-back-btn svg{pointer-events:none;}
-.drawer-back-btn:hover{ color:var(--txt2); border-color:var(--txt2); }
+/* Hover solo su dispositivi con puntatore preciso (mouse desktop) */
+@media (hover:hover) and (pointer:fine){
+  .drawer-back-btn:hover{ color:var(--txt2); border-color:var(--txt2); }
+}
+/* Nessun :focus o :active visibile — lo stato viene gestito solo via .btn-flash JS */
+.drawer-back-btn:focus{ outline:none; }
+.drawer-back-btn:active{ background:transparent; color:var(--dim); border-color:var(--dim); }
 .drawer-back-btn.visible{ display:inline-flex; }
 .drawer-back-btn--main{ display:inline-flex; }
 #ris-back-header-btn{ display:inline-flex; }
 #calc-back-header-btn{ display:inline-flex; }
 
-/* Micro-animazione flash per TORNA / CHIUDI / FATTO
+/* ── Micro-animazione flash TORNA/CHIUDI ──────────────────────────
    Cross-platform: iOS Safari, Android Chrome, PWA
-   Non usa :active per evitare lo stato permanente su mobile */
+   fill-mode:none → il bottone torna SEMPRE al suo stato CSS normale dopo l'animazione
+   La classe .btn-flash viene anche rimossa via JS dopo 300ms (doppia sicurezza) */
 @keyframes btnFlash{
   0%  { color:var(--dim);  border-color:var(--dim);  background:transparent; }
-  30% { color:#fff;        border-color:#fff;         background:rgba(255,255,255,.15); }
+  25% { color:#fff;        border-color:#fff;         background:rgba(255,255,255,.18); }
   100%{ color:var(--dim);  border-color:var(--dim);  background:transparent; }
 }
 .drawer-back-btn.btn-flash{
-  animation:btnFlash .22s ease forwards;
+  animation:btnFlash .25s ease-out none;
 }
-/* Variante per fsheet-done (sfondo blu, flash bianco) */
+
+/* ── Micro-animazione flash FATTO ─────────────────────────────────
+   Sfondo blu → bianco → blu, fill-mode:none per non persistere */
 @keyframes btnFlashDone{
-  0%  { background:var(--blue); color:#fff; }
-  30% { background:#fff;        color:var(--blue); }
-  100%{ background:var(--blue); color:#fff; }
+  0%  { background:var(--blue); color:#fff; box-shadow:none; }
+  25% { background:#fff;        color:var(--blue); box-shadow:0 0 0 2px rgba(255,255,255,.6); }
+  100%{ background:var(--blue); color:#fff; box-shadow:none; }
 }
 .fsheet-done.btn-flash{
-  animation:btnFlashDone .22s ease forwards;
+  animation:btnFlashDone .25s ease-out none;
 }
 .drawer{ scrollbar-width:none; }
 .drawer::-webkit-scrollbar{ display:none; }
