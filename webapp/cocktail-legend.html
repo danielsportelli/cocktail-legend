@@ -1801,30 +1801,55 @@ function calcABV() {
   if (pillsSrchBtn && filterBar) {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
+
+      // Calcola offset header e altezza pills (comuni a apertura e chiusura)
+      var pillsBar = document.getElementById('pills-bar');
+      var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
+      var offset = (typeof _hdrHidden !== 'undefined' && _hdrHidden) ? 0 : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
+
       if (srchOpen) {
+        // Misura altezza reale filter-bar invisibilmente prima di aprirla
+        filterBar.style.visibility = 'hidden';
+        filterBar.style.maxHeight = '200px';
+        filterBar.classList.remove('hidden');
+        var fbRealH = filterBar.offsetHeight || 52;
+        filterBar.classList.add('hidden');
+        filterBar.style.maxHeight = '';
+        filterBar.style.visibility = '';
+
+        // Setta --pills-bottom con l'altezza reale PRIMA che parta la transizione
+        // pills-bar e filter-bar transitano nello stesso frame → movimento sincronizzato
+        document.documentElement.style.setProperty('--pills-bottom', (offset + pillsH + fbRealH) + 'px');
+
+        // Aggiorna padding-top main subito con il valore precalcolato
+        var main = document.querySelector('.main');
+        if (main) main.style.paddingTop = (offset + pillsH + fbRealH + 22) + 'px';
+
+        // Ora apri — la transizione parte in sync con il cambio di --pills-bottom
         filterBar.classList.remove('hidden');
         pillsSrchBtn.classList.add('active');
-        // Aggiorna subito il padding-top in sincronia con la transizione CSS della filter-bar
-        if (typeof updateFbH === 'function') {
-          requestAnimationFrame(function(){
-            updateFbH();
-          });
-        }
+
         setTimeout(function(){
           var inp = document.getElementById('srch');
           if (inp) inp.focus();
-        }, 280);
+          // Ricalibra a fine transizione per sicurezza
+          if (typeof updateFbH === 'function') updateFbH();
+        }, 300);
+
       } else {
+        // Ripristina --pills-bottom senza filter-bar PRIMA di chiuderla
+        document.documentElement.style.setProperty('--pills-bottom', (offset + pillsH) + 'px');
+        var main2 = document.querySelector('.main');
+        if (main2) main2.style.paddingTop = (offset + pillsH + 22) + 'px';
+
         filterBar.classList.add('hidden');
         pillsSrchBtn.classList.remove('active');
         var inp = document.getElementById('srch');
         if (inp && inp.value) { inp.value = ''; Q = ''; render(); }
-        // Aggiorna subito
-        if (typeof updateFbH === 'function') {
-          requestAnimationFrame(function(){
-            updateFbH();
-          });
-        }
+
+        setTimeout(function(){
+          if (typeof updateFbH === 'function') updateFbH();
+        }, 300);
       }
     });
   }

@@ -280,7 +280,8 @@ body::before{
   opacity:1;
   transition:max-height .28s cubic-bezier(.4,0,.2,1),
              opacity .2s ease,
-             padding .28s ease;
+             padding .28s ease,
+             top .28s cubic-bezier(.4,0,.2,1);
 }
 .filter-bar.hidden{
   max-height:0;
@@ -307,6 +308,7 @@ body::before{
   box-shadow:0 8px 28px rgba(0,0,0,.85);
   display:flex;align-items:center;
   padding:.3rem 0 .35rem;
+  transition:top .28s cubic-bezier(.4,0,.2,1);
 }
 .hdr-animating .pills-bar{
   transition:top .28s cubic-bezier(.4,0,.2,1);
@@ -648,6 +650,10 @@ body::before{
 .overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--surf);border:1px solid rgba(37,99,235,.2);border-radius:16px;
   max-width:520px;width:100%;max-height:90vh;overflow-y:auto;
+  overflow-x:hidden;
+  isolation:isolate;
+  -webkit-mask-image:-webkit-radial-gradient(white,black);
+  will-change:transform;
   transform:translateY(20px) scale(.97);transition:transform .25s}
 .overlay.open .modal{transform:translateY(0) scale(1)}
 .modal::-webkit-scrollbar{display:none}
@@ -671,6 +677,7 @@ body::before{
   background:rgb(30,41,59);
   border-bottom:1px solid rgba(255,255,255,.07);
   border-radius:16px 16px 0 0;
+  overflow:hidden;
 }
 .m-sticky-title{
   font-size:.82rem;font-weight:700;color:var(--txt2);
