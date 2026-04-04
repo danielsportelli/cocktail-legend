@@ -379,6 +379,9 @@ body::before{
 }
 .calc-cmd-btn:focus,.ris-cmd-btn:focus{outline:none;}
 .calc-cmd-btn:focus-visible,.ris-cmd-btn:focus-visible{outline:none;}
+.calc-cmd-btn,.ris-cmd-btn{background:var(--surf);-webkit-tap-highlight-color:transparent;}
+.calc-cmd-btn:active,.ris-cmd-btn:active{background:rgba(255,255,255,.10);}
+.calc-cmd-btn:not(:active),.ris-cmd-btn:not(:active){background:var(--surf);}
 .sort-sopt{
   display:flex;align-items:center;justify-content:space-between;
   width:100%;background:none;border:none;
@@ -1071,10 +1074,14 @@ body::before{
   border:1px solid var(--dim);
   color:var(--dim);font-size:.62rem;font-weight:600;
   font-family:inherit;cursor:pointer;
-  padding:.2rem .5rem;border-radius:6px;
+  padding:.35rem .65rem;border-radius:6px;
   letter-spacing:.05em;text-transform:uppercase;
   transition:color .15s, border-color .15s;flex-shrink:0;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  min-height:36px;
 }
+.drawer-back-btn svg{pointer-events:none;}
 .drawer-back-btn:hover{ color:var(--txt2); border-color:var(--txt2); }
 .drawer-back-btn.visible{ display:inline-flex; }
 .drawer-back-btn--main{ display:inline-flex; }
