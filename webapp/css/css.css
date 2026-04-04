@@ -377,7 +377,8 @@ body::before{
   font-size:.6rem;font-weight:800;
   margin-left:.1rem;
 }
-/* Sort bottom sheet options */
+.calc-cmd-btn:focus,.ris-cmd-btn:focus{outline:none;}
+.calc-cmd-btn:focus-visible,.ris-cmd-btn:focus-visible{outline:none;}
 .sort-sopt{
   display:flex;align-items:center;justify-content:space-between;
   width:100%;background:none;border:none;
