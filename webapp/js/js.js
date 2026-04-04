@@ -1109,39 +1109,57 @@ function initF() {
   var fsheetOvl    = document.getElementById('fsheet-overlay');
   var fsheetFooter = document.getElementById('fsheet-footer');
   if (fsheetDone) {
-    function _fsheetDoneAction() {
-      // Micro-animazione flash — rimossa dopo 300ms (> 250ms durata)
+
+    function _fsheetDoneFlash() {
       fsheetDone.classList.remove('btn-flash');
       void fsheetDone.offsetWidth;
       fsheetDone.classList.add('btn-flash');
       setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); fsheetDone.blur(); }, 300);
-      // Chiude sempre, con o senza selezione
+    }
+
+    function _fsheetDoneAction() {
+      _fsheetDoneFlash();
       closeFsheet();
       updateBadges();
       render();
       if (typeof updatePills === 'function') updatePills();
     }
-    var _fsheetDoneTouched = false;
-    // touchstart: flash visivo immediato
-    fsheetDone.addEventListener('touchstart', function(){
-      _fsheetDoneTouched = true;
-      fsheetDone.classList.remove('btn-flash');
-      void fsheetDone.offsetWidth;
-      fsheetDone.classList.add('btn-flash');
-    }, {passive:true});
-    fsheetDone.addEventListener('touchend', function(e){
-      e.preventDefault();
-      _fsheetDoneTouched = false;
-      setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); fsheetDone.blur(); }, 300);
-      closeFsheet();
-      updateBadges();
-      render();
-      if (typeof updatePills === 'function') updatePills();
-    });
-    fsheetDone.addEventListener('click', function(){
-      if(_fsheetDoneTouched){ _fsheetDoneTouched=false; return; }
-      _fsheetDoneAction();
-    });
+
+    // ── Pointer Events API: il metodo più affidabile cross-platform ──
+    // Funziona su: iOS Safari 13+, Android Chrome, Samsung Browser, PWA
+    // Un solo evento coerente invece di gestire touch + mouse separatamente
+    if (window.PointerEvent) {
+      fsheetDone.addEventListener('pointerdown', function(e) {
+        // Flash visivo immediato al tocco
+        _fsheetDoneFlash();
+      });
+      fsheetDone.addEventListener('pointerup', function(e) {
+        // Esegui azione solo se il pointer è ancora sopra il bottone
+        _fsheetDoneAction();
+      });
+      // Previeni double-fire con click su dispositivi che generano entrambi
+      fsheetDone.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    } else {
+      // Fallback per browser senza PointerEvent (Safari < 13)
+      var _fsheetDoneTouched = false;
+      fsheetDone.addEventListener('touchstart', function(e) {
+        _fsheetDoneTouched = true;
+        _fsheetDoneFlash();
+      }, {passive: true});
+      fsheetDone.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        if (_fsheetDoneTouched) {
+          _fsheetDoneTouched = false;
+          _fsheetDoneAction();
+        }
+      });
+      fsheetDone.addEventListener('click', function(e) {
+        if (_fsheetDoneTouched) { _fsheetDoneTouched = false; return; }
+        _fsheetDoneAction();
+      });
+    }
   }
   if (fsheetOvl)  fsheetOvl.addEventListener('click', closeFsheet);
   // Tap + swipe up solo dal footer (fascia del trattino)
