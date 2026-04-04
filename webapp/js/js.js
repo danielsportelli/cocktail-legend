@@ -1104,65 +1104,54 @@ function initF() {
     });
   }
 
-  // Fsheet: done button, overlay, footer (fascia handle)
+  updatePills();
+}
+
+
+// ═══ FSHEET DONE/OVERLAY/FOOTER — inizializzato al DOM ready ═══
+// IMPORTANTE: separato da initF() che dipende dal fetch JSON.
+// Il bottone FATTO deve funzionare subito, anche prima che il JSON sia caricato.
+document.addEventListener('DOMContentLoaded', function() {
   var fsheetDone   = document.getElementById('fsheet-done');
   var fsheetOvl    = document.getElementById('fsheet-overlay');
   var fsheetFooter = document.getElementById('fsheet-footer');
-  if (fsheetDone) {
 
+  // ── FATTO ─────────────────────────────────────────────────────
+  if (fsheetDone) {
     function _fsheetDoneFlash() {
       fsheetDone.classList.remove('btn-flash');
       void fsheetDone.offsetWidth;
       fsheetDone.classList.add('btn-flash');
       setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); fsheetDone.blur(); }, 300);
     }
-
     function _fsheetDoneAction() {
       _fsheetDoneFlash();
       closeFsheet();
-      updateBadges();
-      render();
+      if (typeof updateBadges === 'function') updateBadges();
+      if (typeof render === 'function') render();
       if (typeof updatePills === 'function') updatePills();
     }
-
-    // ── Pointer Events API: il metodo più affidabile cross-platform ──
-    // Funziona su: iOS Safari 13+, Android Chrome, Samsung Browser, PWA
-    // Un solo evento coerente invece di gestire touch + mouse separatamente
-    if (window.PointerEvent) {
-      fsheetDone.addEventListener('pointerdown', function(e) {
-        // Flash visivo immediato al tocco
-        _fsheetDoneFlash();
-      });
-      fsheetDone.addEventListener('pointerup', function(e) {
-        // Esegui azione solo se il pointer è ancora sopra il bottone
-        _fsheetDoneAction();
-      });
-      // Previeni double-fire con click su dispositivi che generano entrambi
-      fsheetDone.addEventListener('click', function(e) {
-        e.stopPropagation();
-      });
-    } else {
-      // Fallback per browser senza PointerEvent (Safari < 13)
-      var _fsheetDoneTouched = false;
-      fsheetDone.addEventListener('touchstart', function(e) {
-        _fsheetDoneTouched = true;
-        _fsheetDoneFlash();
-      }, {passive: true});
-      fsheetDone.addEventListener('touchend', function(e) {
-        e.preventDefault();
-        if (_fsheetDoneTouched) {
-          _fsheetDoneTouched = false;
-          _fsheetDoneAction();
-        }
-      });
-      fsheetDone.addEventListener('click', function(e) {
-        if (_fsheetDoneTouched) { _fsheetDoneTouched = false; return; }
-        _fsheetDoneAction();
-      });
-    }
+    // pointerdown: flash immediato e azione — un solo evento, nessun double-fire
+    // Funziona su iOS Safari 13+, Android Chrome, Samsung Browser, PWA
+    var _fsheetDoneActed = false;
+    fsheetDone.addEventListener('pointerdown', function(e) {
+      e.preventDefault();
+      if (_fsheetDoneActed) return;
+      _fsheetDoneActed = true;
+      _fsheetDoneAction();
+      setTimeout(function(){ _fsheetDoneActed = false; }, 400);
+    });
+    // click come fallback per browser senza PointerEvent o mouse desktop
+    fsheetDone.addEventListener('click', function(e) {
+      if (_fsheetDoneActed) { return; }
+      _fsheetDoneAction();
+    });
   }
-  if (fsheetOvl)  fsheetOvl.addEventListener('click', closeFsheet);
-  // Tap + swipe up solo dal footer (fascia del trattino)
+
+  // ── OVERLAY chiude tendina ─────────────────────────────────────
+  if (fsheetOvl) fsheetOvl.addEventListener('click', closeFsheet);
+
+  // ── FOOTER swipe/tap chiude tendina ───────────────────────────
   if (fsheetFooter) {
     var _fsY = 0;
     fsheetFooter.addEventListener('click', closeFsheet);
@@ -1171,13 +1160,10 @@ function initF() {
     }, {passive:true});
     fsheetFooter.addEventListener('touchend', function(e){
       var dy = _fsY - e.changedTouches[0].clientY;
-      if (dy > 30) closeFsheet(); // swipe up
+      if (dy > 30) closeFsheet();
     }, {passive:true});
   }
-
-  updatePills();
-}
-
+});
 
 // ═══ RESET COMPLETO (filtri + ricerca) ═══
 document.addEventListener('DOMContentLoaded', function(){
