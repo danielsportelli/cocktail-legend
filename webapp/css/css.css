@@ -1424,7 +1424,7 @@ body.user-premium #sg-pdf-link > span:last-child {
    Stile da Spirit Genesis — appare dopo 1200px di scroll */
 #back-to-top {
   position: fixed;
-  bottom: 5.5rem; /* sopra la nav tab bar */
+  bottom: 4rem; /* leggermente sopra la nav tab bar */
   right: 1.1rem;
   width: 40px;
   height: 40px;
@@ -1444,6 +1444,7 @@ body.user-premium #sg-pdf-link > span:last-child {
   -webkit-tap-highlight-color: transparent;
   pointer-events: none;
   touch-action: manipulation;
+  outline: none;
 }
 #back-to-top.visible {
   opacity: 1;
@@ -1464,4 +1465,13 @@ body.user-premium #sg-pdf-link > span:last-child {
   #back-to-top:hover svg {
     stroke: var(--blue-l);
   }
+}
+/* Bagliore blu al tap — non persiste */
+@keyframes bttGlow {
+  0%   { box-shadow: 0 0 0 0 rgba(37,99,235,0);   border-color: rgba(255,255,255,0.12); background: rgba(15,23,42,0.82); }
+  35%  { box-shadow: 0 0 0 8px rgba(37,99,235,0.35); border-color: var(--blue-l);          background: rgba(37,99,235,0.25); }
+  100% { box-shadow: 0 0 0 0 rgba(37,99,235,0);   border-color: rgba(255,255,255,0.12); background: rgba(15,23,42,0.82); }
+}
+#back-to-top.btt-flash {
+  animation: bttGlow .35s ease-out none;
 }

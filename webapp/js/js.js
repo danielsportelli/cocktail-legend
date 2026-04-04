@@ -4806,7 +4806,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ── BACK TO TOP ───────────────────────────────────────────────────
-// Appare dopo 1200px di scroll — stile Spirit Genesis
+// Appare dopo 5000px di scroll — stile Spirit Genesis
 (function(){
   document.addEventListener('DOMContentLoaded', function(){
     var btn = document.getElementById('back-to-top');
@@ -4814,19 +4814,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Mostra/nascondi al scroll
     window.addEventListener('scroll', function(){
-      btn.classList.toggle('visible', (window.scrollY || window.pageYOffset) > 1200);
+      btn.classList.toggle('visible', (window.scrollY || window.pageYOffset) > 5000);
     }, { passive: true });
 
-    // Click: scroll smooth to top
+    // Utility: bagliore blu istantaneo, non persistente
+    function bttFlash() {
+      btn.classList.remove('btt-flash');
+      void btn.offsetWidth; // force reflow
+      btn.classList.add('btt-flash');
+      setTimeout(function(){ btn.classList.remove('btt-flash'); btn.blur(); }, 380);
+    }
+
+    // Touch: flash immediato al touchstart, scroll al touchend
     var _bttTouched = false;
-    btn.addEventListener('touchstart', function(){ _bttTouched = true; }, { passive: true });
+    btn.addEventListener('touchstart', function(){
+      _bttTouched = true;
+      bttFlash();
+    }, { passive: true });
     btn.addEventListener('touchend', function(e){
       e.preventDefault();
       _bttTouched = false;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+    // Click (mouse desktop)
     btn.addEventListener('click', function(){
       if (_bttTouched) { _bttTouched = false; return; }
+      bttFlash();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   });
