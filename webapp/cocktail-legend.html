@@ -1794,7 +1794,7 @@ function calcABV() {
     }
   }
 
-  // Lente pills-bar — toggle search bar sotto pills
+  // Lente pills-bar — toggle search bar sotto pills, sincronizzato in un unico frame
   var pillsSrchBtn = document.getElementById('pills-srch-btn');
   var filterBar = document.getElementById('filter-bar');
   var srchOpen = false;
@@ -1802,48 +1802,53 @@ function calcABV() {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
 
-      // Calcola offset header e altezza pills (comuni a apertura e chiusura)
+      // FASE 1 — misura (read): leggi tutto prima di toccare il DOM (no layout thrashing)
       var pillsBar = document.getElementById('pills-bar');
-      var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
-      var offset = (typeof _hdrHidden !== 'undefined' && _hdrHidden) ? 0 : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
+      var pillsH   = pillsBar ? pillsBar.offsetHeight : 40;
+      var offset   = (typeof _hdrHidden !== 'undefined' && _hdrHidden)
+                       ? 0
+                       : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
 
       if (srchOpen) {
-        // Misura altezza reale filter-bar invisibilmente prima di aprirla
+        // Misura altezza reale filter-bar in un pass invisibile (read-only sul DOM)
         filterBar.style.visibility = 'hidden';
-        filterBar.style.maxHeight = '200px';
+        filterBar.style.maxHeight  = '200px';
         filterBar.classList.remove('hidden');
         var fbRealH = filterBar.offsetHeight || 52;
+        // Ripristina stato hidden senza toccare altro
         filterBar.classList.add('hidden');
-        filterBar.style.maxHeight = '';
+        filterBar.style.maxHeight  = '';
         filterBar.style.visibility = '';
 
-        // Setta --pills-bottom con l'altezza reale PRIMA che parta la transizione
-        // pills-bar e filter-bar transitano nello stesso frame → movimento sincronizzato
-        document.documentElement.style.setProperty('--pills-bottom', (offset + pillsH + fbRealH) + 'px');
+        // FASE 2 — scrivi tutto nello stesso rAF: pills-bar e filter-bar
+        // partono nello stesso frame → movimento completamente sincronizzato
+        requestAnimationFrame(function() {
+          var main = document.querySelector('.main');
+          // Imposta CSS custom property PRIMA di rimuovere .hidden → la pills-bar
+          // legge già il valore aggiornato quando scatta la transition CSS
+          document.documentElement.style.setProperty('--pills-bottom', (offset + pillsH + fbRealH) + 'px');
+          if (main) main.style.paddingTop = (offset + pillsH + fbRealH + 22) + 'px';
+          filterBar.classList.remove('hidden');
+          pillsSrchBtn.classList.add('active');
+        });
 
-        // Aggiorna padding-top main subito con il valore precalcolato
-        var main = document.querySelector('.main');
-        if (main) main.style.paddingTop = (offset + pillsH + fbRealH + 22) + 'px';
-
-        // Ora apri — la transizione parte in sync con il cambio di --pills-bottom
-        filterBar.classList.remove('hidden');
-        pillsSrchBtn.classList.add('active');
-
+        // Focus input a fine transizione
         setTimeout(function(){
           var inp = document.getElementById('srch');
           if (inp) inp.focus();
-          // Ricalibra a fine transizione per sicurezza
           if (typeof updateFbH === 'function') updateFbH();
         }, 300);
 
       } else {
-        // Ripristina --pills-bottom senza filter-bar PRIMA di chiuderla
-        document.documentElement.style.setProperty('--pills-bottom', (offset + pillsH) + 'px');
-        var main2 = document.querySelector('.main');
-        if (main2) main2.style.paddingTop = (offset + pillsH + 22) + 'px';
+        // FASE 2 chiusura — tutte le scritture in un unico rAF
+        requestAnimationFrame(function() {
+          var main2 = document.querySelector('.main');
+          document.documentElement.style.setProperty('--pills-bottom', (offset + pillsH) + 'px');
+          if (main2) main2.style.paddingTop = (offset + pillsH + 22) + 'px';
+          filterBar.classList.add('hidden');
+          pillsSrchBtn.classList.remove('active');
+        });
 
-        filterBar.classList.add('hidden');
-        pillsSrchBtn.classList.remove('active');
         var inp = document.getElementById('srch');
         if (inp && inp.value) { inp.value = ''; Q = ''; render(); }
 
