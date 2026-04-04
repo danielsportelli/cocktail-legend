@@ -379,6 +379,9 @@ body::before{
 }
 .calc-cmd-btn:focus,.ris-cmd-btn:focus{outline:none;}
 .calc-cmd-btn:focus-visible,.ris-cmd-btn:focus-visible{outline:none;}
+.calc-cmd-btn,.ris-cmd-btn{-webkit-tap-highlight-color:transparent;background:transparent;}
+.calc-cmd-btn:active,.ris-cmd-btn:active{background:rgba(255,255,255,.05);}
+.calc-cmd-btn:not(:active),.ris-cmd-btn:not(:active){background:transparent;}
 .sort-sopt{
   display:flex;align-items:center;justify-content:space-between;
   width:100%;background:none;border:none;
