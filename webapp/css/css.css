@@ -1079,7 +1079,6 @@ body::before{
   transition:color .15s, border-color .15s;flex-shrink:0;
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
-  min-height:36px;
 }
 .drawer-back-btn svg{pointer-events:none;}
 .drawer-back-btn:hover{ color:var(--txt2); border-color:var(--txt2); }

@@ -2862,10 +2862,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
   // Hover card stile Barman AI
   document.addEventListener('DOMContentLoaded', function(){
-    document.querySelectorAll('.ris-cmd-btn,.calc-cmd-btn').forEach(function(b){
-      b.addEventListener('mouseenter',function(){ this.style.borderColor='rgba(37,99,235,.4)'; this.style.background='rgba(37,99,235,.06)'; });
-      b.addEventListener('mouseleave',function(){ this.style.borderColor='var(--brd)'; this.style.background='var(--bg)'; });
-    });
+    // mouseenter/mouseleave rimossi: sovrascrivevano il CSS e causavano sfondo nero persistente su mobile
 
     // Titoli dinamici
     var RIS_TITLES={tmp:'Temperature',bic:'Glossario',glass:'Bicchieri'};
@@ -2895,6 +2892,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     // Click card Risorse
     document.querySelectorAll('.ris-cmd-btn').forEach(function(b){
       b.addEventListener('click',function(){
+        this.blur();
         var cmd=this.dataset.cmd;
         var t=document.getElementById('ris-header-title');
         if(t)t.textContent=RIS_TITLES[cmd]||'Risorse';
@@ -2912,6 +2910,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     // Click card Calcolatori
     document.querySelectorAll('.calc-cmd-btn').forEach(function(b){
       b.addEventListener('click',function(){
+        this.blur();
         var cmd=this.dataset.cmd;
         var t=document.getElementById('calc-header-title');
         if(t)t.textContent=CALC_TITLES[cmd]||'Calcolatori';
@@ -2957,6 +2956,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var _origShowRisCmds = showRisCmds;
       document.getElementById('ris-back-header-btn').removeEventListener('click', showRisCmds);
       document.getElementById('ris-back-header-btn').addEventListener('click', function() {
+        this.blur();
         var btn = this;
         if (btn.classList.contains('visible')) {
           // Dentro una funzione → torna alla lista
@@ -2973,6 +2973,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if (calcBackMain) {
       document.getElementById('calc-back-header-btn').removeEventListener('click', showCalcCmds);
       document.getElementById('calc-back-header-btn').addEventListener('click', function() {
+        this.blur();
         var btn = this;
         if (btn.classList.contains('visible')) {
           showCalcCmds();
@@ -2996,6 +2997,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     var accBack = document.getElementById('acc-back-header-btn');
     if (accBack) {
       accBack.addEventListener('click', function(e) {
+        this.blur();
         e.stopPropagation();
         closeAllDrawers();
       });
