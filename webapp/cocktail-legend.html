@@ -1804,16 +1804,14 @@ function calcABV() {
       if (srchOpen) {
         filterBar.classList.remove('hidden');
         pillsSrchBtn.classList.add('active');
-        // Aggiorna subito il padding-top in sincronia con la transizione CSS della filter-bar
+        // Focus immediato nel click handler — unico modo per aprire tastiera su iOS Safari.
+        // Su iOS il focus() da setTimeout viene ignorato (sicurezza browser).
+        var inp = document.getElementById('srch');
+        if (inp) inp.focus();
+        // Aggiorna padding-top in sincronia con la transizione CSS
         if (typeof updateFbH === 'function') {
-          requestAnimationFrame(function(){
-            updateFbH();
-          });
+          requestAnimationFrame(function(){ updateFbH(); });
         }
-        setTimeout(function(){
-          var inp = document.getElementById('srch');
-          if (inp) inp.focus();
-        }, 280);
       } else {
         filterBar.classList.add('hidden');
         pillsSrchBtn.classList.remove('active');
