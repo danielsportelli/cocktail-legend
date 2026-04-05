@@ -436,6 +436,7 @@ body::before{
 .fsheet-title{
   font-size:.7rem;font-weight:800;
   letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+}
 .fsheet-done{
   background:var(--blue);color:#fff;
   border:none;border-radius:6px;
