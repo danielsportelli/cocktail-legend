@@ -4,12 +4,24 @@ const { getFirestore } = require("firebase-admin/firestore");
 
 initializeApp();
 
+// Restituisce la data corrente nel timezone di Roma (YYYY-MM-DD)
+// Usa Intl.DateTimeFormat per evitare il bug UTC dei cambi ora (marzo/settembre)
+function oggi_roma() {
+  return new Intl.DateTimeFormat("it-IT", {
+    timeZone: "Europe/Rome",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date()).split("/").reverse().join("-");
+  // "06/04/2026" → ["2026","04","06"] → "2026-04-06"
+}
+
 // ═══════════════════════════════════════════════════
-// DOMANDA DEL GIORNO — ogni notte alle 00:10 (Roma)
+// DOMANDA DEL GIORNO — ogni notte alle 03:00 (Roma)
 // ═══════════════════════════════════════════════════
 exports.aggiornaDomandaDelGiorno = onSchedule(
   {
-    schedule: "10 0 * * *",
+    schedule: "0 3 * * *",
     timeZone: "Europe/Rome",
     region: "europe-west1",
   },
@@ -38,7 +50,7 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
         return;
       }
 
-      const oggi = new Date().toISOString().split("T")[0];
+      const oggi = oggi_roma();
 
       // docs[0] = domanda di oggi, docs[1] = anteprima domani
       const dati = snapshot.docs[0].data();
@@ -73,7 +85,7 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
         data_utilizzo: oggi,
       });
 
-      console.log("Nuova domanda del giorno: " + dati.id);
+      console.log("Nuova domanda del giorno: " + dati.id + " — " + oggi);
 
     } catch (error) {
       console.error("Errore:", error);
@@ -82,11 +94,11 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
 );
 
 // ═══════════════════════════════════════════════════
-// RESET MENSILE + PREMI — ogni 1° del mese alle 00:00 (Roma)
+// RESET MENSILE + PREMI — ogni 1° del mese alle 03:30 (Roma)
 // ═══════════════════════════════════════════════════
 exports.resetMensile = onSchedule(
   {
-    schedule: "0 0 1 * *",
+    schedule: "30 3 1 * *",
     timeZone: "Europe/Rome",
     region: "europe-west1",
   },
