@@ -854,8 +854,8 @@ window.addEventListener('scroll', function(){
 function updateFbH(){
   var fb = document.getElementById('filter-bar');
   if (!fb) return;
-  // Con translateY la filter-bar ha sempre la sua altezza reale nel layout.
-  // Usiamo 0 quando hidden (è fuori schermo), altezza reale quando visibile.
+  void fb.offsetHeight;
+  // Se hidden, usa 0 direttamente senza leggere offsetHeight (che è in transizione)
   _cachedFbH = fb.classList.contains('hidden') ? 0 : fb.offsetHeight;
   document.documentElement.style.setProperty('--fb-h', _cachedFbH + 'px');
   updateRbarTop();
@@ -866,7 +866,7 @@ document.addEventListener('DOMContentLoaded', function(){
   var fb = document.getElementById('filter-bar');
   if (fb) {
     fb.addEventListener('transitionend', function(e){
-      if (e.propertyName === 'transform' || e.propertyName === 'opacity') updateFbH();
+      if (e.propertyName === 'max-height') updateFbH();
     });
   }
 });
@@ -1104,18 +1104,10 @@ function initF() {
     });
   }
 
-  updatePills();
-}
-
-
-// ═══ FSHEET DONE/OVERLAY/FOOTER — inizializzato al DOM ready ═══
-// Separato da initF() che dipende dal fetch JSON — funziona subito al primo caricamento
-document.addEventListener('DOMContentLoaded', function() {
+  // Fsheet: done button, overlay, footer (fascia handle)
   var fsheetDone   = document.getElementById('fsheet-done');
   var fsheetOvl    = document.getElementById('fsheet-overlay');
   var fsheetFooter = document.getElementById('fsheet-footer');
-
-  // ── FATTO ─────────────────────────────────────────────────────
   if (fsheetDone) {
 
     function _fsheetDoneFlash() {
@@ -1125,27 +1117,52 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); fsheetDone.blur(); }, 300);
     }
 
-    // Flash immediato al tocco — pointerdown+touchstart per massima compatibilità
-    fsheetDone.addEventListener('pointerdown', function() {
+    function _fsheetDoneAction() {
       _fsheetDoneFlash();
-    }, {passive: true});
-    fsheetDone.addEventListener('touchstart', function() {
-      if (!window.PointerEvent) _fsheetDoneFlash();
-    }, {passive: true});
-
-    // click: unico trigger per l'azione — garantito su tutti i browser e al primo tap
-    fsheetDone.addEventListener('click', function() {
       closeFsheet();
-      if (typeof updateBadges === 'function') updateBadges();
-      if (typeof render === 'function') render();
+      updateBadges();
+      render();
       if (typeof updatePills === 'function') updatePills();
-    });
+    }
+
+    // ── Pointer Events API: il metodo più affidabile cross-platform ──
+    // Funziona su: iOS Safari 13+, Android Chrome, Samsung Browser, PWA
+    // Un solo evento coerente invece di gestire touch + mouse separatamente
+    if (window.PointerEvent) {
+      fsheetDone.addEventListener('pointerdown', function(e) {
+        // Flash visivo immediato al tocco
+        _fsheetDoneFlash();
+      });
+      fsheetDone.addEventListener('pointerup', function(e) {
+        // Esegui azione solo se il pointer è ancora sopra il bottone
+        _fsheetDoneAction();
+      });
+      // Previeni double-fire con click su dispositivi che generano entrambi
+      fsheetDone.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    } else {
+      // Fallback per browser senza PointerEvent (Safari < 13)
+      var _fsheetDoneTouched = false;
+      fsheetDone.addEventListener('touchstart', function(e) {
+        _fsheetDoneTouched = true;
+        _fsheetDoneFlash();
+      }, {passive: true});
+      fsheetDone.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        if (_fsheetDoneTouched) {
+          _fsheetDoneTouched = false;
+          _fsheetDoneAction();
+        }
+      });
+      fsheetDone.addEventListener('click', function(e) {
+        if (_fsheetDoneTouched) { _fsheetDoneTouched = false; return; }
+        _fsheetDoneAction();
+      });
+    }
   }
-
-  // ── OVERLAY chiude tendina ─────────────────────────────────────
-  if (fsheetOvl) fsheetOvl.addEventListener('click', closeFsheet);
-
-  // ── FOOTER swipe/tap chiude tendina ───────────────────────────
+  if (fsheetOvl)  fsheetOvl.addEventListener('click', closeFsheet);
+  // Tap + swipe up solo dal footer (fascia del trattino)
   if (fsheetFooter) {
     var _fsY = 0;
     fsheetFooter.addEventListener('click', closeFsheet);
@@ -1154,10 +1171,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }, {passive:true});
     fsheetFooter.addEventListener('touchend', function(e){
       var dy = _fsY - e.changedTouches[0].clientY;
-      if (dy > 30) closeFsheet();
+      if (dy > 30) closeFsheet(); // swipe up
     }, {passive:true});
   }
-});
+
+  updatePills();
+}
+
 
 // ═══ RESET COMPLETO (filtri + ricerca) ═══
 document.addEventListener('DOMContentLoaded', function(){

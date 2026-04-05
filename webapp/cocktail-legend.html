@@ -1794,9 +1794,7 @@ function calcABV() {
     }
   }
 
-  // Lente pills-bar — toggle search bar
-  // filter-bar è fissa a top=--pills-bottom; entra/esce via translateY (CSS).
-  // La pills-bar resta ferma — la search scende sotto di essa senza coprirla mai.
+  // Lente pills-bar — toggle search bar sotto pills
   var pillsSrchBtn = document.getElementById('pills-srch-btn');
   var filterBar = document.getElementById('filter-bar');
   var srchOpen = false;
@@ -1806,17 +1804,27 @@ function calcABV() {
       if (srchOpen) {
         filterBar.classList.remove('hidden');
         pillsSrchBtn.classList.add('active');
+        // Aggiorna subito il padding-top in sincronia con la transizione CSS della filter-bar
+        if (typeof updateFbH === 'function') {
+          requestAnimationFrame(function(){
+            updateFbH();
+          });
+        }
         setTimeout(function(){
           var inp = document.getElementById('srch');
           if (inp) inp.focus();
-          if (typeof updateFbH === 'function') updateFbH();
-        }, 300);
+        }, 280);
       } else {
         filterBar.classList.add('hidden');
         pillsSrchBtn.classList.remove('active');
         var inp = document.getElementById('srch');
         if (inp && inp.value) { inp.value = ''; Q = ''; render(); }
-        if (typeof updateFbH === 'function') updateFbH();
+        // Aggiorna subito
+        if (typeof updateFbH === 'function') {
+          requestAnimationFrame(function(){
+            updateFbH();
+          });
+        }
       }
     });
   }
