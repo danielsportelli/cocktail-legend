@@ -1216,36 +1216,40 @@ function renderQuiz(data, quizId, uid, oggi) {
     // Sblocca AudioContext dentro il click handler — obbligatorio su Android Chrome/PWA
     // await garantisce che il contesto sia running PRIMA del primo suono
     await _unlockAudio();
-    playCountdownTick(count);
 
-    var cdInterval = setInterval(function() {
-      count--;
-      if (count <= 0) {
-        clearInterval(cdInterval);
-        // Ripristina stato start per eventuali riusi
-        startContent.style.display = '';
-        startCountdown.style.display = 'none';
-        showState('state-quiz');
-        playQuizStart();
-        startTimer(function() {
-          answered = true;
-          document.querySelectorAll('.option').forEach(function(o){
-            o.classList.add('disabled');
-            const txt = o.querySelector('.opt-text').textContent;
-            if (txt === testoCorretto) o.classList.add('correct');
-            else o.classList.add('dimmed');
-          });
-          playWrong();
-          showResult(false, true, 0, spiegazione, testoCorretto);
-          saveRisposta(uid, quizId, false, 0, oggi);
-        });
-        return;
-      }
-      numEl.textContent = count;
-      numEl.classList.remove('countdown-num');
-      void numEl.offsetWidth;
-      numEl.classList.add('countdown-num');
+    // Mostra 5 visivamente, attende 1s intero prima del primo bip
+    // → ogni bip distanziato esattamente 1s dall'altro (5→4→3→2→1→VIA)
+    setTimeout(function() {
       playCountdownTick(count);
+
+      var cdInterval = setInterval(function() {
+        count--;
+        if (count <= 0) {
+          clearInterval(cdInterval);
+          startContent.style.display = '';
+          startCountdown.style.display = 'none';
+          showState('state-quiz');
+          playQuizStart();
+          startTimer(function() {
+            answered = true;
+            document.querySelectorAll('.option').forEach(function(o){
+              o.classList.add('disabled');
+              const txt = o.querySelector('.opt-text').textContent;
+              if (txt === testoCorretto) o.classList.add('correct');
+              else o.classList.add('dimmed');
+            });
+            playWrong();
+            showResult(false, true, 0, spiegazione, testoCorretto);
+            saveRisposta(uid, quizId, false, 0, oggi);
+          });
+          return;
+        }
+        numEl.textContent = count;
+        numEl.classList.remove('countdown-num');
+        void numEl.offsetWidth;
+        numEl.classList.add('countdown-num');
+        playCountdownTick(count);
+      }, 1000);
     }, 1000);
   };
 }
@@ -1277,7 +1281,7 @@ function handleAnswer(el, isCorrect, rispostaCorretta, spiegazione, opzioni, uid
 
 // ══════════════════════════════════════════════════════
 // QUIZ AUDIO ENGINE — Web Audio API, zero file esterni
-// Funziona su iOS Safari, Android Chrome, PWA, desktop
+// Cross-platform: iOS Safari, Android Chrome, PWA, desktop
 // ══════════════════════════════════════════════════════
 var _audioCtx = null;
 
@@ -1290,9 +1294,6 @@ function _getAudioCtx() {
   return _audioCtx;
 }
 
-// Sblocca AudioContext — deve essere chiamato DENTRO un click handler.
-// Su Android Chrome/PWA resume() è asincrono — aspettiamo la Promise
-// prima di suonare qualsiasi cosa.
 function _unlockAudio() {
   var ctx = _getAudioCtx();
   if (!ctx) return Promise.resolve();
@@ -1300,13 +1301,11 @@ function _unlockAudio() {
   return ctx.resume ? ctx.resume() : Promise.resolve();
 }
 
-// ── COUNTDOWN TICK — stesso suono per tutti i secondi, tipo semaforo F1
-// Beep corto, secco, acuto — onda quadra con click iniziale
-function playCountdownTick(number) {
+// ── COUNTDOWN TICK — beep secco 880Hz, identico per ogni secondo
+function playCountdownTick() {
   var ctx = _getAudioCtx();
   if (!ctx) return;
   var t = ctx.currentTime;
-
   var osc = ctx.createOscillator();
   var gain = ctx.createGain();
   osc.connect(gain);
@@ -1319,117 +1318,106 @@ function playCountdownTick(number) {
   osc.stop(t + 0.09);
 }
 
-// ── VIA! — semaforo F1: tono prolungato che sale e poi si spegne
-// Stile luce verde del semaforo — lungo, pieno, liberatorio
+// ── VIA! — stesso tono countdown ma prolungato (~600ms)
 function playQuizStart() {
   var ctx = _getAudioCtx();
   if (!ctx) return;
   var t = ctx.currentTime;
-
-  // Tono principale — lungo e pieno
-  var osc1 = ctx.createOscillator();
-  var gain1 = ctx.createGain();
-  osc1.connect(gain1);
-  gain1.connect(ctx.destination);
-  osc1.type = 'sine';
-  osc1.frequency.setValueAtTime(440, t);
-  osc1.frequency.linearRampToValueAtTime(660, t + 0.15);
-  osc1.frequency.setValueAtTime(660, t + 0.15);
-  gain1.gain.setValueAtTime(0.0, t);
-  gain1.gain.linearRampToValueAtTime(0.35, t + 0.05);
-  gain1.gain.setValueAtTime(0.35, t + 0.55);
-  gain1.gain.exponentialRampToValueAtTime(0.001, t + 0.85);
-  osc1.start(t);
-  osc1.stop(t + 0.85);
-
-  // Armonica sopra — dà corpo e brillantezza
-  var osc2 = ctx.createOscillator();
-  var gain2 = ctx.createGain();
-  osc2.connect(gain2);
-  gain2.connect(ctx.destination);
-  osc2.type = 'sine';
-  osc2.frequency.setValueAtTime(880, t);
-  osc2.frequency.linearRampToValueAtTime(1320, t + 0.15);
-  osc2.frequency.setValueAtTime(1320, t + 0.15);
-  gain2.gain.setValueAtTime(0.0, t);
-  gain2.gain.linearRampToValueAtTime(0.15, t + 0.05);
-  gain2.gain.setValueAtTime(0.15, t + 0.55);
-  gain2.gain.exponentialRampToValueAtTime(0.001, t + 0.85);
-  osc2.start(t);
-  osc2.stop(t + 0.85);
+  var osc = ctx.createOscillator();
+  var gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.type = 'square';
+  osc.frequency.setValueAtTime(880, t);
+  gain.gain.setValueAtTime(0.22, t);
+  gain.gain.setValueAtTime(0.22, t + 0.42);
+  gain.gain.exponentialRampToValueAtTime(0.001, t + 0.62);
+  osc.start(t);
+  osc.stop(t + 0.62);
 }
 
-// ── RISPOSTA CORRETTA — ding brillante stile quiz social
-// Nota alta, metallica, breve e netta
+// ── RISPOSTA CORRETTA — stile "Pirone" CapCut/TikTok
+// Due note rapide ascendenti (basso→alto), brillanti con risonanza
 function playCorrect() {
   var ctx = _getAudioCtx();
   if (!ctx) return;
   var t = ctx.currentTime;
 
-  // Ding principale
-  var osc = ctx.createOscillator();
-  var gain = ctx.createGain();
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.type = 'sine';
-  osc.frequency.setValueAtTime(1047, t); // Do5
-  gain.gain.setValueAtTime(0.4, t);
-  gain.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
-  osc.start(t);
-  osc.stop(t + 0.5);
+  // Prima nota — La4 (440Hz), breve
+  var o1 = ctx.createOscillator();
+  var g1 = ctx.createGain();
+  o1.connect(g1); g1.connect(ctx.destination);
+  o1.type = 'sine';
+  o1.frequency.setValueAtTime(880, t);
+  g1.gain.setValueAtTime(0.35, t);
+  g1.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+  o1.start(t); o1.stop(t + 0.12);
 
-  // Armonica — dà il timbro metallico brillante
-  var osc2 = ctx.createOscillator();
-  var gain2 = ctx.createGain();
-  osc2.connect(gain2);
-  gain2.connect(ctx.destination);
-  osc2.type = 'sine';
-  osc2.frequency.setValueAtTime(2093, t); // Do6
-  gain2.gain.setValueAtTime(0.18, t);
-  gain2.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
-  osc2.start(t);
-  osc2.stop(t + 0.3);
+  // Seconda nota — La5 (1760Hz), più lunga con risonanza
+  var o2 = ctx.createOscillator();
+  var g2 = ctx.createGain();
+  o2.connect(g2); g2.connect(ctx.destination);
+  o2.type = 'sine';
+  o2.frequency.setValueAtTime(1760, t + 0.1);
+  g2.gain.setValueAtTime(0.0, t + 0.1);
+  g2.gain.linearRampToValueAtTime(0.38, t + 0.14);
+  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.55);
+  o2.start(t + 0.1); o2.stop(t + 0.55);
+
+  // Armonica brillante sopra — dà il timbro "Pirone"
+  var o3 = ctx.createOscillator();
+  var g3 = ctx.createGain();
+  o3.connect(g3); g3.connect(ctx.destination);
+  o3.type = 'sine';
+  o3.frequency.setValueAtTime(2637, t + 0.1); // Mi7
+  g3.gain.setValueAtTime(0.0, t + 0.1);
+  g3.gain.linearRampToValueAtTime(0.14, t + 0.14);
+  g3.gain.exponentialRampToValueAtTime(0.001, t + 0.38);
+  o3.start(t + 0.1); o3.stop(t + 0.38);
 }
 
-// ── RISPOSTA SBAGLIATA — "WROOOONG" stile trombone che scende
-// Lungo, basso, discendente — inconfondibile
+// ── RISPOSTA SBAGLIATA — stile "Booboo" CapCut/TikTok
+// Due note discendenti (bu-bù), tono basso comico
 function playWrong() {
   var ctx = _getAudioCtx();
   if (!ctx) return;
   var t = ctx.currentTime;
 
-  var osc = ctx.createOscillator();
-  var gain = ctx.createGain();
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.type = 'sawtooth';
+  // Prima nota — più alta
+  var o1 = ctx.createOscillator();
+  var g1 = ctx.createGain();
+  o1.connect(g1); g1.connect(ctx.destination);
+  o1.type = 'sine';
+  o1.frequency.setValueAtTime(311, t); // Eb4
+  g1.gain.setValueAtTime(0.0, t);
+  g1.gain.linearRampToValueAtTime(0.42, t + 0.03);
+  g1.gain.setValueAtTime(0.42, t + 0.18);
+  g1.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+  o1.start(t); o1.stop(t + 0.28);
 
-  // Parte alto e scende pesante — effetto "wroooong"
-  osc.frequency.setValueAtTime(280, t);
-  osc.frequency.linearRampToValueAtTime(260, t + 0.08);
-  osc.frequency.linearRampToValueAtTime(140, t + 0.65);
-  osc.frequency.linearRampToValueAtTime(80, t + 0.85);
+  // Seconda nota — più bassa (bu-BÙ)
+  var o2 = ctx.createOscillator();
+  var g2 = ctx.createGain();
+  o2.connect(g2); g2.connect(ctx.destination);
+  o2.type = 'sine';
+  o2.frequency.setValueAtTime(207, t + 0.25); // Ab3
+  g2.gain.setValueAtTime(0.0, t + 0.25);
+  g2.gain.linearRampToValueAtTime(0.45, t + 0.28);
+  g2.gain.setValueAtTime(0.45, t + 0.45);
+  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.58);
+  o2.start(t + 0.25); o2.stop(t + 0.58);
 
-  gain.gain.setValueAtTime(0.0, t);
-  gain.gain.linearRampToValueAtTime(0.38, t + 0.06);
-  gain.gain.setValueAtTime(0.38, t + 0.5);
-  gain.gain.exponentialRampToValueAtTime(0.001, t + 0.85);
-  osc.start(t);
-  osc.stop(t + 0.85);
-
-  // Sub basso — dà il "peso" al suono
-  var osc2 = ctx.createOscillator();
-  var gain2 = ctx.createGain();
-  osc2.connect(gain2);
-  gain2.connect(ctx.destination);
-  osc2.type = 'sine';
-  osc2.frequency.setValueAtTime(140, t);
-  osc2.frequency.linearRampToValueAtTime(70, t + 0.65);
-  gain2.gain.setValueAtTime(0.0, t);
-  gain2.gain.linearRampToValueAtTime(0.22, t + 0.06);
-  gain2.gain.exponentialRampToValueAtTime(0.001, t + 0.75);
-  osc2.start(t);
-  osc2.stop(t + 0.75);
+  // Sub che dà corpo ai due toni
+  var o3 = ctx.createOscillator();
+  var g3 = ctx.createGain();
+  o3.connect(g3); g3.connect(ctx.destination);
+  o3.type = 'sine';
+  o3.frequency.setValueAtTime(311, t);
+  o3.frequency.linearRampToValueAtTime(207, t + 0.25);
+  g3.gain.setValueAtTime(0.0, t);
+  g3.gain.linearRampToValueAtTime(0.18, t + 0.03);
+  g3.gain.exponentialRampToValueAtTime(0.001, t + 0.55);
+  o3.start(t); o3.stop(t + 0.55);
 }
 
 // ── AUTH GUARD ─────────────────────────────────────────
