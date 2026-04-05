@@ -436,31 +436,27 @@ body::before{
 .fsheet-title{
   font-size:.7rem;font-weight:800;
   letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
-}
 .fsheet-done{
   background:var(--blue);color:#fff;
-  border:2px solid transparent;border-radius:8px;
-  font-family:inherit;font-size:.75rem;font-weight:700;
-  /* padding generoso — area touch garantita su tutta la superficie */
-  padding:.5rem 1.2rem;
+  border:none;border-radius:6px;
+  font-family:inherit;font-size:.62rem;font-weight:700;
+  padding:.35rem .65rem;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
   -webkit-appearance:none;
   appearance:none;
   outline:none;
-  min-height:40px;
+  min-height:36px;
   box-sizing:border-box;
   touch-action:manipulation;
   user-select:none;
   -webkit-user-select:none;
   transition:none;
-  /* Area touch esplicita — copre l'intero bottone inclusi bordi */
   position:relative;
   display:inline-flex;
   align-items:center;
   justify-content:center;
   pointer-events:auto;
-  /* Espansione area touch su mobile senza cambiare layout */
   -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 /* Pseudo-element che espande l'area touch invisibile intorno al bottone */
