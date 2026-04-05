@@ -221,7 +221,7 @@ body::before{
 }
 .bsheet-ai-sep{
   height:1px;background:rgba(245,158,11,.15);
-  margin:.2rem 1.4rem .4rem;
+  margin:.5rem 1.4rem;
 }
 
 
@@ -1515,21 +1515,18 @@ body.user-premium #sg-pdf-link > span:last-child {
 }
 
 /* ── QUIZ NOTIFICATION DOT sull'hamburger ───────────────────────── */
-.hdr-menu-btn{
-  position:relative;
-}
-/* Il dot è sempre position:absolute — non partecipa al flex layout,
-   non sposta le linee dell'hamburger in nessun caso */
+/* Il dot è nel wrapper div — position:absolute relativo al wrapper, mai dentro il flex hamburger */
 .hdr-quiz-dot{
   position:absolute;
-  top:3px;right:2px;
-  width:8px;height:8px;
+  top:2px;right:0px;
+  width:9px;height:9px;
   background:#ef4444;
   border-radius:50%;
-  border:1.5px solid #0a0f1e;
+  border:2px solid #0a0f1e;
   pointer-events:none;
   opacity:0;
-  transition:opacity .2s;
+  transition:opacity .25s ease;
+  z-index:10;
 }
 .hdr-quiz-dot.visible{
   opacity:1;
@@ -1545,4 +1542,15 @@ body.user-premium #sg-pdf-link > span:last-child {
   background:#16a34a;
   border:1px solid rgba(22,163,74,.5);
   padding:.22rem .65rem;border-radius:20px;flex-shrink:0;
+  animation:quizShake 2.4s ease-in-out infinite;
+  transform-origin:center;
+}
+@keyframes quizShake{
+  0%,100%{ transform:rotate(0deg); }
+  88%{ transform:rotate(0deg); }
+  90%{ transform:rotate(-8deg); }
+  92%{ transform:rotate(8deg); }
+  94%{ transform:rotate(-6deg); }
+  96%{ transform:rotate(6deg); }
+  98%{ transform:rotate(0deg); }
 }
