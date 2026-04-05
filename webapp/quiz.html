@@ -1213,6 +1213,9 @@ function renderQuiz(data, quizId, uid, oggi) {
     numEl.classList.remove('countdown-num');
     void numEl.offsetWidth;
     numEl.classList.add('countdown-num');
+    // Inizializza AudioContext al click (iOS Safari richiede interazione utente)
+    _getAudioCtx();
+    playCountdownTick(count);
 
     var cdInterval = setInterval(function() {
       count--;
@@ -1222,6 +1225,7 @@ function renderQuiz(data, quizId, uid, oggi) {
         startContent.style.display = '';
         startCountdown.style.display = 'none';
         showState('state-quiz');
+        playQuizStart();
         startTimer(function() {
           answered = true;
           document.querySelectorAll('.option').forEach(function(o){
@@ -1230,6 +1234,7 @@ function renderQuiz(data, quizId, uid, oggi) {
             if (txt === testoCorretto) o.classList.add('correct');
             else o.classList.add('dimmed');
           });
+          playWrong();
           showResult(false, true, 0, spiegazione, testoCorretto);
           saveRisposta(uid, quizId, false, 0, oggi);
         });
@@ -1239,6 +1244,7 @@ function renderQuiz(data, quizId, uid, oggi) {
       numEl.classList.remove('countdown-num');
       void numEl.offsetWidth;
       numEl.classList.add('countdown-num');
+      playCountdownTick(count);
     }, 1000);
   };
 }
@@ -1262,8 +1268,86 @@ function handleAnswer(el, isCorrect, rispostaCorretta, spiegazione, opzioni, uid
     }
   });
 
+  if (isCorrect) { playCorrect(); } else { playWrong(); }
   showResult(isCorrect, false, ptsEarned, spiegazione, rispostaCorretta);
   saveRisposta(uid, quizId, isCorrect, ptsEarned, oggi);
+}
+
+
+// ══════════════════════════════════════════════════════
+// QUIZ AUDIO ENGINE — Web Audio API, zero file esterni
+// Funziona su iOS Safari, Android Chrome, PWA, desktop
+// ══════════════════════════════════════════════════════
+var _audioCtx = null;
+
+function _getAudioCtx() {
+  if (!_audioCtx) {
+    try {
+      _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    } catch(e) { return null; }
+  }
+  // iOS Safari richiede resume dopo interazione utente
+  if (_audioCtx.state === 'suspended') {
+    _audioCtx.resume();
+  }
+  return _audioCtx;
+}
+
+// Primitiva: suona una nota
+function _playTone(freq, duration, type, gainVal, startTime, fadeOut) {
+  var ctx = _getAudioCtx();
+  if (!ctx) return;
+  var osc = ctx.createOscillator();
+  var gain = ctx.createGain();
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.type = type || 'sine';
+  osc.frequency.setValueAtTime(freq, startTime);
+  gain.gain.setValueAtTime(gainVal || 0.3, startTime);
+  if (fadeOut) {
+    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+  }
+  osc.start(startTime);
+  osc.stop(startTime + duration);
+}
+
+// TICK countdown (5→1) — tick secco, tono che scende
+function playCountdownTick(number) {
+  var ctx = _getAudioCtx();
+  if (!ctx) return;
+  // Frequenza scende da 5 a 1: 880→660→550→440→330
+  var freqs = {5: 880, 4: 740, 3: 620, 2: 520, 1: 420};
+  var freq = freqs[number] || 600;
+  var t = ctx.currentTime;
+  _playTone(freq, 0.08, 'square', 0.18, t, true);
+}
+
+// VIA! — suono ascendente energico all'inizio del quiz
+function playQuizStart() {
+  var ctx = _getAudioCtx();
+  if (!ctx) return;
+  var t = ctx.currentTime;
+  _playTone(440, 0.1, 'sine', 0.28, t, false);
+  _playTone(660, 0.1, 'sine', 0.28, t + 0.1, false);
+  _playTone(880, 0.22, 'sine', 0.32, t + 0.2, true);
+}
+
+// RISPOSTA CORRETTA — due ding ascendenti
+function playCorrect() {
+  var ctx = _getAudioCtx();
+  if (!ctx) return;
+  var t = ctx.currentTime;
+  _playTone(660, 0.15, 'sine', 0.3, t, true);
+  _playTone(880, 0.3, 'sine', 0.3, t + 0.16, true);
+}
+
+// RISPOSTA SBAGLIATA — buzz discendente
+function playWrong() {
+  var ctx = _getAudioCtx();
+  if (!ctx) return;
+  var t = ctx.currentTime;
+  _playTone(220, 0.12, 'sawtooth', 0.2, t, false);
+  _playTone(160, 0.25, 'sawtooth', 0.18, t + 0.12, true);
 }
 
 // ── AUTH GUARD ─────────────────────────────────────────
