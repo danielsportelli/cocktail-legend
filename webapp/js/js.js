@@ -3339,6 +3339,47 @@ document.addEventListener('DOMContentLoaded', function(){
       var wrap=document.getElementById('calc-abv-ingredients');
       if(!wrap)return;
 
+      // ── Stato tecnica selezionata ──
+      var _selectedTech=null; // 'stir'|'shake'|'fast'|'throw'|'build'
+
+      // ── Tecnica: label leggibile ──
+      var TECH_LABELS={stir:'Stir & Strain',shake:'Shake & Strain',fast:'Fast Shake',throw:'Throwing',build:'Build'};
+
+      // ── Toggle visibilità sezioni diluizione e top ──
+      function updateTechUI(){
+        var isBuild=_selectedTech==='build';
+        var dilWrap=document.getElementById('calc-abv-dil-wrap');
+        var topWrap=document.getElementById('calc-abv-top-wrap');
+        if(dilWrap) dilWrap.style.display=(_selectedTech&&!isBuild)?'block':'none';
+        if(topWrap) topWrap.style.display=(_selectedTech&&!isBuild)?'block':'none';
+      }
+
+      // ── Click bottoni tecnica ──
+      document.querySelectorAll('.cabv-tech-btn').forEach(function(btn){
+        btn.addEventListener('click',function(){
+          document.querySelectorAll('.cabv-tech-btn').forEach(function(b){b.classList.remove('active');});
+          btn.classList.add('active');
+          _selectedTech=btn.dataset.tech;
+          var dil=parseInt(btn.dataset.dil)||0;
+          var dilInput=document.getElementById('calc-abv-dil-pct');
+          if(dilInput) dilInput.value=dil;
+          var dilLabel=document.getElementById('calc-abv-dil-label');
+          if(dilLabel) dilLabel.textContent=dil+'% default';
+          updateTechUI();
+          calcAbvNew();
+        });
+      });
+
+      // ── Input diluizione manuale ──
+      var dilInput=document.getElementById('calc-abv-dil-pct');
+      if(dilInput) dilInput.addEventListener('input',calcAbvNew);
+
+      // ── Input top ──
+      var topMl=document.getElementById('calc-abv-top-ml');
+      var topPct=document.getElementById('calc-abv-top-pct');
+      if(topMl) topMl.addEventListener('input',calcAbvNew);
+      if(topPct) topPct.addEventListener('input',calcAbvNew);
+
       function addRow(){
         var row=document.createElement('div');
         row.className='calc-abv-row';
@@ -3359,11 +3400,23 @@ document.addEventListener('DOMContentLoaded', function(){
       var resetBtn=document.getElementById('calc-abv-reset');
       if(addBtn)addBtn.addEventListener('click',addRow);
       if(resetBtn)resetBtn.addEventListener('click',function(){
+        // Reset ingredienti
         wrap.innerHTML='';addRow();addRow();
+        // Reset tecnica
+        _selectedTech=null;
+        document.querySelectorAll('.cabv-tech-btn').forEach(function(b){b.classList.remove('active');});
+        updateTechUI();
+        var dilInp=document.getElementById('calc-abv-dil-pct');
+        if(dilInp) dilInp.value='';
+        var tMl=document.getElementById('calc-abv-top-ml');
+        var tPct=document.getElementById('calc-abv-top-pct');
+        if(tMl) tMl.value='';if(tPct) tPct.value='';
         var r=document.getElementById('calc-abv-result');
         var d=document.getElementById('calc-abv-desc');
         var a=document.getElementById('calc-abv-alcol');
+        var di=document.getElementById('calc-abv-dil-info');
         if(r)r.textContent='—';if(d)d.textContent='';if(a)a.textContent='';
+        if(di){di.textContent='';di.style.display='none';}
       });
       wrap.querySelectorAll('input').forEach(function(i){i.addEventListener('input',calcAbvNew);});
       addRow();
@@ -3374,24 +3427,62 @@ document.addEventListener('DOMContentLoaded', function(){
   window.calcAbvNew=function(){
     clearTimeout(_calcTimer);
     _calcTimer=setTimeout(function(){
+      // ── Raccogli ingredienti ──
       var rows=document.querySelectorAll('#calc-abv-ingredients .calc-abv-row');
-      var totalVol=0,totalAlc=0;
+      var baseVol=0,totalAlc=0;
       rows.forEach(function(row){
         var ml=parseFloat(row.querySelector('.cabv-ml').value)||0;
         var pct=parseFloat(row.querySelector('.cabv-pct').value)||0;
-        totalVol+=ml;totalAlc+=ml*(pct/100);
+        baseVol+=ml;totalAlc+=ml*(pct/100);
       });
+
+      // ── Diluizione ──
+      var dilPctInput=document.getElementById('calc-abv-dil-pct');
+      var dilPct= dilPctInput ? (parseFloat(dilPctInput.value)||0) : 0;
+      // Build o nessuna tecnica selezionata → diluizione 0
+      var techBtns=document.querySelectorAll('.cabv-tech-btn.active');
+      var isBuild=techBtns.length>0 && techBtns[0].dataset.tech==='build';
+      var effectiveDil=(techBtns.length===0||isBuild)?0:dilPct;
+      var dilMl=baseVol*(effectiveDil/100);
+
+      // ── Top (non diluito) ──
+      var topMlVal=parseFloat((document.getElementById('calc-abv-top-ml')||{}).value)||0;
+      var topPctVal=parseFloat((document.getElementById('calc-abv-top-pct')||{}).value)||0;
+      var topAlc=topMlVal*(topPctVal/100);
+
+      // ── Totali ──
+      var totalVol=baseVol+dilMl+topMlVal;
+      totalAlc+=topAlc;
+
       var result=document.getElementById('calc-abv-result');
       var desc=document.getElementById('calc-abv-desc');
       var alcol=document.getElementById('calc-abv-alcol');
-      if(totalVol<=0){if(result)result.textContent='—';if(desc)desc.textContent='';if(alcol)alcol.textContent='';return;}
+      var dilInfo=document.getElementById('calc-abv-dil-info');
+
+      if(baseVol<=0){
+        if(result)result.textContent='—';
+        if(desc)desc.textContent='';
+        if(alcol)alcol.textContent='';
+        if(dilInfo){dilInfo.textContent='';dilInfo.style.display='none';}
+        return;
+      }
+
       var abv=(totalAlc/totalVol*100).toFixed(1);
       var abvNum=parseFloat(abv);
       var label=abvNum===0?'Analcolico':abvNum<=8?'Basso':abvNum<=14?'Medio basso':abvNum<=20?'Medio':abvNum<=25?'Medio alto':abvNum<=30?'Alto':'Molto alto';
+
       if(result)result.textContent=abv+'%';
       if(desc)desc.textContent=label+' — '+totalVol.toFixed(0)+' ml totali';
       if(alcol)alcol.textContent='Alcol etilico puro: '+totalAlc.toFixed(1)+' ml';
-    },400);
+      if(dilInfo){
+        if(effectiveDil>0){
+          dilInfo.textContent='Acqua da diluizione: +'+dilMl.toFixed(0)+' ml ('+effectiveDil+'%)';
+          dilInfo.style.display='block';
+        } else {
+          dilInfo.textContent='';dilInfo.style.display='none';
+        }
+      }
+    },300);
   };
 
 })();

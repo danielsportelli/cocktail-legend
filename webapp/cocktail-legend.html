@@ -858,7 +858,47 @@
 
     <!-- CONTENUTO ABV -->
     <div id="calc-step-abv" style="display:none;">
-      <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:1rem;">Calcola la gradazione alcolica stimata del tuo cocktail in base agli ingredienti.</p>
+      <p style="font-size:.7rem;color:var(--txt2);line-height:1.5;margin-bottom:.85rem;">Calcola ABV e diluizione stimata del tuo cocktail.</p>
+
+      <!-- TECNICA -->
+      <div style="margin-bottom:.85rem;">
+        <div style="font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Tecnica</div>
+        <div id="calc-abv-tecniche" style="display:flex;flex-wrap:wrap;gap:.35rem;">
+          <button class="cabv-tech-btn" data-tech="stir" data-dil="25" style="flex:1;min-width:calc(50% - .35rem);">Stir &amp; Strain</button>
+          <button class="cabv-tech-btn" data-tech="shake" data-dil="40" style="flex:1;min-width:calc(50% - .35rem);">Shake &amp; Strain</button>
+          <button class="cabv-tech-btn" data-tech="fast" data-dil="50" style="flex:1;min-width:calc(50% - .35rem);">Fast Shake</button>
+          <button class="cabv-tech-btn" data-tech="throw" data-dil="20" style="flex:1;min-width:calc(50% - .35rem);">Throwing</button>
+          <button class="cabv-tech-btn" data-tech="build" data-dil="0" style="flex:1;min-width:calc(50% - .35rem);">Build</button>
+        </div>
+      </div>
+
+      <!-- DILUIZIONE (si mostra solo se tecnica != build) -->
+      <div id="calc-abv-dil-wrap" style="display:none;margin-bottom:.85rem;">
+        <div style="font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Diluizione <span id="calc-abv-dil-label" style="color:var(--blue-l);font-weight:700;"></span></div>
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <input type="number" id="calc-abv-dil-pct" min="0" max="100" inputmode="decimal" autocomplete="off"
+            style="width:75px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;text-align:center;">
+          <span style="color:var(--dim);font-size:.75rem;">% del volume base</span>
+        </div>
+        <div style="font-size:.6rem;color:var(--dim);margin-top:.3rem;">Modificabile — valore di default da letteratura tecnica</div>
+      </div>
+
+      <!-- TOP non diluito (si mostra solo se tecnica != build) -->
+      <div id="calc-abv-top-wrap" style="display:none;margin-bottom:.85rem;">
+        <div style="font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Top <span style="font-weight:500;text-transform:none;letter-spacing:0;">(non lavorato con ghiaccio, escluso dalla diluizione)</span></div>
+        <div style="display:flex;align-items:center;gap:.4rem;">
+          <input type="number" id="calc-abv-top-ml" placeholder="ml" min="0" max="500" inputmode="decimal" autocomplete="off"
+            style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+          <span style="color:var(--dim);font-size:.75rem;">ml</span>
+          <input type="number" id="calc-abv-top-pct" placeholder="%" min="0" max="100" inputmode="decimal" autocomplete="off"
+            style="width:65px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
+          <span style="color:var(--dim);font-size:.75rem;">%</span>
+          <span style="color:var(--dim);font-size:.68rem;">(es. soda, tonica…)</span>
+        </div>
+      </div>
+
+      <!-- INGREDIENTI -->
+      <div style="font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.45rem;">Ingredienti alcolici</div>
       <div id="calc-abv-ingredients">
         <div class="calc-abv-row" style="display:flex;align-items:center;gap:.4rem;">
           <input type="number" class="cabv-ml" placeholder="ml" autocomplete="off" inputmode="decimal" min="0" max="500" style="width:70px;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.45rem .5rem;color:var(--txt);font-family:inherit;font-size:.8rem;outline:none;">
@@ -871,15 +911,20 @@
         <button id="calc-abv-add" style="flex:1;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem;color:var(--txt2);font-size:.75rem;font-weight:600;font-family:inherit;cursor:pointer;">+ Aggiungi ingrediente</button>
         <button id="calc-abv-reset" style="background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:.5rem .8rem;color:var(--dim);font-size:.75rem;font-family:inherit;cursor:pointer;">Reset</button>
       </div>
+
+      <!-- RISULTATO -->
       <div style="margin-top:1rem;padding:1rem;background:var(--bg);border:1px solid rgba(245,158,11,.2);border-radius:12px;text-align:center;">
         <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem;">ABV stimato</div>
         <div id="calc-abv-result" style="font-size:2.2rem;font-weight:900;color:var(--amber);line-height:1;">—</div>
         <div id="calc-abv-desc" style="font-size:.68rem;color:var(--txt2);margin-top:.3rem;"></div>
         <div id="calc-abv-alcol" style="font-size:.72rem;color:var(--dim);margin-top:.4rem;"></div>
+        <div id="calc-abv-dil-info" style="font-size:.72rem;color:var(--dim);margin-top:.25rem;display:none;"></div>
       </div>
+
+      <!-- NOTE -->
       <div style="margin-top:.85rem;padding:.75rem 1rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;font-size:.65rem;color:var(--dim);line-height:1.6;">
         <span style="color:var(--txt2);font-weight:700;">💡 ABV vs Alcol etilico</span><br>
-        L'ABV indica la <em>percentuale</em> di alcol sul volume totale del drink — non quanto alcol hai ingerito. Uno shot da 50ml di Gin 40° e un Gin Tonic con gli stessi 50ml di Gin hanno <strong style="color:var(--txt)">identici ml di alcol etilico (20ml)</strong>, ma ABV diverso (40% vs ~10%).
+        L'ABV indica la <em>percentuale</em> di alcol sul volume totale del drink — non quanto alcol hai ingerito. Le % di diluizione sono valori medi da letteratura tecnica (Liquid Intelligence, Death &amp; Co) e variano in base a ghiaccio, temperatura e tecnica del barman.
       </div>
     </div>
 

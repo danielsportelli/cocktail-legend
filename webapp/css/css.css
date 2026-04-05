@@ -1491,3 +1491,25 @@ body.user-premium #sg-pdf-link > span:last-child {
 #back-to-top.btt-flash {
   animation: bttGlow .35s ease-out none;
 }
+
+/* ── CALCOLATORE ABV — bottoni tecnica ───────────────────────────── */
+.cabv-tech-btn{
+  background:var(--surf);
+  border:1px solid var(--brd);
+  border-radius:8px;
+  color:var(--txt2);
+  font-family:inherit;font-size:.72rem;font-weight:600;
+  padding:.42rem .5rem;
+  cursor:pointer;
+  text-align:center;
+  transition:border-color .15s, background .15s, color .15s;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  outline:none;
+}
+.cabv-tech-btn.active{
+  background:rgba(37,99,235,.15);
+  border-color:rgba(96,165,250,.6);
+  color:var(--blue-l);
+  font-weight:700;
+}
