@@ -1532,31 +1532,37 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// Swipe down su QUALSIASI drawer aperto — chiude tutto
+// Swipe down per chiudere drawer — SOLO se il touch parte dal handle o dall'header.
+// Se il touch parte dal contenuto scrollabile, non fa nulla (scroll normale).
+// Cross-platform: iOS Safari, Android Chrome, PWA, desktop touch.
 (function() {
   var _swipeStartY = 0;
   var _swipeDrawer = null;
   var _swipeActive = false;
 
   document.addEventListener('touchstart', function(e) {
-    // Controlla se il touch parte dentro un drawer aperto
+    _swipeActive = false;
+    _swipeDrawer = null;
+
+    // Il touch deve partire da un drawer aperto
     var drawer = e.target.closest('.drawer.open');
-    if (drawer) {
-      _swipeDrawer = drawer;
-      _swipeStartY = e.touches[0].clientY;
-      _swipeActive = true;
-    } else {
-      _swipeActive = false;
-      _swipeDrawer = null;
-    }
+    if (!drawer) return;
+
+    // Valido SOLO se il touch parte dall'handle o dall'header del drawer
+    // — non dal contenuto scrollabile interno
+    var fromHandle = e.target.closest('.drawer-handle');
+    var fromHeader = e.target.closest('.drawer-header');
+    if (!fromHandle && !fromHeader) return;
+
+    _swipeDrawer = drawer;
+    _swipeStartY = e.touches[0].clientY;
+    _swipeActive = true;
   }, {passive: true});
 
   document.addEventListener('touchend', function(e) {
     if (_swipeActive && _swipeDrawer) {
       var dy = e.changedTouches[0].clientY - _swipeStartY;
-      // Swipe down di almeno 80px e il drawer è scrollato in cima
-      var scrollTop = _swipeDrawer.scrollTop;
-      if (dy > 80 && scrollTop <= 0) {
+      if (dy > 60) {
         closeAllDrawers();
         window.closeNavMenu && window.closeNavMenu();
       }
