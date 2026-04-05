@@ -3427,36 +3427,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   });
 
-  // ── QUIZ BADGE — aggiorna pallino hamburger e CTA ──────────────────
-function _todayKeyLocal() {
-  var d = new Date();
-  return d.getFullYear() + '-'
-    + String(d.getMonth()+1).padStart(2,'0') + '-'
-    + String(d.getDate()).padStart(2,'0');
-}
-function updateQuizBadge() {
-  var done = window._quizDoneToday === true;
-  var dot  = document.getElementById('hdr-quiz-dot');
-  var cta  = document.getElementById('bsheet-quiz-cta');
-  if (dot) {
-    if (done) {
-      dot.classList.remove('visible');
-    } else {
-      dot.classList.add('visible');
-    }
-  }
-  if (cta) {
-    if (done) {
-      cta.textContent = 'Vedi classifica →';
-      cta.classList.remove('bsheet-quiz-cta--play');
-    } else {
-      cta.textContent = 'Gioca ora →';
-      cta.classList.add('bsheet-quiz-cta--play');
-    }
-  }
-}
-
-var _calcTimer=null;
+  var _calcTimer=null;
   window.calcAbvNew=function(){
     clearTimeout(_calcTimer);
     _calcTimer=setTimeout(function(){
@@ -3519,6 +3490,35 @@ var _calcTimer=null;
   };
 
 })();
+
+// ── QUIZ BADGE — aggiorna pallino hamburger e CTA ────────────────────
+function _todayKeyLocal() {
+  var d = new Date();
+  return d.getFullYear() + '-'
+    + String(d.getMonth()+1).padStart(2,'0') + '-'
+    + String(d.getDate()).padStart(2,'0');
+}
+function updateQuizBadge() {
+  var done = window._quizDoneToday === true;
+  var dot  = document.getElementById('hdr-quiz-dot');
+  var cta  = document.getElementById('bsheet-quiz-cta');
+  if (dot) {
+    if (done) {
+      dot.classList.remove('visible');
+    } else {
+      dot.classList.add('visible');
+    }
+  }
+  if (cta) {
+    if (done) {
+      cta.textContent = 'Vedi classifica →';
+      cta.classList.remove('bsheet-quiz-cta--play');
+    } else {
+      cta.textContent = 'Gioca ora →';
+      cta.classList.add('bsheet-quiz-cta--play');
+    }
+  }
+}
 
 // ═══ BICCHIERI ═══
 function populateRisGlass(){

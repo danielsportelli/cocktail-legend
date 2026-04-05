@@ -1518,18 +1518,21 @@ body.user-premium #sg-pdf-link > span:last-child {
 .hdr-menu-btn{
   position:relative;
 }
+/* Il dot è sempre position:absolute — non partecipa al flex layout,
+   non sposta le linee dell'hamburger in nessun caso */
 .hdr-quiz-dot{
-  display:none;
   position:absolute;
-  top:4px;right:4px;
-  width:9px;height:9px;
+  top:3px;right:2px;
+  width:8px;height:8px;
   background:#ef4444;
   border-radius:50%;
-  border:2px solid #0a0f1e;
+  border:1.5px solid #0a0f1e;
   pointer-events:none;
+  opacity:0;
+  transition:opacity .2s;
 }
 .hdr-quiz-dot.visible{
-  display:block;
+  opacity:1;
 }
 
 /* ── QUIZ CTA — stato non giocato (verde) / giocato (blu default) ── */
