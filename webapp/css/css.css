@@ -1513,3 +1513,33 @@ body.user-premium #sg-pdf-link > span:last-child {
   color:var(--blue-l);
   font-weight:700;
 }
+
+/* ── QUIZ NOTIFICATION DOT sull'hamburger ───────────────────────── */
+.hdr-menu-btn{
+  position:relative;
+}
+.hdr-quiz-dot{
+  display:none;
+  position:absolute;
+  top:4px;right:4px;
+  width:9px;height:9px;
+  background:#ef4444;
+  border-radius:50%;
+  border:2px solid #0a0f1e;
+  pointer-events:none;
+}
+.hdr-quiz-dot.visible{
+  display:block;
+}
+
+/* ── QUIZ CTA — stato non giocato (verde) / giocato (blu default) ── */
+.bsheet-quiz-cta{
+  transition:background .2s, color .2s, border-color .2s;
+}
+.bsheet-quiz-cta--play{
+  font-size:.78rem;font-weight:700;
+  color:#fff;
+  background:#16a34a;
+  border:1px solid rgba(22,163,74,.5);
+  padding:.22rem .65rem;border-radius:20px;flex-shrink:0;
+}
