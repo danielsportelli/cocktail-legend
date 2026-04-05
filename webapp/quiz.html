@@ -1207,20 +1207,18 @@ function renderQuiz(data, quizId, uid, oggi) {
     var startCountdown = document.getElementById('start-countdown');
 
     // Nasconde il contenuto "pronto" e mostra il numero — card rimane visibile
-    startContent.style.display = 'none';
-    startCountdown.style.display = '';
-    numEl.textContent = count;
-    numEl.classList.remove('countdown-num');
-    void numEl.offsetWidth;
-    numEl.classList.add('countdown-num');
-    // Sblocca AudioContext dentro il click handler — obbligatorio su Android Chrome/PWA
-    // await garantisce che il contesto sia running PRIMA del primo suono
+    // Sblocca AudioContext nel click handler — obbligatorio su Android Chrome/PWA
     await _unlockAudio();
 
-    // Mostra 5 visivamente, attende 1s intero prima del primo bip
-    // → ogni bip distanziato esattamente 1s dall'altro (5→4→3→2→1→VIA)
+    // Aspetta 1s, poi mostra numero E suona simultaneamente — nessun numero fermo in silenzio
     setTimeout(function() {
-      playCountdownTick(count);
+      startContent.style.display = 'none';
+      startCountdown.style.display = '';
+      numEl.textContent = count;
+      numEl.classList.remove('countdown-num');
+      void numEl.offsetWidth;
+      numEl.classList.add('countdown-num');
+      playCountdownTick();
 
       var cdInterval = setInterval(function() {
         count--;
@@ -1248,7 +1246,7 @@ function renderQuiz(data, quizId, uid, oggi) {
         numEl.classList.remove('countdown-num');
         void numEl.offsetWidth;
         numEl.classList.add('countdown-num');
-        playCountdownTick(count);
+        playCountdownTick();
       }, 1000);
     }, 1000);
   };
@@ -1383,41 +1381,45 @@ function playWrong() {
   if (!ctx) return;
   var t = ctx.currentTime;
 
-  // Prima nota — più alta
+  // Compressore — evita clipping e dà punch
+  var comp = ctx.createDynamicsCompressor();
+  comp.connect(ctx.destination);
+
+  // Prima nota BU — onda sawtooth, più volume
   var o1 = ctx.createOscillator();
   var g1 = ctx.createGain();
-  o1.connect(g1); g1.connect(ctx.destination);
-  o1.type = 'sine';
-  o1.frequency.setValueAtTime(311, t); // Eb4
+  o1.connect(g1); g1.connect(comp);
+  o1.type = 'sawtooth';
+  o1.frequency.setValueAtTime(220, t); // La3
   g1.gain.setValueAtTime(0.0, t);
-  g1.gain.linearRampToValueAtTime(0.42, t + 0.03);
-  g1.gain.setValueAtTime(0.42, t + 0.18);
-  g1.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
-  o1.start(t); o1.stop(t + 0.28);
+  g1.gain.linearRampToValueAtTime(0.7, t + 0.02);
+  g1.gain.setValueAtTime(0.7, t + 0.16);
+  g1.gain.exponentialRampToValueAtTime(0.001, t + 0.30);
+  o1.start(t); o1.stop(t + 0.30);
 
-  // Seconda nota — più bassa (bu-BÙ)
+  // Seconda nota BÙ — più bassa e ancora più forte
   var o2 = ctx.createOscillator();
   var g2 = ctx.createGain();
-  o2.connect(g2); g2.connect(ctx.destination);
-  o2.type = 'sine';
-  o2.frequency.setValueAtTime(207, t + 0.25); // Ab3
-  g2.gain.setValueAtTime(0.0, t + 0.25);
-  g2.gain.linearRampToValueAtTime(0.45, t + 0.28);
-  g2.gain.setValueAtTime(0.45, t + 0.45);
-  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.58);
-  o2.start(t + 0.25); o2.stop(t + 0.58);
+  o2.connect(g2); g2.connect(comp);
+  o2.type = 'sawtooth';
+  o2.frequency.setValueAtTime(147, t + 0.28); // Re3
+  g2.gain.setValueAtTime(0.0, t + 0.28);
+  g2.gain.linearRampToValueAtTime(0.75, t + 0.30);
+  g2.gain.setValueAtTime(0.75, t + 0.48);
+  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.65);
+  o2.start(t + 0.28); o2.stop(t + 0.65);
 
-  // Sub che dà corpo ai due toni
+  // Sub basso — dà il peso fisico al suono
   var o3 = ctx.createOscillator();
   var g3 = ctx.createGain();
-  o3.connect(g3); g3.connect(ctx.destination);
+  o3.connect(g3); g3.connect(comp);
   o3.type = 'sine';
-  o3.frequency.setValueAtTime(311, t);
-  o3.frequency.linearRampToValueAtTime(207, t + 0.25);
+  o3.frequency.setValueAtTime(110, t);
+  o3.frequency.linearRampToValueAtTime(73, t + 0.65);
   g3.gain.setValueAtTime(0.0, t);
-  g3.gain.linearRampToValueAtTime(0.18, t + 0.03);
-  g3.gain.exponentialRampToValueAtTime(0.001, t + 0.55);
-  o3.start(t); o3.stop(t + 0.55);
+  g3.gain.linearRampToValueAtTime(0.5, t + 0.02);
+  g3.gain.exponentialRampToValueAtTime(0.001, t + 0.65);
+  o3.start(t); o3.stop(t + 0.65);
 }
 
 // ── AUTH GUARD ─────────────────────────────────────────
