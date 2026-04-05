@@ -505,10 +505,10 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
 
     <!-- Stato: nessun quiz / coming soon -->
     <div class="quiz-none" id="state-none" style="display:none;">
-      <div class="coming-soon-icon">⚡</div>
-      <div class="coming-soon-title">Coming Soon</div>
-      <div class="coming-soon-sub">La funzione Quiz del Giorno è in arrivo!</div>
-      <div class="coming-soon-badge">🏆 Classifica · Streak · Punti</div>
+      <div class="coming-soon-icon" id="none-icon">⚡</div>
+      <div class="coming-soon-title" id="none-title">Coming Soon</div>
+      <div class="coming-soon-sub" id="none-sub">La funzione Quiz del Giorno è in arrivo!</div>
+      <div class="coming-soon-badge" id="none-badge">🏆 Classifica · Streak · Punti</div>
     </div>
 
     <!-- Stato: già risposto oggi -->
@@ -525,7 +525,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
       </div>
       <div class="done-next">
         <div class="done-next-label">🕛 Prossima domanda</div>
-        <div class="done-next-time">Domani alle 03:00</div>
+        <div class="done-next-time">Alle ore 00:10</div>
         <div class="done-next-meta" id="done-next-meta">—</div>
       </div>
     </div>
@@ -578,7 +578,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
         <div class="result-explanation" id="result-explanation"></div>
         <div class="result-next">
           <div class="result-next-label">🕛 Prossima domanda</div>
-          <div class="result-next-time">Domani alle 03:00</div>
+          <div class="result-next-time">Alle ore 00:10</div>
           <div class="result-next-meta" id="result-next-meta">—</div>
         </div>
       </div>
@@ -1037,6 +1037,32 @@ async function saveRisposta(uid, quizId, isCorrect, ptsEarned, oggi) {
 }
 
 // ── MAIN QUIZ LOADER ───────────────────────────────────
+// Imposta il contenuto dello state-none in base all'orario
+// Gap 00:00-00:10 → schermata attesa; altrimenti → Coming Soon
+function _setNoneState() {
+  var now = new Date();
+  var h = now.getHours();
+  var m = now.getMinutes();
+  var isGap = (h === 0 && m < 10);
+
+  var icon  = document.getElementById('none-icon');
+  var title = document.getElementById('none-title');
+  var sub   = document.getElementById('none-sub');
+  var badge = document.getElementById('none-badge');
+
+  if (isGap) {
+    if (icon)  icon.textContent  = '⏳';
+    if (title) title.textContent = 'Prossima domanda in arrivo';
+    if (sub)   sub.textContent   = 'Alle ore 00:10';
+    if (badge) badge.textContent = '🏆 Classifica · Streak · Punti';
+  } else {
+    if (icon)  icon.textContent  = '⚡';
+    if (title) title.textContent = 'Coming Soon';
+    if (sub)   sub.textContent   = 'La funzione Quiz del Giorno è in arrivo!';
+    if (badge) badge.textContent = '🏆 Classifica · Streak · Punti';
+  }
+}
+
 async function loadQuiz(user) {
   window._quizUid = user.uid;
   const oggi = todayKey();
@@ -1100,7 +1126,8 @@ async function loadQuiz(user) {
     const attualeSnap = await getDoc(doc(db, 'quiz_del_giorno', 'attuale'));
 
     if (!attualeSnap.exists()) {
-      // Nessuna domanda pubblicata → Coming Soon
+      // Nessuna domanda pubblicata → controlla se siamo nel gap 00:00-00:10
+      _setNoneState();
       showState('state-none');
       loadLeaderboard(currentLbTab);
       return;
@@ -1111,6 +1138,7 @@ async function loadQuiz(user) {
     const config = configSnap.exists() ? configSnap.data() : {};
     const attivo = config.attivo;
     if (attivo === false || attivo === 'false' || attivo === 0) {
+      _setNoneState();
       showState('state-none');
       loadLeaderboard(currentLbTab);
       return;
@@ -1143,6 +1171,7 @@ async function loadQuiz(user) {
 
   } catch(e) {
     console.error('Errore caricamento quiz:', e);
+    _setNoneState();
     showState('state-none');
   }
 

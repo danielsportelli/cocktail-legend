@@ -7,21 +7,22 @@ initializeApp();
 // Restituisce la data corrente nel timezone di Roma (YYYY-MM-DD)
 // Usa Intl.DateTimeFormat per evitare il bug UTC dei cambi ora (marzo/settembre)
 function oggi_roma() {
-  return new Intl.DateTimeFormat("it-IT", {
+  const parts = new Intl.DateTimeFormat("it-IT", {
     timeZone: "Europe/Rome",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-  }).format(new Date()).split("/").reverse().join("-");
-  // "06/04/2026" → ["2026","04","06"] → "2026-04-06"
+  }).format(new Date()).split("/");
+  // "06/04/2026" → "2026-04-06"
+  return parts[2] + "-" + parts[1] + "-" + parts[0];
 }
 
 // ═══════════════════════════════════════════════════
-// DOMANDA DEL GIORNO — ogni notte alle 03:00 (Roma)
+// DOMANDA DEL GIORNO — ogni notte alle 00:10 (Roma)
 // ═══════════════════════════════════════════════════
 exports.aggiornaDomandaDelGiorno = onSchedule(
   {
-    schedule: "0 3 * * *",
+    schedule: "10 0 * * *",
     timeZone: "Europe/Rome",
     region: "europe-west1",
   },
@@ -37,7 +38,6 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
         return;
       }
 
-      // Prendi le prime 2 domande non usate in una sola query
       const snapshot = await db
         .collection("domande")
         .where("usata", "==", false)
@@ -52,7 +52,6 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
 
       const oggi = oggi_roma();
 
-      // docs[0] = domanda di oggi, docs[1] = anteprima domani
       const dati = snapshot.docs[0].data();
       const domandaOggiId = snapshot.docs[0].id;
 
@@ -64,7 +63,6 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
         prossima_difficolta = prossimaDati.difficolta || null;
       }
 
-      // Imposta la domanda del giorno
       const attualeRef = db.collection("quiz_del_giorno").doc("attuale");
       await attualeRef.set({
         domanda_id: dati.id,
@@ -79,7 +77,6 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
         prossima_difficolta: prossima_difficolta,
       });
 
-      // Marca subito la domanda di oggi come usata
       await db.collection("domande").doc(domandaOggiId).update({
         usata: true,
         data_utilizzo: oggi,
@@ -94,18 +91,18 @@ exports.aggiornaDomandaDelGiorno = onSchedule(
 );
 
 // ═══════════════════════════════════════════════════
-// RESET MENSILE + PREMI — ogni 1° del mese alle 03:30 (Roma)
+// RESET MENSILE + PREMI — ogni 1° del mese alle 00:00 (Roma)
+// Gira nel gap 00:00-00:10, invisibile all'utente
 // ═══════════════════════════════════════════════════
 exports.resetMensile = onSchedule(
   {
-    schedule: "30 3 1 * *",
+    schedule: "0 0 1 * *",
     timeZone: "Europe/Rome",
     region: "europe-west1",
   },
   async () => {
     const db = getFirestore();
 
-    // ── 1. Trova i top 5 premium per pts_month ──────
     const premiMap = { 0: 1000, 1: 200, 2: 50, 3: 50, 4: 50 };
 
     try {
@@ -139,7 +136,6 @@ exports.resetMensile = onSchedule(
       console.error("Errore distribuzione premi:", e);
     }
 
-    // ── 2. Reset pts_month per tutti ────────────────
     const snapshot = await db.collection("users").get();
     if (snapshot.empty) return;
 
