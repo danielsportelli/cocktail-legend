@@ -649,7 +649,8 @@ body::before{
 .overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--surf);border:1px solid rgba(37,99,235,.2);border-radius:16px;
   max-width:520px;width:100%;max-height:90vh;overflow-y:auto;
-  clip-path:inset(0 round 16px);
+  overflow-x:hidden;
+  clip-path:inset(0 round 14px);
   transform:translateY(20px) scale(.97);transition:transform .25s}
 .overlay.open .modal{transform:translateY(0) scale(1)}
 .modal::-webkit-scrollbar{display:none}
@@ -669,10 +670,10 @@ body::before{
 .m-sticky-bar{
   position:sticky;top:0;z-index:20;
   display:flex;align-items:center;justify-content:space-between;
-  padding:.55rem calc(.7rem + 1px);
+  padding:.55rem .7rem;
   background:rgb(30,41,59);
   border-bottom:1px solid rgba(255,255,255,.07);
-  margin:-1px -1px 0 -1px;
+  border-radius:14px 14px 0 0;
 }
 .m-sticky-title{
   font-size:.82rem;font-weight:700;color:var(--txt2);
