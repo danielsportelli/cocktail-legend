@@ -532,7 +532,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
     <div id="state-start" style="display:none;text-align:center;padding:1.5rem 1rem;">
       <!-- Contenuto pronto -->
       <div id="start-content">
-        <div style="font-size:2.2rem;margin-bottom:.6rem;">⚡</div>
+        <div style="font-size:2.2rem;margin-bottom:.6rem;animation:floatIcon 2.5s ease-in-out infinite;">⚡</div>
         <div style="font-size:1.5rem;font-weight:900;color:var(--txt);margin-bottom:.3rem;">Pronto?</div>
         <div style="font-size:.75rem;color:var(--dim);margin-bottom:1.2rem;line-height:1.5;">Hai 30 secondi per rispondere.<br>Più sei veloce, più punti guadagni.</div>
         <button id="btn-gioca-ora" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.9rem;border:none;border-radius:12px;padding:.75rem 2rem;cursor:pointer;font-family:inherit;letter-spacing:.02em;transition:transform .12s ease,background .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;" onpointerdown="this.style.transform='scale(.93)'" onpointerup="this.style.transform='scale(1)'" onpointerleave="this.style.transform='scale(1)'">Gioca ora →</button>
@@ -1041,7 +1041,7 @@ function _setNoneState() {
   var now = new Date();
   var h = now.getHours();
   var m = now.getMinutes();
-  var isGap = (h === 0 && m < 10);
+  var isGap = (h === 1 && m < 10);
 
   var icon  = document.getElementById('none-icon');
   var title = document.getElementById('none-title');
@@ -1065,34 +1065,7 @@ async function loadQuiz(user) {
   window._quizUid = user.uid;
   const oggi = todayKey();
 
-  // ── CONTROLLO GAP 00:00-00:10 — primo check assoluto
-  // Chiunque apra il quiz in questo lasso vede la schermata clessidra,
-  // indipendentemente dal fatto che abbia giocato o no.
-  // La domanda di ieri è scaduta, quella di oggi arriva alle 00:10.
-  (function() {
-    var now = new Date();
-    var h = now.getHours();
-    var m = now.getMinutes();
-    if (h === 0 && m < 55) {
-      var icon  = document.getElementById('none-icon');
-      var title = document.getElementById('none-title');
-      var sub   = document.getElementById('none-sub');
-      var badge = document.getElementById('none-badge');
-      if (icon)  icon.textContent  = '⏳';
-      if (title) title.textContent = 'Prossima domanda in arrivo';
-      if (sub)   sub.textContent   = 'Alle ore 00:10';
-      if (badge) badge.textContent = '🏆 Classifica · Streak · Statistiche';
-      showState('state-none');
-      loadLeaderboard(currentLbTab);
-      return;
-    }
-  })();
-  // Se siamo nel gap la funzione è già uscita tramite showState + return nell'IIFE
-  // ma l'IIFE non può fermare la funzione esterna — usiamo un flag
-  var _nowGap = (function(){ var n=new Date(); return n.getHours()===0 && n.getMinutes()<55; })();
-  if (_nowGap) return;
-
-  // Carica dati utente
+  // Carica dati utente SEMPRE — anche nel gap, così le statistiche sono visibili
   try {
     const userSnap = await getDoc(doc(db, 'users', user.uid));
     if (userSnap.exists()) {
@@ -1104,6 +1077,23 @@ async function loadQuiz(user) {
       document.getElementById('streak-pill').textContent = '🔥 ' + (ud.streak || 0) + ' giorni';
     }
   } catch(e) { console.error(e); }
+
+  // ── CONTROLLO GAP 00:00-00:10 — dopo aver caricato i dati utente
+  // Chiunque vede la clessidra in questo lasso, con le proprie statistiche visibili.
+  var _nowGap = (function(){ var n=new Date(); return n.getHours()===1 && n.getMinutes()<10; })();
+  if (_nowGap) {
+    var icon  = document.getElementById('none-icon');
+    var title = document.getElementById('none-title');
+    var sub   = document.getElementById('none-sub');
+    var badge = document.getElementById('none-badge');
+    if (icon)  icon.textContent  = '⏳';
+    if (title) title.textContent = 'Prossima domanda in arrivo';
+    if (sub)   sub.textContent   = 'Alle ore 00:10';
+    if (badge) badge.textContent = '🏆 Classifica · Streak · Statistiche';
+    showState('state-none');
+    loadLeaderboard(currentLbTab);
+    return;
+  }
 
   // Controlla se ha già risposto oggi
   try {
