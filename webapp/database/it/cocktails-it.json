@@ -1,268 +1,898 @@
 [
-{
-  "id": "american_trilogy",
-  "name": "American Trilogy",
-  "distillato": ["Rye whiskey", "Bourbon whiskey"],
-  "categoria": "After dinner",
-  "abv": "Molto alto",
-  "sapori": ["Speziato", "Caramellato", "Complesso"],
-  "garnish": "Zest di arancia",
-  "ingredienti": [
-    ["30 ml", "Rye whiskey"],
-    ["30 ml", "Bourbon whiskey"],
-    ["1", "Zolletta di zucchero"],
-    ["10 ML", "Acqua"],
-    ["2 dash", "Angostura bitters"],
-    ["1 dash", "Orange bitters"]
-  ],
-  "prep": [
-     "In un mixing glass mettere la zolletta di zucchero, l'angostura e l'orange bitters",
+  {
+    "id": "fall_angel",
+    "name": "Fall Angel",
+    "distillato": [
+      "Gin"
+    ],
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Floreale",
+      "Agrumato",
+      "Elegante"
+    ],
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Gin"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "15 ml",
+        "Crème de violette"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Fall Angel è un cocktail moderno nato nella scena craft americana degli anni 2000, costruito attorno alla Crème de violette, un liquore alla violetta che per decenni era praticamente scomparso dal mercato americano. La rinascita di questo ingrediente è strettamente legata alla riscoperta dell'Aviation, classico degli anni Venti del Novecento, e all'ondata di interesse per i distillati e i liquori dimenticati che caratterizzò la mixology del primo decennio del 2000. Il nome evoca l'immagine di qualcosa di fragile e prezioso che cade — un riferimento alla tonalità lavanda pallida del drink nel bicchiere, che ricorda i colori di un tramonto autunnale. Come molti cocktail della sua generazione, il Fall Angel si inserisce nel filone dei riff florali sul modello del Bee's Knees, a riprova di quanto il recupero degli ingredienti storici abbia fertilizzato la creatività contemporanea.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fall_angel.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "fallen_leaves",
+    "name": "Fallen Leaves",
+    "distillato": [
+      "Calvados"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Fruttato",
+      "Aromatico",
+      "Morbido"
+    ],
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Calvados"
+      ],
+      [
+        "15 ml",
+        "Vermouth rosso"
+      ],
+      [
+        "15 ml",
+        "Vermouth dry"
+      ],
+      [
+        "7,5 ml",
+        "Apricot brandy"
+      ],
+      [
+        "1 dash",
+        "Angostura bitters"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
+    ],
+    "storia": "Il Fallen Leaves è una creazione di Charles Schumann, il leggendario bartender tedesco fondatore dello Schumann's Bar di Monaco di Baviera, aperto nel 1982 e diventato uno dei bar di riferimento dell'Europa continentale. La ricetta compare nell'American Bar, il libro pubblicato da Schumann nel 1995 e considerato uno dei manuali di miscelazione europei più influenti del secondo Novecento. Il nome — foglie cadute — è un omaggio poetico all'autunno, la stagione della raccolta delle mele in Normandia, regione da cui proviene il Calvados. Schumann, noto per il suo approccio essenziale e la sua avversione per l'eccesso, costruì un drink capace di raccontare un paesaggio attraverso un singolo distillato, circondandolo di vermouth e brandy di albicocche per esaltarne la complessità fruttata senza soffocarne il carattere.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fallen_leaves.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "fanciulli",
+    "name": "Fanciulli",
+    "distillato": [
+      "Gin"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Amaro",
+      "Erbaceo",
+      "Complesso"
+    ],
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Gin"
+      ],
+      [
+        "30 ml",
+        "Vermouth rosso"
+      ],
+      [
+        "15 ml",
+        "Fernet branca"
+      ],
+      [
+        "15 ml",
+        "Campari"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
+    ],
+    "storia": "Il Fanciulli è un cocktail di origini italiane che compare in alcuni ricettari della prima metà del Novecento come variante strutturale del Negroni, con l'aggiunta del Fernet-Branca a conferire maggiore profondità amaricante. Il nome — che in italiano significa semplicemente \"bambini\" o \"ragazzi\" — ha un tono ironico, quasi a suggerire che chi lo ordina non sappia ancora cosa lo aspetta. La presenza simultanea di Campari e Fernet-Branca, due amari milanesi iconici con caratteri molto diversi tra loro, rende il drink uno dei più complessi della tradizione pre-dinner italiana. Nei bar storici milanesi, questa famiglia di drink stirred con doppio amaro era considerata una prova di palato per gli avventori più esperti, e il Fanciulli ne rappresenta una delle espressioni più eleganti.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/fanciulli.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "flannel_shirt",
+    "name": "Flannel Shirt",
+    "distillato": [
+      "Bourbon whiskey"
+    ],
+    "categoria": "After dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Caramellato",
+      "Speziato",
+      "Caldo"
+    ],
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Bourbon whiskey"
+      ],
+      [
+        "15 ml",
+        "Amaro nonino"
+      ],
+      [
+        "7,5 ml",
+        "Sciroppo di acero"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
+    ],
+    "storia": "Il Flannel Shirt è un cocktail contemporaneo figlio della stagione dei riff sull'Old Fashioned che ha dominato i cocktail bar americani tra il 2005 e il 2015. Il nome evoca l'immaginario del Nord-Est americano in autunno — le foreste del Vermont, lo sciroppo d'acero, il freddo che si avvicina — e la scelta degli ingredienti rispecchia questa poetica rurale e artigianale. L'Amaro Nonino, il distillato friulano di Giovanni Nonino prodotto a partire dal 1984, fu uno dei primi amari italiani a conquistare i bartender americani grazie alla sua struttura elegante e alla sua origine da grappe di monovitigno, e la sua comparsa nei cocktail bar di New York nei primi anni 2000 aprì la strada a una generazione intera di drink che miscelavano whiskey americano e amari italiani.",
+    "frizzante": false,
+    "bicchiere": "Tumbler basso",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/flannel_shirt.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "flip",
+    "name": "Flip",
+    "distillato": [
+      "Rum"
+    ],
+    "categoria": "After dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Cremoso",
+      "Avvolgente",
+      "Ricco"
+    ],
+    "garnish": "Noce moscata",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Rum"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "1",
+        "Uovo intero"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
+      "Aggiungere ghiaccio e shakerare nuovamente",
+      "Filtrare (double strain) in una coppetta raffreddata",
+      "Grattugiare noce moscata sulla superficie"
+    ],
+    "storia": "Il Flip è una delle preparazioni più antiche della storia della miscelazione occidentale, con radici documentate nell'Inghilterra del XVII secolo. Le prime versioni erano bevande calde a base di birra o vino forte, uova, zucchero e spezie, scaldate immergendo nel boccale un attizzatoio incandescente — l'atto di \"flippare\" il liquido tra due recipienti per mescolarlo e renderlo spumoso. Nel corso del Settecento la categoria si raffinò e si raffreddò, migrò dall'Inghilterra alle colonie americane e Jerry Thomas la codificò nel suo Bartender's Guide del 1862 come una famiglia distinta di drink a base di uovo intero, distillato e zucchero. Oggi il termine Flip indica specificamente la tecnica del dry shake con uovo intero, e il drink con rum è considerato la versione archetipica — quella da cui deriva tutta la famiglia, incluse le varianti con porto, sherry e whiskey diffuse nei bar storici di Boston e New York.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/flip.webp",
+    "varianti": [
+      {
+        "nome": "Sherry Flip",
+        "note": "Versione con Sherry oloroso al posto del rum, classico britannico vittoriano"
+      }
+    ],
+    "iba": false
+  },
+  {
+    "id": "gentonique",
+    "name": "Gentonique",
+    "distillato": [
+      "Gin"
+    ],
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Floreale",
+      "Fresco",
+      "Aromatico"
+    ],
+    "garnish": "Rondella di lime",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Gin"
+      ],
+      [
+        "15 ml",
+        "Liquore ai fiori di sambuco"
+      ],
+      [
+        "Top",
+        "Acqua tonica"
+      ]
+    ],
+    "prep": [
+      "Versare il gin e il liquore ai fiori di sambuco in un bicchiere highball riempito di ghiaccio",
+      "Colmare con l'acqua tonica",
+      "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
+    ],
+    "storia": "Il Gentonique è un cocktail semplice e di grande successo nato in Spagna nel primo decennio degli anni 2000, durante il boom della cultura del Gin Tonic iberico che trasformò Barcellona e Madrid in capitali mondiali della miscelazione con gin. In Spagna il Gin Tonic non è mai stato un semplice long drink: è un rituale, una scienza, un'identità culturale. I bartender spagnoli avevano l'abitudine di arricchire i loro Gin Tonic con liquori e botaniche per esaltare le note aromatiche dei singoli gin, e l'aggiunta del St-Germain — il liquore al fiore di sambuco alsaziano lanciato nel 2007 e diventato l'ingrediente simbolo della nuova mixology mondiale — diede origine a questa variante immediatamente adottata in tutta Europa. Il nome è una crasi tra \"Gento\" e \"tonique\", che richiama le radici francofone del liquore di sambuco.",
+    "frizzante": true,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gentonique.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "gin_and_it",
+    "name": "Gin & It",
+    "distillato": [
+      "Gin"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Medio alto",
+    "sapori": [
+      "Aromatico",
+      "Morbido",
+      "Classico"
+    ],
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Gin"
+      ],
+      [
+        "45 ml",
+        "Vermouth rosso"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
+    ],
+    "storia": "Il Gin & It — dove \"It\" sta per \"Italian\", ovvero il vermouth rosso di produzione italiana — è uno dei cocktail stirred più antichi del repertorio anglofono, predecessore diretto del Dry Martini nella cultura dei bar britannici vittoriani e edoardiani. Mentre il Martini si evolveva verso il secco con vermouth dry francese, il Gin & Italian restava il drink preferito di chi amava una miscelazione più dolce e vinosa. Winston Churchill, noto amante dei Martini e degli aperitivi forti, è tra le figure storiche associate a questa tradizione. Nei bar del West End londinese dell'inizio del Novecento, chiedere un \"Sweet Martini\" equivaleva spesso a ordinare questa ricetta. La versione classica non prevede ghiaccio nel bicchiere — i britannici erano tradizionalmente contrari al ghiaccio nei drink stirred — ma la miscelazione moderna l'ha progressivamente adottato.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/gin_and_it.webp",
+    "varianti": [
+      {
+        "nome": "Sweet Martini",
+        "note": "Nome alternativo usato nei bar americani, identica ricetta"
+      }
+    ],
+    "iba": false
+  },
+  {
+    "id": "great_gatsby",
+    "name": "Great Gatsby",
+    "distillato": [
+      "Vodka"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Medio basso",
+    "sapori": [
+      "Elegante",
+      "Agrumato",
+      "Effervescente"
+    ],
+    "garnish": "Rondella di lime",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Vodka"
+      ],
+      [
+        "30 ml",
+        "Lillet blanc"
+      ],
+      [
+        "60 ml",
+        "Succo di pompelmo rosa"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio",
+      "Completare con lo Champagne"
+    ],
+    "storia": "Il Great Gatsby è un cocktail ispirato all'omonimo romanzo di F. Scott Fitzgerald, pubblicato nel 1925, capolavoro della letteratura americana e affresco definitivo dell'era del jazz e del Proibizionismo. Le sfarzose feste di Jay Gatsby nel suo palazzo di Long Island erano annaffiate di Champagne — il simbolo più immediato della ricchezza ostentata e della nuova classe agiata americana degli anni Ruggenti. Questo cocktail nasce come omaggio a quell'immaginario: la scintilla delle bollicine, la precisione del gin, la pulizia del limone. Il romanzo è stato adattato al cinema più volte, con trasposizioni nel 1949, nel 1974 e nel 2013, ciascuna delle quali ha riacceso l'interesse per l'estetica e la cultura della bevuta degli anni Venti. Il nome del drink circola nei cocktail bar tematici e nelle carte delle feste in bianco e nero da decenni, senza paternità definita ma con un'identità visiva e narrativa inconfondibile.",
+    "frizzante": false,
+    "bicchiere": "Tumbler basso",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/great_gatsby.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "inverno",
+    "name": "Inverno",
+    "distillato": [
+      "Rye whiskey"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Speziato",
+      "Amaro",
+      "Profondo"
+    ],
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Rye whiskey"
+      ],
+      [
+        "15 ml",
+        "Vermouth rosso"
+      ],
+      [
+        "15 ml",
+        "Amaro nonino"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
+    ],
+    "storia": "L'Inverno è un cocktail contemporaneo di ispirazione stagionale, costruito attorno al connubio tra rye whiskey americano e Amaro Nonino friulano che ha caratterizzato una fase importante della miscelazione italiana ed europea degli anni 2010. Il nome è semplicemente quello della stagione più fredda dell'anno, e il drink porta con sé tutto il carattere invernale: spezie, erbe, profondità, calore contenuto. Questo tipo di build — whiskey di segale, vermouth e amaro italiano — è figlio diretto del movimento Black Manhattan e del Paper Plane, che negli anni 2000 avevano dimostrato come gli amari italiani potessero dialogare alla pari con i grandi distillati americani. La presenza del vermouth rosso richiama la struttura del Manhattan classico, ma l'Amaro Nonino sposta il drink verso un registro più erbaceo e continentale, più vicino ai paesaggi alpini che alle distillerie del Kentucky.",
+    "frizzante": false,
+    "bicchiere": "Tumbler basso",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/inverno.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "line_cocktail",
+    "name": "Line Cocktail",
+    "distillato": [
+      "Gin"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Medio alto",
+    "sapori": [
+      "Secco",
+      "Agrumato",
+      "Raffinato"
+    ],
+    "garnish": "Ciliegia",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Gin"
+      ],
+      [
+        "15 ml",
+        "Vermouth dry"
+      ],
+      [
+        "7,5 ml",
+        "Maraschino"
+      ],
+      [
+        "22,5 ml",
+        "Succo di limone"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Line Cocktail è un drink di origini scandinave, legato alla tradizione marinaresca nordica e al Kümmel — il liquore al cumino che per secoli è stato il distillato dei marinai del Baltico. La \"linea\" del nome fa riferimento all'equatore: nella tradizione nautica, attraversare la linea dell'equatore era un rito di passaggio celebrato a bordo con dosi generose di alcolici, e il Line Crossing Ceremony aveva nei paesi nordici una ricca tradizione di bevande dedicate. La ricetta attuale, senza Kümmel ma con gin, vermouth dry e maraschino, è una versione raffinata che circola nei ricettari scandinavi del dopoguerra. La struttura è quella di un Aviation semplificato, con la Crème de violette sostituita dal vermouth dry, che conferisce maggiore secchezza e verticalità al profilo aromatico.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/line_cocktail.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "american_trilogy",
+    "name": "American Trilogy",
+    "distillato": [
+      "Rye whiskey",
+      "Bourbon whiskey"
+    ],
+    "categoria": "After dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Speziato",
+      "Caramellato",
+      "Complesso"
+    ],
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Rye whiskey"
+      ],
+      [
+        "30 ml",
+        "Bourbon whiskey"
+      ],
+      [
+        "1",
+        "Zolletta di zucchero"
+      ],
+      [
+        "10 ML",
+        "Acqua"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
+      ],
+      [
+        "1 dash",
+        "Orange bitters"
+      ]
+    ],
+    "prep": [
+      "In un mixing glass mettere la zolletta di zucchero, l'angostura e l'orange bitters",
       "Aggiungere l'acqua e mescolare fino a sciogliere lo zucchero",
       "Aggiungere il rye, il bourbon, il ghiaccio e mescolare delicatamente per circa 20 secondi",
       "Filtrare e versare in un tumbler basso riempito di ghiaccio (meglio se chunk)"
-  ],
-  "storia": "L'American Trilogy è una creazione moderna del bartender Mickey Chateau, che lo sviluppò lavorando al ristorante newyorkese di Mario Batali agli inizi degli anni 2000. Il drink nasce come omaggio dichiarato all'Old Fashioned, il cocktail americano per antonomasia, ma lo reinterpreta attraverso la lente della dualità: due distillati simbolo degli Stati Uniti, il rye whiskey e il bourbon, convivono in parti uguali in un bicchiere solo. Il rye, protagonista della mixology pre-Proibizionismo, e il bourbon, figlio del Sud americano, raccontano insieme secoli di storia della distillazione americana. La ricetta si diffuse rapidamente tra i bartender della scena craft newyorkese degli anni 2000, diventando un riferimento discreto ma riconoscibile per chi apprezza la tradizione americana del whiskey.",
-  "frizzante": false,
-  "bicchiere": "Tumbler basso",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/american_trilogy.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "atholl_brose",
-  "name": "Atholl Brose",
-  "distillato": ["Scotch whisky"],
-  "categoria": "After dinner",
-  "abv": "Medio",
-  "sapori": ["Cremoso", "Morbido", "Tostato"],
-  "garnish": "Noce moscata",
-  "ingredienti": [
-    ["45 ml", "Scotch whisky"],
-    ["15 ml", "Drambuie"],
-    ["15 ml", "Miele"],
-    ["30 ml", "Panna fresca"]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata",
-    "Grattugiare noce moscata sulla superficie"
-  ],
-  "storia": "L'Atholl Brose affonda le radici nella Scozia medievale e il suo nome rimanda direttamente al Duca di Atholl. Secondo la leggenda, nel 1475 il Duca riuscì a catturare il ribelle Lord of the Isles riempiendogli di questa miscela il pozzo dal quale si dissetava abitualmente, cogliendolo così in stato di ebbrezza. La ricetta originale era ben più rustica della versione moderna: un composto di avena, acqua, miele e whisky consumato tradizionalmente nella notte di Capodanno, il 31 dicembre, e nelle celebrazioni di Hogmanay. Nel tempo la preparazione si è raffinata, la panna ha preso il posto dell'avena e il Drambuie, liquore scozzese nato anch'esso da una leggenda legata al Principe Carlo Edoardo Stuart, ha aggiunto complessità erbacea. Ancora oggi l'Atholl Brose è considerato un simbolo dell'identità culturale scozzese, consumato nelle feste e nei momenti di convivialità delle Highland.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/atholl_brose.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "bicycle_thief",
-  "name": "Bicycle Thief",
-  "distillato": ["Rum"],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": ["Fruttato", "Agrumato", "Fresco"],
-  "garnish": "Rondella di lime",
-  "ingredienti": [
-    ["45 ml", "Rum"],
-    ["22,5 ml", "Succo di lime"],
-    ["15 ml", "Sciroppo di zucchero"],
-    ["15 ml", "Succo di ananas"],
-    ["2 dash", "Angostura bitters"]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in un tumbler basso riempito di ghiaccio"
-  ],
-  "storia": "Il Bicycle Thief è un cocktail contemporaneo nato nei bar artigianali nordamericani degli anni 2010, periodo florido per la riscoperta di ricette classiche rielaborate con sensibilità moderna. Il nome è un omaggio dichiarato al capolavoro cinematografico di Vittorio De Sica del 1948, Ladri di biciclette, pietra miliare del neorealismo italiano e film considerato tra i più grandi della storia del cinema mondiale. La scelta di evocare un'icona della cultura italiana in un drink a base di rum riflette la tendenza di quella generazione di bartender a costruire cocktail carichi di riferimenti letterari, artistici e cinematografici, trasformando il bancone in uno spazio narrativo. La ricetta ha circolato principalmente nella scena dei cocktail bar indipendenti canadesi prima di diffondersi a livello internazionale.",
-  "frizzante": false,
-  "bicchiere": "Tumbler basso",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bicycle_thief.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "bitter_giuseppe",
-  "name": "Bitter Giuseppe",
-  "distillato": ["Scotch whisky"],
-  "categoria": "Pre dinner",
-  "abv": "Medio",
-  "sapori": ["Amaro", "Agrumato", "Complesso"],
-  "garnish": "Zest di limone",
-  "ingredienti": [
-    ["50 ml", "Cynar"],
-    ["15 ml", "Scotch whisky"],
-    ["7,5 ml", "Succo di limone"],
-    ["4 dash", "Orange bitters"]
-  ],
-  "prep": [
-    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
-    "Mescolare delicatamente per circa 20 secondi",
-    "Filtrare in un tumbler basso riempito di ghiaccio"
-  ],
-  "storia": "Il Bitter Giuseppe è una creazione di James Friedman, bartender di Chicago, nata intorno al 2008 nella scena dei cocktail bar craft della città. Il nome unisce un aggettivo inglese a un nome italiano, rendendo omaggio al Cynar, il protagonista assoluto della ricetta: l'amaro milanese a base di carciofo che porta con sé decenni di storia della liquoristica italiana. Il Cynar, commercializzato a partire dal 1952 dall'azienda veneziana Dalle Molle, era nato come digestivo ma nel primo decennio degli anni 2000 i bartender americani lo riscoprirono come ingrediente da miscelazione, capace di portare amarezza, erbacità e struttura nei drink stirred. Il Bitter Giuseppe divenne rapidamente uno dei cocktail più replicati e citati della nascente cultura dei low-ABV stirred drinks, contribuendo a sdoganare l'uso degli amari italiani nella mixology internazionale.",
-  "frizzante": false,
-  "bicchiere": "Tumbler basso",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bitter_giuseppe.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "blue_hawaii",
-  "name": "Blue Hawaii",
-  "distillato": ["Rum", "Vodka"],
-  "categoria": "All day",
-  "abv": "Medio basso",
-  "sapori": ["Tropicale", "Dolce", "Fruttato"],
-  "garnish": "Fetta di ananas + Ciliegia",
-  "ingredienti": [
-    ["15 ml", "Rum"],
-    ["15 ml", "Vodka"],
-    ["30 ml", "Blue curaçao"],
-    ["90 ml", "Succo di ananas"],
-    ["15 ml", "Succo di lime"],
-    ["15 ml", "Sciroppo di zucchero"]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in un bicchiere hurricane riempito di ghiaccio"
-  ],
-  "storia": "Il Blue Hawaii nacque nel 1957 al Royal Hawaiian Hotel di Honolulu, nelle Hawaii, per mano di Harry Yee, uno dei bartender più creativi e influenti della storia della mixology tropicale americana. La sua creazione fu in parte provocata da un rappresentante commerciale della Bols che cercava modi per promuovere il Blue Curaçao negli Stati Uniti: il colore azzurro intenso che il liquore conferisce al drink divenne immediatamente il tratto distintivo più riconoscibile della ricetta. Il nome fu preso in prestito dalla canzone Blue Hawaii, originariamente scritta nel 1937 da Leo Robin e Ralph Rainger per il film Waikiki Wedding. La fama del drink esplose definitivamente nel 1961 quando Elvis Presley girò l'omonimo film musicale alle Hawaii, portando il cocktail a simboleggiare in tutto il mondo l'immaginario del paradiso tropicale americano.",
-  "frizzante": false,
-  "bicchiere": "Hurricane",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/blue_hawaii.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "brooklynite",
-  "name": "Brooklynite",
-  "distillato": ["Rum"],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": ["Speziato", "Floreale", "Complesso"],
-  "garnish": "Rondella di lime",
-  "ingredienti": [
-    ["60 ml", "Rum agricolo"],
-    ["22,5 ml", "Miele"],
-    ["22,5 ml", "Succo di lime"],
-    ["2 dash", "Angostura bitters"]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "Il Brooklynite è una creazione di Sasha Petraske, il bartender newyorkese che nel 1999 aprì Milk & Honey a Manhattan, locale che avrebbe ridefinito il linguaggio della miscelazione mondiale e inaugurato il movimento dei cocktail bar di nuova generazione. La ricetta è strutturalmente un riff del Bee's Knees, classico del Proibizionismo, ma traslato nel mondo del rum agricolo della Martinica. Petraske era noto per la sua capacità di costruire cocktail di poche ingredienti ad alto impatto, e il Brooklynite rispecchia perfettamente questa filosofia. Il nome omaggia il quartiere di Brooklyn, simbolo della cultura artigianale e indipendente di New York. Sasha Petraske è scomparso nel 2015, ma il suo lascito ha influenzato ogni generazione di bartender successiva, e il Brooklynite rimane uno degli esempi più citati della sua poetica.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/brooklynite.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "carajillo",
-  "name": "Carajillo",
-  "distillato": ["Licor 43"],
-  "categoria": "After dinner",
-  "abv": "Medio basso",
-  "sapori": ["Caffeinico", "Amaro", "Caldo"],
-  "garnish": "Chicchi di caffe",
-  "ingredienti": [
-    ["45 ml", "Licor 43"],
-    ["45 ml", "Caffè caldo"]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in un tumbler basso riempito di ghiaccio"
-  ],
-  "storia": "Il Carajillo è una preparazione con radici profonde nella Penisola Iberica, documentata in Spagna fin dall'Ottocento. L'etimologia del nome è oggetto di dibattito: una delle teorie più diffuse lo collega al termine catalano \"coratge\" (coraggio), a indicare il piccolo rinforzo alcolico aggiunto al caffè dai soldati spagnoli di stanza a Cuba durante le guerre coloniali. In Spagna la versione tradizionale era semplicemente caffè con brandy, cognac o rum. La variante con il Licor 43, il liquore valenciano a base di agrumi e vaniglia prodotto dall'azienda Diego Zamenhof, si impose nel corso del Novecento e divenne la forma più riconoscibile del Carajillo nella mixology moderna. In Messico, dove il drink fu importato attraverso i legami culturali con la Spagna, la versione con Licor 43 e ghiaccio è oggi considerata quasi un simbolo nazionale, servita in ogni bar del paese e protagonista di una vera e propria rinascita di popolarità a partire dagli anni 2010.",
-  "frizzante": false,
-  "bicchiere": "Tumbler basso",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/carajillo.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "coffee_cocktail",
-  "name": "Coffee Cocktail",
-  "distillato": ["Cognac"],
-  "categoria": "After dinner",
-  "abv": "Medio alto",
-  "sapori": ["Vellutato", "Ricco", "Avvolgente"],
-  "garnish": "Noce moscata",
-  "ingredienti": [
-    ["45 ml", "Cognac"],
-    ["45 ml", "Porto rosso"],
-    ["1", "Uovo intero"],
-    ["15 ml", "Sciroppo di zucchero"]
-  ],
-  "prep": [
-    "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
-    "Aggiungere ghiaccio e shakerare nuovamente",
-    "Filtrare (double strain) in una coppetta raffreddata",
-    "Grattugiare noce moscata sulla superficie"
-  ],
-  "storia": "Il Coffee Cocktail è uno dei drink più enigmatici della storia della miscelazione, non tanto per la sua composizione — in cui non compare alcun caffè — quanto per il nome. La ricetta compare nel leggendario manuale di Jerry Thomas, Bartender's Guide del 1887, dove lo stesso Thomas ammette apertamente che il nome è puramente evocativo: l'aspetto finale nel bicchiere, con la sua schiuma densa e il colore ambrato, ricorda visivamente un caffè. Jerry Thomas, spesso chiamato il padre della mixology americana, fu il primo a raccogliere sistematicamente le ricette dell'epoca vittoriana, e il Coffee Cocktail è considerato uno dei suoi drink più originali. L'uso dell'uovo intero nel XIX secolo era comune in molte preparazioni calde e fredde, ma l'accostamento con cognac e porto in versione fredda era una scelta sofisticata e insolita. Il drink è oggi un riferimento storico apprezzato dai bartender che studiano le origini della miscelazione angloamericana.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/coffee_cocktail.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "death_flip",
-  "name": "Death Flip",
-  "distillato": ["Tequila"],
-  "categoria": "After dinner",
-  "abv": "Alto",
-  "sapori": ["Intenso", "Erbaceo", "Cremoso"],
-  "garnish": "Noce moscata",
-  "ingredienti": [
-    ["30 ml", "Tequila"],
-    ["22,5 ml", "Fernet branca"],
-    ["22,5 ml", "Chartreuse gialla"],
-    ["15 ml", "Sciroppo di zucchero"],
-    ["1", "Uovo intero"]
-  ],
-  "prep": [
-    "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
-    "Aggiungere ghiaccio e shakerare nuovamente",
-    "Filtrare (double strain) in una coppetta raffreddata",
-    "Grattugiare noce moscata sulla superficie"
-  ],
-  "storia": "Il Death Flip è una creazione di Jason Williams, bartender australiano, apparsa nei primi anni 2010 nella scena cocktail di Melbourne e Sydney. Il nome richiama tanto la tecnica del flip — preparazione storica a base di uovo intero diffusa fin dal XVII secolo nelle taverne anglosassoni — quanto la sensazione di sfida gustativa che il drink impone a chi lo assaggia per la prima volta. La convivenza di Fernet-Branca e Chartreuse gialla in un unico bicchiere era considerata audace persino dagli standard del mondo bartender, e il drink circolò rapidamente come una sorta di test di coraggio tra i professionisti della miscelazione mondiale. La diffusione esplosiva attraverso i social media degli anni 2010 ne fece un drink di culto nei cocktail bar internazionali, citato nelle stesse conversazioni in cui si parla di Last Word e Paper Plane come simboli della modernità in miscelazione.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/death_flip.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "eastside",
-  "name": "Eastside",
-  "distillato": ["Gin"],
-  "categoria": "All day",
-  "abv": "Medio alto",
-  "sapori": ["Fresco", "Erbaceo", "Agrumato"],
-  "garnish": "Striscia di cetriolo",
-  "ingredienti": [
-    ["60 ml", "Gin"],
-    ["22,5 ml", "Succo di lime"],
-    ["15 ml", "Sciroppo di zucchero"],
-    ["6", "Foglie di menta"],
-    ["3", "Rondelle di cetriolo"]
-  ],
-  "prep": [
-    "Pestare le romndelle di cetriolo nello shaker",
-    "Aggiungere gli altri ingredienti e shakerare con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "L'Eastside è un cocktail nato a New York City nei primi anni 2000 e attribuito al bartender Gary Regan, uno dei più influenti autori e professionisti della miscelazione americana contemporanea, noto per il suo contributo alla codificazione dei bitters e alla divulgazione della cultura cocktail. Il nome rimanda all'East Side di Manhattan, il quartiere storico che ha accolto generazioni di immigranti e che negli anni Novanta e Duemila visse una vigorosa rinascita come centro della vita notturna newyorkese. La ricetta nacque essenzialmente come variante del Southside — classico gin sour con menta — arricchita dall'aggiunta del cetriolo fresco, allora ancora insolito nel bicchiere. L'Eastside contribuì a sdoganare l'uso degli ortaggi nella miscelazione moderna, aprendo la strada a un filone di drink botanici che avrebbe caratterizzato la fine degli anni 2000 e l'intero decennio successivo.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/eastside.webp",
-  "varianti": [],
-  "iba": false
-},
+    ],
+    "storia": "L'American Trilogy è una creazione moderna del bartender Mickey Chateau, che lo sviluppò lavorando al ristorante newyorkese di Mario Batali agli inizi degli anni 2000. Il drink nasce come omaggio dichiarato all'Old Fashioned, il cocktail americano per antonomasia, ma lo reinterpreta attraverso la lente della dualità: due distillati simbolo degli Stati Uniti, il rye whiskey e il bourbon, convivono in parti uguali in un bicchiere solo. Il rye, protagonista della mixology pre-Proibizionismo, e il bourbon, figlio del Sud americano, raccontano insieme secoli di storia della distillazione americana. La ricetta si diffuse rapidamente tra i bartender della scena craft newyorkese degli anni 2000, diventando un riferimento discreto ma riconoscibile per chi apprezza la tradizione americana del whiskey.",
+    "frizzante": false,
+    "bicchiere": "Tumbler basso",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/american_trilogy.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "atholl_brose",
+    "name": "Atholl Brose",
+    "distillato": [
+      "Scotch whisky"
+    ],
+    "categoria": "After dinner",
+    "abv": "Medio",
+    "sapori": [
+      "Cremoso",
+      "Morbido",
+      "Tostato"
+    ],
+    "garnish": "Noce moscata",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Scotch whisky"
+      ],
+      [
+        "15 ml",
+        "Drambuie"
+      ],
+      [
+        "15 ml",
+        "Miele"
+      ],
+      [
+        "30 ml",
+        "Panna fresca"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata",
+      "Grattugiare noce moscata sulla superficie"
+    ],
+    "storia": "L'Atholl Brose affonda le radici nella Scozia medievale e il suo nome rimanda direttamente al Duca di Atholl. Secondo la leggenda, nel 1475 il Duca riuscì a catturare il ribelle Lord of the Isles riempiendogli di questa miscela il pozzo dal quale si dissetava abitualmente, cogliendolo così in stato di ebbrezza. La ricetta originale era ben più rustica della versione moderna: un composto di avena, acqua, miele e whisky consumato tradizionalmente nella notte di Capodanno, il 31 dicembre, e nelle celebrazioni di Hogmanay. Nel tempo la preparazione si è raffinata, la panna ha preso il posto dell'avena e il Drambuie, liquore scozzese nato anch'esso da una leggenda legata al Principe Carlo Edoardo Stuart, ha aggiunto complessità erbacea. Ancora oggi l'Atholl Brose è considerato un simbolo dell'identità culturale scozzese, consumato nelle feste e nei momenti di convivialità delle Highland.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/atholl_brose.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "bicycle_thief",
+    "name": "Bicycle Thief",
+    "distillato": [
+      "Rum"
+    ],
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Fruttato",
+      "Agrumato",
+      "Fresco"
+    ],
+    "garnish": "Rondella di lime",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Rum"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "15 ml",
+        "Succo di ananas"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio"
+    ],
+    "storia": "Il Bicycle Thief è un cocktail contemporaneo nato nei bar artigianali nordamericani degli anni 2010, periodo florido per la riscoperta di ricette classiche rielaborate con sensibilità moderna. Il nome è un omaggio dichiarato al capolavoro cinematografico di Vittorio De Sica del 1948, Ladri di biciclette, pietra miliare del neorealismo italiano e film considerato tra i più grandi della storia del cinema mondiale. La scelta di evocare un'icona della cultura italiana in un drink a base di rum riflette la tendenza di quella generazione di bartender a costruire cocktail carichi di riferimenti letterari, artistici e cinematografici, trasformando il bancone in uno spazio narrativo. La ricetta ha circolato principalmente nella scena dei cocktail bar indipendenti canadesi prima di diffondersi a livello internazionale.",
+    "frizzante": false,
+    "bicchiere": "Tumbler basso",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bicycle_thief.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "bitter_giuseppe",
+    "name": "Bitter Giuseppe",
+    "distillato": [
+      "Scotch whisky"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Medio",
+    "sapori": [
+      "Amaro",
+      "Agrumato",
+      "Complesso"
+    ],
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Cynar"
+      ],
+      [
+        "15 ml",
+        "Scotch whisky"
+      ],
+      [
+        "7,5 ml",
+        "Succo di limone"
+      ],
+      [
+        "4 dash",
+        "Orange bitters"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in un tumbler basso riempito di ghiaccio"
+    ],
+    "storia": "Il Bitter Giuseppe è una creazione di James Friedman, bartender di Chicago, nata intorno al 2008 nella scena dei cocktail bar craft della città. Il nome unisce un aggettivo inglese a un nome italiano, rendendo omaggio al Cynar, il protagonista assoluto della ricetta: l'amaro milanese a base di carciofo che porta con sé decenni di storia della liquoristica italiana. Il Cynar, commercializzato a partire dal 1952 dall'azienda veneziana Dalle Molle, era nato come digestivo ma nel primo decennio degli anni 2000 i bartender americani lo riscoprirono come ingrediente da miscelazione, capace di portare amarezza, erbacità e struttura nei drink stirred. Il Bitter Giuseppe divenne rapidamente uno dei cocktail più replicati e citati della nascente cultura dei low-ABV stirred drinks, contribuendo a sdoganare l'uso degli amari italiani nella mixology internazionale.",
+    "frizzante": false,
+    "bicchiere": "Tumbler basso",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/bitter_giuseppe.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "blue_hawaii",
+    "name": "Blue Hawaii",
+    "distillato": [
+      "Rum",
+      "Vodka"
+    ],
+    "categoria": "All day",
+    "abv": "Medio basso",
+    "sapori": [
+      "Tropicale",
+      "Dolce",
+      "Fruttato"
+    ],
+    "garnish": "Fetta di ananas + Ciliegia",
+    "ingredienti": [
+      [
+        "15 ml",
+        "Rum"
+      ],
+      [
+        "15 ml",
+        "Vodka"
+      ],
+      [
+        "30 ml",
+        "Blue curaçao"
+      ],
+      [
+        "90 ml",
+        "Succo di ananas"
+      ],
+      [
+        "15 ml",
+        "Succo di lime"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in un bicchiere hurricane riempito di ghiaccio"
+    ],
+    "storia": "Il Blue Hawaii nacque nel 1957 al Royal Hawaiian Hotel di Honolulu, nelle Hawaii, per mano di Harry Yee, uno dei bartender più creativi e influenti della storia della mixology tropicale americana. La sua creazione fu in parte provocata da un rappresentante commerciale della Bols che cercava modi per promuovere il Blue Curaçao negli Stati Uniti: il colore azzurro intenso che il liquore conferisce al drink divenne immediatamente il tratto distintivo più riconoscibile della ricetta. Il nome fu preso in prestito dalla canzone Blue Hawaii, originariamente scritta nel 1937 da Leo Robin e Ralph Rainger per il film Waikiki Wedding. La fama del drink esplose definitivamente nel 1961 quando Elvis Presley girò l'omonimo film musicale alle Hawaii, portando il cocktail a simboleggiare in tutto il mondo l'immaginario del paradiso tropicale americano.",
+    "frizzante": false,
+    "bicchiere": "Hurricane",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/blue_hawaii.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "brooklynite",
+    "name": "Brooklynite",
+    "distillato": [
+      "Rum"
+    ],
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Speziato",
+      "Floreale",
+      "Complesso"
+    ],
+    "garnish": "Rondella di lime",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Rum agricolo"
+      ],
+      [
+        "22,5 ml",
+        "Miele"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ],
+      [
+        "2 dash",
+        "Angostura bitters"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Brooklynite è una creazione di Sasha Petraske, il bartender newyorkese che nel 1999 aprì Milk & Honey a Manhattan, locale che avrebbe ridefinito il linguaggio della miscelazione mondiale e inaugurato il movimento dei cocktail bar di nuova generazione. La ricetta è strutturalmente un riff del Bee's Knees, classico del Proibizionismo, ma traslato nel mondo del rum agricolo della Martinica. Petraske era noto per la sua capacità di costruire cocktail di poche ingredienti ad alto impatto, e il Brooklynite rispecchia perfettamente questa filosofia. Il nome omaggia il quartiere di Brooklyn, simbolo della cultura artigianale e indipendente di New York. Sasha Petraske è scomparso nel 2015, ma il suo lascito ha influenzato ogni generazione di bartender successiva, e il Brooklynite rimane uno degli esempi più citati della sua poetica.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/brooklynite.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "carajillo",
+    "name": "Carajillo",
+    "distillato": [
+      "Licor 43"
+    ],
+    "categoria": "After dinner",
+    "abv": "Analcolico",
+    "sapori": [
+      "Caffeinico",
+      "Amaro",
+      "Caldo"
+    ],
+    "garnish": "Chicchi di caffe",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Licor 43"
+      ],
+      [
+        "45 ml",
+        "Caffè caldo"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in un tumbler basso riempito di ghiaccio"
+    ],
+    "storia": "Il Carajillo è una preparazione con radici profonde nella Penisola Iberica, documentata in Spagna fin dall'Ottocento. L'etimologia del nome è oggetto di dibattito: una delle teorie più diffuse lo collega al termine catalano \"coratge\" (coraggio), a indicare il piccolo rinforzo alcolico aggiunto al caffè dai soldati spagnoli di stanza a Cuba durante le guerre coloniali. In Spagna la versione tradizionale era semplicemente caffè con brandy, cognac o rum. La variante con il Licor 43, il liquore valenciano a base di agrumi e vaniglia prodotto dall'azienda Diego Zamenhof, si impose nel corso del Novecento e divenne la forma più riconoscibile del Carajillo nella mixology moderna. In Messico, dove il drink fu importato attraverso i legami culturali con la Spagna, la versione con Licor 43 e ghiaccio è oggi considerata quasi un simbolo nazionale, servita in ogni bar del paese e protagonista di una vera e propria rinascita di popolarità a partire dagli anni 2010.",
+    "frizzante": false,
+    "bicchiere": "Tumbler basso",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/carajillo.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "coffee_cocktail",
+    "name": "Coffee Cocktail",
+    "distillato": [
+      "Cognac"
+    ],
+    "categoria": "After dinner",
+    "abv": "Medio alto",
+    "sapori": [
+      "Vellutato",
+      "Ricco",
+      "Avvolgente"
+    ],
+    "garnish": "Noce moscata",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Cognac"
+      ],
+      [
+        "45 ml",
+        "Porto rosso"
+      ],
+      [
+        "1",
+        "Uovo intero"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
+      "Aggiungere ghiaccio e shakerare nuovamente",
+      "Filtrare (double strain) in una coppetta raffreddata",
+      "Grattugiare noce moscata sulla superficie"
+    ],
+    "storia": "Il Coffee Cocktail è uno dei drink più enigmatici della storia della miscelazione, non tanto per la sua composizione — in cui non compare alcun caffè — quanto per il nome. La ricetta compare nel leggendario manuale di Jerry Thomas, Bartender's Guide del 1887, dove lo stesso Thomas ammette apertamente che il nome è puramente evocativo: l'aspetto finale nel bicchiere, con la sua schiuma densa e il colore ambrato, ricorda visivamente un caffè. Jerry Thomas, spesso chiamato il padre della mixology americana, fu il primo a raccogliere sistematicamente le ricette dell'epoca vittoriana, e il Coffee Cocktail è considerato uno dei suoi drink più originali. L'uso dell'uovo intero nel XIX secolo era comune in molte preparazioni calde e fredde, ma l'accostamento con cognac e porto in versione fredda era una scelta sofisticata e insolita. Il drink è oggi un riferimento storico apprezzato dai bartender che studiano le origini della miscelazione angloamericana.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/coffee_cocktail.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "death_flip",
+    "name": "Death Flip",
+    "distillato": [
+      "Tequila"
+    ],
+    "categoria": "After dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Intenso",
+      "Erbaceo",
+      "Cremoso"
+    ],
+    "garnish": "Noce moscata",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Tequila"
+      ],
+      [
+        "22,5 ml",
+        "Fernet branca"
+      ],
+      [
+        "22,5 ml",
+        "Chartreuse gialla"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "1",
+        "Uovo intero"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutti gli ingredienti senza ghiaccio (dry shake)",
+      "Aggiungere ghiaccio e shakerare nuovamente",
+      "Filtrare (double strain) in una coppetta raffreddata",
+      "Grattugiare noce moscata sulla superficie"
+    ],
+    "storia": "Il Death Flip è una creazione di Jason Williams, bartender australiano, apparsa nei primi anni 2010 nella scena cocktail di Melbourne e Sydney. Il nome richiama tanto la tecnica del flip — preparazione storica a base di uovo intero diffusa fin dal XVII secolo nelle taverne anglosassoni — quanto la sensazione di sfida gustativa che il drink impone a chi lo assaggia per la prima volta. La convivenza di Fernet-Branca e Chartreuse gialla in un unico bicchiere era considerata audace persino dagli standard del mondo bartender, e il drink circolò rapidamente come una sorta di test di coraggio tra i professionisti della miscelazione mondiale. La diffusione esplosiva attraverso i social media degli anni 2010 ne fece un drink di culto nei cocktail bar internazionali, citato nelle stesse conversazioni in cui si parla di Last Word e Paper Plane come simboli della modernità in miscelazione.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/death_flip.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "eastside",
+    "name": "Eastside",
+    "distillato": [
+      "Gin"
+    ],
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Fresco",
+      "Erbaceo",
+      "Agrumato"
+    ],
+    "garnish": "Striscia di cetriolo",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Gin"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "6",
+        "Foglie di menta"
+      ],
+      [
+        "3",
+        "Rondelle di cetriolo"
+      ]
+    ],
+    "prep": [
+      "Pestare le romndelle di cetriolo nello shaker",
+      "Aggiungere gli altri ingredienti e shakerare con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "L'Eastside è un cocktail nato a New York City nei primi anni 2000 e attribuito al bartender Gary Regan, uno dei più influenti autori e professionisti della miscelazione americana contemporanea, noto per il suo contributo alla codificazione dei bitters e alla divulgazione della cultura cocktail. Il nome rimanda all'East Side di Manhattan, il quartiere storico che ha accolto generazioni di immigranti e che negli anni Novanta e Duemila visse una vigorosa rinascita come centro della vita notturna newyorkese. La ricetta nacque essenzialmente come variante del Southside — classico gin sour con menta — arricchita dall'aggiunta del cetriolo fresco, allora ancora insolito nel bicchiere. L'Eastside contribuì a sdoganare l'uso degli ortaggi nella miscelazione moderna, aprendo la strada a un filone di drink botanici che avrebbe caratterizzato la fine degli anni 2000 e l'intero decennio successivo.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/eastside.webp",
+    "varianti": [],
+    "iba": false
+  },
   {
     "id": "barbary_coast",
     "name": "Barbary Coast",
@@ -500,7 +1130,9 @@
   {
     "id": "campari_shakerato",
     "name": "Campari Shakerato",
-    "distillato": ["Campari"],
+    "distillato": [
+      "Campari"
+    ],
     "categoria": "Pre dinner",
     "abv": "Medio",
     "sapori": [
@@ -529,7 +1161,9 @@
   {
     "id": "charlie_chaplin",
     "name": "Charlie Chaplin",
-    "distillato": ["Sloe gin"],
+    "distillato": [
+      "Sloe gin"
+    ],
     "categoria": "All day",
     "abv": "Medio",
     "sapori": [
@@ -4598,7 +5232,10 @@
   {
     "id": "americano",
     "name": "Americano",
-    "distillato": ["Campari", "Vermouth rosso"],
+    "distillato": [
+      "Campari",
+      "Vermouth rosso"
+    ],
     "categoria": "Pre dinner",
     "abv": "Medio basso",
     "sapori": [
@@ -9689,7 +10326,8 @@
     "id": "milano_torino",
     "name": "Milano Torino",
     "distillato": [
-      "Campari", "Vermouth rosso"
+      "Campari",
+      "Vermouth rosso"
     ],
     "categoria": "Pre dinner",
     "abv": "Medio",
@@ -10338,7 +10976,7 @@
       "Bourbon whiskey"
     ],
     "categoria": "After dinner",
-    "abv": "Molto alto",
+    "abv": "Alto",
     "sapori": [
       "Amaro",
       "Ricco",

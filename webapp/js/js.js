@@ -3503,7 +3503,11 @@ function _todayKeyLocal() {
     + String(d.getDate()).padStart(2,'0');
 }
 function updateQuizBadge() {
-  var done = window._quizDoneToday === true;
+  // Nel gap 00:00-00:10 nessuna notifica — la domanda non è ancora disponibile
+  var now = new Date();
+  var inGap = (now.getHours() === 0 && now.getMinutes() < 10);
+  var done = window._quizDoneToday === true || inGap;
+
   var dot  = document.getElementById('hdr-quiz-dot');
   var cta  = document.getElementById('bsheet-quiz-cta');
   if (dot) {
