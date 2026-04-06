@@ -1054,13 +1054,13 @@ body::before{
 
 /* Drawer (scende dall'alto — tutti i drawer) */
 .drawer{
-  position:fixed;left:0;right:0;
-  bottom:0;
+  position:fixed;left:.75rem;right:.75rem;
+  bottom:.75rem;
   top:var(--rbar-top, var(--hdr-h));
   z-index:1050;
   background:var(--surf);
-  border-top:1px solid rgba(255,255,255,.08);
-  border-radius:20px 20px 0 0;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
   overflow-y:auto;
   overscroll-behavior:none;
   -webkit-overflow-scrolling:touch;
@@ -1081,7 +1081,8 @@ body::before{
 }
 @media (display-mode: standalone) {
   .drawer{
-    padding-bottom:calc(env(safe-area-inset-bottom, 12px));
+    bottom:calc(.75rem + env(safe-area-inset-bottom, 0px));
+    padding-bottom:.5rem;
   }
 }
 .drawer-handle{
@@ -1171,8 +1172,8 @@ body::before{
   top:0;
   z-index:1049;
   background:rgba(0,0,0,.55);
-  backdrop-filter:blur(3px);
-  -webkit-backdrop-filter:blur(3px);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
   opacity:0;pointer-events:none;
   transition:opacity .3s;
 }
