@@ -1074,7 +1074,7 @@ async function loadQuiz(user) {
     var now = new Date();
     var h = now.getHours();
     var m = now.getMinutes();
-    if (h === 0 && m < 50) {
+    if (h === 0 && m < 37) {
       var icon  = document.getElementById('none-icon');
       var title = document.getElementById('none-title');
       var sub   = document.getElementById('none-sub');
@@ -1090,7 +1090,7 @@ async function loadQuiz(user) {
   })();
   // Se siamo nel gap la funzione è già uscita tramite showState + return nell'IIFE
   // ma l'IIFE non può fermare la funzione esterna — usiamo un flag
-  var _nowGap = (function(){ var n=new Date(); return n.getHours()===0 && n.getMinutes()<50; })();
+  var _nowGap = (function(){ var n=new Date(); return n.getHours()===0 && n.getMinutes()<37; })();
   if (_nowGap) return;
 
   // Carica dati utente
