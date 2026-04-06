@@ -1307,9 +1307,18 @@ function handleAnswer(el, isCorrect, rispostaCorretta, spiegazione, opzioni, uid
 
 
 // ══════════════════════════════════════════════════════
-// QUIZ AUDIO ENGINE — Web Audio API, zero file esterni
-// Cross-platform: iOS Safari, Android Chrome, PWA, desktop
+// QUIZ AUDIO ENGINE
+// Countdown e start: Web Audio API (generati, nessun file)
+// Giusto e sbagliato: file MP3 reali da webapp/audio/
 // ══════════════════════════════════════════════════════
+
+// ── Precarica i file audio MP3 al load della pagina
+var _audioCorrect = new Audio('audio/correct_answer.mp3');
+var _audioWrong   = new Audio('audio/wrong_answer.mp3');
+_audioCorrect.preload = 'auto';
+_audioWrong.preload   = 'auto';
+
+// ── Web Audio API per countdown e start (generati sinteticamente)
 var _audioCtx = null;
 
 function _getAudioCtx() {
@@ -1322,10 +1331,16 @@ function _getAudioCtx() {
 }
 
 function _unlockAudio() {
+  // Sblocca Web Audio API (countdown/start) + ricarica mp3 per iOS
   var ctx = _getAudioCtx();
-  if (!ctx) return Promise.resolve();
-  if (ctx.state === 'running') return Promise.resolve();
-  return ctx.resume ? ctx.resume() : Promise.resolve();
+  var p1 = (ctx && ctx.state !== 'running' && ctx.resume) ? ctx.resume() : Promise.resolve();
+  // iOS Safari richiede play/pause dal click handler per sbloccare <Audio>
+  var unlock = function(a) {
+    a.play().then(function(){ a.pause(); a.currentTime = 0; }).catch(function(){});
+  };
+  unlock(_audioCorrect);
+  unlock(_audioWrong);
+  return p1;
 }
 
 // ── COUNTDOWN TICK — beep secco 880Hz, identico per ogni secondo
@@ -1363,92 +1378,20 @@ function playQuizStart() {
   osc.stop(t + 0.62);
 }
 
-// ── RISPOSTA CORRETTA — stile "Pirone" CapCut/TikTok
-// Due note rapide ascendenti (basso→alto), brillanti con risonanza
+// ── RISPOSTA CORRETTA — file MP3 reale
 function playCorrect() {
-  var ctx = _getAudioCtx();
-  if (!ctx) return;
-  var t = ctx.currentTime;
-
-  // Prima nota — La4 (440Hz), breve
-  var o1 = ctx.createOscillator();
-  var g1 = ctx.createGain();
-  o1.connect(g1); g1.connect(ctx.destination);
-  o1.type = 'sine';
-  o1.frequency.setValueAtTime(880, t);
-  g1.gain.setValueAtTime(0.35, t);
-  g1.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
-  o1.start(t); o1.stop(t + 0.12);
-
-  // Seconda nota — La5 (1760Hz), più lunga con risonanza
-  var o2 = ctx.createOscillator();
-  var g2 = ctx.createGain();
-  o2.connect(g2); g2.connect(ctx.destination);
-  o2.type = 'sine';
-  o2.frequency.setValueAtTime(1760, t + 0.1);
-  g2.gain.setValueAtTime(0.0, t + 0.1);
-  g2.gain.linearRampToValueAtTime(0.38, t + 0.14);
-  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.55);
-  o2.start(t + 0.1); o2.stop(t + 0.55);
-
-  // Armonica brillante sopra — dà il timbro "Pirone"
-  var o3 = ctx.createOscillator();
-  var g3 = ctx.createGain();
-  o3.connect(g3); g3.connect(ctx.destination);
-  o3.type = 'sine';
-  o3.frequency.setValueAtTime(2637, t + 0.1); // Mi7
-  g3.gain.setValueAtTime(0.0, t + 0.1);
-  g3.gain.linearRampToValueAtTime(0.14, t + 0.14);
-  g3.gain.exponentialRampToValueAtTime(0.001, t + 0.38);
-  o3.start(t + 0.1); o3.stop(t + 0.38);
+  try {
+    _audioCorrect.currentTime = 0;
+    _audioCorrect.play().catch(function(){});
+  } catch(e) {}
 }
 
-// ── RISPOSTA SBAGLIATA — stile "Booboo" CapCut/TikTok
-// Due note discendenti (bu-bù), tono basso comico
+// ── RISPOSTA SBAGLIATA — file MP3 reale
 function playWrong() {
-  var ctx = _getAudioCtx();
-  if (!ctx) return;
-  var t = ctx.currentTime;
-
-  // Compressore — evita clipping e dà punch
-  var comp = ctx.createDynamicsCompressor();
-  comp.connect(ctx.destination);
-
-  // Prima nota BU — onda sawtooth, più volume
-  var o1 = ctx.createOscillator();
-  var g1 = ctx.createGain();
-  o1.connect(g1); g1.connect(comp);
-  o1.type = 'sawtooth';
-  o1.frequency.setValueAtTime(220, t); // La3
-  g1.gain.setValueAtTime(0.0, t);
-  g1.gain.linearRampToValueAtTime(0.7, t + 0.02);
-  g1.gain.setValueAtTime(0.7, t + 0.16);
-  g1.gain.exponentialRampToValueAtTime(0.001, t + 0.30);
-  o1.start(t); o1.stop(t + 0.30);
-
-  // Seconda nota BÙ — più bassa e ancora più forte
-  var o2 = ctx.createOscillator();
-  var g2 = ctx.createGain();
-  o2.connect(g2); g2.connect(comp);
-  o2.type = 'sawtooth';
-  o2.frequency.setValueAtTime(147, t + 0.28); // Re3
-  g2.gain.setValueAtTime(0.0, t + 0.28);
-  g2.gain.linearRampToValueAtTime(0.75, t + 0.30);
-  g2.gain.setValueAtTime(0.75, t + 0.48);
-  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.65);
-  o2.start(t + 0.28); o2.stop(t + 0.65);
-
-  // Sub basso — dà il peso fisico al suono
-  var o3 = ctx.createOscillator();
-  var g3 = ctx.createGain();
-  o3.connect(g3); g3.connect(comp);
-  o3.type = 'sine';
-  o3.frequency.setValueAtTime(110, t);
-  o3.frequency.linearRampToValueAtTime(73, t + 0.65);
-  g3.gain.setValueAtTime(0.0, t);
-  g3.gain.linearRampToValueAtTime(0.5, t + 0.02);
-  g3.gain.exponentialRampToValueAtTime(0.001, t + 0.65);
-  o3.start(t); o3.stop(t + 0.65);
+  try {
+    _audioWrong.currentTime = 0;
+    _audioWrong.play().catch(function(){});
+  } catch(e) {}
 }
 
 // ── AUTH GUARD ─────────────────────────────────────────
