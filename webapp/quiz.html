@@ -59,8 +59,9 @@ body{
   width:100%;
   max-width:480px;
   display:flex;
-  flex-direction:column;
-  gap:.3rem;
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between;
 }
 .question-text{
   font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:700;
@@ -100,8 +101,8 @@ body::after{
 
 /* ── BACK NAV ── */
 .nav-back{
-  display:inline-flex;align-items:center;gap:.5rem;
-  color:var(--txt2);font-size:.8rem;font-weight:600;
+  display:inline-flex;align-items:center;gap:.35rem;
+  color:#f1f5f9;font-size:.75rem;font-weight:500;
   text-decoration:none;
   background:none;border:none;cursor:pointer;
   font-family:'Inter',sans-serif;
@@ -111,8 +112,9 @@ body::after{
   -webkit-touch-callout:none;
   -webkit-user-select:none;user-select:none;
   width:fit-content;
+  flex-shrink:0;
 }
-.nav-back:hover{color:var(--blue-l);}
+.nav-back:hover{color:#fff;}
 .nav-back svg{flex-shrink:0;pointer-events:none;}
 
 /* ── HEADER ── */
@@ -483,13 +485,10 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
 <div class="quiz-fixed-header">
   <div class="quiz-fixed-header-inner">
     <button class="nav-back" onclick="window.location.href='cocktail-legend.html'">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       Chiudi quiz
     </button>
-    <div class="app-header">
-      <div class="logo">Quiz del Giorno</div>
-      <div class="streak-pill" id="streak-pill">🔥 — giorni</div>
-    </div>
+    <div class="streak-pill" id="streak-pill">🔥 — giorni</div>
   </div>
 </div>
 
