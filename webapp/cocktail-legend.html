@@ -416,7 +416,7 @@
     </button>
     <!-- Separatore -->
     <div class="bsheet-ai-sep"></div>
-    <button class="bsheet-item" onclick="closeNavMenu();openDrawer('calc')">
+    <button class="bsheet-item" onclick="openDrawer('calc')">
       <div class="bsheet-item-ico">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><rect x="7" y="5" width="10" height="4" rx="1"/><circle cx="8" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="8" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1" fill="currentColor" stroke="none"/></svg>
       </div>
@@ -424,7 +424,7 @@
       <svg class="bsheet-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
     <div class="bsheet-divider"></div>
-    <button class="bsheet-item" onclick="closeNavMenu();openDrawer('ris')">
+    <button class="bsheet-item" onclick="openDrawer('ris')">
       <div class="bsheet-item-ico">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
       </div>
@@ -432,7 +432,7 @@
       <svg class="bsheet-item-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
     <div class="bsheet-divider"></div>
-    <button class="bsheet-item" onclick="closeNavMenu();openDrawer('vnt')">
+    <button class="bsheet-item" onclick="openDrawer('vnt')">
       <div class="bsheet-item-ico">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
       </div>
@@ -1496,6 +1496,7 @@ function openDrawer(id) {
     });
   });
   overlay.classList.add('show');
+  document.body.classList.add('drawer-open');
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   if (btn) btn.classList.add('active');
   CURRENT_DRAWER = id;
@@ -1512,6 +1513,7 @@ function openDrawer(id) {
 function closeAllDrawers(silent) {
   document.querySelectorAll('.drawer').forEach(function(d){ d.classList.remove('open'); });
   document.getElementById('drawer-overlay').classList.remove('show');
+  document.body.classList.remove('drawer-open');
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
   // Omino header: torna bianco
   var hdrAcc = document.getElementById('hdr-acc-btn');

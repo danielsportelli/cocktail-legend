@@ -1970,7 +1970,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           '</a>'+
         '</div>'+
       '</div>'+
-      '<div style="border-top:1px solid var(--brd);padding-top:.8rem;text-align:center;">'+
+      '<div style="border-top:1px solid var(--brd);padding-top:1.5rem;margin-top:.8rem;text-align:center;">'+
         '<button id="acc-logout-btn" style="display:inline-flex;align-items:center;background:transparent;border:1px solid var(--dim);color:var(--dim);font-size:.62rem;font-weight:600;font-family:inherit;cursor:pointer;padding:.35rem .65rem;border-radius:6px;letter-spacing:.05em;text-transform:uppercase;transition:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">Disconnetti account</button>'+
       '</div>';
 
@@ -3016,15 +3016,19 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // ── Torna sui drawer principali → chiude drawer + riapre menu ──
     function tornaSuMenu() {
-      closeAllDrawers();
-      // Breve delay per far completare l'animazione di chiusura
-      setTimeout(function() {
-        var bsheet = document.getElementById('nav-menu-modal');
-        var overlay = document.getElementById('bsheet-overlay');
-        if (bsheet) bsheet.classList.add('open');
-        if (overlay) overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }, 180);
+      // Chiudi solo il drawer — il bsheet resta visibile sotto, nessuna animazione
+      var drawer = document.querySelector('.drawer.open');
+      if (drawer) drawer.classList.remove('open');
+      var dOverlay = document.getElementById('drawer-overlay');
+      if (dOverlay) dOverlay.classList.remove('show');
+      document.body.classList.remove('drawer-open');
+      if (typeof CURRENT_DRAWER !== 'undefined') CURRENT_DRAWER = null;
+      // Assicura bsheet visibile
+      var bsheet = document.getElementById('nav-menu-modal');
+      var bOvl = document.getElementById('bsheet-overlay');
+      if (bsheet && !bsheet.classList.contains('open')) bsheet.classList.add('open');
+      if (bOvl && !bOvl.classList.contains('open')) bOvl.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
 
     // Torna su Risorse (livello lista → menu)

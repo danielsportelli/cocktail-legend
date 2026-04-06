@@ -379,8 +379,10 @@ body::before{
 }
 .calc-cmd-btn:focus,.ris-cmd-btn:focus{outline:none;}
 .calc-cmd-btn:focus-visible,.ris-cmd-btn:focus-visible{outline:none;}
-.calc-cmd-btn,.ris-cmd-btn{background:var(--surf);-webkit-tap-highlight-color:transparent;}
-.calc-cmd-btn:active,.ris-cmd-btn:active{background:rgba(255,255,255,.10);}
+.calc-cmd-btn,.ris-cmd-btn{background:var(--surf);-webkit-tap-highlight-color:transparent;
+  margin:0 -1.2rem;padding-left:1.2rem;padding-right:1.2rem;
+  width:calc(100% + 2.4rem);}
+.calc-cmd-btn:active,.ris-cmd-btn:active{background:rgba(255,255,255,.07);}
 .calc-cmd-btn:not(:active),.ris-cmd-btn:not(:active){background:var(--surf);}
 .sort-sopt{
   display:flex;align-items:center;justify-content:space-between;
@@ -1553,4 +1555,14 @@ body.user-premium #sg-pdf-link > span:last-child {
   94%{ transform:rotate(-6deg); }
   96%{ transform:rotate(6deg); }
   98%{ transform:rotate(0deg); }
+}
+
+/* ── Header blur quando drawer aperto ─────────────────────────── */
+body.drawer-open .hdr{
+  filter:blur(2px);
+  transition:filter .2s ease;
+}
+body:not(.drawer-open) .hdr{
+  filter:none;
+  transition:filter .2s ease;
 }
