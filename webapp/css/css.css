@@ -1021,8 +1021,7 @@ body::before{
 .acc-legal-links{
   display:flex;align-items:center;justify-content:center;
   gap:.5rem;padding:1.2rem 0 .5rem;
-  border-top:1px solid var(--brd);
-  margin-top:1rem;
+  margin-top:.5rem;
 }
 .acc-legal-link{
   font-size:.68rem;color:var(--dim);
