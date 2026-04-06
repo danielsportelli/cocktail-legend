@@ -1970,8 +1970,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           '</a>'+
         '</div>'+
       '</div>'+
-      '<div style="text-align:center;padding-top:.8rem;border-top:1px solid var(--brd);">'+
-        '<button id="acc-logout-btn" style="background:none;border:none;color:var(--dim);font-size:.68rem;font-family:inherit;cursor:pointer;padding:.4rem .8rem;border-radius:6px;transition:color .2s;">Disconnetti account</button>'+
+      '<div style="text-align:center;padding-top:.8rem;">'+
+        '<button id="acc-logout-btn" style="display:inline-flex;align-items:center;background:transparent;border:1px solid var(--dim);color:var(--dim);font-size:.62rem;font-weight:600;font-family:inherit;cursor:pointer;padding:.35rem .65rem;border-radius:6px;letter-spacing:.05em;text-transform:uppercase;transition:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">Disconnetti account</button>'+
       '</div>';
 
     // Popola sezione nickname in modo asincrono
