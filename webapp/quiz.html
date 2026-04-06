@@ -37,7 +37,7 @@ body{
   color:var(--txt);
   -webkit-font-smoothing:antialiased;
   min-height:100vh;
-  padding:7rem 1rem 5rem;
+  padding:5rem 1rem 5rem;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -536,7 +536,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
         <div style="font-size:2.2rem;margin-bottom:.6rem;">⚡</div>
         <div style="font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.3rem;">Pronto?</div>
         <div style="font-size:.75rem;color:var(--dim);margin-bottom:1.2rem;line-height:1.5;">Hai 30 secondi per rispondere.<br>Più sei veloce, più punti guadagni.</div>
-        <button id="btn-gioca-ora" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.9rem;border:none;border-radius:12px;padding:.75rem 2rem;cursor:pointer;font-family:inherit;letter-spacing:.02em;transition:background .2s;">Gioca ora →</button>
+        <button id="btn-gioca-ora" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.9rem;border:none;border-radius:12px;padding:.75rem 2rem;cursor:pointer;font-family:inherit;letter-spacing:.02em;transition:transform .12s ease,background .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;" onpointerdown="this.style.transform='scale(.93)'" onpointerup="this.style.transform='scale(1)'" onpointerleave="this.style.transform='scale(1)'">Gioca ora →</button>
       </div>
       <!-- Countdown — appare al posto del contenuto pronto -->
       <div id="start-countdown" style="display:none;padding:1rem 0;">
