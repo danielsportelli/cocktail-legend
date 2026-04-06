@@ -1066,6 +1066,33 @@ async function loadQuiz(user) {
   window._quizUid = user.uid;
   const oggi = todayKey();
 
+  // ── CONTROLLO GAP 00:00-00:10 — primo check assoluto
+  // Chiunque apra il quiz in questo lasso vede la schermata clessidra,
+  // indipendentemente dal fatto che abbia giocato o no.
+  // La domanda di ieri è scaduta, quella di oggi arriva alle 00:10.
+  (function() {
+    var now = new Date();
+    var h = now.getHours();
+    var m = now.getMinutes();
+    if (h === 0 && m < 50) {
+      var icon  = document.getElementById('none-icon');
+      var title = document.getElementById('none-title');
+      var sub   = document.getElementById('none-sub');
+      var badge = document.getElementById('none-badge');
+      if (icon)  icon.textContent  = '⏳';
+      if (title) title.textContent = 'Prossima domanda in arrivo';
+      if (sub)   sub.textContent   = 'Alle ore 00:10';
+      if (badge) badge.textContent = '🏆 Classifica · Streak · Statistiche';
+      showState('state-none');
+      loadLeaderboard(currentLbTab);
+      return;
+    }
+  })();
+  // Se siamo nel gap la funzione è già uscita tramite showState + return nell'IIFE
+  // ma l'IIFE non può fermare la funzione esterna — usiamo un flag
+  var _nowGap = (function(){ var n=new Date(); return n.getHours()===0 && n.getMinutes()<50; })();
+  if (_nowGap) return;
+
   // Carica dati utente
   try {
     const userSnap = await getDoc(doc(db, 'users', user.uid));
