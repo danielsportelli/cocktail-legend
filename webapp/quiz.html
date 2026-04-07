@@ -777,8 +777,8 @@ async function loadLeaderboard(tab) {
   if (oldSticky) oldSticky.remove();
 
   const tabMeta = {
-    monthly: { title:'*Classifica Mensile',     reset:'1° del mese',   field:'pts_month'   },
-    alltime: { title:'*Classifica All Time', reset:'Non si resetta', field:'pts_alltime' }
+    monthly: { title:'Classifica Mensile*',     reset:'1° del mese',   field:'pts_month'   },
+    alltime: { title:'Classifica All Time*', reset:'Non si resetta', field:'pts_alltime' }
   };
   const meta = tabMeta[tab];
   title.textContent = meta.title;

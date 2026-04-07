@@ -4740,7 +4740,7 @@ function showPremiumModal() {
       <!-- Prezzo -->
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04));border:1px solid rgba(245,158,11,0.25);border-radius:16px;padding:1.1rem 1.25rem;margin-bottom:1.5rem;text-align:center;">
         <div style="font-size:2rem;font-weight:900;color:#f59e0b;letter-spacing:-.03em;">19,99€<span style="font-size:.95rem;font-weight:500;color:#94a3b8;"> / primo anno</span></div>
-        <div style="font-size:.75rem;color:#64748b;margin-top:.3rem;line-height:1.6;">Dal secondo anno in poi 9,99€/anno<br>Inclusi 30 crediti AI/mese</div>
+        <div style="font-size:.75rem;color:#64748b;margin-top:.3rem;line-height:1.6;">Dal secondo anno in poi 9,99€/anno</div>
       </div>
 
       <!-- Lista benefici -->
@@ -4754,7 +4754,7 @@ function showPremiumModal() {
           </div>
           <div>
             <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Spirit Genesis</div>
-            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Accesso completo + download PDF</div>
+            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Corso avanzato di merceologia</div>
           </div>
         </div>
 
@@ -4764,7 +4764,7 @@ function showPremiumModal() {
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div>
-            <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Funzioni AI (4 strumenti)</div>
+            <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Barman AI (4 funzioni)</div>
             <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Cocktail del Giorno · Crea Signature · Twist on Classic · Food Pairing</div>
           </div>
         </div>
@@ -4787,7 +4787,7 @@ function showPremiumModal() {
           </div>
           <div>
             <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Preferiti</div>
-            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Salva i tuoi cocktail preferiti</div>
+            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Vedi tutti i cocktail salvati come preferiti</div>
           </div>
         </div>
 
