@@ -3495,6 +3495,45 @@ document.addEventListener('DOMContentLoaded', function(){
     },300);
   };
 
+  // ── Tips ABV ──────────────────────────────────────────────────────
+  var TIPS_ABV = '<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come si usa il calcolatore</strong>'
+    +'Inserisci il volume (ml) e la gradazione alcolica (%) di ogni ingrediente alcolico. Il calcolatore calcola automaticamente l\'ABV del drink finito tenendo conto della diluizione del ghiaccio.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Scegli la tecnica</strong>'
+    +'Ogni tecnica porta una diluizione diversa perché il contatto con il ghiaccio varia. I valori di default sono tratti da letteratura tecnica (Liquid Intelligence di Dave Arnold, Death &amp; Co):<br>'
+    +'<span style="color:var(--txt2);">• <strong>Stir &amp; Strain</strong> — 25% · Mescolato delicatamente, diluizione contenuta</span><br>'
+    +'<span style="color:var(--txt2);">• <strong>Shake &amp; Strain</strong> — 40% · Shakerata standard, diluizione più alta</span><br>'
+    +'<span style="color:var(--txt2);">• <strong>Fast Shake</strong> — 50% · Shakerata rapida su ghiaccio pilé, massima diluizione</span><br>'
+    +'<span style="color:var(--txt2);">• <strong>Throwing</strong> — 20% · Tecnica scenica, aerazione senza eccessiva diluizione</span><br>'
+    +'<span style="color:var(--txt2);">• <strong>Build</strong> — 0% · Nessuna diluizione calcolata (dipende da ghiaccio e tempo)</span><br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">La diluizione è modificabile</strong>'
+    +'Il valore di default è un punto di partenza. Puoi modificarlo manualmente per adattarlo alla tua tecnica, al tipo di ghiaccio e alla temperatura di lavoro.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Il campo TOP</strong>'
+    +'Inserisci qui soda, tonica o altri liquidi non lavorati con ghiaccio. Vengono esclusi dalla diluizione ma contribuiscono al volume totale e all\'ABV finale.<br><br>'
+    +'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">ABV vs Alcol etilico</strong>'
+    +'L\'ABV è la <em>percentuale</em> di alcol sul volume totale del drink — non indica quanto alcol etilico hai ingerito. Uno shot da 50ml di Gin 40° e un Gin Tonic con gli stessi 50ml di Gin hanno <strong style="color:var(--txt)">identici ml di alcol etilico (20ml)</strong>, ma ABV molto diverso (~40% vs ~10%). Ai fini del tasso alcolemico conta la quantità assoluta di alcol etilico, non l\'ABV.';
+
+  var abvTipsBtn = document.getElementById('calc-abv-tips-btn');
+  var tipsOverlay = document.getElementById('tips-overlay');
+  var tipsContent = document.getElementById('tips-content');
+  var tipsTitle = document.getElementById('tips-title');
+  var tipsClose = document.getElementById('tips-close');
+
+  if (abvTipsBtn && tipsOverlay && tipsContent) {
+    abvTipsBtn.addEventListener('click', function() {
+      if (tipsTitle) tipsTitle.textContent = 'Come usarlo';
+      tipsContent.innerHTML = TIPS_ABV;
+      tipsOverlay.style.display = 'flex';
+    });
+    if (tipsClose) {
+      tipsClose.addEventListener('click', function() {
+        tipsOverlay.style.display = 'none';
+      });
+    }
+    tipsOverlay.addEventListener('click', function(e) {
+      if (e.target === tipsOverlay) tipsOverlay.style.display = 'none';
+    });
+  }
+
 })();
 
 // ── QUIZ BADGE — aggiorna pallino hamburger e CTA ────────────────────
