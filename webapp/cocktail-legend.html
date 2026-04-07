@@ -1911,6 +1911,7 @@ function calcABV() {
   if (accBtn) {
     accBtn.addEventListener('click', function(e) {
       e.stopPropagation();
+      if (typeof window.closeNavMenu === 'function') window.closeNavMenu();
       if (typeof openDrawer === 'function') openDrawer('acc');
     });
   }

@@ -380,8 +380,7 @@ body::before{
 .calc-cmd-btn:focus,.ris-cmd-btn:focus{outline:none;}
 .calc-cmd-btn:focus-visible,.ris-cmd-btn:focus-visible{outline:none;}
 .calc-cmd-btn,.ris-cmd-btn{background:var(--surf);-webkit-tap-highlight-color:transparent;
-  margin:0 -1.2rem;padding-left:1.2rem;padding-right:1.2rem;
-  width:calc(100% + 2.4rem);}
+  border-radius:10px;}
 .calc-cmd-btn:active,.ris-cmd-btn:active{background:rgba(255,255,255,.07);}
 .calc-cmd-btn:not(:active),.ris-cmd-btn:not(:active){background:var(--surf);}
 .sort-sopt{
@@ -1058,7 +1057,7 @@ body::before{
   position:fixed;left:.75rem;right:.75rem;
   bottom:.75rem;
   top:var(--rbar-top, var(--hdr-h));
-  z-index:1050;
+  z-index:1120;
   background:var(--surf);
   border:1px solid rgba(255,255,255,.08);
   border-radius:20px;
@@ -1167,11 +1166,11 @@ body::before{
 }
 .drawer{ scrollbar-width:none; }
 .drawer::-webkit-scrollbar{ display:none; }
-/* overlay scuro dietro drawer */
+/* overlay scuro dietro drawer — copre schermata + header + bsheet */
 .drawer-overlay{
   position:fixed;inset:0;
   top:0;
-  z-index:1049;
+  z-index:1110;
   background:rgba(0,0,0,.55);
   backdrop-filter:blur(4px);
   -webkit-backdrop-filter:blur(4px);
@@ -1557,12 +1556,4 @@ body.user-premium #sg-pdf-link > span:last-child {
   98%{ transform:rotate(0deg); }
 }
 
-/* ── Header blur quando drawer aperto ─────────────────────────── */
-body.drawer-open .hdr{
-  filter:blur(2px);
-  transition:filter .2s ease;
-}
-body:not(.drawer-open) .hdr{
-  filter:none;
-  transition:filter .2s ease;
-}
+/* ── Header blur rimosso — coperto e bloccato dall'overlay (z-index 1110 > hdr 1100) ── */
