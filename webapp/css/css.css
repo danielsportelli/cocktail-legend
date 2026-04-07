@@ -1075,7 +1075,7 @@ body::before{
   position:fixed;left:.75rem;right:.75rem;
   bottom:.75rem;
   top:var(--rbar-top, var(--hdr-h));
-  z-index:1120;
+  z-index:9200;
   background:var(--surf);
   border:1px solid rgba(255,255,255,.08);
   border-radius:20px;
@@ -1188,7 +1188,7 @@ body::before{
 .drawer-overlay{
   position:fixed;inset:0;
   top:0;
-  z-index:1110;
+  z-index:9100;
   background:rgba(0,0,0,.55);
   backdrop-filter:blur(4px);
   -webkit-backdrop-filter:blur(4px);
@@ -1196,6 +1196,11 @@ body::before{
   transition:opacity .3s;
 }
 .drawer-overlay.show{opacity:1;pointer-events:auto;}
+/* Quando un drawer è aperto: bsheet visibile ma non interagibile */
+body.drawer-open .bsheet,
+body.drawer-open .bsheet-overlay{
+  pointer-events:none;
+}
 
 /* mantieni vnt-item, vnt-code etc invariati */
 

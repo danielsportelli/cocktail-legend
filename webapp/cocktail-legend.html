@@ -455,7 +455,7 @@
 </div>
 
 <!-- OVERLAY DRAWER -->
-<div class="drawer-overlay" id="drawer-overlay" onclick="closeAllDrawers()"></div>
+<div class="drawer-overlay" id="drawer-overlay"></div>
 
 <!-- SEARCH BAR (toggle via lente) -->
 <div class="filter-bar hidden" id="filter-bar">
@@ -1477,6 +1477,7 @@
 
 // ═══ DRAWER SYSTEM ═══
 var CURRENT_DRAWER = null;
+var DRAWER_FROM_BSHEET = false;
 
 function openDrawer(id) {
   var drawer = document.getElementById('drawer-' + id);
@@ -1487,6 +1488,9 @@ function openDrawer(id) {
     closeAllDrawers();
     return;
   }
+  // Traccia se il bsheet era aperto quando si apre il drawer
+  var bsheet = document.getElementById('nav-menu-modal');
+  DRAWER_FROM_BSHEET = !!(bsheet && bsheet.classList.contains('open'));
   // Forza aggiornamento --rbar-top PRIMA di aprire
   // Garantisce altezza corretta su tutti i device (Android/iOS)
   if (typeof updateRbarTop === 'function') updateRbarTop();
@@ -1523,18 +1527,23 @@ function closeAllDrawers(silent) {
   var hdrAcc = document.getElementById('hdr-acc-btn');
   if (hdrAcc) hdrAcc.classList.remove('active');
   if (!silent) CURRENT_DRAWER = null;
+  if (!silent) DRAWER_FROM_BSHEET = false;
   if (!silent){
     var creabtn = document.getElementById('tbtn-ai');
     if(creabtn) creabtn.classList.remove('dim');
   }
 }
 
-// Handle cliccabile — chiude drawer e tutto
+// Handle cliccabile — torna al bsheet se drawer aperto da lì, altrimenti chiude tutto
 document.addEventListener('click', function(e) {
   var handle = e.target.closest('.drawer-handle');
   if (handle) {
-    closeAllDrawers();
-    window.closeNavMenu && window.closeNavMenu();
+    if (DRAWER_FROM_BSHEET && typeof tornaSuMenu === 'function') {
+      tornaSuMenu();
+    } else {
+      closeAllDrawers();
+      window.closeNavMenu && window.closeNavMenu();
+    }
   }
 });
 
@@ -1583,9 +1592,14 @@ document.querySelectorAll('.tab-btn').forEach(function(b){
   b.addEventListener('click', function(e){ e.stopPropagation(); });
 });
 
-// Overlay click — chiude drawer
+// Overlay click — torna al bsheet se drawer aperto da lì, altrimenti chiude tutto
 document.getElementById('drawer-overlay').addEventListener('click', function(){
-  closeAllDrawers();
+  if (DRAWER_FROM_BSHEET && typeof tornaSuMenu === 'function') {
+    tornaSuMenu();
+  } else {
+    closeAllDrawers();
+    window.closeNavMenu && window.closeNavMenu();
+  }
 });
 
 // ═══ COPIA CODICE (Vantaggi drawer) ═══

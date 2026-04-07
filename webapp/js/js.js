@@ -3023,6 +3023,7 @@ document.addEventListener('DOMContentLoaded', function(){
       if (dOverlay) dOverlay.classList.remove('show');
       document.body.classList.remove('drawer-open');
       if (typeof CURRENT_DRAWER !== 'undefined') CURRENT_DRAWER = null;
+      DRAWER_FROM_BSHEET = false;
       // Assicura bsheet visibile
       var bsheet = document.getElementById('nav-menu-modal');
       var bOvl = document.getElementById('bsheet-overlay');
@@ -3030,6 +3031,7 @@ document.addEventListener('DOMContentLoaded', function(){
       if (bOvl && !bOvl.classList.contains('open')) bOvl.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
+    window.tornaSuMenu = tornaSuMenu;
 
     // Torna su Risorse (livello lista → menu)
     var risBackMain = document.getElementById('ris-back-header-btn');
@@ -4787,7 +4789,7 @@ function showPremiumModal() {
           </div>
           <div>
             <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Preferiti</div>
-            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Vedi tutti i cocktail salvati come preferiti</div>
+            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Salva i tuoi cocktail preferiti</div>
           </div>
         </div>
 
