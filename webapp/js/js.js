@@ -4789,7 +4789,7 @@ function showPremiumModal() {
           </div>
           <div>
             <div style="font-size:.88rem;font-weight:700;color:#f1f5f9;">Preferiti</div>
-            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Salva i tuoi cocktail preferiti</div>
+            <div style="font-size:.75rem;color:#64748b;margin-top:.1rem;">Vedi tutti i cocktail salvati come preferiti</div>
           </div>
         </div>
 
