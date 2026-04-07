@@ -601,7 +601,7 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
 
   <!-- BADGE PUNTI & PREMI -->
   <button id="prizes-btn" style="width:100%;display:flex;align-items:center;justify-content:center;gap:.4rem;background:rgba(37,99,235,.07);border:1px solid rgba(96,165,250,.2);border-radius:12px;padding:.55rem 1rem;cursor:pointer;font-family:inherit;font-size:.72rem;font-weight:700;color:var(--blue-l);letter-spacing:.02em;">
-    Calcolo dei punti e premi mensili
+    *Calcolo dei punti e premi mensili
   </button>
   <div id="prizes-popup" style="display:none;background:var(--surf);border:1px solid rgba(96,165,250,.2);border-radius:14px;padding:1rem 1.1rem;">
 
@@ -777,9 +777,8 @@ async function loadLeaderboard(tab) {
   if (oldSticky) oldSticky.remove();
 
   const tabMeta = {
-    weekly:  { title:'Classifica Settimanale', reset:'Ogni Lunedì',   field:'pts_week'    },
-    monthly: { title:'Classifica Mensile',     reset:'1° del mese',   field:'pts_month'   },
-    alltime: { title:'Classifica All Time', reset:'Non si resetta', field:'pts_alltime' }
+    monthly: { title:'*Classifica Mensile',     reset:'1° del mese',   field:'pts_month'   },
+    alltime: { title:'*Classifica All Time', reset:'Non si resetta', field:'pts_alltime' }
   };
   const meta = tabMeta[tab];
   title.textContent = meta.title;
