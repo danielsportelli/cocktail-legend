@@ -379,10 +379,18 @@ body::before{
 }
 .calc-cmd-btn:focus,.ris-cmd-btn:focus{outline:none;}
 .calc-cmd-btn:focus-visible,.ris-cmd-btn:focus-visible{outline:none;}
-.calc-cmd-btn,.ris-cmd-btn{background:var(--surf);-webkit-tap-highlight-color:transparent;
-  border-radius:10px;}
-.calc-cmd-btn:active,.ris-cmd-btn:active{background:rgba(255,255,255,.07);}
-.calc-cmd-btn:not(:active),.ris-cmd-btn:not(:active){background:var(--surf);}
+.calc-cmd-btn,.ris-cmd-btn{
+  display:flex;align-items:center;gap:1rem;
+  width:100%;
+  padding:.9rem 1.4rem;
+  background:none;border:none;cursor:pointer;
+  font-family:inherit;color:var(--txt);
+  text-align:left;text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:background .15s;
+}
+.calc-cmd-btn:active,.ris-cmd-btn:active{background:rgba(255,255,255,.05);}
 .sort-sopt{
   display:flex;align-items:center;justify-content:space-between;
   width:100%;background:none;border:none;
