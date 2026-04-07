@@ -819,62 +819,42 @@ function updateAllCounts() {
 }
 
 // ── SCROLL HIDE/SHOW HEADER ─────────────────────────
+// Approccio: body.hdr--scrolled toggled via JS.
+// pills-bar e filter-bar usano transform via CSS transition — fluido su GPU su tutti i device.
+// padding-top del main aggiornato solo quando cambia filter-bar (search aperta/chiusa).
+
 var _lastScrollY = 0;
 var _hdrHidden = false;
-var _scrollTicking = false;
 var _cachedHdrH = 73;
 var _cachedFbH = 0;
-var _animFrame = null;
-var _animStart = null;
-var _animFrom = null;
-var _animTo = null;
-var ANIM_DUR = 280;
-
-// Anima --hdr-offset da from a to in ANIM_DUR ms, muove pills e main in sincronia
-function _animateOffset(from, to) {
-  if (_animFrame) cancelAnimationFrame(_animFrame);
-  _animStart = null;
-  _animFrom = from;
-  _animTo = to;
-  function step(ts) {
-    if (!_animStart) _animStart = ts;
-    var elapsed = ts - _animStart;
-    var progress = Math.min(elapsed / ANIM_DUR, 1);
-    // ease-in-out cubic
-    var t = progress < 0.5
-      ? 4 * progress * progress * progress
-      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-    _applyOffset(_animFrom + (_animTo - _animFrom) * t);
-    if (progress < 1) { _animFrame = requestAnimationFrame(step); }
-    else { _animFrame = null; _applyOffset(_animTo); }
-  }
-  _animFrame = requestAnimationFrame(step);
-}
-
-function _applyOffset(offset) {
-  document.documentElement.style.setProperty('--hdr-offset', offset + 'px');
-  var pillsBar = document.getElementById('pills-bar');
-  var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
-  document.documentElement.style.setProperty('--pills-bottom', (offset + pillsH) + 'px');
-  document.documentElement.style.setProperty('--pills-h-px', pillsH + 'px');
-  var main = document.querySelector('.main');
-  if (main) main.style.paddingTop = (offset + pillsH + _cachedFbH + 22) + 'px';
-}
 
 function updateHeaderVisibility() {
   var hdr = document.querySelector('.hdr');
   if (!hdr) return;
   var currentY = window.scrollY || window.pageYOffset;
+
   if (currentY > _lastScrollY && currentY > _cachedHdrH && !_hdrHidden) {
     _hdrHidden = true;
     hdr.classList.add('hdr--hidden');
-    _animateOffset(_cachedHdrH, 0);
+    document.body.classList.add('hdr--scrolled');
+    // padding-top main: scende di hdrH
+    _updateMainPadding();
   } else if (currentY < _lastScrollY && _hdrHidden) {
     _hdrHidden = false;
     hdr.classList.remove('hdr--hidden');
-    _animateOffset(0, _cachedHdrH);
+    document.body.classList.remove('hdr--scrolled');
+    // padding-top main: torna su
+    _updateMainPadding();
   }
   _lastScrollY = currentY;
+}
+
+function _updateMainPadding() {
+  var main = document.querySelector('.main');
+  var pillsBar = document.getElementById('pills-bar');
+  var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
+  var hdrH = _hdrHidden ? 0 : _cachedHdrH;
+  if (main) main.style.paddingTop = (hdrH + pillsH + _cachedFbH + 22) + 'px';
 }
 
 window.addEventListener('scroll', function(){ updateHeaderVisibility(); }, {passive: true});
@@ -885,8 +865,22 @@ function updateFbH(){
   void fb.offsetHeight;
   _cachedFbH = fb.classList.contains('hidden') ? 0 : fb.offsetHeight;
   document.documentElement.style.setProperty('--fb-h', _cachedFbH + 'px');
-  var offset = _hdrHidden ? 0 : _cachedHdrH;
-  _applyOffset(offset);
+  _updateMainPadding();
+}
+
+// Aggiorna --pills-h-px e --pills-bottom dopo resize o load
+function _updatePillsVars() {
+  var pillsBar = document.getElementById('pills-bar');
+  var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
+  document.documentElement.style.setProperty('--pills-h-px', pillsH + 'px');
+  document.documentElement.style.setProperty('--pills-bottom', (_cachedHdrH + pillsH) + 'px');
+  document.documentElement.style.setProperty('--pills-h', pillsH + 'px');
+}
+
+// updateRbarTop mantenuto per compatibilità con chiamate esistenti nel codice
+function updateRbarTop(){
+  _updatePillsVars();
+  _updateMainPadding();
 }
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -896,23 +890,20 @@ document.addEventListener('DOMContentLoaded', function(){
       if (e.propertyName === 'max-height') updateFbH();
     });
   }
-});
-
-function updateRbarTop(){
-  var offset = _hdrHidden ? 0 : _cachedHdrH;
-  _applyOffset(offset);
-}
-
-window.addEventListener('DOMContentLoaded', function(){
   _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
+  _updatePillsVars();
+  updateFbH();
 });
+
 updateFbH();
 window.addEventListener('resize', function(){
   _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
+  _updatePillsVars();
   updateFbH();
-  updateHeaderVisibility();
 });
 window.addEventListener('load', function(){
+  _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
+  _updatePillsVars();
   updateFbH();
   setTimeout(updateFbH, 100);
   setTimeout(updateFbH, 300);
@@ -922,7 +913,6 @@ var _fpObs = new MutationObserver(updateFbH);
 document.addEventListener('DOMContentLoaded', function(){
   var fp = document.getElementById('filter-panel');
   if (fp) _fpObs.observe(fp, {attributes:true, attributeFilter:['class']});
-  updateFbH();
 });
 
 
