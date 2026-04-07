@@ -819,14 +819,54 @@ function updateAllCounts() {
 }
 
 // ── SCROLL HIDE/SHOW HEADER ─────────────────────────
-// Approccio: body.hdr--scrolled toggled via JS.
-// pills-bar e filter-bar usano transform via CSS transition — fluido su GPU su tutti i device.
-// padding-top del main aggiornato solo quando cambia filter-bar (search aperta/chiusa).
+// Strategia: pills-bar e filter-bar seguono l'header pixel per pixel via rAF loop.
+// Nessuna CSS transition separata per il movimento scroll — zero gap garantito.
+// hdr usa CSS transition transform. pills/filter-bar leggono hdr.getBoundingClientRect().bottom
+// ad ogni frame durante l'animazione e impostano top direttamente.
 
 var _lastScrollY = 0;
 var _hdrHidden = false;
 var _cachedHdrH = 73;
 var _cachedFbH = 0;
+var _syncRafId = null;
+
+// Loop rAF che sincronizza pills e filter-bar all'header frame per frame
+function _startSyncLoop() {
+  if (_syncRafId) return; // già in corso
+  function loop() {
+    var hdr = document.querySelector('.hdr');
+    if (!hdr) { _syncRafId = null; return; }
+    var bottom = hdr.getBoundingClientRect().bottom;
+    // Applica bottom come top di pills e filter-bar
+    _applyBarsTop(bottom);
+    // Continua finché l'header non è fermo (non hidden e bottom == _cachedHdrH, o hidden e bottom == 0)
+    var target = _hdrHidden ? 0 : _cachedHdrH;
+    var safeTop = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--safe-top') || '0') || 0;
+    target += safeTop;
+    if (Math.abs(bottom - target) > 0.5) {
+      _syncRafId = requestAnimationFrame(loop);
+    } else {
+      _applyBarsTop(target);
+      _syncRafId = null;
+    }
+  }
+  _syncRafId = requestAnimationFrame(loop);
+}
+
+function _applyBarsTop(hdrBottom) {
+  var pills = document.getElementById('pills-bar');
+  var fb = document.getElementById('filter-bar');
+  var pillsH = pills ? pills.offsetHeight : 40;
+  if (pills) pills.style.top = hdrBottom + 'px';
+  if (fb) fb.style.top = (hdrBottom + pillsH) + 'px';
+  // Aggiorna main padding-top in sincronia
+  var main = document.querySelector('.main');
+  if (main) main.style.paddingTop = (hdrBottom + pillsH + _cachedFbH + 22) + 'px';
+  // Aggiorna variabili CSS per altri elementi che le usano
+  document.documentElement.style.setProperty('--hdr-offset', hdrBottom + 'px');
+  document.documentElement.style.setProperty('--pills-bottom', (hdrBottom + pillsH) + 'px');
+  document.documentElement.style.setProperty('--pills-h-px', pillsH + 'px');
+}
 
 function updateHeaderVisibility() {
   var hdr = document.querySelector('.hdr');
@@ -836,25 +876,13 @@ function updateHeaderVisibility() {
   if (currentY > _lastScrollY && currentY > _cachedHdrH && !_hdrHidden) {
     _hdrHidden = true;
     hdr.classList.add('hdr--hidden');
-    document.body.classList.add('hdr--scrolled');
-    // padding-top main: scende di hdrH
-    _updateMainPadding();
+    _startSyncLoop();
   } else if (currentY < _lastScrollY && _hdrHidden) {
     _hdrHidden = false;
     hdr.classList.remove('hdr--hidden');
-    document.body.classList.remove('hdr--scrolled');
-    // padding-top main: torna su
-    _updateMainPadding();
+    _startSyncLoop();
   }
   _lastScrollY = currentY;
-}
-
-function _updateMainPadding() {
-  var main = document.querySelector('.main');
-  var pillsBar = document.getElementById('pills-bar');
-  var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
-  var hdrH = _hdrHidden ? 0 : _cachedHdrH;
-  if (main) main.style.paddingTop = (hdrH + pillsH + _cachedFbH + 22) + 'px';
 }
 
 window.addEventListener('scroll', function(){ updateHeaderVisibility(); }, {passive: true});
@@ -865,22 +893,25 @@ function updateFbH(){
   void fb.offsetHeight;
   _cachedFbH = fb.classList.contains('hidden') ? 0 : fb.offsetHeight;
   document.documentElement.style.setProperty('--fb-h', _cachedFbH + 'px');
-  _updateMainPadding();
+  // Ricalcola top bars con posizione corrente hdr
+  var hdr = document.querySelector('.hdr');
+  var hdrBottom = hdr ? hdr.getBoundingClientRect().bottom : _cachedHdrH;
+  _applyBarsTop(hdrBottom);
 }
 
-// Aggiorna --pills-h-px e --pills-bottom dopo resize o load
 function _updatePillsVars() {
   var pillsBar = document.getElementById('pills-bar');
   var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
   document.documentElement.style.setProperty('--pills-h-px', pillsH + 'px');
-  document.documentElement.style.setProperty('--pills-bottom', (_cachedHdrH + pillsH) + 'px');
   document.documentElement.style.setProperty('--pills-h', pillsH + 'px');
 }
 
-// updateRbarTop mantenuto per compatibilità con chiamate esistenti nel codice
+// updateRbarTop mantenuto per compatibilità
 function updateRbarTop(){
   _updatePillsVars();
-  _updateMainPadding();
+  var hdr = document.querySelector('.hdr');
+  var hdrBottom = hdr ? hdr.getBoundingClientRect().bottom : _cachedHdrH;
+  _applyBarsTop(hdrBottom);
 }
 
 document.addEventListener('DOMContentLoaded', function(){

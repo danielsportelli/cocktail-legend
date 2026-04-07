@@ -1892,7 +1892,9 @@ function calcABV() {
       } else {
         // Azzera cache PRIMA di aggiungere .hidden — padding-top scende in sincronia
         if (typeof _cachedFbH !== 'undefined') _cachedFbH = 0;
-        if (typeof _updateMainPadding === 'function') _updateMainPadding();
+        var _hdr = document.querySelector('.hdr');
+        var _hdrBot = _hdr ? _hdr.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
+        if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot);
         filterBar.classList.add('hidden');
         pillsSrchBtn.classList.remove('active');
         var inp = document.getElementById('srch');
