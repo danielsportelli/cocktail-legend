@@ -4890,7 +4890,7 @@ function showPremiumModal() {
 
 // ── TOAST PREMIUM (volte successive) ────────────────────
 function showPremiumToast(msg) {
-  msg = msg || 'Funzione riservata al piano Premium';
+  msg = msg || '🔒 Solo Piano Premium — Upgrade →';
   var existing = document.getElementById('premium-toast');
   if (existing) { existing.remove(); }
 
@@ -4921,7 +4921,7 @@ function requirePremium(featureName) {
   if (!window._premiumModalShownThisSession) {
     showPremiumModal();
   } else {
-    showPremiumToast(featureName ? featureName + ' — solo Piano Premium' : null);
+    showPremiumToast('Solo Piano Premium');
   }
   return false;
 }
