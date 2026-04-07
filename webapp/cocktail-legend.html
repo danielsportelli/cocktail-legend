@@ -1880,25 +1880,26 @@ function calcABV() {
       if (srchOpen) {
         filterBar.classList.remove('hidden');
         pillsSrchBtn.classList.add('active');
-        // Focus immediato nel click handler — unico modo per aprire tastiera su iOS Safari.
-        // Su iOS il focus() da setTimeout viene ignorato (sicurezza browser).
+        // Focus immediato — unico modo per aprire tastiera su iOS Safari
         var inp = document.getElementById('srch');
         if (inp) inp.focus();
-        // Aggiorna padding-top in sincronia con la transizione CSS
-        if (typeof updateFbH === 'function') {
-          requestAnimationFrame(function(){ updateFbH(); });
-        }
+        // Legge altezza reale dopo due frame (filter-bar già visibile nel DOM)
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            if (typeof updateFbH === 'function') updateFbH();
+          });
+        });
       } else {
+        // Azzera cache PRIMA di aggiungere .hidden — padding-top scende in sincronia
+        if (typeof _cachedFbH !== 'undefined') _cachedFbH = 0;
+        if (typeof _applyOffset === 'function') {
+          var _off = (typeof _hdrHidden !== 'undefined' && _hdrHidden) ? 0 : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
+          _applyOffset(_off);
+        }
         filterBar.classList.add('hidden');
         pillsSrchBtn.classList.remove('active');
         var inp = document.getElementById('srch');
         if (inp && inp.value) { inp.value = ''; Q = ''; render(); }
-        // Aggiorna subito
-        if (typeof updateFbH === 'function') {
-          requestAnimationFrame(function(){
-            updateFbH();
-          });
-        }
       }
     });
   }

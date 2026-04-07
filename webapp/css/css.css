@@ -278,7 +278,8 @@ body::before{
   overflow:visible;
   max-height:200px;
   opacity:1;
-  transition:max-height .28s cubic-bezier(.4,0,.2,1),
+  transition:top .28s cubic-bezier(.4,0,.2,1),
+             max-height .28s cubic-bezier(.4,0,.2,1),
              opacity .2s ease,
              padding .28s ease;
 }
@@ -307,6 +308,7 @@ body::before{
   box-shadow:0 8px 28px rgba(0,0,0,.85);
   display:flex;align-items:center;
   padding:.3rem 0 .35rem;
+  transition:top .28s cubic-bezier(.4,0,.2,1);
 }
 .hdr-animating .pills-bar{
   transition:top .28s cubic-bezier(.4,0,.2,1);
