@@ -1051,7 +1051,7 @@ function _setNoneState() {
   var now = new Date();
   var h = now.getHours();
   var m = now.getMinutes();
-  var isGap = (h === 1 && m < 10);
+  var isGap = (h === 0 && m < 10);
 
   var icon  = document.getElementById('none-icon');
   var title = document.getElementById('none-title');
@@ -1090,7 +1090,7 @@ async function loadQuiz(user) {
 
   // ── CONTROLLO GAP 00:00-00:10 — dopo aver caricato i dati utente
   // Chiunque vede la clessidra in questo lasso, con le proprie statistiche visibili.
-  var _nowGap = (function(){ var n=new Date(); return n.getHours()===1 && n.getMinutes()<10; })();
+  var _nowGap = (function(){ var n=new Date(); return n.getHours()===0 && n.getMinutes()<10; })();
   if (_nowGap) {
     var icon  = document.getElementById('none-icon');
     var title = document.getElementById('none-title');
