@@ -765,21 +765,24 @@
 
     <!-- GRIGLIA 2 COMANDI -->
     <div id="ris-step-cmds">
-      <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.6rem;">Cosa vuoi consultare?</div>
-      <div style="display:flex;flex-direction:column;margin:0 -1.2rem;">
+      <div class="drawer-cmd-label">Cosa vuoi consultare?</div>
+      <div class="drawer-cmd-list">
+        <button class="ris-cmd-btn" data-cmd="tmp">
           <div style="width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" style="pointer-events:none"><rect x="10" y="3" width="4" height="11" rx="2"/><circle cx="12" cy="17" r="3.5"/><line x1="12" y1="14" x2="12" y2="9"/></svg>
           </div>
           <span style="flex:1;font-size:.95rem;font-weight:600;color:var(--txt);letter-spacing:-.01em;pointer-events:none;">Temperature</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
-        <button class="ris-cmd-btn" data-cmd="bic" style="border-bottom:1px solid var(--brd);">
+        <div class="bsheet-divider"></div>
+        <button class="ris-cmd-btn" data-cmd="bic">
           <div style="width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           </div>
           <span style="flex:1;font-size:.95rem;font-weight:600;color:var(--txt);letter-spacing:-.01em;pointer-events:none;">Glossario</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
+        <div class="bsheet-divider"></div>
         <button class="ris-cmd-btn" data-cmd="glass">
           <div style="width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M4 3h16L12 14z"/><line x1="12" y1="14" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>
@@ -832,22 +835,24 @@
 
     <!-- GRIGLIA 2 COMANDI -->
     <div id="calc-step-cmds">
-      <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:.6rem;">Cosa vuoi calcolare?</div>
-      <div style="display:flex;flex-direction:column;margin:0 -1.2rem;">
-        <button class="calc-cmd-btn" id="calc-btn-abv" data-cmd="abv" style="border-bottom:1px solid var(--brd);">
+      <div class="drawer-cmd-label">Cosa vuoi calcolare?</div>
+      <div class="drawer-cmd-list">
+        <button class="calc-cmd-btn" id="calc-btn-abv" data-cmd="abv">
           <div style="width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" style="pointer-events:none"><circle cx="7.5" cy="7.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
           </div>
           <span style="flex:1;font-size:.95rem;font-weight:600;color:var(--txt);letter-spacing:-.01em;pointer-events:none;">ABV</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
-        <button class="calc-cmd-btn" data-cmd="cost" style="border-bottom:1px solid var(--brd);">
+        <div class="bsheet-divider"></div>
+        <button class="calc-cmd-btn" data-cmd="cost">
           <div style="width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
           <span style="flex:1;font-size:.95rem;font-weight:600;color:var(--txt);letter-spacing:-.01em;pointer-events:none;">Drink Cost</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
+        <div class="bsheet-divider"></div>
         <button class="calc-cmd-btn" id="calc-btn-batch" data-cmd="batch">
           <div style="width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><rect x="9" y="1" width="6" height="3" rx="1"/><path d="M8 4h8c1 2 2 3 2 6v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-9c0-3 1-4 2-6z"/><rect x="8.5" y="11" width="7" height="4" rx=".5" fill="rgba(203,213,225,.15)" stroke="var(--txt2)" stroke-width="1.2"/></svg>

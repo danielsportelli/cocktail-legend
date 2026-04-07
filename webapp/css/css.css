@@ -391,6 +391,16 @@ body::before{
   transition:background .15s;
 }
 .calc-cmd-btn:active,.ris-cmd-btn:active{background:rgba(255,255,255,.05);}
+/* Etichetta sopra lista voci drawer — allineata con i button */
+.drawer-cmd-label{
+  font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
+  color:#60a5fa;margin-bottom:.6rem;
+}
+/* Container lista button — esce dal padding di drawer-inner su tutti i device */
+.drawer-cmd-list{
+  display:flex;flex-direction:column;
+  margin-left:-1.2rem;margin-right:-1.2rem;
+}
 .sort-sopt{
   display:flex;align-items:center;justify-content:space-between;
   width:100%;background:none;border:none;
