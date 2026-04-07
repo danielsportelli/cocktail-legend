@@ -798,6 +798,17 @@ async function loadLeaderboard(tab) {
 
     if (snap.empty) {
       list.innerHTML = '<div class="lb-row lb-loading">Nessun punteggio ancora — sii il primo! 🏆</div>';
+      // Anche se snap è vuota, mostra banner free mensile se applicabile
+      const freeBannerEmpty = document.getElementById('lb-free-banner');
+      if (freeBannerEmpty && tab === 'monthly') {
+        const isPremiumCheck = window._quizUserData && window._quizUserData.plan === 'premium';
+        if (!isPremiumCheck && window._quizUserData) {
+          const myPts = window._quizUserData.pts_month || 0;
+          document.getElementById('free-pts-val').textContent = myPts;
+          document.getElementById('free-rank-txt').textContent = '— saresti 1°';
+          freeBannerEmpty.style.display = '';
+        }
+      }
       return;
     }
 
