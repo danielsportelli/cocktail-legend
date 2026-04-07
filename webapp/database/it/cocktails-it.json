@@ -1,5 +1,449 @@
 [
   {
+    "id": "little_italy",
+    "name": "Little Italy",
+    "distillato": [
+      "Rye whiskey"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Amaro",
+      "Erbaceo",
+      "Complesso"
+    ],
+    "garnish": "Ciliegia",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Rye whiskey"
+      ],
+      [
+        "22,5 ml",
+        "Vermouth rosso"
+      ],
+      [
+        "7,5 ml",
+        "Cynar"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
+    ],
+    "storia": "Creato da Audrey Saunders al Pegu Club di New York City nei primi anni 2000, il Little Italy nasce come omaggio al quartiere storico di Manhattan che porta lo stesso nome — per secoli cuore della comunità italiana emigrata a New York. Saunders, una delle figure più influenti nella rinascita del bartending classico americano, costruì il drink attorno al Cynar, l'amaro veneziano a base di carciofo introdotto in Italia nel 1952 e diventato simbolo di un'italianità autentica e popolare. La scelta del Cynar come terzo elemento non era scontata: in quegli anni l'amaro era ancora poco conosciuto nei bar americani, e il Little Italy contribuì a fargli conquistare un posto stabile dietro i banconi d'autore di New York e oltre.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/little_italy.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "mercy_mercy",
+    "name": "Mercy Mercy",
+    "distillato": [
+      "Campari"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Basso",
+    "sapori": [
+      "Amaro",
+      "Agrumato",
+      "Fruttato"
+    ],
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Campari"
+      ],
+      [
+        "30 ml",
+        "Succo di arancia"
+      ],
+      [
+        "15 ml",
+        "Succo di limone"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "Top",
+        "Prosecco"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio (tranne il Prosecco)",
+      "Filtrare (double strain) in un flûte raffreddato",
+      "Completare con Prosecco e dare una leggera mescolata con il barspoon"
+    ],
+    "storia": "Il Mercy Mercy è un cocktail contemporaneo nato nell'ambito della rinascita aperitivo-culture italiana degli anni 2010, quando i bartender europei cominciarono a esplorare combinazioni tra bitter classici e bollicine locali. Il nome evoca sia un'interiezione di supplica che il titolo della celebre canzone di Don Covay del 1964, portata al successo dai Rolling Stones — un riferimento alla cultura pop angloamericana filtrata attraverso un'estetica aperitivo tutta italiana. Poco documentato nelle fonti ufficiali, appartiene alla categoria dei drink moderni di tendenza diffusi nel circuito dei bar europei, con origini incerte tra Londra e le capitali del cocktail italiano.",
+    "frizzante": true,
+    "bicchiere": "Flûte",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mercy_mercy.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "mezcalibur",
+    "name": "Mezcalibur",
+    "distillato": [
+      "Mezcal"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Medio",
+    "sapori": [
+      "Affumicato",
+      "Agrumato",
+      "Speziato"
+    ],
+    "garnish": "Fetta di pompelmo rosa",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Mezcal"
+      ],
+      [
+        "22,5 ml",
+        "Succo di pompelmo rosa"
+      ],
+      [
+        "15 ml",
+        "Succo di lime"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di agave"
+      ],
+      [
+        "q.b.",
+        "Crusta di sale"
+      ]
+    ],
+    "prep": [
+      "Bordare un tumbler basso con sale e riempirlo di ghiaccio",
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) nel tumbler basso"
+    ],
+    "storia": "Il Mezcalibur è un cocktail moderno ispirato al profilo della Paloma tradizionale, reinterpretato attraverso la lente del mezcal artigianale. Il nome fonde 'Mezcal' con 'Excalibur', la leggendaria spada di Re Artù — un gioco linguistico che allude alla complessità affumicata del distillato come qualcosa di mitico e indomabile. Nato nell'ondata di interesse per il mezcal che ha attraversato i bar nordamericani e europei a partire dagli anni 2010, il drink riflette la rivalutazione dei distillati oaxacani tradizionali, spesso prodotti da maestros mezcaleros con metodi centenari. È un drink di tendenza piuttosto che storico, la cui ricetta varia da bar a bar.",
+    "frizzante": false,
+    "bicchiere": "Tumbler basso",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/mezcalibur.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "one_sip_martini",
+    "name": "One Sip Martini",
+    "distillato": [
+      "Vodka"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Secco",
+      "Elegante",
+      "Aromatico"
+    ],
+    "garnish": "Oliva verde",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Vodka"
+      ],
+      [
+        "15 ml",
+        "Vermouth dry"
+      ],
+      [
+        "7,5 ml",
+        "Sherry"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una bicchiere da shot"
+    ],
+    "storia": "Il One Sip Martini è una versione iperconcentrata del Martini classico, pensata per essere servita in coppetta da degustazione di dimensioni ridotte — un formato che esalta la purezza e la potenza del distillato senza diluzione. Il nome è dichiaratamente programmatico: un'esperienza da assaporare in un solo sorso, come si fa con certi grandi whisky o cognac. Questa filosofia del 'mini cocktail da meditazione' ha trovato terreno fertile nei bar di alta miscelazione europei e giapponesi degli anni 2010, dove la concentrazione e la tecnica hanno preso il sopravvento sulla quantità. La ricetta è poco documentata in modo univoco e varia sensibilmente per proporzioni a seconda dell'interprete.",
+    "frizzante": false,
+    "bicchiere": "Shot",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/one_sip_martini.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "palo_negro",
+    "name": "Palo Negro",
+    "distillato": [
+      "Tequila"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Affumicato",
+      "Amaro",
+      "Intenso"
+    ],
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Tequila reposado"
+      ],
+      [
+        "22,5 ml",
+        "Sherry"
+      ],
+      [
+        "10 ml",
+        "Rum blackstrap"
+      ],
+      [
+        "5 ml",
+        "Grand marnier"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
+    ],
+    "storia": "Il Palo Negro — che in spagnolo significa 'legno nero' o 'bastone nero' — è un cocktail contemporaneo che esplora la famiglia dei bitter stirred, collocandosi nel solco del Toronto e del Black Manhattan ma con un anima mesoamericana. Il nome evoca tanto le sfumature affumicate del mezcal, prodotto dalla cottura delle piñas in fosse scavate nella terra, quanto il legno carbonizzato dei fusti in cui certi distillati riposano. Nato nell'era della cocktail renaissance degli anni 2010.",
+    "frizzante": false,
+    "bicchiere": "Tumbler basso",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/palo_negro.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "pearl_diver",
+    "name": "Pearl Diver",
+    "distillato": [
+      "Rum"
+    ],
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Tropicale",
+      "Cremoso",
+      "Dolce"
+    ],
+    "garnish": "Gardenia",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Rum cubano"
+      ],
+      [
+        "15 ml",
+        "Rum demerara"
+      ],
+      [
+        "15 ml",
+        "Succo di arancia"
+      ],
+      [
+        "15 ml",
+        "Succo di lime"
+      ],
+      [
+        "20 ml",
+        "Gardenia mix"
+      ],
+      [
+        "1 dash",
+        "Angostura bitters"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti in uno nel milkshake mixer con una paletta di ghiaccio tritato (circa 120 gr)",
+      "Miscelare per circa un minuto finché il ghiaccio non sarà quasi sciolto"
+    ],
+    "storia": "Il Pearl Diver è una delle creazioni più iconiche di Don the Beachcomber — al secolo Donn Beach, il visionario texano che inventò il genere tiki nei suoi locali di Hollywood negli anni '30. Leggenda vuole che Beach tenesse le proprie ricette in cassaforte, cambiasse continuamente le formule e impiegasse numeri in codice per identificare gli ingredienti, così da impedire ai concorrenti e persino ai suoi stessi bartender di replicare le sue creazioni. Il Pearl Diver era tra i drink più custoditi del suo arsenale: la ricetta originale rimase segreta per decenni. Il componente chiave — il Gardenia Mix, un blend cremoso a base di burro, miele e spezie — fu ricostruito solo anni dopo la morte di Beach grazie alle ricerche di Jeff 'Beachbum' Berry, il grande storico del tiki moderno.",
+    "frizzante": false,
+    "bicchiere": "Hurricane",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pearl_diver.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "pesquito",
+    "name": "Pesquito",
+    "distillato": [
+      "Liquore alla pesca"
+    ],
+    "categoria": "All day",
+    "abv": "Medio basso",
+    "sapori": [
+      "Agrumato",
+      "Fresco",
+      "Vivace"
+    ],
+    "garnish": "Rondella di lime",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Liquore alla pesca"
+      ],
+      [
+        "Top",
+        "Soda al limone"
+      ]
+    ],
+    "prep": [
+      "Versare tutto in un bicchiere highball riempito di ghiaccio",
+      "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
+    ],
+    "storia": "Il Pesquito è un long drink semplice e immediato, il cui nome è un diminutivo affettuoso dall'estetica messicana — 'pesciolino' o 'piccola pesca' — che evoca leggerezza e freschezza estiva. Non ha un inventore documentato né un locale di nascita preciso: appartiene a quella generazione di drink informali nati nei bar europei e americani degli anni 2000-2010, costruiti sulla logica essenziale del liquore fruttato allungato con una soda agrumata. Una formula senza pretese, pensata per essere bevuta facilmente, che ha trovato spazio nei menu estivi dei locali di tutto il mondo proprio per la sua accessibilità e il suo profilo dissetante.",
+    "frizzante": true,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/pesquito.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "quaker",
+    "name": "Quaker",
+    "distillato": [
+      "Rum",
+      "Brandy"
+    ],
+    "categoria": "After dinner",
+    "abv": "Medio alto",
+    "sapori": [
+      "Fruttato",
+      "Raffinato",
+      "Dolce"
+    ],
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Rum"
+      ],
+      [
+        "20 ml",
+        "Brandy"
+      ],
+      [
+        "22,5 ml",
+        "Succo di limone"
+      ],
+      [
+        "15 ml",
+        "Maraschino"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "Il Quaker è un cocktail storico documentato nel Savoy Cocktail Book di Harry Craddock, pubblicato nel 1930, dove compare come formula discreta ma elegante tra le ricette del celebre American Bar del Savoy Hotel di Londra. Il nome richiama la comunità religiosa dei Quaccheri, nota per la sobrietà e la semplicità — un'ironia sottile in un drink che mescola due distillati con liquore al ciliegio. Alcune fonti collocano varianti della ricetta anche in manuali precedenti al Savoy, suggerendo radici nel periodo pre-Proibizionista americano, quando la combinazione rum-brandy era apprezzata negli ambienti più sofisticati. Il Maraschino, prodotto principalmente in Dalmazia dalla distillazione delle marasche, era un ingrediente pregiato e frequente nella miscelazione d'autore dell'Ottocento e dei primi del Novecento.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/quaker.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "queen_elizabeth",
+    "name": "Queen Elizabeth",
+    "distillato": [
+      "Gin"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Molto alto",
+    "sapori": [
+      "Erbaceo",
+      "Aromatico",
+      "Secco"
+    ],
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Gin"
+      ],
+      [
+        "15 ml",
+        "Vermouth dry"
+      ],
+      [
+        "15 ml",
+        "Dom bénédictine"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
+    ],
+    "storia": "Il Queen Elizabeth è un cocktail da stir della famiglia dei Martini variati, documentato nel Savoy Cocktail Book di Harry Craddock del 1930 e in altri ricettari classici del periodo interbellico. Il nome rende omaggio alla corona britannica — una prassi comune nella miscelazione anglosassone dell'epoca, che amava battezzare i drink con riferimenti alla monarchia o all'aristocrazia. La Bénédictine, l'erboristico liquore normanno prodotto a Fécamp in Normandia dal 1863 su ricetta attribuita — con una certa licenza storica — a un monaco benedettino del XVI secolo, apporta al drink quella complessità speziata ed erbacea che lo distingue dal Martini classico. È un drink che riflette il gusto dell'alta borghesia londinese degli anni '20 e '30, frequentatrice assidua dell'American Bar del Savoy.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/queen_elizabeth.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "queens_park_swizzle",
+    "name": "Queen's Park Swizzle",
+    "distillato": [
+      "Rum"
+    ],
+    "categoria": "All day",
+    "abv": "Medio alto",
+    "sapori": [
+      "Fresco",
+      "Aromatico",
+      "Mentolato"
+    ],
+    "garnish": "Ciuffo di menta + Noce moscata",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Rum demerara"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "8",
+        "Foglie di menta"
+      ],
+      [
+        "3 dash",
+        "Angostura bitters"
+      ],
+      [
+        "3 dash",
+        "Peychaud's bitters"
+      ]
+    ],
+    "prep": [
+      "In un bicchiere highball inserire lo 'swizzle stick'",
+      "Versare tutti gli ingredienti e il ghiaccio tritato",
+      "Miscelare bene facendo ruotare lo swizzle tra i palmi delle mani",
+      "Aggiungere altro ghiaccio tritato fino a riempire il bicchiere",
+      "Grattuggiare noce moscata sulla superficie"
+    ],
+    "storia": "Il Queen's Park Swizzle prende il nome dal Queen's Park Hotel di Port of Spain, Trinidad, dove si narra fosse una specialità della casa già nel primo Novecento. Considerato da molti il re della famiglia degli swizzle, questo drink incorpora una doppia dose di bitters — Angostura, prodotto a Trinidad dal 1824, e Peychaud's, nato a New Orleans — rendendo omaggio a due delle grandi tradizioni bitteristiche delle Americhe. Il rum demerara, distillato nella regione omonima della Guyana con caratteristiche uniche legate ai vecchi alambicchi in legno, è il cuore del drink: profondo, ricco di melassa e spezie. Importato nella cocktail culture internazionale attraverso il movimento tiki degli anni '40 e '50, e poi riscoperto dalla bartending renaissance contemporanea, il Queen's Park Swizzle è oggi considerato un classico imprescindibile della miscelazione caraibica.",
+    "frizzante": false,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/queens_park_swizzle.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
     "id": "fall_angel",
     "name": "Fall Angel",
     "distillato": [
