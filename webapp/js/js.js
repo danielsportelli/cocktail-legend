@@ -3617,7 +3617,7 @@ function softReset() {
   var srt = document.getElementById('srt');
   if (srt) srt.value = 'az';
   // 8. Aggiorna pills e re-render
-  if (typeof updateFilterPills === 'function') updateFilterPills();
+  if (typeof updatePills === 'function') updatePills();
   if (typeof render === 'function') render();
   // 9. Scroll top fluido — cross-platform inclusa PWA
   window.scrollTo({ top: 0, behavior: 'smooth' });
