@@ -339,6 +339,7 @@ window._isRegistering = false;
       var cap       = (document.getElementById('reg-cap').value || '').trim();
       var provincia = (document.getElementById('reg-provincia').value || '').trim();
       var paese     = (document.getElementById('reg-paese').value || '').trim();
+      var ruolo     = (document.getElementById('reg-ruolo').value || '').trim();
       var pwd       = regPwd ? regPwd.value : '';
       var pwd2      = regPwd2 ? regPwd2.value : '';
       var tcAccepted   = document.getElementById('reg-tc') ? document.getElementById('reg-tc').checked : false;
@@ -347,6 +348,7 @@ window._isRegistering = false;
       // Validazioni
       if (!nome || !cognome)        { showRegErr('Inserisci nome e cognome.'); return; }
       if (!email)                   { showRegErr('Inserisci la tua email.'); return; }
+      if (!ruolo)                   { showRegErr('Seleziona il tuo ruolo nel settore.'); var rw = document.getElementById('reg-ruolo-wrap'); if(rw){ rw.style.borderColor='#f87171'; setTimeout(function(){ rw.style.borderColor=''; }, 2000); } return; }
       if (!pwd || pwd.length < 6)   { showRegErr('La password deve avere almeno 6 caratteri.'); return; }
       if (/\s/.test(pwd))               { showRegErr('La password non può contenere spazi.'); return; }
       if (pwd !== pwd2)             { showRegErr('Le password non coincidono.'); return; }
@@ -390,6 +392,7 @@ window._isRegistering = false;
             cap:         cap,
             provincia:   provincia,
             paese:       paese,
+            ruolo:       ruolo,
             plan:        'free',
             tc_accepted: true,
             tc_date:     new Date().toISOString(),
