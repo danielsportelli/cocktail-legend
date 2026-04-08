@@ -1,269 +1,466 @@
 [
-{
-  "id": "ranch_water",
-  "name": "Ranch Water",
-  "distillato": ["Tequila"],
-  "categoria": "All day",
-  "abv": "Medio basso",
-  "sapori": ["Dissetante", "Agrumato", "Leggero"],
-  "garnish": "Rondella di lime",
-  "ingredienti": [
-    ["60 ml", "Tequila"],
-    ["30 ml", "Succo di lime"],
-    ["Top", "Soda"]
-  ],
-  "prep": [
-    "Versare la tequila e il succo di lime in un bicchiere highball riempito di ghiaccio",
-    "Completare con la soda",
-    "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
-  ],
-  "storia": "Il Ranch Water è il drink simbolo del West Texas, nato nelle distese aride tra Marfa e il Big Bend National Park, dove i rancheros cercavano un modo semplice per battere il caldo rovente. La versione più accreditata lo lega al Gage Hotel di Marathon, Texas, dove fin dagli anni Ottanta il personale lo preparava come bevanda quotidiana — essenziale, senza fronzoli, pensata per chi lavora all'aperto sotto il sole texano. Per decenni è rimasto un segreto locale, il drink di chi conosce il deserto dall'interno. La sua esplosione nazionale è arrivata negli anni 2010, trascinata dalla cultura texana e dall'onda del 'low-ABV drinking', e il nome stesso — acqua del ranch — racconta tutto sulla filosofia di chi lo ha inventato: idratazione, semplicità, territorio.",
-  "frizzante": true,
-  "bicchiere": "Highball",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/ranch_water.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "red_eye",
-  "name": "Red Eye",
-  "distillato": ["Vodka"],
-  "categoria": "All day",
-  "abv": "Basso",
-  "sapori": ["Rustico", "Dissetante", "Deciso"],
-  "garnish": "Fetta di limone",
-  "ingredienti": [
-    ["30 ml", "Vodka"],
-    ["90 ml", "Succo di pomodoro"],
-    ["1 dash", "Tabasco"],
-    ["1 dash", "Worcestershire"],
-    ["q.b.", "Sale e pepe"],
-    ["Top", "Birra chiara (lager)"]
-  ],
-  "prep": [
+  {
+    "id": "ranch_water",
+    "name": "Ranch Water",
+    "distillato": [
+      "Tequila"
+    ],
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Dissetante",
+      "Agrumato",
+      "Leggero"
+    ],
+    "garnish": "Rondella di lime",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Tequila"
+      ],
+      [
+        "30 ml",
+        "Succo di lime"
+      ],
+      [
+        "Top",
+        "Soda"
+      ]
+    ],
+    "prep": [
+      "Versare la tequila e il succo di lime in un bicchiere highball riempito di ghiaccio",
+      "Completare con la soda",
+      "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
+    ],
+    "storia": "Il Ranch Water è il drink simbolo del West Texas, nato nelle distese aride tra Marfa e il Big Bend National Park, dove i rancheros cercavano un modo semplice per battere il caldo rovente. La versione più accreditata lo lega al Gage Hotel di Marathon, Texas, dove fin dagli anni Ottanta il personale lo preparava come bevanda quotidiana — essenziale, senza fronzoli, pensata per chi lavora all'aperto sotto il sole texano. Per decenni è rimasto un segreto locale, il drink di chi conosce il deserto dall'interno. La sua esplosione nazionale è arrivata negli anni 2010, trascinata dalla cultura texana e dall'onda del 'low-ABV drinking', e il nome stesso — acqua del ranch — racconta tutto sulla filosofia di chi lo ha inventato: idratazione, semplicità, territorio.",
+    "frizzante": true,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/ranch_water.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "red_eye",
+    "name": "Red Eye",
+    "distillato": [
+      "Vodka"
+    ],
+    "categoria": "All day",
+    "abv": "Basso",
+    "sapori": [
+      "Rustico",
+      "Dissetante",
+      "Deciso"
+    ],
+    "garnish": "Fetta di limone",
+    "ingredienti": [
+      [
+        "30 ml",
+        "Vodka"
+      ],
+      [
+        "90 ml",
+        "Succo di pomodoro"
+      ],
+      [
+        "1 dash",
+        "Tabasco"
+      ],
+      [
+        "1 dash",
+        "Worcestershire"
+      ],
+      [
+        "q.b.",
+        "Sale e pepe"
+      ],
+      [
+        "Top",
+        "Birra chiara (lager)"
+      ]
+    ],
+    "prep": [
       "Shakerare tutto con ghiaccio (tranne la birra)",
       "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio",
       "Completare con la birra",
       "Dare una leggera mescolata col bar spoon dal basso verso l'alto"
-  ],
-  "storia": "Il Red Eye — così chiamato per il colore rossastro che assume nel bicchiere — appartiene alla tradizione americana dei 'morning drinks', quei cocktail da colazione o da cura della sbornia che mescolano birra e succo di pomodoro. Entrato nell'immaginario collettivo grazie alla scena cult del film Cocktail del 1988 con Tom Cruise, dove il personaggio di Brian Flanagan lo prepara come rimedio del mattino dopo, il Red Eye ha radici popolari più antiche nel Midwest americano, dove la combinazione birra-pomodoro era già diffusa come bevanda operaia di fine settimana. È un drink che vive di cultura popolare più che di haute mixology — diretto, pragmatico, privo di pretese — e che si è guadagnato un posto fisso nel repertorio dei bar americani proprio per questa sua onestà.",
-  "frizzante": true,
-  "bicchiere": "Highball",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/red_eye.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "revolver",
-  "name": "Revolver",
-  "distillato": ["Bourbon whiskey"],
-  "categoria": "After dinner",
-  "abv": "Molto alto",
-  "sapori": ["Tostato", "Caffeinico", "Intenso"],
-  "garnish": "Zest di arancia",
-  "ingredienti": [
-    ["60 ml", "Bourbon whiskey"],
-    ["15 ml", "Liquore al caffè"],
-    ["2 dash", "Orange bitters"]
-  ],
-  "prep": [
-    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
-    "Mescolare delicatamente per circa 20 secondi",
-    "Filtrare in una coppetta raffreddata"
-  ],
-  "storia": "Il Revolver nasce nel 2004 dalla mente di Jon Santer, bartender di San Francisco che lo creò come omaggio personale al Buffalo Trace Bourbon in occasione di una degustazione. La scelta del nome riflette la poetica diretta e senza ornamenti tipica dei cocktail da stir dell'era della cocktail renaissance americana — un drink che va dritto al bersaglio, come il fuoco di un revolver. Santer, figura di riferimento nella scena bar della Bay Area, costruì la ricetta attorno all'affinità tra bourbon invecchiato e caffè — un abbinamento che la tradizione del Sud degli Stati Uniti conosce bene — aggiungendo il tocco aromatico del bitter all'arancia a legare il tutto. In pochi anni il Revolver è diventato un moderno classico riconosciuto, presente nei ricettari contemporanei e nei menu dei migliori cocktail bar del mondo.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/revolver.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "rickey",
-  "name": "Rickey",
-  "distillato": ["Gin"],
-  "categoria": "All day",
-  "abv": "Medio basso",
-  "sapori": ["Agrumato", "Secco", "Dissetante"],
-  "garnish": "Spicchio di lime",
-  "ingredienti": [
-    ["50 ml", "Gin"],
-    ["15 ml", "Succo di lime"],
-    ["Top", "Soda"]
-  ],
-  "prep": [
-    "Versare il gin e il succo di lime in un bicchiere highball riempito di ghiaccio",
-    "Completare con la soda",
-    "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
-  ],
-  "storia": "Il Rickey nasce a Washington D.C. negli anni Ottanta dell'Ottocento, in un'epoca in cui la capitale americana era famosa tanto per la politica quanto per i suoi saloon affollati. Protagonista indiscusso della storia è il lobbyista e uomo di mondo Joe Rickey, habitué del Shoomaker's Bar di Pennsylvania Avenue, dove il barman George Williamson cominciò a preparare questa combinazione su misura per lui. La versione originale era a base di bourbon, non di gin, e si beveva senza sciroppo — un drink volutamente secco e dissetante. Col tempo fu il gin a imporsi come base standard, mentre il nome rimase a immortalare il suo ispiratore. Nel 1904 il Gin Rickey fu protagonista di una curiosa campagna di sobrietà a Washington, promossa come alternativa 'pulita' ai cocktail più dolci — il che dice molto su quanto fosse entrato nel costume della città.",
-  "frizzante": true,
-  "bicchiere": "Highball",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rickey.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "rum_punch",
-  "name": "Rum Punch",
-  "distillato": ["Rum"],
-  "categoria": "All day",
-  "abv": "Medio",
-  "sapori": ["Tropicale", "Fruttato", "Dolce"],
-  "garnish": "Fetta di ananas + Ciliegia",
-  "ingredienti": [
-    ["50 ml", "Rum"],
-    ["22,5 ml", "Succo di lime"],
-    ["22,5 ml", "Succo di arancia"],
-    ["22,5 ml", "Succo di ananas"],
-    ["15 ml", "Sciroppo di granatina"],
-    ["15 ml", "Sciroppo di zucchero"],
-    ["3 dash", "Angostura bitters"]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio tritato",
-    "Versare tutto, ghiaccio compreso (dirty dump) in un bicchiere hurricane",
-    "Se necessario aggiungere altro ghiaccio tritato a colmare"
-  ],
-  "storia": "Il Rum Punch è forse il cocktail più antico del mondo occidentale ancora in uso, con radici che affondano nel XVII secolo nelle colonie britanniche delle Indie Occidentali. Il termine 'punch' deriverebbe dal sanscrito 'panch', che significa cinque — i cinque elementi tradizionali della bevanda: distillato, acido, dolce, acqua e spezie. Le prime testimonianze scritte di punch a base rum risalgono agli anni 1650-1680, quando le piantagioni di canna da zucchero dei Caraibi cominciarono a produrre rum in quantità industriali. Ogni isola del mar dei Carabi ha la propria variante, tramandata con orgoglio quasi patriottico: a Barbados si usa ancora oggi la formula mnemonica 'one of sour, two of sweet, three of strong, four of weak' — un verso che i bartender imparano da bambini. È il progenitore di tutti i long drink moderni a base di frutta e distillato.",
-  "frizzante": false,
-  "bicchiere": "Hurricane",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rum_punch.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "saketini",
-  "name": "Saketini",
-  "distillato": ["Gin", "Sake"],
-  "categoria": "Pre dinner",
-  "abv": "Alto",
-  "sapori": ["Secco", "Floreale", "Elegante"],
-  "garnish": "Zest di limone",
-  "ingredienti": [
-    ["50 ml", "Gin"],
-    ["25 ml", "Sake junmai"],
-    ["2 dash", "Orange bitters"]
-  ],
-  "prep": [
-    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
-    "Mescolare delicatamente per circa 20 secondi",
-    "Filtrare in una coppetta raffreddata"
-  ],
-  "storia": "Il Saketini nasce negli anni Novanta sull'onda della moda fusion che attraversò la ristorazione e la miscelazione americana, quando l'interesse per la cucina giapponese portò bar e ristoranti di New York e Los Angeles a sperimentare con il sake come sostituto del vermouth nel Martini classico. L'intuizione aveva una logica elegante: il sake junmai, fermentato dal riso senza aggiunta di alcol, offre note floreali e umami che dialogano naturalmente con i botanici del gin, così come il vermouth dry dialoga con esso nella formula originale. Il Saketini si è poi diffuso nel circuito dei bar di Tokyo e delle grandi città giapponesi, dove i bartender locali lo hanno fatto proprio con precisione tecnica impeccabile, contribuendo a trasformarlo da trovata fusion a cocktail rispettabile a pieno titolo.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/saketini.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "san_francisco",
-  "name": "San Francisco",
-  "distillato": ["Vodka"],
-  "categoria": "All day",
-  "abv": "Medio basso",
-  "sapori": ["Fruttato", "Dolce", "Vivace"],
-  "garnish": "Fetta di arancia + Ciliegia",
-  "ingredienti": [
-    ["50 ml", "Vodka"],
-    ["30 ml", "Succo di arancia"],
-    ["30 ml", "Succo di ananas"],
-    ["15 ml", "Succo di cranberry"],
-    ["15 ml", "Sciroppo di granatina"],
-    ["Top", "Soda"]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio (tranne la soda)",
-    "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio",
-    "Completare con la soda",
-    "Dare una leggera mescolata col bar spoon dal basso verso l'alto"
-  ],
-  "storia": "Il San Francisco è un long drink fruttato nato negli anni Settanta-Ottanta nell'orbita dei cocktail bar americani orientati a un pubblico giovane e festivo, che cercava alternative colorate e accessibili ai drink più impegnativi. La città californiana che dà il nome al drink era in quegli anni epicentro culturale di una generazione che reinventava stili di vita, musica e — inevitabilmente — anche il modo di bere. Il drink riflette quella vitalità: colorato, solare, costruito su un bouquet di succhi di frutta tropicale. Non ha un inventore documentato con precisione, appartiene a quella generazione di cocktail anonima e collettiva nati dietro i banconi americani degli anni Settanta-Ottanta, dove creatività e voglia di colore contavano più della tradizione.",
-  "frizzante": true,
-  "bicchiere": "Highball",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/san_francisco.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "savory_cocktail",
-  "name": "Savory Cocktail",
-  "distillato": ["Gin"],
-  "categoria": "Pre dinner",
-  "abv": "Alto",
-  "sapori": ["Erbaceo", "Aromatico", "Secco"],
-  "garnish": "Zest di limone",
-  "ingredienti": [
-    ["45 ml", "Gin"],
-    ["22,5 ml", "Vermouth dry"],
-    ["7,5 ml", "Cynar"],
-    ["1 dash", "Orange bitters"]
-  ],
-  "prep": [
-    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
-    "Mescolare delicatamente per circa 20 secondi",
-    "Filtrare in una coppetta raffreddata"
-  ],
-  "storia": "Il Savory Cocktail appartiene alla famiglia dei Martini variati con amaro, una categoria che ha vissuto una rinascita straordinaria durante la cocktail renaissance degli anni 2000-2010, quando i bartender americani ed europei cominciarono a guardare agli amari italiani come strumenti di complessità piuttosto che come digestivi da fine pasto. Il termine 'savory' — che in inglese indica il gusto salato e saporito, contrapposto al dolce — è il manifesto programmatico del drink: un aperitivo volutamente asciutto, erbaceo, pensato per stimolare l'appetito e non sedarlo. La presenza del Cynar come modificatore riflette la riscoperta del carciofo come ingrediente miscelatorio, resa popolare da cocktail come il Little Italy di Audrey Saunders. La ricetta non è attribuita a un singolo bartender.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/savory_cocktail.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "scorpion",
-  "name": "Scorpion",
-  "distillato": ["Rum", "Brandy"],
-  "categoria": "All day",
-  "abv": "Alto",
-  "sapori": ["Tropicale", "Fruttato", "Intenso"],
-  "garnish": "Fetta di arancia + Ciliegia",
-  "ingredienti": [
-    ["50 ml", "Rum"],
-    ["30 ml", "Brandy"],
-    ["30 ml", "Succo di arancia"],
-    ["22,5 ml", "Succo di limone"],
-    ["15 ml", "Sciroppo di orzata"]
-  ],
-  "prep": [
-    "Versare tutti gli ingredienti in uno nel milkshake mixer con una paletta di ghiaccio tritato (circa 120 gr)",
-    "Miscelare per circa un minuto finché il ghiaccio non sarà quasi sciolto"
-  ],
-  "storia": "Lo Scorpion è una delle grandi creazioni di Trader Vic — al secolo Victor Bergeron — il fondatore dell'impero tiki che sfidò e rese famoso Don the Beachcomber nell'America degli anni Quaranta e Cinquanta. Bergeron lo ideò negli anni Quaranta ispirandosi a una bevanda hawaiana tradizionale, adattandola alla formula tiki con la sua consueta maestria nel bilanciare distillati, agrumi e sciroppi esotici. Il nome evocativo — Scorpione — era tipico dello stile di Trader Vic, che amava battezzare i suoi drink con nomi capaci di evocare avventura, pericolo e terre lontane. Lo Scorpion è stato codificato nel Trader Vic's Bartender's Guide e rimane uno dei punti fermi del canone tiki classico, spesso servito nella versione 'Scorpion Bowl' per più persone.",
-  "frizzante": false,
-  "bicchiere": "Hurricane",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/scorpion.webp",
-  "varianti": [],
-  "iba": false
-},
-{
-  "id": "siesta",
-  "name": "Siesta",
-  "distillato": ["Tequila"],
-  "categoria": "All day",
-  "abv": "Medio alto",
-  "sapori": ["Agrumato", "Amaro", "Fresco"],
-  "garnish": "Fetta di pompelmo rosa",
-  "ingredienti": [
-    ["45 ml", "Tequila"],
-    ["15 ml", "Campari"],
-    ["22,5 ml", "Succo di pompelmo rosa"],
-    ["22,5 ml", "Succo di limone"],
-    ["15 ml", "Sciroppo di zucchero"]
-  ],
-  "prep": [
-    "Shakerare tutto con ghiaccio",
-    "Filtrare (double strain) in una coppetta raffreddata"
-  ],
-  "storia": "La Siesta nasce nel 2006 da Katie Stipe, bartender del Flatiron Lounge di New York City, uno dei locali-laboratorio che più ha contribuito alla stagione d'oro della cocktail renaissance newyorkese. Stipe costruì il drink attorno a un'intuizione elegante: il Campari e il pompelmo rosa si accordano naturalmente, entrambi amaro-agrumati, e la tequila — al posto del gin della Paloma tradizionale — porta un carattere terroso e deciso che cementa il tutto. Il nome è un omaggio alla cultura messicana, evocato non solo dalla tequila ma dalla sensazione di dolce torpore meridiano che il drink trasmette. La Siesta è oggi riconosciuta come uno dei cocktail moderni più riusciti degli anni 2000, un esempio di come una struttura sour classica possa essere reinventata con pochi, precisi cambiamenti.",
-  "frizzante": false,
-  "bicchiere": "Coppetta",
-  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/siesta.webp",
-  "varianti": [],
-  "iba": false
-},
+    ],
+    "storia": "Il Red Eye — così chiamato per il colore rossastro che assume nel bicchiere — appartiene alla tradizione americana dei 'morning drinks', quei cocktail da colazione o da cura della sbornia che mescolano birra e succo di pomodoro. Entrato nell'immaginario collettivo grazie alla scena cult del film Cocktail del 1988 con Tom Cruise, dove il personaggio di Brian Flanagan lo prepara come rimedio del mattino dopo, il Red Eye ha radici popolari più antiche nel Midwest americano, dove la combinazione birra-pomodoro era già diffusa come bevanda operaia di fine settimana. È un drink che vive di cultura popolare più che di haute mixology — diretto, pragmatico, privo di pretese — e che si è guadagnato un posto fisso nel repertorio dei bar americani proprio per questa sua onestà.",
+    "frizzante": true,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/red_eye.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "revolver",
+    "name": "Revolver",
+    "distillato": [
+      "Bourbon whiskey"
+    ],
+    "categoria": "After dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Tostato",
+      "Caffeinico",
+      "Intenso"
+    ],
+    "garnish": "Zest di arancia",
+    "ingredienti": [
+      [
+        "60 ml",
+        "Bourbon whiskey"
+      ],
+      [
+        "15 ml",
+        "Liquore al caffè"
+      ],
+      [
+        "2 dash",
+        "Orange bitters"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
+    ],
+    "storia": "Il Revolver nasce nel 2004 dalla mente di Jon Santer, bartender di San Francisco che lo creò come omaggio personale al Buffalo Trace Bourbon in occasione di una degustazione. La scelta del nome riflette la poetica diretta e senza ornamenti tipica dei cocktail da stir dell'era della cocktail renaissance americana — un drink che va dritto al bersaglio, come il fuoco di un revolver. Santer, figura di riferimento nella scena bar della Bay Area, costruì la ricetta attorno all'affinità tra bourbon invecchiato e caffè — un abbinamento che la tradizione del Sud degli Stati Uniti conosce bene — aggiungendo il tocco aromatico del bitter all'arancia a legare il tutto. In pochi anni il Revolver è diventato un moderno classico riconosciuto, presente nei ricettari contemporanei e nei menu dei migliori cocktail bar del mondo.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/revolver.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "rickey",
+    "name": "Rickey",
+    "distillato": [
+      "Gin"
+    ],
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Agrumato",
+      "Secco",
+      "Dissetante"
+    ],
+    "garnish": "Spicchio di lime",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Gin"
+      ],
+      [
+        "15 ml",
+        "Succo di lime"
+      ],
+      [
+        "Top",
+        "Soda"
+      ]
+    ],
+    "prep": [
+      "Versare il gin e il succo di lime in un bicchiere highball riempito di ghiaccio",
+      "Completare con la soda",
+      "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
+    ],
+    "storia": "Il Rickey nasce a Washington D.C. negli anni Ottanta dell'Ottocento, in un'epoca in cui la capitale americana era famosa tanto per la politica quanto per i suoi saloon affollati. Protagonista indiscusso della storia è il lobbyista e uomo di mondo Joe Rickey, habitué del Shoomaker's Bar di Pennsylvania Avenue, dove il barman George Williamson cominciò a preparare questa combinazione su misura per lui. La versione originale era a base di bourbon, non di gin, e si beveva senza sciroppo — un drink volutamente secco e dissetante. Col tempo fu il gin a imporsi come base standard, mentre il nome rimase a immortalare il suo ispiratore. Nel 1904 il Gin Rickey fu protagonista di una curiosa campagna di sobrietà a Washington, promossa come alternativa 'pulita' ai cocktail più dolci — il che dice molto su quanto fosse entrato nel costume della città.",
+    "frizzante": true,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rickey.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "rum_punch",
+    "name": "Rum Punch",
+    "distillato": [
+      "Rum"
+    ],
+    "categoria": "All day",
+    "abv": "Medio basso",
+    "sapori": [
+      "Tropicale",
+      "Fruttato",
+      "Dolce"
+    ],
+    "garnish": "Fetta di ananas + Ciliegia",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Rum"
+      ],
+      [
+        "22,5 ml",
+        "Succo di lime"
+      ],
+      [
+        "22,5 ml",
+        "Succo di arancia"
+      ],
+      [
+        "22,5 ml",
+        "Succo di ananas"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di granatina"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ],
+      [
+        "3 dash",
+        "Angostura bitters"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio tritato",
+      "Versare tutto, ghiaccio compreso (dirty dump) in un bicchiere hurricane",
+      "Se necessario aggiungere altro ghiaccio tritato a colmare"
+    ],
+    "storia": "Il Rum Punch è forse il cocktail più antico del mondo occidentale ancora in uso, con radici che affondano nel XVII secolo nelle colonie britanniche delle Indie Occidentali. Il termine 'punch' deriverebbe dal sanscrito 'panch', che significa cinque — i cinque elementi tradizionali della bevanda: distillato, acido, dolce, acqua e spezie. Le prime testimonianze scritte di punch a base rum risalgono agli anni 1650-1680, quando le piantagioni di canna da zucchero dei Caraibi cominciarono a produrre rum in quantità industriali. Ogni isola del mar dei Carabi ha la propria variante, tramandata con orgoglio quasi patriottico: a Barbados si usa ancora oggi la formula mnemonica 'one of sour, two of sweet, three of strong, four of weak' — un verso che i bartender imparano da bambini. È il progenitore di tutti i long drink moderni a base di frutta e distillato.",
+    "frizzante": false,
+    "bicchiere": "Hurricane",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/rum_punch.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "saketini",
+    "name": "Saketini",
+    "distillato": [
+      "Gin",
+      "Sake"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Secco",
+      "Floreale",
+      "Elegante"
+    ],
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Gin"
+      ],
+      [
+        "25 ml",
+        "Sake junmai"
+      ],
+      [
+        "2 dash",
+        "Orange bitters"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
+    ],
+    "storia": "Il Saketini nasce negli anni Novanta sull'onda della moda fusion che attraversò la ristorazione e la miscelazione americana, quando l'interesse per la cucina giapponese portò bar e ristoranti di New York e Los Angeles a sperimentare con il sake come sostituto del vermouth nel Martini classico. L'intuizione aveva una logica elegante: il sake junmai, fermentato dal riso senza aggiunta di alcol, offre note floreali e umami che dialogano naturalmente con i botanici del gin, così come il vermouth dry dialoga con esso nella formula originale. Il Saketini si è poi diffuso nel circuito dei bar di Tokyo e delle grandi città giapponesi, dove i bartender locali lo hanno fatto proprio con precisione tecnica impeccabile, contribuendo a trasformarlo da trovata fusion a cocktail rispettabile a pieno titolo.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/saketini.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "san_francisco",
+    "name": "San Francisco",
+    "distillato": [
+      "Vodka"
+    ],
+    "categoria": "All day",
+    "abv": "Basso",
+    "sapori": [
+      "Fruttato",
+      "Dolce",
+      "Vivace"
+    ],
+    "garnish": "Fetta di arancia + Ciliegia",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Vodka"
+      ],
+      [
+        "30 ml",
+        "Succo di arancia"
+      ],
+      [
+        "30 ml",
+        "Succo di ananas"
+      ],
+      [
+        "15 ml",
+        "Succo di cranberry"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di granatina"
+      ],
+      [
+        "Top",
+        "Soda"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio (tranne la soda)",
+      "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio",
+      "Completare con la soda",
+      "Dare una leggera mescolata col bar spoon dal basso verso l'alto"
+    ],
+    "storia": "Il San Francisco è un long drink fruttato nato negli anni Settanta-Ottanta nell'orbita dei cocktail bar americani orientati a un pubblico giovane e festivo, che cercava alternative colorate e accessibili ai drink più impegnativi. La città californiana che dà il nome al drink era in quegli anni epicentro culturale di una generazione che reinventava stili di vita, musica e — inevitabilmente — anche il modo di bere. Il drink riflette quella vitalità: colorato, solare, costruito su un bouquet di succhi di frutta tropicale. Non ha un inventore documentato con precisione, appartiene a quella generazione di cocktail anonima e collettiva nati dietro i banconi americani degli anni Settanta-Ottanta, dove creatività e voglia di colore contavano più della tradizione.",
+    "frizzante": true,
+    "bicchiere": "Highball",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/san_francisco.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "savory_cocktail",
+    "name": "Savory Cocktail",
+    "distillato": [
+      "Gin"
+    ],
+    "categoria": "Pre dinner",
+    "abv": "Alto",
+    "sapori": [
+      "Erbaceo",
+      "Aromatico",
+      "Secco"
+    ],
+    "garnish": "Zest di limone",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Gin"
+      ],
+      [
+        "22,5 ml",
+        "Vermouth dry"
+      ],
+      [
+        "7,5 ml",
+        "Cynar"
+      ],
+      [
+        "1 dash",
+        "Orange bitters"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+      "Mescolare delicatamente per circa 20 secondi",
+      "Filtrare in una coppetta raffreddata"
+    ],
+    "storia": "Il Savory Cocktail appartiene alla famiglia dei Martini variati con amaro, una categoria che ha vissuto una rinascita straordinaria durante la cocktail renaissance degli anni 2000-2010, quando i bartender americani ed europei cominciarono a guardare agli amari italiani come strumenti di complessità piuttosto che come digestivi da fine pasto. Il termine 'savory' — che in inglese indica il gusto salato e saporito, contrapposto al dolce — è il manifesto programmatico del drink: un aperitivo volutamente asciutto, erbaceo, pensato per stimolare l'appetito e non sedarlo. La presenza del Cynar come modificatore riflette la riscoperta del carciofo come ingrediente miscelatorio, resa popolare da cocktail come il Little Italy di Audrey Saunders. La ricetta non è attribuita a un singolo bartender.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/savory_cocktail.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "scorpion",
+    "name": "Scorpion",
+    "distillato": [
+      "Rum",
+      "Brandy"
+    ],
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Tropicale",
+      "Fruttato",
+      "Intenso"
+    ],
+    "garnish": "Fetta di arancia + Ciliegia",
+    "ingredienti": [
+      [
+        "50 ml",
+        "Rum"
+      ],
+      [
+        "30 ml",
+        "Brandy"
+      ],
+      [
+        "30 ml",
+        "Succo di arancia"
+      ],
+      [
+        "22,5 ml",
+        "Succo di limone"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di orzata"
+      ]
+    ],
+    "prep": [
+      "Versare tutti gli ingredienti in uno nel milkshake mixer con una paletta di ghiaccio tritato (circa 120 gr)",
+      "Miscelare per circa un minuto finché il ghiaccio non sarà quasi sciolto"
+    ],
+    "storia": "Lo Scorpion è una delle grandi creazioni di Trader Vic — al secolo Victor Bergeron — il fondatore dell'impero tiki che sfidò e rese famoso Don the Beachcomber nell'America degli anni Quaranta e Cinquanta. Bergeron lo ideò negli anni Quaranta ispirandosi a una bevanda hawaiana tradizionale, adattandola alla formula tiki con la sua consueta maestria nel bilanciare distillati, agrumi e sciroppi esotici. Il nome evocativo — Scorpione — era tipico dello stile di Trader Vic, che amava battezzare i suoi drink con nomi capaci di evocare avventura, pericolo e terre lontane. Lo Scorpion è stato codificato nel Trader Vic's Bartender's Guide e rimane uno dei punti fermi del canone tiki classico, spesso servito nella versione 'Scorpion Bowl' per più persone.",
+    "frizzante": false,
+    "bicchiere": "Hurricane",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/scorpion.webp",
+    "varianti": [],
+    "iba": false
+  },
+  {
+    "id": "siesta",
+    "name": "Siesta",
+    "distillato": [
+      "Tequila"
+    ],
+    "categoria": "All day",
+    "abv": "Medio",
+    "sapori": [
+      "Agrumato",
+      "Amaro",
+      "Fresco"
+    ],
+    "garnish": "Fetta di pompelmo rosa",
+    "ingredienti": [
+      [
+        "45 ml",
+        "Tequila"
+      ],
+      [
+        "15 ml",
+        "Campari"
+      ],
+      [
+        "22,5 ml",
+        "Succo di pompelmo rosa"
+      ],
+      [
+        "22,5 ml",
+        "Succo di limone"
+      ],
+      [
+        "15 ml",
+        "Sciroppo di zucchero"
+      ]
+    ],
+    "prep": [
+      "Shakerare tutto con ghiaccio",
+      "Filtrare (double strain) in una coppetta raffreddata"
+    ],
+    "storia": "La Siesta nasce nel 2006 da Katie Stipe, bartender del Flatiron Lounge di New York City, uno dei locali-laboratorio che più ha contribuito alla stagione d'oro della cocktail renaissance newyorkese. Stipe costruì il drink attorno a un'intuizione elegante: il Campari e il pompelmo rosa si accordano naturalmente, entrambi amaro-agrumati, e la tequila — al posto del gin della Paloma tradizionale — porta un carattere terroso e deciso che cementa il tutto. Il nome è un omaggio alla cultura messicana, evocato non solo dalla tequila ma dalla sensazione di dolce torpore meridiano che il drink trasmette. La Siesta è oggi riconosciuta come uno dei cocktail moderni più riusciti degli anni 2000, un esempio di come una struttura sour classica possa essere reinventata con pochi, precisi cambiamenti.",
+    "frizzante": false,
+    "bicchiere": "Coppetta",
+    "img": "https://danielsportelli.github.io/cocktail-legend/immagini/siesta.webp",
+    "varianti": [],
+    "iba": false
+  },
   {
     "id": "little_italy",
     "name": "Little Italy",
