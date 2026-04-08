@@ -3581,7 +3581,9 @@ function _todayKeyLocal() {
 function softReset() {
   // 1. Chiudi tutti i drawer
   if (typeof closeAllDrawers === 'function') closeAllDrawers();
-  // 2. Chiudi bsheet menu
+  // 2. Chiudi filter sheet (tendina pills)
+  if (typeof closeFsheet === 'function') closeFsheet();
+  // 3. Chiudi bsheet menu
   if (typeof window.closeNavMenu === 'function') window.closeNavMenu();
   // 3. Chiudi search bar se aperta
   var fb = document.getElementById('filter-bar');
