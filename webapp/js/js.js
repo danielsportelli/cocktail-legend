@@ -382,6 +382,7 @@ window._isRegistering = false;
           fns.updateProfile(user, { displayName: nome + ' ' + cognome });
           // Salva dati utente in Firestore
           var userDoc = fns.doc(db, 'users', user.uid);
+          var _nowStr = new Date().toISOString().split('T')[0];
           return fns.setDoc(userDoc, {
             nome:        nome,
             cognome:     cognome,
@@ -397,7 +398,8 @@ window._isRegistering = false;
             tc_accepted: true,
             tc_date:     new Date().toISOString(),
             marketing:   marketing,
-            createdAt:   new Date().toISOString()
+            createdAt:   new Date().toISOString(),
+            aiUsage:     { monthlyCount: 0, extraCredits: 0, periodStart: _nowStr }
           }).then(function() {
             // Invia email di verifica
             return fns.sendEmailVerification(user);
