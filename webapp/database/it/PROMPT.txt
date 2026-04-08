@@ -185,7 +185,7 @@ Mentolato, Morbido, Piccante, Potente, Profondo, Raffinato, Ricco, Rinfrescante,
 Tropicale, Vanigliato, Vellutato, Vivace
 
 BICCHIERE (scegli 1):
-Calice, Cocotte, Collins, Coppetta, Flûte, Highball, Hurricane, Tazza con manico, Julep cup, Mug di rame, Shot, Sling, Tumbler basso
+Calice, Cocotte, Collins, Coppetta, Flûte, Highball, Hurricane, Tazza con manico, Julep cup, Tazza di rame, Shot, Sling, Tumbler basso
 
 GARNISH (scegli 1):
 Fetta di ananas, Fetta di ananas + 3 ciliegie, Fetta di ananas + Ciliegia, Fetta di ananas + Noce moscata, Chicchi di caffe, Ciliegia, Cipolle sotto aceto,
