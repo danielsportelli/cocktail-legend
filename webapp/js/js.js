@@ -3620,14 +3620,14 @@ function populateRisGlass(){
       {nome:'Hurricane',uso:'Hurricane, Frozen, Colade, Tiki',ml:'450–600 ml',img:'hurricane'},
       {nome:'Zombie',uso:'Tiki drink',ml:'350–400 ml',img:'zombie'},
       {nome:'Balloon',uso:'Gin tonic',ml:'500–700 ml',img:'balloon'},
-      {nome:'Copper Mug',uso:'Moscow Mule',ml:'500–600 ml',img:'copper_mug'},
+      {nome:'Copper Mug / Tazza Rame',uso:'Moscow Mule',ml:'500–600 ml',img:'copper_mug'},
       {nome:'Julep Cup',uso:'Mint Julep',ml:'300–400 ml',img:'julep_cup'},
       {nome:'Tiki Mug',uso:'Tiki drink',ml:'500–700 ml',img:'tiki_mug'}
     ]},
     {cat:'Bicchieri per drink \"Up\"',color:'#a78bfa',items:[
-      {nome:'Flute',uso:'Drink con spumante',ml:'150–200 ml',img:'flute'},
+      {nome:'Flûte',uso:'Drink con spumante',ml:'150–200 ml',img:'flute'},
       {nome:'Coppa Champagne',uso:'Vari drink in coppetta',ml:'180–250 ml',img:'coppa_champagne'},
-      {nome:'Coppa Nick & Nora',uso:'Drink in coppetta spirits forward',ml:'120–150 ml',img:'nick_and_nora'},
+      {nome:'Nick & Nora',uso:'Drink in coppetta spirits forward',ml:'120–150 ml',img:'nick_and_nora'},
       {nome:'Coppa Martini',uso:'Drink spirits forward',ml:'100–120 ml',img:'coppa_martini'},
       {nome:'Doppia Coppa Martini',uso:'Drink in coppetta con succhi',ml:'180–250 ml',img:'doppia_coppa_martini'},
       {nome:'Sour',uso:'Cocktail con albumina o semplici sour',ml:'200–250 ml',img:'sour'},
@@ -3637,14 +3637,14 @@ function populateRisGlass(){
     ]},
     {cat:'Bicchieri per Shot',color:'#f59e0b',items:[
       {nome:'Shot',uso:'Distillati puri',ml:'30–60 ml',img:'shot'},
-      {nome:'Shooter',uso:'B-52, mini drink',ml:'60–120 ml',img:'shooter'},
-      {nome:'Pousse Café',uso:'Mini cocktail stratificati dopo pasto',ml:'60–120 ml',img:'pousse_cafe'}
+      {nome:'Shooter',uso:'B-52, mini drink',ml:'60–120 ml',img:'shooter'}
     ]},
     {cat:'Bicchieri da Degustazione',color:'#2da89a',items:[
       {nome:'Snifter / Brandy Cup / Napoleon',uso:'Cognac, Armagnac e Brandy',ml:'250–590 ml',img:'snifter'},
       {nome:'Wobble',uso:'Distillati invecchiati',ml:'200–300 ml',img:'wobble'},
       {nome:'Tulip',uso:'Distillati invecchiati',ml:'200–300 ml',img:'tulip'},
       {nome:'Nosing',uso:'Distillati invecchiati',ml:'90–150 ml',img:'nosing'},
+      {nome:'Bicchiere ISO/INAO',uso:'Degustazioni tecniche — analisi olfattiva e visiva',ml:'210–230 ml',img:'iso_inao'},
       {nome:'Grappa',uso:'Grappa, acquaviti',ml:'50–100 ml',img:'grappa'}
     ]},
     {cat:'Bicchieri da Liquori e Amari',color:'#e8701a',items:[
@@ -3654,15 +3654,14 @@ function populateRisGlass(){
       {nome:'Amaro Glass',uso:'Digestivi, amari e liquori erbacei',ml:'80–120 ml',img:'amaro'}
     ]},
     {cat:'Bicchieri per Drink Caldi',color:'#f87171',items:[
-      {nome:'Irish Coffee',uso:'Irish coffee, drink e punch caldi',ml:'200–250 ml',img:'tazza_manico'}
+      {nome:'Tazza con Manico',uso:'Irish coffee, drink e punch caldi',ml:'200–250 ml',img:'tazza_manico'}
     ]},
     {cat:'Bicchieri da Vino',color:'#c084fc',items:[
       {nome:'Flute',uso:'Champagne, Prosecco, Spumante — preserva la bollicina',ml:'150–200 ml',img:'flute'},
       {nome:'Champagne Tulip',uso:'Champagne, Prosecco — compromesso tra degustazione e eleganza',ml:'380–450 ml',img:'champagne_tulip'},
       {nome:'Vino Bianco',uso:'Chardonnay, Sauvignon — conserva la temperatura',ml:'250–360 ml',img:'vino_bianco'},
       {nome:'Vino Rosso',uso:'Bordeaux, Bourgogne — favorisce ossigenazione e tannini',ml:'350–600 ml',img:'vino_rosso'},
-      {nome:'Copita',uso:'Vini fortificati, vini passiti, vini liquorosi',ml:'120–190 ml',img:'copita'},
-      {nome:'Bicchiere ISO/INAO',uso:'Degustazioni tecniche — analisi olfattiva e visiva',ml:'210–230 ml',img:'iso_inao'}
+      {nome:'Copita',uso:'Vini fortificati, vini passiti, vini liquorosi',ml:'120–190 ml',img:'copita'}
     ]}
   ]
   var html='';
