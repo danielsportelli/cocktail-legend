@@ -3672,7 +3672,7 @@ function populateRisGlass(){
       var imgSrc = '../bicchieri/' + g.img + '.webp';
       html+='<div class="vnt-item" style="display:flex;align-items:center;gap:.8rem;padding:.6rem .75rem;">'
         +'<div style="flex-shrink:0;width:52px;height:52px;border-radius:10px;background:var(--bg);border:1px solid rgba(255,255,255,.07);overflow:hidden;display:flex;align-items:center;justify-content:center;">'
-        +'<img src="'+imgSrc+'" alt="'+g.nome+'" style="width:44px;height:44px;object-fit:contain;" loading="lazy" onerror="this.style.display='none'">'
+        +'<img src="'+imgSrc+'" alt="'+g.nome+'" style="width:44px;height:44px;object-fit:contain;" loading="lazy" onerror="this.style.display=\'none\'">'
         +'</div>'
         +'<div style="flex:1;min-width:0;">'
         +'<div class="vnt-item-title" style="font-size:.76rem;line-height:1.3;">'+g.nome+'</div>'
@@ -3683,7 +3683,6 @@ function populateRisGlass(){
     });
   });
   el.innerHTML=html;
-}
 }
 
 // ═══ DRINK COST ═══
