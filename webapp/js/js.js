@@ -3611,67 +3611,69 @@ function populateRisGlass(){
 
   var GLASSES=[
     {cat:'Bicchieri On the Rocks',color:'#3ab8d4',items:[
-      {nome:'Rock / Rock Juice / Granity',uso:'Distillati puri, drink spirits forward',ml:'220–300 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="28" height="44" rx="3"/><line x1="6" y1="14" x2="34" y2="14" stroke-opacity=".3"/><line x1="6" y1="24" x2="34" y2="24" stroke-opacity=".3"/><line x1="6" y1="34" x2="34" y2="34" stroke-opacity=".3"/></svg>'},
-      {nome:'Tumbler Basso / Lowball',uso:'Distillati puri, drink spirits forward',ml:'250–350 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6 L5 50 L35 50 L33 6 Z"/></svg>'},
-      {nome:'Old Fashioned',uso:'Distillati puri, drink spirits forward',ml:'250–350 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5 L5 50 L35 50 L34 5 Z"/><line x1="5" y1="18" x2="35" y2="18" stroke-opacity=".25"/></svg>'},
-      {nome:'Collins',uso:'Long drink sour sodati',ml:'300–350 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 L8 53 L32 53 L30 3 Z"/></svg>'},
-      {nome:'Tumbler Alto / Highball',uso:'Long drink alcolici e analcolici',ml:'350–400 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2 L9 54 L31 54 L29 2 Z"/></svg>'},
-      {nome:'Sling',uso:'Singapore Sling, drink fruttati',ml:'300–350 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L8 54 L32 54 L28 2 Z"/></svg>'},
-      {nome:'Hurricane',uso:'Hurricane, Frozen, Colade, Tiki',ml:'450–600 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2 C10 10 6 20 10 30 C14 40 14 46 12 54 L28 54 C26 46 26 40 30 30 C34 20 30 10 24 2 Z"/></svg>'},
-      {nome:'Zombie',uso:'Tiki drink',ml:'350–400 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 L9 54 L31 54 L27 2 Z"/></svg>'},
-      {nome:'Balloon',uso:'Gin tonic',ml:'500–700 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4 C8 4 5 14 5 22 C5 34 12 42 18 44 L18 50 L14 52 L26 52 L22 50 L22 44 C28 42 35 34 35 22 C35 14 32 4 20 4 Z"/></svg>'},
-      {nome:'Copper Mug',uso:'Moscow Mule',ml:'500–600 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8 L6 48 Q6 52 10 52 L30 52 Q34 52 34 48 L34 8 Q34 4 30 4 L10 4 Q6 4 6 8 Z"/><path d="M34 16 Q40 16 40 22 Q40 28 34 28" stroke-width="1.4"/></svg>'},
-      {nome:'Julep Cup',uso:'Mint Julep',ml:'300–400 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 L8 50 Q8 53 12 53 L28 53 Q32 53 32 50 L32 4 Z"/></svg>'},
-      {nome:'Tiki Mug',uso:'Tiki drink',ml:'500–700 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 C8 3 6 8 6 14 L6 46 Q6 53 12 53 L28 53 Q34 53 34 46 L34 14 C34 8 32 3 28 3 Z"/><circle cx="20" cy="18" r="4" stroke-opacity=".5"/><line x1="15" y1="28" x2="25" y2="28" stroke-opacity=".4"/></svg>'}
+      {nome:'Rock / Rock Juice / Granity',uso:'Distillati puri, drink spirits forward',ml:'220–300 ml',img:'rock'},
+      {nome:'Tumbler Basso / Lowball',uso:'Distillati puri, drink spirits forward',ml:'250–350 ml',img:'tumbler_basso'},
+      {nome:'Old Fashioned',uso:'Distillati puri, drink spirits forward',ml:'250–350 ml',img:'old_fashioned'},
+      {nome:'Collins',uso:'Long drink sour sodati',ml:'300–350 ml',img:'collins'},
+      {nome:'Tumbler Alto / Highball',uso:'Long drink alcolici e analcolici',ml:'350–400 ml',img:'tumbler_alto'},
+      {nome:'Sling',uso:'Singapore Sling, drink fruttati',ml:'300–350 ml',img:'sling'},
+      {nome:'Hurricane',uso:'Hurricane, Frozen, Colade, Tiki',ml:'450–600 ml',img:'hurricane'},
+      {nome:'Zombie',uso:'Tiki drink',ml:'350–400 ml',img:'zombie'},
+      {nome:'Balloon',uso:'Gin tonic',ml:'500–700 ml',img:'balloon'},
+      {nome:'Copper Mug',uso:'Moscow Mule',ml:'500–600 ml',img:'copper_mug'},
+      {nome:'Julep Cup',uso:'Mint Julep',ml:'300–400 ml',img:'julep_cup'},
+      {nome:'Tiki Mug',uso:'Tiki drink',ml:'500–700 ml',img:'tiki_mug'}
     ]},
-    {cat:'Bicchieri per drink "Up"',color:'#a78bfa',items:[
-      {nome:'Flute',uso:'Drink con spumante',ml:'150–200 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2 C11 8 10 16 12 26 C13 32 16 36 18 38 L18 50 L14 52 L26 52 L22 50 L22 38 C24 36 27 32 28 26 C30 16 29 8 25 2 Z"/></svg>'},
-      {nome:'Coppa Champagne',uso:'Vari drink in coppetta',ml:'180–250 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8 Q5 26 20 28 Q35 26 35 8 Z"/><line x1="20" y1="28" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Coppa Nick & Nora',uso:'Drink in coppetta spirits forward',ml:'120–150 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6 Q8 28 20 30 Q32 28 32 6 Z"/><line x1="20" y1="30" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Coppa Martini',uso:'Drink spirits forward',ml:'100–120 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6 L20 28 L36 6 Z"/><line x1="20" y1="28" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Doppia Coppa Martini',uso:'Drink in coppetta con succhi',ml:'180–250 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5 L20 30 L37 5 Z"/><line x1="20" y1="30" x2="20" y2="50"/><line x1="13" y1="50" x2="27" y2="50"/></svg>'},
-      {nome:'Sour',uso:'Cocktail con albumina o semplici sour',ml:'200–250 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5 Q7 28 20 30 Q33 28 33 5 Z"/><line x1="20" y1="30" x2="20" y2="50"/><line x1="13" y1="50" x2="27" y2="50"/></svg>'},
-      {nome:'Coppa Margarita / Sombrero',uso:'Margarita, drink frozen o colade',ml:'250–300 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8 L14 28 L26 28 L38 8 Z"/><line x1="20" y1="28" x2="20" y2="50"/><line x1="13" y1="50" x2="27" y2="50"/></svg>'},
-      {nome:'Poco Grande',uso:'Drink frozen o colade',ml:'300–400 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6 Q2 26 20 30 Q38 26 38 6 Z"/><line x1="20" y1="30" x2="20" y2="50"/><line x1="13" y1="50" x2="27" y2="50"/></svg>'},
-      {nome:'Cocotte in Terracotta',uso:'Canchanchara e drink cubani',ml:'220 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14 Q6 30 8 44 Q8 52 20 52 Q32 52 32 44 Q34 30 32 14 Q28 8 20 8 Q12 8 8 14 Z"/><path d="M14 8 Q14 2 20 2 Q26 2 26 8"/></svg>'}
+    {cat:'Bicchieri per drink \"Up\"',color:'#a78bfa',items:[
+      {nome:'Flute',uso:'Drink con spumante',ml:'150–200 ml',img:'flute'},
+      {nome:'Coppa Champagne',uso:'Vari drink in coppetta',ml:'180–250 ml',img:'coppa_champagne'},
+      {nome:'Coppa Nick & Nora',uso:'Drink in coppetta spirits forward',ml:'120–150 ml',img:'nick_and_nora'},
+      {nome:'Coppa Martini',uso:'Drink spirits forward',ml:'100–120 ml',img:'coppa_martini'},
+      {nome:'Doppia Coppa Martini',uso:'Drink in coppetta con succhi',ml:'180–250 ml',img:'doppia_coppa_martini'},
+      {nome:'Sour',uso:'Cocktail con albumina o semplici sour',ml:'200–250 ml',img:'sour'},
+      {nome:'Coppa Margarita / Sombrero',uso:'Margarita, drink frozen o colade',ml:'250–300 ml',img:'coppa_margarita'},
+      {nome:'Poco Grande',uso:'Drink frozen o colade',ml:'300–400 ml',img:'poco_grande'},
+      {nome:'Cocotte in Terracotta',uso:'Canchanchara e drink cubani',ml:'220 ml',img:'cocotte'}
     ]},
     {cat:'Bicchieri per Shot',color:'#f59e0b',items:[
-      {nome:'Shot',uso:'Distillati puri',ml:'30–60 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6 L10 50 L30 50 L28 6 Z"/></svg>'},
-      {nome:'Shooter',uso:'B-52, mini drink',ml:'60–120 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4 L9 52 L31 52 L29 4 Z"/></svg>'},
-      {nome:'Pousse Café',uso:'Mini cocktail stratificati dopo pasto',ml:'60–120 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 L11 50 L29 50 L27 3 Z"/><line x1="11" y1="22" x2="29" y2="22" stroke-opacity=".3"/><line x1="11" y1="36" x2="29" y2="36" stroke-opacity=".3"/></svg>'}
+      {nome:'Shot',uso:'Distillati puri',ml:'30–60 ml',img:'shot'},
+      {nome:'Shooter',uso:'B-52, mini drink',ml:'60–120 ml',img:'shooter'},
+      {nome:'Pousse Café',uso:'Mini cocktail stratificati dopo pasto',ml:'60–120 ml',img:'pousse_cafe'}
     ]},
     {cat:'Bicchieri da Degustazione',color:'#2da89a',items:[
-      {nome:'Snifter / Brandy Cup / Napoleon',uso:'Cognac, Armagnac e Brandy',ml:'250–590 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 Q6 26 20 30 Q34 26 34 4 Z"/><line x1="20" y1="30" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Wobble',uso:'Distillati invecchiati',ml:'200–300 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8 Q4 20 8 30 Q12 38 20 40 Q28 38 32 30 Q36 20 32 8 Z"/><line x1="20" y1="40" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Tulip',uso:'Distillati invecchiati',ml:'200–300 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 Q8 14 10 24 Q12 32 20 34 Q28 32 30 24 Q32 14 28 4 Z"/><line x1="20" y1="34" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Nosing',uso:'Distillati invecchiati',ml:'90–150 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4 Q9 14 11 22 Q13 30 20 32 Q27 30 29 22 Q31 14 27 4 Z"/><path d="M16 4 Q16 2 20 2 Q24 2 24 4"/><line x1="20" y1="32" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Grappa',uso:'Grappa, acquaviti',ml:'50–100 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 Q13 12 14 20 Q15 26 20 28 Q25 26 26 20 Q27 12 24 4 Z"/><line x1="20" y1="28" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'}
+      {nome:'Snifter / Brandy Cup / Napoleon',uso:'Cognac, Armagnac e Brandy',ml:'250–590 ml',img:'snifter'},
+      {nome:'Wobble',uso:'Distillati invecchiati',ml:'200–300 ml',img:'wobble'},
+      {nome:'Tulip',uso:'Distillati invecchiati',ml:'200–300 ml',img:'tulip'},
+      {nome:'Nosing',uso:'Distillati invecchiati',ml:'90–150 ml',img:'nosing'},
+      {nome:'Grappa',uso:'Grappa, acquaviti',ml:'50–100 ml',img:'grappa'}
     ]},
     {cat:'Bicchieri da Liquori e Amari',color:'#e8701a',items:[
-      {nome:'Cordial',uso:'Liquori dolci e creme',ml:'50–100 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4 Q12 10 13 18 Q14 24 20 26 Q26 24 27 18 Q28 10 25 4 Z"/><line x1="20" y1="26" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Liqueur',uso:'Liquori dolci e creme',ml:'60–120 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3 Q10 12 12 22 Q14 28 20 30 Q26 28 28 22 Q30 12 26 3 Z"/><line x1="20" y1="30" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Pousse Café',uso:'Mini cocktail stratificati dopo pasto',ml:'60–120 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 L11 50 L29 50 L27 3 Z"/><line x1="11" y1="22" x2="29" y2="22" stroke-opacity=".3"/><line x1="11" y1="36" x2="29" y2="36" stroke-opacity=".3"/></svg>'},
-      {nome:'Amaro Glass',uso:'Digestivi, amari e liquori erbacei',ml:'80–120 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5 L9 48 Q9 52 13 52 L27 52 Q31 52 31 48 L30 5 Z"/></svg>'}
+      {nome:'Cordial',uso:'Liquori dolci e creme',ml:'50–100 ml',img:'cordial'},
+      {nome:'Liqueur',uso:'Liquori dolci e creme',ml:'60–120 ml',img:'liqueur'},
+      {nome:'Pousse Café',uso:'Mini cocktail stratificati dopo pasto',ml:'60–120 ml',img:'pousse_cafe'},
+      {nome:'Amaro Glass',uso:'Digestivi, amari e liquori erbacei',ml:'80–120 ml',img:'amaro'}
     ]},
     {cat:'Bicchieri per Drink Caldi',color:'#f87171',items:[
-      {nome:'Irish Coffee',uso:'Irish coffee, drink e punch caldi',ml:'200–250 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6 L8 48 Q8 52 12 52 L28 52 Q32 52 32 48 L30 6 Z"/><path d="M32 16 Q38 16 38 24 Q38 30 32 30" stroke-width="1.4"/></svg>'}
+      {nome:'Irish Coffee',uso:'Irish coffee, drink e punch caldi',ml:'200–250 ml',img:'tazza_manico'}
     ]},
     {cat:'Bicchieri da Vino',color:'#c084fc',items:[
-      {nome:'Flute',uso:'Champagne, Prosecco, Spumante — preserva la bollicina',ml:'150–200 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2 C11 8 10 16 12 26 C13 32 16 36 18 38 L18 50 L14 52 L26 52 L22 50 L22 38 C24 36 27 32 28 26 C30 16 29 8 25 2 Z"/></svg>'},
-      {nome:'Champagne Tulip',uso:'Champagne, Prosecco — compromesso tra degustazione e eleganza',ml:'380–450 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 Q9 14 11 24 Q13 32 20 34 Q27 32 29 24 Q31 14 27 3 Z"/><line x1="20" y1="34" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Vino Bianco',uso:'Chardonnay, Sauvignon — conserva la temperatura',ml:'250–360 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 Q8 16 10 26 Q12 34 20 36 Q28 34 30 26 Q32 16 28 3 Z"/><line x1="20" y1="36" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Vino Rosso',uso:'Bordeaux, Bourgogne — favorisce ossigenazione e tannini',ml:'350–600 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 Q4 18 8 28 Q12 36 20 38 Q28 36 32 28 Q36 18 32 3 Z"/><line x1="20" y1="38" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Copita',uso:'Vini fortificati, vini passiti, vini liquorosi',ml:'120–190 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4 Q9 14 11 22 Q13 30 20 32 Q27 30 29 22 Q31 14 27 4 Z"/><line x1="20" y1="32" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'},
-      {nome:'Bicchiere ISO/INAO',uso:'Degustazioni tecniche — analisi olfattiva e visiva',ml:'210–230 ml',svg:'<svg viewBox="0 0 40 56" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4 Q7 14 9 24 Q11 32 20 34 Q29 32 31 24 Q33 14 29 4 Z"/><path d="M15 34 Q16 38 20 38 Q24 38 25 34"/><line x1="20" y1="38" x2="20" y2="50"/><line x1="14" y1="50" x2="26" y2="50"/></svg>'}
+      {nome:'Flute',uso:'Champagne, Prosecco, Spumante — preserva la bollicina',ml:'150–200 ml',img:'flute'},
+      {nome:'Champagne Tulip',uso:'Champagne, Prosecco — compromesso tra degustazione e eleganza',ml:'380–450 ml',img:'champagne_tulip'},
+      {nome:'Vino Bianco',uso:'Chardonnay, Sauvignon — conserva la temperatura',ml:'250–360 ml',img:'vino_bianco'},
+      {nome:'Vino Rosso',uso:'Bordeaux, Bourgogne — favorisce ossigenazione e tannini',ml:'350–600 ml',img:'vino_rosso'},
+      {nome:'Copita',uso:'Vini fortificati, vini passiti, vini liquorosi',ml:'120–190 ml',img:'copita'},
+      {nome:'Bicchiere ISO/INAO',uso:'Degustazioni tecniche — analisi olfattiva e visiva',ml:'210–230 ml',img:'iso_inao'}
     ]}
-  ];
-
+  ]
   var html='';
   GLASSES.forEach(function(cat){
     html+='<div style="font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:'+cat.color+';margin:.9rem 0 .5rem;">'+cat.cat+'</div>';
     cat.items.forEach(function(g){
+      var imgSrc = '../bicchieri/' + g.img + '.webp';
       html+='<div class="vnt-item" style="display:flex;align-items:center;gap:.8rem;padding:.6rem .75rem;">'
-        +'<div style="flex-shrink:0;width:36px;height:50px;display:flex;align-items:center;justify-content:center;color:'+cat.color+';opacity:.85;">'+g.svg+'</div>'
+        +'<div style="flex-shrink:0;width:52px;height:52px;border-radius:10px;background:var(--bg);border:1px solid rgba(255,255,255,.07);overflow:hidden;display:flex;align-items:center;justify-content:center;">'
+        +'<img src="'+imgSrc+'" alt="'+g.nome+'" style="width:44px;height:44px;object-fit:contain;" loading="lazy" onerror="this.style.display='none'">'
+        +'</div>'
         +'<div style="flex:1;min-width:0;">'
         +'<div class="vnt-item-title" style="font-size:.76rem;line-height:1.3;">'+g.nome+'</div>'
         +'<div class="vnt-item-desc" style="font-size:.67rem;margin-top:.15rem;">'+g.uso+'</div>'
@@ -3681,6 +3683,7 @@ function populateRisGlass(){
     });
   });
   el.innerHTML=html;
+}
 }
 
 // ═══ DRINK COST ═══
