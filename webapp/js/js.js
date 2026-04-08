@@ -3644,7 +3644,7 @@ function populateRisGlass(){
       {nome:'Wobble',uso:'Distillati invecchiati',ml:'200–300 ml',img:'wobble'},
       {nome:'Tulip',uso:'Distillati invecchiati',ml:'200–300 ml',img:'tulip'},
       {nome:'Nosing',uso:'Distillati invecchiati',ml:'90–150 ml',img:'nosing'},
-      {nome:'Bicchiere ISO/INAO',uso:'Degustazioni tecniche — analisi olfattiva e visiva',ml:'210–230 ml',img:'iso_inao'},
+      {nome:'ISO/INAO',uso:'Degustazioni tecniche — analisi olfattiva e visiva',ml:'210–230 ml',img:'iso_inao'},
       {nome:'Grappa',uso:'Grappa, acquaviti',ml:'50–100 ml',img:'grappa'}
     ]},
     {cat:'Bicchieri da Liquori e Amari',color:'#e8701a',items:[
