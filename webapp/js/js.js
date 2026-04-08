@@ -3577,6 +3577,61 @@ function _todayKeyLocal() {
     + String(d.getMonth()+1).padStart(2,'0') + '-'
     + String(d.getDate()).padStart(2,'0');
 }
+// ── SOFT RESET — logo click ─────────────────────────────────────
+function softReset() {
+  // 1. Chiudi tutti i drawer
+  if (typeof closeAllDrawers === 'function') closeAllDrawers();
+  // 2. Chiudi bsheet menu
+  if (typeof window.closeNavMenu === 'function') window.closeNavMenu();
+  // 3. Chiudi search bar se aperta
+  var fb = document.getElementById('filter-bar');
+  var pillsSrchBtn = document.getElementById('pills-srch-btn');
+  var srchInp = document.getElementById('srch');
+  if (fb && !fb.classList.contains('hidden')) {
+    if (typeof _cachedFbH !== 'undefined') _cachedFbH = 0;
+    if (typeof _applyBarsTop === 'function') {
+      var hdr = document.querySelector('.hdr');
+      _applyBarsTop(hdr ? hdr.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73));
+    }
+    fb.classList.add('hidden');
+    if (pillsSrchBtn) pillsSrchBtn.classList.remove('active');
+  }
+  if (srchInp) { srchInp.value = ''; srchInp.blur(); }
+  // 4. Azzera ricerca
+  if (typeof Q !== 'undefined') Q = '';
+  // 5. Azzera filtri attivi
+  if (typeof AF !== 'undefined') {
+    Object.keys(AF).forEach(function(k){ AF[k] = []; });
+  }
+  // 6. Azzera FAV_ONLY
+  if (typeof FAV_ONLY !== 'undefined' && FAV_ONLY) {
+    FAV_ONLY = false;
+    var favBtn = document.getElementById('hdr-fav-btn');
+    var favOnlyBtn = document.getElementById('btn-favonly');
+    if (favBtn) favBtn.classList.remove('active');
+    if (favOnlyBtn) favOnlyBtn.classList.remove('active');
+  }
+  // 7. Azzera sort a default A→Z
+  var srt = document.getElementById('srt');
+  if (srt) srt.value = 'az';
+  // 8. Aggiorna pills e re-render
+  if (typeof updateFilterPills === 'function') updateFilterPills();
+  if (typeof render === 'function') render();
+  // 9. Scroll top fluido — cross-platform inclusa PWA
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Listener logo
+document.addEventListener('DOMContentLoaded', function() {
+  var logo = document.getElementById('hdr-logo');
+  if (logo) {
+    logo.addEventListener('click', function(e) {
+      e.preventDefault();
+      softReset();
+    });
+  }
+});
+
 function updateQuizBadge() {
   // Nel gap 00:00-00:10 nessuna notifica — la domanda non è ancora disponibile
   var now = new Date();
@@ -4931,7 +4986,7 @@ function showPremiumToast(msg) {
 
   var toast = document.createElement('div');
   toast.id = 'premium-toast';
-  toast.style.cssText = 'position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);z-index:99999;background:#1e293b;border:1px solid rgba(245,158,11,0.4);border-radius:12px;padding:.65rem 1.1rem;display:flex;align-items:center;gap:.6rem;box-shadow:0 8px 30px rgba(0,0,0,0.4);animation:toastIn .25s ease;white-space:nowrap;';
+  toast.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;background:#0f172a;border:1px solid rgba(245,158,11,0.6);border-radius:16px;padding:.9rem 1.4rem;display:flex;align-items:center;gap:.7rem;box-shadow:0 0 0 1px rgba(245,158,11,0.15),0 20px 60px rgba(0,0,0,0.8);animation:toastIn .25s ease;white-space:nowrap;';
   toast.innerHTML = `
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
     <span style="font-size:.82rem;font-weight:600;color:#f1f5f9;">${msg}</span>
@@ -4964,7 +5019,7 @@ function requirePremium(featureName) {
 // Aggiungi stile animazione toast
 (function() {
   var s = document.createElement('style');
-  s.textContent = '@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}';
+  s.textContent = '@keyframes toastIn{from{opacity:0;transform:translate(-50%,-50%) scale(.92)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}';
   document.head.appendChild(s);
 })();
 
