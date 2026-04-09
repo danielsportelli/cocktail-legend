@@ -4800,19 +4800,63 @@ function closeResetPasswordModal() {
           .then(function() {
             window._resetOobCode = null;
             var resetForm = document.getElementById('form-reset-confirm');
-            if (resetForm) {
+            if (!resetForm) return;
+
+            var WEBAPP_URL = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html';
+            var isPWA     = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+            var ua        = navigator.userAgent || '';
+            var isWebView = !isPWA && (
+              /wv/.test(ua) ||
+              /FBAN|FBAV|Instagram|GSA/.test(ua) ||
+              (/Android/.test(ua) && !/Chrome\/[.0-9]*/.test(ua)) ||
+              (/iPhone|iPad/.test(ua) && !/Safari\//.test(ua))
+            );
+
+            var iconHtml =
+              '<div style="width:56px;height:56px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">' +
+                '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' +
+              '</div>' +
+              '<div style="font-size:1.1rem;font-weight:800;color:#f1f5f9;margin-bottom:.5rem;">Password aggiornata!</div>';
+
+            if (isPWA) {
+              // Siamo già nella PWA — vai al login dopo 2 secondi
               resetForm.innerHTML =
                 '<div style="text-align:center;padding:1.5rem 0;">' +
-                  '<div style="width:56px;height:56px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">' +
-                    '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' +
-                  '</div>' +
-                  '<div style="font-size:1.1rem;font-weight:800;color:#f1f5f9;margin-bottom:.5rem;">Password aggiornata!</div>' +
+                  iconHtml +
+                  '<p style="font-size:.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1.25rem;">Perfetto! Ora puoi accedere<br>con la tua nuova password.</p>' +
+                '</div>';
+              setTimeout(function() {
+                if (typeof switchAuthTab === 'function') switchAuthTab('login');
+                var loginErr = document.getElementById('login-err');
+                if (loginErr) {
+                  loginErr.style.color = '#4ade80';
+                  loginErr.textContent = '✓ Password aggiornata! Accedi con la nuova password.';
+                  setTimeout(function() { loginErr.style.color = ''; loginErr.textContent = ''; }, 5000);
+                }
+              }, 2000);
+
+            } else if (isWebView) {
+              // Browser interno app email — non può aprire la PWA, messaggio manuale
+              resetForm.innerHTML =
+                '<div style="text-align:center;padding:1.5rem 0;">' +
+                  iconHtml +
                   '<p style="font-size:.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1.25rem;">Chiudi questa schermata e torna su<br><strong style=\"color:#f1f5f9\">Cocktail Legend</strong> per accedere<br>con la tua nuova password.</p>' +
                   '<div style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.55rem 1rem;font-size:.75rem;color:#64748b;">' +
                     '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
                     ' Puoi chiudere questa schermata' +
                   '</div>' +
                 '</div>';
+
+            } else {
+              // Browser normale — redirect diretto alla webapp login
+              resetForm.innerHTML =
+                '<div style="text-align:center;padding:1.5rem 0;">' +
+                  iconHtml +
+                  '<p style="font-size:.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1rem;">Ora puoi accedere con la tua nuova password.</p>' +
+                '</div>';
+              setTimeout(function() {
+                window.location.href = WEBAPP_URL;
+              }, 2000);
             }
           })
           .catch(function(e) {
