@@ -344,10 +344,12 @@ body{
 
   // ── RESET PASSWORD → redirect immediato alla webapp con tutti i params ──
   if (mode === 'resetPassword') {
-    // Passa tutti i parametri originali alla webapp così js.js li intercetta normalmente
+    var isPWA = window.matchMedia('(display-mode: standalone)').matches
+             || window.navigator.standalone === true;
     var dest = WEBAPP_URL + '?' + params.toString();
+    if (isPWA) dest += '&pwreset=pwa';
     window.location.replace(dest);
-    return; // non eseguire altro
+    return;
   }
 
   // ── VERIFICA EMAIL ──

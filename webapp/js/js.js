@@ -4802,15 +4802,12 @@ function closeResetPasswordModal() {
             var resetForm = document.getElementById('form-reset-confirm');
             if (!resetForm) return;
 
+            // Legge il parametro aggiunto da auth-action.html
+            // pwreset=pwa → link aperto dalla PWA installata → vai al login
+            // assente     → link aperto da WebView/browser → chiudi e riapri
+            var urlParams  = new URLSearchParams(window.location.search);
+            var fromPWA    = urlParams.get('pwreset') === 'pwa';
             var WEBAPP_URL = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html';
-            var isPWA     = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-            var ua        = navigator.userAgent || '';
-            var isWebView = !isPWA && (
-              /wv/.test(ua) ||
-              /FBAN|FBAV|Instagram|GSA/.test(ua) ||
-              (/Android/.test(ua) && !/Chrome\/[.0-9]*/.test(ua)) ||
-              (/iPhone|iPad/.test(ua) && !/Safari\//.test(ua))
-            );
 
             var iconHtml =
               '<div style="width:56px;height:56px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">' +
@@ -4818,8 +4815,8 @@ function closeResetPasswordModal() {
               '</div>' +
               '<div style="font-size:1.1rem;font-weight:800;color:#f1f5f9;margin-bottom:.5rem;">Password aggiornata!</div>';
 
-            if (isPWA) {
-              // Siamo già nella PWA — vai al login dopo 2 secondi
+            if (fromPWA) {
+              // Siamo nella PWA — mostra conferma e vai al login
               resetForm.innerHTML =
                 '<div style="text-align:center;padding:1.5rem 0;">' +
                   iconHtml +
@@ -4835,8 +4832,8 @@ function closeResetPasswordModal() {
                 }
               }, 2000);
 
-            } else if (isWebView) {
-              // Browser interno app email — non può aprire la PWA, messaggio manuale
+            } else {
+              // WebView o browser normale — chiudi e riapri manualmente
               resetForm.innerHTML =
                 '<div style="text-align:center;padding:1.5rem 0;">' +
                   iconHtml +
@@ -4846,17 +4843,6 @@ function closeResetPasswordModal() {
                     ' Puoi chiudere questa schermata' +
                   '</div>' +
                 '</div>';
-
-            } else {
-              // Browser normale — redirect diretto alla webapp login
-              resetForm.innerHTML =
-                '<div style="text-align:center;padding:1.5rem 0;">' +
-                  iconHtml +
-                  '<p style="font-size:.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1rem;">Ora puoi accedere con la tua nuova password.</p>' +
-                '</div>';
-              setTimeout(function() {
-                window.location.href = WEBAPP_URL;
-              }, 2000);
             }
           })
           .catch(function(e) {
