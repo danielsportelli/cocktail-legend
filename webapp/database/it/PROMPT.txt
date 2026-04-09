@@ -258,16 +258,22 @@ GRADAZIONI DI RIFERIMENTO (valori medi da usare):
 - Campari / Aperitivo rosso / Aperitivo bianco: 25%
 - Cointreau / Grand Marnier: 40%
 - Galliano: 42%
+- Chambord: 16,5%
 - Chartreuse verde: 55%
 - Chartreuse gialla: 43%
+- Cherry heering: 24%
 - Maraschino: 32%
 - Orange curaçao / Blue curaçao / Triple sec generico: 30%
-- Liquori alla frutta generici (crema di banana, liquore al lampone, ecc.): 25%
-- Crème de cassis / Crème de mûre: 20%
+- Liquori alla frutta generici (liquore al lampone, liquore alla pesca ecc.): 25%
+- Crème da banane: 20%
+- Crème de cassis: 20%
+- Crème de mûre: 20%
 - Crème de violette: 16%
-- Crème de menthe (bianca o verde): 25%
+- Crème de menthe (bianca o verde): 24%
+- Crème de cacao (bianca o marrone): 20%
 - Kahlúa / Liquore al caffè: 20%
 - Disaronno: 28%
+- St-Germain: 20%
 - Fernet / Amaro ad alta gradazione (Fernet-Branca, Amaro Montenegro): 39%
 - Cynar: 17%
 - Dom Benedictine: 40%

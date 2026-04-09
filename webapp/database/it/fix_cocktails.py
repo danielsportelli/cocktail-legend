@@ -67,7 +67,7 @@ ABV_REF = {
     "crème de cassis": 20, "creme de cassis": 20,
     "crème de mûre": 20, "creme de mure": 20,
     "crème de violette": 16, "creme de violette": 16,
-    "crème de menthe": 25, "creme de menthe": 25,
+    "crème de menthe": 24, "creme de menthe": 24,
     "kahlúa": 20, "kahlu": 20, "liquore al caffè": 20,
     "amaretto": 28,
     "baileys": 17, "crema di whiskey": 17,
@@ -139,8 +139,8 @@ ABV_SPECIFIC = {
     "crème de cassis": 20, "creme de cassis": 20,
     "crème de mûre": 20, "creme de mure": 20,
     "crème de violette": 16, "creme de violette": 16,
-    "crème de menthe bianca": 25, "crème de menthe verde": 25,
-    "creme de menthe bianca": 25, "creme de menthe verde": 25,
+    "crème de menthe bianca": 24, "crème de menthe verde": 24,
+    "creme de menthe bianca": 24, "creme de menthe verde": 24,
     "kahlúa": 20, "liquore al caffè": 20,
     "amaretto": 28, "liquore all'amaretto": 28,
     "baileys": 17, "crema di whiskey": 17,
@@ -169,6 +169,13 @@ ABV_SPECIFIC = {
     "poire williams": 40,
     # Amaretti / liquori italiani comuni
     "disaronno": 28, "disaronno originale": 28,
+    # Liquori francesi e altri
+    "chambord": 16.5,
+    "crème de banane": 20, "creme de banane": 20,
+    "crème de cacao": 20, "creme de cacao": 20,
+    "crème de cacao bianca": 20, "crème de cacao marrone": 20,
+    "creme de cacao bianca": 20, "creme de cacao marrone": 20,
+    "st-germain": 20, "st germain": 20, "liquore al sambuco": 20,
 }
 def get_abv(ingredient_name):
     name = ingredient_name.lower().strip()

@@ -131,7 +131,7 @@
   "garnish": "Rondelle di cetriolo",
   "ingredienti": [
     ["45 ml", "Gin"],
-    ["15 ml", "Liquore ai fiori di sambuco"],
+    ["15 ml", "St-Germain"],
     ["22,5 ml", "Succo di limone"],
     ["15 ml", "Sciroppo di zucchero"],
     ["3 rondelle", "Cetriolo"],
@@ -895,7 +895,7 @@
   "garnish": "Rondella di lime",
   "ingredienti": [
     ["45 ml", "Gin"],
-    ["15 ml", "Liquore ai fiori di sambuco"],
+    ["15 ml", "St-Germain"],
     ["Top", "Acqua tonica"]
   ],
   "prep": [
@@ -1288,7 +1288,7 @@
     ["22,5 ml", "Gin"],
     ["22,5 ml", "Whisky scotch"],
     ["22,5 ml", "Rum"],
-    ["22,5 ml", "Liquore al cacao scuro"],
+    ["22,5 ml", "Crème de cacao marrone"],
     ["22,5 ml", "Panna fresca"]
   ],
   "prep": [
@@ -1923,7 +1923,7 @@
   "ingredienti": [
     ["45 ml", "Whiskey bourbon"],
     ["30 ml", "Brancamenta"],
-    ["15 ml", "Liquore alla menta bianca"]
+    ["15 ml", "Crème de menthe bianca"]
   ],
   "prep": [
     "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
@@ -2548,7 +2548,7 @@
   "garnish": "Nessuna",
   "ingredienti": [
     ["30 ml", "Rum"],
-    ["15 ml", "Liquore galliano"],
+    ["15 ml", "Galliano"],
     ["15 ml", "Triple sec"],
     ["15 ml", "Succo di lime"]
   ],
@@ -2774,7 +2774,7 @@
   "garnish": "Fetta di ananas + Ciliegia",
   "ingredienti": [
     ["30 ml", "Gin"],
-    ["15 ml", "Liquore alla ciliegia"],
+    ["15 ml", "Cherry heering"],
     ["7,5 ml", "Triple sec"],
     ["7,5 ml", "Dom bénédictine"],
     ["60 ml", "Succo di ananas"],
@@ -2854,7 +2854,7 @@
     ["50 ml", "Vodka alla vaniglia"],
     ["22,5 ml", "Succo di lime"],
     ["15 ml", "Miele"],
-    ["15 ml", "Liquore ai fiori di sambuco"],
+    ["15 ml", "St-Germain"],
     ["2 dash", "Tabasco"]
   ],
   "prep": [
@@ -2904,7 +2904,7 @@
   "garnish": "Ciuffo di menta",
   "ingredienti": [
     ["50 ml", "Cognac"],
-    ["25 ml", "Liquore alla menta bianca"]
+    ["25 ml", "Crème de menthe bianca"]
   ],
   "prep": [
     "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
@@ -3305,13 +3305,13 @@
   "name": "Remember The Maine",
   "distillato": ["Rye whiskey"],
   "categoria": "Pre dinner",
-  "abv": "Molto alto",
+  "abv": "Alto",
   "sapori": ["Intenso", "Speziato", "Fruttato"],
   "garnish": "Ciliegia",
   "ingredienti": [
     ["60 ml", "Whiskey rye"],
     ["22,5 ml", "Vermouth rosso"],
-    ["15 ml", "Liquore alla ciliegia"],
+    ["15 ml", "Cherry heering"],
     ["7,5 ml", "Assenzio"]
   ],
   "prep": [
@@ -3574,7 +3574,7 @@
   "ingredienti": [
     ["45 ml", "Gin"],
     ["15 ml", "Lillet blanc"],
-    ["15 ml", "Liquore al cacao bianco"],
+    ["15 ml", "Crème de cacao bianca"],
     ["15 ml", "Succo di limone"]
   ],
   "prep": [
@@ -3776,7 +3776,7 @@
   "garnish": "Noce moscata",
   "ingredienti": [
     ["30 ml", "Cognac"],
-    ["30 ml", "Liquore al cacao scuro"],
+    ["30 ml", "Crème de cacao marrone"],
     ["30 ml", "Panna fresca"]
   ],
   "prep": [
@@ -3903,7 +3903,7 @@
     ["45 ml", "Gin"],
     ["15 ml", "Maraschino"],
     ["15 ml", "Succo di limone"],
-    ["7,5 ml", "Liquore alla violetta"]
+    ["7,5 ml", "Crème de violette"]
   ],
   "prep": [
     "Shakerare tutto con ghiaccio",
@@ -4282,7 +4282,7 @@
   "garnish": "Fetta di ananas + Ciliegia",
   "ingredienti": [
     ["45 ml", "Rum scuro"],
-    ["15 ml", "Liquore galliano"],
+    ["15 ml", "Galliano"],
     ["60 ml", "Succo di ananas"],
     ["15 ml", "Succo di lime"],
     ["Top", "Prosecco"]
@@ -4428,14 +4428,14 @@
   "name": "Blood & Sand",
   "distillato": ["Scotch whisky"],
   "categoria": "Pre dinner",
-  "abv": "Medio",
+  "abv": "Medio basso",
   "sapori": ["Fruttato", "Morbido", "Avvolgente"],
   "garnish": "Zest di arancia",
   "ingredienti": [
     ["25 ml", "Whisky scotch"],
     ["25 ml", "Vermouth rosso"],
     ["25 ml", "Succo di arancia"],
-    ["25 ml", "Liquore alla ciliegia"]
+    ["25 ml", "Cherry heering"]
   ],
   "prep": [
     "Shakerare tutto con ghiaccio",
@@ -4615,7 +4615,7 @@
     ["50 ml", "Gin"],
     ["22,5 ml", "Succo di limone"],
     ["15 ml", "Sciroppo di zucchero"],
-    ["15 ml", "Liquore alle more"]
+    ["15 ml", "Crème de mûre"]
   ],
   "prep": [
     "Shakerare tutto con ghiaccio (tranne il liquore alle more)",
@@ -5387,7 +5387,7 @@
   "garnish": "Fiore edibile",
   "ingredienti": [
     ["45 ml", "Gin"],
-    ["15 ml", "Liquore ai fiori di sambuco"],
+    ["15 ml", "St-Germain"],
     ["15 ml", "Succo di pompelmo rosa"],
     ["22,5 ml", "Succo di lime"],
     ["15 ml", "Sciroppo di zucchero"],
@@ -5792,8 +5792,8 @@
   "sapori": ["Cremoso", "Vanigliato", "Avvolgente"],
   "garnish": "Cacao",
   "ingredienti": [
-    ["30 ml", "Liquore galliano"],
-    ["30 ml", "Liquore al cacao bianco"],
+    ["30 ml", "Galliano"],
+    ["30 ml", "Crème de cacao bianca"],
     ["30 ml", "Panna fresca"]
   ],
   "prep": [
@@ -5817,7 +5817,7 @@
   "sapori": ["Agrumato", "Cremoso", "Avvolgente"],
   "garnish": "Zest di arancia",
   "ingredienti": [
-    ["25 ml", "Liquore galliano"],
+    ["25 ml", "Galliano"],
     ["25 ml", "Triple sec"],
     ["25 ml", "Succo di arancia"],
     ["10 ml", "Panna fresca"]
@@ -5868,8 +5868,8 @@
   "sapori": ["Cremoso", "Mentolato", "Dolce"],
   "garnish": "Cacao",
   "ingredienti": [
-    ["30 ml", "Liquore alla menta verde"],
-    ["30 ml", "Liquore al cacao bianco"],
+    ["30 ml", "Crème de menthe verde"],
+    ["30 ml", "Crème de cacao bianca"],
     ["30 ml", "Panna fresca"]
   ],
   "prep": [
@@ -5920,7 +5920,7 @@
   "ingredienti": [
     ["50 ml", "Vodka"],
     ["120 ml", "Succo di arancia"],
-    ["15 ml", "Liquore galliano"]
+    ["15 ml", "Galliano"]
   ],
   "prep": [
     "Versare la vodka e il succo d'arancia in un bicchiere highball riempito di ghiaccio",
