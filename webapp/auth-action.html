@@ -13,223 +13,120 @@
   --bg:#0a0f1e;--surf:#1e293b;--surf2:#334155;
   --txt:#f1f5f9;--txt2:#cbd5e1;--brd:rgba(255,255,255,.08);--dim:#64748b;
 }
-html,body{
-  min-height:100%;
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--txt);
-  -webkit-font-smoothing:antialiased;
-}
-body{
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  padding:2rem 1.25rem 3rem;
-  padding-top:max(2rem, env(safe-area-inset-top));
-}
+html,body{min-height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;}
+body{display:flex;align-items:flex-start;justify-content:center;padding:2rem 1.25rem 3rem;padding-top:max(2rem,env(safe-area-inset-top));}
 
-/* ── LOADING (mostrato mentre legge il mode) ── */
-.loading{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  min-height:60vh;
-  gap:1rem;
-  width:100%;
-}
-.loading-spinner{
-  width:36px;height:36px;
-  border:3px solid rgba(255,255,255,.08);
-  border-top-color:var(--amber);
-  border-radius:50%;
-  animation:spin .7s linear infinite;
-}
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1rem;width:100%;}
+.loading-spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.08);border-top-color:var(--amber);border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .loading-txt{font-size:.82rem;color:var(--dim);}
 
-/* ── WRAP CONTENUTO ── */
-.wrap{
-  width:100%;
-  max-width:420px;
-  display:flex;
-  flex-direction:column;
-  display:none; /* nascosto finché JS non decide cosa mostrare */
-}
+.wrap{width:100%;max-width:420px;display:none;flex-direction:column;}
 
-/* ── LOGO ── */
-.logo{
-  font-size:1rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--amber);
-  display:inline-block;
-  padding:.28rem .65rem;
-  border-radius:8px;
-  background:
-    linear-gradient(#0a0f1e,#0a0f1e) padding-box,
-    conic-gradient(from 0deg,var(--amber) 0deg,var(--blue-l) 180deg,var(--amber) 360deg) border-box;
-  border:2px solid transparent;
-  margin-bottom:2rem;
-  align-self:center;
-}
+.logo{font-size:1rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);display:inline-block;padding:.28rem .65rem;border-radius:8px;background:linear-gradient(#0a0f1e,#0a0f1e) padding-box,conic-gradient(from 0deg,var(--amber) 0deg,var(--blue-l) 180deg,var(--amber) 360deg) border-box;border:2px solid transparent;margin-bottom:2rem;align-self:center;}
 
-/* ── SEZIONE CONFERMA ── */
-.confirm-section{
-  text-align:center;
-  margin-bottom:2rem;
-}
-.confirm-icon{
-  width:64px;height:64px;
-  background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.08));
-  border:1px solid rgba(34,197,94,.35);
-  border-radius:18px;
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 1.1rem;
-}
-.confirm-title{
-  font-size:1.45rem;font-weight:900;letter-spacing:-.03em;
-  color:var(--txt);margin-bottom:.4rem;
-}
-.confirm-sub{
-  font-size:.88rem;color:var(--txt2);line-height:1.55;
-}
+/* ── RESET FORM ── */
+.reset-box{background:var(--surf);border:1px solid var(--brd);border-radius:18px;padding:1.75rem 1.5rem;}
+.reset-title{font-size:1.2rem;font-weight:800;color:var(--txt);margin-bottom:.3rem;letter-spacing:-.02em;}
+.reset-sub{font-size:.82rem;color:var(--txt2);line-height:1.5;margin-bottom:1.4rem;}
+.reset-input-wrap{position:relative;margin-bottom:.9rem;}
+.reset-input{width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.75rem 2.8rem .75rem .9rem;font-size:.9rem;font-family:'Inter',sans-serif;color:var(--txt);outline:none;transition:border-color .2s,box-shadow .2s;}
+.reset-input:focus{border-color:rgba(37,99,235,.5);box-shadow:0 0 0 3px rgba(37,99,235,.1);}
+.reset-eye{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--dim);cursor:pointer;padding:10px;font-size:1.1rem;line-height:1;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.reset-btn{width:100%;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:10px;padding:.78rem;font-size:.9rem;font-weight:800;font-family:'Inter',sans-serif;cursor:pointer;letter-spacing:.03em;transition:all .2s;box-shadow:0 4px 18px rgba(245,158,11,.3);}
+.reset-btn:disabled{opacity:.6;cursor:not-allowed;}
+.reset-btn:not(:disabled):active{transform:scale(.98);}
+.reset-err{font-size:.75rem;min-height:1.1rem;margin-top:.5rem;color:#f87171;}
+.reset-err.ok{color:#4ade80;}
 
-/* ── SEZIONE INSTALLA ── */
-.install-section{
-  background:var(--surf);
-  border:1px solid var(--brd);
-  border-radius:18px;
-  padding:1.4rem 1.25rem 1.5rem;
-  margin-bottom:1.25rem;
-}
-.install-title{
-  font-size:1rem;font-weight:800;letter-spacing:-.01em;
-  color:var(--txt);margin-bottom:.25rem;line-height:1.3;
-}
-.install-sub{
-  font-size:.78rem;color:var(--dim);
-  margin-bottom:1.1rem;line-height:1.4;
-}
+/* ── STATO FINALE ── */
+.done-section{display:none;text-align:center;padding:1rem 0;animation:fadeUp .35s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.done-icon{width:64px;height:64px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
+.done-title{font-size:1.2rem;font-weight:800;color:var(--txt);margin-bottom:.5rem;}
+.done-msg{font-size:.85rem;color:var(--txt2);line-height:1.6;margin-bottom:1.4rem;}
+.btn-accedi{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:1rem 1.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:13px;font-family:'Inter',sans-serif;font-size:1rem;font-weight:800;letter-spacing:.01em;cursor:pointer;text-decoration:none;box-shadow:0 6px 22px rgba(245,158,11,.35);transition:all .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.btn-accedi:active{transform:scale(.98);}
+.done-note{font-size:.72rem;color:var(--dim);margin-top:.75rem;line-height:1.5;}
 
-/* Toggle iOS / Android */
-.os-toggle{
-  display:flex;
-  background:var(--bg);
-  border-radius:10px;
-  padding:3px;
-  margin-bottom:1.25rem;
-  gap:3px;
-}
-.os-btn{
-  flex:1;padding:.48rem .5rem;
-  border:none;border-radius:8px;
-  font-family:inherit;font-size:.8rem;font-weight:700;
-  cursor:pointer;transition:all .2s;
-  background:transparent;color:var(--dim);
-  display:flex;align-items:center;justify-content:center;gap:.35rem;
-  -webkit-tap-highlight-color:transparent;
-}
+/* ── VERIFICA EMAIL ── */
+.confirm-section{text-align:center;margin-bottom:2rem;}
+.confirm-icon{width:64px;height:64px;background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.08));border:1px solid rgba(34,197,94,.35);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;}
+.confirm-title{font-size:1.45rem;font-weight:900;letter-spacing:-.03em;color:var(--txt);margin-bottom:.4rem;}
+.confirm-sub{font-size:.88rem;color:var(--txt2);line-height:1.55;}
+.install-section{background:var(--surf);border:1px solid var(--brd);border-radius:18px;padding:1.4rem 1.25rem 1.5rem;margin-bottom:1.25rem;}
+.install-title{font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.25rem;line-height:1.3;}
+.install-sub{font-size:.78rem;color:var(--dim);margin-bottom:1.1rem;line-height:1.4;}
+.os-toggle{display:flex;background:var(--bg);border-radius:10px;padding:3px;margin-bottom:1.25rem;gap:3px;}
+.os-btn{flex:1;padding:.48rem .5rem;border:none;border-radius:8px;font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;background:transparent;color:var(--dim);display:flex;align-items:center;justify-content:center;gap:.35rem;-webkit-tap-highlight-color:transparent;}
 .os-btn.active{background:var(--surf2);color:var(--txt);}
-
-/* Steps */
 .steps{display:flex;flex-direction:column;gap:.75rem;}
 .step{display:flex;align-items:flex-start;gap:.75rem;}
-.step-num{
-  flex-shrink:0;width:24px;height:24px;
-  background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.3);
-  border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.65rem;font-weight:800;color:var(--blue-l);margin-top:.05rem;
-}
+.step-num{flex-shrink:0;width:24px;height:24px;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--blue-l);margin-top:.05rem;}
 .step-text{font-size:.82rem;color:var(--txt2);line-height:1.55;flex:1;}
 .step-text strong{color:var(--txt);font-weight:700;}
-.step-text .tag{
-  display:inline-flex;align-items:center;gap:.2rem;
-  background:var(--surf2);border:1px solid var(--brd);
-  border-radius:6px;padding:.1rem .4rem;
-  font-size:.72rem;font-weight:700;color:var(--txt);white-space:nowrap;
-}
-
-.os-panel{display:none;}
-.os-panel.active{display:block;}
-
-/* Bottone OK */
-.btn-ok{
-  width:100%;padding:.85rem 1rem;
-  background:var(--surf2);border:1px solid rgba(255,255,255,.12);
-  border-radius:12px;color:var(--txt);
-  font-family:inherit;font-size:.88rem;font-weight:700;
-  cursor:pointer;margin-top:1.25rem;
-  display:flex;align-items:center;justify-content:center;gap:.5rem;
-  transition:background .2s;
-  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
-}
+.step-text .tag{display:inline-flex;align-items:center;gap:.2rem;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:.1rem .4rem;font-size:.72rem;font-weight:700;color:var(--txt);white-space:nowrap;}
+.os-panel{display:none;}.os-panel.active{display:block;}
+.btn-ok{width:100%;padding:.85rem 1rem;background:var(--surf2);border:1px solid rgba(255,255,255,.12);border-radius:12px;color:var(--txt);font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;margin-top:1.25rem;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:background .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
 .btn-ok:active{background:var(--surf);}
-
-/* Sezione accedi */
-.access-section{
-  display:none;flex-direction:column;
-  align-items:center;text-align:center;gap:1rem;
-  animation:fadeUp .35s ease both;
-}
+.access-section{display:none;flex-direction:column;align-items:center;text-align:center;gap:1rem;animation:fadeUp .35s ease both;}
 .access-section.visible{display:flex;}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(14px);}
-  to{opacity:1;transform:translateY(0);}
-}
 .access-msg{font-size:.82rem;color:var(--txt2);line-height:1.5;}
-.btn-accedi{
-  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-  width:100%;padding:1rem 1.5rem;
-  background:linear-gradient(135deg,var(--amber),#d97706);
-  color:#0a0f1e;border:none;border-radius:13px;
-  font-family:inherit;font-size:1rem;font-weight:800;
-  letter-spacing:.01em;cursor:pointer;text-decoration:none;
-  box-shadow:0 6px 22px rgba(245,158,11,.35);
-  transition:all .2s;
-  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
-}
-.btn-accedi:active{transform:scale(.98);box-shadow:0 3px 12px rgba(245,158,11,.25);}
 .access-note{font-size:.7rem;color:var(--dim);line-height:1.5;}
 
-/* ── SEZIONE ERRORE ── */
-.error-section{
-  text-align:center;display:none;
-}
-.error-icon{
-  width:64px;height:64px;
-  background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);
-  border-radius:18px;display:flex;align-items:center;justify-content:center;
-  margin:0 auto 1.1rem;
-}
+/* ── ERRORE ── */
+.error-section{text-align:center;display:none;}
+.error-icon{width:64px;height:64px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;}
 .error-title{font-size:1.2rem;font-weight:800;color:#f87171;margin-bottom:.4rem;}
 .error-sub{font-size:.85rem;color:var(--txt2);line-height:1.55;margin-bottom:1.5rem;}
-.btn-error{
-  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-  width:100%;padding:.9rem 1.5rem;
-  background:var(--surf2);border:1px solid var(--brd);
-  color:var(--txt);border-radius:13px;
-  font-family:inherit;font-size:.9rem;font-weight:700;
-  cursor:pointer;text-decoration:none;transition:background .2s;
-}
+.btn-error{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.9rem 1.5rem;background:var(--surf2);border:1px solid var(--brd);color:var(--txt);border-radius:13px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .2s;}
 .btn-error:active{background:var(--surf);}
 </style>
 </head>
 <body>
 
-<!-- Spinner iniziale -->
 <div class="loading" id="loading">
   <div class="loading-spinner"></div>
   <div class="loading-txt">Verifica in corso…</div>
 </div>
 
-<!-- Contenuto principale -->
 <div class="wrap" id="main-wrap">
-
-  <!-- Logo -->
   <div class="logo">Cocktail Legend</div>
+
+  <!-- ── RESET PASSWORD ── -->
+  <div id="section-reset" style="display:none;">
+    <div class="reset-box">
+      <div class="reset-title">Nuova password</div>
+      <div class="reset-sub">Scegli una password sicura per il tuo account.</div>
+      <div class="reset-input-wrap">
+        <input class="reset-input" type="password" id="reset-pwd1" placeholder="Nuova password" autocomplete="new-password">
+        <button class="reset-eye" id="reset-eye1" type="button">&#128065;</button>
+      </div>
+      <div class="reset-input-wrap">
+        <input class="reset-input" type="password" id="reset-pwd2" placeholder="Conferma password" autocomplete="new-password">
+        <button class="reset-eye" id="reset-eye2" type="button">&#128065;</button>
+      </div>
+      <button class="reset-btn" id="reset-btn">Salva nuova password →</button>
+      <div class="reset-err" id="reset-err"></div>
+    </div>
+
+    <!-- Stato finale — appare dopo il salvataggio -->
+    <div class="done-section" id="done-section">
+      <div class="done-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="done-title">Password aggiornata!</div>
+      <div class="done-msg" id="done-msg"></div>
+      <a class="btn-accedi" id="done-btn" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html" style="display:none;">
+        Accedi a Cocktail Legend
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <div class="done-note" id="done-note"></div>
+    </div>
+  </div>
 
   <!-- ── VERIFICA EMAIL ── -->
   <div id="section-verify" style="display:none;">
-
     <div class="confirm-section">
       <div class="confirm-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -237,11 +134,9 @@ body{
       <div class="confirm-title">Email verificata!</div>
       <div class="confirm-sub">Il tuo account Cocktail Legend è attivo.<br>Prima di accedere, leggi come installare l'app.</div>
     </div>
-
     <div class="install-section" id="install-section">
       <div class="install-title">📲 Salva l'app sul tuo smartphone</div>
       <div class="install-sub">Che tipo di smartphone hai?</div>
-
       <div class="os-toggle">
         <button class="os-btn active" id="btn-ios" onclick="switchOS('ios')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -252,57 +147,27 @@ body{
           Android
         </button>
       </div>
-
-      <!-- iOS -->
       <div class="os-panel active" id="panel-ios">
         <div class="steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-text">Apri questa pagina in <strong>Safari</strong> — se sei in un altro browser copia il link e incollalo in Safari</div>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-text">Tocca l'icona <span class="tag">⎋ Condividi</span> in basso al centro nella barra di Safari</div>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-text">Scorri verso il basso e tocca <span class="tag">Aggiungi a schermata Home</span></div>
-          </div>
-          <div class="step">
-            <div class="step-num">4</div>
-            <div class="step-text">Tocca <strong>Aggiungi</strong> in alto a destra — l'icona di Cocktail Legend apparirà sulla tua home</div>
-          </div>
+          <div class="step"><div class="step-num">1</div><div class="step-text">Apri questa pagina in <strong>Safari</strong> — se sei in un altro browser copia il link e incollalo in Safari</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text">Tocca l'icona <span class="tag">⎋ Condividi</span> in basso al centro nella barra di Safari</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text">Scorri verso il basso e tocca <span class="tag">Aggiungi a schermata Home</span></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-text">Tocca <strong>Aggiungi</strong> in alto a destra — l'icona di Cocktail Legend apparirà sulla tua home</div></div>
         </div>
       </div>
-
-      <!-- Android -->
       <div class="os-panel" id="panel-android">
         <div class="steps">
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-text">Apri questa pagina in <strong>Chrome</strong> — se sei in un altro browser copia il link e incollalo in Chrome</div>
-          </div>
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-text">Tocca il menu <span class="tag">⋮</span> in alto a destra</div>
-          </div>
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-text">Tocca <span class="tag">Aggiungi a schermata Home</span> oppure <span class="tag">Installa app</span></div>
-          </div>
-          <div class="step">
-            <div class="step-num">4</div>
-            <div class="step-text">Tocca <strong>Aggiungi</strong> — l'icona di Cocktail Legend apparirà sulla tua home</div>
-          </div>
+          <div class="step"><div class="step-num">1</div><div class="step-text">Apri questa pagina in <strong>Chrome</strong> — se sei in un altro browser copia il link e incollalo in Chrome</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text">Tocca il menu <span class="tag">⋮</span> in alto a destra</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text">Tocca <span class="tag">Aggiungi a schermata Home</span> oppure <span class="tag">Installa app</span></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-text">Tocca <strong>Aggiungi</strong> — l'icona di Cocktail Legend apparirà sulla tua home</div></div>
         </div>
       </div>
-
       <button class="btn-ok" id="btn-ok" onclick="showAccess()">
         Ok, ho capito!
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       </button>
     </div>
-
     <div class="access-section" id="access-section">
       <div class="access-msg">Ora puoi accedere a Cocktail Legend.<br>Se hai già salvato l'app, aprila dalla home.</div>
       <a class="btn-accedi" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html">
@@ -311,9 +176,7 @@ body{
       </a>
       <div class="access-note">Non hai ancora salvato l'app? Nessun problema,<br>puoi sempre farlo in seguito dal browser.</div>
     </div>
-
   </div>
-  <!-- /section-verify -->
 
   <!-- ── ERRORE ── -->
   <div id="section-error" class="error-section">
@@ -322,52 +185,138 @@ body{
     </div>
     <div class="error-title">Link non valido</div>
     <div class="error-sub">Il link è scaduto o è già stato utilizzato.<br>Torna alla app e richiedi un nuovo link.</div>
-    <a class="btn-error" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html">
-      Vai a Cocktail Legend →
-    </a>
+    <a class="btn-error" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html">Vai a Cocktail Legend →</a>
   </div>
-
 </div>
-<!-- /main-wrap -->
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getAuth, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDkIK5KD-LHCdAhxHVS-bbnwP9Qak2vTxc",
+  authDomain: "cocktail-legend.firebaseapp.com",
+  projectId: "cocktail-legend",
+  storageBucket: "cocktail-legend.firebasestorage.app",
+  messagingSenderId: "237023162237",
+  appId: "1:237023162237:web:8a35e5421521171e2fa614"
+};
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const WEBAPP_URL = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html';
+const params  = new URLSearchParams(window.location.search);
+const mode    = params.get('mode');
+const oobCode = params.get('oobCode');
+
+function hideLoading() {
+  document.getElementById('loading').style.display   = 'none';
+  document.getElementById('main-wrap').style.display = 'flex';
+}
+
+function showError() {
+  hideLoading();
+  document.getElementById('section-error').style.display = 'block';
+}
+
+// ── RESET PASSWORD ──────────────────────────────────────────
+if (mode === 'resetPassword' && oobCode) {
+  hideLoading();
+  document.getElementById('section-reset').style.display = 'block';
+
+  const pwd1  = document.getElementById('reset-pwd1');
+  const pwd2  = document.getElementById('reset-pwd2');
+  const eye1  = document.getElementById('reset-eye1');
+  const eye2  = document.getElementById('reset-eye2');
+  const btn   = document.getElementById('reset-btn');
+  const errEl = document.getElementById('reset-err');
+
+  // Toggle mostra/nascondi password
+  eye1.addEventListener('click', () => {
+    pwd1.type = pwd1.type === 'password' ? 'text' : 'password';
+    eye1.innerHTML = pwd1.type === 'text' ? '&#128064;' : '&#128065;';
+  });
+  eye2.addEventListener('click', () => {
+    pwd2.type = pwd2.type === 'password' ? 'text' : 'password';
+    eye2.innerHTML = pwd2.type === 'text' ? '&#128064;' : '&#128065;';
+  });
+
+  // Enter tra i campi
+  pwd1.addEventListener('keydown', e => { if (e.key === 'Enter') pwd2.focus(); });
+  pwd2.addEventListener('keydown', e => { if (e.key === 'Enter') doReset(); });
+
+  function setErr(msg, isOk) {
+    errEl.textContent   = msg;
+    errEl.className     = 'reset-err' + (isOk ? ' ok' : '');
+  }
+
+  async function doReset() {
+    const p1 = pwd1.value;
+    const p2 = pwd2.value;
+    if (!p1 || p1.length < 6)  { setErr('La password deve avere almeno 6 caratteri.'); pwd1.focus(); return; }
+    if (/\s/.test(p1))          { setErr('La password non può contenere spazi.'); pwd1.focus(); return; }
+    if (p1 !== p2)              { setErr('Le password non coincidono.'); pwd2.focus(); return; }
+
+    btn.disabled    = true;
+    btn.textContent = 'Salvataggio…';
+    errEl.textContent = '';
+
+    try {
+      await confirmPasswordReset(auth, oobCode, p1);
+
+      // Nascondi form, mostra stato finale
+      document.getElementById('reset-box') && (document.querySelector('.reset-box').style.display = 'none');
+      document.querySelector('.reset-box').style.display = 'none';
+      const done = document.getElementById('done-section');
+      done.style.display = 'block';
+
+      // Rileva contesto
+      const isPWA = window.matchMedia('(display-mode: standalone)').matches
+                 || window.navigator.standalone === true;
+
+      const doneMsg  = document.getElementById('done-msg');
+      const doneBtn  = document.getElementById('done-btn');
+      const doneNote = document.getElementById('done-note');
+
+      if (isPWA) {
+        // Siamo già nella PWA — bottone per tornare al login
+        doneMsg.textContent  = 'Ora puoi accedere con la tua nuova password.';
+        doneBtn.style.display = 'flex';
+      } else {
+        // WebView o browser esterno — istruzioni manuali
+        doneMsg.innerHTML = 'Chiudi questa schermata e torna su<br><strong style="color:#f1f5f9">Cocktail Legend</strong> per accedere<br>con la tua nuova password.';
+        doneNote.textContent = 'Puoi chiudere questa schermata.';
+      }
+
+    } catch(e) {
+      btn.disabled    = false;
+      btn.textContent = 'Salva nuova password →';
+      let msg = 'Qualcosa è andato storto. Riprova.';
+      if (e.code === 'auth/expired-action-code') msg = 'Link scaduto. Richiedine uno nuovo dalla schermata di login.';
+      if (e.code === 'auth/invalid-action-code') msg = 'Link non valido o già usato. Richiedine uno nuovo.';
+      if (e.code === 'auth/weak-password')       msg = 'Password troppo debole. Usa almeno 6 caratteri.';
+      setErr(msg);
+    }
+  }
+
+  btn.addEventListener('click', doReset);
+}
+
+// ── VERIFICA EMAIL ──────────────────────────────────────────
+else if (mode === 'verifyEmail' && oobCode) {
+  hideLoading();
+  document.getElementById('section-verify').style.display = 'block';
+  if (/android/i.test(navigator.userAgent || '')) switchOS('android');
+}
+
+// ── FALLBACK ────────────────────────────────────────────────
+else {
+  window.location.replace(WEBAPP_URL);
+}
+</script>
 
 <script>
-(function() {
-  var WEBAPP_URL = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html';
-  var params     = new URLSearchParams(window.location.search);
-  var mode       = params.get('mode');
-  var oobCode    = params.get('oobCode');
-
-  function hideLoading() {
-    document.getElementById('loading').style.display    = 'none';
-    document.getElementById('main-wrap').style.display  = 'flex';
-  }
-
-  // ── RESET PASSWORD → redirect immediato alla webapp con tutti i params ──
-  if (mode === 'resetPassword') {
-    var isPWA = window.matchMedia('(display-mode: standalone)').matches
-             || window.navigator.standalone === true;
-    var dest = WEBAPP_URL + '?' + params.toString();
-    if (isPWA) dest += '&pwreset=pwa';
-    window.location.replace(dest);
-    return;
-  }
-
-  // ── VERIFICA EMAIL ──
-  if (mode === 'verifyEmail' && oobCode) {
-    hideLoading();
-    document.getElementById('section-verify').style.display = 'block';
-
-    // Auto-detect OS
-    if (/android/i.test(navigator.userAgent || '')) {
-      switchOS('android');
-    }
-    return;
-  }
-
-  // ── MODE NON RICONOSCIUTO o parametri mancanti → redirect webapp ──
-  window.location.replace(WEBAPP_URL);
-})();
-
 function switchOS(os) {
   document.getElementById('btn-ios').classList.toggle('active', os === 'ios');
   document.getElementById('btn-android').classList.toggle('active', os === 'android');
@@ -376,17 +325,15 @@ function switchOS(os) {
 }
 
 function showAccess() {
-  var installSection = document.getElementById('install-section');
-  var accessSection  = document.getElementById('access-section');
-
-  installSection.style.transition = 'opacity .3s ease, transform .3s ease';
-  installSection.style.opacity    = '0';
-  installSection.style.transform  = 'translateY(-8px)';
-
+  var inst = document.getElementById('install-section');
+  var acc  = document.getElementById('access-section');
+  inst.style.transition = 'opacity .3s ease, transform .3s ease';
+  inst.style.opacity    = '0';
+  inst.style.transform  = 'translateY(-8px)';
   setTimeout(function() {
-    installSection.style.display = 'none';
-    accessSection.classList.add('visible');
-    accessSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    inst.style.display = 'none';
+    acc.classList.add('visible');
+    acc.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 300);
 }
 </script>
