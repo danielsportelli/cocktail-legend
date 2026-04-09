@@ -31,7 +31,7 @@
   "categoria": "All day",
   "abv": "Alto",
   "sapori": ["Mandorlato", "Agrumato", "Bilanciato"],
-  "garnish": "Rondella di lime,
+  "garnish": "Rondella di lime",
   "ingredienti": [
     ["45 ml", "Tequila"],
     ["22,5 ml", "Apricot brandy"],
@@ -218,7 +218,7 @@
     "Mescolare delicatamente per circa 20 secondi",
     "Filtrare in una coppetta raffreddata"
   ],
-  "storia": "Zephyr — nella mitologia greca il dio del vento occidentale, il più mite e gentile tra i venti — è il nome perfetto per un cocktail pensato per essere leggero, delicato e quasi impalpabile. Il drink appartiene alla corrente dei floral highball che ha attraversato la miscelazione europea e nordamericana degli anni 2010, quando l'interesse per i botanici delicati, i fiori edibili e gli sciroppi artigianali ha portato i bartender a costruire drink di grande eleganza visiva e olfattiva. Il sambuco, protagonista della liquoristica nordeuropea e oggi ingrediente chiave in molti cocktail contemporanei, dona al Zephyr quella nota floreale quasi eterea che giustifica il nome. Non è attribuito a un inventore specifico.",
+  "storia": "Zephyr — nella mitologia greca il dio del vento occidentale, simbolo di primavera e leggerezza — è un nome che negli anni è stato adottato nella miscelazione contemporanea per identificare cocktail eleganti e misurati. Non esiste una singola origine codificata: il drink si inserisce nel movimento nato tra la fine degli anni 2000 e l’inizio del decennio successivo, quando i bartender iniziarono a privilegiare strutture più essenziali e bilanciate. Intorno al 2008 il nome Zephyr compare in diverse interpretazioni, senza mai fissarsi in una ricetta unica. Oggi rappresenta un’idea di cocktail moderno, dove equilibrio, precisione e stile prevalgono su qualsiasi eccesso.",
   "frizzante": true,
   "bicchiere": "Coppetta",
   "img": "https://danielsportelli.github.io/cocktail-legend/immagini/zephyr.webp",
@@ -11809,6 +11809,10 @@
       {
         "nome": "Negrosky",
         "note": "Vodka al posto del Gin"
+      },
+      {
+        "nome": "Kingston Negroni",
+        "note": "Rum giamaicano al posto del Gin"
       },
       {
         "nome": "Negroni Sbagliato",
