@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Cocktail Legend</title>
+<meta name="theme-color" content="#0a0f1e">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --blue:#2563eb;--blue-l:#60a5fa;--amber:#f59e0b;
+  --bg:#0a0f1e;--surf:#1e293b;--surf2:#334155;
+  --txt:#f1f5f9;--txt2:#cbd5e1;--brd:rgba(255,255,255,.08);--dim:#64748b;
+}
+html,body{
+  min-height:100%;
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  -webkit-font-smoothing:antialiased;
+}
+body{
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:2rem 1.25rem 3rem;
+  padding-top:max(2rem, env(safe-area-inset-top));
+}
+
+/* ── LOADING (mostrato mentre legge il mode) ── */
+.loading{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:60vh;
+  gap:1rem;
+  width:100%;
+}
+.loading-spinner{
+  width:36px;height:36px;
+  border:3px solid rgba(255,255,255,.08);
+  border-top-color:var(--amber);
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-txt{font-size:.82rem;color:var(--dim);}
+
+/* ── WRAP CONTENUTO ── */
+.wrap{
+  width:100%;
+  max-width:420px;
+  display:flex;
+  flex-direction:column;
+  display:none; /* nascosto finché JS non decide cosa mostrare */
+}
+
+/* ── LOGO ── */
+.logo{
+  font-size:1rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--amber);
+  display:inline-block;
+  padding:.28rem .65rem;
+  border-radius:8px;
+  background:
+    linear-gradient(#0a0f1e,#0a0f1e) padding-box,
+    conic-gradient(from 0deg,var(--amber) 0deg,var(--blue-l) 180deg,var(--amber) 360deg) border-box;
+  border:2px solid transparent;
+  margin-bottom:2rem;
+  align-self:center;
+}
+
+/* ── SEZIONE CONFERMA ── */
+.confirm-section{
+  text-align:center;
+  margin-bottom:2rem;
+}
+.confirm-icon{
+  width:64px;height:64px;
+  background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.08));
+  border:1px solid rgba(34,197,94,.35);
+  border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.1rem;
+}
+.confirm-title{
+  font-size:1.45rem;font-weight:900;letter-spacing:-.03em;
+  color:var(--txt);margin-bottom:.4rem;
+}
+.confirm-sub{
+  font-size:.88rem;color:var(--txt2);line-height:1.55;
+}
+
+/* ── SEZIONE INSTALLA ── */
+.install-section{
+  background:var(--surf);
+  border:1px solid var(--brd);
+  border-radius:18px;
+  padding:1.4rem 1.25rem 1.5rem;
+  margin-bottom:1.25rem;
+}
+.install-title{
+  font-size:1rem;font-weight:800;letter-spacing:-.01em;
+  color:var(--txt);margin-bottom:.25rem;line-height:1.3;
+}
+.install-sub{
+  font-size:.78rem;color:var(--dim);
+  margin-bottom:1.1rem;line-height:1.4;
+}
+
+/* Toggle iOS / Android */
+.os-toggle{
+  display:flex;
+  background:var(--bg);
+  border-radius:10px;
+  padding:3px;
+  margin-bottom:1.25rem;
+  gap:3px;
+}
+.os-btn{
+  flex:1;padding:.48rem .5rem;
+  border:none;border-radius:8px;
+  font-family:inherit;font-size:.8rem;font-weight:700;
+  cursor:pointer;transition:all .2s;
+  background:transparent;color:var(--dim);
+  display:flex;align-items:center;justify-content:center;gap:.35rem;
+  -webkit-tap-highlight-color:transparent;
+}
+.os-btn.active{background:var(--surf2);color:var(--txt);}
+
+/* Steps */
+.steps{display:flex;flex-direction:column;gap:.75rem;}
+.step{display:flex;align-items:flex-start;gap:.75rem;}
+.step-num{
+  flex-shrink:0;width:24px;height:24px;
+  background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.3);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:800;color:var(--blue-l);margin-top:.05rem;
+}
+.step-text{font-size:.82rem;color:var(--txt2);line-height:1.55;flex:1;}
+.step-text strong{color:var(--txt);font-weight:700;}
+.step-text .tag{
+  display:inline-flex;align-items:center;gap:.2rem;
+  background:var(--surf2);border:1px solid var(--brd);
+  border-radius:6px;padding:.1rem .4rem;
+  font-size:.72rem;font-weight:700;color:var(--txt);white-space:nowrap;
+}
+
+.os-panel{display:none;}
+.os-panel.active{display:block;}
+
+/* Bottone OK */
+.btn-ok{
+  width:100%;padding:.85rem 1rem;
+  background:var(--surf2);border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;color:var(--txt);
+  font-family:inherit;font-size:.88rem;font-weight:700;
+  cursor:pointer;margin-top:1.25rem;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  transition:background .2s;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+.btn-ok:active{background:var(--surf);}
+
+/* Sezione accedi */
+.access-section{
+  display:none;flex-direction:column;
+  align-items:center;text-align:center;gap:1rem;
+  animation:fadeUp .35s ease both;
+}
+.access-section.visible{display:flex;}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.access-msg{font-size:.82rem;color:var(--txt2);line-height:1.5;}
+.btn-accedi{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  width:100%;padding:1rem 1.5rem;
+  background:linear-gradient(135deg,var(--amber),#d97706);
+  color:#0a0f1e;border:none;border-radius:13px;
+  font-family:inherit;font-size:1rem;font-weight:800;
+  letter-spacing:.01em;cursor:pointer;text-decoration:none;
+  box-shadow:0 6px 22px rgba(245,158,11,.35);
+  transition:all .2s;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+.btn-accedi:active{transform:scale(.98);box-shadow:0 3px 12px rgba(245,158,11,.25);}
+.access-note{font-size:.7rem;color:var(--dim);line-height:1.5;}
+
+/* ── SEZIONE ERRORE ── */
+.error-section{
+  text-align:center;display:none;
+}
+.error-icon{
+  width:64px;height:64px;
+  background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);
+  border-radius:18px;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.1rem;
+}
+.error-title{font-size:1.2rem;font-weight:800;color:#f87171;margin-bottom:.4rem;}
+.error-sub{font-size:.85rem;color:var(--txt2);line-height:1.55;margin-bottom:1.5rem;}
+.btn-error{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  width:100%;padding:.9rem 1.5rem;
+  background:var(--surf2);border:1px solid var(--brd);
+  color:var(--txt);border-radius:13px;
+  font-family:inherit;font-size:.9rem;font-weight:700;
+  cursor:pointer;text-decoration:none;transition:background .2s;
+}
+.btn-error:active{background:var(--surf);}
+</style>
+</head>
+<body>
+
+<!-- Spinner iniziale -->
+<div class="loading" id="loading">
+  <div class="loading-spinner"></div>
+  <div class="loading-txt">Verifica in corso…</div>
+</div>
+
+<!-- Contenuto principale -->
+<div class="wrap" id="main-wrap">
+
+  <!-- Logo -->
+  <div class="logo">Cocktail Legend</div>
+
+  <!-- ── VERIFICA EMAIL ── -->
+  <div id="section-verify" style="display:none;">
+
+    <div class="confirm-section">
+      <div class="confirm-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="confirm-title">Email verificata!</div>
+      <div class="confirm-sub">Il tuo account Cocktail Legend è attivo.<br>Prima di accedere, leggi come installare l'app.</div>
+    </div>
+
+    <div class="install-section" id="install-section">
+      <div class="install-title">📲 Salva l'app sul tuo smartphone</div>
+      <div class="install-sub">Che tipo di smartphone hai?</div>
+
+      <div class="os-toggle">
+        <button class="os-btn active" id="btn-ios" onclick="switchOS('ios')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          iPhone / iPad
+        </button>
+        <button class="os-btn" id="btn-android" onclick="switchOS('android')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 15.341a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-9 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM2.1 8.4l1.8-3.1a.5.5 0 0 1 .87.5l-1.8 3.1A.5.5 0 0 1 2.1 8.4zm19.8 0a.5.5 0 0 1-.87.5l-1.8-3.1a.5.5 0 1 1 .87-.5l1.8 3.1zM5 8h14v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8zm2-5.5 1.5 2.6h7L17 2.5a.5.5 0 0 1 .87-.5l-1.6 2.7a2 2 0 0 1 .73 1.3H7a2 2 0 0 1 .73-1.3L6.13 2a.5.5 0 1 1 .87-.5z"/></svg>
+          Android
+        </button>
+      </div>
+
+      <!-- iOS -->
+      <div class="os-panel active" id="panel-ios">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">Apri questa pagina in <strong>Safari</strong> — se sei in un altro browser copia il link e incollalo in Safari</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">Tocca l'icona <span class="tag">⎋ Condividi</span> in basso al centro nella barra di Safari</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">Scorri verso il basso e tocca <span class="tag">Aggiungi a schermata Home</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">Tocca <strong>Aggiungi</strong> in alto a destra — l'icona di Cocktail Legend apparirà sulla tua home</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Android -->
+      <div class="os-panel" id="panel-android">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">Apri questa pagina in <strong>Chrome</strong> — se sei in un altro browser copia il link e incollalo in Chrome</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">Tocca il menu <span class="tag">⋮</span> in alto a destra</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">Tocca <span class="tag">Aggiungi a schermata Home</span> oppure <span class="tag">Installa app</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">Tocca <strong>Aggiungi</strong> — l'icona di Cocktail Legend apparirà sulla tua home</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-ok" id="btn-ok" onclick="showAccess()">
+        Ok, ho capito!
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+    </div>
+
+    <div class="access-section" id="access-section">
+      <div class="access-msg">Ora puoi accedere a Cocktail Legend.<br>Se hai già salvato l'app, aprila dalla home.</div>
+      <a class="btn-accedi" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html">
+        Accedi a Cocktail Legend
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <div class="access-note">Non hai ancora salvato l'app? Nessun problema,<br>puoi sempre farlo in seguito dal browser.</div>
+    </div>
+
+  </div>
+  <!-- /section-verify -->
+
+  <!-- ── ERRORE ── -->
+  <div id="section-error" class="error-section">
+    <div class="error-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div class="error-title">Link non valido</div>
+    <div class="error-sub">Il link è scaduto o è già stato utilizzato.<br>Torna alla app e richiedi un nuovo link.</div>
+    <a class="btn-error" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html">
+      Vai a Cocktail Legend →
+    </a>
+  </div>
+
+</div>
+<!-- /main-wrap -->
+
+<script>
+(function() {
+  var WEBAPP_URL = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html';
+  var params     = new URLSearchParams(window.location.search);
+  var mode       = params.get('mode');
+  var oobCode    = params.get('oobCode');
+
+  function hideLoading() {
+    document.getElementById('loading').style.display    = 'none';
+    document.getElementById('main-wrap').style.display  = 'flex';
+  }
+
+  // ── RESET PASSWORD → redirect immediato alla webapp con tutti i params ──
+  if (mode === 'resetPassword') {
+    // Passa tutti i parametri originali alla webapp così js.js li intercetta normalmente
+    var dest = WEBAPP_URL + '?' + params.toString();
+    window.location.replace(dest);
+    return; // non eseguire altro
+  }
+
+  // ── VERIFICA EMAIL ──
+  if (mode === 'verifyEmail' && oobCode) {
+    hideLoading();
+    document.getElementById('section-verify').style.display = 'block';
+
+    // Auto-detect OS
+    if (/android/i.test(navigator.userAgent || '')) {
+      switchOS('android');
+    }
+    return;
+  }
+
+  // ── MODE NON RICONOSCIUTO o parametri mancanti → redirect webapp ──
+  window.location.replace(WEBAPP_URL);
+})();
+
+function switchOS(os) {
+  document.getElementById('btn-ios').classList.toggle('active', os === 'ios');
+  document.getElementById('btn-android').classList.toggle('active', os === 'android');
+  document.getElementById('panel-ios').classList.toggle('active', os === 'ios');
+  document.getElementById('panel-android').classList.toggle('active', os === 'android');
+}
+
+function showAccess() {
+  var installSection = document.getElementById('install-section');
+  var accessSection  = document.getElementById('access-section');
+
+  installSection.style.transition = 'opacity .3s ease, transform .3s ease';
+  installSection.style.opacity    = '0';
+  installSection.style.transform  = 'translateY(-8px)';
+
+  setTimeout(function() {
+    installSection.style.display = 'none';
+    accessSection.classList.add('visible');
+    accessSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 300);
+}
+</script>
+
+</body>
+</html>
