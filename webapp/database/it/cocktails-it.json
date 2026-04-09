@@ -1,4 +1,230 @@
 [
+{
+  "id": "smokey_joe",
+  "name": "Smokey Joe",
+  "distillato": ["Sake"],
+  "categoria": "Pre dinner",
+  "abv": "Molto alto",
+  "sapori": ["Affumicato", "Dolce", "Intenso"],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    ["50 ml", "Sake"],
+    ["22,5 ml", "Sauternes"],
+    ["7,5 ml", "Cognac"],
+    ["5 ml", "Scotch whisky torbato"]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Lo Smokey Joe è un cocktail contemporaneo costruito attorno al fascino del whisky torbato delle isole scozzesi — in particolare di Islay, l'isola del Hebrides interiori dove la torba è così presente nell'acqua e nell'aria da impregnarsi nel malto durante l'essiccazione. Il nome evoca quella figura archetipica del barman veterano, burbero e saggio, che non ha bisogno di spiegazioni — sa già cosa vuoi. La combinazione tra affumicato, miele e agrumi richiama la tradizione degli honey whisky sours scozzesi, una famiglia di drink che si è imposta con forza nella cocktail culture britannica degli anni 2010. Non è attribuito a un singolo inventore documentato, appartiene alla generazione di drink d'autore nati nell'orbita dei whisky bar europei specializzati.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/smokey_joe.webp",
+  "varianti": [],
+  "iba": false
+},
+{
+  "id": "toreador",
+  "name": "Toreador",
+  "distillato": ["Tequila"],
+  "categoria": "All day",
+  "abv": "Alto",
+  "sapori": ["Mandorlato", "Agrumato", "Bilanciato"],
+  "garnish": "Rondella di lime,
+  "ingredienti": [
+    ["45 ml", "Tequila"],
+    ["22,5 ml", "Apricot brandy"],
+    ["22,5 ml", "Succo di lime"]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "Il Toreador è un cocktail classico documentato già nei ricettari del primo Novecento, dove la tequila compariva ancora come ingrediente esotico e poco conosciuto fuori dal Messico. Il nome rimanda al mondo della corrida — i toreros erano figure mitiche della cultura popolare ispanica, celebrate e temute in egual misura — e la scelta non era casuale: un drink dalla forza contenuta ma dal carattere netto, come l'abilità di chi affronta il toro. La combinazione con l'amaretto riflette quella curiosa fusione tra distillazione mesoamericana e liquoristica italiana che si ritrovava in certi bar internazionali degli anni Trenta e Quaranta, quando i bartender europei cominciavano a fare i primi esperimenti con la tequila importata.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/toreador.webp",
+  "varianti": [],
+  "iba": false
+},
+{
+  "id": "trinity",
+  "name": "Trinity",
+  "distillato": ["Gin"],
+  "categoria": "Pre dinner",
+  "abv": "Molto alto",
+  "sapori": ["Aromatico", "Elegante", "Classico"],
+  "garnish": "Zest di limone",
+  "ingredienti": [
+    ["30 ml", "Gin"],
+    ["30 ml", "Vermouth dry"],
+    ["30 ml", "Vermouth rosso"]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in una coppetta raffreddata"
+  ],
+  "storia": "Il Trinity è una delle varianti più equilibrate e simmetriche del Martini classico, costruita sulla proporzione perfetta tra tre elementi — gin, vermouth secco e vermouth rosso — da cui deriva il nome. Conosciuto anche come Tuxedo Martini o Perfect Martini nella sua interpretazione più diffusa, il Trinity porta alla forma più pura il concetto di 'perfect' nella miscelazione anglosassone: uguale parte di vermouth dolce e secco a bilanciare il distillato. La formula fu popolare nei cocktail bar degli anni Venti e Trenta, in piena epoca d'oro del Martini, quando i bartender del Savoy e dei grandi hotel europei sperimentavano variazioni sulla struttura del drink più celebre del Novecento. È un cocktail che non ha bisogno di fronzoli: la sua eleganza è tutta nella proporzione.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/trinity.webp",
+  "varianti": [],
+  "iba": false
+},
+{
+  "id": "vodka_lemon",
+  "name": "Vodka Lemon",
+  "distillato": ["Vodka"],
+  "categoria": "All day",
+  "abv": "Medio basso",
+  "sapori": ["Agrumato", "Fresco", "Dissetante"],
+  "garnish": "Fetta di limone",
+  "ingredienti": [
+    ["50 ml", "Vodka"],
+    ["Top", "Soda al limone"]
+  ],
+  "prep": [
+  "Versare la vodka in un bicchiere highball riempito di ghiaccio",
+    "Completare con la soda al limone fredda",
+    "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
+  ],
+  "storia": "Il Vodka Lemon è il cocktail evergreen dei bar italiani, quello che ordina chi non vuole sbagliare e chi sa esattamente cosa vuole. In Italia si è imposto a partire dagli anni Ottanta e Novanta, cavalcando l'ondata di popolarità della vodka nel mercato europeo e diventando in breve il long drink più ordinato nei locali notturni della penisola — dalle discoteche romagnole ai bar di aperitivo milanesi. Semplice, immediato, senza ambiguità: vodka, limone e qualcosa di frizzante. Non ha un inventore, non ha un locale di nascita — è emerso per convenzione collettiva, come succede ai drink che appartengono davvero alla cultura popolare. In questo lo somiglia molto al Lemon Soda, il soft drink italiano per eccellenza, di cui è la versione alcolica dichiarata.",
+  "frizzante": true,
+  "bicchiere": "Highball",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vodka_lemon.webp",
+  "varianti": [],
+  "iba": false
+},
+{
+  "id": "vodka_tonic",
+  "name": "Vodka Tonic",
+  "distillato": ["Vodka"],
+  "categoria": "All day",
+  "abv": "Medio basso",
+  "sapori": ["Secco", "Dissetante", "Leggero"],
+  "garnish": "Rondella di lime",
+  "ingredienti": [
+    ["50 ml", "Vodka"],
+    ["Top", "Acqua tonica"]
+  ],
+  "prep": [
+    "Versare la vodka in un bicchiere highball riempito di ghiaccio",
+    "Completare con l'acqua tonica fredda",
+    "Mescolare delicatamente con un bar spoon dal basso verso l'alto"
+  ],
+  "storia": "Il Vodka Tonic è il fratello minore del Gin Tonic — stesso schema, distillato diverso — e come il suo predecessore porta con sé una storia legata alla medicina coloniale britannica. L'acqua tonica, inventata nel XIX secolo per somministrare il chinino ai soldati e ai funzionari coloniali nelle zone malariche dell'India e dell'Africa, si scoprì più bevibile con un distillato. Dove il gin era il compagno tradizionale dell'Impero, la vodka è diventata la scelta della generazione che cercava un profilo più neutro, meno aromatico, più adatto alla beva prolungata. Dalla Russia agli Stati Uniti, dall'Europa al Giappone, il Vodka Tonic si è imposto come il long drink per chi vuole il minimo indispensabile in un bicchiere: alcol, bollicine e la leggera amarezza del chinino.",
+  "frizzante": true,
+  "bicchiere": "Highball",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vodka_tonic.webp",
+  "varianti": [],
+  "iba": false
+},
+{
+  "id": "white_linen",
+  "name": "White Linen",
+  "distillato": ["Gin"],
+  "categoria": "All day",
+  "abv": "Medio basso",
+  "sapori": ["Floreale", "Fresco", "Dissetante"],
+  "garnish": "Rondelle di cetriolo",
+  "ingredienti": [
+    ["45 ml", "Gin"],
+    ["15 ml", "Liquore ai fiori di sambuco"],
+    ["22,5 ml", "Succo di limone"],
+    ["15 ml", "Sciroppo di zucchero"],
+    ["3 rondelle", "Cetriolo"],
+    ["Top", "Soda"]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio (tranne la soda)",
+    "Filtrare (double strain) in un bicchiere highball riempito di ghiaccio",
+    "Completare con la soda",
+    "Dare una leggera mescolata col bar spoon dal basso verso l'alto"
+  ],
+  "storia": "Il White Linen è un cocktail estivo nato negli anni 2000 nell'ambito della cocktail renaissance britannica, quando i bartender londinesi cominciarono a lavorare con ingredienti freschi, aromi botanici delicati e strutture leggere pensate per i mesi caldi. Il nome evoca il candore e la leggerezza del lino bianco — il tessuto delle estati mediterranee — e il drink ne è la trasposizione liquida: fresco, pulito, quasi etereo. La combinazione di cetriolo, sambuco e gin a base botanica riflette l'estetica garden party che ha caratterizzato una certa miscelazione britannica degli anni 2010, fatta di profumi di prato, fiori edibili e orto. Non è attribuito a un singolo bartender, appartiene alla famiglia dei contemporary sours con top che si è sviluppata parallelamente all'ascesa dei gin artigianali britannici.",
+  "frizzante": true,
+  "bicchiere": "Highball",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/white_linen.webp",
+  "varianti": [],
+  "iba": false
+},
+{
+  "id": "xyz",
+  "name": "X.Y.Z.",
+  "distillato": ["Rum"],
+  "categoria": "All day",
+  "abv": "Alto",
+  "sapori": ["Agrumato", "Secco", "Deciso"],
+  "garnish": "Zest di limone",
+  "ingredienti": [
+    ["50 ml", "Rum"],
+    ["22,5 ml", "Triple sec"],
+    ["15 ml", "Succo di limone"]
+  ],
+  "prep": [
+    "Shakerare tutto con ghiaccio",
+    "Filtrare (double strain) in una coppetta raffreddata"
+  ],
+  "storia": "L'X.Y.Z. è un cocktail classico documentato nel Savoy Cocktail Book di Harry Craddock del 1930, dove appare con una nota lapidaria: è il 'last word' dei cocktail, l'ultima parola — nel senso che dopo questo non c'è altro da ordinare. Il nome, le ultime tre lettere dell'alfabeto, sottintende proprio questo: siamo alla fine, al punto definitivo. La formula richiama la struttura del Sidecar — distillato, orange curaçao e limone — semplicemente sostituendo il cognac con il rum, a testimonianza della vivacità con cui i bartender del Savoy costruivano variazioni su strutture collaudate. È un drink dall'equilibrio preciso e dalla personalità discreta, pensato per chi conosce bene la miscelazione classica e vuole qualcosa di rigoroso senza fronzoli.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/xyz.webp",
+  "varianti": [],
+  "iba": false
+},
+{
+  "id": "yamabuki",
+  "name": "Yamabuki",
+  "distillato": ["Japanese whisky"],
+  "categoria": "Pre dinner",
+  "abv": "Molto alto",
+  "sapori": ["Floreale", "Speziato", "Elegante"],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    ["45 ml", "Japanese whisky"],
+    ["15 ml", "Vermouth bianco"],
+    ["15 ml", "Maraschino"],
+    ["2 dash", "Orange bitters"]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in una coppetta raffreddata"
+  ],
+  "storia": "Yamabuki è il nome giapponese della kerria japonica, un arbusto dai fiori giallo oro che sboccia in primavera e che nella poesia e nella pittura giapponese classica è simbolo di grazia transitoria e bellezza efimera. Il cocktail che porta questo nome appartiene alla tradizione dei whisky bar giapponesi d'alta gamma — quei locali di Tokyo, Osaka e Kyoto dove la miscelazione è elevata a forma d'arte con la stessa cura riservata alla cerimonia del tè. Il Giappone ha sviluppato una propria scuola di bartending nel corso del Novecento, fortemente influenzata dai classici europei ma filtrata attraverso un'estetica di precisione, silenzio e rispetto per l'ingrediente. Il Yamabuki si inserisce in questa tradizione: stirred, pulito, costruito per esaltare le note delicate del whisky nipponico. Non è attribuito a un singolo inventore documentato.",
+  "frizzante": false,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/yamabuki.webp",
+  "varianti": [],
+  "iba": false
+},
+{
+  "id": "zephyr",
+  "name": "Zephyr",
+  "distillato": ["Gin"],
+  "categoria": "Pre dinner",
+  "abv": "Medio basso",
+  "sapori": ["Erabceo", "Aromatico", "Complesso"],
+  "garnish": "Zest di limone",
+  "ingredienti": [
+    ["50 ml", "Gin"],
+    ["15 ml", "Cocchi americano"],
+    ["15 ml", "Chartreuse verde"]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in una coppetta raffreddata"
+  ],
+  "storia": "Zephyr — nella mitologia greca il dio del vento occidentale, il più mite e gentile tra i venti — è il nome perfetto per un cocktail pensato per essere leggero, delicato e quasi impalpabile. Il drink appartiene alla corrente dei floral highball che ha attraversato la miscelazione europea e nordamericana degli anni 2010, quando l'interesse per i botanici delicati, i fiori edibili e gli sciroppi artigianali ha portato i bartender a costruire drink di grande eleganza visiva e olfattiva. Il sambuco, protagonista della liquoristica nordeuropea e oggi ingrediente chiave in molti cocktail contemporanei, dona al Zephyr quella nota floreale quasi eterea che giustifica il nome. Non è attribuito a un inventore specifico.",
+  "frizzante": true,
+  "bicchiere": "Coppetta",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/zephyr.webp",
+  "varianti": [],
+  "iba": false
+},
   {
   "id": "ranch_water",
   "name": "Ranch Water",
@@ -37,7 +263,8 @@
     ["90 ml", "Succo di pomodoro"],
     ["1 dash", "Tabasco"],
     ["1 dash", "Worcestershire"],
-    ["q.b.", "Sale e pepe"],
+    ["q.b.", "Sale"],
+    ["q.b.", "Pepe"],
     ["Top", "Birra chiara (lager)"]
   ],
   "prep": [
@@ -62,7 +289,7 @@
   "sapori": ["Tostato", "Caffeinico", "Intenso"],
   "garnish": "Zest di arancia",
   "ingredienti": [
-    ["60 ml", "Bourbon whiskey"],
+    ["60 ml", "Whiskey bourbon"],
     ["15 ml", "Liquore al caffè"],
     ["2 dash", "Orange bitters"]
   ],
@@ -135,14 +362,14 @@
 {
   "id": "saketini",
   "name": "Saketini",
-  "distillato": ["Gin", "Sake"],
+  "distillato": ["Gin"],
   "categoria": "Pre dinner",
   "abv": "Alto",
   "sapori": ["Secco", "Floreale", "Elegante"],
   "garnish": "Zest di limone",
   "ingredienti": [
     ["50 ml", "Gin"],
-    ["25 ml", "Sake junmai"],
+    ["25 ml", "Sake"],
     ["2 dash", "Orange bitters"]
   ],
   "prep": [
@@ -154,9 +381,7 @@
   "frizzante": false,
   "bicchiere": "Coppetta",
   "img": "https://danielsportelli.github.io/cocktail-legend/immagini/saketini.webp",
-  "varianti": [
-    {"nome": "Vodka Saketini", "note": "Variante con vodka al posto del gin, più neutro e diffuso nei bar americani."}
-  ],
+  "varianti": [],
   "iba": false
 },
 {
@@ -285,7 +510,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "22,5 ml",
@@ -686,8 +911,8 @@
         "Sciroppo di zucchero"
       ],
       [
-        "8",
-        "Foglie di menta"
+        "8 foglie",
+        "Menta"
       ],
       [
         "3 dash",
@@ -864,7 +1089,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "15 ml",
@@ -1074,8 +1299,8 @@
     "garnish": "Zest di arancia",
     "ingredienti": [
       [
-        "30 ml",
-        "Rye whiskey"
+        "45 ml",
+        "Whiskey rye"
       ],
       [
         "15 ml",
@@ -1163,11 +1388,11 @@
     "ingredienti": [
       [
         "30 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "30 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "1",
@@ -1216,7 +1441,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Scotch whisky"
+        "Whisky scotch"
       ],
       [
         "15 ml",
@@ -1311,7 +1536,7 @@
       ],
       [
         "15 ml",
-        "Scotch whisky"
+        "Whisky scotch"
       ],
       [
         "7,5 ml",
@@ -1586,12 +1811,12 @@
         "Sciroppo di zucchero"
       ],
       [
-        "6",
-        "Foglie di menta"
+        "6 foglie",
+        "Menta"
       ],
       [
-        "3",
-        "Rondella di cetriolo"
+        "3 rondelle",
+        "Cetriolo"
       ]
     ],
     "prep": [
@@ -1629,7 +1854,7 @@
       ],
       [
         "22,5 ml",
-        "Scotch whisky blended"
+        "Whisky scotch"
       ],
       [
         "22,5 ml",
@@ -1728,7 +1953,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "22,5 ml",
@@ -1767,7 +1992,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "22,5 ml",
@@ -2063,7 +2288,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "7,5 ml",
@@ -2189,7 +2414,7 @@
       ],
       [
         "30 ml",
-        "Liquore all'amaretto"
+        "Disaronno"
       ],
       [
         "30 ml",
@@ -2446,16 +2671,16 @@
         "Chiodi di garofano"
       ],
       [
-        "1",
-        "Stecca di cannella"
+        "1 stecca",
+        "Cannella"
       ],
       [
-        "1",
-        "Zest di arancia"
+        "1 zest",
+        "Arancia"
       ],
       [
-        "1",
-        "Zest di pompelmo"
+        "1 zest",
+        "Pompelmo"
       ],
       [
         "1 bspoon",
@@ -2535,7 +2760,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "22,5 ml",
@@ -2579,7 +2804,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "15 ml",
@@ -2670,7 +2895,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Scotch whisky blended"
+        "Whisky scotch"
       ],
       [
         "15 ml",
@@ -2711,7 +2936,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "30 ml",
@@ -2751,7 +2976,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "20 ml",
@@ -2799,7 +3024,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Japanese whisky blended"
+        "Japanese whisky"
       ],
       [
         "100 ml",
@@ -2924,7 +3149,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "20 ml",
@@ -3114,7 +3339,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Liquore all'amaretto"
+        "Disaronno"
       ],
       [
         "22,5 ml",
@@ -3294,7 +3519,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "7,5 ml",
@@ -3342,7 +3567,7 @@
       ],
       [
         "15 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "30 ml",
@@ -3545,7 +3770,7 @@
       ],
       [
         "7,5 ml",
-        "Lillet blanc"
+        "Cocchi americano"
       ]
     ],
     "prep": [
@@ -3576,7 +3801,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "15 ml",
@@ -3619,7 +3844,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "30 ml",
@@ -3893,7 +4118,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "30 ml",
@@ -4284,8 +4509,8 @@
         "Sciroppo di zucchero"
       ],
       [
-        "6",
-        "Foglie di menta"
+        "6 foglie",
+        "Menta"
       ]
     ],
     "prep": [
@@ -4686,7 +4911,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Irish whiskey"
+        "Whiskey irish"
       ],
       [
         "22,5 ml",
@@ -4822,7 +5047,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "22,5 ml",
@@ -4971,7 +5196,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "22,5 ml",
@@ -5019,7 +5244,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "15 ml",
@@ -5123,7 +5348,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "22,5 ml",
@@ -5168,7 +5393,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Scotch whisky"
+        "Whisky scotch"
       ],
       [
         "22,5 ml",
@@ -5258,12 +5483,12 @@
         "Sciroppo di zucchero"
       ],
       [
-        "2",
-        "Spicchio di lime"
+        "2 spicchi",
+        "Lime"
       ],
       [
-        "2",
-        "Fetta di arancia"
+        "2 fette",
+        "Arancia"
       ],
       [
         "Top",
@@ -5401,7 +5626,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Scotch whisky"
+        "Whisky scotch"
       ],
       [
         "25 ml",
@@ -5478,7 +5703,7 @@
     "ingredienti": [
       [
         "30 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "30 ml",
@@ -5522,7 +5747,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Rye whiskey o Cognac"
+        "Whiskey rye o Cognac"
       ],
       [
         "1",
@@ -5696,7 +5921,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Scotch whisky"
+        "Whisky scotch"
       ],
       [
         "22,5 ml",
@@ -5788,7 +6013,7 @@
       ],
       [
         "30 ml",
-        "Liquore all'amaretto"
+        "Disaronno"
       ],
       [
         "30 ml",
@@ -6221,12 +6446,12 @@
         "Miele"
       ],
       [
-        "4",
-        "Fetta di ananas"
+        "4 fette",
+        "Ananas"
       ],
       [
-        "10",
-        "Foglie di menta"
+        "10 foglie",
+        "Menta"
       ]
     ],
     "prep": [
@@ -6511,7 +6736,7 @@
     "ingredienti": [
       [
         "30 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "30 ml",
@@ -7024,7 +7249,7 @@
     "ingredienti": [
       [
         "25 ml",
-        "Scotch whisky"
+        "Whisky scotch"
       ],
       [
         "25 ml",
@@ -7162,7 +7387,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Scotch whisky"
+        "Whisky scotch"
       ],
       [
         "15 ml",
@@ -7250,7 +7475,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "30 ml",
@@ -7476,7 +7701,7 @@
     "ingredienti": [
       [
         "30 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "30 ml",
@@ -7575,11 +7800,11 @@
     "ingredienti": [
       [
         "30 ml",
-        "Irish whiskey"
+        "Whiskey irish"
       ],
       [
         "30 ml",
-        "Scotch whisky"
+        "Whisky scotch"
       ],
       [
         "15 ml",
@@ -8394,7 +8619,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "22,5 ml",
@@ -8405,8 +8630,8 @@
         "Sciroppo di zucchero"
       ],
       [
-        "4/6",
-        "Foglie di menta"
+        "6 foglie",
+        "Menta"
       ]
     ],
     "prep": [
@@ -8900,7 +9125,7 @@
       ],
       [
         "45 ml",
-        "Liquore all'amaretto"
+        "Disaronno"
       ]
     ],
     "prep": [
@@ -9097,8 +9322,8 @@
         "Sciroppo di zucchero"
       ],
       [
-        "10",
-        "Foglie di basilico"
+        "10 foglie",
+        "Basilico"
       ]
     ],
     "prep": [
@@ -9223,11 +9448,11 @@
     "ingredienti": [
       [
         "45 ml",
-        "Scotch whisky"
+        "Whisky scotch"
       ],
       [
         "45 ml",
-        "Liquore all'amaretto"
+        "Disaronno"
       ]
     ],
     "prep": [
@@ -9262,7 +9487,7 @@
       ],
       [
         "45 ml",
-        "Liquore all'amaretto"
+        "Disaronno"
       ]
     ],
     "prep": [
@@ -9293,7 +9518,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Bourbon whiskey"
+        "Whiskey  bourbon"
       ],
       [
         "22,5 ml",
@@ -9622,7 +9847,7 @@
     "ingredienti": [
       [
         "45 ml",
-        "Irish whiskey"
+        "Whiskey irish"
       ],
       [
         "120 ml",
@@ -9752,7 +9977,7 @@
       ],
       [
         "15 ml",
-        "Liquore all'amaretto"
+        "Apricot brandy"
       ],
       [
         "5 ml",
@@ -9775,8 +10000,8 @@
         "Succo di ananas"
       ],
       [
-        "1",
-        "Rondella di zenzero"
+        "1 rondella",
+        "Zenzero"
       ]
     ],
     "prep": [
@@ -9961,7 +10186,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Irish whiskey"
+        "Whiskey irish"
       ],
       [
         "120 ml",
@@ -10276,7 +10501,7 @@
     "ingredienti": [
       [
         "105 ml",
-        "Vino bianco secco"
+        "Vino bianco"
       ],
       [
         "15 ml",
@@ -10320,7 +10545,7 @@
     "ingredienti": [
       [
         "15 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "15 ml",
@@ -10516,8 +10741,8 @@
     "garnish": "Fetta di limone",
     "ingredienti": [
       [
-        "45 ml",
-        "Bourbon whiskey"
+        "50 ml",
+        "Whiskey bourbon"
       ],
       [
         "15 ml",
@@ -10610,7 +10835,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "22,5 ml",
@@ -11132,7 +11357,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "2 bspoon",
@@ -11143,8 +11368,8 @@
         "Acqua"
       ],
       [
-        "10",
-        "Foglie di menta"
+        "10 foglie",
+        "Menta"
       ]
     ],
     "prep": [
@@ -11189,8 +11414,8 @@
         "Sciroppo di zucchero"
       ],
       [
-        "8",
-        "Foglie di menta"
+        "8 foglie",
+        "Menta"
       ],
       [
         "Top",
@@ -11269,7 +11494,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "15 ml",
@@ -11309,7 +11534,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Scotch whisky"
+        "Whisky scotch"
       ],
       [
         "22,5 ml",
@@ -11610,7 +11835,7 @@
     "ingredienti": [
       [
         "50 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "22,5 ml",
@@ -11670,8 +11895,8 @@
         "Sciroppo di zucchero"
       ],
       [
-        "6",
-        "Foglie di menta"
+        "6 foglie",
+        "Menta"
       ],
       [
         "60 ml",
@@ -11707,7 +11932,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "1",
@@ -11752,7 +11977,7 @@
     "ingredienti": [
       [
         "30 ml",
-        "Rye whiskey"
+        "Whiskey rye"
       ],
       [
         "30 ml",
@@ -11927,7 +12152,7 @@
     "ingredienti": [
       [
         "22,5 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "22,5 ml",
@@ -12052,7 +12277,7 @@
     "ingredienti": [
       [
         "60 ml",
-        "Scotch whisky"
+        "Whisky scotch"
       ],
       [
         "22,5 ml",
@@ -12064,7 +12289,7 @@
       ],
       [
         "7,5 ml",
-        "Scotch whisky torbato"
+        "Whisky scotch torbato"
       ]
     ],
     "prep": [
@@ -12151,7 +12376,7 @@
       ],
       [
         "30 ml",
-        "Vino bianco secco"
+        "Vino bianco"
       ],
       [
         "3",
@@ -12467,7 +12692,7 @@
       ],
       [
         "10 ml",
-        "Bourbon whiskey"
+        "Whiskey bourbon"
       ],
       [
         "10 ml",
