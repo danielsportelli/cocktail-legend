@@ -4799,27 +4799,21 @@ function closeResetPasswordModal() {
         fn.confirmPasswordReset(auth, oobCode, pwd1)
           .then(function() {
             window._resetOobCode = null;
-            showErr('✓ Password aggiornata! Ora puoi accedere.', true);
-            btn.textContent = 'Password salvata ✓';
-            btn.style.background = '#1e293b';
-            btn.style.color = '#64748b';
-            // Dopo 2 secondi torna al login
-            setTimeout(function() {
-              switchAuthTab('login');
-              btn.disabled = false;
-              btn.textContent = 'Salva nuova password →';
-              btn.style.background = '';
-              btn.style.color = '';
-              if (pwdNew) pwdNew.value = '';
-              if (pwdConfirm) pwdConfirm.value = '';
-              // Mostra messaggio successo nel form login
-              var loginErr = document.getElementById('login-err');
-              if (loginErr) {
-                loginErr.style.color = '#4ade80';
-                loginErr.textContent = '✓ Password aggiornata! Accedi con la nuova password.';
-                setTimeout(function() { loginErr.style.color = ''; loginErr.textContent = ''; }, 5000);
-              }
-            }, 2000);
+            var resetForm = document.getElementById('form-reset-confirm');
+            if (resetForm) {
+              resetForm.innerHTML =
+                '<div style="text-align:center;padding:1.5rem 0;">' +
+                  '<div style="width:56px;height:56px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">' +
+                    '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' +
+                  '</div>' +
+                  '<div style="font-size:1.1rem;font-weight:800;color:#f1f5f9;margin-bottom:.5rem;">Password aggiornata!</div>' +
+                  '<p style="font-size:.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1.25rem;">Chiudi questa schermata e torna su<br><strong style=\"color:#f1f5f9\">Cocktail Legend</strong> per accedere<br>con la tua nuova password.</p>' +
+                  '<div style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.55rem 1rem;font-size:.75rem;color:#64748b;">' +
+                    '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
+                    ' Puoi chiudere questa schermata' +
+                  '</div>' +
+                '</div>';
+            }
           })
           .catch(function(e) {
             btn.disabled = false;
