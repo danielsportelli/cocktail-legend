@@ -2,11 +2,11 @@
 """
 fix_cocktails.py
 ----------------
-1. Ricalcola l'ABV di tutti i drink in cocktails-it.json usando le regole
-   del prompt (gradazioni di riferimento + fattori di diluizione per tecnica)
-2. Aggiorna il campo "abv" nel JSON
-3. Produce un report delle storie che citano ingredienti/dosi/fonti competitor
-4. Salva il JSON corretto in cocktails-it-fixed.json
+1. Valida e ripara la sintassi JSON (virgole mancanti, parentesi non chiuse, ecc.)
+2. Ricalcola l'ABV di tutti i drink usando le regole del prompt
+3. Aggiorna il campo "abv" nel JSON
+4. Restituisce il JSON con i campi nell'ordine esatto del PROMPT e lo stile originale
+5. Produce abv_report.txt con il dettaglio dei calcoli
 
 USO:
     python3 fix_cocktails.py
@@ -14,14 +14,22 @@ USO:
 INPUT:  cocktails-it.json  (nella stessa cartella)
 OUTPUT: cocktails-it-fixed.json
         abv_report.txt
-        storia_audit.txt
 """
 
 import re, json, sys
 from pathlib import Path
 
 # ─────────────────────────────────────────────────────────────
-# GRADAZIONI DI RIFERIMENTO — sincronizzate col prompt ufficiale
+# ORDINE CAMPI — esattamente come nel PROMPT
+# ─────────────────────────────────────────────────────────────
+FIELD_ORDER = [
+    "id", "name", "distillato", "categoria", "abv", "sapori",
+    "garnish", "ingredienti", "prep", "storia", "frizzante",
+    "bicchiere", "img", "varianti", "iba"
+]
+
+# ─────────────────────────────────────────────────────────────
+# GRADAZIONI DI RIFERIMENTO
 # ─────────────────────────────────────────────────────────────
 ABV_REF = {
     # Distillati base 40%
@@ -95,8 +103,6 @@ ABV_REF = {
     "cannella": 0, "pepe": 0, "tabasco": 0, "worcestershire": 0,
     "zest": 0, "fetta": 0, "spicchio": 0, "rondella": 0,
 }
-
-# Lookup specifico (priorità assoluta)
 ABV_SPECIFIC = {
     # Ginger e Sake — priorità su "gin" nel lookup parziale
     "ginger ale": 0, "ginger beer": 0, "ginger beer artigianale": 0,
@@ -161,8 +167,9 @@ ABV_SPECIFIC = {
     "acquavite di frutta": 40, "acquavite di grano": 40,
     "kirsch": 40, "kirsch artigianale": 40,
     "poire williams": 40,
+    # Amaretti / liquori italiani comuni
+    "disaronno": 28, "disaronno originale": 28,
 }
-
 def get_abv(ingredient_name):
     name = ingredient_name.lower().strip()
     if name in ABV_SPECIFIC:
@@ -177,10 +184,8 @@ def get_abv(ingredient_name):
 
 def parse_ml(qty_str):
     q = qty_str.strip().lower().replace(",", ".")
-    if "top" in q:
-        return 60.0
-    if "q.b." in q or "q.b" in q:
-        return 0.0
+    if "top" in q: return 60.0
+    if "q.b." in q or "q.b" in q: return 0.0
     if "dash" in q:
         num = re.search(r"[\d.]+", q)
         return float(num.group()) * 1.0 if num else 1.0
@@ -190,17 +195,12 @@ def parse_ml(qty_str):
     return 0.0
 
 def detect_tecnica(prep):
-    if not prep:
-        return "build"
+    if not prep: return "build"
     first = prep[0].lower()
-    if "dry shake" in first or "senza ghiaccio" in first:
-        return "shake"
-    if "shakerare" in first or "shaker" in first:
-        return "shake"
-    if "mixing glass" in first or "mescolare" in first:
-        return "stir"
-    if "frullare" in first or "blend" in first or "milkshake mixer" in first:
-        return "blend"
+    if "dry shake" in first or "senza ghiaccio" in first: return "shake"
+    if "shakerare" in first or "shaker" in first: return "shake"
+    if "mixing glass" in first or "mescolare" in first: return "stir"
+    if "frullare" in first or "blend" in first: return "blend"
     return "build"
 
 DILUTION = {"shake": 0.80, "stir": 0.85, "build": 0.90, "blend": 0.85}
@@ -222,56 +222,260 @@ def calc_abv(ingredienti, prep):
     return round(abv_finale, 1), tecnica, alcol_puro, volume_totale
 
 def abv_label(abv):
-    if abv == 0: return "Analcolico"
-    if abv <= 8: return "Basso"
+    if abv == 0:  return "Analcolico"
+    if abv <= 8:  return "Basso"
     if abv <= 14: return "Medio basso"
     if abv <= 20: return "Medio"
     if abv <= 25: return "Medio alto"
     if abv <= 30: return "Alto"
     return "Molto alto"
 
+# ─────────────────────────────────────────────────────────────
+# RIPARAZIONE SINTASSI JSON
+# ─────────────────────────────────────────────────────────────
+def repair_json(raw):
+    repairs = []
 
+    # 1. Rimuovi commenti // (fuori dalle stringhe)
+    lines = raw.split('\n')
+    cleaned_lines = []
+    for i, line in enumerate(lines):
+        in_string = False
+        result = []
+        j = 0
+        while j < len(line):
+            ch = line[j]
+            if ch == '"' and (j == 0 or line[j-1] != '\\'):
+                in_string = not in_string
+            if not in_string and ch == '/' and j + 1 < len(line) and line[j+1] == '/':
+                comment = line[j:].strip()
+                if comment:
+                    repairs.append(f"  Riga {i+1}: rimosso commento -> {comment}")
+                break
+            result.append(ch)
+            j += 1
+        cleaned_lines.append(''.join(result).rstrip())
+    raw = '\n'.join(cleaned_lines)
 
-input_path = Path("cocktails-it.json")
-output_path = Path("cocktails-it-fixed.json")
+    # 2. Rimuovi commenti /* */
+    before = raw
+    raw = re.sub(r'/\*.*?\*/', '', raw, flags=re.DOTALL)
+    if raw != before:
+        repairs.append("  Rimossi commenti /* */")
+
+    # 3. Trailing comma prima di } o ]
+    before = raw
+    raw = re.sub(r',(\s*[}\]])', r'\1', raw)
+    if raw != before:
+        repairs.append("  Rimosse trailing comma prima di } o ]")
+
+    # 4. Virgola mancante tra oggetti } {
+    before = raw
+    raw = re.sub(r'}\s*\n(\s*){', r'},\n\1{', raw)
+    if raw != before:
+        repairs.append("  Aggiunte virgole mancanti tra oggetti")
+
+    # 5. Controlla bilanciamento parentesi
+    opens = {'(': 0, '[': 0, '{': 0}
+    pairs = {')': '(', ']': '[', '}': '{'}
+    in_string = False
+    prev = ''
+    for ch in raw:
+        if ch == '"' and prev != '\\':
+            in_string = not in_string
+        if not in_string:
+            if ch in opens:
+                opens[ch] += 1
+            elif ch in pairs:
+                opens[pairs[ch]] -= 1
+        prev = ch
+
+    balance_errors = []
+    if opens['('] != 0:
+        balance_errors.append(f"parentesi tonde sbilanciate: {opens['(']:+d}")
+    if opens['['] != 0:
+        balance_errors.append(f"parentesi quadre sbilanciate: {opens['[']:+d}")
+    if opens['{'] != 0:
+        balance_errors.append(f"parentesi graffe sbilanciate: {opens['{']:+d}")
+
+    return raw, repairs, balance_errors
+
+# ─────────────────────────────────────────────────────────────
+# SERIALIZZAZIONE JSON — stile PROMPT
+# ─────────────────────────────────────────────────────────────
+def esc(s):
+    """Escape stringa per JSON."""
+    return s.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n').replace('\r', '\\r').replace('\t', '\\t')
+
+def serialize_value(val, indent_level, key=None):
+    ind  = "  " * indent_level
+    ind1 = "  " * (indent_level + 1)
+
+    if val is None:         return "null"
+    if isinstance(val, bool): return "true" if val else "false"
+    if isinstance(val, int):  return str(val)
+    if isinstance(val, float):return str(val)
+    if isinstance(val, str):  return f'"{esc(val)}"'
+
+    if isinstance(val, list):
+        if len(val) == 0:
+            return "[]"
+
+        # ingredienti: lista di ["qty", "name"]
+        if key == "ingredienti":
+            parts = []
+            for item in val:
+                if isinstance(item, list):
+                    inner = ", ".join(f'"{esc(x)}"' if isinstance(x, str) else str(x) for x in item)
+                    parts.append(f"{ind1}[{inner}]")
+                else:
+                    parts.append(f"{ind1}{serialize_value(item, indent_level+1)}")
+            return "[\n" + ",\n".join(parts) + "\n" + ind + "]"
+
+        # distillato, sapori — inline su riga singola: ["Val1", "Val2"]
+        if key in ("distillato", "sapori"):
+            parts = [serialize_value(item, 0) for item in val]
+            return "[" + ", ".join(parts) + "]"
+
+        # prep — ogni passo su riga propria
+        if key == "prep":
+            parts = []
+            for item in val:
+                parts.append(f"{ind1}{serialize_value(item, indent_level+1)}")
+            return "[\n" + ",\n".join(parts) + "\n" + ind + "]"
+
+        # varianti — ogni oggetto su riga singola inline: {"nome": "X", "note": "Y"}
+        if key == "varianti":
+            parts = []
+            for item in val:
+                if isinstance(item, dict):
+                    inner = ", ".join(f'"{k}": "{esc(v)}"' for k, v in item.items())
+                    parts.append(f"{ind1}{{{inner}}}")
+                else:
+                    parts.append(f"{ind1}{serialize_value(item, indent_level+1)}")
+            return "[\n" + ",\n".join(parts) + "\n" + ind + "]"
+
+        # array generico
+        parts = []
+        for item in val:
+            parts.append(f"{ind1}{serialize_value(item, indent_level+1)}")
+        return "[\n" + ",\n".join(parts) + "\n" + ind + "]"
+
+    if isinstance(val, dict):
+        return serialize_object(val, indent_level)
+
+    return f'"{esc(str(val))}"'
+
+def serialize_object(obj, indent_level):
+    ind  = "  " * indent_level
+    ind1 = "  " * (indent_level + 1)
+
+    # Ordina i campi: se è un cocktail usa FIELD_ORDER
+    if "id" in obj:
+        ordered = [k for k in FIELD_ORDER if k in obj]
+        ordered += [k for k in obj if k not in FIELD_ORDER]
+    else:
+        ordered = list(obj.keys())
+
+    parts = []
+    for k in ordered:
+        v = obj[k]
+        parts.append(f'{ind1}"{k}": {serialize_value(v, indent_level+1, key=k)}')
+
+    return "{\n" + ",\n".join(parts) + "\n" + ind + "}"
+
+def serialize_cocktails(data):
+    """Output finale: array JSON standard."""
+    parts = [serialize_object(c, 0) for c in data]
+    inner = ",\n".join(parts)
+    return "[\n" + inner + "\n]\n"
+
+# ─────────────────────────────────────────────────────────────
+# MAIN
+# ─────────────────────────────────────────────────────────────
+input_path      = Path("cocktails-it.json")
+output_path     = Path("cocktails-it-fixed.json")
 abv_report_path = Path("abv_report.txt")
 
-print(f"Caricamento {input_path}...")
+print("=" * 60)
+print("  fix_cocktails.py")
+print("=" * 60)
+print(f"\n[1/4] Caricamento {input_path}...")
+
 with open(input_path, encoding="utf-8") as f:
     raw = f.read()
 
-cleaned = re.sub(r'(?<!\:)\s*//(?![\w./])[^\n]*', '', raw)
-data = json.loads(cleaned)
-print(f"Cocktail caricati: {len(data)}")
+# ── Riparazione sintassi ──
+print("[2/4] Analisi e riparazione sintassi JSON...")
+raw_repaired, repairs, balance_errors = repair_json(raw)
 
+if repairs:
+    print("  Riparazioni effettuate:")
+    for r in repairs:
+        print(r)
+else:
+    print("  Nessuna riparazione necessaria")
+
+if balance_errors:
+    print("\n  ATTENZIONE - parentesi non bilanciate:")
+    for e in balance_errors:
+        print(f"     - {e}")
+    print("     Controlla manualmente il file prima di continuare.")
+
+# ── Parse JSON ──
+try:
+    to_parse = raw_repaired.strip()
+    if to_parse.endswith(','):
+        to_parse = to_parse[:-1]
+    if not to_parse.startswith('['):
+        to_parse = '[' + to_parse + ']'
+    data = json.loads(to_parse)
+    print(f"  JSON valido - {len(data)} cocktail caricati")
+except json.JSONDecodeError as e:
+    print(f"\n  ERRORE JSON non riparabile automaticamente:")
+    print(f"    {e}")
+    print("\n  Apri il file in VS Code e cerca la riga indicata nell'errore.")
+    sys.exit(1)
+
+# ── Calcolo ABV ──
+print(f"\n[3/4] Calcolo ABV...")
 abv_changes = []
 abv_report_lines = []
 
 for c in data:
-    name = c.get("name", "?")
+    name        = c.get("name", "?")
     ingredienti = c.get("ingredienti", [])
-    prep = c.get("prep", [])
-    old_abv = c.get("abv", "?")
+    prep        = c.get("prep", [])
+    old_abv     = c.get("abv", "?")
 
     abv_val, tecnica, alcol, vol = calc_abv(ingredienti, prep)
     new_label = abv_label(abv_val)
 
-    line = f"{name:<35} | {tecnica:<6} | alcol={alcol:.1f}ml vol={vol:.1f}ml | {abv_val:.1f}% | {old_abv} → {new_label}"
+    line = (f"{name:<35} | {tecnica:<6} | "
+            f"alcol={alcol:.1f}ml vol={vol:.1f}ml | "
+            f"{abv_val:.1f}% | {old_abv} -> {new_label}")
     abv_report_lines.append(line)
 
     if old_abv != new_label:
         abv_changes.append((name, old_abv, new_label, abv_val))
         c["abv"] = new_label
 
+print(f"  ABV cambiati: {len(abv_changes)} / {len(data)}")
+for name, old, new, val in abv_changes:
+    print(f"     - {name}: {old} -> {new}  ({val:.1f}%)")
 
-print(f"\nSalvataggio {output_path}...")
+# ── Scrittura output ──
+print(f"\n[4/4] Scrittura output...")
+
+output_str = serialize_cocktails(data)
 with open(output_path, "w", encoding="utf-8") as f:
-    json.dump(data, f, ensure_ascii=False, indent=2)
+    f.write(output_str)
+print(f"  {output_path}")
 
 with open(abv_report_path, "w", encoding="utf-8") as f:
-    f.write("ABV REPORT — tutti i drink\n")
+    f.write("ABV REPORT\n")
     f.write("=" * 90 + "\n")
-    f.write(f"{'Nome':<35} | {'Tecnica':<6} | {'Calcolo':<30} | {'ABV%':<6} | Vecchio → Nuovo\n")
+    f.write(f"{'Nome':<35} | {'Tecnica':<6} | {'Calcolo':<30} | {'ABV%':<6} | Vecchio -> Nuovo\n")
     f.write("-" * 90 + "\n")
     for line in abv_report_lines:
         f.write(line + "\n")
@@ -279,12 +483,13 @@ with open(abv_report_path, "w", encoding="utf-8") as f:
     f.write(f"CAMBIAMENTI ABV: {len(abv_changes)}\n")
     f.write("-" * 90 + "\n")
     for name, old, new, val in abv_changes:
-        f.write(f"  {name:<35} | {old} → {new}  ({val:.1f}%)\n")
-
+        f.write(f"  {name:<35} | {old} -> {new}  ({val:.1f}%)\n")
+print(f"  {abv_report_path}")
 
 print(f"\n{'='*60}")
-print(f"ABV cambiati: {len(abv_changes)} / {len(data)}")
-print(f"\nFile generati:")
-print(f"  {output_path}   ← JSON corretto da usare")
-print(f"  {abv_report_path}   ← dettaglio calcoli ABV")
-print(f"{'='*60}")
+print(f"  Cocktail processati : {len(data)}")
+print(f"  ABV cambiati        : {len(abv_changes)}")
+print(f"  Riparazioni JSON    : {len(repairs)}")
+if balance_errors:
+    print(f"  Errori strutturali  : {len(balance_errors)} - verifica manuale!")
+print(f"{'='*60}\n")

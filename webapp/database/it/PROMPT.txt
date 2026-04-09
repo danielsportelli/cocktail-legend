@@ -267,7 +267,7 @@ GRADAZIONI DI RIFERIMENTO (valori medi da usare):
 - Crème de violette: 16%
 - Crème de menthe (bianca o verde): 25%
 - Kahlúa / Liquore al caffè: 20%
-- Amaretto: 28%
+- Disaronno: 28%
 - Fernet / Amaro ad alta gradazione (Fernet-Branca, Amaro Montenegro): 39%
 - Cynar: 17%
 - Dom Benedictine: 40%
