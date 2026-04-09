@@ -265,6 +265,7 @@ GRADAZIONI DI RIFERIMENTO (valori medi da usare):
 - Maraschino: 32%
 - Orange curaçao / Blue curaçao / Triple sec generico: 30%
 - Liquori alla frutta generici (liquore al lampone, liquore alla pesca ecc.): 25%
+- Licor 43: 31%
 - Crème da banane: 20%
 - Crème de cassis: 20%
 - Crème de mûre: 20%
