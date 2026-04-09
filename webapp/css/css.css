@@ -882,10 +882,17 @@ body::before{
   margin:auto;
 }
 .login-title{
-  font-size:1.9rem;font-weight:900;letter-spacing:-.04em;
-  background:linear-gradient(135deg,var(--blue-l),var(--amber));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;margin-bottom:1.25rem;
+  font-size:1rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--amber);
+  display:inline-block;
+  padding:.28rem .65rem;
+  border-radius:8px;
+  background:
+    linear-gradient(#0a0f1e,#0a0f1e) padding-box,
+    conic-gradient(from 0deg,var(--amber) 0deg,var(--blue-l) 180deg,var(--amber) 360deg) border-box;
+  border:2px solid transparent;
+  margin-bottom:2rem;
+  align-self:center;
 }
 /* Auth tabs */
 .auth-tabs{
