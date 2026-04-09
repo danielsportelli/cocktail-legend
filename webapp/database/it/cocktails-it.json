@@ -3041,7 +3041,7 @@
   "ingredienti": [
     ["60 ml", "Rum agricolo"],
     ["2 bspoon", "Zucchero bianco"],
-    ["1", "Spicchio di lime"]
+    ["1 spicchio", "Lime"]
   ],
   "prep": [
     "Versare lo zucchero in un tumbler basso, spremere lo spicchio di lime e lasciarlo cadere all'interno",
@@ -4590,7 +4590,7 @@
     ["45 ml", "Gin Old Tom"],
     ["45 ml", "Vermouth dry"],
     ["4 dash", "Orange bitters"],
-    ["2", "Zest di limone"]
+    ["2 zest", "Limone"]
   ],
   "prep": [
     "Shakerare tutto con ghiaccio",
@@ -5768,7 +5768,7 @@
   "sapori": ["Agrumato", "Dolce", "Ricco"],
   "garnish": "Zest di limone",
   "ingredienti": [
-    ["60 ml", "Whiskey  bourbon"],
+    ["60 ml", "Whiskey bourbon"],
     ["22,5 ml", "Succo di limone"],
     ["15 ml", "Miele"]
   ],
@@ -7036,7 +7036,7 @@
   "ingredienti": [
     ["30 ml", "Rum"],
     ["30 ml", "Rum scuro"],
-    ["30 ml", "Rum backstrap overproof 151"],
+    ["30 ml", "Rum blackstrap overproof 151"],
     ["22,5 ml", "Succo di lime"],
     ["22,5 ml", "Succo di pompelmo"],
     ["22,5 ml", "Miele"],
