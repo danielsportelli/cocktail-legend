@@ -259,6 +259,12 @@ function switchAuthTab(tab) {
     if (tabRegister)   tabRegister.classList.add('active');
     if (tabs)          tabs.style.display = '';
     if (overlay)       overlay.style.opacity = '1';
+    // Ripristina bottone e flag — utente torna indietro dalla schermata verify
+    var regBtnEl = document.getElementById('reg-btn');
+    if (regBtnEl) { regBtnEl.disabled = false; regBtnEl.textContent = 'Crea account →'; }
+    window._isRegistering = false;
+    var regErrEl = document.getElementById('reg-err');
+    if (regErrEl) regErrEl.textContent = '';
   } else if (tab === 'verify') {
     if (formVerify) formVerify.style.display = '';
     if (tabs)       tabs.style.display = 'none';
@@ -4397,15 +4403,21 @@ function populateRisGlass(){
 
       var ok = await saveNickname(uid, nick);
       if (ok) {
-        // Rimuovi modale
+        // Rimuovi modale nickname
         modal.style.opacity = '0';
         modal.style.transition = 'opacity .25s';
         setTimeout(function() {
           if (modal.parentNode) modal.parentNode.removeChild(modal);
+          // Aggiorna drawer account se aperto
+          if (typeof renderAccountTab === 'function') renderAccountTab();
+          else if (window._renderAccountTab) window._renderAccountTab();
+          // Mostra popup installa PWA (solo se non già in standalone)
+          var alreadyPWA = window.matchMedia('(display-mode: standalone)').matches
+                        || window.navigator.standalone === true;
+          if (!alreadyPWA) {
+            setTimeout(function() { showInstallPWAModal(); }, 400);
+          }
         }, 250);
-        // Aggiorna drawer account se aperto
-        if (typeof renderAccountTab === 'function') renderAccountTab();
-        else if (window._renderAccountTab) window._renderAccountTab();
       } else {
         btn.disabled = false;
         btn.textContent = 'Continua';
@@ -5156,3 +5168,79 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 })();
+
+// ═══════════════════════════════════════════════════════════
+// POPUP INSTALLA PWA — mostrato dopo conferma nickname
+// ═══════════════════════════════════════════════════════════
+function showInstallPWAModal() {
+  if (document.getElementById('pwa-install-modal')) return;
+
+  var ua      = navigator.userAgent || '';
+  var isIOS   = /iPhone|iPad|iPod/i.test(ua);
+  var isAndroid = /Android/i.test(ua);
+  if (!isIOS && !isAndroid) return; // desktop — non mostrare
+
+  var stepsIOS = [
+    'Apri <strong>Safari</strong> — se sei in un altro browser, copia il link e incollalo in Safari',
+    'Tocca l\'icona <strong>Condividi</strong> (□↑) in basso al centro',
+    'Scorri e tocca <strong>Aggiungi a schermata Home</strong>',
+    'Tocca <strong>Aggiungi</strong> in alto a destra'
+  ];
+  var stepsAndroid = [
+    'Apri <strong>Chrome</strong> — se sei in un altro browser, copia il link e incollalo in Chrome',
+    'Tocca il menu <strong>⋮</strong> in alto a destra',
+    'Tocca <strong>Aggiungi a schermata Home</strong> oppure <strong>Installa app</strong>',
+    'Tocca <strong>Aggiungi</strong> per confermare'
+  ];
+
+  var steps   = isIOS ? stepsIOS : stepsAndroid;
+  var stepsHtml = steps.map(function(s, i) {
+    return '<div style="display:flex;align-items:flex-start;gap:.65rem;margin-bottom:.65rem;">'
+      + '<div style="flex-shrink:0;width:22px;height:22px;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;color:#60a5fa;margin-top:.1rem;">' + (i+1) + '</div>'
+      + '<div style="font-size:.8rem;color:#cbd5e1;line-height:1.55;">' + s + '</div>'
+      + '</div>';
+  }).join('');
+
+  var modal = document.createElement('div');
+  modal.id = 'pwa-install-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:99997;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:0 .75rem .75rem;animation:fadeIn .25s ease;';
+
+  modal.innerHTML =
+    '<div style="background:#1e293b;border:1px solid rgba(255,255,255,.08);border-radius:20px;width:100%;max-width:420px;padding:1.5rem 1.4rem 1.75rem;position:relative;">'
+
+      // Handle
+      + '<div style="width:36px;height:4px;background:rgba(255,255,255,.18);border-radius:2px;margin:0 auto .9rem;"></div>'
+
+      // Titolo
+      + '<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem;">'
+        + '<div style="width:36px;height:36px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'
+          + '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10m0 0l-3-3m3 3l3-3"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>'
+        + '</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f1f5f9;letter-spacing:-.01em;">Salva l\'app sul telefono</div>'
+      + '</div>'
+      + '<div style="font-size:.78rem;color:#64748b;margin-bottom:1.25rem;">Accedi più velocemente senza aprire il browser.</div>'
+
+      // Steps
+      + stepsHtml
+
+      // Bottoni
+      + '<div style="display:flex;gap:.6rem;margin-top:1.1rem;">'
+        + '<button id="pwa-install-skip" style="flex:1;padding:.72rem;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#64748b;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">Dopo</button>'
+        + '<button id="pwa-install-ok" style="flex:2;padding:.72rem;background:linear-gradient(135deg,#f59e0b,#d97706);border:none;border-radius:10px;color:#0a0f1e;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent;">Ok, capito!</button>'
+      + '</div>'
+
+    + '</div>';
+
+  document.body.appendChild(modal);
+
+  function closeModal() {
+    modal.style.opacity = '0';
+    modal.style.transition = 'opacity .2s';
+    setTimeout(function() { if (modal.parentNode) modal.parentNode.removeChild(modal); }, 200);
+  }
+
+  document.getElementById('pwa-install-skip').addEventListener('click', closeModal);
+  document.getElementById('pwa-install-ok').addEventListener('click', closeModal);
+  // Chiudi toccando fuori
+  modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+}

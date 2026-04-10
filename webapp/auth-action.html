@@ -127,54 +127,16 @@ body{display:flex;align-items:flex-start;justify-content:center;padding:2rem 1.2
 
   <!-- ── VERIFICA EMAIL ── -->
   <div id="section-verify" style="display:none;">
-    <div class="confirm-section">
+    <div style="text-align:center;padding:1rem 0;">
       <div class="confirm-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <div class="confirm-title">Email verificata!</div>
-      <div class="confirm-sub">Il tuo account Cocktail Legend è attivo.<br>Prima di accedere, leggi come installare l'app.</div>
-    </div>
-    <div class="install-section" id="install-section">
-      <div class="install-title">📲 Salva l'app sul tuo smartphone</div>
-      <div class="install-sub">Che tipo di smartphone hai?</div>
-      <div class="os-toggle">
-        <button class="os-btn active" id="btn-ios" onclick="switchOS('ios')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          iPhone / iPad
-        </button>
-        <button class="os-btn" id="btn-android" onclick="switchOS('android')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 15.341a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-9 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM2.1 8.4l1.8-3.1a.5.5 0 0 1 .87.5l-1.8 3.1A.5.5 0 0 1 2.1 8.4zm19.8 0a.5.5 0 0 1-.87.5l-1.8-3.1a.5.5 0 1 1 .87-.5l1.8 3.1zM5 8h14v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8zm2-5.5 1.5 2.6h7L17 2.5a.5.5 0 0 1 .87-.5l-1.6 2.7a2 2 0 0 1 .73 1.3H7a2 2 0 0 1 .73-1.3L6.13 2a.5.5 0 1 1 .87-.5z"/></svg>
-          Android
-        </button>
-      </div>
-      <div class="os-panel active" id="panel-ios">
-        <div class="steps">
-          <div class="step"><div class="step-num">1</div><div class="step-text">Apri questa pagina in <strong>Safari</strong> — se sei in un altro browser copia il link e incollalo in Safari</div></div>
-          <div class="step"><div class="step-num">2</div><div class="step-text">Tocca l'icona <span class="tag">⎋ Condividi</span> in basso al centro nella barra di Safari</div></div>
-          <div class="step"><div class="step-num">3</div><div class="step-text">Scorri verso il basso e tocca <span class="tag">Aggiungi a schermata Home</span></div></div>
-          <div class="step"><div class="step-num">4</div><div class="step-text">Tocca <strong>Aggiungi</strong> in alto a destra — l'icona di Cocktail Legend apparirà sulla tua home</div></div>
-        </div>
-      </div>
-      <div class="os-panel" id="panel-android">
-        <div class="steps">
-          <div class="step"><div class="step-num">1</div><div class="step-text">Apri questa pagina in <strong>Chrome</strong> — se sei in un altro browser copia il link e incollalo in Chrome</div></div>
-          <div class="step"><div class="step-num">2</div><div class="step-text">Tocca il menu <span class="tag">⋮</span> in alto a destra</div></div>
-          <div class="step"><div class="step-num">3</div><div class="step-text">Tocca <span class="tag">Aggiungi a schermata Home</span> oppure <span class="tag">Installa app</span></div></div>
-          <div class="step"><div class="step-num">4</div><div class="step-text">Tocca <strong>Aggiungi</strong> — l'icona di Cocktail Legend apparirà sulla tua home</div></div>
-        </div>
-      </div>
-      <button class="btn-ok" id="btn-ok" onclick="showAccess()">
-        Ok, ho capito!
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-      </button>
-    </div>
-    <div class="access-section" id="access-section">
-      <div class="access-msg">Ora puoi accedere a Cocktail Legend.<br>Se hai già salvato l'app, aprila dalla home.</div>
+      <div class="confirm-sub" style="margin-bottom:2rem;">Il tuo account Cocktail Legend è attivo.<br>Clicca il pulsante per accedere.</div>
       <a class="btn-accedi" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html">
         Accedi a Cocktail Legend
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <div class="access-note">Non hai ancora salvato l'app? Nessun problema,<br>puoi sempre farlo in seguito dal browser.</div>
     </div>
   </div>
 
@@ -191,7 +153,7 @@ body{display:flex;align-items:flex-start;justify-content:center;padding:2rem 1.2
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-import { getAuth, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { getAuth, confirmPasswordReset, applyActionCode } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDkIK5KD-LHCdAhxHVS-bbnwP9Qak2vTxc",
@@ -305,9 +267,18 @@ if (mode === 'resetPassword' && oobCode) {
 
 // ── VERIFICA EMAIL ──────────────────────────────────────────
 else if (mode === 'verifyEmail' && oobCode) {
+  try {
+    await applyActionCode(auth, oobCode);
+  } catch(e) {
+    // Link scaduto o già usato — mostra errore
+    if (e.code === 'auth/expired-action-code' || e.code === 'auth/invalid-action-code') {
+      showError();
+      return;
+    }
+    // Qualsiasi altro errore — mostriamo comunque la schermata (potrebbe essere già verificata)
+  }
   hideLoading();
   document.getElementById('section-verify').style.display = 'block';
-  if (/android/i.test(navigator.userAgent || '')) switchOS('android');
 }
 
 // ── FALLBACK ────────────────────────────────────────────────
