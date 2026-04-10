@@ -469,13 +469,33 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
     box = document.getElementById('srch-suggestions');
     if(!inp || !box) return;
 
+    var clearBtn = document.getElementById('srch-clear');
+
+    function updateClearBtn(){
+      if(clearBtn) clearBtn.style.display = inp.value.length > 0 ? 'flex' : 'none';
+    }
+
     inp.addEventListener('input', function(){
       Q = this.value;
       lastQ = Q;
       activeIdx = -1;
       showSuggestions(Q);
       render();
+      updateClearBtn();
     });
+
+    if(clearBtn){
+      clearBtn.addEventListener('pointerdown', function(e){
+        e.preventDefault(); // evita che l'input perda il focus prima del click
+        inp.value = '';
+        Q = '';
+        lastQ = '';
+        closeSuggestions();
+        render();
+        updateClearBtn();
+        inp.focus();
+      });
+    }
 
     inp.addEventListener('keydown', function(e){
       var items = box.querySelectorAll('.srch-sug-item');
