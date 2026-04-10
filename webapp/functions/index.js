@@ -1,6 +1,7 @@
 const { onSchedule } = require("firebase-functions/v2/scheduler");
 const { initializeApp } = require("firebase-admin/app");
 const { getFirestore } = require("firebase-admin/firestore");
+const { getAuth } = require("firebase-admin/auth");
 
 initializeApp();
 
@@ -145,5 +146,54 @@ exports.resetMensile = onSchedule(
     });
     await batch.commit();
     console.log("Reset mensile completato — " + snapshot.size + " utenti");
+  }
+);
+
+// ═══════════════════════════════════════════════════
+// PULIZIA UTENTI NON VERIFICATI — ogni notte alle 02:00 (Roma)
+// Elimina da Auth + Firestore gli utenti con email non verificata
+// creati da più di 48 ore
+// ═══════════════════════════════════════════════════
+exports.cleanUnverifiedUsers = onSchedule(
+  {
+    schedule: "0 2 * * *",
+    timeZone: "Europe/Rome",
+    region: "europe-west1",
+  },
+  async () => {
+    const auth = getAuth();
+    const db   = getFirestore();
+
+    const QUARANTOTTO_ORE_MS = 48 * 60 * 60 * 1000;
+    const cutoff = new Date(Date.now() - QUARANTOTTO_ORE_MS);
+
+    let deleted = 0;
+    let pageToken = undefined;
+
+    do {
+      const result = await auth.listUsers(1000, pageToken);
+
+      for (const user of result.users) {
+        if (user.emailVerified) continue;
+
+        const createdAt = new Date(user.metadata.creationTime);
+        if (createdAt > cutoff) continue;
+
+        try {
+          const docRef = db.collection("users").doc(user.uid);
+          const snap   = await docRef.get();
+          if (snap.exists) await docRef.delete();
+          await auth.deleteUser(user.uid);
+          deleted++;
+          console.log(`Eliminato: ${user.email} (uid: ${user.uid})`);
+        } catch (err) {
+          console.error(`Errore su ${user.uid}:`, err.message);
+        }
+      }
+
+      pageToken = result.pageToken;
+    } while (pageToken);
+
+    console.log(`cleanUnverifiedUsers — eliminati: ${deleted} utenti`);
   }
 );
