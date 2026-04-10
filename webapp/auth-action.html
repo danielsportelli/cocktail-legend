@@ -155,6 +155,9 @@ function hideLoading() {
 }
 
 function showError() {
+  var isPWA = window.matchMedia('(display-mode: standalone)').matches
+           || window.navigator.standalone === true;
+  if (isPWA) { window.location.replace(WEBAPP_URL); return; }
   hideLoading();
   document.getElementById('section-error').style.display = 'block';
 }
@@ -207,7 +210,15 @@ if (mode === 'resetPassword' && oobCode) {
     try {
       await confirmPasswordReset(auth, oobCode, p1);
 
-      // Nascondi form, mostra stato finale
+      // Se siamo nella PWA → redirect diretto al login
+      const isPWA = window.matchMedia('(display-mode: standalone)').matches
+                 || window.navigator.standalone === true;
+      if (isPWA) {
+        window.location.replace(WEBAPP_URL);
+        return;
+      }
+
+      // WebView / browser → mostra messaggio statico
       document.querySelector('.reset-box').style.display = 'none';
       document.getElementById('done-section').style.display = 'block';
 
@@ -237,6 +248,15 @@ else if (mode === 'verifyEmail' && oobCode) {
     }
     // Qualsiasi altro errore — mostriamo comunque la schermata (potrebbe essere già verificata)
   }
+
+  // Se siamo nella PWA → redirect diretto al login
+  const isPWA2 = window.matchMedia('(display-mode: standalone)').matches
+              || window.navigator.standalone === true;
+  if (isPWA2) {
+    window.location.replace(WEBAPP_URL);
+    return;
+  }
+
   hideLoading();
   document.getElementById('section-verify').style.display = 'block';
 }
