@@ -4744,6 +4744,15 @@ function closeResetPasswordModal() {
         sendBtn.style.background = '#1e293b';
         sendBtn.style.color = '#64748b';
         sendBtn.style.border = '1px solid rgba(255,255,255,0.08)';
+        // Aggiungi bottone "Torna al login"
+        if (!document.getElementById('resetBackToLogin')) {
+          var backBtn = document.createElement('button');
+          backBtn.id = 'resetBackToLogin';
+          backBtn.textContent = '← Torna al login';
+          backBtn.style.cssText = 'width:100%;margin-top:.75rem;padding:.78rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--txt);font-family:Inter,sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:background .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;';
+          backBtn.addEventListener('click', function() { closeResetPasswordModal(); });
+          sendBtn.parentNode.insertBefore(backBtn, sendBtn.nextSibling);
+        }
       })
       .catch(function(error) {
         sendBtn.disabled = false;
