@@ -14,7 +14,7 @@
   --txt:#f1f5f9;--txt2:#cbd5e1;--brd:rgba(255,255,255,.08);--dim:#64748b;
 }
 html,body{min-height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;}
-body{display:flex;align-items:flex-start;justify-content:center;padding:2rem 1.25rem 3rem;padding-top:max(2rem,env(safe-area-inset-top));}
+body{display:flex;align-items:center;justify-content:center;min-height:100svh;padding:2rem 1.25rem 3rem;padding-top:max(2rem,env(safe-area-inset-top));}
 
 .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1rem;width:100%;}
 .loading-spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.08);border-top-color:var(--amber);border-radius:50%;animation:spin .7s linear infinite;}
@@ -315,15 +315,12 @@ function showAccess() {
 function openApp() {
   var ua = navigator.userAgent || '';
   var isAndroid = /Android/i.test(ua);
-  var isWebView = isAndroid && (
-    /wv/.test(ua) ||
-    /FBAN|FBAV|Instagram|GSA/.test(ua) ||
-    !/Chrome\/[.0-9]/.test(ua)
-  );
-  if (isAndroid && isWebView) {
-    // Forza apertura in Chrome — se PWA installata Chrome la apre in standalone
+  if (isAndroid) {
+    // Su Android usa sempre intent URL — esce dal WebView e apre Chrome
+    // Se PWA installata, Chrome la riconosce e la apre in standalone
     window.location.href = 'intent://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fdanielsportelli.github.io%2Fcocktail-legend%2Fwebapp%2Fcocktail-legend.html;end';
   } else {
+    // iOS e desktop — href normale, Safari gestisce PWA automaticamente
     window.location.href = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html';
   }
 }

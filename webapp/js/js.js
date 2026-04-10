@@ -5190,7 +5190,7 @@ function showInstallPWAModal() {
     'Apri <strong>Chrome</strong> — se sei in un altro browser, copia il link e incollalo in Chrome',
     'Tocca il menu <strong>⋮</strong> in alto a destra',
     'Tocca <strong>Aggiungi a schermata Home</strong> oppure <strong>Installa app</strong>',
-    'Tocca <strong>Aggiungi</strong> per confermare'
+    'Tocca <strong>Installa</strong> o <strong>Aggiungi</strong> per far apparire l\'icona Cocktail Legend sul tuo smartphone assieme alle altre app'
   ];
 
   var steps   = isIOS ? stepsIOS : stepsAndroid;
@@ -5226,7 +5226,7 @@ function showInstallPWAModal() {
       // Bottoni
       + '<div style="display:flex;gap:.6rem;margin-top:1.1rem;">'
         + '<button id="pwa-install-skip" style="flex:1;padding:.72rem;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#64748b;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">Dopo</button>'
-        + '<button id="pwa-install-ok" style="flex:2;padding:.72rem;background:linear-gradient(135deg,#f59e0b,#d97706);border:none;border-radius:10px;color:#0a0f1e;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent;">Ok, capito!</button>'
+        + '<button id="pwa-install-ok" style="flex:2;padding:.72rem;background:linear-gradient(135deg,#f59e0b,#d97706);border:none;border-radius:10px;color:#0a0f1e;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent;">Ok, fatto!</button>'
       + '</div>'
 
     + '</div>';
