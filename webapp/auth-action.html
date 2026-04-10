@@ -313,15 +313,27 @@ function showAccess() {
   }, 300);
 }
 function openApp() {
+  var WEBAPP = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html';
   var ua = navigator.userAgent || '';
   var isAndroid = /Android/i.test(ua);
+
   if (isAndroid) {
-    // Su Android usa sempre intent URL — esce dal WebView e apre Chrome
-    // Se PWA installata, Chrome la riconosce e la apre in standalone
-    window.location.href = 'intent://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fdanielsportelli.github.io%2Fcocktail-legend%2Fwebapp%2Fcocktail-legend.html;end';
+    // Crea un link con target="_blank" e simula il click
+    // Alcuni WebView (Gmail incluso) aprono _blank nel browser esterno
+    var a = document.createElement('a');
+    a.href = WEBAPP;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    // Fallback dopo 800ms: se ancora qui, prova intent URL
+    setTimeout(function() {
+      window.location.href = 'intent://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fdanielsportelli.github.io%2Fcocktail-legend%2Fwebapp%2Fcocktail-legend.html;end';
+    }, 800);
   } else {
-    // iOS e desktop — href normale, Safari gestisce PWA automaticamente
-    window.location.href = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html';
+    window.location.href = WEBAPP;
   }
 }
 </script>
