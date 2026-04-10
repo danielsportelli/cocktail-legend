@@ -1128,9 +1128,9 @@ function updatePills() {
       if (badge) badge.remove();
     }
   });
-  // Mostra/nascondi pill reset
+  // fpill-reset nascosto sempre dalla pills bar — il reset appare vicino al contatore
   var resetPill = document.getElementById('fpill-reset');
-  if (resetPill) resetPill.classList.toggle('hidden', !anyActive);
+  if (resetPill) resetPill.classList.add('hidden');
   // Riordina: pill attive prima
   reorderPills();
 }
@@ -1268,14 +1268,13 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 function updateBadges() {
-  // tag rimovibili
-
-  // tag rimovibili
   var tagsEl = document.getElementById("active-tags");
   tagsEl.innerHTML = "";
   var allKeys = ["cat","dis","abv","frz","bic","iba"];
+  var totalActive = 0;
   for(var ki=0;ki<allKeys.length;ki++){
     var k=allKeys[ki];
+    totalActive += AF[k].length;
     for(var vi=0;vi<AF[k].length;vi++){
       var v=AF[k][vi];
       var tag=document.createElement("div");
@@ -1293,6 +1292,19 @@ function updateBadges() {
       });
       tagsEl.appendChild(tag);
     }
+  }
+  // Bottone Reset inline — appare solo se filtri attivi >= 2
+  if (totalActive >= 2) {
+    var resetBtn = document.createElement("button");
+    resetBtn.className = "active-tag-reset";
+    resetBtn.innerHTML = '&#x2715; Reset';
+    resetBtn.addEventListener("click", function(){
+      AF = {cat:[], dis:[], abv:[], frz:[], bic:[], iba:[]};
+      updateBadges();
+      render();
+      if (typeof updatePills === 'function') updatePills();
+    });
+    tagsEl.appendChild(resetBtn);
   }
 }
 

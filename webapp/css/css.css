@@ -599,6 +599,16 @@ body::before{
   cursor:pointer;transition:all .2s
 }
 .active-tag:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.3);color:#f87171}
+.active-tag-reset{
+  display:flex;align-items:center;gap:.3rem;
+  background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.35);
+  color:#f87171;border-radius:20px;
+  padding:.18rem .55rem;font-size:.65rem;font-weight:700;
+  cursor:pointer;transition:all .2s;
+  font-family:inherit;white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
+}
+.active-tag-reset:active{background:rgba(239,68,68,.28);}
 .active-tag .x{font-size:.7rem;opacity:.7}
 
 /* MAIN */
