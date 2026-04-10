@@ -182,6 +182,9 @@ function showError() {
   document.getElementById('section-error').style.display = 'block';
 }
 
+// Tutto il codice async wrappato in IIFE — compatibile con tutti i browser/WebView
+(async function() {
+
 // ── RESET PASSWORD ──────────────────────────────────────────
 if (mode === 'resetPassword' && oobCode) {
   hideLoading();
@@ -285,6 +288,8 @@ else if (mode === 'verifyEmail' && oobCode) {
 else {
   window.location.replace(WEBAPP_URL);
 }
+
+})(); // fine async IIFE
 </script>
 
 <script>
