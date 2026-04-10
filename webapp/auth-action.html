@@ -57,6 +57,8 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
 .error-icon{width:64px;height:64px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;}
 .error-title{font-size:1.2rem;font-weight:800;color:#f87171;margin-bottom:.4rem;}
 .error-sub{font-size:.85rem;color:var(--txt2);line-height:1.55;margin-bottom:1.5rem;}
+.btn-accedi{display:none;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:1rem 1.5rem;margin-top:1.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:13px;font-family:'Inter',sans-serif;font-size:1rem;font-weight:800;letter-spacing:.01em;cursor:pointer;text-decoration:none;box-shadow:0 6px 22px rgba(245,158,11,.35);transition:all .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.btn-accedi:active{transform:scale(.98);}
 </style>
 </head>
 <body>
@@ -92,10 +94,13 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <div class="done-title">Password aggiornata!</div>
-      <div style="font-size:.88rem;color:var(--txt2);line-height:1.7;margin-top:.5rem;">
-        Torna su <strong style="color:var(--txt);">Cocktail Legend</strong><br>e accedi con la tua nuova password.
+      <div class="done-webview" style="display:none;">
+        <div style="font-size:.88rem;color:var(--txt2);line-height:1.7;margin-top:.5rem;">
+          Torna su <strong style="color:var(--txt);">Cocktail Legend</strong><br>e accedi con la tua nuova password.
+        </div>
+        <div style="font-size:.75rem;color:var(--dim);margin-top:1.5rem;line-height:1.5;">Puoi chiudere questa finestra.</div>
       </div>
-      <div style="font-size:.75rem;color:var(--dim);margin-top:1.5rem;line-height:1.5;">Puoi chiudere questa finestra.</div>
+      <a class="btn-accedi" id="done-btn" href="#">Accedi a Cocktail Legend →</a>
     </div>
   </div>
 
@@ -107,10 +112,13 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
       </div>
       <div class="confirm-title">Email verificata!</div>
       <div class="confirm-sub">Il tuo account è ora attivo.</div>
-      <div style="font-size:.88rem;color:var(--txt2);line-height:1.7;margin-top:1.5rem;">
-        Torna su <strong style="color:var(--txt);">Cocktail Legend</strong><br>e accedi con le tue credenziali.
+      <div class="verify-webview" style="display:none;">
+        <div style="font-size:.88rem;color:var(--txt2);line-height:1.7;margin-top:1.5rem;">
+          Torna su <strong style="color:var(--txt);">Cocktail Legend</strong><br>e accedi con le tue credenziali.
+        </div>
+        <div style="font-size:.75rem;color:var(--dim);margin-top:1.5rem;line-height:1.5;">Puoi chiudere questa finestra.</div>
       </div>
-      <div style="font-size:.75rem;color:var(--dim);margin-top:1.5rem;line-height:1.5;">Puoi chiudere questa finestra.</div>
+      <a class="btn-accedi" id="verify-btn" href="#">Accedi a Cocktail Legend →</a>
     </div>
   </div>
 
@@ -121,16 +129,19 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
     </div>
     <div class="error-title">Link non valido</div>
     <div class="error-sub">Il link è scaduto o è già stato utilizzato.</div>
-    <div style="font-size:.85rem;color:var(--txt2);line-height:1.7;">
-      Torna su <strong style="color:var(--txt);">Cocktail Legend</strong><br>e richiedi un nuovo link dalla schermata di login.
+    <div class="error-webview" style="display:none;">
+      <div style="font-size:.85rem;color:var(--txt2);line-height:1.7;">
+        Torna su <strong style="color:var(--txt);">Cocktail Legend</strong><br>e richiedi un nuovo link dalla schermata di login.
+      </div>
+      <div style="font-size:.75rem;color:var(--dim);margin-top:1.5rem;line-height:1.5;">Puoi chiudere questa finestra.</div>
     </div>
-    <div style="font-size:.75rem;color:var(--dim);margin-top:1.5rem;line-height:1.5;">Puoi chiudere questa finestra.</div>
+    <a class="btn-accedi" id="error-btn" href="#">Vai a Cocktail Legend →</a>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-import { getAuth, confirmPasswordReset, applyActionCode } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { getAuth, confirmPasswordReset, applyActionCode, verifyPasswordResetCode } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDkIK5KD-LHCdAhxHVS-bbnwP9Qak2vTxc",
@@ -149,17 +160,43 @@ const params  = new URLSearchParams(window.location.search);
 const mode    = params.get('mode');
 const oobCode = params.get('oobCode');
 
+// ── Rilevamento contesto ──
+const isPWA = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+const ua = navigator.userAgent || '';
+const isWebView = /Android/i.test(ua) && (/wv\b|; wv\)|Gmail/i.test(ua) || !/(Chrome\/[\d.]+\s*(?:Mobile\s*)?Safari\/[\d.]+$)/i.test(ua));
+// Browser normale = non PWA e non WebView Android
+const isBrowser = !isPWA && !isWebView;
+
+function setupSection(webviewEl, btnEl, url) {
+  if (isWebView) {
+    if (webviewEl) webviewEl.style.display = 'block';
+  } else {
+    // Browser normale (iPhone/Chrome/Safari/desktop)
+    if (btnEl) {
+      btnEl.style.display = 'flex';
+      btnEl.href = url;
+      btnEl.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = url;
+      });
+    }
+  }
+}
+
 function hideLoading() {
   document.getElementById('loading').style.display   = 'none';
   document.getElementById('main-wrap').style.display = 'flex';
 }
 
 function showError() {
-  var isPWA = window.matchMedia('(display-mode: standalone)').matches
-           || window.navigator.standalone === true;
   if (isPWA) { window.location.replace(WEBAPP_URL); return; }
   hideLoading();
   document.getElementById('section-error').style.display = 'block';
+  setupSection(
+    document.querySelector('.error-webview'),
+    document.getElementById('error-btn'),
+    WEBAPP_URL
+  );
 }
 
 // Tutto il codice async wrappato in IIFE — compatibile con tutti i browser/WebView
@@ -208,19 +245,28 @@ if (mode === 'resetPassword' && oobCode) {
     errEl.textContent = '';
 
     try {
+      // Recupera email associata al codice reset prima di confermare
+      var resetEmail = '';
+      try { resetEmail = await verifyPasswordResetCode(auth, oobCode); } catch(ignored) {}
+
       await confirmPasswordReset(auth, oobCode, p1);
 
-      // Se siamo nella PWA → redirect diretto al login
-      const isPWA = window.matchMedia('(display-mode: standalone)').matches
-                 || window.navigator.standalone === true;
+      // PWA → redirect diretto
       if (isPWA) {
         window.location.replace(WEBAPP_URL);
         return;
       }
 
-      // WebView / browser → mostra messaggio statico
+      // Mostra conferma
       document.querySelector('.reset-box').style.display = 'none';
       document.getElementById('done-section').style.display = 'block';
+
+      var urlWithEmail = WEBAPP_URL + (resetEmail ? '?email=' + encodeURIComponent(resetEmail) : '');
+      setupSection(
+        document.querySelector('.done-webview'),
+        document.getElementById('done-btn'),
+        urlWithEmail
+      );
 
     } catch(e) {
       btn.disabled    = false;
@@ -250,15 +296,18 @@ else if (mode === 'verifyEmail' && oobCode) {
   }
 
   // Se siamo nella PWA → redirect diretto al login
-  const isPWA2 = window.matchMedia('(display-mode: standalone)').matches
-              || window.navigator.standalone === true;
-  if (isPWA2) {
+  if (isPWA) {
     window.location.replace(WEBAPP_URL);
     return;
   }
 
   hideLoading();
   document.getElementById('section-verify').style.display = 'block';
+  setupSection(
+    document.querySelector('.verify-webview'),
+    document.getElementById('verify-btn'),
+    WEBAPP_URL
+  );
 }
 
 // ── FALLBACK ────────────────────────────────────────────────

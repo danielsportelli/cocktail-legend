@@ -86,6 +86,19 @@ function mdToHtml(md){
   var overlay = document.getElementById("login-overlay");
   var emailIn = document.getElementById("login-email");
   var pwdIn   = document.getElementById("login-pwd");
+
+  // Precompila email da parametro URL (es. dopo reset password)
+  (function() {
+    var urlP = new URLSearchParams(window.location.search);
+    var prefillEmail = urlP.get('email');
+    if (prefillEmail && emailIn) {
+      emailIn.value = prefillEmail;
+      // Rimuovi param dall'URL senza ricaricare
+      urlP.delete('email');
+      var cleanUrl = window.location.pathname + (urlP.toString() ? '?' + urlP.toString() : '') + window.location.hash;
+      history.replaceState(null, '', cleanUrl);
+    }
+  })();
   var btn     = document.getElementById("login-btn");
   var err     = document.getElementById("login-err");
   var eye     = document.getElementById("login-eye");
@@ -2014,6 +2027,19 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
             '</div>'
         )+
       '</div>'+
+      // Badge "Installa app" — visibile solo su mobile e se non in PWA
+      (!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+        ? '<div id="acc-install-badge" style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+            '<button id="acc-install-btn" style="width:100%;display:flex;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:12px;padding:.75rem .9rem;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:border-color .2s;">'+
+              '<div style="width:32px;height:32px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+
+                '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10m0 0l-3-3m3 3l3-3"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>'+
+              '</div>'+
+              '<span style="font-size:.82rem;font-weight:700;color:var(--txt);">Installa app</span>'+
+              '<svg style="margin-left:auto;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'+
+            '</button>'+
+          '</div>'
+        : ''
+      )+
       '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
         '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.7rem;">Crediti mensili</div>'+
         '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'+
@@ -2077,6 +2103,14 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
             location.reload();
           });
         }
+      });
+    }
+
+    // Install app badge → apre bottom sheet PWA
+    var installBtn = document.getElementById('acc-install-btn');
+    if (installBtn) {
+      installBtn.addEventListener('click', function() {
+        showInstallPWAModal();
       });
     }
   }
@@ -4750,7 +4784,11 @@ function closeResetPasswordModal() {
           backBtn.id = 'resetBackToLogin';
           backBtn.textContent = '← Torna al login';
           backBtn.style.cssText = 'width:100%;margin-top:.75rem;padding:.78rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--txt);font-family:Inter,sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:background .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;';
-          backBtn.addEventListener('click', function() { closeResetPasswordModal(); });
+          backBtn.addEventListener('click', function() {
+            closeResetPasswordModal();
+            var loginPwd = document.getElementById('login-pwd');
+            if (loginPwd) { loginPwd.value = ''; }
+          });
           sendBtn.parentNode.insertBefore(backBtn, sendBtn.nextSibling);
         }
       })
