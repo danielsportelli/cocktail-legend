@@ -81,6 +81,15 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
 .error-sub{font-size:.85rem;color:var(--txt2);line-height:1.55;margin-bottom:1.5rem;}
 .btn-error{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.9rem 1.5rem;background:var(--surf2);border:1px solid var(--brd);color:var(--txt);border-radius:13px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .2s;}
 .btn-error:active{background:var(--surf);}
+
+/* ── WEBVIEW FALLBACK BANNER ── */
+.wv-banner{display:none;background:var(--surf);border:1px solid var(--brd);border-radius:14px;padding:1.1rem 1.15rem;margin-top:1rem;animation:fadeUp .3s ease both;text-align:left;}
+.wv-banner.show{display:block;}
+.wv-banner-title{font-size:.82rem;font-weight:700;color:var(--amber);margin-bottom:.45rem;display:flex;align-items:center;gap:.4rem;}
+.wv-banner-step{font-size:.78rem;color:var(--txt2);line-height:1.55;}
+.wv-banner-step strong{color:var(--txt);font-weight:700;}
+.wv-copy{width:100%;margin-top:.75rem;padding:.6rem .8rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;color:var(--txt);font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.4rem;transition:border-color .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.wv-copy:active{border-color:rgba(245,158,11,.4);}
 </style>
 </head>
 <body>
@@ -117,10 +126,11 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
       </div>
       <div class="done-title">Password aggiornata!</div>
       <div class="done-msg" id="done-msg"></div>
-      <a class="btn-accedi" id="done-btn" href="#" onclick="openApp();return false;" style="display:none;">
+      <a class="btn-accedi" id="done-btn" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html" target="_blank" rel="noopener noreferrer" style="display:none;">
         Accedi a Cocktail Legend
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
+      <div class="wv-banner" id="done-wv-banner"></div>
       <div class="done-note" id="done-note"></div>
     </div>
   </div>
@@ -133,10 +143,11 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
       </div>
       <div class="confirm-title">Email verificata!</div>
       <div class="confirm-sub" style="margin-bottom:2rem;">Il tuo account Cocktail Legend è attivo.<br>Clicca il pulsante per accedere.</div>
-      <a class="btn-accedi" href="#" onclick="openApp();return false;">
+      <a class="btn-accedi" id="verify-btn" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html" target="_blank" rel="noopener noreferrer">
         Accedi a Cocktail Legend
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
+      <div class="wv-banner" id="verify-wv-banner"></div>
     </div>
   </div>
 
@@ -147,7 +158,8 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
     </div>
     <div class="error-title">Link non valido</div>
     <div class="error-sub">Il link è scaduto o è già stato utilizzato.<br>Torna alla app e richiedi un nuovo link.</div>
-    <a class="btn-error" href="#" onclick="openApp();return false;">Vai a Cocktail Legend →</a>
+    <a class="btn-error" id="error-btn" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html" target="_blank" rel="noopener noreferrer">Vai a Cocktail Legend →</a>
+    <div class="wv-banner" id="error-wv-banner"></div>
   </div>
 </div>
 
@@ -313,29 +325,65 @@ function showAccess() {
   }, 300);
 }
 function openApp() {
+  window.open('https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html', '_blank');
+}
+
+// ── WEBVIEW FALLBACK ──
+(function() {
   var WEBAPP = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html';
   var ua = navigator.userAgent || '';
-  var isAndroid = /Android/i.test(ua);
+  var isWebView = /Android/i.test(ua) && (/wv\b|; wv\)|Gmail/i.test(ua) || !/(Chrome\/[\d.]+\s*(?:Mobile\s*)?Safari\/[\d.]+$)/i.test(ua));
 
-  if (isAndroid) {
-    // Crea un link con target="_blank" e simula il click
-    // Alcuni WebView (Gmail incluso) aprono _blank nel browser esterno
-    var a = document.createElement('a');
-    a.href = WEBAPP;
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+  if (!isWebView) return;
 
-    // Fallback dopo 800ms: se ancora qui, prova intent URL
-    setTimeout(function() {
-      window.location.href = 'intent://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=https%3A%2F%2Fdanielsportelli.github.io%2Fcocktail-legend%2Fwebapp%2Fcocktail-legend.html;end';
-    }, 800);
-  } else {
-    window.location.href = WEBAPP;
+  function makeBanner(bannerId) {
+    var b = document.getElementById(bannerId);
+    if (!b) return;
+    b.innerHTML =
+      '<div class="wv-banner-title">⚠️ Stai usando un browser interno</div>' +
+      '<div class="wv-banner-step">' +
+        'Se il pulsante sopra non apre Chrome:<br>' +
+        '1. Tocca <strong>⋮</strong> in alto a destra<br>' +
+        '2. Seleziona <strong>"Apri in Chrome"</strong>' +
+      '</div>' +
+      '<button class="wv-copy" id="copy-' + bannerId + '">📋 Copia link della app</button>';
+    b.classList.add('show');
+    document.getElementById('copy-' + bannerId).addEventListener('click', function() {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(WEBAPP).then(function() {
+          this.textContent = '✓ Link copiato!';
+        }.bind(this)).catch(function() {
+          fallbackCopy(this);
+        }.bind(this));
+      } else {
+        fallbackCopy(this);
+      }
+    });
   }
-}
+
+  function fallbackCopy(btn) {
+    var ta = document.createElement('textarea');
+    ta.value = WEBAPP; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); btn.textContent = '✓ Link copiato!'; }
+    catch(e) { btn.textContent = 'Copia manualmente il link'; }
+    document.body.removeChild(ta);
+  }
+
+  // Attiva i banner quando le sezioni diventano visibili
+  var observer = new MutationObserver(function() {
+    if (document.getElementById('section-verify') && document.getElementById('section-verify').style.display !== 'none') makeBanner('verify-wv-banner');
+    if (document.getElementById('done-section') && document.getElementById('done-section').style.display !== 'none') makeBanner('done-wv-banner');
+    if (document.getElementById('section-error') && document.getElementById('section-error').style.display !== 'none') makeBanner('error-wv-banner');
+  });
+  observer.observe(document.getElementById('main-wrap'), { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
+
+  // Check iniziale (per verifyEmail che mostra subito)
+  setTimeout(function() {
+    makeBanner('verify-wv-banner');
+    makeBanner('error-wv-banner');
+  }, 500);
+})();
 </script>
 
 </body>
