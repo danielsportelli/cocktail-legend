@@ -141,7 +141,7 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-import { getAuth, confirmPasswordReset, applyActionCode, verifyPasswordResetCode } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { getAuth, confirmPasswordReset, applyActionCode, verifyPasswordResetCode, checkActionCode } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDkIK5KD-LHCdAhxHVS-bbnwP9Qak2vTxc",
@@ -253,7 +253,7 @@ if (mode === 'resetPassword' && oobCode) {
 
       // PWA → redirect diretto
       if (isPWA) {
-        window.location.replace(WEBAPP_URL);
+        window.location.replace(WEBAPP_URL + (resetEmail ? '?email=' + encodeURIComponent(resetEmail) : ''));
         return;
       }
 
@@ -284,6 +284,9 @@ if (mode === 'resetPassword' && oobCode) {
 
 // ── VERIFICA EMAIL ──────────────────────────────────────────
 else if (mode === 'verifyEmail' && oobCode) {
+  var verifyEmail = '';
+  try { var info = await checkActionCode(auth, oobCode); verifyEmail = info.data.email || ''; } catch(ignored) {}
+
   try {
     await applyActionCode(auth, oobCode);
   } catch(e) {
@@ -295,9 +298,11 @@ else if (mode === 'verifyEmail' && oobCode) {
     // Qualsiasi altro errore — mostriamo comunque la schermata (potrebbe essere già verificata)
   }
 
+  var verifyUrl = WEBAPP_URL + (verifyEmail ? '?email=' + encodeURIComponent(verifyEmail) : '');
+
   // Se siamo nella PWA → redirect diretto al login
   if (isPWA) {
-    window.location.replace(WEBAPP_URL);
+    window.location.replace(verifyUrl);
     return;
   }
 
@@ -306,7 +311,7 @@ else if (mode === 'verifyEmail' && oobCode) {
   setupSection(
     document.querySelector('.verify-webview'),
     document.getElementById('verify-btn'),
-    WEBAPP_URL
+    verifyUrl
   );
 }
 

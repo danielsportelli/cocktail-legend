@@ -57,10 +57,10 @@
     <!-- ── FORM LOGIN ── -->
     <div id="form-login">
       <div class="login-input-wrap">
-        <input class="login-input" type="email" id="login-email" placeholder="Email" autocomplete="email">
+        <input class="login-input" type="email" id="login-email" placeholder="Email" autocomplete="email" enterkeyhint="next">
       </div>
       <div class="login-input-wrap">
-        <input class="login-input" type="password" id="login-pwd" placeholder="Password" autocomplete="current-password">
+        <input class="login-input" type="password" id="login-pwd" placeholder="Password" autocomplete="current-password" enterkeyhint="done">
         <button class="login-eye" id="login-eye" type="button">&#128065;</button>
       </div>
       <button class="login-btn" id="login-btn">Accedi &rarr;</button>
@@ -74,15 +74,15 @@
     <div id="form-register" style="display:none;">
       <div class="reg-row">
         <div class="login-input-wrap">
-          <input class="login-input" type="text" id="reg-nome" placeholder="Nome *" autocomplete="given-name">
+          <input class="login-input" type="text" id="reg-nome" placeholder="Nome *" autocomplete="given-name" enterkeyhint="next">
         </div>
         <div class="login-input-wrap">
-          <input class="login-input" type="text" id="reg-cognome" placeholder="Cognome *" autocomplete="family-name">
+          <input class="login-input" type="text" id="reg-cognome" placeholder="Cognome *" autocomplete="family-name" enterkeyhint="next">
         </div>
       </div>
 
       <div class="login-input-wrap">
-        <input class="login-input" type="email" id="reg-email" placeholder="Email *" autocomplete="email">
+        <input class="login-input" type="email" id="reg-email" placeholder="Email *" autocomplete="email" enterkeyhint="next">
       </div>
       <div class="login-input-wrap tel-wrap">
         <select class="tel-prefix" id="reg-prefix">
@@ -134,17 +134,17 @@
           <option value="+212" data-flag="🇲🇦">🇲🇦 +212</option>
         </select>
         <div class="tel-divider"></div>
-        <input class="tel-number" type="tel" id="reg-tel" placeholder="Telefono *" autocomplete="tel-national" maxlength="10" inputmode="numeric">
+        <input class="tel-number" type="tel" id="reg-tel" placeholder="Telefono *" autocomplete="tel-national" enterkeyhint="next" maxlength="10" inputmode="numeric">
       </div>
       <div class="login-input-wrap">
-        <input class="login-input" type="text" id="reg-via" placeholder="Via / Indirizzo *" autocomplete="street-address">
+        <input class="login-input" type="text" id="reg-via" placeholder="Via / Indirizzo *" autocomplete="street-address" enterkeyhint="next">
       </div>
       <div class="reg-row">
         <div class="login-input-wrap" style="flex:1.3;">
-          <input class="login-input" type="text" id="reg-civico" placeholder="N° *" autocomplete="off">
+          <input class="login-input" type="text" id="reg-civico" placeholder="N° *" autocomplete="off" enterkeyhint="next">
         </div>
         <div class="login-input-wrap" style="flex:2;">
-          <input class="login-input" type="text" id="reg-cap" placeholder="CAP *" autocomplete="postal-code" maxlength="5" inputmode="numeric" pattern="[0-9]{5}">
+          <input class="login-input" type="text" id="reg-cap" placeholder="CAP *" enterkeyhint="next" autocomplete="postal-code" maxlength="5" inputmode="numeric" pattern="[0-9]{5}">
         </div>
         <div class="login-input-wrap" style="flex:1.8;">
           <select class="login-input login-select" id="reg-provincia" autocomplete="address-level2">
@@ -306,11 +306,11 @@
         </select>
       </div>
       <div class="login-input-wrap">
-        <input class="login-input" type="password" id="reg-pwd" placeholder="Password" autocomplete="new-password">
+        <input class="login-input" type="password" id="reg-pwd" placeholder="Password" autocomplete="new-password" enterkeyhint="next">
         <button class="login-eye" id="reg-eye" type="button">&#128065;</button>
       </div>
       <div class="login-input-wrap">
-        <input class="login-input" type="password" id="reg-pwd2" placeholder="Conferma password" autocomplete="new-password">
+        <input class="login-input" type="password" id="reg-pwd2" placeholder="Conferma password" autocomplete="new-password" enterkeyhint="done">
         <button class="login-eye" id="reg-eye2" type="button">&#128065;</button>
       </div>
       <!-- Checkbox T&C (obbligatoria) -->

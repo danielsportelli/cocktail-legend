@@ -2034,8 +2034,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
               '<div style="width:32px;height:32px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+
                 '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10m0 0l-3-3m3 3l3-3"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>'+
               '</div>'+
-              '<span style="font-size:.82rem;font-weight:700;color:var(--txt);">Installa app</span>'+
-              '<svg style="margin-left:auto;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'+
+              '<div style="display:flex;flex-direction:column;flex:1;min-width:0;">'+
+                '<span style="font-size:.82rem;font-weight:700;color:var(--txt);">Installa app sul tuo smartphone</span>'+
+                '<span style="font-size:.68rem;color:var(--dim);font-weight:500;margin-top:.15rem;">Gratis — accedi in un tap, come una vera app.</span>'+
+              '</div>'+
+              '<svg style="flex-shrink:0;margin-left:auto;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'+
             '</button>'+
           '</div>'
         : ''
@@ -4699,7 +4702,7 @@ function openResetPasswordModal(prefillEmail) {
   btn.style.color = '#0f172a';
 
   modal.style.display = 'flex';
-  setTimeout(function() { input.focus(); }, 120);
+  if (!prefillEmail) setTimeout(function() { input.focus(); }, 120);
 }
 
 function closeResetPasswordModal() {
