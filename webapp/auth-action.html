@@ -45,51 +45,18 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
 .done-icon{width:64px;height:64px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;}
 .done-title{font-size:1.2rem;font-weight:800;color:var(--txt);margin-bottom:.5rem;}
 .done-msg{font-size:.85rem;color:var(--txt2);line-height:1.6;margin-bottom:1.4rem;}
-.btn-accedi{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:1rem 1.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:13px;font-family:'Inter',sans-serif;font-size:1rem;font-weight:800;letter-spacing:.01em;cursor:pointer;text-decoration:none;box-shadow:0 6px 22px rgba(245,158,11,.35);transition:all .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
-.btn-accedi:active{transform:scale(.98);}
 .done-note{font-size:.72rem;color:var(--dim);margin-top:.75rem;line-height:1.5;}
 
 /* ── VERIFICA EMAIL ── */
-.confirm-section{text-align:center;margin-bottom:2rem;}
 .confirm-icon{width:64px;height:64px;background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.08));border:1px solid rgba(34,197,94,.35);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;}
 .confirm-title{font-size:1.45rem;font-weight:900;letter-spacing:-.03em;color:var(--txt);margin-bottom:.4rem;}
 .confirm-sub{font-size:.88rem;color:var(--txt2);line-height:1.55;}
-.install-section{background:var(--surf);border:1px solid var(--brd);border-radius:18px;padding:1.4rem 1.25rem 1.5rem;margin-bottom:1.25rem;}
-.install-title{font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:.25rem;line-height:1.3;}
-.install-sub{font-size:.78rem;color:var(--dim);margin-bottom:1.1rem;line-height:1.4;}
-.os-toggle{display:flex;background:var(--bg);border-radius:10px;padding:3px;margin-bottom:1.25rem;gap:3px;}
-.os-btn{flex:1;padding:.48rem .5rem;border:none;border-radius:8px;font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;background:transparent;color:var(--dim);display:flex;align-items:center;justify-content:center;gap:.35rem;-webkit-tap-highlight-color:transparent;}
-.os-btn.active{background:var(--surf2);color:var(--txt);}
-.steps{display:flex;flex-direction:column;gap:.75rem;}
-.step{display:flex;align-items:flex-start;gap:.75rem;}
-.step-num{flex-shrink:0;width:24px;height:24px;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--blue-l);margin-top:.05rem;}
-.step-text{font-size:.82rem;color:var(--txt2);line-height:1.55;flex:1;}
-.step-text strong{color:var(--txt);font-weight:700;}
-.step-text .tag{display:inline-flex;align-items:center;gap:.2rem;background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:.1rem .4rem;font-size:.72rem;font-weight:700;color:var(--txt);white-space:nowrap;}
-.os-panel{display:none;}.os-panel.active{display:block;}
-.btn-ok{width:100%;padding:.85rem 1rem;background:var(--surf2);border:1px solid rgba(255,255,255,.12);border-radius:12px;color:var(--txt);font-family:inherit;font-size:.88rem;font-weight:700;cursor:pointer;margin-top:1.25rem;display:flex;align-items:center;justify-content:center;gap:.5rem;transition:background .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
-.btn-ok:active{background:var(--surf);}
-.access-section{display:none;flex-direction:column;align-items:center;text-align:center;gap:1rem;animation:fadeUp .35s ease both;}
-.access-section.visible{display:flex;}
-.access-msg{font-size:.82rem;color:var(--txt2);line-height:1.5;}
-.access-note{font-size:.7rem;color:var(--dim);line-height:1.5;}
 
 /* ── ERRORE ── */
 .error-section{text-align:center;display:none;}
 .error-icon{width:64px;height:64px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.1rem;}
 .error-title{font-size:1.2rem;font-weight:800;color:#f87171;margin-bottom:.4rem;}
 .error-sub{font-size:.85rem;color:var(--txt2);line-height:1.55;margin-bottom:1.5rem;}
-.btn-error{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.9rem 1.5rem;background:var(--surf2);border:1px solid var(--brd);color:var(--txt);border-radius:13px;font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .2s;}
-.btn-error:active{background:var(--surf);}
-
-/* ── WEBVIEW FALLBACK BANNER ── */
-.wv-banner{display:none;background:var(--surf);border:1px solid var(--brd);border-radius:14px;padding:1.1rem 1.15rem;margin-top:1rem;animation:fadeUp .3s ease both;text-align:left;}
-.wv-banner.show{display:block;}
-.wv-banner-title{font-size:.82rem;font-weight:700;color:var(--amber);margin-bottom:.45rem;display:flex;align-items:center;gap:.4rem;}
-.wv-banner-step{font-size:.78rem;color:var(--txt2);line-height:1.55;}
-.wv-banner-step strong{color:var(--txt);font-weight:700;}
-.wv-copy{width:100%;margin-top:.75rem;padding:.6rem .8rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;color:var(--txt);font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.4rem;transition:border-color .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
-.wv-copy:active{border-color:rgba(245,158,11,.4);}
 </style>
 </head>
 <body>
@@ -125,29 +92,25 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <div class="done-title">Password aggiornata!</div>
-      <div class="done-msg" id="done-msg"></div>
-      <a class="btn-accedi" id="done-btn" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html" target="_blank" rel="noopener noreferrer" style="display:none;">
-        Accedi a Cocktail Legend
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <div class="wv-banner" id="done-wv-banner"></div>
-      <div class="done-note" id="done-note"></div>
+      <div style="font-size:.88rem;color:var(--txt2);line-height:1.7;margin-top:.5rem;">
+        Torna su <strong style="color:var(--txt);">Cocktail Legend</strong><br>e accedi con la tua nuova password.
+      </div>
+      <div style="font-size:.75rem;color:var(--dim);margin-top:1.5rem;line-height:1.5;">Puoi chiudere questa finestra.</div>
     </div>
   </div>
 
   <!-- ── VERIFICA EMAIL ── -->
   <div id="section-verify" style="display:none;">
-    <div style="text-align:center;padding:1rem 0;">
+    <div style="text-align:center;padding:1.5rem 0;">
       <div class="confirm-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <div class="confirm-title">Email verificata!</div>
-      <div class="confirm-sub" style="margin-bottom:2rem;">Il tuo account Cocktail Legend è attivo.<br>Clicca il pulsante per accedere.</div>
-      <a class="btn-accedi" id="verify-btn" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html" target="_blank" rel="noopener noreferrer">
-        Accedi a Cocktail Legend
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <div class="wv-banner" id="verify-wv-banner"></div>
+      <div class="confirm-sub">Il tuo account è ora attivo.</div>
+      <div style="font-size:.88rem;color:var(--txt2);line-height:1.7;margin-top:1.5rem;">
+        Torna su <strong style="color:var(--txt);">Cocktail Legend</strong><br>e accedi con le tue credenziali.
+      </div>
+      <div style="font-size:.75rem;color:var(--dim);margin-top:1.5rem;line-height:1.5;">Puoi chiudere questa finestra.</div>
     </div>
   </div>
 
@@ -157,9 +120,11 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
     </div>
     <div class="error-title">Link non valido</div>
-    <div class="error-sub">Il link è scaduto o è già stato utilizzato.<br>Torna alla app e richiedi un nuovo link.</div>
-    <a class="btn-error" id="error-btn" href="https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html" target="_blank" rel="noopener noreferrer">Vai a Cocktail Legend →</a>
-    <div class="wv-banner" id="error-wv-banner"></div>
+    <div class="error-sub">Il link è scaduto o è già stato utilizzato.</div>
+    <div style="font-size:.85rem;color:var(--txt2);line-height:1.7;">
+      Torna su <strong style="color:var(--txt);">Cocktail Legend</strong><br>e richiedi un nuovo link dalla schermata di login.
+    </div>
+    <div style="font-size:.75rem;color:var(--dim);margin-top:1.5rem;line-height:1.5;">Puoi chiudere questa finestra.</div>
   </div>
 </div>
 
@@ -243,28 +208,8 @@ if (mode === 'resetPassword' && oobCode) {
       await confirmPasswordReset(auth, oobCode, p1);
 
       // Nascondi form, mostra stato finale
-      document.getElementById('reset-box') && (document.querySelector('.reset-box').style.display = 'none');
       document.querySelector('.reset-box').style.display = 'none';
-      const done = document.getElementById('done-section');
-      done.style.display = 'block';
-
-      // Rileva contesto
-      const isPWA = window.matchMedia('(display-mode: standalone)').matches
-                 || window.navigator.standalone === true;
-
-      const doneMsg  = document.getElementById('done-msg');
-      const doneBtn  = document.getElementById('done-btn');
-      const doneNote = document.getElementById('done-note');
-
-      if (isPWA) {
-        // Siamo già nella PWA — bottone per tornare al login
-        doneMsg.textContent  = 'Ora puoi accedere con la tua nuova password.';
-        doneBtn.style.display = 'flex';
-      } else {
-        // WebView o browser esterno — istruzioni manuali
-        doneMsg.innerHTML = 'Chiudi questa schermata e torna su<br><strong style="color:#f1f5f9">Cocktail Legend</strong> per accedere<br>con la tua nuova password.';
-        doneNote.textContent = 'Puoi chiudere questa schermata.';
-      }
+      document.getElementById('done-section').style.display = 'block';
 
     } catch(e) {
       btn.disabled    = false;
@@ -302,88 +247,6 @@ else {
 }
 
 })(); // fine async IIFE
-</script>
-
-<script>
-function switchOS(os) {
-  document.getElementById('btn-ios').classList.toggle('active', os === 'ios');
-  document.getElementById('btn-android').classList.toggle('active', os === 'android');
-  document.getElementById('panel-ios').classList.toggle('active', os === 'ios');
-  document.getElementById('panel-android').classList.toggle('active', os === 'android');
-}
-
-function showAccess() {
-  var inst = document.getElementById('install-section');
-  var acc  = document.getElementById('access-section');
-  inst.style.transition = 'opacity .3s ease, transform .3s ease';
-  inst.style.opacity    = '0';
-  inst.style.transform  = 'translateY(-8px)';
-  setTimeout(function() {
-    inst.style.display = 'none';
-    acc.classList.add('visible');
-    acc.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, 300);
-}
-function openApp() {
-  window.open('https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html', '_blank');
-}
-
-// ── WEBVIEW FALLBACK ──
-(function() {
-  var WEBAPP = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html';
-  var ua = navigator.userAgent || '';
-  var isWebView = /Android/i.test(ua) && (/wv\b|; wv\)|Gmail/i.test(ua) || !/(Chrome\/[\d.]+\s*(?:Mobile\s*)?Safari\/[\d.]+$)/i.test(ua));
-
-  if (!isWebView) return;
-
-  function makeBanner(bannerId) {
-    var b = document.getElementById(bannerId);
-    if (!b) return;
-    b.innerHTML =
-      '<div class="wv-banner-title">⚠️ Stai usando un browser interno</div>' +
-      '<div class="wv-banner-step">' +
-        'Se il pulsante sopra non apre Chrome:<br>' +
-        '1. Tocca <strong>⋮</strong> in alto a destra<br>' +
-        '2. Seleziona <strong>"Apri in Chrome"</strong>' +
-      '</div>' +
-      '<button class="wv-copy" id="copy-' + bannerId + '">📋 Copia link della app</button>';
-    b.classList.add('show');
-    document.getElementById('copy-' + bannerId).addEventListener('click', function() {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(WEBAPP).then(function() {
-          this.textContent = '✓ Link copiato!';
-        }.bind(this)).catch(function() {
-          fallbackCopy(this);
-        }.bind(this));
-      } else {
-        fallbackCopy(this);
-      }
-    });
-  }
-
-  function fallbackCopy(btn) {
-    var ta = document.createElement('textarea');
-    ta.value = WEBAPP; ta.style.position = 'fixed'; ta.style.opacity = '0';
-    document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); btn.textContent = '✓ Link copiato!'; }
-    catch(e) { btn.textContent = 'Copia manualmente il link'; }
-    document.body.removeChild(ta);
-  }
-
-  // Attiva i banner quando le sezioni diventano visibili
-  var observer = new MutationObserver(function() {
-    if (document.getElementById('section-verify') && document.getElementById('section-verify').style.display !== 'none') makeBanner('verify-wv-banner');
-    if (document.getElementById('done-section') && document.getElementById('done-section').style.display !== 'none') makeBanner('done-wv-banner');
-    if (document.getElementById('section-error') && document.getElementById('section-error').style.display !== 'none') makeBanner('error-wv-banner');
-  });
-  observer.observe(document.getElementById('main-wrap'), { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
-
-  // Check iniziale (per verifyEmail che mostra subito)
-  setTimeout(function() {
-    makeBanner('verify-wv-banner');
-    makeBanner('error-wv-banner');
-  }, 500);
-})();
 </script>
 
 </body>
