@@ -240,14 +240,17 @@ body::before{
   border-top:none;
   border-bottom:1px solid rgba(37,99,235,.15);
   transform:translateY(-110%);
-  transition:transform .32s cubic-bezier(.4,0,.2,1) !important;
+  transition:transform .32s cubic-bezier(.4,0,.2,1) !important, visibility 0s .32s;
   box-shadow:0 8px 40px rgba(0,0,0,.5);
   z-index:1050;
   pointer-events:none;
+  visibility:hidden;
 }
 #drawer-ai.open{
   transform:translateY(0) !important;
   pointer-events:auto;
+  visibility:visible;
+  transition:transform .32s cubic-bezier(.4,0,.2,1) !important, visibility 0s 0s;
 }
 @media (display-mode: standalone) {
   #drawer-ai{
@@ -309,6 +312,19 @@ body::before{
   box-shadow:0 8px 28px rgba(0,0,0,.85);
   display:flex;align-items:center;
   padding:.3rem 0 .35rem;
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+.hdr.hdr--hidden ~ .pills-bar{
+  transform:translateY(calc(-1 * var(--hdr-h)));
+}
+@media (display-mode: standalone) {
+  .pills-bar{
+    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));
+  }
+  .hdr.hdr--hidden ~ .pills-bar{
+    transform:translateY(calc(-1 * (var(--hdr-h) + env(safe-area-inset-top, 0px))));
+  }
 }
 .hdr-animating .pills-bar{ transition:none; }
 .hdr-animating .filter-bar{

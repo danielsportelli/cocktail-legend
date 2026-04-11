@@ -62,7 +62,7 @@
       </div>
       <div class="login-input-wrap">
         <input class="login-input" type="password" id="login-pwd" placeholder="Password" autocomplete="current-password" enterkeyhint="done">
-        <button class="login-eye" id="login-eye" type="button">&#128065;</button>
+        <button class="login-eye" id="login-eye" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
       </div>
       <button class="login-btn" id="login-btn">Accedi &rarr;</button>
       <div class="login-err" id="login-err"></div>
@@ -308,11 +308,10 @@
       </div>
       <div class="login-input-wrap">
         <input class="login-input" type="password" id="reg-pwd" placeholder="Password" autocomplete="new-password" enterkeyhint="next">
-        <button class="login-eye" id="reg-eye" type="button">&#128065;</button>
+        <button class="login-eye" id="reg-eye" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
       </div>
       <div class="login-input-wrap">
         <input class="login-input" type="password" id="reg-pwd2" placeholder="Conferma password" autocomplete="new-password" enterkeyhint="done">
-        <button class="login-eye" id="reg-eye2" type="button">&#128065;</button>
       </div>
       <!-- Checkbox T&C (obbligatoria) -->
       <label class="reg-check-wrap" id="reg-check-tc-wrap">
@@ -348,11 +347,10 @@
 
       <div class="login-input-wrap">
         <input class="login-input" type="password" id="reset-pwd-new" placeholder="Nuova password" autocomplete="new-password">
-        <button class="login-eye" id="reset-eye-new" type="button">&#128065;</button>
+        <button class="login-eye" id="reset-eye-new" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
       </div>
       <div class="login-input-wrap" style="margin-top:.6rem;">
         <input class="login-input" type="password" id="reset-pwd-confirm" placeholder="Conferma password" autocomplete="new-password">
-        <button class="login-eye" id="reset-eye-confirm" type="button">&#128065;</button>
       </div>
 
       <button class="login-btn" id="reset-confirm-btn" style="margin-top:1rem;">Salva nuova password &rarr;</button>
@@ -1891,17 +1889,21 @@ function calcABV() {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
+        // Pre-calcola altezza: rimuovi hidden, forza layout, applica padding — tutto prima del paint
+        filterBar.style.transition = 'none';
         filterBar.classList.remove('hidden');
+        var fbH = filterBar.offsetHeight;
+        if (typeof _cachedFbH !== 'undefined') _cachedFbH = fbH;
+        var _hdr2 = document.querySelector('.hdr');
+        var _hdrBot2 = _hdr2 ? _hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
+        if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot2);
+        // Ripristina transition e attiva animazione
+        requestAnimationFrame(function() {
+          filterBar.style.transition = '';
+        });
         pillsSrchBtn.classList.add('active');
-        // Focus immediato — unico modo per aprire tastiera su iOS Safari
         var inp = document.getElementById('srch');
         if (inp) inp.focus();
-        // Legge altezza reale dopo due frame (filter-bar già visibile nel DOM)
-        requestAnimationFrame(function(){
-          requestAnimationFrame(function(){
-            if (typeof updateFbH === 'function') updateFbH();
-          });
-        });
       } else {
         // Azzera cache PRIMA di aggiungere .hidden — padding-top scende in sincronia
         if (typeof _cachedFbH !== 'undefined') _cachedFbH = 0;

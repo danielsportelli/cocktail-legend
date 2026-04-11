@@ -14,7 +14,7 @@
   --bg:#0a0f1e;--surf:#1e293b;--surf2:#334155;
   --txt:#f1f5f9;--txt2:#cbd5e1;--brd:rgba(255,255,255,.08);--dim:#64748b;
 }
-html,body{min-height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;}
+html,body{min-height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;-webkit-user-select:none;user-select:none;}
 body{display:flex;align-items:center;justify-content:center;min-height:100svh;padding:2rem 1.25rem 3rem;padding-top:max(2rem,env(safe-area-inset-top));}
 
 .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1rem;width:100%;}
@@ -31,7 +31,7 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
 .reset-title{font-size:1.2rem;font-weight:800;color:var(--txt);margin-bottom:.3rem;letter-spacing:-.02em;}
 .reset-sub{font-size:.82rem;color:var(--txt2);line-height:1.5;margin-bottom:1.4rem;}
 .reset-input-wrap{position:relative;margin-bottom:.9rem;}
-.reset-input{width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.75rem 2.8rem .75rem .9rem;font-size:16px;font-family:'Inter',sans-serif;color:var(--txt);outline:none;transition:border-color .2s,box-shadow .2s;}
+.reset-input{width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.75rem 2.8rem .75rem .9rem;font-size:16px;font-family:'Inter',sans-serif;color:var(--txt);outline:none;transition:border-color .2s,box-shadow .2s;-webkit-user-select:text;user-select:text;}
 .reset-input:focus{border-color:rgba(37,99,235,.5);box-shadow:0 0 0 3px rgba(37,99,235,.1);}
 .reset-eye{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--dim);cursor:pointer;padding:10px;font-size:1.1rem;line-height:1;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
 .reset-btn{width:100%;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:10px;padding:.78rem;font-size:.9rem;font-weight:800;font-family:'Inter',sans-serif;cursor:pointer;letter-spacing:.03em;transition:all .2s;box-shadow:0 4px 18px rgba(245,158,11,.3);}
@@ -79,11 +79,10 @@ body{display:flex;align-items:center;justify-content:center;min-height:100svh;pa
       <div class="reset-sub">Scegli una password sicura per il tuo account.</div>
       <div class="reset-input-wrap">
         <input class="reset-input" type="password" id="reset-pwd1" placeholder="Nuova password" autocomplete="new-password">
-        <button class="reset-eye" id="reset-eye1" type="button">&#128065;</button>
+        <button class="reset-eye" id="reset-eye1" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
       </div>
       <div class="reset-input-wrap">
         <input class="reset-input" type="password" id="reset-pwd2" placeholder="Conferma password" autocomplete="new-password">
-        <button class="reset-eye" id="reset-eye2" type="button">&#128065;</button>
       </div>
       <button class="reset-btn" id="reset-btn">Salva nuova password →</button>
       <div class="reset-err" id="reset-err"></div>
@@ -211,18 +210,18 @@ if (mode === 'resetPassword' && oobCode) {
   const pwd1  = document.getElementById('reset-pwd1');
   const pwd2  = document.getElementById('reset-pwd2');
   const eye1  = document.getElementById('reset-eye1');
-  const eye2  = document.getElementById('reset-eye2');
   const btn   = document.getElementById('reset-btn');
   const errEl = document.getElementById('reset-err');
 
-  // Toggle mostra/nascondi password
+  const _aaEyeOn = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+  const _aaEyeOff = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+
+  // Toggle mostra/nascondi password (unico per entrambi i campi)
   eye1.addEventListener('click', () => {
-    pwd1.type = pwd1.type === 'password' ? 'text' : 'password';
-    eye1.innerHTML = pwd1.type === 'text' ? '&#128064;' : '&#128065;';
-  });
-  eye2.addEventListener('click', () => {
-    pwd2.type = pwd2.type === 'password' ? 'text' : 'password';
-    eye2.innerHTML = pwd2.type === 'text' ? '&#128064;' : '&#128065;';
+    const show = pwd1.type === 'password';
+    pwd1.type = show ? 'text' : 'password';
+    pwd2.type = show ? 'text' : 'password';
+    eye1.innerHTML = show ? _aaEyeOff : _aaEyeOn;
   });
 
   // Enter tra i campi
@@ -322,6 +321,10 @@ else {
 }
 
 })(); // fine async IIFE
+</script>
+<script>
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); return false; });
+document.addEventListener('dragstart', function(e){ e.preventDefault(); return false; });
 </script>
 
 </body>

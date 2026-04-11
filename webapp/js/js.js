@@ -87,6 +87,18 @@ function mdToHtml(md){
   var emailIn = document.getElementById("login-email");
   var pwdIn   = document.getElementById("login-pwd");
 
+  // Reset scroll e header dopo login
+  function postLoginReset() {
+    window.scrollTo(0, 0);
+    if (typeof _cachedHdrH !== 'undefined') {
+      var hdr = document.querySelector('.hdr');
+      if (hdr) _cachedHdrH = hdr.offsetHeight;
+    }
+    if (typeof _applyBarsTop === 'function') {
+      _applyBarsTop(typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
+    }
+  }
+
   // Precompila email da parametro URL (es. dopo reset password)
   (function() {
     var urlP = new URLSearchParams(window.location.search);
@@ -121,6 +133,7 @@ function mdToHtml(md){
   if (localStorage.getItem('cl_logged') === '1') {
     overlay.style.display = "none";
     document.body.style.overflow = "";
+    postLoginReset();
   } else {
     document.body.style.overflow = "hidden";
   }
@@ -142,6 +155,7 @@ function mdToHtml(md){
       setTimeout(function() {
         overlay.style.display = "none";
         document.body.style.overflow = "";
+        postLoginReset();
       }, 350);
     } else {
       // Firebase conferma: nessuna sessione valida
@@ -201,6 +215,7 @@ function mdToHtml(md){
         setTimeout(function() {
           overlay.style.display = "none";
           document.body.style.overflow = "";
+          postLoginReset();
         }, 350);
       })
       .catch(function(e) {
@@ -221,13 +236,15 @@ function mdToHtml(md){
   emailIn.addEventListener("keydown", function(e) { if (e.key === "Enter") pwdIn.focus(); });
 
   // Mostra/nascondi password
+  var _eyeOn = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+  var _eyeOff = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
   eye.addEventListener("click", function() {
     if (pwdIn.type === "password") {
       pwdIn.type = "text";
-      eye.innerHTML = "&#128064;";
+      eye.innerHTML = _eyeOff;
     } else {
       pwdIn.type = "password";
-      eye.innerHTML = "&#128065;";
+      eye.innerHTML = _eyeOn;
     }
   });
 
@@ -300,7 +317,6 @@ window._isRegistering = false;
     var regBtn  = document.getElementById('reg-btn');
     var regErr  = document.getElementById('reg-err');
     var regEye  = document.getElementById('reg-eye');
-    var regEye2 = document.getElementById('reg-eye2');
     var regPwd  = document.getElementById('reg-pwd');
     var regPwd2 = document.getElementById('reg-pwd2');
 
@@ -349,18 +365,15 @@ window._isRegistering = false;
       });
     }
 
-    // Mostra/nascondi password
+    // Mostra/nascondi password (toggle unico per entrambi i campi)
+    var _rEyeOn = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+    var _rEyeOff = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
     if (regEye && regPwd) {
       regEye.addEventListener('click', function() {
-        if (regPwd.type === 'password') { regPwd.type = 'text'; regEye.innerHTML = '&#128064;'; }
-        else { regPwd.type = 'password'; regEye.innerHTML = '&#128065;'; }
-      });
-    }
-    // Mostra/nascondi conferma password
-    if (regEye2 && regPwd2) {
-      regEye2.addEventListener('click', function() {
-        if (regPwd2.type === 'password') { regPwd2.type = 'text'; regEye2.innerHTML = '&#128064;'; }
-        else { regPwd2.type = 'password'; regEye2.innerHTML = '&#128065;'; }
+        var show = regPwd.type === 'password';
+        regPwd.type = show ? 'text' : 'password';
+        if (regPwd2) regPwd2.type = show ? 'text' : 'password';
+        regEye.innerHTML = show ? _rEyeOff : _rEyeOn;
       });
     }
 
@@ -935,7 +948,7 @@ function _applyBarsTop(hdrBottom) {
   var pills = document.getElementById('pills-bar');
   var fb = document.getElementById('filter-bar');
   var pillsH = pills ? pills.offsetHeight : 40;
-  if (pills) pills.style.top = hdrBottom + 'px';
+  // pills-bar posizione gestita da CSS transform — non impostare top via JS
   if (fb) fb.style.top = (hdrBottom + pillsH) + 'px';
   // Aggiorna main padding-top in sincronia
   var main = document.querySelector('.main');
@@ -4838,23 +4851,20 @@ function closeResetPasswordModal() {
     var pwdNew     = document.getElementById('reset-pwd-new');
     var pwdConfirm = document.getElementById('reset-pwd-confirm');
     var eyeNew     = document.getElementById('reset-eye-new');
-    var eyeConfirm = document.getElementById('reset-eye-confirm');
     var btn        = document.getElementById('reset-confirm-btn');
     var errEl      = document.getElementById('reset-confirm-err');
 
     if (!btn) return;
 
-    // Toggle mostra/nascondi password
+    // Toggle mostra/nascondi password (unico toggle per entrambi i campi)
+    var _rsEyeOn = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+    var _rsEyeOff = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
     if (eyeNew) {
       eyeNew.addEventListener('click', function() {
-        if (pwdNew.type === 'password') { pwdNew.type = 'text'; eyeNew.innerHTML = '&#128064;'; }
-        else { pwdNew.type = 'password'; eyeNew.innerHTML = '&#128065;'; }
-      });
-    }
-    if (eyeConfirm) {
-      eyeConfirm.addEventListener('click', function() {
-        if (pwdConfirm.type === 'password') { pwdConfirm.type = 'text'; eyeConfirm.innerHTML = '&#128064;'; }
-        else { pwdConfirm.type = 'password'; eyeConfirm.innerHTML = '&#128065;'; }
+        var show = pwdNew.type === 'password';
+        pwdNew.type = show ? 'text' : 'password';
+        if (pwdConfirm) pwdConfirm.type = show ? 'text' : 'password';
+        eyeNew.innerHTML = show ? _rsEyeOff : _rsEyeOn;
       });
     }
 
