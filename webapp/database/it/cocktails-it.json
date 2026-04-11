@@ -1,5 +1,30 @@
 [
 {
+  "id": "vermouth_panache",
+  "name": "Vermouth Panache",
+  "distillato": ["Vermouth"],
+  "categoria": "Pre dinner",
+  "abv": "Medio basso",
+  "sapori": ["Aromatico", "Secco", "Elegante"],
+  "garnish": "Zest di arancia",
+  "ingredienti": [
+    ["60 ml", "Vermouth dry"],
+    ["30 ml", "Vermouth rosso"],
+    ["1 dash", "Angostura bitters"]
+  ],
+  "prep": [
+    "Versare tutti gli ingredienti con ghiaccio in un mixing glass freddo",
+    "Mescolare delicatamente per circa 20 secondi",
+    "Filtrare in un tumbler basso riempito di ghiaccio (meglio se con chunk)"
+  ],
+  "storia": "Il Vermouth Panache non è un cocktail codificato nella tradizione classica, ma rappresenta una costruzione contemporanea che si inserisce nella crescente valorizzazione del vermouth come protagonista e non più come semplice modificatore. Il nome richiama il termine francese “panaché”, che indica una miscela equilibrata e armoniosa, suggerendo l’idea di un blend raffinato tra diverse espressioni dello stesso prodotto. Questo tipo di approccio riflette la sensibilità moderna della miscelazione, sempre più orientata verso drink a bassa gradazione e profili eleganti. Più che legato a un inventore preciso, il Vermouth Panache è espressione della cultura del bartending attuale, attenta alla riscoperta degli aromatizzati storici europei.",
+  "frizzante": false,
+  "bicchiere": "Tumbler bass0",
+  "img": "https://danielsportelli.github.io/cocktail-legend/immagini/vermouth_panache.webp",
+  "varianti": [],
+  "iba": false
+},
+{
   "id": "smokey_joe",
   "name": "Smokey Joe",
   "distillato": ["Sake"],
