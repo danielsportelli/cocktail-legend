@@ -1,0 +1,1379 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Barman AI — Cocktail Legend</title>
+<meta name="theme-color" content="#0a0f1e">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --blue:#2563eb;--blue-l:#60a5fa;--amber:#f59e0b;
+  --bg:#0a0f1e;--surf:#1e293b;--surf2:#334155;
+  --txt:#f1f5f9;--txt2:#cbd5e1;--brd:rgba(255,255,255,.08);--dim:#64748b;
+}
+html,body{min-height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;}
+
+/* Safe area notch */
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:#0a0f1e;z-index:9999;}
+
+/* ── HEADER ── */
+.bai-header{
+  position:fixed;top:0;left:0;right:0;
+  z-index:200;
+  height:56px;
+  padding-top:env(safe-area-inset-top,0px);
+  background:#0a0f1e;
+  border-bottom:1px solid var(--brd);
+  display:flex;align-items:center;justify-content:space-between;
+  padding-left:4%;padding-right:4%;
+}
+@media(display-mode:standalone){
+  .bai-header{height:calc(56px + env(safe-area-inset-top,0px));}
+}
+.bai-back{
+  display:flex;align-items:center;gap:.3rem;
+  background:none;border:none;cursor:pointer;
+  color:var(--txt2);font-family:inherit;font-size:.78rem;font-weight:600;
+  padding:.4rem 0;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.bai-back svg{flex-shrink:0;}
+.bai-back:active{color:var(--txt);}
+.bai-actions{display:flex;align-items:center;gap:.3rem;}
+.bai-icon-btn{
+  background:none;border:none;cursor:pointer;
+  padding:.4rem;
+  display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent;
+  border-radius:8px;
+  transition:background .15s;
+}
+.bai-icon-btn:active{background:rgba(255,255,255,.07);}
+.bai-icon-btn svg{stroke:var(--txt2);}
+.bai-icon-btn.active svg{stroke:var(--amber);}
+
+/* ── MAIN CONTENT ── */
+.bai-main{
+  padding-top:calc(56px + env(safe-area-inset-top,0px) + 1rem);
+  padding-bottom:calc(2rem + env(safe-area-inset-bottom,0px));
+  min-height:100vh;
+}
+
+/* ── GATE FREE ── */
+.bai-gate{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;padding:2rem 1.25rem 1.5rem;
+  max-width:400px;margin:0 auto;
+}
+.bai-gate-icon{
+  width:60px;height:60px;
+  background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);
+  border-radius:16px;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1rem;
+}
+.bai-gate-title{font-size:1.1rem;font-weight:800;color:var(--txt);margin-bottom:.4rem;letter-spacing:-.02em;}
+.bai-gate-sub{font-size:.82rem;color:var(--txt2);line-height:1.6;margin-bottom:1.5rem;}
+.bai-gate-btn{
+  width:100%;padding:.85rem;
+  background:linear-gradient(135deg,var(--amber),#d97706);
+  color:#0a0f1e;border:none;border-radius:12px;
+  font-family:inherit;font-size:.9rem;font-weight:800;
+  cursor:pointer;letter-spacing:.01em;
+  box-shadow:0 4px 18px rgba(245,158,11,.3);
+  transition:all .2s;
+}
+.bai-gate-btn:active{transform:scale(.98);}
+
+/* ── CMD CARDS ── */
+.bai-section{padding:0 4% 1rem;}
+.bai-greeting{
+  font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--blue-l);margin-bottom:.6rem;
+}
+.bai-cmds{display:flex;flex-direction:column;gap:.5rem;}
+.bai-cmd{
+  display:flex;align-items:center;gap:.7rem;
+  background:var(--bg);border:1px solid var(--brd);border-radius:12px;
+  padding:.75rem .85rem;
+  cursor:pointer;transition:all .2s;text-align:left;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  width:100%;font-family:inherit;
+}
+.bai-cmd:active{border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.04);}
+.bai-cmd.disabled{opacity:.45;cursor:default;pointer-events:none;}
+.bai-cmd-ico{
+  width:38px;height:38px;flex-shrink:0;
+  background:rgba(245,158,11,.1);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+}
+.bai-cmd-text{flex:1;}
+.bai-cmd-title{font-size:.85rem;font-weight:700;color:var(--txt);margin-bottom:.1rem;}
+.bai-cmd-sub{font-size:.68rem;color:var(--dim);}
+.bai-cmd-arr{flex-shrink:0;stroke:var(--dim);}
+
+/* Usage bar compatta */
+.bai-usage{
+  display:flex;align-items:center;gap:8px;
+  padding:0 4%;margin-bottom:.9rem;
+  font-size:.63rem;color:var(--dim);
+}
+.bai-usage-track{flex:1;height:3px;background:var(--brd);border-radius:99px;overflow:hidden;}
+.bai-usage-fill{height:100%;background:var(--amber);border-radius:99px;width:0%;transition:width .4s;}
+
+/* ── STEP AREA ── */
+.bai-step-area{padding:0 4%;display:none;}
+.bai-step-header{
+  display:flex;align-items:center;gap:.6rem;
+  margin-bottom:1rem;
+}
+.bai-step-back{
+  display:inline-flex;align-items:center;gap:.3rem;
+  background:none;border:1px solid var(--dim);border-radius:6px;
+  color:var(--dim);font-family:inherit;font-size:.62rem;font-weight:600;
+  letter-spacing:.05em;text-transform:uppercase;
+  padding:.32rem .6rem;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  transition:none;
+}
+.bai-step-back:active{background:rgba(255,255,255,.07);}
+.bai-step-title{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-l);flex:1;}
+
+/* ── PILL SELETTORI ── */
+.bai-pills-label{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-l);margin-bottom:.45rem;margin-top:.75rem;}
+.bai-pills-row{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:.1rem;}
+.bai-pills-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-bottom:.1rem;}
+.bai-pill{
+  flex:1;background:var(--bg);border:1px solid var(--brd);border-radius:8px;
+  padding:.52rem .5rem;font-size:.75rem;font-weight:600;color:var(--txt2);
+  cursor:pointer;transition:all .2s;font-family:inherit;text-align:center;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  white-space:nowrap;
+}
+.bai-pill.sel{
+  background:rgba(37,99,235,.25);border-color:#3b82f6;color:#fff;font-weight:700;
+}
+.bai-pill:active{background:rgba(255,255,255,.07);}
+
+/* textarea + send */
+.bai-input-wrap{margin-top:.85rem;}
+.bai-input-label{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-l);margin-bottom:.45rem;}
+.bai-textarea{
+  width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:10px;
+  padding:.6rem .75rem;color:var(--txt);font-family:inherit;font-size:.83rem;
+  outline:none;resize:none;line-height:1.5;box-sizing:border-box;
+  transition:border-color .2s;
+  -webkit-user-select:text;user-select:text;
+}
+.bai-textarea:focus{border-color:rgba(37,99,235,.5);box-shadow:0 0 0 3px rgba(37,99,235,.1);}
+.bai-textarea::placeholder{color:var(--dim);}
+.bai-send{
+  margin-top:.65rem;width:100%;padding:.78rem;
+  background:var(--surf);color:var(--dim);border:1px solid var(--brd);
+  border-radius:10px;font-family:inherit;font-size:.75rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  cursor:not-allowed;transition:all .25s;
+}
+.bai-send.ready{
+  background:linear-gradient(135deg,var(--amber),#d97706);
+  color:#0a0f1e;border-color:transparent;cursor:pointer;
+  box-shadow:0 4px 14px rgba(245,158,11,.3);
+}
+.bai-send.ready:active{transform:scale(.98);}
+
+/* ── RISPOSTA ── */
+.bai-response{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--brd);}
+.bai-response-hdr{display:flex;align-items:center;gap:8px;margin-bottom:.75rem;font-size:.68rem;color:var(--dim);}
+.bai-star{width:24px;height:24px;background:var(--amber);border-radius:50%;display:grid;place-items:center;color:#0a0f1e;flex-shrink:0;}
+.bai-body{font-size:.78rem;line-height:1.75;color:var(--txt);}
+
+/* Thinking */
+.bai-thinking{display:flex;align-items:center;gap:5px;padding:.4rem 0;}
+@keyframes aiStarPulse{0%,100%{opacity:.25;transform:scale(.7);}50%{opacity:1;transform:scale(1.2);}}
+.bai-think-star{color:var(--amber);font-size:1rem;animation:aiStarPulse 1.2s ease-in-out infinite;}
+.bai-think-star.s1{animation-delay:0s;}.bai-think-star.s2{animation-delay:.25s;}.bai-think-star.s3{animation-delay:.5s;}
+
+/* Follow-up */
+.bai-fu{display:none;margin-top:1.1rem;padding-top:.9rem;border-top:1px solid var(--brd);}
+.bai-fu-label{font-size:.68rem;color:var(--dim);margin-bottom:.5rem;}
+.bai-fu-row{display:flex;gap:.45rem;margin-bottom:.45rem;}
+.bai-fu-btn{
+  flex:1;background:var(--surf);border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;padding:.55rem;font-size:.7rem;font-weight:600;color:var(--txt);
+  cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;
+  -webkit-tap-highlight-color:transparent;
+}
+.bai-fu-btn:active{background:var(--surf2);}
+.bai-fu-btn--save{
+  background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);
+  color:var(--amber);
+}
+.bai-fu-btn--save:active{background:rgba(245,158,11,.22);}
+
+/* Scelta drink da modificare */
+.bai-fu-scelta{display:none;margin-top:.75rem;}
+.bai-fu-scelta-label{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-l);margin-bottom:.5rem;}
+
+/* Chat cont */
+.bai-chat-cont{display:none;margin-top:.75rem;}
+
+/* Errore */
+.bai-error{display:none;margin-top:.75rem;padding:.65rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;font-size:.72rem;color:#f87171;}
+
+/* Esaurito */
+.bai-exhausted{display:none;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:.75rem;text-align:center;margin-bottom:.85rem;}
+.bai-exhausted p{font-size:.72rem;color:#f87171;line-height:1.5;}
+.bai-exhausted small{font-size:.62rem;color:var(--dim);margin-top:.3rem;display:block;}
+
+/* Tips btn */
+.bai-tips-btn{
+  display:none;align-items:center;gap:.4rem;
+  background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);
+  border-radius:8px;padding:.35rem .75rem;
+  font-family:inherit;font-size:.65rem;font-weight:700;color:var(--amber);
+  cursor:pointer;margin-bottom:.85rem;letter-spacing:.06em;transition:all .2s;
+}
+.bai-tips-btn:active{background:rgba(245,158,11,.15);}
+
+/* ── DRAWER OVERLAY ── */
+.bai-overlay{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  opacity:0;transition:opacity .25s;
+}
+.bai-overlay.open{display:block;opacity:1;}
+
+/* ── DRAWER GENERICO ── */
+.bai-drawer{
+  position:fixed;left:.75rem;right:.75rem;bottom:.75rem;
+  z-index:310;
+  background:var(--surf);
+  border-radius:20px;border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 -8px 40px rgba(0,0,0,.5);
+  padding:0 0 env(safe-area-inset-bottom,0px);
+  transform:translateY(110%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+  max-height:82vh;overflow-y:auto;
+  scrollbar-width:none;
+}
+.bai-drawer::-webkit-scrollbar{display:none;}
+.bai-drawer.open{transform:translateY(0);}
+.bai-drawer-handle{width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.18);margin:12px auto 4px;cursor:pointer;}
+.bai-drawer-inner{padding:.5rem 1.25rem 1.5rem;}
+.bai-drawer-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:.7rem;border-bottom:1px solid var(--brd);margin-bottom:1rem;
+}
+.bai-drawer-title{font-size:.65rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);}
+.bai-drawer-close{background:none;border:none;cursor:pointer;color:var(--dim);font-size:1.1rem;padding:.1rem .2rem;line-height:1;}
+.bai-drawer-close:active{color:var(--txt);}
+
+/* ── CREDITI DRAWER ── */
+.bai-credits-section{margin-bottom:1.3rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);}
+.bai-credits-label{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;}
+.bai-credits-bar-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem;font-size:.75rem;}
+.bai-credits-bar-row span:first-child{color:var(--txt2);}
+.bai-credits-bar-row span:last-child{color:var(--dim);font-size:.7rem;}
+.bai-credits-track{height:5px;background:var(--brd);border-radius:99px;overflow:hidden;margin-bottom:.3rem;}
+.bai-credits-fill{height:100%;background:var(--amber);border-radius:99px;transition:width .4s;}
+.bai-credits-remaining{font-size:.65rem;color:var(--dim);}
+.bai-credits-extra-val{font-size:1.5rem;font-weight:800;color:var(--amber);margin-bottom:.2rem;}
+.bai-credits-extra-note{font-size:.65rem;color:var(--dim);line-height:1.5;}
+
+/* Pacchetti acquisto */
+.bai-pkg{
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--bg);border:1px solid var(--brd);border-radius:10px;
+  padding:.65rem .85rem;text-decoration:none;
+  transition:border-color .2s;margin-bottom:.5rem;cursor:pointer;
+}
+.bai-pkg:active{border-color:rgba(245,158,11,.4);}
+.bai-pkg--best{border-color:rgba(245,158,11,.35);}
+.bai-pkg-name{font-size:.75rem;font-weight:700;color:var(--txt);}
+.bai-pkg-sub{font-size:.62rem;color:var(--dim);}
+.bai-pkg-price{font-size:.85rem;font-weight:800;color:var(--amber);}
+.bai-pkg-badge{font-size:.55rem;background:var(--amber);color:#000;border-radius:4px;padding:1px 5px;margin-left:4px;font-weight:700;}
+
+/* Non premium gate nel drawer crediti */
+.bai-credits-free-msg{text-align:center;padding:.75rem 0;}
+.bai-credits-free-msg p{font-size:.82rem;color:var(--txt2);line-height:1.6;margin-bottom:1rem;}
+
+/* ── SALVATI DRAWER ── */
+.bai-saved-cat{margin-bottom:1.1rem;}
+.bai-saved-cat-title{
+  display:flex;align-items:center;gap:.5rem;justify-content:space-between;
+  font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--blue-l);margin-bottom:.55rem;cursor:pointer;
+  padding:.3rem 0;
+}
+.bai-saved-cat-count{font-size:.58rem;background:rgba(37,99,235,.2);color:var(--blue-l);border-radius:20px;padding:.1rem .45rem;font-weight:700;}
+.bai-saved-item{
+  background:var(--bg);border:1px solid var(--brd);border-radius:10px;
+  padding:.65rem .8rem;margin-bottom:.4rem;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;
+}
+.bai-saved-item-text{flex:1;font-size:.75rem;color:var(--txt);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+.bai-saved-item-date{font-size:.58rem;color:var(--dim);flex-shrink:0;margin-top:.1rem;}
+.bai-saved-item-del{background:none;border:none;color:var(--dim);cursor:pointer;font-size:.85rem;padding:.1rem .15rem;flex-shrink:0;line-height:1;-webkit-tap-highlight-color:transparent;}
+.bai-saved-item-del:active{color:#f87171;}
+.bai-saved-empty{font-size:.78rem;color:var(--dim);text-align:center;padding:1rem 0;}
+
+/* Tips popup */
+#bai-tips-overlay{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.55);align-items:center;justify-content:center;padding:1.2rem;}
+#bai-tips-overlay.open{display:flex;}
+#bai-tips-box{background:#0f172a;border:1px solid rgba(245,158,11,.25);border-radius:16px;width:100%;max-width:360px;max-height:80vh;overflow-y:auto;padding:1.25rem 1.1rem 1rem;position:relative;box-shadow:0 8px 40px rgba(0,0,0,.6);scrollbar-width:none;}
+#bai-tips-box::-webkit-scrollbar{display:none;}
+
+/* Protezione contenuti */
+*{-webkit-user-select:none;-moz-user-select:none;user-select:none;}
+img{-webkit-user-drag:none;pointer-events:none;}
+button,a,input,textarea{pointer-events:auto;}
+textarea{-webkit-user-select:text;user-select:text;}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.bai-anim{animation:fadeIn .25s ease both;}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="bai-header">
+  <button class="bai-back" onclick="window.location.href='cocktail-legend.html'">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Cocktail Legend
+  </button>
+  <div class="bai-actions">
+    <!-- Salvati -->
+    <button class="bai-icon-btn" id="bai-saved-btn" aria-label="Salvati" title="Le tue ricerche salvate">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+    </button>
+    <!-- Crediti / Account AI -->
+    <button class="bai-icon-btn" id="bai-credits-btn" aria-label="Crediti AI">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ── MAIN ── -->
+<div class="bai-main" id="bai-main">
+
+  <!-- Spinner iniziale -->
+  <div id="bai-loading" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1rem;">
+    <div style="width:32px;height:32px;border:3px solid rgba(255,255,255,.08);border-top-color:var(--amber);border-radius:50%;animation:spin .7s linear infinite;"></div>
+  </div>
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  <!-- Gate per utenti non autenticati -->
+  <div id="bai-gate-auth" class="bai-gate" style="display:none;">
+    <div class="bai-gate-icon">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </div>
+    <div class="bai-gate-title">Accedi per usare il Barman AI</div>
+    <div class="bai-gate-sub">Devi essere loggato per utilizzare questa funzione.</div>
+    <button class="bai-gate-btn" onclick="window.location.href='cocktail-legend.html'">Vai al Login →</button>
+  </div>
+
+  <!-- Contenuto principale (mostrato dopo auth check) -->
+  <div id="bai-content" style="display:none;">
+
+    <!-- Usage bar -->
+    <div class="bai-usage" id="bai-usage-wrap" style="display:none;">
+      <span style="white-space:nowrap;">Ricerche mese:</span>
+      <div class="bai-usage-track"><div class="bai-usage-fill" id="bai-usage-fill"></div></div>
+      <span id="bai-usage-txt" style="white-space:nowrap;font-size:.63rem;">0/30</span>
+    </div>
+
+    <!-- Tips btn (visibile solo dentro una funzione) -->
+    <div style="padding:0 4%;">
+      <button class="bai-tips-btn" id="bai-tips-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Tips
+      </button>
+    </div>
+
+    <!-- ── STEP 0: 4 funzioni ── -->
+    <div class="bai-section" id="bai-step-cmds">
+      <div class="bai-greeting" id="bai-greeting">Cosa vuoi fare?</div>
+      <div class="bai-cmds">
+
+        <button class="bai-cmd" id="ai-btn-signature" data-cmd="signature">
+          <div class="bai-cmd-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 22v-7"/><path d="M3 3l7 9h4l7-9z"/></svg>
+          </div>
+          <div class="bai-cmd-text">
+            <div class="bai-cmd-title">Crea un Signature</div>
+            <div class="bai-cmd-sub">Drink originale su misura</div>
+          </div>
+          <svg class="bai-cmd-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <button class="bai-cmd" id="ai-btn-giorno" data-cmd="giorno">
+          <div class="bai-cmd-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="16" r="2" fill="#f59e0b" stroke="none"/></svg>
+          </div>
+          <div class="bai-cmd-text">
+            <div class="bai-cmd-title">Cocktail del Giorno</div>
+            <div class="bai-cmd-sub">Stagionale, pensato per oggi</div>
+          </div>
+          <svg class="bai-cmd-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <button class="bai-cmd" id="ai-btn-twist" data-cmd="twist">
+          <div class="bai-cmd-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          </div>
+          <div class="bai-cmd-text">
+            <div class="bai-cmd-title">Twist on Classic</div>
+            <div class="bai-cmd-sub">3 reinterpretazioni di un classico</div>
+          </div>
+          <svg class="bai-cmd-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <button class="bai-cmd" id="ai-btn-pairing" data-cmd="pairing">
+          <div class="bai-cmd-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <div class="bai-cmd-text">
+            <div class="bai-cmd-title">Food Pairing</div>
+            <div class="bai-cmd-sub">3 abbinamenti drink-piatto</div>
+          </div>
+          <svg class="bai-cmd-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- ── STEP AREA (selezioni + risposta) ── -->
+    <div class="bai-step-area bai-anim" id="bai-step-area">
+
+      <!-- Header step con tasto torna -->
+      <div class="bai-step-header">
+        <button class="bai-step-back" id="bai-step-back">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Torna
+        </button>
+        <span class="bai-step-title" id="bai-step-title"></span>
+      </div>
+
+      <!-- Esaurito -->
+      <div class="bai-exhausted" id="bai-exhausted">
+        <p>🚫 Hai esaurito le 30 ricerche mensili.</p>
+        <small id="bai-reset-date"></small>
+      </div>
+
+      <!-- SIGNATURE steps -->
+      <div id="bai-sig-steps" style="display:none;">
+        <div class="bai-pills-label">Cosa creiamo?</div>
+        <div class="bai-pills-row" id="bai-sig-1">
+          <button class="bai-pill" data-step="1" data-val="alcolico">Alcolico</button>
+          <button class="bai-pill" data-step="1" data-val="analcolico">Analcolico</button>
+        </div>
+        <div id="bai-sig-2a" style="display:none;">
+          <div class="bai-pills-label">Che tipo di drink?</div>
+          <div class="bai-pills-row">
+            <button class="bai-pill" data-step="2a" data-val="pre dinner">Pre dinner</button>
+            <button class="bai-pill" data-step="2a" data-val="after dinner">After dinner</button>
+            <button class="bai-pill" data-step="2a" data-val="all day">All day</button>
+          </div>
+        </div>
+        <div id="bai-sig-2b" style="display:none;">
+          <div class="bai-pills-label">Profilo gusto</div>
+          <div class="bai-pills-grid">
+            <button class="bai-pill" data-step="2b" data-val="dolce">Dolce</button>
+            <button class="bai-pill" data-step="2b" data-val="aspro">Aspro</button>
+            <button class="bai-pill" data-step="2b" data-val="amaro">Amaro</button>
+            <button class="bai-pill" data-step="2b" data-val="fresco">Fresco</button>
+          </div>
+        </div>
+        <div id="bai-sig-3" style="display:none;">
+          <div class="bai-pills-label">Tenore alcolico</div>
+          <div class="bai-pills-row">
+            <button class="bai-pill" data-step="3" data-val="basso">Basso</button>
+            <button class="bai-pill" data-step="3" data-val="medio">Medio</button>
+            <button class="bai-pill" data-step="3" data-val="alto">Alto</button>
+          </div>
+        </div>
+        <div id="bai-sig-4" style="display:none;">
+          <div class="bai-pills-label">In quale bicchiere?</div>
+          <div class="bai-pills-row">
+            <button class="bai-pill" data-step="4" data-val="coppetta">Coppetta</button>
+            <button class="bai-pill" data-step="4" data-val="tumbler">Tumbler</button>
+            <button class="bai-pill" data-step="4" data-val="highball">Highball</button>
+          </div>
+        </div>
+        <div id="bai-sig-5" style="display:none;">
+          <div class="bai-input-wrap">
+            <div class="bai-input-label">Con quali ingredienti?</div>
+            <textarea id="bai-sig-input" class="bai-textarea" rows="2" placeholder="es. gin, lime, rosmarino... aggiungi note se vuoi: frizzante, secco, cremoso"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- GIORNO steps -->
+      <div id="bai-giorno-steps" style="display:none;">
+        <div class="bai-pills-label">Alcolico o analcolico?</div>
+        <div class="bai-pills-row" id="bai-giorno-1">
+          <button class="bai-pill giorno-tipo" data-val="alcolico">Alcolico</button>
+          <button class="bai-pill giorno-tipo" data-val="analcolico">Analcolico</button>
+        </div>
+        <div id="bai-giorno-2" style="display:none;">
+          <div class="bai-pills-label">In che stile lo vuoi?</div>
+          <div class="bai-pills-row">
+            <button class="bai-pill giorno-stile" data-val="pre dinner">Pre dinner</button>
+            <button class="bai-pill giorno-stile" data-val="after dinner">After dinner</button>
+            <button class="bai-pill giorno-stile" data-val="all day">All day</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- INPUT area (twist, pairing, giorno send) -->
+      <div id="bai-input-area" style="display:none;">
+        <div class="bai-input-wrap">
+          <div class="bai-input-label" id="bai-input-label"></div>
+          <textarea id="bai-input" class="bai-textarea" rows="2" placeholder=""></textarea>
+        </div>
+      </div>
+
+      <!-- Send button -->
+      <button class="bai-send" id="bai-send">✦ Chiedi al Barman</button>
+
+      <!-- Risposta -->
+      <div class="bai-response" id="bai-response">
+        <div class="bai-response-hdr">
+          <div class="bai-star">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+          </div>
+          Il barman risponde
+        </div>
+        <div class="bai-body" id="bai-body"></div>
+
+        <!-- Follow-up -->
+        <div class="bai-fu" id="bai-fu">
+          <!-- SINO (signature, giorno) -->
+          <div id="bai-fu-sino" style="display:none;">
+            <div class="bai-fu-label">Se sei soddisfatto, salva la proposta!</div>
+            <div class="bai-fu-row">
+              <button class="bai-fu-btn bai-fu-btn--save" id="bai-fu-save">Salva</button>
+            </div>
+            <div class="bai-fu-label" style="margin-top:.1rem;">Altrimenti:</div>
+            <div class="bai-fu-row">
+              <button class="bai-fu-btn" id="bai-fu-lavora">Lavoriamo su questa</button>
+              <button class="bai-fu-btn" id="bai-fu-nuova">Nuova proposta</button>
+            </div>
+          </div>
+          <!-- TRE (twist, pairing) -->
+          <div id="bai-fu-tre" style="display:none;">
+            <div id="bai-fu-tre-opts">
+              <div class="bai-fu-label">Se sei soddisfatto, salva le proposte!</div>
+              <div class="bai-fu-row">
+                <button class="bai-fu-btn bai-fu-btn--save" id="bai-fu-save-tre">Salva</button>
+              </div>
+              <div class="bai-fu-label" style="margin-top:.1rem;">Altrimenti:</div>
+              <div class="bai-fu-row">
+                <button class="bai-fu-btn" id="bai-fu-modifica-tre" style="font-size:.68rem;">Modifica una proposta</button>
+                <button class="bai-fu-btn" id="bai-fu-altre-tre" style="font-size:.68rem;">Altre 3 varianti</button>
+              </div>
+            </div>
+            <div class="bai-fu-scelta" id="bai-fu-scelta">
+              <div class="bai-fu-scelta-label">Su quale proposta vuoi lavorare?</div>
+              <div class="bai-fu-row">
+                <button class="bai-fu-btn fu-scelta-num" data-num="1">Prima</button>
+                <button class="bai-fu-btn fu-scelta-num" data-num="2">Seconda</button>
+                <button class="bai-fu-btn fu-scelta-num" data-num="3">Terza</button>
+              </div>
+            </div>
+          </div>
+          <!-- Chat continua -->
+          <div class="bai-chat-cont" id="bai-chat-cont">
+            <textarea id="bai-cont-inp" class="bai-textarea" rows="2" placeholder="Dimmi cosa vuoi che faccia..."></textarea>
+            <button id="bai-cont-send" class="bai-send" style="margin-top:.5rem;font-size:.72rem;letter-spacing:.1em;" disabled>✦ Modifica</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bai-error" id="bai-error"></div>
+
+    </div>
+    <!-- /step-area -->
+
+  </div>
+  <!-- /bai-content -->
+
+</div>
+<!-- /bai-main -->
+
+<!-- ── OVERLAY ── -->
+<div class="bai-overlay" id="bai-overlay"></div>
+
+<!-- ── DRAWER CREDITI ── -->
+<div class="bai-drawer" id="bai-drawer-credits">
+  <div class="bai-drawer-handle"></div>
+  <div class="bai-drawer-inner">
+    <div class="bai-drawer-hdr">
+      <span class="bai-drawer-title">Crediti AI</span>
+      <button class="bai-drawer-close" id="bai-credits-close">✕</button>
+    </div>
+    <div id="bai-credits-content">
+      <!-- Popolato via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ── DRAWER SALVATI ── -->
+<div class="bai-drawer" id="bai-drawer-saved">
+  <div class="bai-drawer-handle"></div>
+  <div class="bai-drawer-inner">
+    <div class="bai-drawer-hdr">
+      <span class="bai-drawer-title">Le tue ricerche salvate</span>
+      <button class="bai-drawer-close" id="bai-saved-close">✕</button>
+    </div>
+    <div id="bai-saved-content">
+      <!-- Popolato via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ── TIPS OVERLAY ── -->
+<div id="bai-tips-overlay">
+  <div id="bai-tips-box">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;">
+      <div style="display:flex;align-items:center;gap:.45rem;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="bai-tips-title" style="font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);">Come usarla</span>
+      </div>
+      <button id="bai-tips-close" style="background:none;border:none;color:var(--dim);font-size:1rem;cursor:pointer;padding:.1rem .3rem;line-height:1;">✕</button>
+    </div>
+    <div id="bai-tips-content" style="font-size:.75rem;color:var(--txt2);line-height:1.7;"></div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script type="module" src="js/firebase-init.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// BARMAN AI — logica completa
+// ═══════════════════════════════════════════════════════════
+(function(){
+
+var WORKER_URL = 'https://cocktail-legend-ai.daniel-sportelli.workers.dev';
+var MAX = 30;
+var _usageCache = null;
+var currentCmd  = null;
+var selectedPill = null;
+var lastRawText  = '';
+var lastUserInput = '';
+var giornoTipo = null;
+var sig = { tipo:null, momento:null, gusto:null, tenore:null, bicchiere:null };
+var _isPremium = false;
+var _currentUser = null;
+var _fuType = null;
+
+// ── mdToHtml ──────────────────────────────────────────────
+function mdToHtml(md){
+  var SEZIONI=['RICETTA','PREPARAZIONI','PERSONALIZZAZIONE','MODIFICHE APPORTATE','INGREDIENTE PROTAGONISTA','INGREDIENTE STAGIONALE'];
+  var lines=md.split('\n');
+  var out=lines.map(function(line){
+    if(/^## .+/.test(line)){
+      var title=line.replace(/^## /,'');
+      var isSezione=SEZIONI.indexOf(title.trim().toUpperCase())!==-1;
+      if(isSezione) return '<div style="font-size:.6rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--blue-l);margin:18px 0 6px;padding-bottom:5px;border-bottom:1px solid rgba(96,165,250,.2);">'+title+'</div>';
+      return '<div style="font-size:1.1rem;font-weight:800;color:var(--txt);margin:14px 0 6px;letter-spacing:-.01em;">'+title+'</div>';
+    }
+    if(/^### .+/.test(line)) return '<div style="font-size:.82rem;font-weight:700;color:var(--txt);margin:12px 0 3px;">'+line.replace(/^### /,'')+'</div>';
+    if(/^- .+/.test(line)) return '<div style="padding:3px 0 3px 10px;border-left:2px solid rgba(96,165,250,.25);color:var(--txt2);font-size:.78rem;">'+line.replace(/^- /,'')+'</div>';
+    if(/^---$/.test(line)) return '<hr style="border:none;border-top:1px solid var(--brd);margin:12px 0;">';
+    return line;
+  }).join('\n');
+  return out
+    .replace(/\*\*(.+?)\*\*/g,'<strong style="color:var(--amber);font-weight:700;">$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em style="color:var(--txt2);">$1</em>')
+    .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+}
+
+// ── PROMPTS (copiati da js.js) ────────────────────────────
+// (stesso oggetto PROMPTS di cocktail-legend)
+var PROMPTS = {
+  twist:{
+    maxTokens:1500,
+    label:'Scrivi un drink classico e ti propongo 3 varianti',
+    placeholder:'es. Negroni, Old Fashioned, Margarita...',
+    usePills:false,fuType:'tre',
+    build:function(v){
+      var cocktailRef='';
+      return 'Voglio fare un twist creativo su: '+v+'.\n\nREGOLA FONDAMENTALE: un twist non è un signature. Ogni reinterpretazione deve rimanere RICONOSCIBILE come variante del classico — stessa logica strutturale di base, stesso profilo di appartenenza. Chi lo beve deve percepire il classico di partenza reinterpretato, non un drink completamente nuovo. Se cambi tutto (base alcolica, struttura, profilo gusto, tecnica) non è più un twist — è un signature. Mantieni almeno 2-3 elementi chiave del classico originale in ogni variante.\n\nREGOLA DOSI: mantieni proporzioni coerenti con il classico di partenza.\n\nProponmi esattamente 3 reinterpretazioni originali e distinte tra loro, separate da ---.\n\nPer ognuna usa questa struttura esatta:\n## NOME TWIST\n(descrizione concept)\n## RICETTA\n- dose ml Ingrediente\n**Tecnica:** descrizione\n**Bicchiere:** specificare\n**Garnish:** specificare\n## PREPARAZIONI\n(solo se serve una prep homemade)\n## PERSONALIZZAZIONE\nConsiglio tecnico.\n\n* Ogni proposta è un punto di partenza: assaggia sempre e bilancia a tuo piacere prima del servizio.';
+    }
+  },
+  pairing:{
+    maxTokens:2000,
+    label:'Descrivi il piatto e ti propongo 3 drink',
+    placeholder:'es. Tartare di tonno con avocado e sesamo...',
+    usePills:false,fuType:'tre',
+    build:function(v){
+      return 'Devo abbinare cocktail a questo piatto: '+v+'\n\nProponmi esattamente 3 drink con logiche distinte, separati da ---:\n1. CLASSICO: il classico più adatto\n2. AFFINITÀ: amplifica i sapori del piatto\n3. CREATIVO/INASPETTATO: abbinamento sorprendente\n\nPer ognuno usa questa struttura:\n## NOME DRINK\n(perché funziona con questo piatto)\n## RICETTA\n- dose ml Ingrediente\n**Tecnica:** descrizione\n**Bicchiere:** specificare\n**Garnish:** specificare\n## PREPARAZIONI\n(solo se serve una prep homemade)\n## PERSONALIZZAZIONE\nConsiglio timing servizio.\n\n* Assaggia sempre e bilancia a tuo piacere prima del servizio.';
+    }
+  },
+  giorno:{
+    maxTokens:700,
+    label:'In che stile lo vuoi?',
+    placeholder:'',
+    usePills:true,fuType:'sino',
+    build:function(v){
+      var now=new Date();
+      var mesi=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+      var stagioni=['inverno','inverno','primavera','primavera','primavera','estate','estate','estate','autunno','autunno','autunno','inverno'];
+      var mese=mesi[now.getMonth()];
+      var stagione=stagioni[now.getMonth()];
+      var tipoStr=giornoTipo==='analcolico'?'ANALCOLICO (zero alcol)':'ALCOLICO, stile '+v;
+      return 'Oggi è il '+now.getDate()+' '+mese+', siamo in '+stagione+'.\n\nCrea il cocktail del giorno '+tipoStr+'.\n\nRispondi SOLO con questa struttura:\n## NOME DRINK\n(concept)\n## RICETTA\n- dose ml Ingrediente\n**Tecnica:** descrizione\n**Bicchiere:** specificare\n**Garnish:** specificare\n## PREPARAZIONI\n(solo se necessario)\n## INGREDIENTE STAGIONALE\nPerché è perfetto ora.\n## PERSONALIZZAZIONE\nConsiglio tecnico.\n\n* Assaggia sempre e bilancia prima del servizio.';
+    }
+  }
+};
+
+// Signature prompt
+function buildSignaturePrompt(ingredienti){
+  var tipo=sig.tipo;
+  var lines=[];
+  if(tipo==='alcolico'){
+    lines.push('Crea un signature drink ALCOLICO originale con queste caratteristiche:');
+    lines.push('- Momento di servizio: '+sig.momento);
+    lines.push('- Tenore alcolico: '+sig.tenore);
+    if(sig.bicchiere) lines.push('- Bicchiere: '+sig.bicchiere);
+  } else {
+    lines.push('Crea un signature drink ANALCOLICO (zero alcol assoluto) con queste caratteristiche:');
+    lines.push('- Profilo gusto: '+sig.gusto);
+  }
+  lines.push('- Ingredienti disponibili: '+ingredienti);
+  lines.push('');
+  lines.push('REGOLA CONCEPT: un signature deve avere una identità propria e irripetibile. NON accettare concept generici.');
+  lines.push('REGOLA PREP HOMEMADE: deve avere almeno una preparazione homemade.');
+  lines.push('');
+  lines.push('Rispondi SOLO con questa struttura:\n## NOME DRINK\n(storia o emozione)\n## RICETTA\n- dose ml Ingrediente\n**Tecnica:** descrizione\n**Bicchiere:** specificare\n**Garnish:** specificare\n## PREPARAZIONI\n(quasi sempre obbligatoria)\n## PERSONALIZZAZIONE\nConsiglio tecnico.\n\n* Assaggia sempre prima del servizio.');
+  return lines.join('\n');
+}
+
+// ── USAGE ─────────────────────────────────────────────────
+function _isPeriodExpired(periodStart){
+  if(!periodStart) return true;
+  var start=new Date(periodStart);
+  var now=new Date();
+  return (now-start)/(1000*60*60*24)>=30;
+}
+function getMonthlyUsed(){ return _usageCache?(_usageCache.monthlyCount||0):0; }
+function getExtraCredits(){ return _usageCache?(_usageCache.extraCredits||0):0; }
+function getMonthlyRemaining(){ return Math.max(0,MAX-getMonthlyUsed()); }
+function getTotalRemaining(){ return getMonthlyRemaining()+getExtraCredits(); }
+
+function renderUsage(){
+  var monthly=getMonthlyUsed();
+  var extra=getExtraCredits();
+  var pct=Math.min(100,(monthly/MAX)*100);
+  var fill=document.getElementById('bai-usage-fill');
+  if(fill){fill.style.width=pct+'%';fill.style.background=pct>=80?'#ef4444':'var(--amber)';}
+  var txt=document.getElementById('bai-usage-txt');
+  if(txt) txt.textContent=extra>0?monthly+'/'+MAX+' + '+extra+' extra':monthly+'/'+MAX;
+  var wrap=document.getElementById('bai-usage-wrap');
+  if(wrap) wrap.style.display=_isPremium?'flex':'none';
+}
+
+function incUsage(){
+  if(!_usageCache) return 0;
+  var user=window._currentUser;
+  var db=window._fbDb;
+  var fns=window._fbFunctions;
+  if(!user||!db||!fns) return getTotalRemaining();
+  if(_usageCache.monthlyCount<MAX){ _usageCache.monthlyCount++; }
+  else if(_usageCache.extraCredits>0){ _usageCache.extraCredits--; }
+  var userDoc=fns.doc(db,'users',user.uid);
+  fns.setDoc(userDoc,{aiUsage:{monthlyCount:_usageCache.monthlyCount,extraCredits:_usageCache.extraCredits,periodStart:_usageCache.periodStart}},{merge:true})
+    .catch(function(e){console.warn('incUsage err',e);});
+  return getTotalRemaining();
+}
+
+// ── AUTH READY ────────────────────────────────────────────
+window.addEventListener('fb-auth-ready', function(e){
+  var user=e.detail.user;
+  document.getElementById('bai-loading').style.display='none';
+
+  if(!user){
+    document.getElementById('bai-gate-auth').style.display='flex';
+    return;
+  }
+  _currentUser=user;
+
+  // Carica dati utente
+  var db=window._fbDb;
+  var fns=window._fbFunctions;
+  if(!db||!fns) return;
+  var userDoc=fns.doc(db,'users',user.uid);
+
+  function processSnap(snap){
+    var now=new Date();
+    var nowStr=now.toISOString().split('T')[0];
+    if(snap.exists()){
+      var data=snap.data();
+      _isPremium=data.plan==='premium';
+
+      // Aggiorna greeting con nome
+      var nome=data.nome||user.displayName||(user.email?user.email.split('@')[0]:'');
+      var greet=document.getElementById('bai-greeting');
+      if(greet && nome) greet.textContent='Ciao '+nome+', cosa vuoi fare?';
+
+      // Disabilita bottoni se non premium
+      if(!_isPremium){
+        document.querySelectorAll('.bai-cmd').forEach(function(b){ b.classList.add('disabled'); });
+        // Mostra banner upgrade sopra i comandi
+        var section=document.getElementById('bai-step-cmds');
+        var banner=document.createElement('div');
+        banner.style.cssText='margin-bottom:1rem;padding:.75rem .85rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:12px;font-size:.75rem;color:var(--txt2);line-height:1.55;';
+        banner.innerHTML='🔒 Le funzioni Barman AI sono riservate al piano <strong style="color:var(--amber);">Premium</strong>.<br><button onclick="showPremiumModal&&showPremiumModal()" style="margin-top:.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:8px;padding:.38rem .85rem;font-family:inherit;font-size:.72rem;font-weight:800;cursor:pointer;">Scopri Premium →</button>';
+        section.insertBefore(banner,section.firstChild);
+      }
+
+      var ai=data.aiUsage||{};
+      var periodStart=ai.periodStart||data.createdAt||nowStr;
+      if(_isPeriodExpired(periodStart)){
+        var start=new Date(periodStart);
+        while(_isPeriodExpired(start.toISOString().split('T')[0])) start.setDate(start.getDate()+30);
+        _usageCache={monthlyCount:0,extraCredits:ai.extraCredits||0,periodStart:start.toISOString().split('T')[0]};
+        fns.setDoc(userDoc,{aiUsage:_usageCache},{merge:true}).catch(function(){});
+      } else {
+        _usageCache={monthlyCount:ai.monthlyCount||0,extraCredits:ai.extraCredits||0,periodStart:periodStart};
+      }
+    } else {
+      _usageCache={monthlyCount:0,extraCredits:0,periodStart:nowStr};
+    }
+    renderUsage();
+    document.getElementById('bai-content').style.display='block';
+  }
+
+  if(fns.onSnapshot){
+    fns.onSnapshot(userDoc,processSnap,function(){});
+  } else {
+    fns.getDoc(userDoc).then(processSnap).catch(function(){
+      _usageCache={monthlyCount:0,extraCredits:0,periodStart:new Date().toISOString().split('T')[0]};
+      document.getElementById('bai-content').style.display='block';
+    });
+  }
+});
+
+// ── HELPERS ───────────────────────────────────────────────
+function setVisible(id,v){ var el=document.getElementById(id); if(el) el.style.display=v?'block':'none'; }
+
+function pillOn(el){ el.classList.add('sel'); }
+function pillOff(el){ el.classList.remove('sel'); }
+
+function showCmds(){
+  setVisible('bai-step-cmds',true);
+  document.getElementById('bai-step-area').style.display='none';
+  document.getElementById('bai-tips-btn').style.display='none';
+  currentCmd=null; selectedPill=null; giornoTipo=null;
+  sig={tipo:null,momento:null,gusto:null,tenore:null,bicchiere:null};
+}
+
+function showStep(cmd){
+  document.getElementById('bai-step-cmds').style.display='none';
+  var area=document.getElementById('bai-step-area');
+  area.style.display='block';
+  // Reset
+  setVisible('bai-sig-steps',false);
+  setVisible('bai-giorno-steps',false);
+  setVisible('bai-input-area',false);
+  setVisible('bai-response',false);
+  setVisible('bai-exhausted',false);
+  setVisible('bai-error',false);
+  setVisible('bai-fu',false);
+  document.getElementById('bai-send').disabled=true;
+  document.getElementById('bai-send').classList.remove('ready');
+  document.querySelectorAll('.bai-pill').forEach(function(p){ pillOff(p); });
+
+  var titles={signature:'Crea un Signature',giorno:'Cocktail del Giorno',twist:'Twist on Classic',pairing:'Food Pairing'};
+  document.getElementById('bai-step-title').textContent=titles[cmd]||'';
+  currentCmd=cmd;
+  selectedPill=null; giornoTipo=null;
+  sig={tipo:null,momento:null,gusto:null,tenore:null,bicchiere:null};
+
+  // Mostra sezione corretta
+  if(cmd==='signature'){
+    setVisible('bai-sig-steps',true);
+    setVisible('bai-sig-2a',false);setVisible('bai-sig-2b',false);
+    setVisible('bai-sig-3',false);setVisible('bai-sig-4',false);setVisible('bai-sig-5',false);
+  } else if(cmd==='giorno'){
+    setVisible('bai-giorno-steps',true);
+    setVisible('bai-giorno-2',false);
+  } else {
+    // twist / pairing — input diretto
+    setVisible('bai-input-area',true);
+    var label=document.getElementById('bai-input-label');
+    var inp=document.getElementById('bai-input');
+    var cfg=PROMPTS[cmd];
+    if(label) label.textContent=cfg.label;
+    if(inp){ inp.value=''; inp.placeholder=cfg.placeholder; inp.style.display='block'; }
+    // Tips
+    var tipsBtn=document.getElementById('bai-tips-btn');
+    if(tipsBtn){ tipsBtn.style.display='inline-flex'; }
+  }
+  updateSendBtn();
+}
+
+function updateSendBtn(){
+  var btn=document.getElementById('bai-send');
+  if(!btn||!currentCmd) return;
+  var ok=false;
+  if(currentCmd==='signature'){
+    var inp=document.getElementById('bai-sig-input');
+    if(sig.tipo==='analcolico') ok=sig.gusto!==null&&inp&&inp.value.trim().length>0;
+    else ok=sig.tipo!==null&&sig.momento!==null&&sig.tenore!==null&&inp&&inp.value.trim().length>0;
+  } else if(currentCmd==='giorno'){
+    ok=(giornoTipo==='analcolico')||(giornoTipo==='alcolico'&&selectedPill!==null);
+  } else {
+    var inp2=document.getElementById('bai-input');
+    ok=inp2&&inp2.value.trim().length>0;
+  }
+  btn.disabled=!ok;
+  btn.classList.toggle('ready',ok);
+}
+
+// ── PILL HANDLERS ─────────────────────────────────────────
+// Signature pills
+document.addEventListener('click',function(e){
+  var pill=e.target.closest('.bai-pill[data-step]');
+  if(!pill) return;
+  var step=pill.dataset.step;
+  var val=pill.dataset.val;
+  // Deseleziona stesse pill nel gruppo
+  document.querySelectorAll('.bai-pill[data-step="'+step+'"]').forEach(pillOff);
+  pillOn(pill);
+
+  if(step==='1'){
+    sig.tipo=val;
+    sig.momento=null;sig.gusto=null;sig.tenore=null;sig.bicchiere=null;
+    document.querySelectorAll('.bai-pill[data-step="2a"],.bai-pill[data-step="2b"],.bai-pill[data-step="3"],.bai-pill[data-step="4"]').forEach(pillOff);
+    if(val==='alcolico'){setVisible('bai-sig-2a',true);setVisible('bai-sig-2b',false);}
+    else{setVisible('bai-sig-2b',true);setVisible('bai-sig-2a',false);}
+    setVisible('bai-sig-3',false);setVisible('bai-sig-4',false);setVisible('bai-sig-5',false);
+  } else if(step==='2a'){
+    sig.momento=val;
+    sig.tenore=null;sig.bicchiere=null;
+    document.querySelectorAll('.bai-pill[data-step="3"],.bai-pill[data-step="4"]').forEach(pillOff);
+    setVisible('bai-sig-3',true);setVisible('bai-sig-4',false);setVisible('bai-sig-5',false);
+  } else if(step==='2b'){
+    sig.gusto=val;
+    setVisible('bai-sig-5',true);
+  } else if(step==='3'){
+    sig.tenore=val;
+    document.querySelectorAll('.bai-pill[data-step="4"]').forEach(pillOff);
+    sig.bicchiere=null;
+    setVisible('bai-sig-4',true);setVisible('bai-sig-5',false);
+  } else if(step==='4'){
+    sig.bicchiere=val;
+    setVisible('bai-sig-5',true);
+  }
+  updateSendBtn();
+});
+
+// Giorno tipo pills
+document.addEventListener('click',function(e){
+  var pill=e.target.closest('.bai-pill.giorno-tipo');
+  if(!pill) return;
+  giornoTipo=pill.dataset.val;
+  document.querySelectorAll('.bai-pill.giorno-tipo').forEach(pillOff);
+  pillOn(pill);
+  if(giornoTipo==='alcolico'){
+    setVisible('bai-giorno-2',true);
+    selectedPill=null;
+    document.querySelectorAll('.bai-pill.giorno-stile').forEach(pillOff);
+  } else {
+    setVisible('bai-giorno-2',false);
+    selectedPill=null;
+  }
+  updateSendBtn();
+});
+
+// Giorno stile pills
+document.addEventListener('click',function(e){
+  var pill=e.target.closest('.bai-pill.giorno-stile');
+  if(!pill) return;
+  selectedPill=pill.dataset.val;
+  document.querySelectorAll('.bai-pill.giorno-stile').forEach(pillOff);
+  pillOn(pill);
+  updateSendBtn();
+});
+
+// Input twist/pairing
+document.getElementById('bai-input').addEventListener('input',updateSendBtn);
+document.getElementById('bai-sig-input').addEventListener('input',updateSendBtn);
+
+// ── CMD BUTTONS ───────────────────────────────────────────
+document.querySelectorAll('.bai-cmd').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    if(btn.classList.contains('disabled')) return;
+    if(!_isPremium) return;
+    var cmd=btn.dataset.cmd;
+    if(getTotalRemaining()<=0&&cmd!=='giorno'){
+      showStep(cmd);
+      setVisible('bai-exhausted',true);
+      return;
+    }
+    showStep(cmd);
+  });
+});
+
+// Torna ai comandi
+document.getElementById('bai-step-back').addEventListener('click',showCmds);
+
+// ── SEND ──────────────────────────────────────────────────
+document.getElementById('bai-send').addEventListener('click',function(){
+  if(this.disabled||!currentCmd) return;
+  var prompt='';
+  if(currentCmd==='signature'){
+    var inp=document.getElementById('bai-sig-input');
+    prompt=buildSignaturePrompt(inp?inp.value.trim():'');
+    lastUserInput=inp?inp.value.trim():'';
+  } else if(currentCmd==='giorno'){
+    var cfg=PROMPTS['giorno'];
+    prompt=cfg.build(selectedPill||'');
+    lastUserInput=giornoTipo+(selectedPill?' - '+selectedPill:'');
+  } else {
+    var inp2=document.getElementById('bai-input');
+    var cfg2=PROMPTS[currentCmd];
+    prompt=cfg2.build(inp2?inp2.value.trim():'');
+    lastUserInput=inp2?inp2.value.trim():'';
+  }
+  callAI(prompt, PROMPTS[currentCmd]?PROMPTS[currentCmd].maxTokens:1500, PROMPTS[currentCmd]?PROMPTS[currentCmd].fuType:'sino', false);
+});
+
+// ── CALL AI ───────────────────────────────────────────────
+function callAI(prompt, maxTokens, fuType, isCont){
+  _fuType=fuType;
+  setVisible('bai-exhausted',false);
+  setVisible('bai-error',false);
+  // Disabilita send durante la chiamata
+  var sendBtn=document.getElementById('bai-send');
+  var contBtn=document.getElementById('bai-cont-send');
+  if(sendBtn){sendBtn.disabled=true;sendBtn.classList.remove('ready');}
+
+  var resp=document.getElementById('bai-response');
+  var body=document.getElementById('bai-body');
+  resp.style.display='block';
+  setVisible('bai-fu',false);
+  body.innerHTML='<div class="bai-thinking"><span class="bai-think-star s1">✦</span><span class="bai-think-star s2">✦</span><span class="bai-think-star s3">✦</span></div>';
+
+  fetch(WORKER_URL,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:maxTokens,
+      messages:[{role:'user',content:prompt}]
+    })
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    var text='';
+    if(data.content&&data.content.length){
+      data.content.forEach(function(b){ if(b.type==='text') text+=b.text; });
+    } else if(data.error){
+      throw new Error(data.error.message||'Errore AI');
+    }
+    lastRawText=text;
+    body.innerHTML=mdToHtml(text);
+    incUsage(); renderUsage();
+    showFollowUp(fuType);
+  })
+  .catch(function(err){
+    body.innerHTML='';
+    var errEl=document.getElementById('bai-error');
+    if(errEl){errEl.style.display='block';errEl.textContent='Errore: '+(err.message||'Riprova.');}
+    if(sendBtn){sendBtn.disabled=false;sendBtn.classList.add('ready');}
+    if(contBtn){contBtn.disabled=false;}
+  });
+}
+
+function showFollowUp(fuType){
+  var fu=document.getElementById('bai-fu');
+  fu.style.display='block';
+  setVisible('bai-fu-sino',false);
+  setVisible('bai-fu-tre',false);
+  setVisible('bai-chat-cont',false);
+  if(fuType==='sino') setVisible('bai-fu-sino',true);
+  else setVisible('bai-fu-tre',true);
+}
+
+// ── FOLLOW-UP HANDLERS ───────────────────────────────────
+// Salva (sino)
+document.getElementById('bai-fu-save').addEventListener('click',function(){ saveResult(); });
+// Salva (tre)
+document.getElementById('bai-fu-save-tre').addEventListener('click',function(){ saveResult(); });
+
+function saveResult(){
+  var user=window._currentUser;
+  var db=window._fbDb;
+  var fns=window._fbFunctions;
+  if(!user||!db||!fns) return;
+  var userDoc=fns.doc(db,'users',user.uid);
+  fns.getDoc(userDoc).then(function(snap){
+    var saved=[];
+    if(snap.exists()&&snap.data().savedAI) saved=snap.data().savedAI.slice();
+    // Prendi titolo dalla risposta (primo ## o prime 60 chars)
+    var title='';
+    var match=lastRawText.match(/^## (.+)/m);
+    if(match) title=match[1].trim();
+    else title=lastRawText.replace(/<[^>]+>/g,'').substring(0,60).trim()+'…';
+    var item={
+      id:Date.now().toString(),
+      cmd:currentCmd,
+      title:title,
+      content:lastRawText,
+      input:lastUserInput,
+      date:new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit',year:'2-digit'})
+    };
+    saved.unshift(item);
+    if(saved.length>50) saved=saved.slice(0,50);
+    fns.setDoc(userDoc,{savedAI:saved},{merge:true})
+      .then(function(){
+        // Feedback visivo
+        var btn=document.getElementById('bai-fu-save')||document.getElementById('bai-fu-save-tre');
+        if(btn){btn.textContent='✓ Salvato!';setTimeout(function(){btn.textContent='Salva';},2000);}
+      })
+      .catch(function(e){ console.warn('save err',e); });
+  });
+}
+
+// Lavora su questa (sino)
+document.getElementById('bai-fu-lavora').addEventListener('click',function(){
+  setVisible('bai-fu-sino',false);
+  setVisible('bai-chat-cont',true);
+  var inp=document.getElementById('bai-cont-inp');
+  if(inp){inp.value='';inp.focus();}
+});
+// Nuova proposta (sino)
+document.getElementById('bai-fu-nuova').addEventListener('click',function(){
+  showStep(currentCmd);
+});
+// Modifica una proposta (tre)
+document.getElementById('bai-fu-modifica-tre').addEventListener('click',function(){
+  document.getElementById('bai-fu-tre-opts').style.display='none';
+  setVisible('bai-fu-scelta',true);
+});
+// Altre 3 varianti (tre)
+document.getElementById('bai-fu-altre-tre').addEventListener('click',function(){
+  showStep(currentCmd);
+});
+// Scelta drink
+document.querySelectorAll('.fu-scelta-num').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var num=this.dataset.num;
+    setVisible('bai-fu-scelta',false);
+    setVisible('bai-chat-cont',true);
+    var inp=document.getElementById('bai-cont-inp');
+    if(inp){inp.value='Lavoriamo sulla proposta numero '+num+'. ';inp.focus();}
+    var contSend=document.getElementById('bai-cont-send');
+    if(contSend){contSend.disabled=false;contSend.classList.add('ready');}
+  });
+});
+// Chat cont input
+document.getElementById('bai-cont-inp').addEventListener('input',function(){
+  var contSend=document.getElementById('bai-cont-send');
+  if(contSend){
+    var ok=this.value.trim().length>0;
+    contSend.disabled=!ok;
+    contSend.classList.toggle('ready',ok);
+  }
+});
+// Chat cont send
+document.getElementById('bai-cont-send').addEventListener('click',function(){
+  if(this.disabled) return;
+  var inp=document.getElementById('bai-cont-inp');
+  var val=inp?inp.value.trim():'';
+  if(!val) return;
+  var prompt='Contesto precedente:\n'+lastRawText+'\n\nRichiesta dell\'utente: '+val;
+  setVisible('bai-chat-cont',false);
+  callAI(prompt,1500,_fuType||'sino',true);
+});
+
+// ── DRAWER CREDITI ────────────────────────────────────────
+function openDrawer(id){
+  document.getElementById('bai-overlay').classList.add('open');
+  document.getElementById('bai-drawer-'+id).classList.add('open');
+}
+function closeDrawer(id){
+  document.getElementById('bai-overlay').classList.remove('open');
+  document.getElementById('bai-drawer-'+id).classList.remove('open');
+}
+
+document.getElementById('bai-credits-btn').addEventListener('click',function(){
+  renderCreditsDrawer();
+  openDrawer('credits');
+});
+document.getElementById('bai-credits-close').addEventListener('click',function(){ closeDrawer('credits'); });
+
+document.getElementById('bai-saved-btn').addEventListener('click',function(){
+  renderSavedDrawer();
+  openDrawer('saved');
+});
+document.getElementById('bai-saved-close').addEventListener('click',function(){ closeDrawer('saved'); });
+document.getElementById('bai-overlay').addEventListener('click',function(){
+  closeDrawer('credits');
+  closeDrawer('saved');
+});
+
+// Handle dei drawer
+document.querySelectorAll('.bai-drawer-handle').forEach(function(h){
+  h.addEventListener('click',function(){
+    closeDrawer('credits');
+    closeDrawer('saved');
+  });
+});
+
+function renderCreditsDrawer(){
+  var cont=document.getElementById('bai-credits-content');
+  if(!cont) return;
+  if(!_isPremium){
+    cont.innerHTML='<div class="bai-credits-free-msg"><p>I crediti AI sono disponibili con il piano <strong style="color:var(--amber);">Premium</strong>.</p><button onclick="showPremiumModal&&showPremiumModal()" style="background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:10px;padding:.75rem 1.5rem;font-family:inherit;font-size:.88rem;font-weight:800;cursor:pointer;width:100%;">Scopri Premium →</button></div>';
+    return;
+  }
+  var monthly=getMonthlyUsed();
+  var extra=getExtraCredits();
+  var pct=Math.min(100,(monthly/MAX)*100);
+  var monthlyRem=getMonthlyRemaining();
+
+  // Calcola prossimo reset
+  var nextReset='—';
+  if(_usageCache&&_usageCache.periodStart){
+    var start=new Date(_usageCache.periodStart);
+    start.setDate(start.getDate()+30);
+    nextReset=start.toLocaleDateString('it-IT',{day:'numeric',month:'long'});
+  }
+
+  cont.innerHTML=
+    '<div class="bai-credits-section">'+
+      '<div class="bai-credits-label">Crediti mensili</div>'+
+      '<div class="bai-credits-bar-row"><span>'+monthly+' / '+MAX+' usati</span><span>Reset: '+nextReset+'</span></div>'+
+      '<div class="bai-credits-track"><div class="bai-credits-fill" style="width:'+pct+'%;background:'+(pct>=80?'#ef4444':'var(--amber)')+'"></div></div>'+
+      '<div class="bai-credits-remaining">'+monthlyRem+' crediti mensili rimanenti</div>'+
+    '</div>'+
+    '<div class="bai-credits-section">'+
+      '<div class="bai-credits-label">Crediti extra disponibili</div>'+
+      '<div class="bai-credits-extra-val">'+extra+'</div>'+
+      '<div class="bai-credits-extra-note">I crediti extra vengono utilizzati solo dopo aver esaurito i crediti mensili e sono disponibili solo con un piano Premium attivo.</div>'+
+    '</div>'+
+    '<div>'+
+      '<div class="bai-credits-label">Acquista crediti extra</div>'+
+      '<a href="#" class="bai-pkg" data-pkg="50"><div><div class="bai-pkg-name">50 crediti extra</div><div class="bai-pkg-sub">0,039€/credito</div></div><div class="bai-pkg-price">1,99 €</div></a>'+
+      '<a href="#" class="bai-pkg" data-pkg="200"><div><div class="bai-pkg-name">200 crediti extra</div><div class="bai-pkg-sub">0,024€/credito</div></div><div class="bai-pkg-price">4,99 €</div></a>'+
+      '<a href="#" class="bai-pkg bai-pkg--best" data-pkg="1000"><div><div class="bai-pkg-name">1000 crediti extra <span class="bai-pkg-badge">PIÙ VANTAGGIOSO</span></div><div class="bai-pkg-sub">0,019€/credito</div></div><div class="bai-pkg-price">19,99 €</div></a>'+
+    '</div>';
+
+  // TODO: collegare Stripe ai bottoni .bai-pkg
+  cont.querySelectorAll('.bai-pkg').forEach(function(pkg){
+    pkg.addEventListener('click',function(e){
+      e.preventDefault();
+      alert('Acquisto crediti — Stripe verrà collegato a breve.');
+    });
+  });
+}
+
+function renderSavedDrawer(){
+  var cont=document.getElementById('bai-saved-content');
+  if(!cont) return;
+  var user=window._currentUser;
+  var db=window._fbDb;
+  var fns=window._fbFunctions;
+  if(!user||!db||!fns){
+    cont.innerHTML='<div class="bai-saved-empty">Accedi per vedere i salvati.</div>';
+    return;
+  }
+  cont.innerHTML='<div style="text-align:center;padding:1rem;color:var(--dim);font-size:.78rem;">Caricamento…</div>';
+  fns.getDoc(fns.doc(db,'users',user.uid)).then(function(snap){
+    var saved=[];
+    if(snap.exists()&&snap.data().savedAI) saved=snap.data().savedAI;
+    if(!saved.length){
+      cont.innerHTML='<div class="bai-saved-empty">Nessuna ricerca salvata ancora.<br>Usa le funzioni Barman AI e salva le risposte che ti piacciono.</div>';
+      return;
+    }
+    // Raggruppa per cmd
+    var cats={signature:[],giorno:[],twist:[],pairing:[]};
+    var catLabels={signature:'Signature',giorno:'Cocktail del Giorno',twist:'Twist on Classic',pairing:'Food Pairing'};
+    saved.forEach(function(item){ if(cats[item.cmd]) cats[item.cmd].push(item); });
+    var html='';
+    Object.keys(cats).forEach(function(cmd){
+      var items=cats[cmd];
+      if(!items.length) return;
+      html+='<div class="bai-saved-cat">'+
+        '<div class="bai-saved-cat-title">'+catLabels[cmd]+'<span class="bai-saved-cat-count">'+items.length+'</span></div>';
+      items.forEach(function(item){
+        html+='<div class="bai-saved-item" data-id="'+item.id+'">'+
+          '<div class="bai-saved-item-text">'+item.title+'</div>'+
+          '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">'+
+            '<span class="bai-saved-item-date">'+item.date+'</span>'+
+            '<button class="bai-saved-item-del" data-id="'+item.id+'" title="Elimina">✕</button>'+
+          '</div>'+
+        '</div>';
+      });
+      html+='</div>';
+    });
+    cont.innerHTML=html;
+
+    // Delete handlers
+    cont.querySelectorAll('.bai-saved-item-del').forEach(function(btn){
+      btn.addEventListener('click',function(e){
+        e.stopPropagation();
+        var id=this.dataset.id;
+        fns.getDoc(fns.doc(db,'users',user.uid)).then(function(s){
+          var arr=s.exists()&&s.data().savedAI?s.data().savedAI:[];
+          arr=arr.filter(function(x){ return x.id!==id; });
+          fns.setDoc(fns.doc(db,'users',user.uid),{savedAI:arr},{merge:true})
+            .then(function(){ renderSavedDrawer(); })
+            .catch(function(e){ console.warn(e); });
+        });
+      });
+    });
+  }).catch(function(){
+    cont.innerHTML='<div class="bai-saved-empty">Errore nel caricamento.</div>';
+  });
+}
+
+// ── TIPS ─────────────────────────────────────────────────
+var TIPS = {
+  twist:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Twist on Classic</strong>Scrivi il nome di un cocktail classico. Il Barman AI proporrà 3 varianti creative che mantengono l\'identità del drink originale pur reinterpretandolo. Ogni variante esplora una direzione diversa: elegante, tecnica, o contemporanea.',
+  pairing:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Food Pairing</strong>Descrivi il piatto nel dettaglio — ingredienti principali, cottura, sapori dominanti. Il Barman AI proporrà 3 abbinamenti con logiche diverse: un classico, un drink per affinità, e uno creativo/inaspettato.',
+  signature:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Crea un Signature</strong>Seleziona le caratteristiche del drink che vuoi creare, poi inserisci gli ingredienti che hai a disposizione. Il Barman AI creerà un signature originale con almeno una preparazione homemade.',
+  giorno:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Cocktail del Giorno</strong>Il Barman AI crea un drink stagionale pensato appositamente per oggi, usando ingredienti di stagione e costruendo la ricetta intorno a un ingrediente protagonista.'
+};
+document.getElementById('bai-tips-btn').addEventListener('click',function(){
+  var overlay=document.getElementById('bai-tips-overlay');
+  var content=document.getElementById('bai-tips-content');
+  var title=document.getElementById('bai-tips-title');
+  if(content&&currentCmd){content.innerHTML=TIPS[currentCmd]||'';}
+  if(title){var t={signature:'Crea un Signature',giorno:'Cocktail del Giorno',twist:'Twist on Classic',pairing:'Food Pairing'};title.textContent=t[currentCmd]||'Come usarla';}
+  if(overlay) overlay.classList.add('open');
+});
+document.getElementById('bai-tips-close').addEventListener('click',function(){
+  document.getElementById('bai-tips-overlay').classList.remove('open');
+});
+document.getElementById('bai-tips-overlay').addEventListener('click',function(e){
+  if(e.target===this) this.classList.remove('open');
+});
+
+// Mostra tips btn per twist e pairing
+document.querySelectorAll('.bai-cmd[data-cmd="twist"], .bai-cmd[data-cmd="pairing"]').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.getElementById('bai-tips-btn').style.display='inline-flex';
+  });
+});
+
+})();
+</script>
+
+</body>
+</html>
