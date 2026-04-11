@@ -332,8 +332,8 @@ window._isRegistering = false;
           e.preventDefault();
           var nextId = regFields[i + 1];
           var next = nextId ? document.getElementById(nextId) : null;
-          if (next) next.focus();
-          else el.blur();
+          el.blur();
+          if (next) setTimeout(function() { next.focus(); }, 50);
         }
       });
     });
