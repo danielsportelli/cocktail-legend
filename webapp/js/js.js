@@ -343,6 +343,9 @@ window._isRegistering = false;
     var loginBtn = document.getElementById('login-btn');
     if (loginEmail) loginEmail.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); if (loginPwd) loginPwd.focus(); } });
     if (loginPwd) loginPwd.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); if (loginBtn) loginBtn.click(); } });
+    // Reg password: pwd → pwd2, pwd2 → chiudi tastiera
+    if (regPwd) regPwd.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); if (regPwd2) regPwd2.focus(); } });
+    if (regPwd2) regPwd2.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); regPwd2.blur(); } });
 
     // ── CAP: solo numeri ─────────────────────────────────────────
     var capInput = document.getElementById('reg-cap');
