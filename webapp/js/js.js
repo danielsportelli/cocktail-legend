@@ -946,10 +946,8 @@ function _startSyncLoop() {
 
 function _applyBarsTop(hdrBottom) {
   var pills = document.getElementById('pills-bar');
-  var fb = document.getElementById('filter-bar');
   var pillsH = pills ? pills.offsetHeight : 40;
-  // pills-bar posizione gestita da CSS transform — non impostare top via JS
-  if (fb) fb.style.top = (hdrBottom + pillsH) + 'px';
+  // pills-bar e filter-bar posizione gestita da CSS transform — non impostare top via JS
   // Aggiorna main padding-top in sincronia
   var main = document.querySelector('.main');
   if (main) main.style.paddingTop = (hdrBottom + pillsH + _cachedFbH + 22) + 'px';
