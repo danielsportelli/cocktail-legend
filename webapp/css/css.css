@@ -716,10 +716,11 @@ body::before{
 /* MODAL */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);
   z-index:1100;display:flex;align-items:center;justify-content:center;
-  padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .25s}
+  padding:1.5rem;padding-top:max(1.5rem, env(safe-area-inset-top, 0px));
+  opacity:0;pointer-events:none;transition:opacity .25s}
 .overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--surf);border:1px solid rgba(37,99,235,.2);border-radius:16px;
-  max-width:520px;width:100%;max-height:90vh;overflow-y:auto;
+  max-width:520px;width:100%;max-height:min(90vh, calc(100dvh - 3rem));overflow-y:auto;
   overflow-x:hidden;
   clip-path:inset(0 round 14px);
   transform:translateY(20px) scale(.97);transition:transform .25s}
@@ -995,6 +996,7 @@ body::before{
   min-width:0;
 }
 .login-input::placeholder{color:var(--dim);letter-spacing:0}
+.login-input:not([type="password"]){padding-right:.9rem;}
 .login-input:focus{border-color:rgba(37,99,235,.5);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
 .login-eye{
   position:absolute;right:4px;top:50%;transform:translateY(-50%);

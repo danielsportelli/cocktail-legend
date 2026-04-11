@@ -58,7 +58,7 @@
     <!-- ── FORM LOGIN ── -->
     <div id="form-login">
       <div class="login-input-wrap">
-        <input class="login-input" type="email" id="login-email" placeholder="Email" autocomplete="email" enterkeyhint="next">
+        <input class="login-input" type="email" id="login-email" placeholder="Email" autocomplete="email" autocapitalize="none" enterkeyhint="next">
       </div>
       <div class="login-input-wrap">
         <input class="login-input" type="password" id="login-pwd" placeholder="Password" autocomplete="current-password" enterkeyhint="done">
@@ -75,15 +75,15 @@
     <div id="form-register" style="display:none;">
       <div class="reg-row">
         <div class="login-input-wrap">
-          <input class="login-input" type="text" id="reg-nome" placeholder="Nome *" autocomplete="given-name" enterkeyhint="next">
+          <input class="login-input" type="text" id="reg-nome" placeholder="Nome *" autocomplete="given-name" autocapitalize="words" enterkeyhint="next">
         </div>
         <div class="login-input-wrap">
-          <input class="login-input" type="text" id="reg-cognome" placeholder="Cognome *" autocomplete="family-name" enterkeyhint="next">
+          <input class="login-input" type="text" id="reg-cognome" placeholder="Cognome *" autocomplete="family-name" autocapitalize="words" enterkeyhint="next">
         </div>
       </div>
 
       <div class="login-input-wrap">
-        <input class="login-input" type="email" id="reg-email" placeholder="Email *" autocomplete="email" enterkeyhint="next">
+        <input class="login-input" type="email" id="reg-email" placeholder="Email *" autocomplete="email" autocapitalize="none" enterkeyhint="next">
       </div>
       <div class="login-input-wrap tel-wrap">
         <select class="tel-prefix" id="reg-prefix">
@@ -1751,10 +1751,7 @@ function calcABV() {
 <!-- ══ MODAL RESET PASSWORD ══ -->
 <div id="resetPasswordModal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
   <div style="background:#1e293b;border:1px solid rgba(255,255,255,0.10);border-radius:20px;padding:2rem 1.8rem;width:92%;max-width:390px;position:relative;box-shadow:0 25px 60px rgba(0,0,0,0.5);">
-<div class="login-title">COCKTAIL LEGEND</div>
-
-    <!-- Chiudi -->
-    <button id="resetModalClose" style="position:absolute;top:1rem;right:1.1rem;background:none;border:none;color:#64748b;font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s;" onmouseover="this.style.color='#f1f5f9'" onmouseout="this.style.color='#64748b'">×</button>
+<div style="text-align:center;"><div class="login-title" style="display:inline-block;">COCKTAIL LEGEND</div></div>
 
     <!-- Header -->
     <div style="margin-bottom:1.4rem;">
@@ -1769,7 +1766,7 @@ function calcABV() {
         id="resetEmailInput"
         type="email"
         placeholder="La tua email"
-        style="width:100%;padding:.85rem 1rem;background:#0f172a;border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#f1f5f9;font-size:.93rem;outline:none;box-sizing:border-box;font-family:inherit;transition:border-color .2s;"
+        style="width:100%;padding:.85rem 1rem;background:#0f172a;border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#f1f5f9;font-size:16px;outline:none;box-sizing:border-box;font-family:inherit;transition:border-color .2s;"
         onfocus="this.style.borderColor='rgba(245,158,11,0.5)'"
         onblur="this.style.borderColor='rgba(255,255,255,0.12)'"
       />

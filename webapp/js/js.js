@@ -2084,7 +2084,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
               '</div>'+
               '<div style="display:flex;flex-direction:column;flex:1;min-width:0;">'+
                 '<span style="font-size:.82rem;font-weight:700;color:var(--txt);">Come installare l\'app</span>'+
-                '<span style="font-size:.68rem;color:var(--dim);font-weight:500;margin-top:.15rem;">Gratis — accedi in un tap, come una vera app.</span>'+
+                '<span style="font-size:.68rem;color:var(--dim);font-weight:500;margin-top:.15rem;">Accedi in un tap, come una vera app.</span>'+
               '</div>'+
               '<svg style="flex-shrink:0;margin-left:auto;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'+
             '</button>'+
@@ -4824,11 +4824,25 @@ function closeResetPasswordModal() {
 
     resetFn(auth, email)
       .then(function() {
-        setFeedback('✓ Email inviata! Controlla la casella di posta (anche spam/junk). Riceverai un link per reimpostare la password.', true);
-        sendBtn.textContent = 'Email inviata ✓';
-        sendBtn.style.background = '#1e293b';
-        sendBtn.style.color = '#64748b';
-        sendBtn.style.border = '1px solid rgba(255,255,255,0.08)';
+        // Sostituisci contenuto modale con schermata conferma
+        var modalInner = modal.querySelector('div');
+        if (modalInner) {
+          modalInner.innerHTML =
+            '<div style="text-align:center;padding:1rem 0;">' +
+              '<div class="login-title" style="display:inline-block;margin-bottom:1.5rem;">COCKTAIL LEGEND</div>' +
+              '<div style="background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:.7rem 1rem;margin-bottom:1rem;">' +
+                '<span style="font-size:.85rem;font-weight:700;color:#86efac;">Email inviata ✔️</span>' +
+              '</div>' +
+              '<p style="font-size:.85rem;color:var(--txt);line-height:1.6;margin-bottom:1.2rem;">Riceverai un link per reimpostare la password.</p>' +
+              '<div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.85rem 1rem;text-align:left;">' +
+                '<p style="font-size:.75rem;color:#f59e0b;font-weight:700;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;">' +
+                  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
+                  'Non trovi l\'email?' +
+                '</p>' +
+                '<p style="font-size:.72rem;color:#cbd5e1;line-height:1.7;">&#x2022; Controlla la cartella <strong style="color:#f1f5f9;">Spam</strong> o <strong style="color:#f1f5f9;">Posta indesiderata</strong></p>' +
+              '</div>' +
+            '</div>';
+        }
       })
       .catch(function(error) {
         sendBtn.disabled = false;
@@ -5008,10 +5022,10 @@ function showPremiumModal() {
 
   var modal = document.createElement('div');
   modal.id = 'premium-modal';
-  modal.style.cssText = 'position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem;';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem;padding-top:max(1rem, env(safe-area-inset-top, 0px));';
 
   modal.innerHTML = `
-    <div style="background:#1e293b;border:1px solid rgba(245,158,11,0.3);border-radius:24px;padding:1.4rem 1.5rem;width:100%;max-width:420px;max-height:88vh;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.6);">
+    <div style="background:#1e293b;border:1px solid rgba(245,158,11,0.3);border-radius:24px;padding:1.4rem 1.5rem;width:100%;max-width:420px;max-height:min(88vh, calc(100dvh - 2rem));overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.6);">
 
       <!-- Chiudi -->
       <button id="premium-modal-close" style="position:absolute;top:1rem;right:1.1rem;background:none;border:none;color:#64748b;font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s;" onmouseover="this.style.color='#f1f5f9'" onmouseout="this.style.color='#64748b'">×</button>
