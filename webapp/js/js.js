@@ -306,6 +306,28 @@ window._isRegistering = false;
 
     if (!regBtn) return;
 
+    // ── Enter → focus campo successivo ──────────────────────────
+    var regFields = ['reg-nome','reg-cognome','reg-email','reg-tel','reg-via','reg-civico','reg-cap'];
+    regFields.forEach(function(id, i) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          var nextId = regFields[i + 1];
+          var next = nextId ? document.getElementById(nextId) : null;
+          if (next) next.focus();
+          else el.blur();
+        }
+      });
+    });
+    // Login: email → password, password → submit
+    var loginEmail = document.getElementById('login-email');
+    var loginPwd = document.getElementById('login-pwd');
+    var loginBtn = document.getElementById('login-btn');
+    if (loginEmail) loginEmail.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); if (loginPwd) loginPwd.focus(); } });
+    if (loginPwd) loginPwd.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); if (loginBtn) loginBtn.click(); } });
+
     // ── CAP: solo numeri ─────────────────────────────────────────
     var capInput = document.getElementById('reg-cap');
     if (capInput) {
@@ -874,6 +896,20 @@ var _cachedHdrH = 73;
 var _cachedFbH = 0;
 var _syncRafId = null;
 
+// Calcola altezza header reale (include safe-area in standalone)
+(function() {
+  function updateHdrH() {
+    var hdr = document.querySelector('.hdr');
+    if (hdr) _cachedHdrH = hdr.offsetHeight;
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateHdrH);
+  } else {
+    updateHdrH();
+  }
+  window.addEventListener('resize', updateHdrH);
+})();
+
 // Loop rAF che sincronizza pills e filter-bar all'header frame per frame
 function _startSyncLoop() {
   if (_syncRafId) return; // già in corso
@@ -885,8 +921,6 @@ function _startSyncLoop() {
     _applyBarsTop(bottom);
     // Continua finché l'header non è fermo (non hidden e bottom == _cachedHdrH, o hidden e bottom == 0)
     var target = _hdrHidden ? 0 : _cachedHdrH;
-    var safeTop = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--safe-top') || '0') || 0;
-    target += safeTop;
     if (Math.abs(bottom - target) > 0.5) {
       _syncRafId = requestAnimationFrame(loop);
     } else {
@@ -2035,7 +2069,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
                 '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10m0 0l-3-3m3 3l3-3"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>'+
               '</div>'+
               '<div style="display:flex;flex-direction:column;flex:1;min-width:0;">'+
-                '<span style="font-size:.82rem;font-weight:700;color:var(--txt);">Installa app sul tuo smartphone</span>'+
+                '<span style="font-size:.82rem;font-weight:700;color:var(--txt);">Come installare l\'app</span>'+
                 '<span style="font-size:.68rem;color:var(--dim);font-weight:500;margin-top:.15rem;">Gratis — accedi in un tap, come una vera app.</span>'+
               '</div>'+
               '<svg style="flex-shrink:0;margin-left:auto;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'+
@@ -4781,19 +4815,6 @@ function closeResetPasswordModal() {
         sendBtn.style.background = '#1e293b';
         sendBtn.style.color = '#64748b';
         sendBtn.style.border = '1px solid rgba(255,255,255,0.08)';
-        // Aggiungi bottone "Torna al login"
-        if (!document.getElementById('resetBackToLogin')) {
-          var backBtn = document.createElement('button');
-          backBtn.id = 'resetBackToLogin';
-          backBtn.textContent = '← Torna al login';
-          backBtn.style.cssText = 'width:100%;margin-top:.75rem;padding:.78rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--txt);font-family:Inter,sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;transition:background .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;';
-          backBtn.addEventListener('click', function() {
-            closeResetPasswordModal();
-            var loginPwd = document.getElementById('login-pwd');
-            if (loginPwd) { loginPwd.value = ''; }
-          });
-          sendBtn.parentNode.insertBefore(backBtn, sendBtn.nextSibling);
-        }
       })
       .catch(function(error) {
         sendBtn.disabled = false;
@@ -5260,13 +5281,17 @@ function showInstallPWAModal() {
   var ua      = navigator.userAgent || '';
   var isIOS   = /iPhone|iPad|iPod/i.test(ua);
   var isAndroid = /Android/i.test(ua);
-  if (!isIOS && !isAndroid) return; // desktop — non mostrare
+  if (!isIOS && !isAndroid) return;
 
-  var stepsIOS = [
-    'Apri <strong>Safari</strong> — se sei in un altro browser, copia il link e incollalo in Safari',
+  var stepsIOSSafari = [
     'Tocca l\'icona <strong>Condividi</strong> (□↑) in basso al centro',
     'Scorri e tocca <strong>Aggiungi a schermata Home</strong>',
     'Tocca <strong>Aggiungi</strong> in alto a destra'
+  ];
+  var stepsIOSChrome = [
+    'Tocca l\'icona <strong>Condividi</strong> (□↑) in alto a destra',
+    'Scorri e tocca <strong>Aggiungi alla schermata Home</strong>',
+    'Tocca <strong>Aggiungi</strong> per confermare'
   ];
   var stepsAndroid = [
     'Apri <strong>Chrome</strong> — se sei in un altro browser, copia il link e incollalo in Chrome',
@@ -5275,13 +5300,28 @@ function showInstallPWAModal() {
     'Tocca <strong>Installa</strong> o <strong>Aggiungi</strong> per far apparire l\'icona Cocktail Legend sul tuo smartphone assieme alle altre app'
   ];
 
-  var steps   = isIOS ? stepsIOS : stepsAndroid;
-  var stepsHtml = steps.map(function(s, i) {
-    return '<div style="display:flex;align-items:flex-start;gap:.65rem;margin-bottom:.65rem;">'
-      + '<div style="flex-shrink:0;width:22px;height:22px;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;color:#60a5fa;margin-top:.1rem;">' + (i+1) + '</div>'
-      + '<div style="font-size:.8rem;color:#cbd5e1;line-height:1.55;">' + s + '</div>'
-      + '</div>';
-  }).join('');
+  function buildStepsHtml(steps) {
+    return steps.map(function(s, i) {
+      return '<div style="display:flex;align-items:flex-start;gap:.65rem;margin-bottom:.65rem;">'
+        + '<div style="flex-shrink:0;width:22px;height:22px;background:rgba(37,99,235,.18);border:1px solid rgba(37,99,235,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;color:#60a5fa;margin-top:.1rem;">' + (i+1) + '</div>'
+        + '<div style="font-size:.8rem;color:#cbd5e1;line-height:1.55;">' + s + '</div>'
+        + '</div>';
+    }).join('');
+  }
+
+  var stepsContent = '';
+  if (isIOS) {
+    // Toggle Safari/Chrome + pannelli
+    stepsContent =
+      '<div id="pwa-os-toggle" style="display:flex;background:#0a0f1e;border-radius:10px;padding:3px;margin-bottom:1.25rem;gap:3px;">'
+        + '<button id="pwa-btn-safari" style="flex:1;padding:.48rem .5rem;border:none;border-radius:8px;font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;background:#334155;color:#f1f5f9;display:flex;align-items:center;justify-content:center;gap:.35rem;-webkit-tap-highlight-color:transparent;">Safari</button>'
+        + '<button id="pwa-btn-chrome" style="flex:1;padding:.48rem .5rem;border:none;border-radius:8px;font-family:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;background:transparent;color:#64748b;display:flex;align-items:center;justify-content:center;gap:.35rem;-webkit-tap-highlight-color:transparent;">Chrome</button>'
+      + '</div>'
+      + '<div id="pwa-panel-safari">' + buildStepsHtml(stepsIOSSafari) + '</div>'
+      + '<div id="pwa-panel-chrome" style="display:none;">' + buildStepsHtml(stepsIOSChrome) + '</div>';
+  } else {
+    stepsContent = buildStepsHtml(stepsAndroid);
+  }
 
   var modal = document.createElement('div');
   modal.id = 'pwa-install-modal';
@@ -5289,11 +5329,7 @@ function showInstallPWAModal() {
 
   modal.innerHTML =
     '<div style="background:#1e293b;border:1px solid rgba(255,255,255,.08);border-radius:20px;width:100%;max-width:420px;padding:1.5rem 1.4rem 1.75rem;position:relative;">'
-
-      // Handle
       + '<div style="width:36px;height:4px;background:rgba(255,255,255,.18);border-radius:2px;margin:0 auto .9rem;"></div>'
-
-      // Titolo
       + '<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem;">'
         + '<div style="width:36px;height:36px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'
           + '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10m0 0l-3-3m3 3l3-3"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>'
@@ -5301,19 +5337,32 @@ function showInstallPWAModal() {
         + '<div style="font-size:1rem;font-weight:800;color:#f1f5f9;letter-spacing:-.01em;">Salva l\'app sul telefono</div>'
       + '</div>'
       + '<div style="font-size:.78rem;color:#64748b;margin-bottom:1.25rem;">Accedi più velocemente senza aprire il browser.</div>'
-
-      // Steps
-      + stepsHtml
-
-      // Bottoni
+      + stepsContent
       + '<div style="display:flex;gap:.6rem;margin-top:1.1rem;">'
-        + '<button id="pwa-install-skip" style="flex:1;padding:.72rem;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#64748b;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;">Dopo</button>'
-        + '<button id="pwa-install-ok" style="flex:2;padding:.72rem;background:linear-gradient(135deg,#f59e0b,#d97706);border:none;border-radius:10px;color:#0a0f1e;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent;">Ok, fatto!</button>'
+        + '<button id="pwa-install-ok" style="width:100%;padding:.72rem;background:linear-gradient(135deg,#f59e0b,#d97706);border:none;border-radius:10px;color:#0a0f1e;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent;">Ho capito!</button>'
       + '</div>'
-
     + '</div>';
 
   document.body.appendChild(modal);
+
+  // Toggle Safari/Chrome su iOS
+  if (isIOS) {
+    var btnSafari = document.getElementById('pwa-btn-safari');
+    var btnChrome = document.getElementById('pwa-btn-chrome');
+    var panelSafari = document.getElementById('pwa-panel-safari');
+    var panelChrome = document.getElementById('pwa-panel-chrome');
+    function switchPwa(which) {
+      var isSafari = which === 'safari';
+      btnSafari.style.background = isSafari ? '#334155' : 'transparent';
+      btnSafari.style.color = isSafari ? '#f1f5f9' : '#64748b';
+      btnChrome.style.background = isSafari ? 'transparent' : '#334155';
+      btnChrome.style.color = isSafari ? '#64748b' : '#f1f5f9';
+      panelSafari.style.display = isSafari ? 'block' : 'none';
+      panelChrome.style.display = isSafari ? 'none' : 'block';
+    }
+    btnSafari.addEventListener('click', function() { switchPwa('safari'); });
+    btnChrome.addEventListener('click', function() { switchPwa('chrome'); });
+  }
 
   function closeModal() {
     modal.style.opacity = '0';
@@ -5321,7 +5370,6 @@ function showInstallPWAModal() {
     setTimeout(function() { if (modal.parentNode) modal.parentNode.removeChild(modal); }, 200);
   }
 
-  document.getElementById('pwa-install-skip').addEventListener('click', closeModal);
   document.getElementById('pwa-install-ok').addEventListener('click', closeModal);
   // Chiudi toccando fuori
   modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });

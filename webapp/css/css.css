@@ -37,6 +37,9 @@ body::before{
     height:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));
     padding-top:env(safe-area-inset-top, 0px);
   }
+  .pills-bar{
+    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));
+  }
 }
 .hdr-inner{
   display:flex;align-items:center;
@@ -268,7 +271,7 @@ body::before{
 /* SEARCH BAR */
 .filter-bar{
   position:fixed;
-  top:var(--hdr-h);
+  top:var(--pills-bottom, calc(var(--hdr-h) + 40px));
   left:0;right:0;
   z-index:1047;
   background:var(--surf);
@@ -434,12 +437,15 @@ body::before{
   max-height:70vh;
   display:flex;flex-direction:column;
   transform:translateY(-110%);
-  transition:transform .32s cubic-bezier(.4,0,.2,1);
+  transition:transform .32s cubic-bezier(.4,0,.2,1), visibility 0s .32s;
   box-shadow:none;
+  visibility:hidden;
 }
 .fsheet.open{
   transform:translateY(var(--pills-h-px, 40px));
   box-shadow:0 8px 40px rgba(0,0,0,.5);
+  visibility:visible;
+  transition:transform .32s cubic-bezier(.4,0,.2,1), visibility 0s 0s;
 }
 /* header fsheet in cima */
 .fsheet-header{
@@ -895,6 +901,7 @@ body::before{
   background:var(--bg);
   display:flex;align-items:center;justify-content:center;
   padding:1.5rem;
+  padding-top:max(1.5rem, env(safe-area-inset-top, 0px));
   overflow-y:auto;
 }
 .login-box{
