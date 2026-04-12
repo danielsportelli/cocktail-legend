@@ -440,6 +440,8 @@ window._isRegistering = false;
           // Salva dati utente in Firestore
           var userDoc = fns.doc(db, 'users', user.uid);
           var _nowStr = new Date().toISOString().split('T')[0];
+          // Leggi codice referral dall'URL
+          var _refCode = (new URLSearchParams(window.location.search)).get('ref') || '';
           return fns.setDoc(userDoc, {
             nome:        nome,
             cognome:     cognome,
@@ -456,8 +458,62 @@ window._isRegistering = false;
             tc_date:     new Date().toISOString(),
             marketing:   marketing,
             createdAt:   new Date().toISOString(),
-            aiUsage:     { monthlyCount: 0, extraCredits: 0, periodStart: _nowStr }
+            aiUsage:     { monthlyCount: 0, extraCredits: 0, referralCredits: 0, periodStart: _nowStr },
+            referredBy:  _refCode || null,
+            referral:    { code: user.uid.substring(0,8), count: 0, badge: null, earnedCredits: 0 }
           }).then(function() {
+            // ── Traccia referral se presente ──────────────
+            if(_refCode) {
+              var BADGE_THRESHOLDS = [
+                { key:'starter',    num:5,   credits:20  },
+                { key:'junior',     num:10,  credits:40  },
+                { key:'senior',     num:25,  credits:100 },
+                { key:'ambassador', num:50,  credits:200 },
+                { key:'legend',     num:100, credits:500 }
+              ];
+              // Trova l'utente con quel codice referral
+              fns.getDocs(fns.query(
+                fns.collection(db, 'users'),
+                fns.where('referral.code', '==', _refCode)
+              )).then(function(snap) {
+                if(snap.empty) return;
+                var inviterDoc = snap.docs[0];
+                var inviterData = inviterDoc.data();
+                var inviterRef = fns.doc(db, 'users', inviterDoc.id);
+                var oldCount = (inviterData.referral && inviterData.referral.count) || 0;
+                var newCount = oldCount + 1;
+                var oldBadge = (inviterData.referral && inviterData.referral.badge) || null;
+                var oldEarned = (inviterData.referral && inviterData.referral.earnedCredits) || 0;
+                var oldReferralCredits = (inviterData.aiUsage && inviterData.aiUsage.referralCredits) || 0;
+
+                // Calcola nuovo badge e crediti da assegnare
+                var newBadge = oldBadge;
+                var creditsToAdd = 0;
+                BADGE_THRESHOLDS.forEach(function(b) {
+                  if(newCount >= b.num && oldCount < b.num) {
+                    // Nuovo badge raggiunto!
+                    newBadge = b.key;
+                    creditsToAdd += b.credits;
+                  }
+                });
+
+                // Aggiorna Firestore dell'invitante
+                fns.setDoc(inviterRef, {
+                  referral: {
+                    code: inviterData.referral ? inviterData.referral.code : inviterDoc.id.substring(0,8),
+                    count: newCount,
+                    badge: newBadge,
+                    earnedCredits: oldEarned + creditsToAdd
+                  },
+                  aiUsage: {
+                    monthlyCount: (inviterData.aiUsage && inviterData.aiUsage.monthlyCount) || 0,
+                    extraCredits: (inviterData.aiUsage && inviterData.aiUsage.extraCredits) || 0,
+                    referralCredits: oldReferralCredits + creditsToAdd,
+                    periodStart: (inviterData.aiUsage && inviterData.aiUsage.periodStart) || _nowStr
+                  }
+                }, { merge: true }).catch(function(e){ console.warn('referral update err', e); });
+              }).catch(function(e){ console.warn('referral query err', e); });
+            }
             // Invia email di verifica
             return fns.sendEmailVerification(user);
           }).then(function() {
