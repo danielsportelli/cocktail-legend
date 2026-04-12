@@ -2106,7 +2106,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.35rem;">Accesso effettuato con</div>'+
         '<div style="font-size:.8rem;color:var(--txt2);font-weight:600;">'+user.email+'</div>'+
       '</div>'+
-      '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+      '<div style="margin-bottom:0;padding-bottom:1.2rem;">'+
         '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Piano attuale</div>'+
         (window._userPlan === 'premium'
           ? '<div style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(245,158,11,.05));border:1px solid rgba(245,158,11,.35);border-radius:10px;padding:.5rem .9rem;">' +
@@ -2127,13 +2127,13 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       '<div class="drawer-cmd-list" style="margin-bottom:0;">'+
         '<button id="acc-badge-btn" class="calc-cmd-btn">'+
           '<div style="width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+
-            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><circle cx="12" cy="8" r="4"/><path d="M8 8l-4 8h16l-4-8"/><path d="M9 16l1 4h4l1-4"/></svg>'+
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><circle cx="12" cy="8" r="4"/><path d="M8 12l-3 9 7-3 7 3-3-9"/></svg>'+
           '</div>'+
           '<span style="flex:1;font-size:.95rem;font-weight:600;color:var(--txt);letter-spacing:-.01em;pointer-events:none;">I tuoi badge</span>'+
           '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><polyline points="9 18 15 12 9 6"/></svg>'+
         '</button>'+
       '</div>'+
-      '<div class="bsheet-divider" style="margin:0 0 1.4rem;"></div>'+
+      '<div class="bsheet-divider" style="margin:0;"></div>'+
       // "Come installare app" — stile calc-cmd-btn, visibile solo su mobile non-PWA
       (!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
         ? '<div id="acc-install-badge">'+
@@ -2146,10 +2146,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
                 '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><polyline points="9 18 15 12 9 6"/></svg>'+
               '</button>'+
             '</div>'+
-            '<div class="bsheet-divider" style="margin:0 0 1.4rem;"></div>'+
+            '<div class="bsheet-divider" style="margin:0;"></div>'+
           '</div>'
         : ''
       )+
+      '<div style="margin-bottom:1.4rem;"></div>'+
       (window._userPlan === 'premium'
         ? '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
             '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti AI</div>'+
@@ -2360,7 +2361,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
     function openModal(code){
       var link = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html?ref='+code;
-      var waText = encodeURIComponent('🍹 Ti invito su Cocktail Legend, la migliore app per bartender!\nScaricala gratis qui: '+link);
+      var waText = encodeURIComponent('Scopri Cocktail Legend, la miglior app per bartenders!\nRegistrati gratis qui: '+link);
       var waUrl = 'https://wa.me/?text='+waText;
 
       // Rimuovi eventuale modale precedente
@@ -5644,11 +5645,13 @@ function showInstallPWAModal() {
 
   var modal = document.createElement('div');
   modal.id = 'pwa-install-modal';
-  modal.style.cssText = 'position:fixed;inset:0;z-index:99997;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:0 .75rem .75rem;animation:fadeIn .25s ease;';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:99997;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding:0 8px 12px;';
 
-  modal.innerHTML =
-    '<div style="background:#1e293b;border:1px solid rgba(255,255,255,.08);border-radius:20px;width:100%;max-width:420px;padding:1.5rem 1.4rem 1.75rem;position:relative;">'
-      + '<div style="width:36px;height:4px;background:rgba(255,255,255,.18);border-radius:2px;margin:0 auto .9rem;"></div>'
+  var sheet = document.createElement('div');
+  sheet.style.cssText = 'background:#1e293b;border:1px solid rgba(255,255,255,.08);border-radius:20px;width:100%;max-width:420px;padding:0 1.4rem 1.75rem;position:relative;transform:translateY(110%);transition:transform .32s cubic-bezier(.4,0,.2,1);will-change:transform;max-height:90vh;overflow-y:auto;scrollbar-width:none;';
+
+  sheet.innerHTML =
+      '<div id="pwa-handle" style="width:40px;height:4px;background:rgba(255,255,255,.18);border-radius:2px;margin:12px auto 1rem;cursor:pointer;"></div>'
       + '<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem;">'
         + '<div style="width:36px;height:36px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'
           + '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10m0 0l-3-3m3 3l3-3"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>'
@@ -5659,10 +5662,17 @@ function showInstallPWAModal() {
       + stepsContent
       + '<div style="display:flex;gap:.6rem;margin-top:1.1rem;">'
         + '<button id="pwa-install-ok" style="width:100%;padding:.72rem;background:linear-gradient(135deg,#f59e0b,#d97706);border:none;border-radius:10px;color:#0a0f1e;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent;">Ho capito!</button>'
-      + '</div>'
-    + '</div>';
+      + '</div>';
 
+  modal.appendChild(sheet);
   document.body.appendChild(modal);
+
+  // Anima apertura
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      sheet.style.transform = 'translateY(0)';
+    });
+  });
 
   // Toggle Safari/Chrome su iOS
   if (isIOS) {
@@ -5684,12 +5694,32 @@ function showInstallPWAModal() {
   }
 
   function closeModal() {
-    modal.style.opacity = '0';
-    modal.style.transition = 'opacity .2s';
-    setTimeout(function() { if (modal.parentNode) modal.parentNode.removeChild(modal); }, 200);
+    sheet.style.transform = 'translateY(110%)';
+    setTimeout(function() { if (modal.parentNode) modal.parentNode.removeChild(modal); }, 320);
   }
 
+  // Handle click — flash + chiude
+  var handle = document.getElementById('pwa-handle');
+  if(handle){
+    handle.addEventListener('click', function(){
+      handle.style.background = 'rgba(255,255,255,.6)';
+      setTimeout(function(){ closeModal(); }, 120);
+    });
+  }
+
+  // Swipe down
+  var _startY = 0;
+  sheet.addEventListener('touchstart', function(e){ _startY = e.touches[0].clientY; }, {passive:true});
+  sheet.addEventListener('touchmove', function(e){
+    var dy = e.touches[0].clientY - _startY;
+    if(dy > 0) sheet.style.transform = 'translateY('+dy+'px)';
+  }, {passive:true});
+  sheet.addEventListener('touchend', function(e){
+    var dy = e.changedTouches[0].clientY - _startY;
+    if(dy > 80){ closeModal(); }
+    else { sheet.style.transform = 'translateY(0)'; }
+  }, {passive:true});
+
   document.getElementById('pwa-install-ok').addEventListener('click', closeModal);
-  // Chiudi toccando fuori
   modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
 }
