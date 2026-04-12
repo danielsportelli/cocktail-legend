@@ -815,19 +815,27 @@ function _isPeriodExpired(periodStart){
 }
 function getMonthlyUsed(){ return _usageCache?(_usageCache.monthlyCount||0):0; }
 function getExtraCredits(){ return _usageCache?(_usageCache.extraCredits||0):0; }
+function getReferralCredits(){ return _usageCache?(_usageCache.referralCredits||0):0; }
 function getMonthlyRemaining(){ return Math.max(0,MAX-getMonthlyUsed()); }
-function getTotalRemaining(){ return getMonthlyRemaining()+getExtraCredits(); }
+function getTotalRemaining(){ return getMonthlyRemaining()+getExtraCredits()+getReferralCredits(); }
 
 function renderUsage(){
   var monthly=getMonthlyUsed();
   var extra=getExtraCredits();
+  var ref=getReferralCredits();
   var pct=Math.min(100,(monthly/MAX)*100);
   var fill=document.getElementById('bai-usage-fill');
   if(fill){fill.style.width=pct+'%';fill.style.background=pct>=80?'#ef4444':'var(--amber)';}
   var txt=document.getElementById('bai-usage-txt');
-  if(txt) txt.textContent=extra>0?monthly+'/'+MAX+' + '+extra+' extra':monthly+'/'+MAX;
+  if(txt){
+    var label=monthly+'/'+MAX;
+    if(extra>0) label+=' + '+extra+' extra';
+    if(ref>0) label+=' + '+ref+' ref';
+    txt.textContent=label;
+  }
   var wrap=document.getElementById('bai-usage-wrap');
-  if(wrap) wrap.style.display=_isPremium?'flex':'none';
+  // Mostra barra se premium OPPURE se free con crediti referral
+  if(wrap) wrap.style.display=(_isPremium||ref>0)?'flex':'none';
 }
 
 function incUsage(){
@@ -837,9 +845,10 @@ function incUsage(){
   var fns=window._fbFunctions;
   if(!user||!db||!fns) return getTotalRemaining();
   if(_usageCache.monthlyCount<MAX){ _usageCache.monthlyCount++; }
-  else if(_usageCache.extraCredits>0){ _usageCache.extraCredits--; }
+  else if(_isPremium&&_usageCache.extraCredits>0){ _usageCache.extraCredits--; }
+  else if(_usageCache.referralCredits>0){ _usageCache.referralCredits--; }
   var userDoc=fns.doc(db,'users',user.uid);
-  fns.setDoc(userDoc,{aiUsage:{monthlyCount:_usageCache.monthlyCount,extraCredits:_usageCache.extraCredits,periodStart:_usageCache.periodStart}},{merge:true})
+  fns.setDoc(userDoc,{aiUsage:{monthlyCount:_usageCache.monthlyCount,extraCredits:_usageCache.extraCredits,referralCredits:_usageCache.referralCredits||0,periodStart:_usageCache.periodStart}},{merge:true})
     .catch(function(e){console.warn('incUsage err',e);});
   return getTotalRemaining();
 }
@@ -873,29 +882,43 @@ window.addEventListener('fb-auth-ready', function(e){
       var greet=document.getElementById('bai-greeting');
       if(greet && nome) greet.textContent='Ciao '+nome+', cosa vuoi fare oggi?';
 
-      // Disabilita bottoni se non premium
-      if(!_isPremium){
+      var ai=data.aiUsage||{};
+      var referralCredits=ai.referralCredits||0;
+      var periodStart=ai.periodStart||data.createdAt||nowStr;
+
+      // Carica _usageCache con reset periodo se scaduto
+      if(_isPeriodExpired(periodStart)){
+        var start=new Date(periodStart);
+        while(_isPeriodExpired(start.toISOString().split('T')[0])) start.setDate(start.getDate()+30);
+        _usageCache={monthlyCount:0,extraCredits:_isPremium?(ai.extraCredits||0):0,referralCredits:referralCredits,periodStart:start.toISOString().split('T')[0]};
+        fns.setDoc(userDoc,{aiUsage:_usageCache},{merge:true}).catch(function(){});
+      } else {
+        // extraCredits congelati se non premium
+        _usageCache={monthlyCount:ai.monthlyCount||0,extraCredits:_isPremium?(ai.extraCredits||0):0,referralCredits:referralCredits,periodStart:periodStart};
+      }
+
+      // Logica accesso: premium OPPURE ha crediti referral
+      var hasReferralAccess = referralCredits > 0;
+
+      if(!_isPremium && !hasReferralAccess){
+        // Free senza crediti referral — blocca tutto
         document.querySelectorAll('.bai-cmd').forEach(function(b){ b.classList.add('disabled'); });
-        // Mostra banner upgrade sopra i comandi
         var section=document.getElementById('bai-step-cmds');
         var banner=document.createElement('div');
         banner.style.cssText='margin-bottom:1rem;padding:.75rem .85rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:12px;font-size:.75rem;color:var(--txt2);line-height:1.55;';
         banner.innerHTML='🔒 Le funzioni Barman AI sono riservate al piano <strong style="color:var(--amber);">Premium</strong>.<br><button onclick="showPremiumModal&&showPremiumModal()" style="margin-top:.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:8px;padding:.38rem .85rem;font-family:inherit;font-size:.72rem;font-weight:800;cursor:pointer;">Passa a Premium →</button>';
         section.insertBefore(banner,section.firstChild);
+      } else if(!_isPremium && hasReferralAccess){
+        // Free con crediti referral — sblocca con banner informativo
+        var section2=document.getElementById('bai-step-cmds');
+        var bannerRef=document.createElement('div');
+        bannerRef.style.cssText='margin-bottom:1rem;padding:.75rem .85rem;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);border-radius:12px;font-size:.75rem;color:var(--txt2);line-height:1.55;';
+        bannerRef.innerHTML='🎁 Hai <strong style="color:#4ade80;">'+referralCredits+' crediti referral</strong> disponibili. Usali per accedere alle funzioni Barman AI!';
+        section2.insertBefore(bannerRef,section2.firstChild);
       }
 
-      var ai=data.aiUsage||{};
-      var periodStart=ai.periodStart||data.createdAt||nowStr;
-      if(_isPeriodExpired(periodStart)){
-        var start=new Date(periodStart);
-        while(_isPeriodExpired(start.toISOString().split('T')[0])) start.setDate(start.getDate()+30);
-        _usageCache={monthlyCount:0,extraCredits:ai.extraCredits||0,periodStart:start.toISOString().split('T')[0]};
-        fns.setDoc(userDoc,{aiUsage:_usageCache},{merge:true}).catch(function(){});
-      } else {
-        _usageCache={monthlyCount:ai.monthlyCount||0,extraCredits:ai.extraCredits||0,periodStart:periodStart};
-      }
     } else {
-      _usageCache={monthlyCount:0,extraCredits:0,periodStart:nowStr};
+      _usageCache={monthlyCount:0,extraCredits:0,referralCredits:0,periodStart:nowStr};
     }
     renderUsage();
     document.getElementById('bai-content').style.display='block';
@@ -1062,7 +1085,8 @@ document.getElementById('bai-sig-input').addEventListener('input',updateSendBtn)
 document.querySelectorAll('.bai-cmd').forEach(function(btn){
   btn.addEventListener('click',function(){
     if(btn.classList.contains('disabled')) return;
-    if(!_isPremium) return;
+    // Accesso: premium OPPURE ha crediti referral
+    if(!_isPremium && getReferralCredits()<=0) return;
     var cmd=btn.dataset.cmd;
     if(getTotalRemaining()<=0&&cmd!=='giorno'){
       showStep(cmd);
@@ -1297,10 +1321,13 @@ document.querySelectorAll('.bai-drawer-handle').forEach(function(h){
 function renderCreditsDrawer(){
   var cont=document.getElementById('bai-credits-content');
   if(!cont) return;
-  if(!_isPremium){
+  var ref=getReferralCredits();
+
+  if(!_isPremium && ref<=0){
     cont.innerHTML='<div class="bai-credits-free-msg"><p>I crediti AI sono disponibili con il piano <strong style="color:var(--amber);">Premium</strong>.</p><button onclick="showPremiumModal&&showPremiumModal()" style="background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:10px;padding:.75rem 1.5rem;font-family:inherit;font-size:.88rem;font-weight:800;cursor:pointer;width:100%;">Passa a Premium →</button></div>';
     return;
   }
+
   var monthly=getMonthlyUsed();
   var extra=getExtraCredits();
   var pct=Math.min(100,(monthly/MAX)*100);
@@ -1314,27 +1341,50 @@ function renderCreditsDrawer(){
     nextReset=start.toLocaleDateString('it-IT',{day:'numeric',month:'long'});
   }
 
-  cont.innerHTML=
-    '<div class="bai-credits-section">'+
-      '<div class="bai-credits-label">Crediti mensili</div>'+
-      '<div class="bai-credits-bar-row"><span>'+monthly+' / '+MAX+' usati</span><span>Reset: '+nextReset+'</span></div>'+
-      '<div class="bai-credits-track"><div class="bai-credits-fill" style="width:'+pct+'%;background:'+(pct>=80?'#ef4444':'var(--amber)')+'"></div></div>'+
-      '<div class="bai-credits-remaining">'+monthlyRem+' crediti mensili rimanenti'+(monthlyRem===0&&extra===0?' — acquista crediti extra qui sotto':'')+'</div>'+
-    '</div>'+
-    '<div class="bai-credits-section">'+
-      '<div class="bai-credits-label">Crediti extra disponibili</div>'+
-      '<div class="bai-credits-extra-val">'+extra+'</div>'+
-      '<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin:.35rem 0 .3rem;">'+
-        '<div style="height:100%;width:'+(extra>0?Math.min(100,(extra/200)*100):0)+'%;background:'+(extra>0?'var(--blue-l)':'var(--brd)')+';border-radius:99px;transition:width .4s;"></div>'+
+  var html='';
+
+  // Sezione mensili — solo per premium
+  if(_isPremium){
+    html+=
+      '<div class="bai-credits-section">'+
+        '<div class="bai-credits-label">Crediti mensili</div>'+
+        '<div class="bai-credits-bar-row"><span>'+monthly+' / '+MAX+' usati</span><span>Reset: '+nextReset+'</span></div>'+
+        '<div class="bai-credits-track"><div class="bai-credits-fill" style="width:'+pct+'%;background:'+(pct>=80?'#ef4444':'var(--amber)')+'"></div></div>'+
+        '<div class="bai-credits-remaining">'+monthlyRem+' crediti mensili rimanenti'+(monthlyRem===0&&extra===0&&ref===0?' — acquista crediti extra qui sotto':'')+'</div>'+
       '</div>'+
-      '<div class="bai-credits-extra-note">I crediti extra vengono utilizzati solo dopo aver esaurito i crediti mensili e sono disponibili solo con un piano Premium attivo.</div>'+
-    '</div>'+
-    '<div>'+
-      '<div class="bai-credits-label">Acquista crediti extra</div>'+
-      '<a href="#" class="bai-pkg" data-pkg="50"><div><div class="bai-pkg-name">50 crediti extra</div><div class="bai-pkg-sub">0,039€/credito</div></div><div class="bai-pkg-price">1,99 €</div></a>'+
-      '<a href="#" class="bai-pkg" data-pkg="200"><div><div class="bai-pkg-name">200 crediti extra</div><div class="bai-pkg-sub">0,024€/credito</div></div><div class="bai-pkg-price">4,99 €</div></a>'+
-      '<a href="#" class="bai-pkg bai-pkg--best" data-pkg="1000"><div><div class="bai-pkg-name">1000 crediti extra <span class="bai-pkg-badge">PIÙ VANTAGGIOSO</span></div><div class="bai-pkg-sub">0,019€/credito</div></div><div class="bai-pkg-price">19,99 €</div></a>'+
+      '<div class="bai-credits-section">'+
+        '<div class="bai-credits-label">Crediti extra disponibili</div>'+
+        '<div class="bai-credits-extra-val">'+extra+'</div>'+
+        '<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin:.35rem 0 .3rem;">'+
+          '<div style="height:100%;width:'+(extra>0?Math.min(100,(extra/200)*100):0)+'%;background:'+(extra>0?'var(--blue-l)':'var(--brd)')+';border-radius:99px;transition:width .4s;"></div>'+
+        '</div>'+
+        '<div class="bai-credits-extra-note">I crediti extra vengono utilizzati solo dopo aver esaurito i crediti mensili e sono disponibili solo con un piano Premium attivo.</div>'+
+      '</div>';
+  }
+
+  // Sezione referral — per tutti (anche free)
+  html+=
+    '<div class="bai-credits-section">'+
+      '<div class="bai-credits-label">Crediti referral</div>'+
+      '<div class="bai-credits-extra-val" style="color:#4ade80;">'+ref+'</div>'+
+      '<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin:.35rem 0 .3rem;">'+
+        '<div style="height:100%;width:'+(ref>0?Math.min(100,(ref/100)*100):0)+'%;background:#22c55e;border-radius:99px;transition:width .4s;"></div>'+
+      '</div>'+
+      '<div class="bai-credits-extra-note">Guadagnati invitando amici. Utilizzabili anche senza piano Premium, dopo i crediti mensili e extra.</div>'+
     '</div>';
+
+  // Acquisto — solo premium
+  if(_isPremium){
+    html+=
+      '<div>'+
+        '<div class="bai-credits-label">Acquista crediti extra</div>'+
+        '<a href="#" class="bai-pkg" data-pkg="50"><div><div class="bai-pkg-name">50 crediti extra</div><div class="bai-pkg-sub">0,039€/credito</div></div><div class="bai-pkg-price">1,99 €</div></a>'+
+        '<a href="#" class="bai-pkg" data-pkg="200"><div><div class="bai-pkg-name">200 crediti extra</div><div class="bai-pkg-sub">0,024€/credito</div></div><div class="bai-pkg-price">4,99 €</div></a>'+
+        '<a href="#" class="bai-pkg bai-pkg--best" data-pkg="1000"><div><div class="bai-pkg-name">1000 crediti extra <span class="bai-pkg-badge">PIÙ VANTAGGIOSO</span></div><div class="bai-pkg-sub">0,019€/credito</div></div><div class="bai-pkg-price">19,99 €</div></a>'+
+      '</div>';
+  }
+
+  cont.innerHTML=html;
 
   // TODO: collegare Stripe ai bottoni .bai-pkg
   cont.querySelectorAll('.bai-pkg').forEach(function(pkg){
