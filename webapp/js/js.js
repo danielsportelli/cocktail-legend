@@ -2162,7 +2162,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
             '</div>'+
             '<div style="margin-top:.75rem;display:flex;align-items:flex-start;gap:.5rem;background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:.6rem .75rem;">'+
               '<svg style="flex-shrink:0;margin-top:.05rem;" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
-              '<span style="font-size:.68rem;color:#94a3b8;line-height:1.5;">Gestisci e acquista crediti extra dalla sezione <strong style="color:#60a5fa;">Barman AI</strong> → icona crediti in alto a destra.</span>'+
+              '<span style="font-size:.68rem;color:#94a3b8;line-height:1.5;">Gestisci e acquista crediti extra dalla sezione <strong style="color:#60a5fa;">Barman AI</strong> → icona wallet in alto a destra.</span>'+
             '</div>'+
           '</div>'
         : ''
@@ -2361,7 +2361,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
     function openModal(code){
       var link = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html?ref='+code;
-      var waText = encodeURIComponent('Scopri Cocktail Legend, la miglior app per bartenders!\nRegistrati gratis qui: '+link);
+      var waText = encodeURIComponent('Più di 100 bartender la stanno già usando!\nRegistrati gratis qui: '+link);
       var waUrl = 'https://wa.me/?text='+waText;
 
       // Rimuovi eventuale modale precedente
