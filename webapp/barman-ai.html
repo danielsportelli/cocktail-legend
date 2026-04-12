@@ -31,7 +31,6 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area
   height:56px;
   padding-top:env(safe-area-inset-top,0px);
   background:#0a0f1e;
-  border-bottom:1px solid var(--brd);
   display:flex;align-items:center;justify-content:space-between;
   padding-left:4%;padding-right:4%;
 }
@@ -62,6 +61,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area
 .bai-icon-btn.active svg{stroke:var(--amber);}
 
 /* ── MAIN CONTENT ── */
+.bai-header::after{content:'';position:absolute;left:0;right:0;bottom:-32px;height:32px;background:linear-gradient(to bottom,rgba(10,15,30,1) 0%,rgba(10,15,30,0) 100%);pointer-events:none;z-index:1;}
 .bai-main{
   padding-top:calc(56px + env(safe-area-inset-top,0px) + 1rem);
   padding-bottom:calc(2rem + env(safe-area-inset-bottom,0px));
@@ -253,16 +253,19 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area
 
 /* ── DRAWER GENERICO ── */
 .bai-drawer{
-  position:fixed;left:.75rem;right:.75rem;bottom:.75rem;
+  position:fixed;
+  left:0;right:0;bottom:0;
+  top:calc(56px + env(safe-area-inset-top,0px));
   z-index:310;
   background:var(--surf);
-  border-radius:20px;border:1px solid rgba(255,255,255,.08);
+  border-radius:20px 20px 0 0;
+  border-top:1px solid rgba(255,255,255,.08);
   box-shadow:0 -8px 40px rgba(0,0,0,.5);
   padding:0 0 env(safe-area-inset-bottom,0px);
   transform:translateY(110%);
   transition:transform .32s cubic-bezier(.4,0,.2,1);
   will-change:transform;
-  max-height:82vh;overflow-y:auto;
+  overflow-y:auto;
   scrollbar-width:none;
 }
 .bai-drawer::-webkit-scrollbar{display:none;}
@@ -274,8 +277,17 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area
   padding-bottom:.7rem;border-bottom:1px solid var(--brd);margin-bottom:1rem;
 }
 .bai-drawer-title{font-size:.65rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);}
-.bai-drawer-close{background:none;border:none;cursor:pointer;color:var(--dim);font-size:1.1rem;padding:.1rem .2rem;line-height:1;}
-.bai-drawer-close:active{color:var(--txt);}
+.bai-drawer-close{
+  display:inline-flex;align-items:center;
+  background:transparent;border:1px solid var(--dim);
+  color:var(--dim);font-size:.62rem;font-weight:600;
+  font-family:inherit;cursor:pointer;
+  padding:.35rem .65rem;border-radius:6px;
+  letter-spacing:.05em;text-transform:uppercase;
+  transition:none;flex-shrink:0;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+.bai-drawer-close:active{background:transparent;color:var(--dim);border-color:var(--dim);}
 
 /* ── CREDITI DRAWER ── */
 .bai-credits-section{margin-bottom:1.3rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);}
@@ -339,6 +351,7 @@ img{-webkit-user-drag:none;pointer-events:none;}
 button,a,input,textarea{pointer-events:auto;}
 textarea{-webkit-user-select:text;user-select:text;}
 
+@keyframes spin{to{transform:rotate(360deg);}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 .bai-anim{animation:fadeIn .25s ease both;}
 </style>
@@ -349,7 +362,7 @@ textarea{-webkit-user-select:text;user-select:text;}
 <header class="bai-header">
   <button class="bai-back" onclick="window.location.href='cocktail-legend.html'">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    Cocktail Legend
+    Chiudi Barman AI
   </button>
   <div class="bai-actions">
     <!-- Salvati -->
@@ -358,7 +371,7 @@ textarea{-webkit-user-select:text;user-select:text;}
     </button>
     <!-- Crediti / Account AI -->
     <button class="bai-icon-btn" id="bai-credits-btn" aria-label="Crediti AI">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="17" cy="15" r="1.5" fill="currentColor" stroke="none"/></svg>
     </button>
   </div>
 </header>
@@ -370,7 +383,6 @@ textarea{-webkit-user-select:text;user-select:text;}
   <div id="bai-loading" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1rem;">
     <div style="width:32px;height:32px;border:3px solid rgba(255,255,255,.08);border-top-color:var(--amber);border-radius:50%;animation:spin .7s linear infinite;"></div>
   </div>
-  @keyframes spin{to{transform:rotate(360deg);}}
 
   <!-- Gate per utenti non autenticati -->
   <div id="bai-gate-auth" class="bai-gate" style="display:none;">
@@ -826,7 +838,7 @@ window.addEventListener('fb-auth-ready', function(e){
       // Aggiorna greeting con nome
       var nome=data.nome||user.displayName||(user.email?user.email.split('@')[0]:'');
       var greet=document.getElementById('bai-greeting');
-      if(greet && nome) greet.textContent='Ciao '+nome+', cosa vuoi fare?';
+      if(greet && nome) greet.textContent='Ciao '+nome+', cosa vuoi fare oggi?';
 
       // Disabilita bottoni se non premium
       if(!_isPremium){
@@ -835,7 +847,7 @@ window.addEventListener('fb-auth-ready', function(e){
         var section=document.getElementById('bai-step-cmds');
         var banner=document.createElement('div');
         banner.style.cssText='margin-bottom:1rem;padding:.75rem .85rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:12px;font-size:.75rem;color:var(--txt2);line-height:1.55;';
-        banner.innerHTML='🔒 Le funzioni Barman AI sono riservate al piano <strong style="color:var(--amber);">Premium</strong>.<br><button onclick="showPremiumModal&&showPremiumModal()" style="margin-top:.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:8px;padding:.38rem .85rem;font-family:inherit;font-size:.72rem;font-weight:800;cursor:pointer;">Scopri Premium →</button>';
+        banner.innerHTML='🔒 Le funzioni Barman AI sono riservate al piano <strong style="color:var(--amber);">Premium</strong>.<br><button onclick="showPremiumModal&&showPremiumModal()" style="margin-top:.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:8px;padding:.38rem .85rem;font-family:inherit;font-size:.72rem;font-weight:800;cursor:pointer;">Passa a Premium →</button>';
         section.insertBefore(banner,section.firstChild);
       }
 
@@ -1239,7 +1251,7 @@ function renderCreditsDrawer(){
   var cont=document.getElementById('bai-credits-content');
   if(!cont) return;
   if(!_isPremium){
-    cont.innerHTML='<div class="bai-credits-free-msg"><p>I crediti AI sono disponibili con il piano <strong style="color:var(--amber);">Premium</strong>.</p><button onclick="showPremiumModal&&showPremiumModal()" style="background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:10px;padding:.75rem 1.5rem;font-family:inherit;font-size:.88rem;font-weight:800;cursor:pointer;width:100%;">Scopri Premium →</button></div>';
+    cont.innerHTML='<div class="bai-credits-free-msg"><p>I crediti AI sono disponibili con il piano <strong style="color:var(--amber);">Premium</strong>.</p><button onclick="showPremiumModal&&showPremiumModal()" style="background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:10px;padding:.75rem 1.5rem;font-family:inherit;font-size:.88rem;font-weight:800;cursor:pointer;width:100%;">Passa a Premium →</button></div>';
     return;
   }
   var monthly=getMonthlyUsed();
@@ -1373,6 +1385,55 @@ document.querySelectorAll('.bai-cmd[data-cmd="twist"], .bai-cmd[data-cmd="pairin
 });
 
 })();
+
+// ── PROTEZIONE CONTENUTI ─────────────────────────────────
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+document.addEventListener('copy', function(e){ e.preventDefault(); });
+document.addEventListener('cut', function(e){ e.preventDefault(); });
+document.addEventListener('dragstart', function(e){ e.preventDefault(); });
+document.addEventListener('selectstart', function(e){
+  if(!e.target.matches('textarea,input')) e.preventDefault();
+});
+
+// ── PREMIUM MODAL ────────────────────────────────────────
+function showPremiumModal() {
+  if (document.getElementById('premium-modal')) {
+    document.getElementById('premium-modal').style.display = 'flex';
+    return;
+  }
+  var modal = document.createElement('div');
+  modal.id = 'premium-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem;padding-top:max(1rem, env(safe-area-inset-top, 0px));';
+  modal.innerHTML = `
+    <div style="background:#1e293b;border:1px solid rgba(245,158,11,0.3);border-radius:24px;padding:1.4rem 1.5rem;width:100%;max-width:420px;max-height:min(88vh, calc(100dvh - 2rem));overflow-y:auto;scrollbar-width:none;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.6);">
+      <button id="premium-modal-close" style="position:absolute;top:1rem;right:1.1rem;background:none;border:none;color:#64748b;font-size:1.5rem;cursor:pointer;line-height:1;">×</button>
+      <div style="text-align:center;margin-bottom:1rem;">
+        <div style="width:44px;height:44px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h2 style="font-size:1.25rem;font-weight:900;color:#f1f5f9;margin:0 0 .2rem;letter-spacing:-.02em;">Passa a Premium</h2>
+        <p style="font-size:.82rem;color:#94a3b8;margin:0;">Sblocca tutte le funzioni di Cocktail Legend</p>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04));border:1px solid rgba(245,158,11,0.25);border-radius:16px;padding:.75rem 1rem;margin-bottom:1rem;text-align:center;">
+        <div style="font-size:1.7rem;font-weight:900;color:#f59e0b;letter-spacing:-.03em;">19,99€<span style="font-size:.9rem;font-weight:500;color:#94a3b8;"> / primo anno</span></div>
+        <div style="font-size:.72rem;color:#64748b;margin-top:.25rem;">Dal secondo anno in poi 9,99€/anno</div>
+      </div>
+      <div style="margin-bottom:1rem;">
+        <div style="font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f59e0b;margin-bottom:.55rem;">Cosa sblocchi</div>
+        ${['Spirit Genesis|Corso avanzato di merceologia','Barman AI (4 funzioni)|Cocktail del Giorno · Signature · Twist · Pairing','Calcolatori avanzati|Calcolatore ABV · Pre-Batch','Preferiti|Vedi tutti i cocktail salvati come preferiti','Premi Quiz Mensili|1° → 1000 crediti · 2° → 200 · 3° → 50','30 crediti AI / mese|Inclusi ogni mese, si rinnovano automaticamente'].map(function(item){var p=item.split('|');return '<div style="display:flex;align-items:flex-start;gap:.75rem;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,0.06);"><div style="width:20px;height:20px;background:rgba(34,197,94,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div style="font-size:.85rem;font-weight:700;color:#f1f5f9;">'+p[0]+'</div><div style="font-size:.72rem;color:#64748b;margin-top:.1rem;">'+p[1]+'</div></div></div>';}).join('')}
+      </div>
+      <button id="premium-cta-btn" style="width:100%;padding:.8rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-weight:800;font-size:.92rem;border:none;border-radius:12px;cursor:pointer;font-family:inherit;">Acquista Premium →</button>
+      <p style="text-align:center;font-size:.7rem;color:#475569;margin-top:.5rem;">Rinnovo automatico · Disdici quando vuoi</p>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  document.getElementById('premium-modal-close').addEventListener('click', function(){ modal.style.display='none'; });
+  modal.addEventListener('click', function(e){ if(e.target===modal) modal.style.display='none'; });
+  document.getElementById('premium-cta-btn').addEventListener('click', function(){
+    alert('Pagamento in arrivo! Stripe verrà collegato a breve.');
+  });
+}
+
 </script>
 
 </body>
