@@ -21,8 +21,25 @@
 }
 html,body{min-height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;}
 
+/* ── BG GLOW (come quiz) ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 50% at 50% 20%,black 0%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 50% at 50% 20%,black 0%,transparent 100%);
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 65% 45% at 50% 8%,rgba(37,99,235,.13) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
 /* Safe area notch */
-body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:#0a0f1e;z-index:9999;}
+.bai-safe-notch{position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:#0a0f1e;z-index:9999;}
 
 /* ── HEADER ── */
 .bai-header{
@@ -66,6 +83,7 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area
   padding-top:calc(56px + env(safe-area-inset-top,0px) + 1rem);
   padding-bottom:calc(2rem + env(safe-area-inset-bottom,0px));
   min-height:100vh;
+  position:relative;z-index:1;
 }
 
 /* ── GATE FREE ── */
@@ -254,12 +272,12 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area
 /* ── DRAWER GENERICO ── */
 .bai-drawer{
   position:fixed;
-  left:0;right:0;bottom:0;
-  top:calc(56px + env(safe-area-inset-top,0px));
+  left:8px;right:8px;bottom:12px;
+  top:calc(56px + env(safe-area-inset-top,0px) + 8px);
   z-index:310;
   background:var(--surf);
-  border-radius:20px 20px 0 0;
-  border-top:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.08);
   box-shadow:0 -8px 40px rgba(0,0,0,.5);
   padding:0 0 env(safe-area-inset-bottom,0px);
   transform:translateY(110%);
@@ -357,6 +375,9 @@ textarea{-webkit-user-select:text;user-select:text;}
 </style>
 </head>
 <body>
+
+<!-- ── SAFE AREA NOTCH ── -->
+<div class="bai-safe-notch"></div>
 
 <!-- ── HEADER ── -->
 <header class="bai-header">
@@ -632,7 +653,7 @@ textarea{-webkit-user-select:text;user-select:text;}
   <div class="bai-drawer-inner">
     <div class="bai-drawer-hdr">
       <span class="bai-drawer-title">Crediti AI</span>
-      <button class="bai-drawer-close" id="bai-credits-close">✕</button>
+      <button class="bai-drawer-close" id="bai-credits-close">Chiudi</button>
     </div>
     <div id="bai-credits-content">
       <!-- Popolato via JS -->
@@ -646,7 +667,7 @@ textarea{-webkit-user-select:text;user-select:text;}
   <div class="bai-drawer-inner">
     <div class="bai-drawer-hdr">
       <span class="bai-drawer-title">Le tue ricerche salvate</span>
-      <button class="bai-drawer-close" id="bai-saved-close">✕</button>
+      <button class="bai-drawer-close" id="bai-saved-close">Chiudi</button>
     </div>
     <div id="bai-saved-content">
       <!-- Popolato via JS -->
