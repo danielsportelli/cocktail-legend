@@ -2361,7 +2361,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
 
     function openModal(code){
       var link = 'https://danielsportelli.github.io/cocktail-legend/webapp/cocktail-legend.html?ref='+code;
-      var waText = encodeURIComponent('Scopri Cocktail Legend, la miglior app per bartenders!\nRegistrati gratis qui: '+link);
+      var waText = encodeURIComponent("Unisciti a 100+ bartender che stanno già usando l'app!\nRegistrati gratis qui: "+link);
       var waUrl = 'https://wa.me/?text='+waText;
 
       // Rimuovi eventuale modale precedente
