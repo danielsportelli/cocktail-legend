@@ -2034,17 +2034,8 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(!el) return;
     var user = window._currentUser;
     if(!user || !_usageCache) return;
-    var monthly = getMonthlyUsed();
     var extra = getExtraCredits();
     var monthlyRem = getMonthlyRemaining();
-    var pct = Math.min(100,(monthly/MAX)*100);
-    var periodStart = _usageCache.periodStart || '';
-    var nextReset = '';
-    if(periodStart){
-      var d = new Date(periodStart);
-      d.setDate(d.getDate()+30);
-      nextReset = d.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'});
-    }
 
     // Sezione nickname (asincrona) — inserisce placeholder e poi popola
     var nickPlaceholder =
@@ -2091,39 +2082,22 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           '</div>'
         : ''
       )+
-      '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
-        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.7rem;">Crediti mensili</div>'+
-        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'+
-          '<span style="font-size:.75rem;color:var(--txt2);">'+monthly+' / '+MAX+' usati</span>'+
-          '<span style="font-size:.7rem;color:var(--dim);">Reset: '+nextReset+'</span>'+
-        '</div>'+
-        '<div style="height:5px;background:var(--brd);border-radius:99px;overflow:hidden;">'+
-          '<div style="height:100%;width:'+pct+'%;background:'+(pct>=80?'#ef4444':'var(--amber)')+';border-radius:99px;transition:width .4s;"></div>'+
-        '</div>'+
-        '<div style="font-size:.65rem;color:var(--dim);margin-top:.35rem;">'+monthlyRem+' crediti mensili rimanenti</div>'+
-      '</div>'+
-      '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
-        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.5rem;">Crediti extra disponibili</div>'+
-        '<div style="font-size:1.4rem;font-weight:800;color:var(--amber);margin-bottom:.2rem;">'+extra+'</div>'+
-        '<div style="font-size:.65rem;color:var(--dim);">I crediti extra non hanno scadenza e vengono utilizzati solo dopo aver esaurito i crediti mensili.</div>'+
-      '</div>'+
-      '<div style="margin-bottom:1rem;">'+
-        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.7rem;">Acquista crediti extra per le funzioni AI</div>'+
-        '<div style="display:flex;flex-direction:column;gap:.5rem;">'+
-          '<a href="#" class="acc-pkg-btn" data-pkg="50" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
-            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">50 crediti extra</div><div style="font-size:.62rem;color:var(--dim);">0,039€/credito</div></div>'+
-            '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">1,99 €</div>'+
-          '</a>'+
-          '<a href="#" class="acc-pkg-btn" data-pkg="200" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
-            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">200 crediti extra</div><div style="font-size:.62rem;color:var(--dim);">0,024€/credito</div></div>'+
-            '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">4,99 €</div>'+
-          '</a>'+
-          '<a href="#" class="acc-pkg-btn" data-pkg="1000" style="display:flex;justify-content:space-between;align-items:center;background:var(--bg);border:1px solid rgba(245,158,11,.4);border-radius:10px;padding:.65rem .85rem;text-decoration:none;transition:border-color .2s;">'+
-            '<div><div style="font-size:.75rem;font-weight:700;color:var(--txt);">1000 crediti extra <span style="font-size:.58rem;background:var(--amber);color:#000;border-radius:4px;padding:1px 5px;margin-left:4px;">PIÙ VANTAGGIOSO</span></div><div style="font-size:.62rem;color:var(--dim);">0,019€/credito</div></div>'+
-            '<div style="font-size:.85rem;font-weight:800;color:var(--amber);">19,99 €</div>'+
-          '</a>'+
-        '</div>'+
-      '</div>'+
+      (window._userPlan === 'premium'
+        ? '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+            '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti AI</div>'+
+            '<div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;">'+
+              '<div style="font-size:.78rem;color:var(--txt2);">'+
+                '<span style="font-weight:700;color:var(--txt);">'+monthlyRem+'</span>/'+MAX+' mensili &nbsp;·&nbsp; '+
+                '<span style="font-weight:700;color:'+(extra>0?'var(--amber)':'var(--dim)')+';">'+extra+'</span> extra'+
+              '</div>'+
+            '</div>'+
+            '<div style="margin-top:.75rem;display:flex;align-items:flex-start;gap:.5rem;background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:.6rem .75rem;">'+
+              '<svg style="flex-shrink:0;margin-top:.05rem;" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
+              '<span style="font-size:.68rem;color:#94a3b8;line-height:1.5;">Gestisci e acquista crediti extra dalla sezione <strong style="color:#60a5fa;">Barman AI</strong> → icona crediti in alto a destra.</span>'+
+            '</div>'+
+          '</div>'
+        : ''
+      )+
       '<div style="border-top:1px solid var(--brd);padding-top:1.5rem;margin-top:.8rem;text-align:center;">'+
         '<button id="acc-logout-btn" style="display:inline-flex;align-items:center;background:transparent;border:1px solid var(--dim);color:var(--dim);font-size:.62rem;font-weight:600;font-family:inherit;cursor:pointer;padding:.35rem .65rem;border-radius:6px;letter-spacing:.05em;text-transform:uppercase;transition:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">LOGOUT</button>'+
       '</div>';
