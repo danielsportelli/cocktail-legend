@@ -1055,6 +1055,20 @@ document.querySelectorAll('.bai-cmd').forEach(function(btn){
     if(getTotalRemaining()<=0&&cmd!=='giorno'){
       showStep(cmd);
       setVisible('bai-exhausted',true);
+      // Popola testo reset date
+      var resetEl=document.getElementById('bai-reset-date');
+      if(resetEl){
+        if(_usageCache&&_usageCache.periodStart){
+          var next=new Date(_usageCache.periodStart);
+          next.setDate(next.getDate()+30);
+          resetEl.textContent='I crediti mensili si ricaricano il '+next.toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'})+'. Oppure acquista crediti extra dal drawer Crediti.';
+        } else {
+          resetEl.textContent='Acquista crediti extra dal drawer Crediti (icona 💳 in alto a destra).';
+        }
+      }
+      // Disabilita tasto send
+      var s=document.getElementById('bai-send');
+      if(s){s.disabled=true;s.classList.remove('ready');}
       return;
     }
     showStep(cmd);
@@ -1293,11 +1307,14 @@ function renderCreditsDrawer(){
       '<div class="bai-credits-label">Crediti mensili</div>'+
       '<div class="bai-credits-bar-row"><span>'+monthly+' / '+MAX+' usati</span><span>Reset: '+nextReset+'</span></div>'+
       '<div class="bai-credits-track"><div class="bai-credits-fill" style="width:'+pct+'%;background:'+(pct>=80?'#ef4444':'var(--amber)')+'"></div></div>'+
-      '<div class="bai-credits-remaining">'+monthlyRem+' crediti mensili rimanenti</div>'+
+      '<div class="bai-credits-remaining">'+monthlyRem+' crediti mensili rimanenti'+(monthlyRem===0&&extra===0?' — acquista crediti extra qui sotto':'')+'</div>'+
     '</div>'+
     '<div class="bai-credits-section">'+
       '<div class="bai-credits-label">Crediti extra disponibili</div>'+
       '<div class="bai-credits-extra-val">'+extra+'</div>'+
+      '<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin:.35rem 0 .3rem;">'+
+        '<div style="height:100%;width:'+(extra>0?Math.min(100,(extra/200)*100):0)+'%;background:'+(extra>0?'var(--blue-l)':'var(--brd)')+';border-radius:99px;transition:width .4s;"></div>'+
+      '</div>'+
       '<div class="bai-credits-extra-note">I crediti extra vengono utilizzati solo dopo aver esaurito i crediti mensili e sono disponibili solo con un piano Premium attivo.</div>'+
     '</div>'+
     '<div>'+
