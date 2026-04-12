@@ -2066,19 +2066,18 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
             '</div>'
         )+
       '</div>'+
-      // Pulsante I TUOI BADGE
-      '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
-        '<button id="acc-badge-btn" style="width:100%;display:flex;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:12px;padding:.75rem .9rem;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:border-color .2s;">'+
-          '<div style="width:32px;height:32px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+
-            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M8 8l-4 8h16l-4-8"/><path d="M9 16l1 4h4l1-4"/></svg>'+
+      // Pulsante I TUOI BADGE — stile calc-cmd-btn
+      '<div class="bsheet-divider" style="margin:0;"></div>'+
+      '<div class="drawer-cmd-list" style="margin-bottom:0;">'+
+        '<button id="acc-badge-btn" class="calc-cmd-btn">'+
+          '<div style="width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><circle cx="12" cy="8" r="4"/><path d="M8 8l-4 8h16l-4-8"/><path d="M9 16l1 4h4l1-4"/></svg>'+
           '</div>'+
-          '<div style="display:flex;flex-direction:column;flex:1;min-width:0;">'+
-            '<span style="font-size:.82rem;font-weight:700;color:var(--txt);">I tuoi badge</span>'+
-            '<span style="font-size:.68rem;color:var(--dim);font-weight:500;margin-top:.15rem;">Invita amici e guadagna crediti AI</span>'+
-          '</div>'+
-          '<svg style="flex-shrink:0;margin-left:auto;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'+
+          '<span style="flex:1;font-size:.95rem;font-weight:600;color:var(--txt);letter-spacing:-.01em;pointer-events:none;">I tuoi badge</span>'+
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><polyline points="9 18 15 12 9 6"/></svg>'+
         '</button>'+
       '</div>'+
+      '<div class="bsheet-divider" style="margin:0 0 1.4rem;"></div>'+
       // Badge "Installa app" — visibile solo su mobile e se non in PWA
       (!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
         ? '<div id="acc-install-badge" style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
@@ -2192,12 +2191,11 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var progressPct = nextBadge ? Math.min(100, Math.round((count / nextNum) * 100)) : 100;
 
       var html =
-        // Tips box
+        // Tips box — solo logica, senza crediti
         '<div style="display:flex;align-items:flex-start;gap:.5rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:.75rem .85rem;margin-bottom:1.25rem;">'+
           '<svg style="flex-shrink:0;margin-top:.1rem;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
           '<div style="font-size:.7rem;color:var(--txt2);line-height:1.55;">'+
-            'Invita amici e colleghi bartender. Per ogni traguardo raggiungi un badge e guadagni <strong style="color:var(--amber);">crediti AI gratuiti</strong>, utilizzabili anche senza piano Premium.<br>'+
-            '<span style="color:var(--dim);font-size:.65rem;margin-top:.3rem;display:block;">5→20cr · 10→40cr · 25→100cr · 50→200cr · 100→500cr</span>'+
+            'Invita amici e colleghi bartender. Per ogni traguardo raggiungi un badge e guadagni <strong style="color:var(--amber);">crediti AI gratuiti</strong>, utilizzabili anche senza piano Premium.'+
           '</div>'+
         '</div>'+
         // Contatore + progress
@@ -2235,6 +2233,20 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       });
 
       html += '</div>'+
+        // Legenda crediti sotto i badge
+        '<div style="margin-bottom:1.25rem;padding:.65rem .75rem;background:var(--bg);border-radius:10px;border:1px solid var(--brd);">'+
+          '<div style="font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.5rem;">Crediti guadagnati per badge</div>'+
+          '<div style="display:flex;flex-direction:column;gap:.3rem;">';
+      BADGES.forEach(function(b){
+        var credits = {starter:20,junior:40,senior:100,ambassador:200,legend:500};
+        var unlocked = count >= b.num;
+        html += '<div style="display:flex;justify-content:space-between;align-items:center;">'+
+          '<span style="font-size:.72rem;color:'+(unlocked?b.color:'var(--dim)')+';">'+b.label+'</span>'+
+          '<span style="font-size:.72rem;font-weight:700;color:'+(unlocked?'var(--amber)':'var(--dim)')+';">+'+credits[b.key]+' crediti</span>'+
+        '</div>';
+      });
+      html += '</div>'+
+        '</div>'+
         // Pulsante invita
         '<button id="badge-invite-btn" style="width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:12px;padding:.8rem;font-family:inherit;font-size:.82rem;font-weight:800;cursor:pointer;letter-spacing:.01em;">'+
           '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>'+
@@ -2263,12 +2275,23 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       buildUI(0);
     }
 
-    // Back button
+    // Back button — torna al drawer account
     var backBtn = document.getElementById('badge-back-btn');
     if(backBtn){
       backBtn.addEventListener('click', function(){
-        closeDrawer('badge');
-        openDrawer('acc');
+        backBtn.classList.add('btn-flash');
+        setTimeout(function(){ backBtn.classList.remove('btn-flash'); }, 300);
+        // Chiudi badge e apri account senza chiudere overlay
+        var allDrawers = document.querySelectorAll('.drawer');
+        allDrawers.forEach(function(d){ d.style.transition='none'; d.classList.remove('open'); });
+        var accDrawer = document.getElementById('drawer-acc');
+        if(accDrawer) accDrawer.classList.add('open');
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            allDrawers.forEach(function(d){ d.style.transition=''; });
+          });
+        });
+        if(typeof CURRENT_DRAWER !== 'undefined') window.CURRENT_DRAWER = 'acc';
       });
     }
   }
