@@ -2066,6 +2066,19 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
             '</div>'
         )+
       '</div>'+
+      // Pulsante I TUOI BADGE
+      '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+        '<button id="acc-badge-btn" style="width:100%;display:flex;align-items:center;gap:.65rem;background:var(--bg);border:1px solid var(--brd);border-radius:12px;padding:.75rem .9rem;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;transition:border-color .2s;">'+
+          '<div style="width:32px;height:32px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M8 8l-4 8h16l-4-8"/><path d="M9 16l1 4h4l1-4"/></svg>'+
+          '</div>'+
+          '<div style="display:flex;flex-direction:column;flex:1;min-width:0;">'+
+            '<span style="font-size:.82rem;font-weight:700;color:var(--txt);">I tuoi badge</span>'+
+            '<span style="font-size:.68rem;color:var(--dim);font-weight:500;margin-top:.15rem;">Invita amici e guadagna crediti AI</span>'+
+          '</div>'+
+          '<svg style="flex-shrink:0;margin-left:auto;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'+
+        '</button>'+
+      '</div>'+
       // Badge "Installa app" — visibile solo su mobile e se non in PWA
       (!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
         ? '<div id="acc-install-badge" style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
@@ -2098,7 +2111,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           '</div>'
         : ''
       )+
-      '<div style="border-top:1px solid var(--brd);padding-top:1.5rem;margin-top:.8rem;text-align:center;">'+
+      '<div style="padding-top:1.2rem;text-align:center;">'+
         '<button id="acc-logout-btn" style="display:inline-flex;align-items:center;background:transparent;border:1px solid var(--dim);color:var(--dim);font-size:.62rem;font-weight:600;font-family:inherit;cursor:pointer;padding:.35rem .65rem;border-radius:6px;letter-spacing:.05em;text-transform:uppercase;transition:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">LOGOUT</button>'+
       '</div>';
 
@@ -2137,6 +2150,190 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       installBtn.addEventListener('click', function() {
         showInstallPWAModal();
       });
+    }
+
+    // Badge → apre drawer badge
+    var badgeBtn = document.getElementById('acc-badge-btn');
+    if (badgeBtn) {
+      badgeBtn.addEventListener('click', function() {
+        openDrawer('badge');
+        renderBadgeDrawer();
+      });
+    }
+  }
+
+  function renderBadgeDrawer(){
+    var el = document.getElementById('badge-content');
+    if(!el) return;
+
+    var BADGES = [
+      { key:'starter',     label:'Starter',     num:5,   color:'#22c55e', shadow:'rgba(34,197,94,.35)'  },
+      { key:'junior',      label:'Junior',      num:10,  color:'#3b82f6', shadow:'rgba(59,130,246,.35)' },
+      { key:'senior',      label:'Senior',      num:25,  color:'#a78bfa', shadow:'rgba(167,139,250,.35)' },
+      { key:'ambassador',  label:'Ambassador',  num:50,  color:'#ef4444', shadow:'rgba(239,68,68,.35)'  },
+      { key:'legend',      label:'Legend',      num:100, color:'#f59e0b', shadow:'rgba(245,158,11,.45)' }
+    ];
+
+    // Leggi count referral da Firestore (placeholder — sarà popolato con dati reali)
+    var referralCount = 0;
+    var currentBadge = null;
+    var user = window._currentUser;
+    var db = window._fbDb;
+    var fns = window._fbFunctions;
+
+    function buildUI(count){
+      var nextBadge = null;
+      var nextNum = 0;
+      BADGES.forEach(function(b){
+        if(count >= b.num){ currentBadge = b; }
+        else if(!nextBadge){ nextBadge = b; nextNum = b.num; }
+      });
+
+      var progressPct = nextBadge ? Math.min(100, Math.round((count / nextNum) * 100)) : 100;
+
+      var html =
+        // Tips box
+        '<div style="display:flex;align-items:flex-start;gap:.5rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:.75rem .85rem;margin-bottom:1.25rem;">'+
+          '<svg style="flex-shrink:0;margin-top:.1rem;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
+          '<div style="font-size:.7rem;color:var(--txt2);line-height:1.55;">'+
+            'Invita amici e colleghi bartender. Per ogni traguardo raggiungi un badge e guadagni <strong style="color:var(--amber);">crediti AI gratuiti</strong>, utilizzabili anche senza piano Premium.<br>'+
+            '<span style="color:var(--dim);font-size:.65rem;margin-top:.3rem;display:block;">5→20cr · 10→40cr · 25→100cr · 50→200cr · 100→500cr</span>'+
+          '</div>'+
+        '</div>'+
+        // Contatore + progress
+        '<div style="margin-bottom:1.25rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;">'+
+            '<span style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">Invitati</span>'+
+            '<span style="font-size:.78rem;font-weight:700;color:var(--txt);">'+count+(nextBadge?' / '+nextNum:'')+'</span>'+
+          '</div>'+
+          '<div style="height:5px;background:var(--brd);border-radius:99px;overflow:hidden;margin-bottom:.4rem;">'+
+            '<div style="height:100%;width:'+progressPct+'%;background:'+(currentBadge?currentBadge.color:'var(--dim)')+';border-radius:99px;transition:width .4s;"></div>'+
+          '</div>'+
+          (nextBadge
+            ? '<div style="font-size:.65rem;color:var(--dim);">Ancora <strong style="color:var(--txt);">'+(nextNum-count)+'</strong> per sbloccare <strong style="color:'+nextBadge.color+';">'+nextBadge.label+'</strong></div>'
+            : '<div style="font-size:.65rem;color:var(--amber);font-weight:700;">🏆 Hai raggiunto tutti i badge!</div>'
+          )+
+        '</div>'+
+        // Badge grid
+        '<div style="display:flex;justify-content:space-between;gap:.5rem;margin-bottom:1.5rem;">';
+
+      BADGES.forEach(function(b){
+        var unlocked = count >= b.num;
+        html +=
+          '<div style="display:flex;flex-direction:column;align-items:center;gap:.4rem;flex:1;">'+
+            '<div style="'+
+              'width:48px;height:48px;border-radius:50%;'+
+              'display:flex;align-items:center;justify-content:center;'+
+              'font-size:.85rem;font-weight:900;'+
+              (unlocked
+                ? 'background:'+b.color+';color:#fff;box-shadow:0 0 14px '+b.shadow+';'
+                : 'background:var(--surf);color:var(--dim);border:1px solid var(--brd);'
+              )+
+            '">'+b.num+'</div>'+
+            '<span style="font-size:.55rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:'+(unlocked?b.color:'var(--dim)')+';">'+b.label+'</span>'+
+          '</div>';
+      });
+
+      html += '</div>'+
+        // Pulsante invita
+        '<button id="badge-invite-btn" style="width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:12px;padding:.8rem;font-family:inherit;font-size:.82rem;font-weight:800;cursor:pointer;letter-spacing:.01em;">'+
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>'+
+          'Invita un amico'+
+        '</button>';
+
+      el.innerHTML = html;
+
+      // Handler pulsante invita
+      var inviteBtn = document.getElementById('badge-invite-btn');
+      if(inviteBtn){
+        inviteBtn.addEventListener('click', function(){
+          showInviteModal();
+        });
+      }
+    }
+
+    // Carica count reale da Firestore
+    if(user && db && fns){
+      fns.getDoc(fns.doc(db,'users',user.uid)).then(function(snap){
+        var count = 0;
+        if(snap.exists() && snap.data().referral) count = snap.data().referral.count || 0;
+        buildUI(count);
+      }).catch(function(){ buildUI(0); });
+    } else {
+      buildUI(0);
+    }
+
+    // Back button
+    var backBtn = document.getElementById('badge-back-btn');
+    if(backBtn){
+      backBtn.addEventListener('click', function(){
+        closeDrawer('badge');
+        openDrawer('acc');
+      });
+    }
+  }
+
+  function showInviteModal(){
+    var user = window._currentUser;
+    var db = window._fbDb;
+    var fns = window._fbFunctions;
+    var referralCode = '';
+
+    function openModal(code){
+      var link = 'https://danielsportelli.github.io/cocktail-legend.html?ref='+code;
+      var waText = encodeURIComponent('🍹 Ti invito su Cocktail Legend, la migliore app per bartender!\nScaricala gratis qui: '+link);
+      var waUrl = 'https://wa.me/?text='+waText;
+
+      var modal = document.createElement('div');
+      modal.id = 'invite-modal';
+      modal.style.cssText = 'position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,.8);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px);';
+      modal.innerHTML =
+        '<div style="background:var(--surf);border-radius:20px 20px 0 0;width:100%;max-width:480px;padding:1.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom,0px));border-top:1px solid var(--brd);">'+
+          '<div style="width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.18);margin:0 auto 1.25rem;"></div>'+
+          '<div style="font-size:.65rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin-bottom:1rem;">Invita un amico</div>'+
+          '<div style="font-size:.8rem;color:var(--txt2);line-height:1.6;margin-bottom:1.1rem;">'+
+            'Condividi il tuo link personale. Quando un amico o collega bartender si iscrive tramite il tuo link, guadagni <strong style="color:var(--amber);">badge e crediti AI gratuiti</strong>.'+
+          '</div>'+
+          // Link copiabile
+          '<div style="display:flex;align-items:center;gap:.5rem;background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:.6rem .75rem;margin-bottom:1rem;">'+
+            '<span style="flex:1;font-size:.7rem;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+link+'</span>'+
+            '<button id="invite-copy-btn" style="flex-shrink:0;background:none;border:none;color:var(--amber);font-size:.68rem;font-weight:700;font-family:inherit;cursor:pointer;padding:.2rem .4rem;">COPIA</button>'+
+          '</div>'+
+          // WhatsApp
+          '<a href="'+waUrl+'" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:.6rem;width:100%;background:#25D366;color:#fff;border:none;border-radius:12px;padding:.8rem;font-family:inherit;font-size:.85rem;font-weight:800;text-decoration:none;margin-bottom:.75rem;">'+
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>'+
+            'Condividi su WhatsApp'+
+          '</a>'+
+          '<button id="invite-close-btn" style="width:100%;background:none;border:1px solid var(--dim);color:var(--dim);border-radius:10px;padding:.65rem;font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer;">Chiudi</button>'+
+        '</div>';
+
+      document.body.appendChild(modal);
+
+      document.getElementById('invite-copy-btn').addEventListener('click', function(){
+        navigator.clipboard.writeText(link).then(function(){
+          var btn = document.getElementById('invite-copy-btn');
+          if(btn){ btn.textContent='✓ COPIATO'; setTimeout(function(){ btn.textContent='COPIA'; }, 2000); }
+        }).catch(function(){});
+      });
+
+      document.getElementById('invite-close-btn').addEventListener('click', function(){ modal.remove(); });
+      modal.addEventListener('click', function(e){ if(e.target===modal) modal.remove(); });
+    }
+
+    // Leggi codice referral da Firestore
+    if(user && db && fns){
+      fns.getDoc(fns.doc(db,'users',user.uid)).then(function(snap){
+        var code = '';
+        if(snap.exists() && snap.data().referral) code = snap.data().referral.code || '';
+        if(!code){
+          // Genera codice se non esiste
+          code = user.uid.substring(0,8);
+          fns.setDoc(fns.doc(db,'users',user.uid),{referral:{code:code,count:0,badge:null,earnedCredits:0}},{merge:true}).catch(function(){});
+        }
+        openModal(code);
+      }).catch(function(){ openModal(user.uid.substring(0,8)); });
+    } else {
+      openModal('xxxxxxxx');
     }
   }
   function showExhausted(){
