@@ -1,4 +1,5 @@
 const { onSchedule } = require("firebase-functions/v2/scheduler");
+const { onDocumentCreated } = require("firebase-functions/v2/firestore");
 const { initializeApp } = require("firebase-admin/app");
 const { getFirestore } = require("firebase-admin/firestore");
 const { getAuth } = require("firebase-admin/auth");
@@ -195,5 +196,93 @@ exports.cleanUnverifiedUsers = onSchedule(
     } while (pageToken);
 
     console.log(`cleanUnverifiedUsers — eliminati: ${deleted} utenti`);
+  }
+);
+
+// ═══════════════════════════════════════════════════
+// REFERRAL — triggerata alla creazione di un nuovo utente
+// Incrementa il contatore di chi ha invitato e assegna badge + crediti
+// ═══════════════════════════════════════════════════
+const BADGE_THRESHOLDS = [
+  { key: 'starter',    num: 5,   credits: 20  },
+  { key: 'junior',     num: 10,  credits: 40  },
+  { key: 'senior',     num: 25,  credits: 100 },
+  { key: 'ambassador', num: 50,  credits: 200 },
+  { key: 'legend',     num: 100, credits: 500 },
+];
+
+exports.onNewUserReferral = onDocumentCreated(
+  {
+    document: "users/{userId}",
+    region: "europe-west1",
+  },
+  async (event) => {
+    const db = getFirestore();
+    const data = event.data.data();
+
+    // Se non c'è codice referral, non fare nulla
+    const refCode = data.referredBy;
+    if (!refCode) {
+      console.log("Nessun codice referral — skip.");
+      return null;
+    }
+
+    try {
+      // Trova l'utente invitante tramite il codice referral
+      const snap = await db.collection("users")
+        .where("referral.code", "==", refCode)
+        .limit(1)
+        .get();
+
+      if (snap.empty) {
+        console.log("Codice referral non trovato:", refCode);
+        return null;
+      }
+
+      const inviterDoc = snap.docs[0];
+      const inviterData = inviterDoc.data();
+      const inviterRef = inviterDoc.ref;
+
+      const oldCount = (inviterData.referral && inviterData.referral.count) || 0;
+      const newCount = oldCount + 1;
+      const oldBadge = (inviterData.referral && inviterData.referral.badge) || null;
+      const oldEarned = (inviterData.referral && inviterData.referral.earnedCredits) || 0;
+      const oldReferralCredits = (inviterData.aiUsage && inviterData.aiUsage.referralCredits) || 0;
+
+      // Calcola nuovo badge e crediti da assegnare
+      let newBadge = oldBadge;
+      let creditsToAdd = 0;
+
+      for (const b of BADGE_THRESHOLDS) {
+        if (newCount >= b.num && oldCount < b.num) {
+          newBadge = b.key;
+          creditsToAdd += b.credits;
+          console.log(`Nuovo badge sbloccato: ${b.key} (+${b.credits} crediti)`);
+        }
+      }
+
+      // Aggiorna Firestore dell'invitante
+      await inviterRef.set({
+        referral: {
+          code: inviterData.referral ? inviterData.referral.code : refCode,
+          count: newCount,
+          badge: newBadge,
+          earnedCredits: oldEarned + creditsToAdd,
+        },
+        aiUsage: {
+          monthlyCount: (inviterData.aiUsage && inviterData.aiUsage.monthlyCount) || 0,
+          extraCredits: (inviterData.aiUsage && inviterData.aiUsage.extraCredits) || 0,
+          referralCredits: oldReferralCredits + creditsToAdd,
+          periodStart: (inviterData.aiUsage && inviterData.aiUsage.periodStart) || new Date().toISOString().split("T")[0],
+        }
+      }, { merge: true });
+
+      console.log(`Referral OK — invitante: ${inviterDoc.id}, count: ${newCount}, badge: ${newBadge}, +${creditsToAdd} crediti`);
+      return null;
+
+    } catch (err) {
+      console.error("Errore onNewUserReferral:", err);
+      return null;
+    }
   }
 );
