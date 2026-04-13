@@ -2092,6 +2092,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
     if(!user || !_usageCache) return;
     var extra = getExtraCredits();
     var monthlyRem = getMonthlyRemaining();
+    var ref = typeof getReferralCredits === 'function' ? getReferralCredits() : (_usageCache.referralCredits||0);
 
     // Sezione nickname (asincrona) — inserisce placeholder e poi popola
     var nickPlaceholder =
@@ -2157,21 +2158,25 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
             '<div style="font-size:.78rem;color:var(--txt2);">'+
               '<span style="font-weight:700;color:var(--txt);">'+monthlyRem+'</span>/'+MAX+' mensili &nbsp;·&nbsp; '+
               '<span style="font-weight:700;color:'+(extra>0?'var(--amber)':'var(--dim)')+';">'+extra+'</span> extra'+
+              (ref>0?' &nbsp;·&nbsp; <span style="font-weight:700;color:#4ade80;">'+ref+'</span> <span style="color:#4ade80;">ref</span>':'')+
             '</div>'+
             '<div style="margin-top:.75rem;display:flex;align-items:flex-start;gap:.5rem;background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:.6rem .75rem;">'+
               '<svg style="flex-shrink:0;margin-top:.05rem;" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
               '<span style="font-size:.68rem;color:#94a3b8;line-height:1.5;">Gestisci e acquista crediti extra dalla sezione <strong style="color:#60a5fa;">Barman AI</strong> → icona wallet in alto a destra.</span>'+
             '</div>'+
           '</div>'
-        : extra > 0
+        : (extra > 0 || ref > 0)
           ? '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
-              '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti extra — congelati</div>'+
-              '<div style="font-size:.78rem;color:var(--dim);">'+
-                '<span style="font-weight:700;color:var(--dim);">'+extra+'</span> crediti extra'+
-              '</div>'+
-              '<div style="margin-top:.6rem;font-size:.68rem;color:var(--dim);line-height:1.5;">'+
-                '🔒 I tuoi crediti extra sono congelati — non persi. Torneranno disponibili al rinnovo del piano Premium.'+
-              '</div>'+
+              (extra > 0
+                ? '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti extra — congelati</div>'+
+                  '<div style="font-size:.78rem;color:var(--dim);margin-bottom:.4rem;">'+
+                    '<span style="font-weight:700;color:var(--dim);">'+extra+'</span> crediti extra'+
+                    (ref>0?' &nbsp;·&nbsp; <span style="font-weight:700;color:#4ade80;">'+ref+'</span> <span style="color:#4ade80;">ref</span>':'')+
+                  '</div>'+
+                  '<div style="font-size:.68rem;color:var(--dim);line-height:1.5;">🔒 I crediti extra sono congelati — torneranno al rinnovo Premium.</div>'
+                : '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti referral</div>'+
+                  '<div style="font-size:.78rem;"><span style="font-weight:700;color:#4ade80;">'+ref+'</span> <span style="color:#4ade80;">ref</span></div>'
+              )+
             '</div>'
           : ''
       )+
