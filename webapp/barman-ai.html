@@ -1358,19 +1358,19 @@ function renderCreditsDrawer(){
         '<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin:.35rem 0 .3rem;">'+
           '<div style="height:100%;width:'+(extra>0?Math.min(100,(extra/200)*100):0)+'%;background:'+(extra>0?'var(--blue-l)':'var(--brd)')+';border-radius:99px;transition:width .4s;"></div>'+
         '</div>'+
-        '<div class="bai-credits-extra-note">I crediti extra vengono utilizzati solo dopo aver esaurito i crediti mensili e sono disponibili solo con un piano Premium attivo.</div>'+
+        '<div class="bai-credits-extra-note">Utilizzati solo dopo aver esaurito i crediti mensili.<br><span style="color:var(--dim);font-size:.62rem;">⚠️ Disponibili solo con piano Premium attivo. In caso di mancato rinnovo, i crediti extra vengono congelati ma non persi — torneranno disponibili al rinnovo.</span></div>'+
       '</div>';
   }
 
   // Sezione referral — per tutti (anche free)
   html+=
     '<div class="bai-credits-section">'+
-      '<div class="bai-credits-label">Crediti referral</div>'+
+      '<div class="bai-credits-label">Crediti referral disponibili</div>'+
       '<div class="bai-credits-extra-val" style="color:#4ade80;">'+ref+'</div>'+
       '<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin:.35rem 0 .3rem;">'+
         '<div style="height:100%;width:'+(ref>0?Math.min(100,(ref/100)*100):0)+'%;background:#22c55e;border-radius:99px;transition:width .4s;"></div>'+
       '</div>'+
-      '<div class="bai-credits-extra-note">Guadagnati invitando amici. Utilizzabili anche senza piano Premium, dopo i crediti mensili e extra.</div>'+
+      '<div class="bai-credits-extra-note">Guadagnati invitando amici, vengono sbloccati al raggiungimento dei vari traguardi badge.<br><span style="color:var(--dim);font-size:.62rem;">✓ Utilizzabili anche senza piano Premium.<br>Con Premium attivo, vengono scalati solo dopo aver consumato i crediti mensili e quelli extra.</span></div>'+
     '</div>';
 
   // Acquisto — solo premium
