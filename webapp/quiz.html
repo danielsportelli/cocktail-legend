@@ -195,6 +195,20 @@ body::after{
 .lb-rank.bronze{color:#d97706;}
 .lb-rank.prize{color:#38bdf8;}
 
+/* Badge referral in classifica */
+.lb-ref-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:18px;height:18px;border-radius:50%;
+  font-size:.55rem;font-weight:900;
+  margin-left:.3rem;vertical-align:middle;
+  flex-shrink:0;
+}
+.lb-ref-badge.starter  {background:#22c55e;color:#fff;}
+.lb-ref-badge.junior   {background:#3b82f6;color:#fff;}
+.lb-ref-badge.senior   {background:#a78bfa;color:#fff;}
+.lb-ref-badge.ambassador{background:#ef4444;color:#fff;}
+.lb-ref-badge.legend   {background:#f59e0b;color:#0a0f1e;}
+
 /* Riga "Tu" sticky sotto la classifica */
 .lb-sticky-me{
   border-top:1px solid var(--brd);
@@ -833,7 +847,7 @@ async function loadLeaderboard(tab) {
       html += `<div class="lb-row${isMe?' me':''}" data-rank="${rank}">
         <div class="lb-rank ${rankCls}">${rank}</div>
         <div class="lb-user">
-          <div class="lb-name">${escHtml(d.nickname||'Utente')}${isMe?'<span class="you-badge">Tu</span>':''}</div>
+          <div class="lb-name">${escHtml(d.nickname||'Utente')}${badgeHtml(d.referral&&d.referral.badge)}${isMe?'<span class="you-badge">Tu</span>':''}</div>
           <div class="lb-meta">${metaTxt}</div>
         </div>
         <div class="lb-score"><span class="lb-pts">${pts}</span><span class="lb-pts-label">${label}</span></div>
@@ -850,7 +864,7 @@ async function loadLeaderboard(tab) {
         html += `<div class="lb-row me" data-rank="${myRank}">
           <div class="lb-rank">…</div>
           <div class="lb-user">
-            <div class="lb-name">${escHtml(ud.nickname||'Tu')}<span class="you-badge">Tu</span></div>
+            <div class="lb-name">${escHtml(ud.nickname||'Tu')}${badgeHtml(ud.referral&&ud.referral.badge)}<span class="you-badge">Tu</span></div>
             <div class="lb-meta">Il tuo punteggio</div>
           </div>
           <div class="lb-score"><span class="lb-pts">${pts}</span><span class="lb-pts-label">${label}</span></div>
@@ -869,7 +883,7 @@ async function loadLeaderboard(tab) {
       stickyEl.innerHTML = `<div class="lb-row me" style="margin:0;">
         <div class="lb-rank">${myRank<=20?myRank:'…'}</div>
         <div class="lb-user">
-          <div class="lb-name">${escHtml(myNick)}<span class="you-badge">Tu</span></div>
+          <div class="lb-name">${escHtml(myNick)}${badgeHtml(window._quizUserData&&window._quizUserData.referral&&window._quizUserData.referral.badge)}<span class="you-badge">Tu</span></div>
           <div class="lb-meta">${myMetaTxt||'Il tuo punteggio'}</div>
         </div>
         <div class="lb-score"><span class="lb-pts">${myPtsVal}</span><span class="lb-pts-label">${label}</span></div>
@@ -921,6 +935,13 @@ window.switchLbTab = function(el, tab) {
 
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Badge referral in classifica
+const BADGE_NUMS = { starter:5, junior:10, senior:25, ambassador:50, legend:100 };
+function badgeHtml(badge) {
+  if (!badge || !BADGE_NUMS[badge]) return '';
+  return `<span class="lb-ref-badge ${badge}" title="Badge ${badge} — ${BADGE_NUMS[badge]} invitati">${BADGE_NUMS[badge]}</span>`;
 }
 
 // ── RENDER RISPOSTA ────────────────────────────────────
