@@ -2010,7 +2010,18 @@
     searchTimer = setTimeout(() => doSearch(searchInput.value.trim()), 200);
   });
 
-  searchInput?.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+  searchInput?.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeSearch();
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      searchInput.blur(); // chiude tastiera
+      // Scrolla al primo risultato se esiste
+      setTimeout(function() {
+        var first = document.querySelector('.sg-search-result');
+        if (first) first.click();
+      }, 100);
+    }
+  });
 
   const searchObs = new MutationObserver(() => {
     const h = searchBar.classList.contains('open') ? searchBar.offsetHeight : 0;
