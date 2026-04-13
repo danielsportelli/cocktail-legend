@@ -713,6 +713,7 @@ textarea{-webkit-user-select:text;user-select:text;}
 var WORKER_URL = 'https://cocktail-legend-ai.daniel-sportelli.workers.dev';
 var MAX = 30;
 var _usageCache = null;
+var _rawExtraCredits = 0; // valore reale extra, anche se congelati per free
 var currentCmd  = null;
 var selectedPill = null;
 var lastRawText  = '';
@@ -885,6 +886,7 @@ window.addEventListener('fb-auth-ready', function(e){
       var ai=data.aiUsage||{};
       var referralCredits=ai.referralCredits||0;
       var periodStart=ai.periodStart||data.createdAt||nowStr;
+      _rawExtraCredits = ai.extraCredits || 0; // salva sempre il valore reale
 
       // Carica _usageCache con reset periodo se scaduto
       if(_isPeriodExpired(periodStart)){
@@ -1322,14 +1324,16 @@ function renderCreditsDrawer(){
   var cont=document.getElementById('bai-credits-content');
   if(!cont) return;
   var ref=getReferralCredits();
+  var rawExtra=_rawExtraCredits;
 
-  if(!_isPremium && ref<=0){
+  // Gate completo solo se free, senza referral E senza extra acquistati
+  if(!_isPremium && ref<=0 && rawExtra<=0){
     cont.innerHTML='<div class="bai-credits-free-msg"><p>I crediti AI sono disponibili con il piano <strong style="color:var(--amber);">Premium</strong>.</p><button onclick="showPremiumModal&&showPremiumModal()" style="background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:10px;padding:.75rem 1.5rem;font-family:inherit;font-size:.88rem;font-weight:800;cursor:pointer;width:100%;">Passa a Premium →</button></div>';
     return;
   }
 
   var monthly=getMonthlyUsed();
-  var extra=getExtraCredits();
+  var extra=getExtraCredits(); // 0 se free (congelati)
   var pct=Math.min(100,(monthly/MAX)*100);
   var monthlyRem=getMonthlyRemaining();
 
@@ -1350,15 +1354,33 @@ function renderCreditsDrawer(){
         '<div class="bai-credits-label">Crediti mensili</div>'+
         '<div class="bai-credits-bar-row"><span>'+monthly+' / '+MAX+' usati</span><span>Reset: '+nextReset+'</span></div>'+
         '<div class="bai-credits-track"><div class="bai-credits-fill" style="width:'+pct+'%;background:'+(pct>=80?'#ef4444':'var(--amber)')+'"></div></div>'+
-        '<div class="bai-credits-remaining">'+monthlyRem+' crediti mensili rimanenti'+(monthlyRem===0&&extra===0&&ref===0?' — acquista crediti extra qui sotto':'')+'</div>'+
-      '</div>'+
+        '<div class="bai-credits-remaining">'+monthlyRem+' crediti mensili rimanenti'+(monthlyRem===0&&rawExtra===0&&ref===0?' — acquista crediti extra qui sotto':'')+'</div>'+
+      '</div>';
+  }
+
+  // Sezione extra — premium: attivi e colorati / free: grigi e congelati (solo se ne ha)
+  if(_isPremium || rawExtra>0){
+    var extraCongelati = !_isPremium && rawExtra>0;
+    html+=
       '<div class="bai-credits-section">'+
-        '<div class="bai-credits-label">Crediti extra disponibili</div>'+
-        '<div class="bai-credits-extra-val">'+extra+'</div>'+
+        '<div class="bai-credits-label" style="'+(extraCongelati?'color:var(--dim);':'')+'">Crediti extra'+(extraCongelati?' — congelati':'disponibili')+'</div>'+
+        '<div class="bai-credits-extra-val" style="color:'+(extraCongelati?'var(--dim)':'var(--amber)')+';">'+rawExtra+'</div>'+
         '<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin:.35rem 0 .3rem;">'+
-          '<div style="height:100%;width:'+(extra>0?Math.min(100,(extra/200)*100):0)+'%;background:'+(extra>0?'var(--blue-l)':'var(--brd)')+';border-radius:99px;transition:width .4s;"></div>'+
+          '<div style="height:100%;width:'+(rawExtra>0?Math.min(100,(rawExtra/200)*100):0)+'%;background:'+(extraCongelati?'var(--surf2)':'var(--blue-l)')+';border-radius:99px;transition:width .4s;"></div>'+
         '</div>'+
-        '<div class="bai-credits-extra-note">Utilizzati solo dopo aver esaurito i crediti mensili.<br><span style="color:var(--dim);font-size:.62rem;">⚠️ Disponibili solo con piano Premium attivo. In caso di mancato rinnovo, i crediti extra vengono congelati ma non persi — torneranno disponibili al rinnovo.</span></div>'+
+        (extraCongelati
+          ? '<div class="bai-credits-extra-note" style="color:var(--dim);">🔒 I tuoi '+rawExtra+' crediti extra sono congelati perché il piano Premium non è attivo. Non andranno persi — torneranno disponibili al prossimo rinnovo.</div>'
+          : '<div class="bai-credits-extra-note">Utilizzati solo dopo aver esaurito i crediti mensili.<br><span style="color:var(--dim);font-size:.62rem;">⚠️ Disponibili solo con piano Premium attivo. In caso di mancato rinnovo, vengono congelati ma non persi — torneranno al rinnovo.</span></div>'
+        )+
+      '</div>';
+  }
+
+  // Se free con extra congelati e no referral — aggiungi banner premium
+  if(!_isPremium && rawExtra>0 && ref<=0){
+    html+=
+      '<div style="margin-bottom:1.3rem;padding:.75rem .85rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:12px;">'+
+        '<p style="font-size:.78rem;color:var(--txt2);line-height:1.55;margin-bottom:.65rem;">Rinnova il piano Premium per sbloccare i tuoi crediti extra e accedere a tutte le funzioni Barman AI.</p>'+
+        '<button onclick="showPremiumModal&&showPremiumModal()" style="background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:8px;padding:.45rem .9rem;font-family:inherit;font-size:.75rem;font-weight:800;cursor:pointer;">Rinnova Premium →</button>'+
       '</div>';
   }
 
@@ -1386,7 +1408,6 @@ function renderCreditsDrawer(){
 
   cont.innerHTML=html;
 
-  // TODO: collegare Stripe ai bottoni .bai-pkg
   cont.querySelectorAll('.bai-pkg').forEach(function(pkg){
     pkg.addEventListener('click',function(e){
       e.preventDefault();
