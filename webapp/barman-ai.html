@@ -351,7 +351,9 @@ body::after{
 .bai-credits-free-msg p{font-size:.82rem;color:var(--txt2);line-height:1.6;margin-bottom:1rem;}
 
 /* ── SALVATI DRAWER ── */
-.bai-saved-cat{margin-bottom:1.1rem;}
+.bai-saved-cat{margin-bottom:.75rem;}
+.bai-cat-body{display:block;}
+.bai-saved-item-date{display:none;}
 .bai-saved-cat-title{
   display:flex;align-items:center;gap:.5rem;justify-content:space-between;
   font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
@@ -1229,7 +1231,19 @@ function saveResult(){
       .then(function(){
         // Feedback visivo
         var btn=document.getElementById('bai-fu-save')||document.getElementById('bai-fu-save-tre');
-        if(btn){btn.textContent='✓ Salvato!';setTimeout(function(){btn.textContent='Salva';},2000);}
+        if(btn){
+          // Animazione verde
+          btn.textContent='✓ Salvato!';
+          btn.style.background='rgba(34,197,94,.2)';
+          btn.style.borderColor='rgba(34,197,94,.5)';
+          btn.style.color='#4ade80';
+          setTimeout(function(){
+            btn.textContent='Salva';
+            btn.style.background='';
+            btn.style.borderColor='';
+            btn.style.color='';
+          },2000);
+        }
       })
       .catch(function(e){ console.warn('save err',e); });
   });
@@ -1443,20 +1457,62 @@ function renderSavedDrawer(){
     Object.keys(cats).forEach(function(cmd){
       var items=cats[cmd];
       if(!items.length) return;
+      var catId='cat-'+cmd;
       html+='<div class="bai-saved-cat">'+
-        '<div class="bai-saved-cat-title">'+catLabels[cmd]+'<span class="bai-saved-cat-count">'+items.length+'</span></div>';
-      items.forEach(function(item){
-        html+='<div class="bai-saved-item" data-id="'+item.id+'">'+
-          '<div class="bai-saved-item-text">'+item.title+'</div>'+
-          '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:.2rem;">'+
-            '<span class="bai-saved-item-date">'+item.date+'</span>'+
-            '<button class="bai-saved-item-del" data-id="'+item.id+'" title="Elimina">✕</button>'+
+        '<div class="bai-saved-cat-title" data-cat="'+catId+'" style="cursor:pointer;user-select:none;">'+
+          '<span>'+catLabels[cmd]+'</span>'+
+          '<div style="display:flex;align-items:center;gap:.5rem;">'+
+            '<span class="bai-saved-cat-count">'+items.length+'</span>'+
+            '<svg class="bai-cat-chevron" data-cat="'+catId+'" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--dim);transition:transform .2s;"><polyline points="6 9 12 15 18 9"/></svg>'+
           '</div>'+
+        '</div>'+
+        '<div class="bai-cat-body" id="'+catId+'">';
+      items.forEach(function(item){
+        html+='<div class="bai-saved-item" data-id="'+item.id+'" style="cursor:pointer;">'+
+          '<div class="bai-saved-item-text">'+item.title+'</div>'+
+          '<button class="bai-saved-item-del" data-id="'+item.id+'" title="Elimina" style="flex-shrink:0;padding:.2rem;">'+
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>'+
+          '</button>'+
         '</div>';
       });
-      html+='</div>';
+      html+='</div></div>';
     });
     cont.innerHTML=html;
+
+    // Accordion toggle
+    cont.querySelectorAll('.bai-saved-cat-title').forEach(function(title){
+      title.addEventListener('click',function(){
+        var catId=this.dataset.cat;
+        var body=document.getElementById(catId);
+        var chevron=cont.querySelector('.bai-cat-chevron[data-cat="'+catId+'"]');
+        var isOpen=body.style.display!=='none';
+        body.style.display=isOpen?'none':'block';
+        if(chevron) chevron.style.transform=isOpen?'rotate(-90deg)':'rotate(0deg)';
+      });
+    });
+
+    // Card click — apre contenuto salvato
+    cont.querySelectorAll('.bai-saved-item').forEach(function(card){
+      card.addEventListener('click',function(e){
+        if(e.target.closest('.bai-saved-item-del')) return;
+        var id=card.dataset.id;
+        var item=saved.find(function(x){ return x.id===id; });
+        if(!item||!item.content) return;
+        // Chiudi drawer salvati e mostra il contenuto
+        closeDrawer('saved');
+        var body=document.getElementById('bai-body');
+        var resp=document.getElementById('bai-response');
+        var stepCmds=document.getElementById('bai-step-cmds');
+        var stepArea=document.getElementById('bai-step-area');
+        if(body) body.innerHTML=mdToHtml(item.content);
+        if(resp) resp.style.display='block';
+        if(stepCmds) stepCmds.style.display='none';
+        if(stepArea) stepArea.style.display='block';
+        // Scroll in cima
+        var main=document.getElementById('bai-main');
+        if(main) main.scrollTop=0;
+      });
+    });
 
     // Delete handlers
     cont.querySelectorAll('.bai-saved-item-del').forEach(function(btn){
