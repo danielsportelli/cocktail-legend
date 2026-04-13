@@ -4084,10 +4084,10 @@ function updateQuizBadge() {
   }
   if (cta) {
     if (done) {
-      cta.textContent = 'Vedi classifica →';
+      cta.textContent = 'Vedi →';
       cta.classList.remove('bsheet-quiz-cta--play');
     } else {
-      cta.textContent = 'Gioca ora →';
+      cta.textContent = 'Gioca →';
       cta.classList.add('bsheet-quiz-cta--play');
     }
   }
