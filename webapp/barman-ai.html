@@ -1365,7 +1365,7 @@ function renderCreditsDrawer(){
     html+=
       '<div class="bai-credits-section">'+
         '<div class="bai-credits-label">Crediti mensili</div>'+
-        '<div class="bai-credits-bar-row"><span><span style="font-weight:800;color:var(--blue-l);">'+monthlyRem+'</span> / '+MAX+'</span></div>'+
+        '<div class="bai-credits-bar-row"><span><span class="bai-credits-extra-val" style="color:var(--blue-l);line-height:1;">'+monthlyRem+'</span><span style="font-size:.75rem;color:var(--txt2);font-weight:500;"> / '+MAX+'</span></span></div>'+
         '<div class="bai-credits-track"><div class="bai-credits-fill" style="width:'+pctRem+'%;background:'+(pctRem<=20?'#ef4444':'var(--blue-l)')+'"></div></div>'+
         '<div class="bai-credits-remaining" style="color:var(--dim);">Reset: '+nextReset+(monthlyRem===0&&rawExtra===0&&ref===0?' — acquista crediti extra qui sotto':'')+'</div>'+
       '</div>';
@@ -1390,7 +1390,7 @@ function renderCreditsDrawer(){
       (extraCongelati
         ? '<div class="bai-credits-extra-note" style="color:var(--dim);">🔒 I tuoi '+rawExtra+' crediti extra sono congelati perché il piano Premium non è attivo. Non andranno persi — torneranno disponibili al prossimo rinnovo.</div>'
         : _isPremium
-          ? '<div class="bai-credits-extra-note">Utilizzati solo dopo aver esaurito i crediti mensili.<br><span style="color:var(--dim);font-size:.62rem;">⚠️ Disponibili solo con piano Premium attivo. In caso di mancato rinnovo, vengono congelati ma non persi — torneranno al rinnovo.</span></div>'
+          ? '<div class="bai-credits-extra-note">Utilizzati solo dopo aver esaurito i crediti mensili.<br><span style="color:var(--dim);font-size:.62rem;">Disponibili solo con piano Premium attivo.<br>In caso di mancato rinnovo, vengono congelati ma non persi — torneranno al rinnovo.</span></div>'
           : '<div class="bai-credits-extra-note" style="color:var(--dim);">Acquistabili con piano Premium attivo.</div>'
       )+
     '</div>';
