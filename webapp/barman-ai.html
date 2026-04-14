@@ -351,16 +351,17 @@ body::after{
 .bai-credits-free-msg p{font-size:.82rem;color:var(--txt2);line-height:1.6;margin-bottom:1rem;}
 
 /* ── SALVATI DRAWER ── */
-.bai-saved-cat{margin-bottom:.75rem;}
-.bai-cat-body{display:block;}
+.bai-saved-cat{margin-bottom:.25rem;}
+.bai-cat-body{display:none;}
 .bai-saved-item-date{display:none;}
 .bai-saved-cat-title{
   display:flex;align-items:center;gap:.5rem;justify-content:space-between;
-  font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--blue-l);margin-bottom:.55rem;cursor:pointer;
-  padding:.3rem 0;
+  font-size:.88rem;font-weight:700;letter-spacing:-.01em;
+  color:var(--txt);cursor:pointer;
+  padding:.65rem 0;border-bottom:1px solid var(--brd);
+  -webkit-tap-highlight-color:transparent;user-select:none;
 }
-.bai-saved-cat-count{font-size:.58rem;background:rgba(37,99,235,.2);color:var(--blue-l);border-radius:20px;padding:.1rem .45rem;font-weight:700;}
+.bai-saved-cat-count{font-size:.62rem;background:rgba(37,99,235,.2);color:var(--blue-l);border-radius:20px;padding:.15rem .5rem;font-weight:700;}
 .bai-saved-item{
   background:var(--bg);border:1px solid var(--brd);border-radius:10px;
   padding:.65rem .8rem;margin-bottom:.4rem;
@@ -681,11 +682,12 @@ textarea{-webkit-user-select:text;user-select:text;}
   <div class="bai-drawer-handle"></div>
   <div class="bai-drawer-inner">
     <div class="bai-drawer-hdr">
-      <span class="bai-drawer-title">Le tue ricerche salvate</span>
+      <span class="bai-drawer-title" id="bai-saved-title">Le tue ricerche salvate</span>
       <button class="bai-drawer-close" id="bai-saved-close">Chiudi</button>
     </div>
-    <div id="bai-saved-content">
-      <!-- Popolato via JS -->
+    <div id="bai-saved-content"><!-- Popolato via JS --></div>
+    <div id="bai-saved-detail" style="display:none;">
+      <div id="bai-saved-detail-body" style="font-size:.78rem;line-height:1.75;color:var(--txt);"></div>
     </div>
   </div>
 </div>
@@ -1433,7 +1435,20 @@ function renderCreditsDrawer(){
 
 function renderSavedDrawer(){
   var cont=document.getElementById('bai-saved-content');
+  var detail=document.getElementById('bai-saved-detail');
+  var detailBody=document.getElementById('bai-saved-detail-body');
+  var savedTitle=document.getElementById('bai-saved-title');
+  var savedClose=document.getElementById('bai-saved-close');
   if(!cont) return;
+
+  function showList(){
+    cont.style.display='';
+    if(detail) detail.style.display='none';
+    if(savedTitle) savedTitle.textContent='Le tue ricerche salvate';
+    if(savedClose){ savedClose.textContent='Chiudi'; savedClose.onclick=function(){ closeDrawer('saved'); }; }
+  }
+  if(savedClose) savedClose.onclick=function(){ closeDrawer('saved'); };
+
   var user=window._currentUser;
   var db=window._fbDb;
   var fns=window._fbFunctions;
@@ -1449,9 +1464,8 @@ function renderSavedDrawer(){
       cont.innerHTML='<div class="bai-saved-empty">Nessuna ricerca salvata ancora.<br>Usa le funzioni Barman AI e salva le risposte che ti piacciono.</div>';
       return;
     }
-    // Raggruppa per cmd
     var cats={signature:[],giorno:[],twist:[],pairing:[]};
-    var catLabels={signature:'Signature',giorno:'Cocktail del Giorno',twist:'Twist on Classic',pairing:'Food Pairing'};
+    var catLabels={signature:'Crea un Signature',giorno:'Cocktail del Giorno',twist:'Twist on Classic',pairing:'Food Pairing'};
     saved.forEach(function(item){ if(cats[item.cmd]) cats[item.cmd].push(item); });
     var html='';
     Object.keys(cats).forEach(function(cmd){
@@ -1459,18 +1473,18 @@ function renderSavedDrawer(){
       if(!items.length) return;
       var catId='cat-'+cmd;
       html+='<div class="bai-saved-cat">'+
-        '<div class="bai-saved-cat-title" data-cat="'+catId+'" style="cursor:pointer;user-select:none;">'+
+        '<div class="bai-saved-cat-title" data-cat="'+catId+'">'+
           '<span>'+catLabels[cmd]+'</span>'+
           '<div style="display:flex;align-items:center;gap:.5rem;">'+
             '<span class="bai-saved-cat-count">'+items.length+'</span>'+
-            '<svg class="bai-cat-chevron" data-cat="'+catId+'" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--dim);transition:transform .2s;"><polyline points="6 9 12 15 18 9"/></svg>'+
+            '<svg class="bai-cat-chevron" data-cat="'+catId+'" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--dim);transition:transform .2s;transform:rotate(-90deg);"><polyline points="6 9 12 15 18 9"/></svg>'+
           '</div>'+
         '</div>'+
-        '<div class="bai-cat-body" id="'+catId+'">';
+        '<div class="bai-cat-body" id="'+catId+'" style="padding-top:.3rem;">';
       items.forEach(function(item){
-        html+='<div class="bai-saved-item" data-id="'+item.id+'" style="cursor:pointer;">'+
+        html+='<div class="bai-saved-item" data-id="'+item.id+'" style="cursor:pointer;margin-bottom:.4rem;">'+
           '<div class="bai-saved-item-text">'+item.title+'</div>'+
-          '<button class="bai-saved-item-del" data-id="'+item.id+'" title="Elimina" style="flex-shrink:0;padding:.2rem;">'+
+          '<button class="bai-saved-item-del" data-id="'+item.id+'" title="Elimina" style="flex-shrink:0;padding:.25rem;">'+
             '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>'+
           '</button>'+
         '</div>';
@@ -1479,7 +1493,7 @@ function renderSavedDrawer(){
     });
     cont.innerHTML=html;
 
-    // Accordion toggle
+    // Accordion — chiuso di default, chevron ruotato -90deg
     cont.querySelectorAll('.bai-saved-cat-title').forEach(function(title){
       title.addEventListener('click',function(){
         var catId=this.dataset.cat;
@@ -1491,30 +1505,27 @@ function renderSavedDrawer(){
       });
     });
 
-    // Card click — apre contenuto salvato
+    // Card click — apre DENTRO il drawer
     cont.querySelectorAll('.bai-saved-item').forEach(function(card){
       card.addEventListener('click',function(e){
         if(e.target.closest('.bai-saved-item-del')) return;
         var id=card.dataset.id;
         var item=saved.find(function(x){ return x.id===id; });
         if(!item||!item.content) return;
-        // Chiudi drawer salvati e mostra il contenuto
-        closeDrawer('saved');
-        var body=document.getElementById('bai-body');
-        var resp=document.getElementById('bai-response');
-        var stepCmds=document.getElementById('bai-step-cmds');
-        var stepArea=document.getElementById('bai-step-area');
-        if(body) body.innerHTML=mdToHtml(item.content);
-        if(resp) resp.style.display='block';
-        if(stepCmds) stepCmds.style.display='none';
-        if(stepArea) stepArea.style.display='block';
-        // Scroll in cima
-        var main=document.getElementById('bai-main');
-        if(main) main.scrollTop=0;
+        cont.style.display='none';
+        if(detailBody) detailBody.innerHTML=mdToHtml(item.content);
+        if(detail) detail.style.display='block';
+        var drawerInner=document.querySelector('#bai-drawer-saved .bai-drawer-inner');
+        if(drawerInner) drawerInner.scrollTop=0;
+        if(savedTitle) savedTitle.textContent=item.title.length>28?item.title.substring(0,28)+'…':item.title;
+        if(savedClose){
+          savedClose.innerHTML='&#8592; Torna';
+          savedClose.onclick=function(){ showList(); };
+        }
       });
     });
 
-    // Delete handlers
+    // Delete
     cont.querySelectorAll('.bai-saved-item-del').forEach(function(btn){
       btn.addEventListener('click',function(e){
         e.stopPropagation();
