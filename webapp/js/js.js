@@ -968,7 +968,7 @@ var _cachedHdrH = 73;
 var _cachedFbH = 0;
 var _syncRafId = null;
 var _scrollDelta = 0;      // accumulatore delta scroll
-var SCROLL_THRESHOLD = 100; // px da scrollare prima di triggerare
+var SCROLL_THRESHOLD = 500; // px da scrollare prima di triggerare
 
 // Calcola altezza header reale (include safe-area in standalone)
 (function() {
