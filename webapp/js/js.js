@@ -5363,8 +5363,7 @@ function showPremiumModal() {
 
       <!-- Prezzo -->
       <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04));border:1px solid rgba(245,158,11,0.25);border-radius:16px;padding:.75rem 1rem;margin-bottom:1rem;text-align:center;">
-        <div style="font-size:1.7rem;font-weight:900;color:#f59e0b;letter-spacing:-.03em;">19,99€<span style="font-size:.9rem;font-weight:500;color:#94a3b8;"> / primo anno</span></div>
-        <div style="font-size:.72rem;color:#64748b;margin-top:.25rem;line-height:1.5;">Dal secondo anno in poi 9,99€/anno</div>
+        <div style="font-size:1.7rem;font-weight:900;color:#f59e0b;letter-spacing:-.03em;">19,99€<span style="font-size:.9rem;font-weight:500;color:#94a3b8;"> / anno</span></div>
       </div>
 
       <!-- Lista benefici -->
