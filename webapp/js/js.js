@@ -2193,11 +2193,14 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           '</div>';
         };
 
+        var lockSvgSm = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
         var mensiliHtml = isPrem
           ? '<span style="color:'+cMensili+';">'+mensiliVal+'</span><span style="font-size:.65rem;color:var(--dim);font-weight:500;">/'+ MAX +'</span>'
-          : '<span style="font-size:.7rem;font-weight:700;color:var(--dim);">Solo<br>Premium</span>';
-        var extraHtml   = '<span style="color:'+cExtra+';">'+extraVal+'</span>';
-        var refHtml     = '<span style="color:'+cRef+';">'+refVal+'</span>';
+          : lockSvgSm;
+        var extraHtml = isPrem
+          ? '<span style="color:'+cExtra+';">'+extraVal+'</span>'
+          : lockSvgSm;
+        var refHtml = '<span style="color:'+cRef+';">'+refVal+'</span>';
 
         return '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
           '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti AI</div>'+
@@ -2205,9 +2208,9 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           '<div style="display:flex;border:1px solid var(--brd);border-radius:12px;overflow:hidden;">'+
             card('Mensili', mensiliHtml, null)+
             '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
-            card('Extra', extraHtml, extraCongelati?'congelati':null)+
+            card('Extra', extraHtml, null)+
             '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
-            card('Referral', refHtml, !isPrem?'senza premium':null)+
+            card('Referral', refHtml, null)+
           '</div>'+
           // info rimando
           '<div style="margin-top:.65rem;display:flex;align-items:center;gap:.45rem;padding:.5rem .65rem;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.18);border-radius:9px;">'+
