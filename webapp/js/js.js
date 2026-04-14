@@ -967,6 +967,8 @@ var _hdrHidden = false;
 var _cachedHdrH = 73;
 var _cachedFbH = 0;
 var _syncRafId = null;
+var _scrollDelta = 0;      // accumulatore delta scroll
+var SCROLL_THRESHOLD = 100; // px da scrollare prima di triggerare
 
 // Calcola altezza header reale (include safe-area in standalone)
 (function() {
@@ -1020,16 +1022,29 @@ function updateHeaderVisibility() {
   var hdr = document.querySelector('.hdr');
   if (!hdr) return;
   var currentY = window.scrollY || window.pageYOffset;
+  var diff = currentY - _lastScrollY;
 
-  if (currentY > _lastScrollY && currentY > _cachedHdrH && !_hdrHidden) {
+  // Accumula delta nella direzione corrente; reset se cambia direzione
+  if (diff > 0) {
+    _scrollDelta = _scrollDelta > 0 ? _scrollDelta + diff : diff;
+  } else if (diff < 0) {
+    _scrollDelta = _scrollDelta < 0 ? _scrollDelta + diff : diff;
+  }
+
+  // Nascondi header: scroll verso il basso di almeno SCROLL_THRESHOLD px
+  if (_scrollDelta >= SCROLL_THRESHOLD && currentY > _cachedHdrH && !_hdrHidden) {
     _hdrHidden = true;
+    _scrollDelta = 0;
     hdr.classList.add('hdr--hidden');
     _startSyncLoop();
-  } else if (currentY < _lastScrollY && _hdrHidden) {
+  // Mostra header: scroll verso l'alto di almeno SCROLL_THRESHOLD px
+  } else if (_scrollDelta <= -SCROLL_THRESHOLD && _hdrHidden) {
     _hdrHidden = false;
+    _scrollDelta = 0;
     hdr.classList.remove('hdr--hidden');
     _startSyncLoop();
   }
+
   _lastScrollY = currentY;
 }
 
