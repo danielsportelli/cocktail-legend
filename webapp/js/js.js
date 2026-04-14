@@ -2186,9 +2186,9 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var cRef     = refVal > 0 ? '#4ade80' : 'var(--dim)';
 
         var card = function(label, valueHtml, sub){
-          return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.6rem .3rem;gap:.15rem;">'+
+          return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.6rem .3rem;gap:.15rem;">'+
             '<div style="font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.1rem;">'+label+'</div>'+
-            '<div style="font-size:1.2rem;font-weight:900;line-height:1;">'+valueHtml+'</div>'+
+            '<div style="font-size:1.2rem;font-weight:900;line-height:1;text-align:center;">'+valueHtml+'</div>'+
             (sub ? '<div style="font-size:.58rem;color:var(--dim);margin-top:.15rem;text-align:center;line-height:1.3;">'+sub+'</div>' : '')+
           '</div>';
         };
@@ -2196,7 +2196,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var mensiliHtml = isPrem
           ? '<span style="color:'+cMensili+';">'+mensiliVal+'</span><span style="font-size:.65rem;color:var(--dim);font-weight:500;">/'+ MAX +'</span>'
           : '<span style="font-size:.7rem;font-weight:700;color:var(--dim);">Solo<br>Premium</span>';
-        var extraHtml   = '<span style="color:'+cExtra+';">'+(extraCongelati?'🔒 ':'')+extraVal+'</span>';
+        var extraHtml   = '<span style="color:'+cExtra+';">'+extraVal+'</span>';
         var refHtml     = '<span style="color:'+cRef+';">'+refVal+'</span>';
 
         return '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
@@ -2207,12 +2207,12 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
             '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
             card('Extra', extraHtml, extraCongelati?'congelati':null)+
             '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
-            card('Referral', refHtml, null)+
+            card('Referral', refHtml, 'senza premium')+
           '</div>'+
           // info rimando
           '<div style="margin-top:.65rem;display:flex;align-items:center;gap:.45rem;padding:.5rem .65rem;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.18);border-radius:9px;">'+
             '<svg style="flex-shrink:0;" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
-            '<span style="font-size:.65rem;color:#94a3b8;line-height:1.45;">Gestisci i crediti nel <strong style="color:#60a5fa;">Barman AI</strong> → icona crediti in alto a destra.</span>'+
+            '<span style="font-size:.65rem;color:#94a3b8;line-height:1.45;">Per gestire i crediti entra nella sezione <strong style="color:#60a5fa;">Barman AI</strong> dal menù generale.</span>'+
           '</div>'+
         '</div>';
       })()+
