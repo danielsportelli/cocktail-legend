@@ -358,7 +358,10 @@ body::after{
   display:flex;align-items:center;gap:.5rem;justify-content:space-between;
   font-size:.88rem;font-weight:700;letter-spacing:-.01em;
   color:var(--txt);cursor:pointer;
-  padding:.65rem 0;border-bottom:1px solid var(--brd);
+  padding:.75rem 0;
+  border-bottom:1px solid var(--brd);
+  border-top:1px solid var(--brd);
+  margin-top:-1px;
   -webkit-tap-highlight-color:transparent;user-select:none;
 }
 .bai-saved-cat-count{font-size:.62rem;background:rgba(37,99,235,.2);color:var(--blue-l);border-radius:20px;padding:.15rem .5rem;font-weight:700;}
@@ -678,13 +681,15 @@ textarea{-webkit-user-select:text;user-select:text;}
 </div>
 
 <!-- ── DRAWER SALVATI ── -->
-<div class="bai-drawer" id="bai-drawer-saved">
-  <div class="bai-drawer-handle"></div>
-  <div class="bai-drawer-inner">
-    <div class="bai-drawer-hdr">
-      <span class="bai-drawer-title" id="bai-saved-title">Le tue ricerche salvate</span>
-      <button class="bai-drawer-close" id="bai-saved-close">Chiudi</button>
-    </div>
+<div class="bai-drawer" id="bai-drawer-saved" style="overflow-y:hidden;display:flex;flex-direction:column;">
+  <div class="bai-drawer-handle" style="flex-shrink:0;"></div>
+  <!-- Header fisso -->
+  <div style="flex-shrink:0;padding:.25rem 1.25rem .7rem;border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between;">
+    <span class="bai-drawer-title" id="bai-saved-title">Le tue ricerche salvate</span>
+    <button class="bai-drawer-close" id="bai-saved-close">Chiudi</button>
+  </div>
+  <!-- Contenuto scrollabile -->
+  <div style="flex:1;overflow-y:auto;scrollbar-width:none;padding:1rem 1.25rem 1.5rem;" id="bai-saved-scroll">
     <div id="bai-saved-content"><!-- Popolato via JS --></div>
     <div id="bai-saved-detail" style="display:none;">
       <div id="bai-saved-detail-body" style="font-size:.78rem;line-height:1.75;color:var(--txt);"></div>
@@ -1515,7 +1520,7 @@ function renderSavedDrawer(){
         cont.style.display='none';
         if(detailBody) detailBody.innerHTML=mdToHtml(item.content);
         if(detail) detail.style.display='block';
-        var drawerInner=document.querySelector('#bai-drawer-saved .bai-drawer-inner');
+        var drawerInner=document.getElementById('bai-saved-scroll');
         if(drawerInner) drawerInner.scrollTop=0;
         if(savedTitle) savedTitle.textContent=item.title.length>28?item.title.substring(0,28)+'…':item.title;
         if(savedClose){
