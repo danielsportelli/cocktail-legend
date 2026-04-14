@@ -360,8 +360,6 @@ body::after{
   color:var(--txt);cursor:pointer;
   padding:.75rem 0;
   border-bottom:1px solid var(--brd);
-  border-top:1px solid var(--brd);
-  margin-top:-1px;
   -webkit-tap-highlight-color:transparent;user-select:none;
 }
 .bai-saved-cat-count{font-size:.62rem;background:rgba(37,99,235,.2);color:var(--blue-l);border-radius:20px;padding:.15rem .5rem;font-weight:700;}
@@ -1328,7 +1326,7 @@ document.getElementById('bai-saved-btn').addEventListener('click',function(){
   renderSavedDrawer();
   openDrawer('saved');
 });
-document.getElementById('bai-saved-close').addEventListener('click',function(){ closeDrawer('saved'); });
+// bai-saved-close gestito dinamicamente da renderSavedDrawer
 document.getElementById('bai-overlay').addEventListener('click',function(){
   closeDrawer('credits');
   closeDrawer('saved');
