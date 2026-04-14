@@ -2169,34 +2169,53 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         : ''
       )+
       '<div style="margin-bottom:1.4rem;"></div>'+
-      (window._userPlan === 'premium'
-        ? '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
-            '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti AI</div>'+
-            '<div style="font-size:.78rem;color:var(--txt2);">'+
-              '<span style="font-weight:700;color:var(--txt);">'+monthlyRem+'</span>/'+MAX+' mensili &nbsp;·&nbsp; '+
-              '<span style="font-weight:700;color:'+(extra>0?'var(--amber)':'var(--dim)')+';">'+extra+'</span> extra'+
-              (ref>0?' &nbsp;·&nbsp; <span style="font-weight:700;color:#4ade80;">'+ref+'</span> <span style="color:#4ade80;">ref</span>':'')+
-            '</div>'+
-            '<div style="margin-top:.75rem;display:flex;align-items:flex-start;gap:.5rem;background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:.6rem .75rem;">'+
-              '<svg style="flex-shrink:0;margin-top:.05rem;" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
-              '<span style="font-size:.68rem;color:#94a3b8;line-height:1.5;">Gestisci e acquista crediti extra dalla sezione <strong style="color:#60a5fa;">Barman AI</strong> → icona wallet in alto a destra.</span>'+
-            '</div>'+
-          '</div>'
-        : (extra > 0 || ref > 0)
-          ? '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
-              (extra > 0
-                ? '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti extra — congelati</div>'+
-                  '<div style="font-size:.78rem;color:var(--dim);margin-bottom:.4rem;">'+
-                    '<span style="font-weight:700;color:var(--dim);">'+extra+'</span> crediti extra'+
-                    (ref>0?' &nbsp;·&nbsp; <span style="font-weight:700;color:#4ade80;">'+ref+'</span> <span style="color:#4ade80;">ref</span>':'')+
-                  '</div>'+
-                  '<div style="font-size:.68rem;color:var(--dim);line-height:1.5;">🔒 I crediti extra sono congelati — torneranno al rinnovo Premium.</div>'
-                : '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti referral</div>'+
-                  '<div style="font-size:.78rem;"><span style="font-weight:700;color:#4ade80;">'+ref+'</span> <span style="color:#4ade80;">ref</span></div>'
-              )+
-            '</div>'
-          : ''
-      )+
+      // ── RIEPILOGO CREDITI AI ─────────────────────────────────
+      (function(){
+        var isPrem = window._userPlan === 'premium';
+        var rawExtra = (_usageCache && _usageCache.extraCredits) ? _usageCache.extraCredits : (extra || 0);
+        var extraCongelati = !isPrem && rawExtra > 0;
+
+        // valori visualizzati
+        var mensiliVal  = isPrem ? monthlyRem : null;
+        var extraVal    = rawExtra;
+        var refVal      = ref;
+
+        // colori
+        var cMensili = isPrem ? 'var(--txt)' : 'var(--dim)';
+        var cExtra   = isPrem && extraVal > 0 ? 'var(--amber)' : extraCongelati ? 'var(--dim)' : 'var(--dim)';
+        var cRef     = refVal > 0 ? '#4ade80' : 'var(--dim)';
+
+        var card = function(label, valueHtml, sub){
+          return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.6rem .3rem;gap:.15rem;">'+
+            '<div style="font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.1rem;">'+label+'</div>'+
+            '<div style="font-size:1.2rem;font-weight:900;line-height:1;">'+valueHtml+'</div>'+
+            (sub ? '<div style="font-size:.58rem;color:var(--dim);margin-top:.15rem;text-align:center;line-height:1.3;">'+sub+'</div>' : '')+
+          '</div>';
+        };
+
+        var mensiliHtml = isPrem
+          ? '<span style="color:'+cMensili+';">'+mensiliVal+'</span><span style="font-size:.65rem;color:var(--dim);font-weight:500;">/'+ MAX +'</span>'
+          : '<span style="font-size:.7rem;font-weight:700;color:var(--dim);">Solo<br>Premium</span>';
+        var extraHtml   = '<span style="color:'+cExtra+';">'+(extraCongelati?'🔒 ':'')+extraVal+'</span>';
+        var refHtml     = '<span style="color:'+cRef+';">'+refVal+'</span>';
+
+        return '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+          '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti AI</div>'+
+          // 3 card
+          '<div style="display:flex;border:1px solid var(--brd);border-radius:12px;overflow:hidden;">'+
+            card('Mensili', mensiliHtml, null)+
+            '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
+            card('Extra', extraHtml, extraCongelati?'congelati':null)+
+            '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
+            card('Referral', refHtml, null)+
+          '</div>'+
+          // info rimando
+          '<div style="margin-top:.65rem;display:flex;align-items:center;gap:.45rem;padding:.5rem .65rem;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.18);border-radius:9px;">'+
+            '<svg style="flex-shrink:0;" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
+            '<span style="font-size:.65rem;color:#94a3b8;line-height:1.45;">Gestisci i crediti nel <strong style="color:#60a5fa;">Barman AI</strong> → icona crediti in alto a destra.</span>'+
+          '</div>'+
+        '</div>';
+      })()+
       '<div style="padding-top:1.2rem;text-align:center;">'+
         '<button id="acc-logout-btn" style="display:inline-flex;align-items:center;background:transparent;border:1px solid var(--dim);color:var(--dim);font-size:.62rem;font-weight:600;font-family:inherit;cursor:pointer;padding:.35rem .65rem;border-radius:6px;letter-spacing:.05em;text-transform:uppercase;transition:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">LOGOUT</button>'+
       '</div>';
