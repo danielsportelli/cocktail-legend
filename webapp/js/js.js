@@ -2181,7 +2181,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         var refVal      = ref;
 
         // colori
-        var cMensili = isPrem ? 'var(--txt)' : 'var(--dim)';
+        var cMensili = isPrem ? 'var(--blue-l)' : 'var(--dim)';
         var cExtra   = isPrem && extraVal > 0 ? 'var(--amber)' : extraCongelati ? 'var(--dim)' : 'var(--dim)';
         var cRef     = refVal > 0 ? '#4ade80' : 'var(--dim)';
 
@@ -2207,7 +2207,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
             '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
             card('Extra', extraHtml, extraCongelati?'congelati':null)+
             '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
-            card('Referral', refHtml, 'senza premium')+
+            card('Referral', refHtml, !isPrem?'senza premium':null)+
           '</div>'+
           // info rimando
           '<div style="margin-top:.65rem;display:flex;align-items:center;gap:.45rem;padding:.5rem .65rem;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.18);border-radius:9px;">'+

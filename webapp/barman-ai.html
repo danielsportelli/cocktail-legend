@@ -1357,7 +1357,7 @@ function renderCreditsDrawer(){
     nextReset=start.toLocaleDateString('it-IT',{day:'numeric',month:'long'});
   }
 
-  var pct=Math.min(100,(monthly/MAX)*100);
+  var pctRem=Math.min(100,(monthlyRem/MAX)*100);
   var html='';
 
   // ── SEZIONE MENSILI ──────────────────────────────────────
@@ -1365,9 +1365,9 @@ function renderCreditsDrawer(){
     html+=
       '<div class="bai-credits-section">'+
         '<div class="bai-credits-label">Crediti mensili</div>'+
-        '<div class="bai-credits-bar-row"><span>'+monthly+' / '+MAX+' usati</span><span>Reset: '+nextReset+'</span></div>'+
-        '<div class="bai-credits-track"><div class="bai-credits-fill" style="width:'+pct+'%;background:'+(pct>=80?'#ef4444':'var(--amber)')+'"></div></div>'+
-        '<div class="bai-credits-remaining">'+monthlyRem+' crediti mensili rimanenti'+(monthlyRem===0&&rawExtra===0&&ref===0?' — acquista crediti extra qui sotto':'')+'</div>'+
+        '<div class="bai-credits-bar-row"><span><span style="font-weight:800;color:var(--blue-l);">'+monthlyRem+'</span> / '+MAX+'</span></div>'+
+        '<div class="bai-credits-track"><div class="bai-credits-fill" style="width:'+pctRem+'%;background:'+(pctRem<=20?'#ef4444':'var(--blue-l)')+'"></div></div>'+
+        '<div class="bai-credits-remaining" style="color:var(--dim);">Reset: '+nextReset+(monthlyRem===0&&rawExtra===0&&ref===0?' — acquista crediti extra qui sotto':'')+'</div>'+
       '</div>';
   } else {
     // Free — mensili non disponibili
@@ -1385,7 +1385,7 @@ function renderCreditsDrawer(){
       '<div class="bai-credits-label" style="'+(extraCongelati?'color:var(--dim);':'')+'">Crediti extra'+(extraCongelati?' — congelati':_isPremium?' disponibili':'')+'</div>'+
       '<div class="bai-credits-extra-val" style="color:'+(!_isPremium&&rawExtra<=0?'var(--dim)':extraCongelati?'var(--dim)':'var(--amber)')+';">'+(rawExtra>0?rawExtra:'0')+'</div>'+
       '<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin:.35rem 0 .3rem;">'+
-        '<div style="height:100%;width:'+(rawExtra>0?Math.min(100,(rawExtra/200)*100):0)+'%;background:'+(extraCongelati?'var(--surf2)':'var(--blue-l)')+';border-radius:99px;transition:width .4s;"></div>'+
+        '<div style="height:100%;width:'+(rawExtra>0?Math.min(100,(rawExtra/200)*100):0)+'%;background:'+(extraCongelati?'var(--surf2)':'var(--amber)')+';border-radius:99px;transition:width .4s;"></div>'+
       '</div>'+
       (extraCongelati
         ? '<div class="bai-credits-extra-note" style="color:var(--dim);">🔒 I tuoi '+rawExtra+' crediti extra sono congelati perché il piano Premium non è attivo. Non andranno persi — torneranno disponibili al prossimo rinnovo.</div>'
