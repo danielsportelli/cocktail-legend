@@ -1870,6 +1870,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           _usageCache = {
             monthlyCount: 0,
             extraCredits: ai.extraCredits || 0,
+            referralCredits: ai.referralCredits || 0,
             periodStart: newPeriodStart
           };
           setDoc(userDoc, { aiUsage: _usageCache }, { merge: true })
@@ -1878,6 +1879,7 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
           _usageCache = {
             monthlyCount: ai.monthlyCount || 0,
             extraCredits: ai.extraCredits || 0,
+            referralCredits: ai.referralCredits || 0,
             periodStart: periodStart
           };
         }
