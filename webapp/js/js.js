@@ -3539,6 +3539,25 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById('calc-step-abv').style.display=cmd==='abv'?'block':'none';
         document.getElementById('calc-step-cost').style.display=cmd==='cost'?'block':'none';
         document.getElementById('calc-step-batch').style.display=cmd==='batch'?'block':'none';
+
+        // ── Blocco premium per ABV e Batch ──────────────────
+        if(cmd==='abv'||cmd==='batch'){
+          var bannerEl=document.getElementById('calc-'+cmd+'-lock-banner');
+          var isPrem=typeof isPremium==='function'&&isPremium();
+          if(bannerEl) bannerEl.style.display=isPrem?'none':'block';
+          // Disabilita tutti gli input/button dentro il drawer se non premium
+          var stepEl=document.getElementById('calc-step-'+cmd);
+          if(stepEl){
+            stepEl.querySelectorAll('input,button,textarea,select').forEach(function(el){
+              if(el.closest('#calc-'+cmd+'-lock-banner')) return; // escludi il banner stesso
+              el.disabled=!isPrem;
+              el.style.pointerEvents=isPrem?'':'none';
+              el.style.opacity=isPrem?'':'0.35';
+            });
+          }
+          if(!isPrem) return; // non inizializzare se free
+        }
+
         if(cmd==='abv') initCalcABV();
         if(cmd==='batch') initCalcBatch();
       });
@@ -5595,22 +5614,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // ── Calcolatori ABV e Pre-Batch ───────────────────────────
-  var calcPremiumBtns = [
-    { id: 'calc-btn-abv',   nome: 'Calcolatore ABV'      },
-    { id: 'calc-btn-batch', nome: 'Calcolatore Pre-Batch' },
-  ];
-  calcPremiumBtns.forEach(function(item) {
-    var btn = document.getElementById(item.id);
-    if (!btn) return;
-    btn.addEventListener('click', function(e) {
-      if (!isPremium()) {
-        e.preventDefault();
-        e.stopPropagation();
-        requirePremium(item.nome);
-      }
-    });
-  });
+  // ── Calcolatori ABV e Pre-Batch ─────────────────────────
+  // Il blocco è ora gestito direttamente nel click handler dei calc-cmd-btn
+  // con banner inline — nessun modal/toast aggiuntivo necessario
 
   // ── Spirit Genesis PDF ────────────────────────────────────
   var sgLink = document.getElementById('sg-pdf-link');
