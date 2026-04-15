@@ -84,15 +84,77 @@ body::after{
 .bai-header::after{content:'';position:absolute;left:0;right:0;bottom:-32px;height:32px;background:linear-gradient(to bottom,rgba(10,15,30,1) 0%,rgba(10,15,30,0) 100%);pointer-events:none;z-index:1;}
 .bai-main{
   padding-top:calc(56px + 1rem);
-  padding-bottom:calc(2rem + env(safe-area-inset-bottom,0px));
+  padding-bottom:0;
   min-height:100vh;
   position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;
 }
 @media(display-mode:standalone){
   .bai-main{
     padding-top:calc(56px + env(safe-area-inset-top,0px) + 1rem);
   }
 }
+
+/* ── CARD PRINCIPALE ── */
+.bai-card{
+  width:calc(100% - 2rem);
+  max-width:480px;
+  margin:0 auto calc(1rem + env(safe-area-inset-bottom,0px));
+  background:var(--surf);
+  border:1px solid var(--brd);
+  border-radius:18px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  /* altezza: dal top del bai-main al fondo schermo con margini */
+  height:calc(100vh - 56px - 1rem - 1rem - env(safe-area-inset-bottom,0px));
+}
+@media(display-mode:standalone){
+  .bai-card{
+    height:calc(100vh - 56px - env(safe-area-inset-top,0px) - 1rem - 1rem - env(safe-area-inset-bottom,0px));
+  }
+}
+
+/* Header interno alla card */
+.bai-card-hdr{
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem 1.1rem .75rem;
+  border-bottom:1px solid var(--brd);
+}
+.bai-card-title{
+  font-size:.65rem;font-weight:800;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--blue-l);
+}
+.bai-card-back{
+  display:inline-flex;align-items:center;gap:.3rem;
+  background:none;border:1px solid var(--dim);border-radius:6px;
+  color:var(--dim);font-family:inherit;font-size:.62rem;font-weight:600;
+  letter-spacing:.05em;text-transform:uppercase;
+  padding:.32rem .6rem;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  transition:none;
+}
+.bai-card-back:active{background:rgba(255,255,255,.07);}
+
+/* Usage bar sticky sotto header card */
+.bai-usage{
+  flex-shrink:0;
+  display:flex;align-items:center;gap:8px;
+  padding:.5rem 1.1rem .45rem;
+  font-size:.63rem;color:var(--dim);
+  border-bottom:1px solid var(--brd);
+}
+
+/* Contenuto scrollabile dentro la card */
+.bai-card-body{
+  flex:1;
+  overflow-y:auto;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  padding:1rem 1.1rem 1.5rem;
+}
+.bai-card-body::-webkit-scrollbar{display:none;}
 
 /* ── GATE FREE ── */
 .bai-gate{
@@ -120,7 +182,7 @@ body::after{
 .bai-gate-btn:active{transform:scale(.98);}
 
 /* ── CMD CARDS ── */
-.bai-section{padding:0 4% 1rem;}
+.bai-section{padding-bottom:.5rem;}
 .bai-greeting{
   font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--blue-l);margin-bottom:.6rem;
@@ -146,17 +208,12 @@ body::after{
 .bai-cmd-sub{font-size:.68rem;color:var(--dim);}
 .bai-cmd-arr{flex-shrink:0;stroke:var(--dim);}
 
-/* Usage bar compatta */
-.bai-usage{
-  display:flex;align-items:center;gap:8px;
-  padding:0 4%;margin-bottom:.9rem;
-  font-size:.63rem;color:var(--dim);
-}
+/* Usage bar — track e fill (il contenitore è ora nella card) */
 .bai-usage-track{flex:1;height:3px;background:var(--brd);border-radius:99px;overflow:hidden;}
 .bai-usage-fill{height:100%;background:var(--amber);border-radius:99px;width:0%;transition:width .4s;}
 
 /* ── STEP AREA ── */
-.bai-step-area{padding:0 4%;display:none;}
+.bai-step-area{padding:0;display:none;}
 .bai-step-header{
   display:flex;align-items:center;gap:.6rem;
   margin-bottom:1rem;
@@ -417,12 +474,12 @@ textarea{-webkit-user-select:text;user-select:text;}
 <!-- ── MAIN ── -->
 <div class="bai-main" id="bai-main">
 
-  <!-- Spinner iniziale -->
-  <div id="bai-loading" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1rem;">
+  <!-- Spinner iniziale (fuori card) -->
+  <div id="bai-loading" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:1rem;width:100%;">
     <div style="width:32px;height:32px;border:3px solid rgba(255,255,255,.08);border-top-color:var(--amber);border-radius:50%;animation:spin .7s linear infinite;"></div>
   </div>
 
-  <!-- Gate per utenti non autenticati -->
+  <!-- Gate per utenti non autenticati (fuori card) -->
   <div id="bai-gate-auth" class="bai-gate" style="display:none;">
     <div class="bai-gate-icon">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
@@ -432,27 +489,36 @@ textarea{-webkit-user-select:text;user-select:text;}
     <button class="bai-gate-btn" onclick="window.location.href='cocktail-legend.html'">Vai al Login →</button>
   </div>
 
-  <!-- Contenuto principale (mostrato dopo auth check) -->
-  <div id="bai-content" style="display:none;">
+  <!-- ── CARD PRINCIPALE ── -->
+  <div class="bai-card" id="bai-content" style="display:none;">
 
-    <!-- Usage bar -->
+    <!-- Header card (fisso) -->
+    <div class="bai-card-hdr" id="bai-card-hdr">
+      <span class="bai-card-title" id="bai-card-title">Cosa vuoi fare oggi?</span>
+      <button class="bai-card-back" id="bai-card-back" style="display:none;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Torna
+      </button>
+    </div>
+
+    <!-- Usage bar (sticky sotto header card, sempre visibile) -->
     <div class="bai-usage" id="bai-usage-wrap" style="display:none;">
-      <span style="white-space:nowrap;">Ricerche mese:</span>
+      <span style="white-space:nowrap;">Crediti disponibili:</span>
       <div class="bai-usage-track"><div class="bai-usage-fill" id="bai-usage-fill"></div></div>
       <span id="bai-usage-txt" style="white-space:nowrap;font-size:.63rem;">0/30</span>
     </div>
 
+    <!-- Corpo scrollabile -->
+    <div class="bai-card-body">
+
     <!-- Tips btn (visibile solo dentro una funzione) -->
-    <div style="padding:0 4%;">
-      <button class="bai-tips-btn" id="bai-tips-btn">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        Tips
-      </button>
-    </div>
+    <button class="bai-tips-btn" id="bai-tips-btn" style="display:none;margin-bottom:.5rem;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Tips
+    </button>
 
     <!-- ── STEP 0: 4 funzioni ── -->
     <div class="bai-section" id="bai-step-cmds">
-      <div class="bai-greeting" id="bai-greeting">Cosa vuoi fare?</div>
       <div class="bai-cmds">
 
         <button class="bai-cmd" id="ai-btn-signature" data-cmd="signature">
@@ -655,8 +721,8 @@ textarea{-webkit-user-select:text;user-select:text;}
     </div>
     <!-- /step-area -->
 
-  </div>
-  <!-- /bai-content -->
+    </div><!-- /bai-card-body -->
+  </div><!-- /bai-card = bai-content -->
 
 </div>
 <!-- /bai-main -->
@@ -922,8 +988,7 @@ window.addEventListener('fb-auth-ready', function(e){
 
       // Aggiorna greeting con nome
       var nome=data.nome||user.displayName||(user.email?user.email.split('@')[0]:'');
-      var greet=document.getElementById('bai-greeting');
-      if(greet && nome) greet.textContent='Ciao '+nome+', cosa vuoi fare oggi?';
+      // greeting rimosso — il titolo è nell'header card
 
       var ai=data.aiUsage||{};
       var referralCredits=ai.referralCredits||0;
@@ -979,7 +1044,7 @@ window.addEventListener('fb-auth-ready', function(e){
   } else {
     fns.getDoc(userDoc).then(processSnap).catch(function(){
       _usageCache={monthlyCount:0,extraCredits:0,periodStart:new Date().toISOString().split('T')[0]};
-      document.getElementById('bai-content').style.display='block';
+      document.getElementById('bai-content').style.display='flex';
     });
   }
 });
@@ -996,6 +1061,14 @@ function showCmds(){
   document.getElementById('bai-tips-btn').style.display='none';
   currentCmd=null; selectedPill=null; giornoTipo=null;
   sig={tipo:null,momento:null,gusto:null,tenore:null,bicchiere:null};
+  // Header card: titolo principale, nascondi tasto torna
+  var cardTitle=document.getElementById('bai-card-title');
+  var cardBack=document.getElementById('bai-card-back');
+  if(cardTitle) cardTitle.textContent='Cosa vuoi fare oggi?';
+  if(cardBack) cardBack.style.display='none';
+  // Scroll top del card body
+  var cb=document.querySelector('.bai-card-body');
+  if(cb) cb.scrollTop=0;
 }
 
 function showStep(cmd){
@@ -1017,6 +1090,14 @@ function showStep(cmd){
   var titles={signature:'Crea un Signature',giorno:'Cocktail del Giorno',twist:'Twist on Classic',pairing:'Food Pairing'};
   document.getElementById('bai-step-title').textContent=titles[cmd]||'';
   currentCmd=cmd;
+  // Header card: mostra nome funzione e tasto torna
+  var cardTitle=document.getElementById('bai-card-title');
+  var cardBack=document.getElementById('bai-card-back');
+  if(cardTitle) cardTitle.textContent=titles[cmd]||'';
+  if(cardBack) cardBack.style.display='inline-flex';
+  // Scroll top del card body
+  var cb=document.querySelector('.bai-card-body');
+  if(cb) cb.scrollTop=0;
   selectedPill=null; giornoTipo=null;
   sig={tipo:null,momento:null,gusto:null,tenore:null,bicchiere:null};
 
@@ -1163,6 +1244,7 @@ document.querySelectorAll('.bai-cmd').forEach(function(btn){
 
 // Torna ai comandi
 document.getElementById('bai-step-back').addEventListener('click',showCmds);
+document.getElementById('bai-card-back').addEventListener('click',showCmds);
 
 // ── SEND ──────────────────────────────────────────────────
 document.getElementById('bai-send').addEventListener('click',function(){
