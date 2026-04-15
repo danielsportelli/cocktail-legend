@@ -81,7 +81,7 @@ body::after{
 .bai-icon-btn.active svg{stroke:var(--amber);}
 
 /* ── MAIN CONTENT ── */
-.bai-header::after{content:'';position:absolute;left:0;right:0;bottom:-32px;height:32px;background:linear-gradient(to bottom,rgba(10,15,30,1) 0%,rgba(10,15,30,0) 100%);pointer-events:none;z-index:1;}
+/* bai-header::after rimosso — lo stacco visivo lo dà la card */
 .bai-main{
   padding-top:calc(56px + 1rem);
   padding-bottom:0;
@@ -99,19 +99,23 @@ body::after{
 .bai-card{
   width:calc(100% - 2rem);
   max-width:480px;
-  margin:0 auto calc(1rem + env(safe-area-inset-bottom,0px));
+  margin:0 auto;
   background:var(--surf);
   border:1px solid var(--brd);
   border-radius:18px;
   overflow:hidden;
   display:flex;
   flex-direction:column;
-  /* altezza: dal top del bai-main al fondo schermo con margini */
-  height:calc(100vh - 56px - 1rem - 1rem - env(safe-area-inset-bottom,0px));
+  /* Altezza: schermo - header fisso - margine top - margine bottom con safe area */
+  height:calc(100vh - 56px - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
+  /* dvh per browser moderni (risolve il problema barra indirizzi iOS) */
+  height:calc(100dvh - 56px - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
+  margin-bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));
 }
 @media(display-mode:standalone){
   .bai-card{
-    height:calc(100vh - 56px - env(safe-area-inset-top,0px) - 1rem - 1rem - env(safe-area-inset-bottom,0px));
+    height:calc(100vh - 56px - env(safe-area-inset-top,0px) - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
+    height:calc(100dvh - 56px - env(safe-area-inset-top,0px) - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
   }
 }
 
@@ -124,7 +128,7 @@ body::after{
 }
 .bai-card-title{
   font-size:.65rem;font-weight:800;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--blue-l);
+  text-transform:uppercase;color:var(--dim);
 }
 .bai-card-back{
   display:inline-flex;align-items:center;gap:.3rem;
@@ -215,8 +219,7 @@ body::after{
 /* ── STEP AREA ── */
 .bai-step-area{padding:0;display:none;}
 .bai-step-header{
-  display:flex;align-items:center;gap:.6rem;
-  margin-bottom:1rem;
+  display:none !important;
 }
 .bai-step-back{
   display:inline-flex;align-items:center;gap:.3rem;
