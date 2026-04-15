@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Spirits Genesis — Cocktail Legend</title>
 <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -81,13 +81,14 @@
     .sg-header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      height: var(--header-h);
+      height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
       background: rgba(10,15,30,0.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       padding: 0 1rem;
+      padding-top: env(safe-area-inset-top, 0px);
       gap: 1rem;
       z-index: 100;
     }
@@ -155,7 +156,7 @@
     /* ── LAYOUT ── */
     .sg-layout {
       display: flex;
-      padding-top: var(--header-h);
+      padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
       min-height: 100vh;
     }
 
@@ -391,7 +392,7 @@
 
     /* ── CHAPTER SECTIONS ── */
     .sg-chapter {
-      margin-bottom: 5rem;
+      margin-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
       scroll-margin-top: calc(var(--header-h) + 24px);
     }
     .chapter-header {
