@@ -60,7 +60,7 @@ body::after{
 .bai-back{
   display:flex;align-items:center;gap:.3rem;
   background:none;border:none;cursor:pointer;
-  color:var(--txt2);font-family:inherit;font-size:.78rem;font-weight:600;
+  color:var(--txt2);font-family:inherit;font-size:.75rem;font-weight:500;
   padding:.4rem 0;
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
@@ -459,8 +459,8 @@ textarea{-webkit-user-select:text;user-select:text;}
 <!-- ── HEADER ── -->
 <header class="bai-header">
   <button class="bai-back" onclick="window.location.href='cocktail-legend.html'">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    Chiudi Barman AI
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Cocktail Legend
   </button>
   <div class="bai-actions">
     <!-- Salvati -->
@@ -1690,7 +1690,7 @@ function renderSavedDrawer(openCats){
 var TIPS = {
   twist:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Twist on Classic</strong>Scrivi il nome di un cocktail classico. Il Barman AI proporrà 3 varianti creative che mantengono l\'identità del drink originale pur reinterpretandolo. Ogni variante esplora una direzione diversa: elegante, tecnica, o contemporanea.',
   pairing:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Food Pairing</strong>Descrivi il piatto nel dettaglio — ingredienti principali, cottura, sapori dominanti. Il Barman AI proporrà 3 abbinamenti con logiche diverse: un classico, un drink per affinità, e uno creativo/inaspettato.',
-  signature:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Crea un Signature</strong>Seleziona le caratteristiche del drink che vuoi creare, poi inserisci gli ingredienti che hai a disposizione. Più dettagli dai, più il risultato sarà su misura per te.',
+  signature:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Crea un Signature</strong>Seleziona le caratteristiche del drink che vuoi creare, poi inserisci gli ingredienti che hai a disposizione. Più dettagli dai, più il risultato sarà su misura per te. Il drink proposto includerà sempre almeno una preparazione homemade.',
   giorno:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Cocktail del Giorno</strong>Il Barman AI crea un drink stagionale pensato per oggi, con un ingrediente protagonista di stagione e almeno una preparazione homemade.'
 };
 document.getElementById('bai-tips-btn').addEventListener('click',function(){
