@@ -834,23 +834,44 @@ function renderUsage(){
   var monthly=getMonthlyUsed();
   var extra=getExtraCredits();
   var ref=getReferralCredits();
-  var pct=Math.min(100,(monthly/MAX)*100);
+  var monthlyRem=getMonthlyRemaining();
   var fill=document.getElementById('bai-usage-fill');
-  if(fill){fill.style.width=pct+'%';fill.style.background=pct>=80?'#ef4444':'var(--amber)';}
   var txt=document.getElementById('bai-usage-txt');
-  if(txt){
-    var label;
-    if(_isPremium){
-      label=monthly+'/'+MAX;
-      if(extra>0) label+=' + '+extra+' extra';
-      if(ref>0) label+=' + '+ref+' ref';
-    } else {
-      label=ref>0?ref+' ref':'0 ref';
-    }
-    txt.textContent=label;
-  }
+  var labelEl=document.querySelector('#bai-usage-wrap > span');
   var wrap=document.getElementById('bai-usage-wrap');
-  // Mostra barra se premium OPPURE se free con crediti referral
+
+  if(_isPremium){
+    var barColor,barPct,labelTxt;
+    if(monthlyRem>0){
+      // Mensili disponibili — blu
+      barColor='var(--blue-l)';
+      barPct=Math.min(100,(monthlyRem/MAX)*100);
+      labelTxt=monthlyRem+(extra>0?' + '+extra+' extra':'')+(ref>0?' + '+ref+' ref':'');
+    } else if(extra>0){
+      // Mensili esauriti, extra — amber
+      barColor='var(--amber)';
+      barPct=Math.min(100,(extra/200)*100);
+      labelTxt=extra+' extra'+(ref>0?' + '+ref+' ref':'');
+    } else if(ref>0){
+      // Solo referral — verde
+      barColor='#22c55e';
+      barPct=Math.min(100,(ref/100)*100);
+      labelTxt=ref+' ref';
+    } else {
+      // Esauriti
+      barColor='#ef4444';
+      barPct=0;
+      labelTxt='0';
+    }
+    if(fill){fill.style.width=barPct+'%';fill.style.background=barColor;}
+    if(txt) txt.textContent=labelTxt;
+  } else {
+    // Free: solo referral — verde
+    if(fill){fill.style.width=Math.min(100,(ref/100)*100)+'%';fill.style.background='#22c55e';}
+    if(txt) txt.textContent=ref>0?ref+' ref':'0 ref';
+  }
+
+  if(labelEl) labelEl.textContent='Crediti disponibili:';
   if(wrap) wrap.style.display=(_isPremium||ref>0)?'flex':'none';
 }
 
@@ -1401,7 +1422,7 @@ function renderCreditsDrawer(){
         '<div style="height:100%;width:'+(rawExtra>0?Math.min(100,(rawExtra/200)*100):0)+'%;background:'+(extraCongelati?'var(--surf2)':'var(--amber)')+';border-radius:99px;transition:width .4s;"></div>'+
       '</div>'+
       (extraCongelati
-        ? '<div class="bai-credits-extra-note" style="color:var(--dim);">I tuoi '+rawExtra+' crediti extra sono congelati perché il piano Premium non è attivo. Non andranno persi — torneranno disponibili al prossimo rinnovo.</div>'
+        ? '<div class="bai-credits-extra-note" style="color:var(--dim);">I tuoi <strong style="color:var(--amber);">'+rawExtra+'</strong> crediti extra sono congelati perché il piano Premium non è attivo. Non andranno persi — torneranno disponibili al prossimo rinnovo.</div>'
         : _isPremium
           ? '<div class="bai-credits-extra-note">Utilizzati solo dopo aver esaurito i crediti mensili.<br><span style="color:var(--dim);font-size:.62rem;">Disponibili solo con piano Premium attivo.<br>In caso di mancato rinnovo, vengono congelati ma non persi — torneranno al rinnovo.</span></div>'
           : '<div class="bai-credits-extra-note" style="color:var(--dim);">Acquistabili con piano Premium attivo.</div>'
