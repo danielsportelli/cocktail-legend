@@ -455,9 +455,9 @@ window._isRegistering = false;
             ruolo:       ruolo,
             plan:        'free',
             tc_accepted: true,
-            tc_date:     new Date().toISOString(),
+            tc_date:     (function(){ var pad=function(n){return n<10?'0'+n:''+n;}; var d=new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds()); })(),
             marketing:   marketing,
-            createdAt:   new Date().toISOString(),
+            createdAt:   (function(){ var pad=function(n){return n<10?'0'+n:''+n;}; var d=new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds()); })(),
             aiUsage:     { monthlyCount: 0, extraCredits: 0, referralCredits: 0, periodStart: _nowStr },
             referredBy:  _refCode || null,
             referral:    { code: user.uid.substring(0,8), count: 0, badge: null, earnedCredits: 0 }
@@ -1863,13 +1863,16 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         // Genera premiumSince e premiumExpiresAt se mancano
         if (window._userPlan === 'premium' && !data.premiumSince) {
           // Data scadenza: stesso giorno dell'anno prossimo -1 giorno, ore 23:59:59
+          // Calcola scadenza: anno prossimo -1 giorno, 23:59:59 ora LOCALE (no UTC)
           var expDate = new Date(now);
           expDate.setFullYear(expDate.getFullYear() + 1);
           expDate.setDate(expDate.getDate() - 1);
-          expDate.setHours(23, 59, 59, 0);
+          // Costruisce stringa data locale per evitare sfasamento UTC
+          var pad = function(n){ return n < 10 ? '0'+n : ''+n; };
+          var expStr = expDate.getFullYear()+'-'+pad(expDate.getMonth()+1)+'-'+pad(expDate.getDate())+'T23:59:59';
           var premiumUpdate = {
             premiumSince: nowStr,
-            premiumExpiresAt: expDate.toISOString().replace('Z','').split('.')[0] // "2027-04-14T23:59:59"
+            premiumExpiresAt: expStr // es. "2027-04-14T23:59:59" ora locale
           };
           setDoc(userDoc, premiumUpdate, { merge: true })
             .catch(function(e){ console.warn('premiumSince write err', e); });
