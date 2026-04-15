@@ -639,7 +639,7 @@ textarea{-webkit-user-select:text;user-select:text;}
 
       <!-- GIORNO steps -->
       <div id="bai-giorno-steps" style="display:none;">
-        <div class="bai-pills-label">Alcolico o analcolico?</div>
+        <div class="bai-pills-label">Lo vuoi alcolico o analcolico?</div>
         <div class="bai-pills-row" id="bai-giorno-1">
           <button class="bai-pill giorno-tipo" data-val="alcolico">Alcolico</button>
           <button class="bai-pill giorno-tipo" data-val="analcolico">Analcolico</button>
@@ -1120,10 +1120,10 @@ function showStep(cmd){
     var cfg=PROMPTS[cmd];
     if(label) label.textContent=cfg.label;
     if(inp){ inp.value=''; inp.placeholder=cfg.placeholder; inp.style.display='block'; }
-    // Tips
-    var tipsBtn=document.getElementById('bai-tips-btn');
-    if(tipsBtn){ tipsBtn.style.display='inline-flex'; }
   }
+  // Tips — visibile per tutte le funzioni
+  var tipsBtn=document.getElementById('bai-tips-btn');
+  if(tipsBtn){ tipsBtn.style.display='inline-flex'; }
   updateSendBtn();
 }
 
@@ -1690,8 +1690,8 @@ function renderSavedDrawer(openCats){
 var TIPS = {
   twist:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Twist on Classic</strong>Scrivi il nome di un cocktail classico. Il Barman AI proporrà 3 varianti creative che mantengono l\'identità del drink originale pur reinterpretandolo. Ogni variante esplora una direzione diversa: elegante, tecnica, o contemporanea.',
   pairing:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Food Pairing</strong>Descrivi il piatto nel dettaglio — ingredienti principali, cottura, sapori dominanti. Il Barman AI proporrà 3 abbinamenti con logiche diverse: un classico, un drink per affinità, e uno creativo/inaspettato.',
-  signature:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Crea un Signature</strong>Seleziona le caratteristiche del drink che vuoi creare, poi inserisci gli ingredienti che hai a disposizione. Il Barman AI creerà un signature originale con almeno una preparazione homemade.',
-  giorno:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Cocktail del Giorno</strong>Il Barman AI crea un drink stagionale pensato appositamente per oggi, usando ingredienti di stagione e costruendo la ricetta intorno a un ingrediente protagonista.'
+  signature:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Crea un Signature</strong>Seleziona le caratteristiche del drink che vuoi creare, poi inserisci gli ingredienti che hai a disposizione. Più dettagli dai, più il risultato sarà su misura per te.',
+  giorno:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Cocktail del Giorno</strong>Il Barman AI crea un drink stagionale pensato per oggi, con un ingrediente protagonista di stagione e almeno una preparazione homemade.'
 };
 document.getElementById('bai-tips-btn').addEventListener('click',function(){
   var overlay=document.getElementById('bai-tips-overlay');
