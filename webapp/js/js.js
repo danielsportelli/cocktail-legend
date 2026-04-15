@@ -5443,7 +5443,7 @@ function showPremiumModal() {
           </div>
           <div>
             <div style="font-size:.85rem;font-weight:700;color:#f1f5f9;">Premi Quiz Mensili</div>
-            <div style="font-size:.72rem;color:#64748b;margin-top:.1rem;">1° → 1000 crediti · 2° → 200 crediti · 3° → 50 crediti</div>
+            <div style="font-size:.72rem;color:#64748b;margin-top:.1rem;">Ogni mese in palio crediti AI</div>
           </div>
         </div>
 
