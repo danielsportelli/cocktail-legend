@@ -1833,6 +1833,19 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
       var nowStr = now.toISOString().split('T')[0];
       if(snap.exists()){
         var data = snap.data();
+
+        // ── Controlla scadenza Premium ──────────────────────────────
+        // Se plan=premium ma premiumExpiresAt è passato → torna free
+        if ((data.plan || 'free') === 'premium' && data.premiumExpiresAt) {
+          var expiry = new Date(data.premiumExpiresAt);
+          if (now > expiry) {
+            // Piano scaduto — aggiorna Firestore e tratta come free
+            setDoc(userDoc, { plan: 'free' }, { merge: true })
+              .catch(function(e){ console.warn('plan expiry err', e); });
+            data.plan = 'free';
+          }
+        }
+
         // ── Salva piano utente globalmente ──
         window._userPlan = data.plan || 'free';
         // Se premium, aggiunge classe al body — CSS nasconde tutti i badge lock
@@ -1845,6 +1858,24 @@ document.getElementById("btn-favonly").addEventListener("click",function(){
         // ── Controlla se ha già fatto il quiz oggi ──
         window._quizDoneToday = (data.last_played === _todayKeyLocal());
         updateQuizBadge();
+
+        // ── Se appena diventato premium (manuale o Stripe) ──────────
+        // Genera premiumSince e premiumExpiresAt se mancano
+        if (window._userPlan === 'premium' && !data.premiumSince) {
+          // Data scadenza: stesso giorno dell'anno prossimo -1 giorno, ore 23:59:59
+          var expDate = new Date(now);
+          expDate.setFullYear(expDate.getFullYear() + 1);
+          expDate.setDate(expDate.getDate() - 1);
+          expDate.setHours(23, 59, 59, 0);
+          var premiumUpdate = {
+            premiumSince: nowStr,
+            premiumExpiresAt: expDate.toISOString().replace('Z','').split('.')[0] // "2027-04-14T23:59:59"
+          };
+          setDoc(userDoc, premiumUpdate, { merge: true })
+            .catch(function(e){ console.warn('premiumSince write err', e); });
+          data.premiumSince = nowStr;
+          data.premiumExpiresAt = premiumUpdate.premiumExpiresAt;
+        }
 
         // ── Se premium e aiUsage non esiste → crea automaticamente ──
         if (window._userPlan === 'premium' && !data.aiUsage) {
