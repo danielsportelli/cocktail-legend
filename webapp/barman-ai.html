@@ -831,30 +831,134 @@ function mdToHtml(md){
     .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
 }
 
-// ── PROMPTS (copiati da js.js) ────────────────────────────
-// (stesso oggetto PROMPTS di cocktail-legend)
+// ── PROMPTS (versione potenziata — livello mixology mondiale) ─────
+// Sorgente unica di verità per i 4 prompt del Barman AI.
+
+// ─── REGOLE MIXOLOGY COMUNI (appese a TUTTI i prompt) ──────────────
+// Queste regole alzano il livello tecnico delle ricette proposte
+// differenziando nettamente l'output dal generico "stile ChatGPT".
+var MIXOLOGY_RULES = '\n\n=== REGOLE TECNICHE OBBLIGATORIE (MIXOLOGY AVANZATA) ===\n'+
+'LIVELLO: ogni ricetta deve riflettere un livello di mixology internazionale alto. Niente soluzioni generiche, niente proporzioni scolastiche. Ragiona come un bar team che pubblica su riviste di settore e partecipa a competizioni.\n\n'+
+'REGOLA COMPLETEZZA HOMEMADE (fondamentale): se la RICETTA cita una qualunque preparazione homemade — sciroppo, cordiale, shrub, oleo saccharum, infuso, tintura, bitter, fat-wash, fermentato, soda, garnish elaborato o qualsiasi altra prep non commerciale — la sezione PREPARAZIONI DEVE contenere il procedimento completo di OGNI singola prep citata, con pesi precisi in grammi, tempi e metodo. Non è ammesso citare un homemade in ricetta e ometterne la preparazione. Se ci sono 3 homemade nella ricetta, PREPARAZIONI contiene tutte e 3.\n\n'+
+'REGOLA SCIROPPI (62° Brix — standard internazionale): tutti gli sciroppi — semplici, aromatizzati, di frutta, di erbe, di spezie — vanno sempre preparati a 62° Brix. La proporzione è SEMPRE 100 g di parte liquida (acqua, succo, infuso) e 165 g di zucchero. Mai 1:1. Non è necessario spiegare il concetto di Brix all\'utente (c\'è la sezione Academy per quello): limitati a indicare pesi e metodo corretti.\n\n'+
+'REGOLA ACQUA MAI IN EBOLLIZIONE: l\'acqua (o qualunque liquido base) non deve MAI essere portata a bollore. Scaldare a circa 90 °C e togliere dal fuoco. Motivo tecnico: a bollore una parte evapora, il peso cambia e le proporzioni zucchero/liquido si sballano. Se la ricetta prevede infusione di erbe o spezie, si aggiungono dopo aver tolto dal fuoco e si lascia in infusione a coperchio chiuso. Vietate formule come "far bollire", "portare a ebollizione", "bollire per X minuti".\n\n'+
+'REGOLA CORDIAL (tecnica moderna): i cordial vanno preparati con metodo a freddo o a bassa temperatura. Base tecnica: succo fresco o macerato + zucchero (ratio orientativa 1:1 in peso, aggiustabile) + correzione acida con acido citrico e/o acido malico per stabilizzare il pH e bilanciare l\'acidità percepita (quando serve, dosi tipiche 0,5–1,5% del peso totale). Niente bollitura dei succhi. Se si usa scorza per oli essenziali, ragionare in oleo saccharum (scorza + zucchero, riposo 2–4 h, poi aggiungere liquido).\n\n'+
+'REGOLA SODE HOMEMADE: le sode si preparano sempre con apparecchio dedicato per la sodatura (no menzioni di marche). Indicare il liquido aromatizzato da caricare (tipicamente filtrato o chiarificato) e il livello di carbonatazione desiderato. Se il liquido contiene polpa o particelle, filtrare prima di caricare per non compromettere il sistema.\n\n'+
+'REGOLA SHRUB / OLEO SACCHARUM / INFUSI / FAT-WASH: usare ratio tecnicamente corretti e tempi realistici. Shrub: frutta + zucchero (macerazione a freddo) + aceto di qualità (ratio tipica 1:1:1 per parti, adattabile). Oleo saccharum: scorza + zucchero 1:1 in peso, riposo 2–4 h. Infusi a freddo: preferire basse temperature e tempi lunghi quando serve tutelare l\'aroma. Fat-wash: ratio grasso/distillato e tempi (tipicamente 3–4 h a temperatura ambiente poi freezer, filtrazione).\n\n'+
+'REGOLA GARNISH NON STANDARD: se il garnish richiede una preparazione (disidratazione, fermentazione, candito, essiccato, dust, foglia stampata, ecc.) la preparazione va riportata in PREPARAZIONI come le altre prep.\n\n'+
+'REGOLA BILANCIAMENTO: rispetta le proporzioni canoniche per categoria di drink (sour, spirit-forward, highball, tiki, ecc.). Ogni ricetta deve essere tecnicamente eseguibile al primo colpo da un bartender professionista.';
+
+// ─── STRUTTURA OUTPUT COMUNE PER SINGOLO DRINK ────────────────────
+// Riutilizzata nei 4 prompt per garantire consistenza di formato.
+var DRINK_STRUCTURE_BASE = '## NOME DRINK\n'+
+'(scrivi direttamente una riga che racconta il concept — NON scrivere "Concept in 1 riga" o altre istruzioni)\n'+
+'## RICETTA\n'+
+'- dose ml Ingrediente (lista completa con dosi in ml)\n'+
+'**Tecnica:** descrizione precisa\n'+
+'**Bicchiere:** specificare\n'+
+'**Garnish:** specificare con tecnica di preparazione se non standard\n'+
+'## PREPARAZIONI\n'+
+'Per OGNI preparazione homemade citata nella ricetta, scrivi: **Nome prep:** procedimento completo con pesi in grammi, tempi, metodo. Ometti l\'intera sezione SOLO se la ricetta non contiene nessuna prep homemade.\n'+
+'## PERSONALIZZAZIONE\n'+
+'Consiglio tecnico di bilanciamento — dove intervenire su dolcezza, acidità, diluizione o alcolicità.';
+
+// ─── DISCLAIMER FINALE COMUNE ─────────────────────────────────────
+var DISCLAIMER = '\n\n* Ogni proposta è un punto di partenza: gli ingredienti reali variano (un vermouth può essere più dolce di un altro, le fragole precoci non sono tutte uguali, due gin possono avere sentori diversi). Assaggia sempre e bilancia a tuo piacere prima del servizio.';
+
+// ─── 20 CLASSICI CODIFICATI (per pairing) ─────────────────────────
+// Dosi esatte, bicchiere e garnish. Il Barman AI non deve modificarli.
+var CLASSICI_20 = 'Negroni|30 ml Gin, 30 ml Vermouth rosso, 30 ml Bitter rosso|Old fashioned|Zest di arancia\n'+
+'Americano|30 ml Bitter rosso, 30 ml Vermouth rosso, 30 ml Soda|Old fashioned|Zest di limone + fetta di arancia\n'+
+'Spritz|90 ml Prosecco, 60 ml Aperol, 30 ml Soda|Highball|Fetta di arancia\n'+
+'Martini Dry|60 ml Gin, 15 ml Vermouth dry|Coppetta|Olive verdi\n'+
+'Manhattan|50 ml Rye whiskey, 22,5 ml Vermouth rosso, 2 dash Angostura bitters|Coppetta|Ciliegia\n'+
+'Boulevardier|30 ml Bourbon whiskey, 30 ml Bitter rosso, 30 ml Vermouth rosso|Old fashioned|Zest di arancia\n'+
+'Hanky Panky|45 ml Gin, 45 ml Vermouth rosso, 1 bspoon Fernet|Coppetta|Zest di arancia\n'+
+'New York Sour|50 ml Bourbon whiskey, 22,5 ml Succo di limone, 15 ml Sciroppo di zucchero, q.b. Albume d\'uovo o foamer, 15 ml Vino rosso|Tumbler basso|Zest di limone + amarena\n'+
+'Daiquiri|50 ml Rum, 22,5 ml Succo di lime, 15 ml Sciroppo di zucchero|Coppetta|Rondella di lime\n'+
+'Mojito|50 ml Rum, 22,5 ml Succo di lime, 15 ml Sciroppo di zucchero, 8 Foglie di menta, Top Soda|Highball|Ciuffo di menta + lime\n'+
+'Margarita|50 ml Tequila, 22,5 ml Triple sec, 15 ml Succo di lime, q.b. Crusta di sale|Coppetta|Rondella di lime\n'+
+'Paloma|50 ml Tequila, 15 ml Succo di lime, 120 ml Soda al pompelmo rosa, q.b. Pizzico di sale|Highball|Fetta di pompelmo rosa\n'+
+'Gin Tonic|50 ml Gin, 150 ml Acqua tonica|Highball|Zest di limone\n'+
+'Gin Basil Smash|60 ml Gin, 22,5 ml Succo di limone, 15 ml Sciroppo di zucchero, 6/8 Foglie di basilico|Tumbler basso|Ciuffo di basilico\n'+
+'Bramble|50 ml Gin, 22,5 ml Succo di limone, 15 ml Sciroppo di zucchero, 15 ml Liquore alle more|Tumbler basso|More\n'+
+'Bloody Mary|45 ml Vodka, 90 ml Succo di pomodoro, 15 ml Succo di limone, 2 dash Worcestershire, 2 dash Tabasco, q.b. Sale e pepe|Highball|Sedano + fetta di limone\n'+
+'Moscow Mule|50 ml Vodka, 15 ml Succo di lime, 120 ml Ginger beer|Mug di rame|Ciuffo di menta + lime\n'+
+'Caipirinha|60 ml Cachaça, 2 bspoon Zucchero bianco, 1/2 Lime fresco|Tumbler basso|Spicchio di lime\n'+
+'Naked & Famous|22,5 ml Mezcal, 22,5 ml Aperol, 22,5 ml Chartreuse gialla, 22,5 ml Succo di lime|Coppetta|Zest di arancia\n'+
+'White Negroni|30 ml Gin, 30 ml Amaro alla genziana, 30 ml Aperitivo bianco|Old fashioned|Zest di limone';
+
+// ─── INGREDIENTI STAGIONALI (30 per mese × 12 mesi = 360 totali) ──
+var INGREDIENTI_STAGIONE = {
+  'gennaio':['limone','arancia amara','pompelmo rosa','kumquat','bergamotto','cedro','vaniglia','radice di zenzero','barbabietola','mela cotogna','melograno','finocchio','timo fresco','rosmarino','radice di rafano','anice stellato','cannella in stecca','pepe nero','chiodi di garofano','noce moscata','aglio nero fermentato','the nero affumicato','radice di curcuma','fiori di camomilla secchi','mela verde','pera kaiser','cachi secchi','dattero medjool','scorza di agrumi candita','fava tonka'],
+  'febbraio':['pompelmo','bergamotto','arancia rossa','limone','kumquat','finocchio','carciofo','vaniglia','zenzero','miele di castagno','timo','lavanda secca','radice di liquirizia','scorza di pompelmo','arance tarocco','mandarino tardivo','pepe lungo','cardamomo verde','petali di rosa essiccati','ibisco secco','radice di angelica','the pu-erh','fava tonka','rabarbaro secco','sambuco secco','mirtillo rosso americano','melograno','acqua di rose','fiori di mimosa','cannella'],
+  'marzo':['fragole precoci','rabarbaro','menta fresca','piselli freschi','asparagi verdi','limone','pompelmo','timo limone','fiori di violetta','miele millefiori','ginger fresco','tarassaco','borragine','acetosella selvatica','aglio orsino','fiori di primula','erba cipollina','fiori di ciliegio','pimpinella','spinacio baby','crescione','melissa fresca','prezzemolo fresco','scorza di limone','fiori di arancio','the verde matcha','radice di bardana','fiori di campo','aneto fresco','germogli di abete'],
+  'aprile':['fragole','rabarbaro','fiori di sambuco','ciliegie precoci','menta piperita','basilico fresco','asparagi','limone','piselli','miele acacia','timo','fiori di lavanda','acetosella','fiori di biancospino','aglio orsino','fiori di glicine edibili','crescione','erba cedrina','borragine','ortica giovane','fiori di nasturzio','fiori di viola','rucola selvatica','aneto fresco','maggiorana fresca','fiori di camomilla freschi','kiwi','fragolina di bosco','miele di tiglio','fiori di sambuco precoci'],
+  'maggio':['fragole mature','ciliegie','fiori di sambuco','basilico genovese','menta','limone','albicocche precoci','rosa canina','cedro','kumquat','erba cedrina','verbena','melissa','fiori di acacia','lamponi precoci','ribes rosso','fiori di lavanda freschi','dragoncello','fiori di nasturzio','maggiorana','fiori di borragine','timo limonato','gelsomino edibile','fiori di salvia','rabarbaro maturo','aneto','finocchietto selvatico','origano fresco','pisello mangiatutto','fiori di rosa'],
+  'giugno':['fragole','ciliegie','albicocche','pesche precoci','fiori di sambuco','basilico','menta','lamponi','ribes rosso','lavanda','limone','melone cantalupo','pomodorini','cetriolo','fiori di zucca','mirto','fiori di nasturzio','timo','salvia fresca','menta romana','fiori di ibisco freschi','anguria precoci','fiori di camomilla','ribes nero','prugne gialle','fiori di tiglio','melissa','dragoncello','fiori di malva','origano in fiore'],
+  'luglio':['pesche','albicocche','anguria','melone retato','lamponi','mirtilli','more precoci','basilico','menta','lavanda','fico d\'india','susine','cetriolo','pomodoro','fiori di nasturzio','fiori di zucca','erba cipollina in fiore','timo selvatico','fiori di calendula','camomilla fresca','basilico greco','menta acquatica','finocchietto','pomodoro verde','melone bianco','prugne rosse','fiori di ibisco','coriandolo fresco','peperoncino fresco','origano selvatico'],
+  'agosto':['pesche noci','fichi freschi','anguria','melone','more','lamponi','mirtilli','pomodoro','basilico','lavanda','fico','uva fragola','prugne','zucchina','melanzana','peperone','basilico viola','maggiorana','fiori di cappero','uva acerba','corbezzolo','fico d\'india maturo','pesca tabacchiera','amarena','sedano rapa','pomodoro camone','origano secco appena essiccato','alloro fresco','finocchio selvatico','fiori di aglio selvatico'],
+  'settembre':['fichi','uva nera','uva bianca','pere williams','mele golden','mirtilli','more','rosmarino','salvia','miele di fiori','melograno','marroni','zucca','nocciole fresche','uva moscato','prugne selvatiche','cotogna','mela annurca','fico secco','corbezzolo maturo','amarena sotto spirito','mirtillo rosso','noci verdi','bacche di ginepro fresche','sorbe','the nero di qualita','sapa d\'uva','vino cotto','fiori di erica','rabarbaro tardivo'],
+  'ottobre':['mele renette','pere','melograno','fichi secchi','uva fragola','zucca','marroni','rosmarino','timo','salvia','cachi','noci fresche','mele cotogne','chiodi di garofano','topinambur','finocchio selvatico secco','alloro','bacche di sambuco','castagna fresca','radice di zenzero essiccata','melissa secca','camomilla secca','bacche di rosa canina','biancospino','radice di cicoria','aglio nero','pepe della jamaica','anice verde','fiori di lavanda secca','cardamomo'],
+  'novembre':['melograno','cachi','mele cotogne','marroni','arance','mandarini','cannella','vaniglia','chiodi di garofano','noce moscata','rosmarino','miele di castagno','zenzero','clementine','bergamotto','tartufo nero','topinambur','radice di rafano','fava tonka','anice stellato','cardamomo','pepe szechuan','the affumicato lapsang','radice di liquirizia','prugna secca','fico secco','datteri','noci tostate','scorza di agrumi candita','cachi fuyu'],
+  'dicembre':['arancia','mandarino','clementine','melograno','cannella','chiodi di garofano','anice stellato','vaniglia','castagne','cachi','cedro','bergamotto','noce moscata','kumquat','arancia amara','scorza di limone candita','mele cotogne','dattero','fico secco','prugna secca','cardamomo nero','pepe lungo','radice di zenzero candita','fiori di arancio essiccati','the chai','miele di abete','pinoli tostati','vin brule spezie','scorza di arancia','fava tonka']
+};
+
 var PROMPTS = {
+
+  // ─── TWIST ON CLASSIC ──────────────────────────────────────────
   twist:{
-    maxTokens:1500,
+    maxTokens:1800,
     label:'Scrivi un drink classico e ti propongo 3 varianti',
     placeholder:'es. Negroni, Old Fashioned, Margarita...',
     usePills:false,fuType:'tre',
     build:function(v){
-      var cocktailRef='';
-      return 'Voglio fare un twist creativo su: '+v+'.\n\nREGOLA FONDAMENTALE: un twist non è un signature. Ogni reinterpretazione deve rimanere RICONOSCIBILE come variante del classico — stessa logica strutturale di base, stesso profilo di appartenenza. Chi lo beve deve percepire il classico di partenza reinterpretato, non un drink completamente nuovo. Se cambi tutto (base alcolica, struttura, profilo gusto, tecnica) non è più un twist — è un signature. Mantieni almeno 2-3 elementi chiave del classico originale in ogni variante.\n\nREGOLA DOSI: mantieni proporzioni coerenti con il classico di partenza.\n\nProponmi esattamente 3 reinterpretazioni originali e distinte tra loro, separate da ---.\n\nPer ognuna usa questa struttura esatta:\n## NOME TWIST\n(descrizione concept)\n## RICETTA\n- dose ml Ingrediente\n**Tecnica:** descrizione\n**Bicchiere:** specificare\n**Garnish:** specificare\n## PREPARAZIONI\n(solo se serve una prep homemade)\n## PERSONALIZZAZIONE\nConsiglio tecnico.\n\n* Ogni proposta è un punto di partenza: assaggia sempre e bilancia a tuo piacere prima del servizio.';
+      return 'Voglio fare un twist creativo su: '+v+'.\n\n'+
+      'REGOLA FONDAMENTALE: un twist non è un signature. Ogni reinterpretazione deve rimanere RICONOSCIBILE come variante del classico — stessa logica strutturale di base, stesso profilo di appartenenza. Chi lo beve deve percepire il classico di partenza reinterpretato, non un drink completamente nuovo. Se cambi tutto (base alcolica, struttura, profilo gusto, tecnica) non è più un twist — è un signature. Mantieni almeno 2-3 elementi chiave del classico originale in ogni variante.\n\n'+
+      'REGOLA DOSI: mantieni proporzioni coerenti con il classico di partenza. Se sostituisci un ingrediente (es. Vermouth con Porto, Campari con altro bitter) la dose di partenza è la stessa — poi ragiona su zuccherino, alcolicità e balance e segnala dove intervenire.\n\n'+
+      'REGOLA DIREZIONI: proponimi esattamente 3 reinterpretazioni originali e distinte tra loro, separate da ---. Le 3 varianti devono esplorare direzioni diverse restando nell\'orbita del classico:\n'+
+      '- Variante 1: elegante / stagionale — più raffinata, gioca su ingredienti freschi o una rilettura composta.\n'+
+      '- Variante 2: tecnica avanzata con homemade — obbligatoriamente include almeno una preparazione homemade (sciroppo a 62° Brix, cordial, oleo saccharum, infuso, shrub, fat-wash, ecc.) che la renda tecnicamente più complessa.\n'+
+      '- Variante 3: contemporanea / inaspettata — un twist coerente ma sorprendente, può usare ingredienti insoliti o una tecnica contemporanea.\n\n'+
+      'REGOLA HOMEMADE: almeno una delle 3 varianti (tipicamente la seconda) DEVE contenere una preparazione homemade completa. Le altre possono averla o no a seconda del twist.\n\n'+
+      'Per ognuna usa questa struttura esatta:\n'+DRINK_STRUCTURE_BASE+
+      MIXOLOGY_RULES+
+      DISCLAIMER;
     }
   },
+
+  // ─── FOOD PAIRING ──────────────────────────────────────────────
   pairing:{
-    maxTokens:2000,
+    maxTokens:2200,
     label:'Descrivi il piatto e ti propongo 3 drink',
     placeholder:'es. Tartare di tonno con avocado e sesamo...',
     usePills:false,fuType:'tre',
     build:function(v){
-      return 'Devo abbinare cocktail a questo piatto: '+v+'\n\nProponmi esattamente 3 drink con logiche distinte, separati da ---:\n1. CLASSICO: il classico più adatto\n2. AFFINITÀ: amplifica i sapori del piatto\n3. CREATIVO/INASPETTATO: abbinamento sorprendente\n\nPer ognuno usa questa struttura:\n## NOME DRINK\n(perché funziona con questo piatto)\n## RICETTA\n- dose ml Ingrediente\n**Tecnica:** descrizione\n**Bicchiere:** specificare\n**Garnish:** specificare\n## PREPARAZIONI\n(solo se serve una prep homemade)\n## PERSONALIZZAZIONE\nConsiglio timing servizio.\n\n* Assaggia sempre e bilancia a tuo piacere prima del servizio.';
+      return 'Devo abbinare cocktail a questo piatto: '+v+'\n\n'+
+      'Prima di proporre: analizza il profilo del piatto — grassi, acidità, sapidità, dolcezza, amaro, spezie, texture — e considera la temperatura di servizio (un piatto caldo si abbina diversamente da un crudo o un freddo).\n\n'+
+      'Proponimi esattamente 3 drink con logiche distinte, separati da ---:\n\n'+
+      '1. CLASSICO: scegli il classico più adatto tra questi 20 — formato: Nome|ingredienti|Bicchiere|Garnish. Usa ESATTAMENTE le dosi e gli ingredienti indicati, senza modifiche. Il drink deve essere accessibile e immediato:\n'+CLASSICI_20+'\n\n'+
+      '2. CONTRASTO: un drink che crea tensione bilanciante con il piatto — se il piatto è grasso, proponi un drink acido/sapido che sgrassi; se il piatto è dolce, proponi amaro/erbaceo; se è piccante, proponi freschezza o dolcezza controllata. La logica è opposizione armonica, non rinforzo. Può essere elaborato, con homemade o tecnica avanzata.\n'+
+      '3. CREATIVO/INASPETTATO: un abbinamento sorprendente, quasi un signature pensato per quel piatto specifico — si può osare con tecnica e ingredienti insoliti. Include tipicamente una o più preparazioni homemade.\n\n'+
+      'Per ognuno usa questa struttura esatta:\n## NOME DRINK\n'+
+      '(scrivi direttamente perché funziona con questo piatto — NON scrivere "Logica di abbinamento in 1 riga" o altre istruzioni)\n'+
+      '## RICETTA\n'+
+      '- dose ml Ingrediente (lista completa con dosi in ml)\n'+
+      '**Tecnica:** descrizione precisa\n'+
+      '**Bicchiere:** specificare\n'+
+      '**Garnish:** specificare con tecnica se non standard\n'+
+      '## PREPARAZIONI\n'+
+      'Per OGNI preparazione homemade citata nella ricetta, scrivi: **Nome prep:** procedimento completo con pesi in grammi, tempi, metodo. Per il CLASSICO ometti sempre questa sezione (usa solo ingredienti commerciali). Per gli altri due, ometti la sezione solo se la ricetta non contiene nessuna prep homemade.\n'+
+      '## PERSONALIZZAZIONE\n'+
+      'Consiglio su timing del servizio rispetto al piatto — prima, durante o dopo — e aggiustamento fine del bilanciamento.'+
+      MIXOLOGY_RULES+
+      DISCLAIMER;
     }
   },
+
+  // ─── COCKTAIL DEL GIORNO ───────────────────────────────────────
   giorno:{
-    maxTokens:700,
+    maxTokens:1200,
     label:'In che stile lo vuoi?',
     placeholder:'',
     usePills:true,fuType:'sino',
@@ -864,13 +968,40 @@ var PROMPTS = {
       var stagioni=['inverno','inverno','primavera','primavera','primavera','estate','estate','estate','autunno','autunno','autunno','inverno'];
       var mese=mesi[now.getMonth()];
       var stagione=stagioni[now.getMonth()];
+
+      var lista=INGREDIENTI_STAGIONE[mese]||['ingredienti freschi di stagione'];
+      var ingScelto=lista[Math.floor(Math.random()*lista.length)];
+
       var tipoStr=giornoTipo==='analcolico'?'ANALCOLICO (zero alcol)':'ALCOLICO, stile '+v;
-      return 'Oggi è il '+now.getDate()+' '+mese+', siamo in '+stagione+'.\n\nCrea il cocktail del giorno '+tipoStr+'.\n\nRispondi SOLO con questa struttura:\n## NOME DRINK\n(concept)\n## RICETTA\n- dose ml Ingrediente\n**Tecnica:** descrizione\n**Bicchiere:** specificare\n**Garnish:** specificare\n## PREPARAZIONI\n(solo se necessario)\n## INGREDIENTE STAGIONALE\nPerché è perfetto ora.\n## PERSONALIZZAZIONE\nConsiglio tecnico.\n\n* Assaggia sempre e bilancia prima del servizio.';
+      var stileNote=giornoTipo==='analcolico'?'':'\nStile: '+v+'.';
+
+      return 'Oggi è il '+now.getDate()+' '+mese+', siamo in '+stagione+'.\n\n'+
+      'Crea il cocktail del giorno '+tipoStr+'.\n\n'+
+      'INGREDIENTE PROTAGONISTA (obbligatorio): '+ingScelto+'.\n'+
+      'Deve essere il cuore del drink — non un semplice garnish o tocco finale. Costruisci tutta la struttura aromatica e tecnica intorno a lui. Se l\'ingrediente lo permette, prevedi una preparazione homemade (sciroppo a 62° Brix, oleo saccharum, infuso, cordiale, shrub, tintura) per esaltarlo al massimo.\n\n'+
+      'REGOLA STRUTTURA: il drink deve avere una struttura originale e stagionalmente coerente. Scegli base alcolica, profilo gusto, tecnica e bicchiere in modo che il risultato racconti questo momento preciso dell\'anno e dimostri padronanza tecnica reale.'+stileNote+'\n\n'+
+      'REGOLA HOMEMADE: il cocktail del giorno deve contenere almeno una preparazione homemade tecnicamente impeccabile, riportata per intero in PREPARAZIONI.\n\n'+
+      'Rispondi SOLO con questa struttura:\n'+
+      '## NOME DRINK\n'+
+      '(scrivi direttamente una riga che racconta il concept del drink e perché è perfetto per oggi — NON scrivere "Concept in 1 riga" o altre istruzioni)\n'+
+      '## RICETTA\n'+
+      '- dose ml Ingrediente (lista completa con dosi in ml)\n'+
+      '**Tecnica:** descrizione precisa\n'+
+      '**Bicchiere:** specificare\n'+
+      '**Garnish:** specificare con tecnica se non standard\n'+
+      '## PREPARAZIONI\n'+
+      'Per OGNI preparazione homemade citata nella ricetta, scrivi: **Nome prep:** procedimento completo con pesi in grammi, tempi, metodo.\n'+
+      '## INGREDIENTE PROTAGONISTA\n'+
+      'Perché '+ingScelto+' è perfetto in questo momento della stagione, come si esprime nel drink e quale tecnica lo valorizza meglio.\n'+
+      '## PERSONALIZZAZIONE\n'+
+      'Consiglio tecnico di bilanciamento — dove agire se il drink risulta troppo dolce, acido, alcolico o piatto.'+
+      MIXOLOGY_RULES+
+      DISCLAIMER;
     }
   }
 };
 
-// Signature prompt
+// ─── SIGNATURE PROMPT ──────────────────────────────────────────────
 function buildSignaturePrompt(ingredienti){
   var tipo=sig.tipo;
   var lines=[];
@@ -885,10 +1016,24 @@ function buildSignaturePrompt(ingredienti){
   }
   lines.push('- Ingredienti disponibili: '+ingredienti);
   lines.push('');
-  lines.push('REGOLA CONCEPT: un signature deve avere una identità propria e irripetibile. NON accettare concept generici.');
-  lines.push('REGOLA PREP HOMEMADE: deve avere almeno una preparazione homemade.');
+  lines.push('REGOLA CONCEPT: un signature non è un classico rielaborato — è un drink con una identità propria e irripetibile. Il concept deve raccontare qualcosa di specifico: un territorio, una stagione vissuta, un\'emozione precisa, un ingrediente che diventa protagonista assoluto. NON accettare concept generici come "fresco ed estivo" o "caldo e avvolgente" — deve esserci una storia dietro.');
   lines.push('');
-  lines.push('Rispondi SOLO con questa struttura:\n## NOME DRINK\n(storia o emozione)\n## RICETTA\n- dose ml Ingrediente\n**Tecnica:** descrizione\n**Bicchiere:** specificare\n**Garnish:** specificare\n## PREPARAZIONI\n(quasi sempre obbligatoria)\n## PERSONALIZZAZIONE\nConsiglio tecnico.\n\n* Assaggia sempre prima del servizio.');
+  lines.push('REGOLA PREP HOMEMADE: un signature DEVE avere almeno una preparazione homemade tecnicamente avanzata (sciroppo artigianale a 62° Brix, infuso, oleo saccharum, cordiale, shrub, tintura, bitter, fat-wash, fermentato) che lo renda unico e non replicabile al banco di un altro bar. È questa prep che fa la differenza tra un drink qualsiasi e un signature. La preparazione va riportata per intero in PREPARAZIONI con pesi in grammi, tempi e metodo.');
+  lines.push('');
+  lines.push('Rispondi SOLO con questa struttura:');
+  lines.push('## NOME DRINK');
+  lines.push('(scrivi direttamente una riga con la storia o l\'emozione del drink — NON scrivere "storia o emozione" o altre istruzioni)');
+  lines.push('## RICETTA');
+  lines.push('- dose ml Ingrediente (lista completa con dosi in ml)');
+  lines.push('**Tecnica:** descrizione precisa');
+  lines.push('**Bicchiere:** specificare');
+  lines.push('**Garnish:** specificare con tecnica di preparazione se non standard');
+  lines.push('## PREPARAZIONI');
+  lines.push('Per OGNI preparazione homemade citata nella ricetta, scrivi: **Nome prep:** procedimento completo con pesi in grammi, tempi, metodo. Questa sezione è obbligatoria in un signature.');
+  lines.push('## PERSONALIZZAZIONE');
+  lines.push('Consiglio tecnico di bilanciamento — dove intervenire su dolcezza, acidità, diluizione o alcolicità.');
+  lines.push(MIXOLOGY_RULES);
+  lines.push(DISCLAIMER);
   return lines.join('\n');
 }
 
