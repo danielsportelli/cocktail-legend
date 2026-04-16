@@ -1,31 +1,47 @@
 // ═══════════════════════════════════════════════════
-// SERVICE WORKER — Cocktail Legend PWA
+// SERVICE WORKER — Cocktail Legend PWA v3
 // ═══════════════════════════════════════════════════
-const CACHE_NAME = 'cocktail-legend-v2';
+const CACHE_NAME = 'cocktail-legend-v3';
 
-// File da cachare per uso offline
-const CACHE_FILES = [
+// ── File da pre-cachare all'installazione ──────────
+const PRECACHE_FILES = [
   '/cocktail-legend/webapp/cocktail-legend.html',
+  '/cocktail-legend/webapp/barman-ai.html',
+  '/cocktail-legend/webapp/quiz.html',
+  '/cocktail-legend/webapp/spirits-genesis.html',
   '/cocktail-legend/webapp/css/css.css',
   '/cocktail-legend/webapp/js/js.js',
   '/cocktail-legend/webapp/js/firebase-init.js',
-  '/cocktail-legend/webapp/quiz.html',
+  '/cocktail-legend/webapp/manifest.json',
+  '/cocktail-legend/webapp/database/it/cocktails-it.json',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Syne:wght@700;800&display=swap'
 ];
 
-// Installazione — cacha i file principali
+// ── Domini da NON cachare mai (sempre online) ──────
+const NETWORK_ONLY = [
+  'firestore.googleapis.com',
+  'firebase.googleapis.com',
+  'identitytoolkit.googleapis.com',
+  'securetoken.googleapis.com',
+  'googleapis.com/v1',
+  'anthropic.com',
+  'cloudfunctions.net',
+  'daniel-sportelli.workers.dev'
+];
+
+// ── Installazione ──────────────────────────────────
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(CACHE_FILES).catch(function(err) {
-        console.warn('Cache parziale:', err);
+      return cache.addAll(PRECACHE_FILES).catch(function(err) {
+        console.warn('[SW] Pre-cache parziale:', err);
       });
     })
   );
   self.skipWaiting();
 });
 
-// Attivazione — rimuovi cache vecchie
+// ── Attivazione — rimuovi cache vecchie ───────────
 self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(keys) {
@@ -33,6 +49,7 @@ self.addEventListener('activate', function(event) {
         keys.filter(function(key) {
           return key !== CACHE_NAME;
         }).map(function(key) {
+          console.log('[SW] Rimozione cache vecchia:', key);
           return caches.delete(key);
         })
       );
@@ -41,33 +58,64 @@ self.addEventListener('activate', function(event) {
   self.clients.claim();
 });
 
-// Fetch — Network first, fallback cache
+// ── Fetch — strategia per tipo di risorsa ─────────
 self.addEventListener('fetch', function(event) {
-  // Ignora richieste Firebase/API (sempre online)
-  if (
-    event.request.url.includes('firestore') ||
-    event.request.url.includes('firebase') ||
-    event.request.url.includes('googleapis.com/v1') ||
-    event.request.url.includes('anthropic')
-  ) {
+  var url = event.request.url;
+
+  // 1. Network Only — Firebase, API, Anthropic
+  var isNetworkOnly = NETWORK_ONLY.some(function(domain) {
+    return url.includes(domain);
+  });
+  if (isNetworkOnly) return;
+
+  // 2. Cache First — immagini e font (cambiano raramente)
+  var isCacheFirst = (
+    url.includes('/database/it/') ||          // JSON e immagini cocktail
+    url.match(/\.(webp|png|jpg|jpeg|svg|ico|woff2|woff|ttf)$/) ||
+    url.includes('fonts.gstatic.com') ||
+    url.includes('fonts.googleapis.com')
+  );
+
+  if (isCacheFirst) {
+    event.respondWith(
+      caches.match(event.request).then(function(cached) {
+        if (cached) return cached;
+        // Non in cache → scarica e salva
+        return fetch(event.request).then(function(response) {
+          if (response && response.status === 200) {
+            var clone = response.clone();
+            caches.open(CACHE_NAME).then(function(cache) {
+              cache.put(event.request, clone);
+            });
+          }
+          return response;
+        }).catch(function() {
+          return new Response('', { status: 408 });
+        });
+      })
+    );
     return;
   }
 
+  // 3. Network First con fallback cache — HTML, CSS, JS
   event.respondWith(
-    fetch(event.request)
-      .then(function(response) {
-        // Salva in cache una copia fresca
-        if (response && response.status === 200 && response.type === 'basic') {
-          var clone = response.clone();
-          caches.open(CACHE_NAME).then(function(cache) {
-            cache.put(event.request, clone);
-          });
+    fetch(event.request).then(function(response) {
+      if (response && response.status === 200 && response.type === 'basic') {
+        var clone = response.clone();
+        caches.open(CACHE_NAME).then(function(cache) {
+          cache.put(event.request, clone);
+        });
+      }
+      return response;
+    }).catch(function() {
+      return caches.match(event.request).then(function(cached) {
+        if (cached) return cached;
+        // Fallback offline per navigazione HTML
+        if (event.request.destination === 'document') {
+          return caches.match('/cocktail-legend/webapp/cocktail-legend.html');
         }
-        return response;
-      })
-      .catch(function() {
-        // Offline → servi dalla cache
-        return caches.match(event.request);
-      })
+        return new Response('', { status: 408 });
+      });
+    })
   );
 });
