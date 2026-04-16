@@ -108,22 +108,22 @@ body::after{
   border:1px solid var(--brd);
   border-radius:18px;
   overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  /* Il main è 100dvh con box-sizing:border-box e padding-top che copre l'header.
-     La card riempie tutto lo spazio disponibile del main, meno un margine inferiore.
-     IMPORTANTE: flex-basis = 0 (non auto) — altrimenti la card cresce fino all'altezza del contenuto
-     ignorando lo spazio disponibile del main, e il body non trova un constraint di altezza reale
-     per attivare overflow-y:auto. Con 0 la card parte da zero e cresce fino al limite del main. */
+  position:relative;                /* ancora per il body in position:absolute */
+  /* Altezza: flex-child del main. flex:1 1 0 + min-height:0 fa sì che la card prenda
+     esattamente lo spazio residuo del main (main height - padding-top header - margin-bottom). */
   flex:1 1 0;
-  min-height:0;                     /* permette alla card di comprimersi dentro il flex del main */
+  min-height:0;
   margin-bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));
+  /* Grid interno verticale: una riga auto per header, una per usage, una 1fr per il body.
+     Questo approccio è MATEMATICAMENTE deterministico: il body prende esattamente lo spazio
+     residuo, indipendentemente dal contenuto interno. Niente flex: annidati fragili. */
+  display:grid;
+  grid-template-rows:auto auto 1fr;
 }
 /* (Rimossa la media query standalone della card: l'altezza è ora gestita da .bai-main via flex.) */
 
 /* Header interno alla card */
 .bai-card-hdr{
-  flex-shrink:0;
   display:flex;align-items:center;justify-content:space-between;
   padding:.85rem 1.1rem .75rem;
   border-bottom:1px solid var(--brd);
@@ -145,17 +145,15 @@ body::after{
 
 /* Usage bar sticky sotto header card */
 .bai-usage{
-  flex-shrink:0;
   display:flex;align-items:center;gap:8px;
   padding:.5rem 1.1rem .45rem;
   font-size:.63rem;color:var(--dim);
   border-bottom:1px solid var(--brd);
 }
 
-/* Contenuto scrollabile dentro la card */
+/* Contenuto scrollabile dentro la card — cella grid 1fr, min-height:0 cruciale */
 .bai-card-body{
-  flex:1 1 0;
-  min-height:0;           /* fix flex: consente al figlio di essere più piccolo del contenuto → attiva scroll */
+  min-height:0;                     /* cruciale: permette alla cella grid 1fr di essere più piccola del contenuto */
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
