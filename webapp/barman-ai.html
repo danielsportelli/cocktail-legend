@@ -111,8 +111,11 @@ body::after{
   display:flex;
   flex-direction:column;
   /* Il main è 100dvh con box-sizing:border-box e padding-top che copre l'header.
-     La card riempie tutto lo spazio disponibile del main, meno un margine inferiore. */
-  flex:1 1 auto;
+     La card riempie tutto lo spazio disponibile del main, meno un margine inferiore.
+     IMPORTANTE: flex-basis = 0 (non auto) — altrimenti la card cresce fino all'altezza del contenuto
+     ignorando lo spazio disponibile del main, e il body non trova un constraint di altezza reale
+     per attivare overflow-y:auto. Con 0 la card parte da zero e cresce fino al limite del main. */
+  flex:1 1 0;
   min-height:0;                     /* permette alla card di comprimersi dentro il flex del main */
   margin-bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));
 }
