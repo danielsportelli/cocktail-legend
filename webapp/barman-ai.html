@@ -82,13 +82,16 @@ body::after{
 .bai-icon-btn.active svg{stroke:var(--amber);}
 
 /* ── MAIN CONTENT ── */
-/* bai-header::after rimosso — lo stacco visivo lo dà la card */
+/* Contenitore ad altezza fissa = il viewport. NON flex: la card figlia si dimensiona da sola con calc(). */
 .bai-main{
   padding-top:calc(56px + 1rem);
   padding-bottom:0;
-  min-height:100vh;
+  height:100vh;
+  height:100dvh;                    /* dvh per browser moderni — barra indirizzi iOS */
+  box-sizing:border-box;            /* il padding non deve sforare l'altezza */
   position:relative;z-index:1;
   display:flex;flex-direction:column;align-items:center;
+  overflow:hidden;                  /* blocca qualsiasi scroll del main → solo .bai-card-body scrolla */
 }
 @media(display-mode:standalone){
   .bai-main{
@@ -107,18 +110,13 @@ body::after{
   overflow:hidden;
   display:flex;
   flex-direction:column;
-  /* Altezza: schermo - header fisso - margine top - margine bottom con safe area */
-  height:calc(100vh - 56px - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
-  /* dvh per browser moderni (risolve il problema barra indirizzi iOS) */
-  height:calc(100dvh - 56px - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
+  /* Il main è 100dvh con box-sizing:border-box e padding-top che copre l'header.
+     La card riempie tutto lo spazio disponibile del main, meno un margine inferiore. */
+  flex:1 1 auto;
+  min-height:0;                     /* permette alla card di comprimersi dentro il flex del main */
   margin-bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));
 }
-@media(display-mode:standalone){
-  .bai-card{
-    height:calc(100vh - 56px - env(safe-area-inset-top,0px) - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
-    height:calc(100dvh - 56px - env(safe-area-inset-top,0px) - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
-  }
-}
+/* (Rimossa la media query standalone della card: l'altezza è ora gestita da .bai-main via flex.) */
 
 /* Header interno alla card */
 .bai-card-hdr{
