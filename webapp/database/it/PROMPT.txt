@@ -179,8 +179,8 @@ ABV (scegli 1):
 Analcolico, Basso, Medio basso, Medio, Medio alto, Alto, Molto alto
 
 SAPORI (scegli esattamente 3 valori):
-Acidulo, Affumicato, Agrumato, Amaro, Aromatico, Avvolgente, Balsamico, Bilanciato, Brillante, Caffeinico, Caldo, Caramellato, Classico, Complesso,
-Corposo, Cremoso, Deciso, Dissetante, Dolce, Effervescente, Elegante, Erbaceo, Esotico, Floreale, Fresco, Fruttato, Goloso, Intenso, Leggero, Mandorlato,
+Acidulo, Affumicato, Agrumato, Amaro, Anisato, Aromatico, Avvolgente, Balsamico, Bilanciato, Brillante, Caffeinico, Caldo, Caramellato, Classico, Complesso,
+Corposo, Cremoso, Deciso, Dissetante, Dolce, Elegante, Erbaceo, Esotico, Floreale, Fresco, Fruttato, Goloso, Intenso, Leggero, Mandorlato,
 Mentolato, Morbido, Piccante, Potente, Profondo, Raffinato, Ricco, Rinfrescante, Robusto, Rotondo, Rustico, Secco, Setoso, Speziato, Strutturato, Tostato,
 Tropicale, Vanigliato, Vellutato, Vivace
 

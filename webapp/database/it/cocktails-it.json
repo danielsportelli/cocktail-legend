@@ -2097,7 +2097,7 @@
   "distillato": ["Assenzio"],
   "categoria": "Pre dinner",
   "abv": "Molto alto",
-  "sapori": ["Erbaceo", "Aromatico", "Secco"],
+  "sapori": ["Balsamico", "Anisato", "Secco"],
   "garnish": "Zest di arancia",
   "ingredienti": [
     ["50 ml", "Assenzio"],
@@ -2124,7 +2124,7 @@
   "distillato": ["Vermouth"],
   "categoria": "Pre dinner",
   "abv": "Basso",
-  "sapori": ["Bilanciato", "Floreale", "Fresco"],
+  "sapori": ["Morbido", "Agrumato", "Classico"],
   "garnish": "Zest di arancia",
   "ingredienti": [
     ["30 ml", "Vermouth bianco"],
@@ -3619,8 +3619,8 @@
   "distillato": ["Gin"],
   "categoria": "Pre dinner",
   "abv": "Medio",
-  "sapori": ["Agrumato", "Fruttato", "Morbido"],
-  "garnish": "Twist di arancia",
+  "sapori": ["Deciso", "Agrumato", "Speziato"],
+  "garnish": "Zest di arancia",
   "ingredienti": [
     ["45 ml", "Gin"],
     ["22,5 ml", "Succo di arancia"],
@@ -3644,7 +3644,7 @@
   "distillato": ["Sherry"],
   "categoria": "Pre dinner",
   "abv": "Medio basso",
-  "sapori": ["Elegante", "Secco", "Aromatico"],
+  "sapori": ["Elegante", "Ricco", "Aromatico"],
   "garnish": "Zest di arancia",
   "ingredienti": [
     ["45 ml", "Sherry fino"],
@@ -3747,7 +3747,7 @@
   "categoria": "After dinner",
   "abv": "Medio alto",
   "sapori": ["Agrumato", "Speziato", "Robusto"],
-  "garnish": "Twist di arancia",
+  "garnish": "Zest di arancia",
   "ingredienti": [
     ["45 ml", "Brandy"],
     ["15 ml", "Orange curaçao"],
