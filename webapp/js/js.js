@@ -1315,11 +1315,16 @@ function initF() {
     }
 
     function _fsheetDoneAction() {
-      _fsheetDoneFlash();
+      // NB: il flash viene fatto a pointerdown/touchstart, non qui —
+      // rifarlo ritardava la chiusura (setTimeout 300ms si resettava).
       closeFsheet();
-      updateBadges();
-      render();
-      if (typeof updatePills === 'function') updatePills();
+      // Il render e update pills avvengono dopo che la transizione di chiusura
+      // è iniziata, così la tendina scompare istantaneamente dal punto di vista utente.
+      requestAnimationFrame(function(){
+        updateBadges();
+        render();
+        if (typeof updatePills === 'function') updatePills();
+      });
     }
 
     // ── Pointer Events API: il metodo più affidabile cross-platform ──
@@ -1354,6 +1359,8 @@ function initF() {
       });
       fsheetDone.addEventListener('click', function(e) {
         if (_fsheetDoneTouched) { _fsheetDoneTouched = false; return; }
+        // Path desktop (mouse): nessun touchstart precedente → facciamo il flash qui
+        _fsheetDoneFlash();
         _fsheetDoneAction();
       });
     }
@@ -1540,6 +1547,9 @@ function showCards(){
 function openM(i){
   var st=document.getElementById("tab-bar");if(st)st.style.display="none";
   var c=RES[i];if(!c)return;LAST_IDX=i;
+  // Reset scroll della modale — deve sempre ripartire dall'alto
+  var modalEl=document.querySelector('.modal');
+  if(modalEl) modalEl.scrollTop=0;
   var img=document.getElementById("m-img");
   img.onerror=function(){this.style.display="none";};
   img.style.display="block";img.src="";img.loading="lazy";

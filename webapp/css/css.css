@@ -38,7 +38,7 @@ body::before{
     padding-top:env(safe-area-inset-top, 0px);
   }
   .pills-bar{
-    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));
+    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px) - 1px);
   }
 }
 .hdr-inner{
@@ -313,7 +313,7 @@ body::before{
 
 .pills-bar{
   position:fixed;
-  top:var(--hdr-h);
+  top:calc(var(--hdr-h) - 1px);
   left:0;right:0;
   z-index:97;
   background:var(--surf);
@@ -329,7 +329,7 @@ body::before{
 }
 @media (display-mode: standalone) {
   .pills-bar{
-    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));
+    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px) - 1px);
   }
   .hdr.hdr--hidden ~ .pills-bar{
     transform:translateY(calc(-1 * (var(--hdr-h) + env(safe-area-inset-top, 0px))));
@@ -373,6 +373,7 @@ body::before{
   cursor:pointer;white-space:nowrap;
   transition:color .15s;
   -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
 }
 .fpill::after{
   content:'▾';
