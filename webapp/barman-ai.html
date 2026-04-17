@@ -114,16 +114,16 @@ body::after{
   flex:1 1 0;
   min-height:0;
   margin-bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));
-  /* Grid interno verticale: una riga auto per header, una per usage, una 1fr per il body.
-     Questo approccio è MATEMATICAMENTE deterministico: il body prende esattamente lo spazio
-     residuo, indipendentemente dal contenuto interno. Niente flex: annidati fragili. */
-  display:grid;
-  grid-template-rows:auto auto 1fr;
+  /* Layout interno della card: flex column per header e usage (altezze auto),
+     poi il body è posizionato in ABSOLUTE per occupare lo spazio residuo. */
+  display:flex;
+  flex-direction:column;
 }
 /* (Rimossa la media query standalone della card: l'altezza è ora gestita da .bai-main via flex.) */
 
 /* Header interno alla card */
 .bai-card-hdr{
+  flex-shrink:0;
   display:flex;align-items:center;justify-content:space-between;
   padding:.85rem 1.1rem .75rem;
   border-bottom:1px solid var(--brd);
@@ -145,15 +145,20 @@ body::after{
 
 /* Usage bar sticky sotto header card */
 .bai-usage{
+  flex-shrink:0;
   display:flex;align-items:center;gap:8px;
   padding:.5rem 1.1rem .45rem;
   font-size:.63rem;color:var(--dim);
   border-bottom:1px solid var(--brd);
 }
 
-/* Contenuto scrollabile dentro la card — cella grid 1fr, min-height:0 cruciale */
+/* Contenuto scrollabile — flex-child che prende lo spazio residuo nella card.
+   Il trucco per farlo funzionare SEMPRE è `height:0` + `flex:1 1 auto` + `overflow-y:auto`:
+   height:0 è un valore iniziale deterministico, flex-grow lo espande fino allo spazio disponibile,
+   overflow-y:auto attiva lo scroll quando il contenuto supera quello spazio. */
 .bai-card-body{
-  min-height:0;                     /* cruciale: permette alla cella grid 1fr di essere più piccola del contenuto */
+  flex:1 1 auto;
+  height:0;                         /* CRITICO: altezza iniziale 0, poi flex la espande */
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
