@@ -723,7 +723,6 @@ body::before{
 .modal{background:var(--surf);border:1px solid rgba(37,99,235,.2);border-radius:16px;
   max-width:520px;width:100%;max-height:min(90vh, calc(100dvh - 3rem));overflow-y:auto;
   overflow-x:hidden;
-  clip-path:inset(0 round 14px);
   transform:translateY(20px) scale(.97);transition:transform .25s}
 .overlay.open .modal{transform:translateY(0) scale(1)}
 .modal::-webkit-scrollbar{display:none}
@@ -747,7 +746,6 @@ body::before{
   background:rgb(30,41,59);
   border-bottom:1px solid rgba(255,255,255,.07);
   border-radius:14px 14px 0 0;
-  margin-bottom:-3px;
 }
 .m-sticky-title{
   font-size:.82rem;font-weight:700;color:var(--txt2);
