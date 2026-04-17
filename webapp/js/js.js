@@ -5595,25 +5595,6 @@ function requirePremium(featureName) {
 // ═══════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', function() {
 
-  // ── AI buttons (tutti e 4 bloccati) ──────────────────────
-  var aiPremiumBtns = [
-    { id: 'ai-btn-signature', nome: 'Crea un Signature' },
-    { id: 'ai-btn-twist',     nome: 'Twist on Classic'  },
-    { id: 'ai-btn-pairing',   nome: 'Food Pairing'      },
-    { id: 'ai-btn-giorno',    nome: 'Cocktail del Giorno'},
-  ];
-  aiPremiumBtns.forEach(function(item) {
-    var btn = document.getElementById(item.id);
-    if (!btn) return;
-    btn.addEventListener('click', function(e) {
-      if (!isPremium()) {
-        e.preventDefault();
-        e.stopPropagation();
-        requirePremium(item.nome);
-      }
-    });
-  });
-
   // ── Calcolatori ABV e Pre-Batch ─────────────────────────
   // Il blocco è ora gestito direttamente nel click handler dei calc-cmd-btn
   // con banner inline — nessun modal/toast aggiuntivo necessario
