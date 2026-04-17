@@ -82,16 +82,13 @@ body::after{
 .bai-icon-btn.active svg{stroke:var(--amber);}
 
 /* ── MAIN CONTENT ── */
-/* Contenitore ad altezza fissa = il viewport. NON flex: la card figlia si dimensiona da sola con calc(). */
+/* bai-header::after rimosso — lo stacco visivo lo dà la card */
 .bai-main{
   padding-top:calc(56px + 1rem);
   padding-bottom:0;
-  height:100vh;
-  height:100dvh;                    /* dvh per browser moderni — barra indirizzi iOS */
-  box-sizing:border-box;            /* il padding non deve sforare l'altezza */
+  min-height:100vh;
   position:relative;z-index:1;
   display:flex;flex-direction:column;align-items:center;
-  overflow:hidden;                  /* blocca qualsiasi scroll del main → solo .bai-card-body scrolla */
 }
 @media(display-mode:standalone){
   .bai-main{
@@ -108,18 +105,20 @@ body::after{
   border:1px solid var(--brd);
   border-radius:18px;
   overflow:hidden;
-  position:relative;                /* ancora per il body in position:absolute */
-  /* Altezza: flex-child del main. flex:1 1 0 + min-height:0 fa sì che la card prenda
-     esattamente lo spazio residuo del main (main height - padding-top header - margin-bottom). */
-  flex:1 1 0;
-  min-height:0;
-  margin-bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));
-  /* Layout interno della card: flex column per header e usage (altezze auto),
-     poi il body è posizionato in ABSOLUTE per occupare lo spazio residuo. */
   display:flex;
   flex-direction:column;
+  /* Altezza: schermo - header fisso - margine top - margine bottom con safe area */
+  height:calc(100vh - 56px - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
+  /* dvh per browser moderni (risolve il problema barra indirizzi iOS) */
+  height:calc(100dvh - 56px - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
+  margin-bottom:calc(1.25rem + env(safe-area-inset-bottom,0px));
 }
-/* (Rimossa la media query standalone della card: l'altezza è ora gestita da .bai-main via flex.) */
+@media(display-mode:standalone){
+  .bai-card{
+    height:calc(100vh - 56px - env(safe-area-inset-top,0px) - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
+    height:calc(100dvh - 56px - env(safe-area-inset-top,0px) - 1rem - 1.25rem - env(safe-area-inset-bottom,0px));
+  }
+}
 
 /* Header interno alla card */
 .bai-card-hdr{
@@ -152,13 +151,10 @@ body::after{
   border-bottom:1px solid var(--brd);
 }
 
-/* Contenuto scrollabile — flex-child che prende lo spazio residuo nella card.
-   Il trucco per farlo funzionare SEMPRE è `height:0` + `flex:1 1 auto` + `overflow-y:auto`:
-   height:0 è un valore iniziale deterministico, flex-grow lo espande fino allo spazio disponibile,
-   overflow-y:auto attiva lo scroll quando il contenuto supera quello spazio. */
+/* Contenuto scrollabile dentro la card — FIX DESKTOP SCROLL: min-height:0 sul body */
 .bai-card-body{
   flex:1 1 auto;
-  height:0;                         /* CRITICO: altezza iniziale 0, poi flex la espande */
+  min-height:0;                     /* fix desktop: consente al body di comprimersi e attivare overflow-y */
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
