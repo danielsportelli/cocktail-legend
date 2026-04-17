@@ -45,6 +45,7 @@ body::before{
   display:flex;align-items:center;
   height:100%;
 }
+.hdr-lbl{display:none;}
 .hdr-logo{
   font-size:1.15rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
   color:var(--amber);
@@ -806,12 +807,14 @@ body::before{
 .varianti-row:last-child{border-bottom:none}
 .varianti-nome{font-size:.8rem;font-weight:700;color:var(--txt)}
 .varianti-note{font-size:.72rem;color:var(--txt2)}
+.tab-btn-lbl{display:none;}
 .empty{grid-column:1/-1;text-align:center;padding:4rem 2rem}
 .empty .ico{font-size:3rem;margin-bottom:1rem;opacity:.4}
 .empty h3{font-size:1.05rem;font-weight:700;margin-bottom:.35rem}
 .empty p{font-size:.85rem;color:var(--txt2)}
 
 @media(max-width:600px){
+  .tab-btn-lbl{display:none;}
   .filter-groups{gap:.4rem}
   .fg-dropdown{position:fixed;left:5%;right:5%;top:auto;min-width:unset;width:auto}
   .grid{grid-template-columns:1fr 1fr}
