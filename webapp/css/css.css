@@ -747,6 +747,7 @@ body::before{
   background:rgb(30,41,59);
   border-bottom:1px solid rgba(255,255,255,.07);
   border-radius:14px 14px 0 0;
+  margin-bottom:-1px;
 }
 .m-sticky-title{
   font-size:.82rem;font-weight:700;color:var(--txt2);
