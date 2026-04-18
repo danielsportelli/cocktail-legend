@@ -1293,11 +1293,13 @@ function initF() {
   var resetPill = document.getElementById('fpill-reset');
   if (resetPill) {
     resetPill.addEventListener('click', function() {
-      // Reset tutti i filtri
+      // Reset filtri pills (mantiene ricerca testuale, FAV_ONLY, sort)
       AF = {cat:[], dis:[], abv:[], frz:[], bic:[], iba:[]};
       updateBadges();
       render();
       updatePills();
+      // Scroll in cima: lista riallineata con contatore visibile
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
@@ -1324,6 +1326,8 @@ function initF() {
         updateBadges();
         render();
         if (typeof updatePills === 'function') updatePills();
+        // Scroll in cima: lista filtrata visibile dall'inizio
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 
