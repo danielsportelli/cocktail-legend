@@ -3838,10 +3838,17 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
         render();
         inp.focus();
       } else {
-        // Ha premuto Invio/Cerca → chiudi tastiera normalmente
+        // Ha premuto Invio/Cerca → chiudi tastiera, chiudi search bar, torna in cima
         closeSuggestions();
         inp.blur();
         render();
+        // Chiudi la search bar simulando click sul bottone lente
+        var _pillsSrchBtnClose = document.getElementById('pills-srch-btn');
+        if (_pillsSrchBtnClose && _pillsSrchBtnClose.classList.contains('active')) {
+          _pillsSrchBtnClose.click();
+        }
+        // Scroll in cima per vedere contatore + risultati dall'inizio
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
 
@@ -4235,6 +4242,15 @@ function updateHeaderVisibility() {
   // Ignora scroll fittizi quando la tastiera è aperta
   var vvH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   if (vvH < (window._initialViewportH || window.innerHeight) * 0.75) {
+    // Se la search è aperta, assicurati che l'header sia visibile — altrimenti
+    // pills+filter-bar restano traslate fuori viewport e l'utente non le vede
+    // mentre digita
+    var _fbOpen = document.getElementById('filter-bar');
+    if (_fbOpen && !_fbOpen.classList.contains('hidden') && _hdrHidden) {
+      _hdrHidden = false;
+      hdr.classList.remove('hdr--hidden');
+      _scrollDelta = 0;
+    }
     _lastScrollY = window.scrollY || window.pageYOffset;
     return;
   }
@@ -7341,8 +7357,15 @@ function showInstallPWAModal() {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
-        // Scroll in cima: garantisce header visibile + barre allineate + lista dall'inizio
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Scroll in cima istantaneo (smooth + apertura tastiera = race condition)
+        window.scrollTo(0, 0);
+        // Forza header visibile: se era nascosto pills+filter-bar resterebbero
+        // traslate di -hdr-h fuori viewport dopo il focus sull'input
+        var _hdrReset = document.querySelector('.hdr');
+        if (_hdrReset) _hdrReset.classList.remove('hdr--hidden');
+        if (typeof _hdrHidden !== 'undefined') _hdrHidden = false;
+        if (typeof _scrollDelta !== 'undefined') _scrollDelta = 0;
+        if (typeof _lastScrollY !== 'undefined') _lastScrollY = 0;
         // Pre-calcola altezza: rimuovi hidden, forza layout, applica padding — tutto prima del paint
         filterBar.style.transition = 'none';
         filterBar.classList.remove('hidden');
