@@ -1021,6 +1021,20 @@ function _applyBarsTop(hdrBottom) {
 function updateHeaderVisibility() {
   var hdr = document.querySelector('.hdr');
   if (!hdr) return;
+  // In modalità ricerca (filter-bar aperta) l'header resta sempre visibile.
+  // Evita che scroll programmatico (tastiera, render che riduce altezza grid)
+  // nasconda le barre mentre l'utente sta cercando.
+  var fb = document.getElementById('filter-bar');
+  if (fb && !fb.classList.contains('hidden')) {
+    if (_hdrHidden) {
+      _hdrHidden = false;
+      hdr.classList.remove('hdr--hidden');
+      _startSyncLoop();
+    }
+    _scrollDelta = 0;
+    _lastScrollY = window.scrollY || window.pageYOffset;
+    return;
+  }
   var currentY = window.scrollY || window.pageYOffset;
   var diff = currentY - _lastScrollY;
 
