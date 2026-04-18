@@ -3798,14 +3798,7 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
         updateClearBtn();
         inp.focus();
         // Ripristina scroll in cima per vedere contatore + barre fisse
-        window.scrollTo(0, 0);
-        if (typeof _scrollDelta !== 'undefined') _scrollDelta = 0;
-        if (typeof _lastScrollY !== 'undefined') _lastScrollY = 0;
-        if (typeof _hdrHidden !== 'undefined' && _hdrHidden) {
-          _hdrHidden = false;
-          var _hdrX = document.querySelector('.hdr');
-          if (_hdrX) _hdrX.classList.remove('hdr--hidden');
-        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 
@@ -4242,16 +4235,23 @@ function updateHeaderVisibility() {
   // Ignora scroll fittizi quando la tastiera è aperta
   var vvH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   if (vvH < (window._initialViewportH || window.innerHeight) * 0.75) {
-    // Reset anche delta: evita che valori accumulati prima dell'apertura tastiera
-    // esplodano al primo evento scroll che passa il guard (oscillazioni viewport)
+    _lastScrollY = window.scrollY || window.pageYOffset;
+    return;
+  }
+  // In modalità ricerca (filter-bar aperta) l'header resta sempre visibile.
+  // Evita che scroll programmatico (tastiera, render che riduce altezza grid)
+  // nasconda le barre mentre l'utente sta cercando.
+  var fb = document.getElementById('filter-bar');
+  if (fb && !fb.classList.contains('hidden')) {
+    if (_hdrHidden) {
+      _hdrHidden = false;
+      hdr.classList.remove('hdr--hidden');
+      _startSyncLoop();
+    }
     _scrollDelta = 0;
     _lastScrollY = window.scrollY || window.pageYOffset;
     return;
   }
-  // Nota: anche con filter-bar aperta manteniamo la logica standard di
-  // hide/show — pills+filter-bar seguono l'header e restano sticky in cima.
-  // La protezione contro scroll fittizi da tastiera è già gestita sopra
-  // dal check su visualViewport.
   var currentY = window.scrollY || window.pageYOffset;
   var diff = currentY - _lastScrollY;
 
@@ -7355,17 +7355,8 @@ function showInstallPWAModal() {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
-        // Scroll in cima istantaneo: evita sovrapposizione smooth-scroll + apertura tastiera
-        // che causerebbe desync del tracking scroll
-        window.scrollTo(0, 0);
-        // Reset stato scroll tracking: riparte da zero coerente con scrollY=0
-        if (typeof _scrollDelta !== 'undefined') _scrollDelta = 0;
-        if (typeof _lastScrollY !== 'undefined') _lastScrollY = 0;
-        if (typeof _hdrHidden !== 'undefined' && _hdrHidden) {
-          _hdrHidden = false;
-          var _hdrReset = document.querySelector('.hdr');
-          if (_hdrReset) _hdrReset.classList.remove('hdr--hidden');
-        }
+        // Scroll in cima: garantisce header visibile + barre allineate + lista dall'inizio
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         // Pre-calcola altezza: rimuovi hidden, forza layout, applica padding — tutto prima del paint
         filterBar.style.transition = 'none';
         filterBar.classList.remove('hidden');
