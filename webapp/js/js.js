@@ -965,6 +965,10 @@ function updateAllCounts() {
 var _lastScrollY = 0;
 var _hdrHidden = false;
 window._initialViewportH = window.innerHeight;
+// Aggiorna _initialViewportH solo a load/orientationchange (non durante tastiera)
+window.addEventListener('orientationchange', function(){
+  setTimeout(function(){ window._initialViewportH = window.innerHeight; }, 300);
+});
 var _cachedHdrH = 73;
 var _cachedFbH = 0;
 var _syncRafId = null;
@@ -982,11 +986,15 @@ var SCROLL_THRESHOLD = 500; // px da scrollare prima di triggerare
   } else {
     updateHdrH();
   }
-  window.addEventListener('resize', function(){
-    var ratio = window.innerHeight / (window._initialViewportH || window.innerHeight);
-    if (ratio < 0.75) return; // tastiera aperta — ignora
+  function onHdrResize() {
+    // usa visualViewport se disponibile
+    var h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    var ref = window._initialViewportH || window.innerHeight;
+    if (h < ref * 0.75) return; // tastiera aperta
     updateHdrH();
-  });
+  }
+  window.addEventListener('resize', onHdrResize);
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', onHdrResize);
 })();
 
 // Loop rAF che sincronizza pills e filter-bar all'header frame per frame
@@ -1026,6 +1034,12 @@ function _applyBarsTop(hdrBottom) {
 function updateHeaderVisibility() {
   var hdr = document.querySelector('.hdr');
   if (!hdr) return;
+  // Ignora scroll fittizi quando la tastiera è aperta
+  var vvH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  if (vvH < (window._initialViewportH || window.innerHeight) * 0.75) {
+    _lastScrollY = window.scrollY || window.pageYOffset;
+    return;
+  }
   // In modalità ricerca (filter-bar aperta) l'header resta sempre visibile.
   // Evita che scroll programmatico (tastiera, render che riduce altezza grid)
   // nasconda le barre mentre l'utente sta cercando.
@@ -1111,17 +1125,32 @@ document.addEventListener('DOMContentLoaded', function(){
 updateFbH();
 (function(){
   var _initialHeight = window.innerHeight;
-  // Aggiorna l'altezza iniziale solo quando la tastiera è chiusa
-  window.addEventListener('resize', function(){
-    var ratio = window.innerHeight / _initialHeight;
-    // Se il viewport si è ridotto di più del 25% è la tastiera — non ricalcolare
-    if (ratio < 0.75) return;
-    // Viewport normale (tastiera chiusa o non presente)
+  var _kbOpen = false;
+
+  function isKeyboardOpen() {
+    // visualViewport è il metodo più affidabile su Android Chrome
+    if (window.visualViewport) {
+      return window.visualViewport.height < _initialHeight * 0.75;
+    }
+    return window.innerHeight < _initialHeight * 0.75;
+  }
+
+  function onResize() {
+    var kb = isKeyboardOpen();
+    if (kb === _kbOpen) return; // nessun cambiamento reale
+    _kbOpen = kb;
+    if (kb) return; // tastiera aperta — ignora
+    // Tastiera chiusa: ricalcola
     _initialHeight = window.innerHeight;
     _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
     _updatePillsVars();
     updateFbH();
-  });
+  }
+
+  window.addEventListener('resize', onResize);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', onResize);
+  }
 })();
 window.addEventListener('load', function(){
   _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
