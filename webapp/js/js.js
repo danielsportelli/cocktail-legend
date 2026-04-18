@@ -600,9 +600,7 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
         closeSuggestions();
         render();
         updateClearBtn();
-        inp.blur();
-        // Riporta la pagina in cima
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        inp.focus();
       });
     }
 
@@ -1130,60 +1128,28 @@ updateFbH();
   var _kbOpen = false;
 
   function isKeyboardOpen() {
-    if (window.visualViewport) return window.visualViewport.height < _initialHeight * 0.8;
-    return window.innerHeight < _initialHeight * 0.8;
-  }
-
-  function anchorBarsToViewport() {
-    // Quando la tastiera è aperta, sposta header+pills+filterbar
-    // in modo che restino visibili nel viewport ridotto
-    if (!window.visualViewport) return;
-    var vv = window.visualViewport;
-    var offsetTop = vv.offsetTop || 0; // quanto il viewport è shiftato dall'alto
-    var hdr = document.querySelector('.hdr');
-    var pills = document.getElementById('pills-bar');
-    var fb = document.getElementById('filter-bar');
-    if (hdr) hdr.style.top = offsetTop + 'px';
-    if (pills) pills.style.top = (offsetTop + _cachedHdrH - 1) + 'px';
-    if (fb && !fb.classList.contains('hidden')) {
-      var pillsH = pills ? pills.offsetHeight : 40;
-      fb.style.top = (offsetTop + _cachedHdrH + pillsH - 1) + 'px';
+    // visualViewport è il metodo più affidabile su Android Chrome
+    if (window.visualViewport) {
+      return window.visualViewport.height < _initialHeight * 0.75;
     }
+    return window.innerHeight < _initialHeight * 0.75;
   }
 
-  function resetBarsPosition() {
-    // Ripristina il posizionamento CSS normale
-    var hdr = document.querySelector('.hdr');
-    var pills = document.getElementById('pills-bar');
-    var fb = document.getElementById('filter-bar');
-    if (hdr) hdr.style.top = '';
-    if (pills) pills.style.top = '';
-    if (fb) fb.style.top = '';
-  }
-
-  function onVVResize() {
+  function onResize() {
     var kb = isKeyboardOpen();
-    if (kb) {
-      _kbOpen = true;
-      anchorBarsToViewport();
-    } else {
-      if (_kbOpen) {
-        _kbOpen = false;
-        resetBarsPosition();
-        _initialHeight = window.innerHeight;
-        _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
-        _updatePillsVars();
-        updateFbH();
-      }
-    }
+    if (kb === _kbOpen) return; // nessun cambiamento reale
+    _kbOpen = kb;
+    if (kb) return; // tastiera aperta — ignora
+    // Tastiera chiusa: ricalcola
+    _initialHeight = window.innerHeight;
+    _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
+    _updatePillsVars();
+    updateFbH();
   }
 
-  window.addEventListener('resize', onVVResize);
+  window.addEventListener('resize', onResize);
   if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', onVVResize);
-    window.visualViewport.addEventListener('scroll', function(){
-      if (_kbOpen) anchorBarsToViewport();
-    });
+    window.visualViewport.addEventListener('resize', onResize);
   }
 })();
 window.addEventListener('load', function(){
