@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════
-// SERVICE WORKER — Cocktail Legend PWA v5.2
+// SERVICE WORKER — Cocktail Legend PWA v5.3
 // ═══════════════════════════════════════════════════
-const CACHE_NAME = 'cocktail-legend-v5.2';
+const CACHE_NAME = 'cocktail-legend-v5.3';
 
 // ── File da pre-cachare all'installazione ──────────
 const PRECACHE_FILES = [
@@ -12,7 +12,6 @@ const PRECACHE_FILES = [
   '/cocktail-legend/webapp/firebase-init.js',
   '/cocktail-legend/webapp/manifest.json',
   '/cocktail-legend/webapp/database/it/cocktails-it.json',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Syne:wght@700;800&display=swap'
 ];
 
 // ── Domini da NON cachare mai (sempre online) ──────
