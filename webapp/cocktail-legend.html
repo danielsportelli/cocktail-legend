@@ -7488,6 +7488,462 @@ function showInstallPWAModal() {
 
 
 <script>
+
+// ═══════════════════════════════════════════════════
+// USAGE CACHE + DRAWER ACCOUNT — funzioni globali
+// (estratte dalla IIFE AI per uso nel drawer Account)
+// ═══════════════════════════════════════════════════
+(function(){
+  var MAX = 30;
+  var _usageCache = null; // cache locale {monthlyCount, extraCredits, periodStart}
+
+  function _isPeriodExpired(periodStart){
+    if(!periodStart) return true;
+    var start = new Date(periodStart);
+    var now = new Date();
+    var diff = (now - start) / (1000 * 60 * 60 * 24);
+    return diff >= 30;
+  }
+
+  function getMonthlyUsed(){ return _usageCache ? (_usageCache.monthlyCount || 0) : 0; }
+  function getExtraCredits(){ return _usageCache ? (_usageCache.extraCredits || 0) : 0; }
+  function getMonthlyRemaining(){ return Math.max(0, MAX - getMonthlyUsed()); }
+  function getTotalRemaining(){ return getMonthlyRemaining() + getExtraCredits(); }
+
+  window.addEventListener('fb-auth-ready', function(e){
+    if(!e.detail.user) return;
+    var user = e.detail.user;
+    var db = window._fbDb;
+    var docFn = window._fbFunctions ? window._fbFunctions.doc : null;
+    var getDoc = window._fbFunctions ? window._fbFunctions.getDoc : null;
+    var setDoc = window._fbFunctions ? window._fbFunctions.setDoc : null;
+    var onSnapshot = window._fbFunctions ? window._fbFunctions.onSnapshot : null;
+    if(!db || !docFn || !getDoc) return;
+    var userDoc = docFn(db, 'users', user.uid);
+
+    function processSnap(snap) {
+      var now = new Date();
+      var nowStr = now.toISOString().split('T')[0];
+      if(snap.exists()){
+        var data = snap.data();
+
+        // ── Controlla scadenza Premium ──────────────────────────────
+        // Se plan=premium ma premiumExpiresAt è passato → torna free
+        if ((data.plan || 'free') === 'premium' && data.premiumExpiresAt) {
+          var expiry = new Date(data.premiumExpiresAt);
+          if (now > expiry) {
+            // Piano scaduto — aggiorna Firestore e tratta come free
+            setDoc(userDoc, { plan: 'free' }, { merge: true })
+              .catch(function(e){ console.warn('plan expiry err', e); });
+            data.plan = 'free';
+          }
+        }
+
+        // ── Salva piano utente globalmente ──
+        window._userPlan = data.plan || 'free';
+        // Se premium, aggiunge classe al body — CSS nasconde tutti i badge lock
+        if (window._userPlan === 'premium') {
+          document.body.classList.add('user-premium');
+        } else {
+          document.body.classList.remove('user-premium');
+        }
+
+        // ── Controlla se ha già fatto il quiz oggi ──
+        window._quizDoneToday = (data.last_played === _todayKeyLocal());
+        updateQuizBadge();
+
+        // ── Se appena diventato premium (manuale o Stripe) ──────────
+        // Genera premiumSince e premiumExpiresAt se mancano
+        if (window._userPlan === 'premium' && !data.premiumSince) {
+          // Data scadenza: stesso giorno dell'anno prossimo -1 giorno, ore 23:59:59
+          // Calcola scadenza: anno prossimo -1 giorno, 23:59:59 ora LOCALE (no UTC)
+          var expDate = new Date(now);
+          expDate.setFullYear(expDate.getFullYear() + 1);
+          expDate.setDate(expDate.getDate() - 1);
+          // Costruisce stringa data locale per evitare sfasamento UTC
+          var pad = function(n){ return n < 10 ? '0'+n : ''+n; };
+          var expStr = expDate.getFullYear()+'-'+pad(expDate.getMonth()+1)+'-'+pad(expDate.getDate())+'T23:59:59';
+          var premiumUpdate = {
+            premiumSince: nowStr,
+            premiumExpiresAt: expStr // es. "2027-04-14T23:59:59" ora locale
+          };
+          setDoc(userDoc, premiumUpdate, { merge: true })
+            .catch(function(e){ console.warn('premiumSince write err', e); });
+          data.premiumSince = nowStr;
+          data.premiumExpiresAt = premiumUpdate.premiumExpiresAt;
+        }
+
+        // ── Se premium e aiUsage non esiste → crea automaticamente ──
+        if (window._userPlan === 'premium' && !data.aiUsage) {
+          var newUsage = { monthlyCount: 0, extraCredits: 0, periodStart: nowStr };
+          setDoc(userDoc, { aiUsage: newUsage }, { merge: true })
+            .catch(function(e){ console.warn('auto-create aiUsage err', e); });
+          _usageCache = newUsage;
+          renderUsage();
+          renderAccountTab();
+          window._renderAccountTab = renderAccountTab;
+          return;
+        }
+
+        var ai = data.aiUsage || {};
+        var periodStart = ai.periodStart || data.createdAt || nowStr;
+        // Controlla se il periodo di 30gg è scaduto
+        if(_isPeriodExpired(periodStart)){
+          var start = new Date(periodStart);
+          while(_isPeriodExpired(start.toISOString().split('T')[0])){
+            start.setDate(start.getDate() + 30);
+          }
+          var newPeriodStart = start.toISOString().split('T')[0];
+          _usageCache = {
+            monthlyCount: 0,
+            extraCredits: ai.extraCredits || 0,
+            referralCredits: ai.referralCredits || 0,
+            periodStart: newPeriodStart
+          };
+          setDoc(userDoc, { aiUsage: _usageCache }, { merge: true })
+            .catch(function(e){ console.warn('reset period err', e); });
+        } else {
+          _usageCache = {
+            monthlyCount: ai.monthlyCount || 0,
+            extraCredits: ai.extraCredits || 0,
+            referralCredits: ai.referralCredits || 0,
+            periodStart: periodStart
+          };
+        }
+      } else {
+        // Nuovo utente — crea documento
+        _usageCache = { monthlyCount: 0, extraCredits: 0, periodStart: nowStr };
+        setDoc(userDoc, {
+          createdAt: nowStr,
+          email: user.email,
+          aiUsage: _usageCache
+        }).catch(function(e){ console.warn('createUser err', e); });
+      }
+      renderUsage();
+      renderAccountTab();
+      window._renderAccountTab = renderAccountTab;
+    }
+
+    // Usa onSnapshot se disponibile (aggiornamento real-time), altrimenti getDoc
+    if(onSnapshot) {
+      onSnapshot(userDoc, processSnap, function(e){ console.warn('onSnapshot err', e); });
+    } else {
+      getDoc(userDoc).then(processSnap).catch(function(e){
+        console.warn('loadUsage err', e);
+        _usageCache = { monthlyCount: 0, extraCredits: 0, periodStart: new Date().toISOString().split('T')[0] };
+      });
+    }
+  });
+
+  function renderAccountTab(){
+    var el = document.getElementById('acc-content');
+    if(!el) return;
+    var user = window._currentUser;
+    if(!user || !_usageCache) return;
+    var extra = getExtraCredits();
+    var monthlyRem = getMonthlyRemaining();
+    var ref = typeof getReferralCredits === 'function' ? getReferralCredits() : (_usageCache.referralCredits||0);
+
+    // Sezione nickname (asincrona) — inserisce placeholder e poi popola
+    var nickPlaceholder =
+      '<div id="nick-acc-section" style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">' +
+        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Nickname</div>' +
+        '<div style="font-size:.72rem;color:var(--dim);">Caricamento…</div>' +
+      '</div>';
+
+    el.innerHTML =
+      nickPlaceholder +
+      '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.35rem;">Accesso effettuato con</div>'+
+        '<div style="font-size:.8rem;color:var(--txt2);font-weight:600;">'+user.email+'</div>'+
+      '</div>'+
+      '<div style="margin-bottom:0;padding-bottom:1.2rem;">'+
+        '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Piano attuale</div>'+
+        (window._userPlan === 'premium'
+          ? '<div style="display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(245,158,11,.05));border:1px solid rgba(245,158,11,.35);border-radius:10px;padding:.5rem .9rem;">' +
+              '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>' +
+              '<span style="font-size:.82rem;font-weight:800;color:#f59e0b;">Premium</span>' +
+            '</div>'
+          : '<div style="display:flex;align-items:center;justify-content:space-between;gap:.75rem;">' +
+              '<div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(100,116,139,.12);border:1px solid rgba(100,116,139,.25);border-radius:10px;padding:.5rem .9rem;">' +
+                '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
+                '<span style="font-size:.82rem;font-weight:700;color:#94a3b8;">Free</span>' +
+              '</div>' +
+              '<button onclick="showPremiumModal()" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;border:none;border-radius:10px;padding:.5rem .9rem;font-size:.78rem;font-weight:800;cursor:pointer;font-family:inherit;white-space:nowrap;">Passa a Premium →</button>' +
+            '</div>'
+        )+
+      '</div>'+
+      // Pulsante I TUOI BADGE — stile calc-cmd-btn
+      '<div class="bsheet-divider" style="margin:0;"></div>'+
+      '<div class="drawer-cmd-list" style="margin-bottom:0;">'+
+        '<button id="acc-badge-btn" class="calc-cmd-btn">'+
+          '<div style="width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><circle cx="12" cy="8" r="4"/><path d="M8 12l-3 9 7-3 7 3-3-9"/></svg>'+
+          '</div>'+
+          '<span style="flex:1;font-size:.95rem;font-weight:600;color:var(--txt);letter-spacing:-.01em;pointer-events:none;">I tuoi badge</span>'+
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><polyline points="9 18 15 12 9 6"/></svg>'+
+        '</button>'+
+      '</div>'+
+      '<div class="bsheet-divider" style="margin:0;"></div>'+
+      // "Come installare app" — stile calc-cmd-btn, visibile solo su mobile non-PWA
+      (!(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+        ? '<div id="acc-install-badge">'+
+            '<div class="drawer-cmd-list" style="margin-bottom:0;">'+
+              '<button id="acc-install-btn" class="calc-cmd-btn">'+
+                '<div style="width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+
+                  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M12 2v10m0 0l-3-3m3 3l3-3"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg>'+
+                '</div>'+
+                '<span style="flex:1;font-size:.95rem;font-weight:600;color:var(--txt);letter-spacing:-.01em;pointer-events:none;">Come installare l\'app</span>'+
+                '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><polyline points="9 18 15 12 9 6"/></svg>'+
+              '</button>'+
+            '</div>'+
+            '<div class="bsheet-divider" style="margin:0;"></div>'+
+          '</div>'
+        : ''
+      )+
+      '<div style="margin-bottom:1.4rem;"></div>'+
+      // ── RIEPILOGO CREDITI AI ─────────────────────────────────
+      (function(){
+        var isPrem = window._userPlan === 'premium';
+        var rawExtra = (_usageCache && _usageCache.extraCredits) ? _usageCache.extraCredits : (extra || 0);
+        var extraCongelati = !isPrem && rawExtra > 0;
+
+        // valori visualizzati
+        var mensiliVal  = isPrem ? monthlyRem : null;
+        var extraVal    = rawExtra;
+        var refVal      = ref;
+
+        // colori
+        var cMensili = isPrem ? 'var(--blue-l)' : 'var(--dim)';
+        var cExtra   = isPrem && extraVal > 0 ? 'var(--amber)' : extraCongelati ? 'var(--dim)' : 'var(--dim)';
+        var cRef     = refVal > 0 ? '#4ade80' : 'var(--dim)';
+
+        var card = function(label, valueHtml, sub){
+          return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.6rem .3rem;gap:.15rem;">'+
+            '<div style="font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.1rem;">'+label+'</div>'+
+            '<div style="font-size:1.2rem;font-weight:900;line-height:1;text-align:center;">'+valueHtml+'</div>'+
+            (sub ? '<div style="font-size:.58rem;color:var(--dim);margin-top:.15rem;text-align:center;line-height:1.3;">'+sub+'</div>' : '')+
+          '</div>';
+        };
+
+        var lockSvgSm = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+        var mensiliHtml = isPrem
+          ? '<span style="color:'+cMensili+';">'+mensiliVal+'</span><span style="font-size:.65rem;color:var(--dim);font-weight:500;">/'+ MAX +'</span>'
+          : lockSvgSm;
+        var extraHtml = isPrem
+          ? '<span style="color:'+cExtra+';">'+extraVal+'</span>'
+          : lockSvgSm;
+        var refHtml = '<span style="color:'+cRef+';">'+refVal+'</span>';
+
+        return '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+          '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti AI</div>'+
+          // 3 card
+          '<div style="display:flex;border:1px solid var(--brd);border-radius:12px;overflow:hidden;">'+
+            card('Mensili', mensiliHtml, null)+
+            '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
+            card('Extra', extraHtml, null)+
+            '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
+            card('Referral', refHtml, null)+
+          '</div>'+
+          // info rimando
+          '<div style="margin-top:.65rem;display:flex;align-items:center;gap:.45rem;padding:.5rem .65rem;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.18);border-radius:9px;">'+
+            '<svg style="flex-shrink:0;" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
+            '<span style="font-size:.65rem;color:#94a3b8;line-height:1.45;">Per gestire i crediti entra nella sezione <strong style="color:#60a5fa;">Barman AI</strong> dal menù generale.</span>'+
+          '</div>'+
+        '</div>';
+      })()+
+      '<div style="padding-top:1.2rem;text-align:center;">'+
+        '<button id="acc-logout-btn" style="display:inline-flex;align-items:center;background:transparent;border:1px solid var(--dim);color:var(--dim);font-size:.62rem;font-weight:600;font-family:inherit;cursor:pointer;padding:.35rem .65rem;border-radius:6px;letter-spacing:.05em;text-transform:uppercase;transition:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">LOGOUT</button>'+
+      '</div>';
+
+    // Popola sezione nickname in modo asincrono
+    if (window._buildNicknameSection) {
+      window._buildNicknameSection(user.uid).then(function(html) {
+        var nickEl = document.getElementById('nick-acc-section');
+        if (nickEl) {
+          nickEl.outerHTML = html;
+          if (window._initNicknameAccSection) {
+            window._initNicknameAccSection(user.uid);
+          }
+        }
+      });
+    }
+
+    // Logout
+    var logoutBtn = document.getElementById('acc-logout-btn');
+    if(logoutBtn){
+      logoutBtn.addEventListener('click', function(){
+        if(!confirm('Vuoi disconnetterti?')) return;
+        var auth = window._fbAuth;
+        var signOutFn = window._fbFunctions ? window._fbFunctions.signOut : null;
+        if(auth && signOutFn){
+          signOutFn(auth).then(function(){
+            localStorage.removeItem('cl_logged');
+            location.reload();
+          });
+        }
+      });
+    }
+
+    // Install app badge → apre bottom sheet PWA
+    var installBtn = document.getElementById('acc-install-btn');
+    if (installBtn) {
+      installBtn.addEventListener('click', function() {
+        showInstallPWAModal();
+      });
+    }
+
+    // Badge → apre drawer badge
+    var badgeBtn = document.getElementById('acc-badge-btn');
+    if (badgeBtn) {
+      badgeBtn.addEventListener('click', function() {
+        openDrawer('badge');
+        renderBadgeDrawer();
+      });
+    }
+  }
+
+
+  function renderBadgeDrawer(){
+    var el = document.getElementById('badge-content');
+    if(!el) return;
+
+    var BADGES = [
+      { key:'starter',     label:'Starter',     num:5,   color:'#22c55e', shadow:'rgba(34,197,94,.35)'  },
+      { key:'junior',      label:'Junior',      num:10,  color:'#3b82f6', shadow:'rgba(59,130,246,.35)' },
+      { key:'senior',      label:'Senior',      num:25,  color:'#a78bfa', shadow:'rgba(167,139,250,.35)' },
+      { key:'ambassador',  label:'Ambassador',  num:50,  color:'#ef4444', shadow:'rgba(239,68,68,.35)'  },
+      { key:'legend',      label:'Legend',      num:100, color:'#f59e0b', shadow:'rgba(245,158,11,.45)' }
+    ];
+
+    // Leggi count referral da Firestore (placeholder — sarà popolato con dati reali)
+    var referralCount = 0;
+    var currentBadge = null;
+    var user = window._currentUser;
+    var db = window._fbDb;
+    var fns = window._fbFunctions;
+
+    function buildUI(count){
+      var nextBadge = null;
+      var nextNum = 0;
+      BADGES.forEach(function(b){
+        if(count >= b.num){ currentBadge = b; }
+        else if(!nextBadge){ nextBadge = b; nextNum = b.num; }
+      });
+
+      var progressPct = nextBadge ? Math.min(100, Math.round((count / nextNum) * 100)) : 100;
+
+      var html =
+        // Tips box — solo logica, senza crediti
+        '<div style="display:flex;align-items:flex-start;gap:.5rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:.75rem .85rem;margin-bottom:1.25rem;">'+
+          '<svg style="flex-shrink:0;margin-top:.1rem;" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
+          '<div style="font-size:.7rem;color:var(--txt2);line-height:1.55;">'+
+            'Invita amici e colleghi bartender. Per ogni traguardo raggiungi un badge e guadagni <strong style="color:var(--amber);">crediti AI gratuiti</strong>, utilizzabili anche senza piano Premium.'+
+          '</div>'+
+        '</div>'+
+        // Contatore + progress
+        '<div style="margin-bottom:1.25rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;">'+
+            '<span style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">Invitati</span>'+
+            '<span style="font-size:.78rem;font-weight:700;color:var(--txt);">'+count+(nextBadge?' / '+nextNum:'')+'</span>'+
+          '</div>'+
+          '<div style="height:5px;background:var(--brd);border-radius:99px;overflow:hidden;margin-bottom:.4rem;">'+
+            '<div style="height:100%;width:'+progressPct+'%;background:'+(currentBadge?currentBadge.color:'var(--dim)')+';border-radius:99px;transition:width .4s;"></div>'+
+          '</div>'+
+          (nextBadge
+            ? '<div style="font-size:.65rem;color:var(--dim);">Ancora <strong style="color:var(--txt);">'+(nextNum-count)+'</strong> per sbloccare <strong style="color:'+nextBadge.color+';">'+nextBadge.label+'</strong></div>'
+            : '<div style="font-size:.65rem;color:var(--amber);font-weight:700;">🏆 Hai raggiunto tutti i badge!</div>'
+          )+
+        '</div>'+
+        // Badge grid
+        '<div style="display:flex;justify-content:space-between;gap:.5rem;margin-bottom:1.5rem;">';
+
+      BADGES.forEach(function(b){
+        var unlocked = count >= b.num;
+        html +=
+          '<div style="display:flex;flex-direction:column;align-items:center;gap:.4rem;flex:1;">'+
+            '<div style="'+
+              'width:48px;height:48px;border-radius:50%;'+
+              'display:flex;align-items:center;justify-content:center;'+
+              'font-size:.85rem;font-weight:900;'+
+              (unlocked
+                ? 'background:'+b.color+';color:#fff;box-shadow:0 0 14px '+b.shadow+';'
+                : 'background:var(--surf);color:var(--dim);border:1px solid var(--brd);'
+              )+
+            '">'+b.num+'</div>'+
+            '<span style="font-size:.55rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:'+(unlocked?b.color:'var(--dim)')+';">'+b.label+'</span>'+
+          '</div>';
+      });
+
+      html += '</div>'+
+        // Legenda crediti sotto i badge
+        '<div style="margin-bottom:1.25rem;padding:.65rem .75rem;background:var(--bg);border-radius:10px;border:1px solid var(--brd);">'+
+          '<div style="font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.5rem;">Crediti guadagnati per badge</div>'+
+          '<div style="display:flex;flex-direction:column;gap:.3rem;">';
+      BADGES.forEach(function(b){
+        var credits = {starter:20,junior:40,senior:100,ambassador:200,legend:500};
+        var unlocked = count >= b.num;
+        html += '<div style="display:flex;justify-content:space-between;align-items:center;">'+
+          '<span style="font-size:.72rem;color:'+(unlocked?b.color:'var(--dim)')+';">'+b.label+'</span>'+
+          '<span style="font-size:.72rem;font-weight:700;color:'+(unlocked?'var(--amber)':'var(--dim)')+';">+'+credits[b.key]+' crediti</span>'+
+        '</div>';
+      });
+      html += '</div>'+
+        '</div>'+
+        // Pulsante invita
+        '<button id="badge-invite-btn" style="width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:12px;padding:.8rem;font-family:inherit;font-size:.82rem;font-weight:800;cursor:pointer;letter-spacing:.01em;">'+
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>'+
+          'Invita un amico'+
+        '</button>';
+
+      el.innerHTML = html;
+
+      // Handler pulsante invita
+      var inviteBtn = document.getElementById('badge-invite-btn');
+      if(inviteBtn){
+        inviteBtn.addEventListener('click', function(){
+          showInviteModal();
+        });
+      }
+    }
+
+    // Carica count reale da Firestore
+    if(user && db && fns){
+      fns.getDoc(fns.doc(db,'users',user.uid)).then(function(snap){
+        var count = 0;
+        if(snap.exists() && snap.data().referral) count = snap.data().referral.count || 0;
+        buildUI(count);
+      }).catch(function(){ buildUI(0); });
+    } else {
+      buildUI(0);
+    }
+
+    // Back button — torna al drawer account
+    var backBtn = document.getElementById('badge-back-btn');
+    if(backBtn){
+      backBtn.addEventListener('click', function(){
+        backBtn.classList.add('btn-flash');
+        setTimeout(function(){ backBtn.classList.remove('btn-flash'); }, 300);
+        // Chiudi badge e apri account senza chiudere overlay
+        var allDrawers = document.querySelectorAll('.drawer');
+        allDrawers.forEach(function(d){ d.style.transition='none'; d.classList.remove('open'); });
+        var accDrawer = document.getElementById('drawer-acc');
+        if(accDrawer) accDrawer.classList.add('open');
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            allDrawers.forEach(function(d){ d.style.transition=''; });
+          });
+        });
+        if(typeof CURRENT_DRAWER !== 'undefined') window.CURRENT_DRAWER = 'acc';
+      });
+    }
+  }
+
+
+})();
+
+</script>
+<script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/cocktail-legend/webapp/service-worker.js')
