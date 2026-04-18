@@ -7579,7 +7579,6 @@ function showInstallPWAModal() {
           setDoc(userDoc, { aiUsage: newUsage }, { merge: true })
             .catch(function(e){ console.warn('auto-create aiUsage err', e); });
           _usageCache = newUsage;
-          renderUsage();
           renderAccountTab();
           window._renderAccountTab = renderAccountTab;
           return;
@@ -7619,7 +7618,6 @@ function showInstallPWAModal() {
           aiUsage: _usageCache
         }).catch(function(e){ console.warn('createUser err', e); });
       }
-      renderUsage();
       renderAccountTab();
       window._renderAccountTab = renderAccountTab;
     }
