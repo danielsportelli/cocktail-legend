@@ -274,7 +274,7 @@ body::before{
 /* SEARCH BAR */
 .filter-bar{
   position:fixed;
-  top:calc(var(--hdr-h) + var(--pills-h-px, 40px));
+  top:calc(var(--hdr-h) + var(--pills-h-px, 40px) - 1px);
   left:0;right:0;
   z-index:1047;
   background:var(--surf);
@@ -295,7 +295,7 @@ body::before{
 }
 @media (display-mode: standalone) {
   .filter-bar{
-    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px) + var(--pills-h-px, 40px));
+    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px) + var(--pills-h-px, 40px) - 1px);
     background:rgb(30,41,59);
   }
   .hdr.hdr--hidden ~ .filter-bar{
