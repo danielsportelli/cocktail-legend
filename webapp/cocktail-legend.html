@@ -3838,7 +3838,7 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
         render();
         inp.focus();
       } else {
-        // Ha premuto Invio/Cerca → chiudi tastiera, chiudi search bar, torna in cima
+        // Ha premuto Invio/Cerca → chiudi tastiera + chiudi search bar + scroll a 0
         closeSuggestions();
         inp.blur();
         render();
@@ -4239,19 +4239,11 @@ function _applyBarsTop(hdrBottom) {
 function updateHeaderVisibility() {
   var hdr = document.querySelector('.hdr');
   if (!hdr) return;
-  // Ignora scroll fittizi quando la tastiera è aperta
+  // Ignora scroll fittizi quando la tastiera è aperta: non aggiornare
+  // nessuno stato, così alla chiusura tastiera riprendiamo esattamente
+  // dal punto in cui eravamo prima che si aprisse.
   var vvH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   if (vvH < (window._initialViewportH || window.innerHeight) * 0.75) {
-    // Se la search è aperta, assicurati che l'header sia visibile — altrimenti
-    // pills+filter-bar restano traslate fuori viewport e l'utente non le vede
-    // mentre digita
-    var _fbOpen = document.getElementById('filter-bar');
-    if (_fbOpen && !_fbOpen.classList.contains('hidden') && _hdrHidden) {
-      _hdrHidden = false;
-      hdr.classList.remove('hdr--hidden');
-      _scrollDelta = 0;
-    }
-    _lastScrollY = window.scrollY || window.pageYOffset;
     return;
   }
   var currentY = window.scrollY || window.pageYOffset;
@@ -7357,16 +7349,8 @@ function showInstallPWAModal() {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
-        // Scroll in cima istantaneo (smooth + apertura tastiera = race condition)
-        window.scrollTo(0, 0);
-        // Forza header visibile: se era nascosto pills+filter-bar resterebbero
-        // traslate di -hdr-h fuori viewport dopo il focus sull'input
-        var _hdrReset = document.querySelector('.hdr');
-        if (_hdrReset) _hdrReset.classList.remove('hdr--hidden');
-        if (typeof _hdrHidden !== 'undefined') _hdrHidden = false;
-        if (typeof _scrollDelta !== 'undefined') _scrollDelta = 0;
-        if (typeof _lastScrollY !== 'undefined') _lastScrollY = 0;
-        // Pre-calcola altezza: rimuovi hidden, forza layout, applica padding — tutto prima del paint
+        // Apri search-bar sotto le pills senza modificare lo stato scroll/header.
+        // Se l'utente era scrollato con header nascosto, resta nascosto.
         filterBar.style.transition = 'none';
         filterBar.classList.remove('hidden');
         var fbH = filterBar.offsetHeight;
