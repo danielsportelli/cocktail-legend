@@ -9335,7 +9335,7 @@ function showInstallPWAModal() {
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/cocktail-legend/service-worker.js')
+    navigator.serviceWorker.register('/cocktail-legend/webapp/service-worker.js')
       .then(function(reg) {
         console.log('[SW] Registrato:', reg.scope);
       })
