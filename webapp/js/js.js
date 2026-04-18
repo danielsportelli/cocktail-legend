@@ -964,6 +964,7 @@ function updateAllCounts() {
 
 var _lastScrollY = 0;
 var _hdrHidden = false;
+window._initialViewportH = window.innerHeight;
 var _cachedHdrH = 73;
 var _cachedFbH = 0;
 var _syncRafId = null;
@@ -981,7 +982,11 @@ var SCROLL_THRESHOLD = 500; // px da scrollare prima di triggerare
   } else {
     updateHdrH();
   }
-  window.addEventListener('resize', updateHdrH);
+  window.addEventListener('resize', function(){
+    var ratio = window.innerHeight / (window._initialViewportH || window.innerHeight);
+    if (ratio < 0.75) return; // tastiera aperta — ignora
+    updateHdrH();
+  });
 })();
 
 // Loop rAF che sincronizza pills e filter-bar all'header frame per frame
@@ -1104,11 +1109,20 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 updateFbH();
-window.addEventListener('resize', function(){
-  _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
-  _updatePillsVars();
-  updateFbH();
-});
+(function(){
+  var _initialHeight = window.innerHeight;
+  // Aggiorna l'altezza iniziale solo quando la tastiera è chiusa
+  window.addEventListener('resize', function(){
+    var ratio = window.innerHeight / _initialHeight;
+    // Se il viewport si è ridotto di più del 25% è la tastiera — non ricalcolare
+    if (ratio < 0.75) return;
+    // Viewport normale (tastiera chiusa o non presente)
+    _initialHeight = window.innerHeight;
+    _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
+    _updatePillsVars();
+    updateFbH();
+  });
+})();
 window.addEventListener('load', function(){
   _cachedHdrH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr-h')) || 73;
   _updatePillsVars();
