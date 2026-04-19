@@ -621,17 +621,13 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
   <!-- LEADERBOARD SECTION — card unica: sponsor + toggle + classifica + tuoi punti -->
   <div class="leaderboard" style="overflow:visible;">
 
-    <!-- BANNER SPONSOR — visibile a tutti -->
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.2rem .6rem;border-bottom:1px solid var(--brd);">
-      <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Premi mensili offerti da</div>
-      <div style="display:flex;align-items:center;gap:.5rem;">
-        <!-- Sostituisci src con il path del logo sponsor nel repo -->
-        <img id="sponsor-logo" src="assets/sponsors/sponsor-logo.png"
-             onerror="this.style.display='none'"
-             style="height:22px;width:auto;object-fit:contain;display:block;"
-             alt="Sponsor logo">
-        <span id="sponsor-name" style="font-size:.78rem;font-weight:800;color:var(--txt);letter-spacing:.01em;">Brand XYZ</span>
-      </div>
+    <!-- BANNER SPONSOR 16:9 — visibile a tutti, agganciato ai bordi top della card -->
+    <!-- Per attivare: metti l'immagine in assets/sponsors/sponsor-banner.png nel repo -->
+    <div id="sponsor-banner-wrap" style="display:none;border-bottom:1px solid var(--brd);">
+      <img id="sponsor-banner"
+           src="sponsor/banner-quiz.png"
+           alt="Sponsor"
+           style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:18px 18px 0 0;">
     </div>
 
     <!-- TOGGLE TABS -->
@@ -1514,6 +1510,22 @@ window.showPremiumModal = function showPremiumModal() {
   });
 }
 
+</script>
+
+<script>
+// Banner sponsor: mostra il wrapper solo se l'immagine carica correttamente.
+// Se assets/sponsors/sponsor-banner.png non esiste → nessuno spazio vuoto.
+(function(){
+  var img = document.getElementById('sponsor-banner');
+  var wrap = document.getElementById('sponsor-banner-wrap');
+  if (!img || !wrap) return;
+  img.addEventListener('load', function(){
+    wrap.style.display = 'block';
+  });
+  img.addEventListener('error', function(){
+    wrap.style.display = 'none';
+  });
+})();
 </script>
 
 </body>
