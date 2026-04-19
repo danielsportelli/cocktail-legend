@@ -3847,7 +3847,6 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
         if (_pillsSrchBtnClose && _pillsSrchBtnClose.classList.contains('active')) {
           _pillsSrchBtnClose.click();
         }
-        // Scroll in cima per vedere contatore + risultati dall'inizio
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
@@ -4202,6 +4201,33 @@ var SCROLL_THRESHOLD = 500; // px da scrollare prima di triggerare
   if (window.visualViewport) window.visualViewport.addEventListener('resize', onHdrResize);
 })();
 
+// ── LOCK SCROLL CON TASTIERA APERTA ─────────────────────────────
+// Su mobile, quando la tastiera virtuale apre il viewport si riduce.
+// Chrome Android può disancorare position:fixed durante lo scroll con
+// tastiera aperta, facendo "sparire" pills+filter-bar. Blocchiamo lo
+// scroll finché la tastiera è aperta — su desktop la tastiera non
+// riduce il viewport, quindi questo codice non si attiva.
+(function(){
+  function isKeyboardOpen(){
+    var h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    var ref = window._initialViewportH || window.innerHeight;
+    return h < ref * 0.75;
+  }
+  function preventTouch(e){
+    // Lascia passare il touchmove se avviene dentro l'input (selezione testo)
+    // o dentro il box dei suggerimenti (scroll interno).
+    var t = e.target;
+    if (t && (t.closest && (t.closest('#srch') || t.closest('#srch-suggestions')))) return;
+    if (isKeyboardOpen()) e.preventDefault();
+  }
+  function preventWheel(e){
+    if (isKeyboardOpen()) e.preventDefault();
+  }
+  // passive:false obbligatorio per poter chiamare preventDefault
+  window.addEventListener('touchmove', preventTouch, { passive: false });
+  window.addEventListener('wheel', preventWheel, { passive: false });
+})();
+
 // Loop rAF che sincronizza pills e filter-bar all'header frame per frame
 function _startSyncLoop() {
   if (_syncRafId) return; // già in corso
@@ -4239,9 +4265,9 @@ function _applyBarsTop(hdrBottom) {
 function updateHeaderVisibility() {
   var hdr = document.querySelector('.hdr');
   if (!hdr) return;
-  // Ignora scroll fittizi quando la tastiera è aperta: non aggiornare
-  // nessuno stato, così alla chiusura tastiera riprendiamo esattamente
-  // dal punto in cui eravamo prima che si aprisse.
+  // Tastiera aperta: NON aggiornare nulla. Così alla chiusura tastiera
+  // lo stato (_lastScrollY, _scrollDelta, _hdrHidden) è identico a prima
+  // dell'apertura — nessun falso trigger.
   var vvH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   if (vvH < (window._initialViewportH || window.innerHeight) * 0.75) {
     return;
@@ -7349,8 +7375,9 @@ function showInstallPWAModal() {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
-        // Apri search-bar sotto le pills senza modificare lo stato scroll/header.
-        // Se l'utente era scrollato con header nascosto, resta nascosto.
+        // La search-bar scende da sotto le pills senza toccare lo stato scroll:
+        // se header era nascosto resta nascosto, se visibile resta visibile.
+        // Pre-calcola altezza: rimuovi hidden, forza layout, applica padding — tutto prima del paint
         filterBar.style.transition = 'none';
         filterBar.classList.remove('hidden');
         var fbH = filterBar.offsetHeight;
