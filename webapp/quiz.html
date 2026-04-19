@@ -618,26 +618,46 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
 
   </div>
 
-  <!-- LEADERBOARD SECTION (tabs + card ravvicinati) -->
-  <div style="display:flex;flex-direction:column;gap:.35rem;">
+  <!-- LEADERBOARD SECTION — card unica: sponsor + toggle + classifica + tuoi punti -->
+  <div class="leaderboard" style="overflow:visible;">
 
-  <!-- LEADERBOARD TABS -->
-  <div class="lb-tabs">
-    <div class="lb-tab active" onclick="switchLbTab(this,'monthly')">Mensile</div>
-    <div class="lb-tab" onclick="switchLbTab(this,'alltime')">All Time</div>
-  </div>
+    <!-- BANNER SPONSOR — visibile a tutti -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.2rem .6rem;border-bottom:1px solid var(--brd);">
+      <div style="font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);">Premi mensili offerti da</div>
+      <div style="display:flex;align-items:center;gap:.5rem;">
+        <!-- Sostituisci src con il path del logo sponsor nel repo -->
+        <img id="sponsor-logo" src="assets/sponsors/sponsor-logo.png"
+             onerror="this.style.display='none'"
+             style="height:22px;width:auto;object-fit:contain;display:block;"
+             alt="Sponsor logo">
+        <span id="sponsor-name" style="font-size:.78rem;font-weight:800;color:var(--txt);letter-spacing:.01em;">Brand XYZ</span>
+      </div>
+    </div>
 
-  <!-- LEADERBOARD -->
-  <div class="leaderboard">
+    <!-- TOGGLE TABS -->
+    <div style="padding:.65rem .8rem .0rem;">
+      <div class="lb-tabs" style="margin-bottom:0;">
+        <div class="lb-tab active" onclick="switchLbTab(this,'monthly')">Mensile</div>
+        <div class="lb-tab" onclick="switchLbTab(this,'alltime')">All Time</div>
+      </div>
+    </div>
+
+    <!-- SEPARATORE -->
+    <div style="height:1px;background:var(--brd);margin:.65rem 0 0;"></div>
+
+    <!-- HEADER CLASSIFICA -->
     <div class="lb-header">
       <div class="lb-title" id="lb-title">Classifica Mensile</div>
       <div class="lb-reset-txt" id="lb-reset-txt">Reset <span id="lb-reset-date">1° Aprile</span></div>
     </div>
+
+    <!-- LISTA -->
     <div id="lb-list">
       <div class="lb-row lb-loading">Caricamento classifica…</div>
     </div>
-    <!-- Banner free utente — visibile solo agli utenti free su tab mensile -->
-    <div id="lb-free-banner" style="display:none;margin-top:.75rem;background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(37,99,235,.04));border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:.75rem .9rem;">
+
+    <!-- BANNER FREE UTENTE — visibile solo agli utenti free su tab mensile -->
+    <div id="lb-free-banner" style="display:none;margin:.75rem .9rem .9rem;background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(37,99,235,.04));border:1px solid rgba(37,99,235,.2);border-radius:10px;padding:.75rem .9rem;">
       <div style="font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-l);margin-bottom:.5rem;">I tuoi punti mensili</div>
       <div style="display:flex;align-items:baseline;gap:.4rem;margin-bottom:.3rem;">
         <span id="free-pts-val" style="font-size:1.4rem;font-weight:900;color:var(--txt);">0</span>
@@ -647,7 +667,8 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
       <div style="font-size:.68rem;color:var(--dim);line-height:1.5;margin-bottom:.6rem;">Passa a Premium per partecipare e vincere i premi mensili.</div>
       <button onclick="showPremiumModal()" style="background:var(--amber);color:#0a0f1e;font-weight:800;font-size:.72rem;border:none;border-radius:8px;padding:.4rem .9rem;cursor:pointer;font-family:inherit;">Passa a Premium →</button>
     </div>
-  </div><!-- /leaderboard section -->
+
+  </div><!-- /leaderboard card -->
 
 </div><!-- /wrapper -->
 
