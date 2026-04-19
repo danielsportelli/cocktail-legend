@@ -7016,8 +7016,28 @@ function showPremiumModal() {
 
   // CTA — per ora placeholder
   document.getElementById('premium-cta-btn').addEventListener('click', function() {
-    // TODO: collegare Stripe
-    alert('Pagamento in arrivo! Stripe verrà collegato a breve.');
+    // TODO: collegare Stripe — mostra modal custom
+    const existing = document.getElementById('stripe-coming-modal');
+    if (existing) { existing.style.display = 'flex'; return; }
+
+    const m = document.createElement('div');
+    m.id = 'stripe-coming-modal';
+    m.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);';
+    m.innerHTML = `
+      <div style="background:#1e293b;border-radius:20px;padding:2rem 1.5rem 1.5rem;max-width:320px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.07);position:relative;">
+        <button id="stripe-coming-close" style="position:absolute;top:.75rem;right:.75rem;background:rgba(255,255,255,0.08);border:none;color:#94a3b8;font-size:1rem;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;">✕</button>
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div style="font-size:1rem;font-weight:800;color:#f1f5f9;margin-bottom:.5rem;letter-spacing:.01em;">Disponibile a breve</div>
+        <div style="font-size:.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1.5rem;">Stiamo raccogliendo i primi utenti.<br>Quando raggiungiamo <span style="color:#f59e0b;font-weight:700;">250 iscritti</span>, il piano Premium si sblocca per tutti.</div>
+        <button id="stripe-coming-ok" style="width:100%;padding:.72rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-weight:800;font-size:.88rem;border:none;border-radius:12px;cursor:pointer;font-family:inherit;letter-spacing:.01em;">Ho capito</button>
+      </div>
+    `;
+    document.body.appendChild(m);
+    document.getElementById('stripe-coming-close').addEventListener('click', function() { m.style.display = 'none'; });
+    document.getElementById('stripe-coming-ok').addEventListener('click', function() { m.style.display = 'none'; });
+    m.addEventListener('click', function(e) { if (e.target === m) m.style.display = 'none'; });
   });
 }
 
