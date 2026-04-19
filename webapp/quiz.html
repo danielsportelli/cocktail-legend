@@ -587,10 +587,19 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
 
     <!-- 1. COME FUNZIONANO I PUNTI -->
     <div style="font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-l);margin-bottom:.75rem;">Come funzionano i punti</div>
-    <div style="font-size:.75rem;color:var(--txt2);line-height:1.9;margin-bottom:1rem;">
-      ✓ Risposta corretta: <strong style="color:var(--txt);">100 pt base</strong><br>
-      ⚡ Bonus velocità: fino a <strong style="color:var(--txt);">+50 pt</strong> in base al tempo rimasto<br>
-      ✗ Risposta sbagliata o timeout: <strong style="color:var(--txt);">0 pt</strong>
+    <div style="font-size:.75rem;color:var(--txt2);line-height:1;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem;">
+      <div style="display:flex;align-items:center;gap:.5rem;">
+        <span style="color:var(--dim);min-width:.9rem;">✓</span>
+        <span>Risposta corretta: <strong style="color:var(--txt);">100 pt base</strong></span>
+      </div>
+      <div style="display:flex;align-items:center;gap:.5rem;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;min-width:.9rem;" aria-hidden="true"><path d="M13 2L4.5 13.5H11L10 22L20.5 10H14L13 2Z" fill="var(--dim)"/></svg>
+        <span>Bonus velocità: fino a <strong style="color:var(--txt);">+50 pt</strong> in base al tempo rimasto</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:.5rem;">
+        <span style="color:var(--dim);min-width:.9rem;">✗</span>
+        <span>Risposta sbagliata o timeout: <strong style="color:var(--txt);">0 pt</strong></span>
+      </div>
     </div>
 
     <!-- 2. CLASSIFICA ALL TIME -->
@@ -598,21 +607,21 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
     <div style="font-size:.75rem;color:var(--txt2);line-height:1.7;margin-bottom:.5rem;">
       Non è una semplice somma di punti: la classifica All Time premia chi risponde bene <em>e</em> con costanza nel tempo. Più rispondi correttamente e più giochi, più il tuo punteggio cresce — ma chi sbaglia spesso resta indietro anche se gioca tanto.
     </div>
-    <div style="font-size:.72rem;color:var(--txt2);line-height:1.8;margin-bottom:1rem;">
-      ✓ Alta % di correttezza = punteggio più alto<br>
-      ✓ Più domande rispondi = punteggio cresce<br>
-      ✓ Chi inizia dopo può ancora scalare la classifica<br>
-      ⚠ Minimo <strong style="color:var(--txt);">30 domande</strong> per entrare in classifica
+    <div style="font-size:.72rem;color:var(--txt2);line-height:1;display:flex;flex-direction:column;gap:.45rem;margin-bottom:1rem;">
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="color:var(--dim);min-width:.9rem;">✓</span><span>Alta % di correttezza = punteggio più alto</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="color:var(--dim);min-width:.9rem;">✓</span><span>Più domande rispondi = punteggio cresce</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="color:var(--dim);min-width:.9rem;">✓</span><span>Chi inizia dopo può ancora scalare la classifica</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="color:var(--dim);min-width:.9rem;">⚠</span><span>Minimo <strong style="color:var(--txt);">30 domande</strong> per entrare in classifica</span></div>
     </div>
 
     <!-- 3. PREMI CLASSIFICA MENSILE -->
     <div style="font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-l);margin-bottom:.6rem;">Premi della classifica mensile</div>
     <div style="font-size:.72rem;color:var(--txt2);line-height:1;display:flex;flex-direction:column;gap:.45rem;margin-bottom:.6rem;">
-      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#fbbf24;min-width:1.2rem;">1°</span><span style="color:var(--txt);">1.000 crediti AI</span></div>
-      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#94a3b8;min-width:1.2rem;">2°</span><span style="color:var(--txt);">200 crediti AI</span></div>
-      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#d97706;min-width:1.2rem;">3°</span><span style="color:var(--txt);">50 crediti AI</span></div>
-      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#38bdf8;min-width:1.2rem;">4°</span><span style="color:var(--txt);">50 crediti AI</span></div>
-      <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-weight:800;color:#38bdf8;min-width:1.2rem;">5°</span><span style="color:var(--txt);">50 crediti AI</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="color:var(--dim);font-weight:700;min-width:1.2rem;">1°</span><span style="color:var(--txt);">1.000 crediti AI</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="color:var(--dim);font-weight:700;min-width:1.2rem;">2°</span><span style="color:var(--txt);">200 crediti AI</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="color:var(--dim);font-weight:700;min-width:1.2rem;">3°</span><span style="color:var(--txt);">50 crediti AI</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="color:var(--dim);font-weight:700;min-width:1.2rem;">4°</span><span style="color:var(--txt);">50 crediti AI</span></div>
+      <div style="display:flex;align-items:center;gap:.5rem;"><span style="color:var(--dim);font-weight:700;min-width:1.2rem;">5°</span><span style="color:var(--txt);">50 crediti AI</span></div>
     </div>
     <div style="font-size:.65rem;color:var(--dim);line-height:1.5;">I crediti sono utilizzabili nelle funzioni AI di Cocktail Legend.<br>Alla classifica mensile partecipano solo gli utenti Premium.</div>
 
@@ -625,7 +634,6 @@ a,button,.option,.lb-tab,.nav-back{-webkit-tap-highlight-color:transparent;}
     <!-- Per attivare: metti l'immagine in assets/sponsors/sponsor-banner.png nel repo -->
     <div id="sponsor-banner-wrap" style="display:none;border-bottom:1px solid var(--brd);">
       <img id="sponsor-banner"
-           src="sponsor/banner-quiz.png"
            alt="Sponsor"
            style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:18px 18px 0 0;">
     </div>
@@ -1513,18 +1521,18 @@ window.showPremiumModal = function showPremiumModal() {
 </script>
 
 <script>
-// Banner sponsor: mostra il wrapper solo se l'immagine carica correttamente.
-// Se assets/sponsors/sponsor-banner.png non esiste → nessuno spazio vuoto.
+// Banner sponsor: imposta src via JS così i listener sono pronti prima del caricamento.
+// Se sponsor/banner-quiz.png non esiste → nessuno spazio vuoto.
 (function(){
   var img = document.getElementById('sponsor-banner');
   var wrap = document.getElementById('sponsor-banner-wrap');
   if (!img || !wrap) return;
-  img.addEventListener('load', function(){
-    wrap.style.display = 'block';
-  });
-  img.addEventListener('error', function(){
-    wrap.style.display = 'none';
-  });
+  function show(){ wrap.style.display = 'block'; }
+  function hide(){ wrap.style.display = 'none'; }
+  img.addEventListener('load', show);
+  img.addEventListener('error', hide);
+  // Imposta src DOPO aver attaccato i listener — evento load non si perde mai
+  img.src = 'sponsor/banner-quiz.png';
 })();
 </script>
 
