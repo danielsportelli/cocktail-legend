@@ -7423,70 +7423,59 @@ function showInstallPWAModal() {
     if (inp) inp.blur();
   });
 
-  // Calcola geometricamente le posizioni corrette di pills e filter-bar
-  // in base allo stato interno — immune a getBoundingClientRect() negativo
+  // Calcola posizioni corrette geometricamente dallo stato interno
   function _calcBarPositions() {
     var hdrH = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
     var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
-    var fbH = filterBar && !filterBar.classList.contains('hidden') ? filterBar.offsetHeight : 0;
-    // Se header nascosto: barre traslate di -hdrH rispetto alla posizione normale
     var pillsTop = _hdrHidden ? 0 : hdrH;
     var fbTop = pillsTop + pillsH;
     return { pillsTop: pillsTop, fbTop: fbTop };
   }
 
-  // Applica freeze con posizioni calcolate geometricamente
+  // Freeze: congela posizioni e mostra overlay
+  // Disabilita transition per evitare salti visivi
   function _freezeBars() {
+    if (window._searchFrozen) return; // già congelato
     var pos = _calcBarPositions();
     _frozenPillsTop = pos.pillsTop;
     _frozenFbTop = pos.fbTop;
     console.log('[FREEZE] pillsTop='+_frozenPillsTop+' fbTop='+_frozenFbTop+' hdrHidden='+_hdrHidden);
-    if (pillsBar) { pillsBar.style.top = _frozenPillsTop + 'px'; pillsBar.style.transform = 'none'; }
-    if (filterBar) { filterBar.style.top = _frozenFbTop + 'px'; filterBar.style.transform = 'none'; }
+    if (pillsBar) { pillsBar.style.transition = 'none'; pillsBar.style.top = _frozenPillsTop + 'px'; pillsBar.style.transform = 'none'; }
+    if (filterBar) { filterBar.style.transition = 'none'; filterBar.style.top = _frozenFbTop + 'px'; filterBar.style.transform = 'none'; }
     window._searchFrozen = true;
     srchOverlay.style.display = 'block';
   }
 
-  // Rimuove freeze e torna al sistema CSS/rAF
+  // Unfreeze: ripristina sistema CSS/rAF
   function _unfreezeBars() {
+    if (!window._searchFrozen) return; // già scongelato
     console.log('[UNFREEZE]');
     window._searchFrozen = false;
     _frozenPillsTop = null;
     _frozenFbTop = null;
-    if (pillsBar) { pillsBar.style.top = ''; pillsBar.style.transform = ''; }
-    if (filterBar) { filterBar.style.top = ''; filterBar.style.transform = ''; }
+    if (pillsBar) { pillsBar.style.transition = ''; pillsBar.style.top = ''; pillsBar.style.transform = ''; }
+    if (filterBar) { filterBar.style.transition = ''; filterBar.style.top = ''; filterBar.style.transform = ''; }
     srchOverlay.style.display = 'none';
+    // Ricalcola posizioni ora che tastiera è chiusa
+    requestAnimationFrame(function() {
+      if (!srchOpen) return;
+      var hdr2 = document.querySelector('.hdr');
+      var hdrBot2 = hdr2 ? hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
+      if (typeof _applyBarsTop === 'function') _applyBarsTop(hdrBot2);
+      if (typeof updateFbH === 'function') updateFbH();
+    });
   }
 
-  // Chiamato da visualViewport resize: gestisce solo la chiusura tastiera (unfreeze)
-  function _updateSearchFrozen() {
-    if (!srchOpen || !window._searchFrozen) return;
-    var vvH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-    var ref = window._initialViewportH || window.innerHeight;
-    var kbOpen = vvH < ref * 0.75;
-    console.log('[VV_RESIZE] kbOpen='+kbOpen+' vvH='+Math.round(vvH)+' ref='+Math.round(ref));
-    if (!kbOpen) {
-      // Tastiera chiusa: unfreeze e ricalcola
-      _unfreezeBars();
-      requestAnimationFrame(function() {
-        var _hdr2 = document.querySelector('.hdr');
-        var _hdrBot2 = _hdr2 ? _hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
-        if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot2);
-      });
-      // Il listener focus persistente sull'input gestisce automaticamente il re-freeze
-    }
-  }
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', _updateSearchFrozen);
-  }
-  window.addEventListener('resize', _updateSearchFrozen);
-
-  // Listener focus PERSISTENTE sull'input — si attiva ogni volta che l'input riceve focus
-  // Non usa { once:true } — rimane attivo per tutta la vita della pagina
+  // Listener PERSISTENTI su focus e blur — affidabili al 100%
+  // Focus = tastiera si apre → freeze
+  // Blur  = tastiera si chiude → unfreeze
   var _srchInp = document.getElementById('srch');
   if (_srchInp) {
     _srchInp.addEventListener('focus', function() {
       if (srchOpen) _freezeBars();
+    });
+    _srchInp.addEventListener('blur', function() {
+      _unfreezeBars();
     });
   }
 
