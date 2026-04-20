@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="it">
 <head>
+<!-- ERUDA DEBUG — RIMUOVERE PRIMA DEL DEPLOY -->
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no, email=no">
@@ -4249,7 +4252,10 @@ function _startSyncLoop() {
 }
 
 function _applyBarsTop(hdrBottom) {
-  if (window._searchFrozen) return; // posizioni congelate — non toccare nulla
+  if (window._searchFrozen) {
+    console.warn('[APPLY_BARS_TOP] BLOCCATO da freeze — chiamante:', new Error().stack.split('\n')[2]);
+    return;
+  }
   var pills = document.getElementById('pills-bar');
   var pillsH = pills ? pills.offsetHeight : 40;
   // pills-bar e filter-bar posizione gestita da CSS transform — non impostare top via JS
@@ -7414,12 +7420,14 @@ function showInstallPWAModal() {
   // Congela pills e filter-bar alle posizioni snapshot — immune al viewport resize
   function _freezeBars() {
     if (_snapPillsTop === null || _snapFbTop === null) return;
+    console.log('[FREEZE] pillsTop='+_snapPillsTop+' fbTop='+_snapFbTop);
     if (pillsBar) { pillsBar.style.top = _snapPillsTop + 'px'; pillsBar.style.transform = 'none'; }
     if (filterBar) { filterBar.style.top = _snapFbTop + 'px'; filterBar.style.transform = 'none'; }
   }
 
   // Rimuove il freeze — torna al sistema CSS/rAF normale
   function _unfreezeBars() {
+    console.log('[UNFREEZE]');
     if (pillsBar) { pillsBar.style.top = ''; pillsBar.style.transform = ''; }
     if (filterBar) { filterBar.style.top = ''; filterBar.style.transform = ''; }
     _snapPillsTop = null;
@@ -7433,6 +7441,7 @@ function showInstallPWAModal() {
     var vvH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
     var ref = window._initialViewportH || window.innerHeight;
     var kbOpen = vvH < ref * 0.75;
+    console.log('[UPDATE_FROZEN] srchOpen='+srchOpen+' kbOpen='+kbOpen+' vvH='+vvH+' ref='+ref);
     if (kbOpen) {
       // Tastiera aperta: congela posizioni
       window._searchFrozen = true;
@@ -7469,6 +7478,7 @@ function showInstallPWAModal() {
         var fbRect = filterBar.getBoundingClientRect();
         _snapPillsTop = pillsRect ? pillsRect.top : 0;
         _snapFbTop = fbRect.top;
+        console.log('[SEARCH OPEN] scrollY='+window.scrollY+' snapPills='+_snapPillsTop+' snapFb='+_snapFbTop+' hdrHidden='+_hdrHidden);
 
         // Ricalcola padding main
         var _hdr2 = document.querySelector('.hdr');
