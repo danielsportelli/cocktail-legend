@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — Cocktail Legend</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#0a0f1e; --surface:#1e293b; --surface2:#334155;
+  --primary:#2563eb; --primary-l:#60a5fa; --accent:#f59e0b;
+  --text:#f1f5f9; --muted:#94a3b8; --border:rgba(255,255,255,0.08);
+  --ok:#22c55e; --err:#ef4444;
+  --purple:#a855f7; --teal:#14b8a6;
+}
+body { background:var(--bg); color:var(--text); font-family:'Inter',system-ui,sans-serif; min-height:100vh; padding:2rem 1rem 4rem; -webkit-font-smoothing:antialiased; }
+.container { max-width:960px; margin:0 auto; }
+
+/* LOGIN */
+#login-overlay { position:fixed; inset:0; background:var(--bg); display:flex; align-items:center; justify-content:center; z-index:100; }
+.login-box { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2.5rem; text-align:center; max-width:360px; width:100%; }
+.login-logo { font-size:1.4rem; font-weight:900; background:linear-gradient(135deg,var(--primary-l),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:0.5rem; }
+.login-sub { font-size:0.82rem; color:var(--muted); margin-bottom:2rem; }
+.btn-google { display:flex; align-items:center; justify-content:center; gap:0.75rem; width:100%; padding:0.85rem 1.5rem; background:white; color:#1f2937; border:none; border-radius:10px; font-size:0.9rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all 0.2s; }
+.btn-google:hover { transform:translateY(-1px); box-shadow:0 4px 16px rgba(255,255,255,0.15); }
+.btn-google svg { width:20px; height:20px; flex-shrink:0; }
+
+#main-content { display:none; }
+
+/* HEADER */
+.header { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:2rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border); }
+.header-left { display:flex; align-items:center; gap:1rem; }
+.logo { font-size:1.4rem; font-weight:900; background:linear-gradient(135deg,var(--primary-l),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.admin-badge { font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; background:rgba(245,158,11,0.15); color:var(--accent); border:1px solid rgba(245,158,11,0.25); padding:0.2rem 0.6rem; border-radius:6px; }
+.user-bar { display:flex; align-items:center; gap:0.75rem; }
+#user-info { font-size:0.75rem; color:var(--ok); }
+.btn-logout { font-size:0.72rem; font-weight:700; color:var(--muted); background:transparent; border:1px solid var(--border); border-radius:6px; padding:0.25rem 0.6rem; cursor:pointer; font-family:inherit; }
+.btn-logout:hover { color:var(--err); border-color:rgba(239,68,68,0.3); }
+
+/* TABS */
+.tabs { display:flex; gap:0.25rem; margin-bottom:2rem; background:var(--surface); border-radius:12px; padding:0.35rem; border:1px solid var(--border); width:fit-content; }
+.tab-btn { padding:0.55rem 1.2rem; border-radius:8px; border:none; background:transparent; color:var(--muted); font-size:0.8rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all 0.2s; white-space:nowrap; }
+.tab-btn.active { background:var(--surface2); color:var(--text); }
+.tab-btn:hover:not(.active) { color:var(--text); }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* CARDS & STATS */
+.stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.5rem; }
+.stats-row-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:1.5rem; }
+.stat-box { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1rem; text-align:center; }
+.stat-box.accent { border-color:rgba(245,158,11,0.25); }
+.stat-box.ok { border-color:rgba(34,197,94,0.25); }
+.stat-box.blue { border-color:rgba(96,165,250,0.25); }
+.stat-box.purple { border-color:rgba(168,85,247,0.25); }
+.stat-val { font-size:1.6rem; font-weight:900; color:var(--text); display:block; }
+.stat-lbl { font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin-top:0.25rem; display:block; }
+.stat-sub { font-size:0.7rem; color:var(--muted); margin-top:0.2rem; display:block; }
+
+.card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.5rem; margin-bottom:1.5rem; }
+.card-title { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent); margin-bottom:1rem; }
+.card-title.blue { color:var(--primary-l); }
+.card-title.ok { color:var(--ok); }
+.card-title.purple { color:var(--purple); }
+
+/* QUIZ EXISTING STYLES */
+.activation-card { border-radius:16px; padding:1.5rem; margin-bottom:1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; transition:all 0.3s; }
+.activation-card.off { background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25); }
+.activation-card.on  { background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.25); }
+.activation-left { flex:1; }
+.activation-status { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.4rem; }
+.activation-card.off .activation-status { color:#f87171; }
+.activation-card.on  .activation-status { color:#4ade80; }
+.activation-title { font-size:1.05rem; font-weight:800; color:var(--text); margin-bottom:0.25rem; }
+.activation-sub { font-size:0.78rem; color:var(--muted); }
+.toggle-wrap { display:flex; align-items:center; gap:1rem; }
+.toggle-label { font-size:0.8rem; font-weight:700; color:var(--muted); }
+.toggle { position:relative; width:56px; height:28px; cursor:pointer; }
+.toggle input { opacity:0; width:0; height:0; }
+.toggle-slider { position:absolute; inset:0; background:var(--surface2); border-radius:99px; transition:0.3s; }
+.toggle-slider::before { content:''; position:absolute; width:22px; height:22px; left:3px; bottom:3px; background:white; border-radius:50%; transition:0.3s; }
+.toggle input:checked + .toggle-slider { background:var(--ok); }
+.toggle input:checked + .toggle-slider::before { transform:translateX(28px); }
+
+.emergency-toggle-btn { width:100%; display:flex; align-items:center; justify-content:space-between; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2); border-radius:12px; padding:1rem 1.25rem; cursor:pointer; margin-bottom:1.5rem; color:#f87171; font-size:0.82rem; font-weight:700; font-family:inherit; transition:all 0.2s; }
+.emergency-toggle-btn:hover { background:rgba(239,68,68,0.1); }
+.emergency-toggle-btn .arrow { transition:transform 0.3s; font-size:0.9rem; }
+.emergency-toggle-btn.open .arrow { transform:rotate(180deg); }
+.emergency-section { display:none; margin-bottom:1.5rem; }
+.emergency-section.open { display:block; }
+
+.oggi-row { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+.oggi-info { flex:1; }
+.oggi-label { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:0.3rem; }
+.oggi-val { font-size:1rem; font-weight:700; color:var(--text); }
+.oggi-sub { font-size:0.75rem; color:var(--muted); margin-top:0.15rem; }
+
+select { background:var(--bg); border:1.5px solid var(--border); color:var(--text); padding:0.6rem 0.9rem; border-radius:8px; font-size:0.82rem; font-family:inherit; outline:none; cursor:pointer; min-width:160px; }
+textarea { width:100%; height:260px; background:var(--bg); border:1.5px solid var(--border); border-radius:10px; color:var(--primary-l); font-family:'Courier New',monospace; font-size:0.78rem; padding:1rem; resize:vertical; outline:none; line-height:1.6; }
+textarea::placeholder { color:var(--surface2); }
+.textarea-hint { font-size:0.72rem; color:var(--muted); margin-top:0.6rem; }
+
+.action-row { display:flex; gap:0.75rem; margin-top:1rem; flex-wrap:wrap; }
+.btn { padding:0.7rem 1.4rem; border-radius:10px; border:1.5px solid var(--border); font-size:0.82rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all 0.2s; display:inline-flex; align-items:center; gap:0.4rem; }
+.btn-ghost { background:transparent; color:var(--muted); }
+.btn-ghost:hover { border-color:rgba(37,99,235,0.4); color:var(--primary-l); background:rgba(37,99,235,0.08); }
+.btn-primary { background:linear-gradient(135deg,var(--primary),#1e40af); border-color:transparent; color:white; box-shadow:0 4px 12px rgba(37,99,235,0.35); }
+.btn-primary:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(37,99,235,0.45); }
+.btn-primary:disabled { background:var(--surface2); box-shadow:none; transform:none; cursor:not-allowed; color:var(--muted); }
+
+.validation-box { display:none; margin-top:1rem; padding:1rem 1.1rem; border-radius:10px; font-size:0.8rem; line-height:1.8; }
+.validation-box.ok { background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.25); color:#4ade80; display:block; }
+.validation-box.error { background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.25); color:#f87171; display:block; }
+
+.log-box { background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:1rem 1.1rem; font-family:'Courier New',monospace; font-size:0.78rem; line-height:2; min-height:60px; max-height:320px; overflow-y:auto; margin-top:1rem; }
+.log-ok { color:#4ade80; } .log-err { color:#f87171; } .log-inf { color:var(--muted); } .log-done { color:var(--accent); font-weight:700; } .log-warn { color:#fbbf24; }
+
+.domande-list { display:flex; flex-direction:column; gap:0.5rem; max-height:400px; overflow-y:auto; }
+.domanda-row { display:grid; grid-template-columns:60px 50px 1fr 80px 70px; align-items:center; gap:0.75rem; padding:0.65rem 0.85rem; border-radius:8px; background:var(--bg); border:1px solid var(--border); font-size:0.78rem; }
+.d-id { color:var(--primary-l); font-weight:700; font-family:monospace; }
+.d-cat { color:var(--muted); font-size:0.68rem; }
+.d-text { color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.badge { display:inline-block; font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; padding:0.15rem 0.45rem; border-radius:5px; }
+.badge-facile { background:rgba(34,197,94,0.12); color:#4ade80; }
+.badge-media { background:rgba(245,158,11,0.12); color:#fbbf24; }
+.badge-difficile { background:rgba(239,68,68,0.12); color:#f87171; }
+.badge-usata { background:rgba(100,116,139,0.2); color:var(--muted); }
+.badge-libera { background:rgba(37,99,235,0.12); color:var(--primary-l); }
+.empty-state { text-align:center; color:var(--muted); font-size:0.82rem; padding:2rem; }
+
+/* BARMAN AI TABLE */
+.ai-table { width:100%; border-collapse:collapse; font-size:0.8rem; }
+.ai-table th { text-align:left; color:var(--muted); font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; padding:0.5rem 0.75rem; border-bottom:1px solid var(--border); }
+.ai-table td { padding:0.65rem 0.75rem; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--text); }
+.ai-table tr:last-child td { border-bottom:none; }
+.ai-table .funzione-badge { font-size:0.68rem; font-weight:700; padding:0.2rem 0.55rem; border-radius:6px; }
+.f-signature { background:rgba(168,85,247,0.12); color:var(--purple); }
+.f-twist { background:rgba(96,165,250,0.12); color:var(--primary-l); }
+.f-pairing { background:rgba(20,184,166,0.12); color:var(--teal); }
+.f-giorno { background:rgba(245,158,11,0.12); color:var(--accent); }
+.f-followup { background:rgba(100,116,139,0.12); color:var(--muted); }
+.f-unknown { background:rgba(100,116,139,0.12); color:var(--muted); }
+
+/* CHART BAR */
+.bar-chart { display:flex; flex-direction:column; gap:0.75rem; }
+.bar-row { display:flex; align-items:center; gap:1rem; }
+.bar-label { font-size:0.75rem; color:var(--muted); width:90px; flex-shrink:0; text-align:right; }
+.bar-track { flex:1; background:var(--bg); border-radius:99px; height:8px; overflow:hidden; }
+.bar-fill { height:100%; border-radius:99px; transition:width 0.8s ease; }
+.bar-val { font-size:0.75rem; font-weight:700; color:var(--text); width:50px; flex-shrink:0; }
+
+/* UTENTI */
+.utenti-row { display:flex; align-items:center; justify-content:space-between; padding:0.75rem 0; border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.82rem; }
+.utenti-row:last-child { border-bottom:none; }
+.utenti-email { color:var(--text); font-weight:600; }
+.utenti-meta { color:var(--muted); font-size:0.72rem; }
+
+/* OVERVIEW KPI */
+.kpi-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-bottom:1.5rem; }
+.kpi-box { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.5rem; }
+.kpi-label { font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:0.5rem; }
+.kpi-val { font-size:2rem; font-weight:900; color:var(--text); line-height:1; }
+.kpi-sub { font-size:0.72rem; color:var(--muted); margin-top:0.4rem; }
+.kpi-trend { font-size:0.72rem; font-weight:700; margin-top:0.4rem; }
+.kpi-trend.up { color:var(--ok); }
+.kpi-trend.down { color:var(--err); }
+
+/* SPONSOR NOTE */
+.sponsor-note { background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.2); border-radius:12px; padding:1rem 1.25rem; font-size:0.78rem; color:var(--muted); margin-bottom:1.5rem; }
+.sponsor-note strong { color:var(--accent); }
+
+::-webkit-scrollbar { width:5px; } ::-webkit-scrollbar-track { background:transparent; } ::-webkit-scrollbar-thumb { background:var(--surface2); border-radius:99px; }
+
+.loading { color:var(--muted); font-size:0.82rem; padding:1rem; text-align:center; }
+.refresh-btn { font-size:0.72rem; font-weight:700; color:var(--primary-l); background:transparent; border:1px solid rgba(96,165,250,0.3); border-radius:6px; padding:0.25rem 0.6rem; cursor:pointer; font-family:inherit; }
+.refresh-btn:hover { background:rgba(96,165,250,0.08); }
+.section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; }
+</style>
+</head>
+<body>
+
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="login-logo">Cocktail Legend</div>
+    <div class="login-sub">Pannello Admin — Accesso riservato</div>
+    <button class="btn-google" onclick="loginGoogle()">
+      <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Accedi con Google
+    </button>
+  </div>
+</div>
+
+<div id="main-content">
+<div class="container">
+
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">Cocktail Legend</div>
+      <div class="admin-badge">Admin Panel</div>
+    </div>
+    <div class="user-bar">
+      <span id="user-info"></span>
+      <button class="btn-logout" onclick="logout()">Esci</button>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('overview')">📊 Overview</button>
+    <button class="tab-btn" onclick="switchTab('barman')">🤖 Barman AI</button>
+    <button class="tab-btn" onclick="switchTab('utenti')">👥 Utenti</button>
+    <button class="tab-btn" onclick="switchTab('quiz')">🎯 Quiz</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- TAB: OVERVIEW                                          -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div id="tab-overview" class="tab-panel active">
+
+    <div class="sponsor-note">
+      <strong>📋 Dati per sponsor</strong> — questa sezione mostra i KPI principali dell'app aggiornati in tempo reale. Utile per presentazioni e partnership commerciali.
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-box" style="border-color:rgba(96,165,250,0.25)">
+        <div class="kpi-label">Utenti registrati totali</div>
+        <div class="kpi-val" id="ov-utenti-tot">—</div>
+        <div class="kpi-sub" id="ov-utenti-sub">Caricamento...</div>
+      </div>
+      <div class="kpi-box" style="border-color:rgba(245,158,11,0.25)">
+        <div class="kpi-label">Utenti Premium attivi</div>
+        <div class="kpi-val" id="ov-premium-tot">—</div>
+        <div class="kpi-sub" id="ov-premium-sub">Caricamento...</div>
+      </div>
+      <div class="kpi-box" style="border-color:rgba(34,197,94,0.25)">
+        <div class="kpi-label">Partecipanti quiz oggi</div>
+        <div class="kpi-val" id="ov-quiz-oggi">—</div>
+        <div class="kpi-sub" id="ov-quiz-sub">Caricamento...</div>
+      </div>
+      <div class="kpi-box" style="border-color:rgba(168,85,247,0.25)">
+        <div class="kpi-label">Chiamate AI totali</div>
+        <div class="kpi-val" id="ov-ai-tot">—</div>
+        <div class="kpi-sub" id="ov-ai-sub">Caricamento...</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+      <div class="card" style="margin-bottom:0">
+        <div class="card-title">🎯 Engagement quiz</div>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+            <span style="color:var(--muted)">Partecipanti totali</span>
+            <span id="ov-quiz-partecipanti" style="font-weight:700">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+            <span style="color:var(--muted)">Quiz completati</span>
+            <span id="ov-quiz-completati" style="font-weight:700">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+            <span style="color:var(--muted)">Punteggio medio</span>
+            <span id="ov-quiz-punteggio" style="font-weight:700">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+            <span style="color:var(--muted)">% utenti che giocano</span>
+            <span id="ov-quiz-pct" style="font-weight:700;color:var(--accent)">—</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:0">
+        <div class="card-title blue">🤖 Barman AI</div>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+            <span style="color:var(--muted)">Chiamate oggi</span>
+            <span id="ov-ai-oggi" style="font-weight:700">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+            <span style="color:var(--muted)">Costo medio chiamata</span>
+            <span id="ov-ai-costo" style="font-weight:700">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+            <span style="color:var(--muted)">Costo totale AI</span>
+            <span id="ov-ai-costoTot" style="font-weight:700;color:var(--err)">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+            <span style="color:var(--muted)">Funzione più usata</span>
+            <span id="ov-ai-top" style="font-weight:700;color:var(--primary-l)">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- TAB: BARMAN AI                                         -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div id="tab-barman" class="tab-panel">
+
+    <div class="stats-row">
+      <div class="stat-box blue"><span class="stat-val" id="ai-tot">—</span><span class="stat-lbl">Chiamate totali</span></div>
+      <div class="stat-box accent"><span class="stat-val" id="ai-oggi-n">—</span><span class="stat-lbl">Chiamate oggi</span></div>
+      <div class="stat-box"><span class="stat-val" id="ai-costo-medio">—</span><span class="stat-lbl">Costo medio</span></div>
+      <div class="stat-box"><span class="stat-val" id="ai-costo-tot">—</span><span class="stat-lbl">Costo totale</span></div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <div class="card-title" style="margin-bottom:0">📊 Chiamate per funzione</div>
+        <button class="refresh-btn" onclick="loadAIStats()">↺ Aggiorna</button>
+      </div>
+      <div id="ai-bar-chart" class="bar-chart">
+        <div class="loading">Caricamento...</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🕐 Ultime 10 chiamate</div>
+      <div style="overflow-x:auto;">
+        <table class="ai-table">
+          <thead>
+            <tr>
+              <th>Ora</th>
+              <th>Funzione</th>
+              <th>Token IN</th>
+              <th>Token OUT</th>
+              <th>Costo</th>
+              <th>Esito</th>
+            </tr>
+          </thead>
+          <tbody id="ai-ultime">
+            <tr><td colspan="6" class="loading">Caricamento...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title blue">📈 Andamento ultimi 30 giorni</div>
+      <div id="ai-giorni-chart" style="display:flex;align-items:flex-end;gap:4px;height:80px;padding-top:8px;">
+        <div class="loading">Caricamento...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- TAB: UTENTI                                            -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div id="tab-utenti" class="tab-panel">
+
+    <div class="stats-row-3">
+      <div class="stat-box blue"><span class="stat-val" id="ut-tot">—</span><span class="stat-lbl">Utenti totali</span></div>
+      <div class="stat-box accent"><span class="stat-val" id="ut-premium">—</span><span class="stat-lbl">Premium attivi</span></div>
+      <div class="stat-box ok"><span class="stat-val" id="ut-pct">—</span><span class="stat-lbl">% conversione</span></div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <div class="card-title" style="margin-bottom:0">👥 Lista utenti</div>
+        <button class="refresh-btn" onclick="loadUtenti()">↺ Aggiorna</button>
+      </div>
+      <div id="utenti-list">
+        <div class="loading">Caricamento...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- TAB: QUIZ (identico all'originale)                     -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div id="tab-quiz" class="tab-panel">
+
+    <div class="stats-row">
+      <div class="stat-box"><span class="stat-val" id="stat-totale">—</span><span class="stat-lbl">Domande totali</span></div>
+      <div class="stat-box"><span class="stat-val" id="stat-libere" style="color:var(--primary-l)">—</span><span class="stat-lbl">Ancora da usare</span></div>
+      <div class="stat-box"><span class="stat-val" id="stat-usate" style="color:var(--muted)">—</span><span class="stat-lbl">Già usate</span></div>
+      <div class="stat-box"><span class="stat-val" id="stat-giorni" style="color:var(--accent)">—</span><span class="stat-lbl">Giorni rimanenti</span></div>
+    </div>
+
+    <div class="activation-card off" id="activation-card">
+      <div class="activation-left">
+        <div class="activation-status" id="activation-status">● QUIZ NON ATTIVO</div>
+        <div class="activation-title" id="activation-title">Il quiz giornaliero è disattivato</div>
+        <div class="activation-sub" id="activation-sub">Attiva quando sei pronto al lancio — la Cloud Function inizierà dalla notte stessa</div>
+      </div>
+      <div class="toggle-wrap">
+        <span class="toggle-label" id="toggle-label">OFF</span>
+        <label class="toggle">
+          <input type="checkbox" id="quiz-toggle" onchange="toggleQuiz(this.checked)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <button class="emergency-toggle-btn" id="emergency-btn" onclick="toggleEmergency()">
+      <span>⚠ Modalità emergenza — Imposta domanda manualmente</span>
+      <span class="arrow">▼</span>
+    </button>
+
+    <div class="emergency-section" id="emergency-section">
+      <div class="card">
+        <div class="card-title">🚨 Controllo manuale — solo per emergenze</div>
+        <div class="oggi-row">
+          <div class="oggi-info">
+            <div class="oggi-label">Domanda attiva oggi</div>
+            <div class="oggi-val" id="oggi-val">Caricamento...</div>
+            <div class="oggi-sub" id="oggi-sub"></div>
+          </div>
+          <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+            <select id="select-domanda"><option value="">Seleziona domanda...</option></select>
+            <button class="btn btn-primary" onclick="impostaOggi()">Imposta oggi</button>
+          </div>
+        </div>
+        <div class="log-box" id="log-oggi"><span class="log-inf">Apri questa sezione solo in caso di emergenza.</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⬆ Carica nuovo batch di domande</div>
+      <textarea id="json-input" placeholder='Incolla qui il JSON delle nuove domande...
+[
+  {
+    "id": "q031",
+    "batch": 2,
+    "domanda": "...",
+    "opzioni": { "A": "...", "B": "...", "C": "..." },
+    "risposta_corretta": "A",
+    "spiegazione": "...",
+    "categoria": "spirits",
+    "difficolta": "facile",
+    "usata": false,
+    "data_utilizzo": null
+  }
+]'></textarea>
+      <div class="textarea-hint">Incolla il JSON del nuovo batch. Valida prima di caricare.</div>
+      <div class="action-row">
+        <button class="btn btn-ghost" onclick="validaJSON()">🔍 Valida JSON</button>
+        <button class="btn btn-primary" id="btn-carica" onclick="caricaDomande()" disabled>⬆ Carica su Firebase</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('json-input').value='';resetValidazione()">✕ Pulisci</button>
+      </div>
+      <div class="validation-box" id="validation-box"></div>
+      <div class="log-box" id="log-carica" style="display:none;"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Tutte le domande in Firebase</div>
+      <div class="action-row" style="margin-bottom:1rem;margin-top:0;">
+        <button class="btn btn-ghost" onclick="caricaListaDomande()">↺ Aggiorna lista</button>
+      </div>
+      <div class="domande-list" id="domande-list">
+        <div class="empty-state">Clicca "Aggiorna lista" per vedere le domande</div>
+      </div>
+    </div>
+
+  </div><!-- /tab-quiz -->
+
+</div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc, getDocs, collection, query, where, orderBy, limit, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDkIK5KD-LHCdAhxHVS-bbnwP9Qak2vTxc",
+  authDomain: "cocktail-legend.firebaseapp.com",
+  projectId: "cocktail-legend",
+  storageBucket: "cocktail-legend.firebasestorage.app",
+  messagingSenderId: "237023162237",
+  appId: "1:237023162237:web:8a35e5421521171e2fa614"
+};
+
+const WORKER_URL = 'https://cocktail-legend-ai.daniel-sportelli.workers.dev';
+// ⚠️ Sostituisci con il token che imposti in Cloudflare (variabile ADMIN_TOKEN)
+const ADMIN_TOKEN = 'CL-admin-2026-panel-admin';
+
+const app  = initializeApp(firebaseConfig);
+const db   = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// ── AUTH ──────────────────────────────────────────────────
+onAuthStateChanged(auth, (user) => {
+  if (user && user.email === 'daniel.sportelli@gmail.com') {
+    document.getElementById('login-overlay').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    document.getElementById('user-info').textContent = '✓ ' + user.email;
+    initAll();
+  } else {
+    document.getElementById('login-overlay').style.display = 'flex';
+    document.getElementById('main-content').style.display = 'none';
+    if (user) signOut(auth);
+  }
+});
+
+window.loginGoogle = async () => {
+  try { await signInWithPopup(auth, provider); }
+  catch(e) { alert('Errore login: ' + e.message); }
+};
+window.logout = async () => { await signOut(auth); };
+
+// ── INIT ──────────────────────────────────────────────────
+async function initAll() {
+  await Promise.all([
+    caricaStats(),
+    caricaStatoAttivazione(),
+    loadAIStats(),
+    loadUtenti(),
+  ]);
+}
+
+// ── TABS ──────────────────────────────────────────────────
+window.switchTab = function(tab) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    const tabs = ['overview','barman','utenti','quiz'];
+    b.classList.toggle('active', tabs[i] === tab);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+};
+
+// ── AI STATS (D1 via Worker) ──────────────────────────────
+window.loadAIStats = async function() {
+  try {
+    const res = await fetch(`${WORKER_URL}/stats?token=${ADMIN_TOKEN}`);
+    if (!res.ok) { console.error('Stats error', res.status); return; }
+    const d = await res.json();
+
+    // Tab Barman AI
+    document.getElementById('ai-tot').textContent = d.totale?.toLocaleString() || '0';
+    document.getElementById('ai-oggi-n').textContent = d.oggi?.n?.toLocaleString() || '0';
+    const avgEur = d.costoMedio?.avg_eur || 0;
+    const totEur = d.costoMedio?.tot_eur || 0;
+    document.getElementById('ai-costo-medio').textContent = avgEur ? (avgEur*100).toFixed(3)+'¢' : '—';
+    document.getElementById('ai-costo-tot').textContent = totEur ? '€'+totEur.toFixed(4) : '—';
+
+    // Bar chart funzioni
+    const funzioni = d.perFunzione || [];
+    const maxN = Math.max(...funzioni.map(f => f.n), 1);
+    const colors = { signature:'#a855f7', twist:'#60a5fa', pairing:'#14b8a6', giorno:'#f59e0b', followup:'#64748b', unknown:'#64748b' };
+    const chartEl = document.getElementById('ai-bar-chart');
+    if (funzioni.length) {
+      chartEl.innerHTML = funzioni.map(f => `
+        <div class="bar-row">
+          <div class="bar-label">${f.funzione}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${(f.n/maxN*100).toFixed(1)}%;background:${colors[f.funzione]||'#64748b'}"></div></div>
+          <div class="bar-val">${f.n} <span style="color:var(--muted);font-size:0.65rem">(${(f.avg_eur*100).toFixed(2)}¢)</span></div>
+        </div>`).join('');
+    } else {
+      chartEl.innerHTML = '<div class="loading">Nessun dato ancora</div>';
+    }
+
+    // Ultime chiamate
+    const ultime = d.ultime || [];
+    const tbody = document.getElementById('ai-ultime');
+    if (ultime.length) {
+      tbody.innerHTML = ultime.map(r => `
+        <tr>
+          <td style="color:var(--muted);font-size:0.72rem">${r.timestamp?.slice(11,19)||'—'}</td>
+          <td><span class="funzione-badge f-${r.funzione}">${r.funzione}</span></td>
+          <td>${r.input_tokens?.toLocaleString()||'—'}</td>
+          <td>${r.output_tokens?.toLocaleString()||'—'}</td>
+          <td style="color:var(--accent)">${r.costo_eur?(r.costo_eur*100).toFixed(3)+'¢':'—'}</td>
+          <td style="color:${r.esito==='ok'?'var(--ok)':'var(--err)'}">${r.esito}</td>
+        </tr>`).join('');
+    } else {
+      tbody.innerHTML = '<tr><td colspan="6" class="loading">Nessuna chiamata ancora — testa una funzione</td></tr>';
+    }
+
+    // Mini bar chart 30 giorni
+    const giorni = d.perGiorno || [];
+    const giornoEl = document.getElementById('ai-giorni-chart');
+    if (giorni.length) {
+      const maxG = Math.max(...giorni.map(g => g.n), 1);
+      giornoEl.innerHTML = giorni.map(g => `
+        <div title="${g.giorno}: ${g.n} chiamate" style="flex:1;background:rgba(37,99,235,0.5);border-radius:3px 3px 0 0;height:${Math.max(g.n/maxG*100,4).toFixed(0)}%;cursor:help;transition:background 0.2s" onmouseover="this.style.background='rgba(96,165,250,0.9)'" onmouseout="this.style.background='rgba(37,99,235,0.5)'"></div>
+      `).join('');
+    } else {
+      giornoEl.innerHTML = '<div class="loading">Nessun dato</div>';
+    }
+
+    // Overview
+    document.getElementById('ov-ai-tot').textContent = d.totale?.toLocaleString() || '0';
+    document.getElementById('ov-ai-sub').textContent = 'totale da sempre';
+    document.getElementById('ov-ai-oggi').textContent = d.oggi?.n || '0';
+    document.getElementById('ov-ai-costo').textContent = avgEur ? (avgEur*100).toFixed(3)+'¢ EUR' : '—';
+    document.getElementById('ov-ai-costoTot').textContent = totEur ? '€'+totEur.toFixed(4) : '—';
+    if (funzioni.length) document.getElementById('ov-ai-top').textContent = funzioni[0].funzione;
+
+  } catch(e) { console.error('loadAIStats:', e); }
+};
+
+// ── UTENTI (Firebase) ─────────────────────────────────────
+window.loadUtenti = async function() {
+  try {
+    const snap = await getDocs(collection(db, 'users'));
+    let premium = 0;
+    const users = [];
+    snap.forEach(d => {
+      const data = d.data();
+      if (data.isPremium) premium++;
+      users.push({ uid: d.id, ...data });
+    });
+    const tot = snap.size;
+    const pct = tot > 0 ? ((premium/tot)*100).toFixed(1) : '0';
+
+    document.getElementById('ut-tot').textContent = tot.toLocaleString();
+    document.getElementById('ut-premium').textContent = premium.toLocaleString();
+    document.getElementById('ut-pct').textContent = pct + '%';
+    document.getElementById('ov-utenti-tot').textContent = tot.toLocaleString();
+    document.getElementById('ov-utenti-sub').textContent = `${premium} premium`;
+    document.getElementById('ov-premium-tot').textContent = premium.toLocaleString();
+    document.getElementById('ov-premium-sub').textContent = pct + '% degli iscritti';
+
+    // Lista
+    const listEl = document.getElementById('utenti-list');
+    if (users.length) {
+      users.sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
+      listEl.innerHTML = users.slice(0,50).map(u => `
+        <div class="utenti-row">
+          <div>
+            <div class="utenti-email">${u.email || u.displayName || u.uid.slice(0,12)+'...'}</div>
+            <div class="utenti-meta">
+              ${u.isPremium ? '⭐ Premium' : '○ Free'} &nbsp;·&nbsp;
+              Crediti: ${u.crediti ?? u.credits ?? '—'} &nbsp;·&nbsp;
+              Referral: ${u.referralCrediti ?? u.referralCredits ?? '—'}
+            </div>
+          </div>
+          <div style="text-align:right">
+            <span class="badge ${u.isPremium ? 'badge-libera' : 'badge-usata'}">${u.isPremium ? 'premium' : 'free'}</span>
+          </div>
+        </div>`).join('');
+    } else {
+      listEl.innerHTML = '<div class="empty-state">Nessun utente trovato — verifica la collezione "users" in Firestore</div>';
+    }
+
+  } catch(e) {
+    console.error('loadUtenti:', e);
+    document.getElementById('utenti-list').innerHTML = `<div class="empty-state" style="color:#f87171">Errore: ${e.message}<br><small>Verifica che la collezione si chiami "users" in Firestore</small></div>`;
+  }
+};
+
+// ── QUIZ STATS (Overview) ─────────────────────────────────
+async function loadQuizOverview() {
+  try {
+    // Usa la stessa collezione del quiz
+    const oggi = new Date().toISOString().split('T')[0];
+
+    // Partecipanti oggi (cerca in risultati_quiz o simile)
+    let oggiN = '—', totPart = '—', completati = '—', avgScore = '—';
+
+    try {
+      const snapAll = await getDocs(collection(db, 'risultati_quiz'));
+      totPart = snapAll.size;
+      let sum = 0, cnt = 0, oggiCnt = 0, compCnt = 0;
+      snapAll.forEach(d => {
+        const data = d.data();
+        if (data.data === oggi || (data.timestamp && data.timestamp.startsWith && data.timestamp.startsWith(oggi))) oggiCnt++;
+        if (data.punteggio !== undefined) { sum += data.punteggio; cnt++; }
+        if (data.completato) compCnt++;
+      });
+      oggiN = oggiCnt;
+      completati = compCnt;
+      avgScore = cnt > 0 ? (sum/cnt).toFixed(1) : '—';
+    } catch(e) {
+      // collezione potrebbe chiamarsi diversamente
+    }
+
+    document.getElementById('ov-quiz-oggi').textContent = oggiN;
+    document.getElementById('ov-quiz-sub').textContent = 'partecipanti oggi';
+    document.getElementById('ov-quiz-partecipanti').textContent = totPart;
+    document.getElementById('ov-quiz-completati').textContent = completati;
+    document.getElementById('ov-quiz-punteggio').textContent = avgScore !== '—' ? avgScore + '/3' : '—';
+
+    // % utenti che giocano
+    const utTot = parseInt(document.getElementById('ut-tot').textContent) || 0;
+    if (utTot > 0 && typeof totPart === 'number') {
+      document.getElementById('ov-quiz-pct').textContent = ((totPart/utTot)*100).toFixed(1) + '%';
+    }
+  } catch(e) { console.error('loadQuizOverview:', e); }
+}
+
+// ── QUIZ (originale) ──────────────────────────────────────
+async function caricaStats() {
+  try {
+    const snap = await getDocs(collection(db, 'domande'));
+    let usate = 0;
+    snap.forEach(d => { if (d.data().usata) usate++; });
+    const totale = snap.size;
+    const libere = totale - usate;
+    document.getElementById('stat-totale').textContent = totale;
+    document.getElementById('stat-libere').textContent = libere;
+    document.getElementById('stat-usate').textContent = usate;
+    document.getElementById('stat-giorni').textContent = libere;
+    await loadQuizOverview();
+  } catch(e) { console.error(e); }
+}
+
+async function caricaStatoAttivazione() {
+  try {
+    const snap = await getDoc(doc(db, 'config', 'quiz'));
+    const attivo = snap.exists() && snap.data().attivo === true;
+    aggiornaToggleUI(attivo);
+    document.getElementById('quiz-toggle').checked = attivo;
+  } catch(e) { console.error(e); }
+}
+
+function aggiornaToggleUI(attivo) {
+  const card = document.getElementById('activation-card');
+  const status = document.getElementById('activation-status');
+  const title = document.getElementById('activation-title');
+  const sub = document.getElementById('activation-sub');
+  const label = document.getElementById('toggle-label');
+  if (attivo) {
+    card.className = 'activation-card on';
+    status.textContent = '● QUIZ ATTIVO';
+    title.textContent = 'Il quiz giornaliero è in esecuzione';
+    sub.textContent = 'La Cloud Function gira ogni notte a mezzanotte e imposta la nuova domanda automaticamente';
+    label.textContent = 'ON';
+  } else {
+    card.className = 'activation-card off';
+    status.textContent = '● QUIZ NON ATTIVO';
+    title.textContent = 'Il quiz giornaliero è disattivato';
+    sub.textContent = 'Attiva quando sei pronto al lancio — la Cloud Function inizierà dalla notte stessa';
+    label.textContent = 'OFF';
+  }
+}
+
+window.toggleQuiz = async function(attivo) {
+  try {
+    await setDoc(doc(db, 'config', 'quiz'), { attivo: attivo });
+    aggiornaToggleUI(attivo);
+  } catch(e) {
+    alert('Errore: ' + e.message);
+    document.getElementById('quiz-toggle').checked = !attivo;
+  }
+};
+
+window.toggleEmergency = async function() {
+  const btn = document.getElementById('emergency-btn');
+  const section = document.getElementById('emergency-section');
+  const isOpen = section.classList.contains('open');
+  btn.classList.toggle('open');
+  section.classList.toggle('open');
+  if (!isOpen) await caricaEmergenza();
+};
+
+async function caricaEmergenza() {
+  try {
+    const qSnap = await getDocs(query(collection(db, 'domande'), where('usata', '==', false), orderBy('id')));
+    const sel = document.getElementById('select-domanda');
+    sel.innerHTML = '<option value="">Seleziona domanda...</option>';
+    qSnap.forEach(d => {
+      const data = d.data();
+      const opt = document.createElement('option');
+      opt.value = data.id;
+      opt.textContent = `${data.id} — ${data.domanda.substring(0,45)}...`;
+      sel.appendChild(opt);
+    });
+    const ref = doc(db, 'quiz_del_giorno', 'attuale');
+    const snap = await getDoc(ref);
+    if (snap.exists()) {
+      const data = snap.data();
+      document.getElementById('oggi-val').textContent = `${data.domanda_id} — ${data.testo ? data.testo.substring(0,55)+'...' : ''}`;
+      document.getElementById('oggi-sub').textContent = `Impostata il: ${data.data_impostazione||'—'} · ${data.categoria||'—'}`;
+    } else {
+      document.getElementById('oggi-val').textContent = 'Nessuna domanda impostata';
+    }
+  } catch(e) { console.error(e); }
+}
+
+window.impostaOggi = async function() {
+  const id = document.getElementById('select-domanda').value;
+  const logEl = document.getElementById('log-oggi');
+  if (!id) { logEl.innerHTML = '<div class="log-warn">⚠ Seleziona prima una domanda.</div>'; return; }
+  try {
+    const dSnap = await getDoc(doc(db, 'domande', id));
+    if (!dSnap.exists()) { logEl.innerHTML = '<div class="log-err">✗ Domanda non trovata.</div>'; return; }
+    const d = dSnap.data();
+    const oggi = new Date().toISOString().split('T')[0];
+    await setDoc(doc(db, 'quiz_del_giorno', 'attuale'), {
+      domanda_id: id, testo: d.domanda, categoria: d.categoria,
+      difficolta: d.difficolta, data_impostazione: oggi,
+      opzioni: d.opzioni, risposta_corretta: d.risposta_corretta, spiegazione: d.spiegazione
+    });
+    logEl.innerHTML = `<div class="log-ok">✓ Domanda ${id} impostata manualmente (${oggi})</div>`;
+    document.getElementById('oggi-val').textContent = `${id} — ${d.domanda.substring(0,55)}...`;
+    document.getElementById('oggi-sub').textContent = `Impostata il: ${oggi} · ${d.categoria}`;
+  } catch(e) { logEl.innerHTML = `<div class="log-err">✗ Errore: ${e.message}</div>`; }
+};
+
+let domandeValidate = null;
+window.validaJSON = function() {
+  const input = document.getElementById('json-input').value.trim();
+  const box = document.getElementById('validation-box');
+  const btn = document.getElementById('btn-carica');
+  domandeValidate = null; btn.disabled = true;
+  if (!input) { box.className='validation-box error'; box.textContent='✗ Campo vuoto.'; return; }
+  try {
+    const parsed = JSON.parse(input);
+    if (!Array.isArray(parsed)) throw new Error('Deve essere un array [ ... ]');
+    if (parsed.length === 0) throw new Error('Array vuoto.');
+    const campi = ['id','domanda','opzioni','risposta_corretta','spiegazione','categoria','difficolta'];
+    const errori = [];
+    parsed.forEach((d,i) => {
+      campi.forEach(c => { if (!d[c]) errori.push(`Domanda ${i+1} (${d.id||'?'}): campo mancante → "${c}"`); });
+      if (d.opzioni && (!d.opzioni.A||!d.opzioni.B||!d.opzioni.C)) errori.push(`Domanda ${i+1}: opzioni A/B/C incomplete`);
+      if (d.risposta_corretta && !['A','B','C'].includes(d.risposta_corretta)) errori.push(`Domanda ${i+1}: risposta_corretta deve essere A, B o C`);
+    });
+    if (errori.length > 0) { box.className='validation-box error'; box.innerHTML='✗ '+errori.length+' errori:<br>'+errori.map(e=>'• '+e).join('<br>'); return; }
+    const dist = {A:0,B:0,C:0};
+    parsed.forEach(d => dist[d.risposta_corretta]++);
+    domandeValidate = parsed; btn.disabled = false;
+    box.className='validation-box ok';
+    box.innerHTML=`✓ JSON valido — ${parsed.length} domande pronte<br>Distribuzione: A=${dist.A} · B=${dist.B} · C=${dist.C}<br>Categorie: ${[...new Set(parsed.map(d=>d.categoria))].join(', ')}`;
+  } catch(e) { box.className='validation-box error'; box.textContent='✗ JSON non valido: '+e.message; }
+};
+
+window.resetValidazione = function() {
+  document.getElementById('validation-box').className='validation-box';
+  document.getElementById('validation-box').textContent='';
+  document.getElementById('btn-carica').disabled = true;
+  document.getElementById('log-carica').style.display = 'none';
+  domandeValidate = null;
+};
+
+function logCarica(msg, tipo='inf') {
+  const el = document.getElementById('log-carica');
+  el.style.display = 'block';
+  el.innerHTML += `<div class="log-${tipo}">${msg}</div>`;
+  el.scrollTop = el.scrollHeight;
+}
+
+window.caricaDomande = async function() {
+  if (!domandeValidate) return;
+  const btn = document.getElementById('btn-carica');
+  btn.disabled = true;
+  document.getElementById('log-carica').innerHTML = '';
+  logCarica(`🚀 Caricamento ${domandeValidate.length} domande...`);
+  logCarica('─────────────────────────────');
+  let ok=0, err=0;
+  for (const domanda of domandeValidate) {
+    try {
+      await setDoc(doc(db,'domande',domanda.id), { ...domanda, usata: domanda.usata??false, data_utilizzo: domanda.data_utilizzo??null });
+      logCarica(`✓ ${domanda.id} — ${domanda.domanda.substring(0,50)}...`, 'ok');
+      ok++;
+    } catch(e) { logCarica(`✗ ${domanda.id} — ${e.message}`, 'err'); err++; }
+    await new Promise(r => setTimeout(r,150));
+  }
+  logCarica('─────────────────────────────');
+  if (err===0) {
+    logCarica(`✅ COMPLETATO — ${ok}/${domandeValidate.length} domande caricate.`, 'done');
+    await caricaStats(); await caricaListaDomande();
+    domandeValidate=null;
+    document.getElementById('json-input').value='';
+    document.getElementById('validation-box').className='validation-box';
+  } else {
+    logCarica(`⚠ Completato con ${err} errori.`, 'warn');
+    btn.disabled = false;
+  }
+};
+
+window.caricaListaDomande = async function() {
+  const list = document.getElementById('domande-list');
+  list.innerHTML = '<div class="empty-state">Caricamento...</div>';
+  try {
+    const snap = await getDocs(collection(db,'domande'));
+    if (snap.empty) { list.innerHTML='<div class="empty-state">Nessuna domanda trovata.</div>'; return; }
+    const domande = [];
+    snap.forEach(d => domande.push(d.data()));
+    domande.sort((a,b) => a.id.localeCompare(b.id));
+    list.innerHTML = domande.map(d=>`
+      <div class="domanda-row">
+        <span class="d-id">${d.id}</span>
+        <span class="d-cat">${d.categoria}</span>
+        <span class="d-text">${d.domanda}</span>
+        <span style="text-align:center"><span class="badge badge-${d.difficolta}">${d.difficolta}</span></span>
+        <span style="text-align:center"><span class="badge ${d.usata?'badge-usata':'badge-libera'}">${d.usata?'usata':'libera'}</span></span>
+      </div>`).join('');
+  } catch(e) { list.innerHTML=`<div class="empty-state" style="color:#f87171">Errore: ${e.message}</div>`; }
+};
+
+</script>
+</body>
+</html>
