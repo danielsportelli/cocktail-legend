@@ -7408,13 +7408,19 @@ function showInstallPWAModal() {
   var _frozenPillsTop = null;
   var _frozenFbTop = null;
 
-  // Overlay semitrasparente sotto search bar
+  // Overlay — intercetta tap sulle card mentre tastiera è aperta
+  // z-index:49 = sopra card (z:auto) ma sotto pills (z:97) e filter-bar (z:1047)
   var srchOverlay = document.createElement('div');
   srchOverlay.id = 'srch-overlay';
-  srchOverlay.style.cssText = 'position:fixed;inset:0;z-index:49;display:none;background:rgba(0,0,0,0.45);';
+  srchOverlay.style.cssText = 'position:fixed;inset:0;z-index:49;display:none;background:rgba(0,0,0,0.01);touch-action:none;';
   document.body.appendChild(srchOverlay);
-  srchOverlay.addEventListener('click', function() {
-    if (srchOpen) pillsSrchBtn.click();
+  // pointerdown + preventDefault: intercetta il touch prima che raggiunga le card
+  srchOverlay.addEventListener('pointerdown', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    // Chiude solo la tastiera — search bar rimane aperta
+    var inp = document.getElementById('srch');
+    if (inp) inp.blur();
   });
 
   // Calcola geometricamente le posizioni corrette di pills e filter-bar
