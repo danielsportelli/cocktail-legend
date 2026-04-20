@@ -7473,16 +7473,7 @@ function showInstallPWAModal() {
         var _hdrBot2 = _hdr2 ? _hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
         if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot2);
       });
-      // Riattacca focus listener — se l'utente ri-tocca l'input, ricongela
-      var inp = document.getElementById('srch');
-      if (inp && srchOpen) {
-        inp.addEventListener('focus', function _onReFocus() {
-          inp.removeEventListener('focus', _onReFocus);
-          setTimeout(function() {
-            if (srchOpen) _freezeBars();
-          }, 50);
-        }, { once: true });
-      }
+      // Il listener focus persistente sull'input gestisce automaticamente il re-freeze
     }
   }
   if (window.visualViewport) {
@@ -7490,11 +7481,19 @@ function showInstallPWAModal() {
   }
   window.addEventListener('resize', _updateSearchFrozen);
 
+  // Listener focus PERSISTENTE sull'input — si attiva ogni volta che l'input riceve focus
+  // Non usa { once:true } — rimane attivo per tutta la vita della pagina
+  var _srchInp = document.getElementById('srch');
+  if (_srchInp) {
+    _srchInp.addEventListener('focus', function() {
+      if (srchOpen) _freezeBars();
+    });
+  }
+
   if (pillsSrchBtn && filterBar) {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
-        // Mostra filter-bar senza transizione per misurare altezza reale
         filterBar.style.transition = 'none';
         filterBar.classList.remove('hidden');
         var fbH = filterBar.offsetHeight;
@@ -7504,21 +7503,9 @@ function showInstallPWAModal() {
         if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot2);
         requestAnimationFrame(function() { filterBar.style.transition = ''; });
         pillsSrchBtn.classList.add('active');
-
-        // Freeze immediato al focus — non aspettare visualViewport resize
         var inp = document.getElementById('srch');
-        if (inp) {
-          inp.addEventListener('focus', function onSrchFocus() {
-            inp.removeEventListener('focus', onSrchFocus);
-            // Piccolo delay per dare tempo al browser di aggiornare lo stato
-            setTimeout(function() {
-              if (srchOpen) _freezeBars();
-            }, 50);
-          }, { once: true });
-          inp.focus();
-        }
+        if (inp) inp.focus(); // il listener persistente sopra chiamerà _freezeBars()
       } else {
-        // Chiusura search
         _unfreezeBars();
         if (typeof _cachedFbH !== 'undefined') _cachedFbH = 0;
         var _hdr = document.querySelector('.hdr');
