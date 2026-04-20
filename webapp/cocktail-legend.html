@@ -7466,23 +7466,11 @@ function showInstallPWAModal() {
     });
   }
 
-  // Listener PERSISTENTI su focus e blur — affidabili al 100%
-  // Focus = tastiera si apre → freeze
-  // Blur  = tastiera si chiude → unfreeze
-  var _srchInp = document.getElementById('srch');
-  if (_srchInp) {
-    _srchInp.addEventListener('focus', function() {
-      if (srchOpen) _freezeBars();
-    });
-    _srchInp.addEventListener('blur', function() {
-      _unfreezeBars();
-    });
-  }
-
   if (pillsSrchBtn && filterBar) {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
+        // Apre search — overlay ON subito (non aspetta tastiera)
         filterBar.style.transition = 'none';
         filterBar.classList.remove('hidden');
         var fbH = filterBar.offsetHeight;
@@ -7492,9 +7480,13 @@ function showInstallPWAModal() {
         if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot2);
         requestAnimationFrame(function() { filterBar.style.transition = ''; });
         pillsSrchBtn.classList.add('active');
+        srchOverlay.style.display = 'block'; // overlay sempre ON quando search è aperta
+        _freezeBars(); // congela posizioni barre
         var inp = document.getElementById('srch');
-        if (inp) inp.focus(); // il listener persistente sopra chiamerà _freezeBars()
+        if (inp) inp.focus();
       } else {
+        // Chiude search — overlay OFF
+        srchOverlay.style.display = 'none';
         _unfreezeBars();
         if (typeof _cachedFbH !== 'undefined') _cachedFbH = 0;
         var _hdr = document.querySelector('.hdr');
