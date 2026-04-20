@@ -904,21 +904,18 @@ var PROMPTS = {
 
   // ─── TWIST ON CLASSIC ──────────────────────────────────────────
   twist:{
-    maxTokens:1800,
-    label:'Scrivi un drink classico e ti propongo 3 varianti',
+    maxTokens:700,
+    label:'Scrivi un drink classico e ti propongo una variante',
     placeholder:'es. Negroni, Old Fashioned, Margarita...',
-    usePills:false,fuType:'tre',
+    usePills:false,fuType:'sino',
     build:function(v){
       return 'Voglio fare un twist creativo su: '+v+'.\n\n'+
-      'REGOLA FONDAMENTALE: un twist non è un signature. Ogni reinterpretazione deve rimanere RICONOSCIBILE come variante del classico — stessa logica strutturale di base, stesso profilo di appartenenza. Chi lo beve deve percepire il classico di partenza reinterpretato, non un drink completamente nuovo. Se cambi tutto (base alcolica, struttura, profilo gusto, tecnica) non è più un twist — è un signature. Mantieni almeno 2-3 elementi chiave del classico originale in ogni variante.\n\n'+
-      'REGOLA DOSI: mantieni proporzioni coerenti con il classico di partenza. Se sostituisci un ingrediente (es. Vermouth con Porto, Campari con altro bitter) la dose di partenza è la stessa — poi ragiona su zuccherino, alcolicità e balance e segnala dove intervenire.\n\n'+
-      'REGOLA DIREZIONI: proponimi esattamente 3 reinterpretazioni originali e distinte tra loro, separate da ---. Le 3 varianti devono esplorare direzioni diverse restando nell\'orbita del classico:\n'+
-      '- Variante 1: elegante / stagionale — più raffinata, gioca su ingredienti freschi o una rilettura composta.\n'+
-      '- Variante 2: tecnica avanzata con homemade — obbligatoriamente include almeno una preparazione homemade (sciroppo a 62° Brix, cordial, oleo saccharum, infuso, shrub, fat-wash, ecc.) che la renda tecnicamente più complessa.\n'+
-      '- Variante 3: contemporanea / inaspettata — un twist coerente ma sorprendente, può usare ingredienti insoliti o una tecnica contemporanea.\n\n'+
-      'REGOLA HOMEMADE: almeno una delle 3 varianti (tipicamente la seconda) DEVE contenere una preparazione homemade completa. Le altre possono averla o no a seconda del twist.\n\n'+
-      'REGOLA NOMI TWIST: a differenza di signature e cocktail del giorno (dove il nome deve essere totalmente autonomo), i twist possono richiamare il classico di partenza nel nome. Esempi: NEGRONI BRUCIATO, OLD FASHIONED DEL CONTADINO, SMOKED PENICILLIN, MARGARITA NERA. Bilancia: il nome deve rendere riconoscibile il classico di riferimento MA aggiungere un tratto distintivo evocativo della reinterpretazione. Evita comunque aggettivi banali ("Fresh Negroni", "Summer Margarita" → NO).\n\n'+
-      'Per ognuna usa questa struttura esatta:\n'+DRINK_STRUCTURE_BASE+
+      'REGOLA FONDAMENTALE: un twist non è un signature. La reinterpretazione deve rimanere RICONOSCIBILE come variante del classico — stessa logica strutturale di base, stesso profilo di appartenenza. Chi lo beve deve percepire il classico di partenza reinterpretato, non un drink completamente nuovo. Mantieni almeno 2-3 elementi chiave del classico originale.\n\n'+
+      'REGOLA DOSI: mantieni proporzioni coerenti con il classico di partenza. Se sostituisci un ingrediente la dose di partenza è la stessa — poi ragiona su zuccherino, alcolicità e balance e segnala dove intervenire.\n\n'+
+      'REGOLA DIREZIONE: proponimi UNA SOLA reinterpretazione originale. Scegli la direzione più interessante per quel classico specifico — può essere elegante/stagionale, contemporanea/inaspettata o ispirata a un territorio. Deve restare nell\'orbita del classico e avere una identità precisa.\n\n'+
+      'REGOLA HOMEMADE (obbligatoria): il twist DEVE contenere almeno una preparazione homemade tecnicamente avanzata (sciroppo a 62° Brix, cordial, oleo saccharum, infuso, shrub, fat-wash, ecc.) che lo renda unico e non replicabile. Riportala per intero in PREPARAZIONI.\n\n'+
+      'REGOLA NOMI TWIST: il nome può richiamare il classico di partenza ma deve aggiungere un tratto distintivo evocativo della reinterpretazione. Esempi: NEGRONI BRUCIATO, OLD FASHIONED DEL CONTADINO, SMOKED PENICILLIN, MARGARITA NERA. Evita aggettivi banali ("Fresh Negroni", "Summer Margarita" → NO).\n\n'+
+      'Usa questa struttura esatta:\n'+DRINK_STRUCTURE_BASE+
       MIXOLOGY_RULES+
       DISCLAIMER;
     }
@@ -926,17 +923,19 @@ var PROMPTS = {
 
   // ─── FOOD PAIRING ──────────────────────────────────────────────
   pairing:{
-    maxTokens:2200,
-    label:'Descrivi il piatto e ti propongo 3 drink',
+    maxTokens:1400,
+    label:'Descrivi il piatto e ti propongo 2 drink',
     placeholder:'es. Tartare di tonno con avocado e sesamo...',
-    usePills:false,fuType:'tre',
+    usePills:false,fuType:'sino',
     build:function(v){
+      var secondaLogica=Math.random()<0.5
+        ? '2. CONTRASTO: un drink che crea tensione bilanciante con il piatto — se il piatto è grasso proponi un drink acido/sapido che sgrassi; se è dolce proponi amaro/erbaceo; se è piccante proponi freschezza o dolcezza controllata. La logica è opposizione armonica, non rinforzo. Può essere elaborato, con homemade o tecnica avanzata.'
+        : '2. INASPETTATO: un abbinamento sorprendente, quasi un signature pensato per quel piatto specifico — osa con tecnica e ingredienti insoliti. Include almeno una preparazione homemade che lo renda irripetibile.';
       return 'Devo abbinare cocktail a questo piatto: '+v+'\n\n'+
       'Prima di proporre: analizza il profilo del piatto — grassi, acidità, sapidità, dolcezza, amaro, spezie, texture — e considera la temperatura di servizio (un piatto caldo si abbina diversamente da un crudo o un freddo).\n\n'+
-      'Proponimi esattamente 3 drink con logiche distinte, separati da ---:\n\n'+
-      '1. CLASSICO: scegli il classico più adatto tra questi 20 — formato: Nome|ingredienti|Bicchiere|Garnish. Usa ESATTAMENTE le dosi e gli ingredienti indicati, senza modifiche. Il drink deve essere accessibile e immediato:\n'+CLASSICI_20+'\n\n'+
-      '2. CONTRASTO: un drink che crea tensione bilanciante con il piatto — se il piatto è grasso, proponi un drink acido/sapido che sgrassi; se il piatto è dolce, proponi amaro/erbaceo; se è piccante, proponi freschezza o dolcezza controllata. La logica è opposizione armonica, non rinforzo. Può essere elaborato, con homemade o tecnica avanzata.\n'+
-      '3. CREATIVO/INASPETTATO: un abbinamento sorprendente, quasi un signature pensato per quel piatto specifico — si può osare con tecnica e ingredienti insoliti. Include tipicamente una o più preparazioni homemade.\n\n'+
+      'Proponimi esattamente 2 drink con logiche distinte, separati da ---:\n\n'+
+      '1. ASSONANZA: scegli il classico più adatto tra questi 20 — formato: Nome|ingredienti|Bicchiere|Garnish. Usa ESATTAMENTE le dosi e gli ingredienti indicati, senza modifiche. Il drink deve essere accessibile e immediato:\n'+CLASSICI_20+'\n\n'+
+      secondaLogica+'\n\n'+
       'Per ognuno usa questa struttura esatta:\n## NOME DRINK\n'+
       '(scrivi direttamente perché funziona con questo piatto — NON scrivere "Logica di abbinamento in 1 riga" o altre istruzioni)\n'+
       '## RICETTA\n'+
@@ -945,7 +944,7 @@ var PROMPTS = {
       '**Bicchiere:** specificare\n'+
       '**Garnish:** specificare con tecnica se non standard\n'+
       '## PREPARAZIONI\n'+
-      'Per OGNI preparazione homemade citata nella ricetta, scrivi: **Nome prep:** procedimento completo con pesi in grammi, tempi, metodo. Per il CLASSICO ometti sempre questa sezione (usa solo ingredienti commerciali). Per gli altri due, ometti la sezione solo se la ricetta non contiene nessuna prep homemade.\n'+
+      'Per OGNI preparazione homemade citata nella ricetta, scrivi: **Nome prep:** procedimento completo con pesi in grammi, tempi, metodo. Per ASSONANZA ometti sempre questa sezione. Per il secondo drink ometti solo se non ci sono prep homemade.\n'+
       '## PERSONALIZZAZIONE\n'+
       'Consiglio su timing del servizio rispetto al piatto — prima, durante o dopo — e aggiustamento fine del bilanciamento.'+
       MIXOLOGY_RULES+
