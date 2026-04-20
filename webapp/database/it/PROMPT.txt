@@ -140,7 +140,8 @@ Ogni cocktail deve avere esattamente questi campi, in questo ordine:
   "bicchiere": "Tumbler basso",
   "img": "https://danielsportelli.github.io/cocktail-legend/immagini/nome_del_drink.webp",
   "varianti": [],
-  "iba": false
+  "iba": false,
+  "video": null
 }
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -990,7 +991,8 @@ ESEMPIO COMPLETO
   "bicchiere": "Coppetta",
   "img": "https://danielsportelli.github.io/cocktail-legend/immagini/toronto.webp",
   "varianti": [],
-  "iba": false
+  "iba": false,
+  "video": null
 }
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

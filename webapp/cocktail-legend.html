@@ -762,7 +762,41 @@ body::before{
 .m-sd{color:rgba(255,255,255,.35);font-size:.48rem}
 .m-body{padding:1.4rem}
 .m-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.9rem}
-.m-name{font-size:1.45rem;font-weight:900;letter-spacing:-.03em;line-height:1.1}
+.m-name-row{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;}
+.m-name{font-size:1.45rem;font-weight:900;letter-spacing:-.03em;line-height:1.1;flex:1;}
+.m-video-btn{
+  flex-shrink:0;margin-top:.15rem;
+  background:none;border:none;cursor:pointer;
+  padding:.2rem;border-radius:6px;
+  transition:opacity .2s, transform .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.m-video-btn:hover:not(.disabled){transform:scale(1.12);}
+.m-video-btn.disabled{cursor:default;opacity:.3;pointer-events:none;}
+
+/* Player video overlay */
+#video-overlay{
+  display:none;position:fixed;inset:0;
+  z-index:10000;background:rgba(0,0,0,.92);
+  flex-direction:column;align-items:center;justify-content:center;
+  padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);
+}
+#video-overlay.open{display:flex;}
+#video-close-btn{
+  position:absolute;top:calc(env(safe-area-inset-top,0px) + .75rem);right:1rem;
+  background:rgba(255,255,255,.12);border:none;color:#fff;
+  width:36px;height:36px;border-radius:50%;
+  font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  z-index:1;-webkit-tap-highlight-color:transparent;
+}
+#video-frame-wrap{
+  width:min(100vw, calc(100vh * 9/16));
+  height:min(100vh, calc(100vw * 16/9));
+  max-height:calc(100vh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 3rem);
+  border-radius:12px;overflow:hidden;
+  background:#000;
+}
+#video-iframe{width:100%;height:100%;border:none;}
 /* ─── STICKY BAR MODAL ─── */
 .m-sticky-bar{
   position:sticky;top:0;z-index:20;
@@ -2204,7 +2238,15 @@ body.user-premium #sg-pdf-link > span:last-child {
     </div>
     <div class="m-body">
       <div class="m-hdr">
-        <div class="m-name" id="m-name"></div>
+        <div class="m-name-row">
+          <div class="m-name" id="m-name"></div>
+          <button class="m-video-btn disabled" id="m-video-btn" aria-label="Guarda video">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="28" height="28" rx="6" fill="currentColor"/>
+              <polygon points="11,9 21,14 11,19" fill="white"/>
+            </svg>
+          </button>
+        </div>
       </div>
       <div class="unit-toggle">
         <button class="unit-btn active" id="btn-ml">ml</button>
@@ -4924,6 +4966,20 @@ function openM(i){
   }
   document.getElementById("m-sap").innerHTML=sapHtml;
   document.getElementById("m-name").textContent=c.name;
+  // Icona video
+  var vBtn = document.getElementById('m-video-btn');
+  if(vBtn){
+    var videoUrl = c.video || null;
+    if(videoUrl){
+      vBtn.classList.remove('disabled');
+      vBtn.style.color = '#ff0000';
+      vBtn.onclick = function(){ openVideo(videoUrl); };
+    } else {
+      vBtn.classList.add('disabled');
+      vBtn.style.color = '#475569';
+      vBtn.onclick = null;
+    }
+  }
   var stTitle=document.getElementById("m-sticky-title");
   if(stTitle)stTitle.textContent=c.name;
   document.getElementById("m-badges").innerHTML=
@@ -4980,7 +5036,35 @@ function openM(i){
   }
 }
 
+function openVideo(url){
+  // Estrai YouTube video ID e costruisci embed URL
+  var videoId = '';
+  var m = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  if(m) videoId = m[1];
+  if(!videoId) return;
+  var embedUrl = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&playsinline=1&rel=0';
+  var iframe = document.getElementById('video-iframe');
+  if(iframe) iframe.src = embedUrl;
+  var overlay = document.getElementById('video-overlay');
+  if(overlay) overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideo(){
+  var overlay = document.getElementById('video-overlay');
+  if(overlay) overlay.classList.remove('open');
+  var iframe = document.getElementById('video-iframe');
+  if(iframe) iframe.src = '';  // stop video
+  // Non resettare overflow — la scheda è ancora aperta
+}
+
+document.getElementById('video-close-btn').addEventListener('click', closeVideo);
+document.getElementById('video-overlay').addEventListener('click', function(e){
+  if(e.target === this) closeVideo();
+});
+
 function closeModal(){var st=document.getElementById("tab-bar");if(st)st.style.display="";
+  closeVideo();
   document.getElementById("ov").classList.remove("open");document.body.style.overflow="";
 }
 
@@ -8244,5 +8328,13 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+<div id="video-overlay">
+  <button id="video-close-btn">✕</button>
+  <div id="video-frame-wrap">
+    <iframe id="video-iframe" id="video-iframe" allowfullscreen
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      src=""></iframe>
+  </div>
+</div>
 </body>
 </html>

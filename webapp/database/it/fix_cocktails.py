@@ -25,7 +25,7 @@ from pathlib import Path
 FIELD_ORDER = [
     "id", "name", "distillato", "categoria", "abv", "sapori",
     "garnish", "ingredienti", "prep", "storia", "frizzante",
-    "bicchiere", "img", "varianti", "iba"
+    "bicchiere", "img", "varianti", "iba", "video"
 ]
 
 # ─────────────────────────────────────────────────────────────
@@ -462,6 +462,10 @@ for c in data:
             f"alcol={alcol:.1f}ml vol={vol:.1f}ml | "
             f"{abv_val:.1f}% | {old_abv} -> {new_label}")
     abv_report_lines.append(line)
+
+    # Garantisce campo video (null se mancante)
+    if "video" not in c:
+        c["video"] = None
 
     if old_abv != new_label:
         abv_changes.append((name, old_abv, new_label, abv_val))
