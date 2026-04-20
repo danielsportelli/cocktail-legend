@@ -3838,16 +3838,11 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
         render();
         inp.focus();
       } else {
-        // Ha premuto Invio/Cerca → chiudi tastiera + chiudi search bar + scroll a 0
+        // Ha premuto Invio/Cerca → chiudi suggerimenti e sfoca (tastiera si chiude)
+        // _updateSearchFrozen rileverà la tastiera chiusa e toglierà overlay + unfreeze
         closeSuggestions();
         inp.blur();
         render();
-        // Chiudi la search bar simulando click sul bottone lente
-        var _pillsSrchBtnClose = document.getElementById('pills-srch-btn');
-        if (_pillsSrchBtnClose && _pillsSrchBtnClose.classList.contains('active')) {
-          _pillsSrchBtnClose.click();
-        }
-        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
 
@@ -4309,6 +4304,7 @@ function updateHeaderVisibility() {
 window.addEventListener('scroll', function(){ updateHeaderVisibility(); }, {passive: true});
 
 function updateFbH(){
+  if (window._searchFrozen) return; // posizioni congelate — non ricalcolare
   var fb = document.getElementById('filter-bar');
   if (!fb) return;
   void fb.offsetHeight;
@@ -4321,6 +4317,7 @@ function updateFbH(){
 }
 
 function _updatePillsVars() {
+  if (window._searchFrozen) return;
   var pillsBar = document.getElementById('pills-bar');
   var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
   document.documentElement.style.setProperty('--pills-h-px', pillsH + 'px');
@@ -4329,6 +4326,7 @@ function _updatePillsVars() {
 
 // updateRbarTop mantenuto per compatibilità
 function updateRbarTop(){
+  if (window._searchFrozen) return;
   _updatePillsVars();
   var hdr = document.querySelector('.hdr');
   var hdrBottom = hdr ? hdr.getBoundingClientRect().bottom : _cachedHdrH;
