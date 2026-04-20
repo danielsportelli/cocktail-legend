@@ -641,7 +641,6 @@ body::before{
 .main{
   padding:.75rem 5% 1.25rem;
   padding-top:calc(var(--hdr-h) + var(--pills-h) + 22px);
-  transition:padding-top .28s cubic-bezier(.4,0,.2,1);
 }
 
 /* Custom sort button */
@@ -7404,7 +7403,7 @@ function showInstallPWAModal() {
   // Overlay — blocca tap accidentali sulle card mentre tastiera è aperta
   var srchOverlay = document.createElement('div');
   srchOverlay.id = 'srch-overlay';
-  srchOverlay.style.cssText = 'position:fixed;inset:0;z-index:96;display:none;background:transparent;touch-action:none;';
+  srchOverlay.style.cssText = 'position:fixed;inset:0;z-index:96;display:none;background:rgba(0,0,0,0.01);touch-action:none;';
   document.body.appendChild(srchOverlay);
   // Tap sull'overlay → chiude tastiera senza aprire card
   srchOverlay.addEventListener('pointerdown', function(e) {
@@ -7429,58 +7428,42 @@ function showInstallPWAModal() {
   function _openSearch() {
     console.log('[OPEN SEARCH] scrollY='+window.scrollY+' hdrHidden='+_hdrHidden);
 
-    // 1. Mostra filter-bar e calcola posizioni PRIMA di congelare
+    // Calcola posizioni geometricamente dallo stato interno
+    var hdrH = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
+    var pillsBar = document.getElementById('pills-bar');
+    var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
+    // Top visivo della filter-bar: se header nascosto è a pillsH, se visibile è hdrH+pillsH
+    var fbVisualTop = (_hdrHidden ? 0 : hdrH) + pillsH;
+
+    // Mostra filter-bar (con transizione disabilitata per misurare altezza)
     filterBar.style.transition = 'none';
     filterBar.classList.remove('hidden');
     var fbH = filterBar.offsetHeight;
     if (typeof _cachedFbH !== 'undefined') _cachedFbH = fbH;
 
-    // 2. Calcola posizioni reali geometricamente dallo stato interno
-    // (non da getBoundingClientRect che dà negativi con header nascosto)
-    var hdrH = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
-    var pillsBar = document.getElementById('pills-bar');
-    var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
-    // Se header nascosto: barre già traslate di -hdrH via CSS transform
-    // Il top visivo effettivo è: top_css - hdrH (se nascosto) o top_css (se visibile)
-    var pillsVisualTop = _hdrHidden ? 0 : hdrH;
-    var fbVisualTop = pillsVisualTop + pillsH;
-
-    // 3. Congela SUBITO con posizioni fisse — neutralizza CSS transform
-    // Questo deve avvenire PRIMA di inp.focus() per anticipare il resize viewport
+    // Congela SUBITO filter-bar con top fisso + transform:none
+    // NON toccare pills-bar — la sua posizione CSS è già corretta
     window._inputFocused = true;
-    if (pillsBar) {
-      pillsBar.style.top = pillsVisualTop + 'px';
-      pillsBar.style.transform = 'none';
-    }
     filterBar.style.top = fbVisualTop + 'px';
     filterBar.style.transform = 'none';
-
-    // Aggiorna padding main per evitare sovrapposizioni
-    var main = document.querySelector('.main');
-    if (main) main.style.paddingTop = (fbVisualTop + fbH + 22) + 'px';
 
     requestAnimationFrame(function() { filterBar.style.transition = ''; });
     pillsSrchBtn.classList.add('active');
     srchOpen = true;
-
-    // 4. Overlay: copre le card sotto ma non pills/search (z-index 96 < pills 97)
     srchOverlay.style.display = 'block';
 
     var inp = document.getElementById('srch');
     if (inp) {
       inp.focus();
 
-      // Blur listener persistente — si riattacca ad ogni blur
       function _attachBlur() {
         inp.addEventListener('blur', function() {
-          // Sblocca barre — rimuovi top/transform fissi
           window._inputFocused = false;
           srchOverlay.style.display = 'none';
-          if (pillsBar) { pillsBar.style.top = ''; pillsBar.style.transform = ''; }
+          // Sblocca filter-bar — torna al sistema CSS
           filterBar.style.top = '';
           filterBar.style.transform = '';
           console.log('[BLUR] sbloccato');
-          // Ricalcola con sistema normale ora che tastiera è chiusa
           requestAnimationFrame(function() {
             if (!srchOpen) return;
             var hdr2 = document.querySelector('.hdr');
@@ -7488,20 +7471,17 @@ function showInstallPWAModal() {
             if (typeof _applyBarsTop === 'function') _applyBarsTop(hdrBot2);
             if (typeof updateFbH === 'function') updateFbH();
           });
-          // Se search ancora aperta, riattacca focus listener
           if (srchOpen) {
             inp.addEventListener('focus', function() {
-              // Ricongela quando l'utente ri-tocca l'input
+              // Ricongela al re-focus
               var hdrH2 = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
               var pillsH2 = pillsBar ? pillsBar.offsetHeight : 40;
-              var pTop = _hdrHidden ? 0 : hdrH2;
-              var fTop = pTop + pillsH2;
+              var fTop = (_hdrHidden ? 0 : hdrH2) + pillsH2;
               window._inputFocused = true;
-              if (pillsBar) { pillsBar.style.top = pTop + 'px'; pillsBar.style.transform = 'none'; }
               filterBar.style.top = fTop + 'px';
               filterBar.style.transform = 'none';
               srchOverlay.style.display = 'block';
-              console.log('[FOCUS] ricongelato');
+              console.log('[FOCUS] ricongelato fTop='+fTop);
               _attachBlur();
             }, { once: true });
           }
@@ -7517,9 +7497,7 @@ function showInstallPWAModal() {
     window._inputFocused = false;
     srchOverlay.style.display = 'none';
 
-    // Rimuovi freeze — torna al sistema CSS/rAF
-    var pillsBar = document.getElementById('pills-bar');
-    if (pillsBar) { pillsBar.style.top = ''; pillsBar.style.transform = ''; }
+    // Rimuovi freeze filter-bar — torna al sistema CSS
     filterBar.style.top = '';
     filterBar.style.transform = '';
 
