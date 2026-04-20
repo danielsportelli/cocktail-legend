@@ -544,7 +544,7 @@ textarea{-webkit-user-select:text;user-select:text;}
           <div class="bai-cmd-text">
             <div class="bai-cmd-title">Twist on Classic</div>
             <div class="bai-cmd-sub">Reinterpretazione creativa con homemade</div>
-            <div class="bai-cmd-spec">1 proposta su misura</div>
+            <div class="bai-cmd-spec">Senza snaturare la struttura del drink</div>
           </div>
           <svg class="bai-cmd-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
@@ -555,8 +555,8 @@ textarea{-webkit-user-select:text;user-select:text;}
           </div>
           <div class="bai-cmd-text">
             <div class="bai-cmd-title">Food Pairing</div>
-            <div class="bai-cmd-sub">Abbinamento per assonanza + contrasto o inaspettato</div>
-            <div class="bai-cmd-spec">2 proposte mirate</div>
+            <div class="bai-cmd-sub">Abbinamento per assonanza o contrasto</div>
+            <div class="bai-cmd-spec">2 proposte (1 classico + 1 signature)</div>
           </div>
           <svg class="bai-cmd-arr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
@@ -1683,9 +1683,9 @@ function renderCreditsDrawer(){
     html+=
       '<div>'+
         '<div class="bai-credits-label">Acquista crediti extra</div>'+
-        '<a href="#" class="bai-pkg" data-pkg="50"><div><div class="bai-pkg-name">50 crediti extra</div><div class="bai-pkg-sub">0,027€/credito</div></div><div class="bai-pkg-price">1,99 €</div></a>'+
-        '<a href="#" class="bai-pkg" data-pkg="200"><div><div class="bai-pkg-name">200 crediti extra</div><div class="bai-pkg-sub">0,023€/credito</div></div><div class="bai-pkg-price">5,99 €</div></a>'+
-        '<a href="#" class="bai-pkg bai-pkg--best" data-pkg="800"><div><div class="bai-pkg-name">800 crediti extra <span class="bai-pkg-badge">PIÙ VANTAGGIOSO</span></div><div class="bai-pkg-sub">0,020€/credito</div></div><div class="bai-pkg-price">19,99 €</div></a>'+
+        '<a href="#" class="bai-pkg" data-pkg="50"><div><div class="bai-pkg-name">50 crediti extra</div><div class="bai-pkg-sub">0,040€/credito</div></div><div class="bai-pkg-price">1,99 €</div></a>'+
+        '<a href="#" class="bai-pkg" data-pkg="200"><div><div class="bai-pkg-name">200 crediti extra</div><div class="bai-pkg-sub">0,030€/credito</div></div><div class="bai-pkg-price">5,99 €</div></a>'+
+        '<a href="#" class="bai-pkg bai-pkg--best" data-pkg="800"><div><div class="bai-pkg-name">800 crediti extra <span class="bai-pkg-badge">PIÙ VANTAGGIOSO</span></div><div class="bai-pkg-sub">0,025€/credito</div></div><div class="bai-pkg-price">19,99 €</div></a>'+
       '</div>';
   }
 
@@ -1846,10 +1846,10 @@ function renderSavedDrawer(openCats){
 
 // ── TIPS ─────────────────────────────────────────────────
 var TIPS = {
-  twist:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Twist on Classic</strong>Scrivi il nome di un cocktail classico. Il Barman AI proporrà 3 varianti creative che mantengono l\'identità del drink originale pur reinterpretandolo. Ogni variante esplora una direzione diversa: elegante, tecnica, o contemporanea.',
-  pairing:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Food Pairing</strong>Descrivi il piatto nel dettaglio — ingredienti principali, cottura, sapori dominanti. Il Barman AI proporrà 3 abbinamenti con logiche diverse: un classico, un drink per affinità, e uno creativo/inaspettato.',
-  signature:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Crea un Signature</strong>Seleziona le caratteristiche del drink che vuoi creare, poi inserisci gli ingredienti che hai a disposizione. Più dettagli dai, più il risultato sarà su misura per te. Il drink proposto includerà sempre almeno una preparazione homemade.',
-  giorno:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Cocktail del Giorno</strong>Il Barman AI crea un drink stagionale pensato per oggi, con un ingrediente protagonista di stagione e almeno una preparazione homemade.'
+  twist:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Twist on Classic</strong>Scrivi il nome di un cocktail classico. Il Barman AI proporrà una reinterpretazione creativa che mantiene la struttura e l\'identità del drink originale, arricchita da almeno una preparazione homemade — senza snaturarlo. Riceverai ricetta completa e preparazione step-by-step.',
+  pairing:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Food Pairing</strong>Descrivi il piatto nel dettaglio — ingredienti principali, cottura, sapori dominanti. Il Barman AI proporrà 2 abbinamenti: un classico per assonanza (selezionato da una lista di 20 grandi classici) e un signature originale — per contrasto o con un abbinamento inaspettato.',
+  signature:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Crea un Signature</strong>Seleziona le caratteristiche del drink che vuoi creare, poi inserisci gli ingredienti che hai a disposizione. Più dettagli dai, più il risultato sarà su misura per te. Il drink include sempre almeno una preparazione homemade tecnica e un nome evocativo pronto per il menu.',
+  giorno:'<strong style="color:var(--amber);display:block;margin-bottom:.4rem;">Come usare Cocktail del Giorno</strong>Scegli lo stile e il Barman AI crea un drink stagionale pensato per oggi — con un ingrediente protagonista di stagione, almeno una preparazione homemade e un nome originale pronto da mettere in carta.'
 };
 document.getElementById('bai-tips-btn').addEventListener('click',function(){
   var overlay=document.getElementById('bai-tips-overlay');
