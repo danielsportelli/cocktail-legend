@@ -4269,7 +4269,7 @@ function _applyBarsTop(hdrBottom) {
 function updateHeaderVisibility() {
   var hdr = document.querySelector('.hdr');
   if (!hdr) return;
-  if (window._inputFocused) return; // input attivo — header congelato
+  // NB: _inputFocused NON blocca l'header — lo scroll deve funzionare sempre
   // Tastiera aperta: NON aggiornare nulla. Così alla chiusura tastiera
   // lo stato (_lastScrollY, _scrollDelta, _hdrHidden) è identico a prima
   // dell'apertura — nessun falso trigger.
@@ -7404,7 +7404,7 @@ function showInstallPWAModal() {
   // Overlay — blocca tap accidentali sulle card mentre tastiera è aperta
   var srchOverlay = document.createElement('div');
   srchOverlay.id = 'srch-overlay';
-  srchOverlay.style.cssText = 'position:fixed;inset:0;z-index:49;display:none;background:rgba(0,0,0,0.0);';
+  srchOverlay.style.cssText = 'position:fixed;inset:0;z-index:96;display:none;background:transparent;touch-action:none;';
   document.body.appendChild(srchOverlay);
   // Tap sull'overlay → chiude tastiera senza aprire card
   srchOverlay.addEventListener('pointerdown', function(e) {
