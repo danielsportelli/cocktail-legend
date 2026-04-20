@@ -4,6 +4,9 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Admin — Cocktail Legend</title>
+<link rel="icon" type="image/x-icon" href="webapp/icons/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="webapp/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="webapp/icons/favicon-16.png">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -267,11 +270,11 @@ textarea::placeholder { color:var(--surface2); }
             <span id="ov-quiz-partecipanti" style="font-weight:700">—</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
-            <span style="color:var(--muted)">Quiz completati</span>
+            <span style="color:var(--muted)">Risposte totali</span>
             <span id="ov-quiz-completati" style="font-weight:700">—</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
-            <span style="color:var(--muted)">Punteggio medio</span>
+            <span style="color:var(--muted)">% correttezza</span>
             <span id="ov-quiz-punteggio" style="font-weight:700">—</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
@@ -679,49 +682,35 @@ window.loadUtenti = async function() {
 async function loadQuizOverview() {
   try {
     const oggi = new Date().toISOString().split('T')[0];
+    let oggiN = 0, totGiocatori = 0, totRisposte = 0, totCorrette = 0, avgStreak = 0, streakCnt = 0;
 
-    // Leggi quiz stats da Firestore — collection 'quiz_stats' con doc per data
-    // Fallback: leggi da users il campo quizStats se esiste
-    let oggiN = 0, totPart = 0, completati = 0, totalScore = 0, scoreCnt = 0;
-
-    // Prova con quiz_stats/{data}
-    try {
-      const snapOggi = await getDoc(doc(db, 'quiz_stats', oggi));
-      if (snapOggi.exists()) {
-        const d = snapOggi.data();
-        oggiN = d.partecipanti || d.players || d.count || 0;
-        completati = d.completati || d.completed || 0;
-        if (d.avgScore) { totalScore = d.avgScore; scoreCnt = 1; }
+    // Leggi users per stats aggregate
+    const usersSnap = await getDocs(collection(db, 'users'));
+    usersSnap.forEach(d => {
+      const u = d.data();
+      // Ha giocato almeno una volta
+      if (u.tot_risposte && u.tot_risposte > 0) {
+        totGiocatori++;
+        totRisposte += u.tot_risposte || 0;
+        totCorrette += u.tot_corrette || 0;
+        if (u.streak) { avgStreak += u.streak; streakCnt++; }
+        // Ha giocato oggi
+        if (u.last_played === oggi) oggiN++;
       }
-    } catch(e) {}
+    });
 
-    // Conta totale partecipanti da users che hanno quizStats
-    try {
-      const usersSnap = await getDocs(collection(db, 'users'));
-      usersSnap.forEach(d => {
-        const data = d.data();
-        if (data.quizStats || data.quiz_stats) {
-          const qs = data.quizStats || data.quiz_stats;
-          totPart++;
-          if (qs.totalGames) completati = Math.max(completati, qs.totalGames);
-          if (qs.avgScore) { totalScore += qs.avgScore; scoreCnt++; }
-        }
-      });
-    } catch(e) {}
+    const pctCorrettezza = totRisposte > 0 ? Math.round((totCorrette/totRisposte)*100) : 0;
+    const mediaStreak = streakCnt > 0 ? (avgStreak/streakCnt).toFixed(1) : '—';
 
-    const avgScore = scoreCnt > 0 ? (totalScore/scoreCnt).toFixed(1) : '—';
+    document.getElementById('ov-quiz-oggi').textContent = oggiN || '0';
+    document.getElementById('ov-quiz-sub').textContent = 'hanno giocato oggi';
+    document.getElementById('ov-quiz-partecipanti').textContent = totGiocatori;
+    document.getElementById('ov-quiz-completati').textContent = totRisposte;
+    document.getElementById('ov-quiz-punteggio').textContent = pctCorrettezza + '%';
 
-    document.getElementById('ov-quiz-oggi').textContent = oggiN || '—';
-    document.getElementById('ov-quiz-sub').textContent = 'partecipanti oggi';
-    document.getElementById('ov-quiz-partecipanti').textContent = totPart || '—';
-    document.getElementById('ov-quiz-completati').textContent = completati || '—';
-    document.getElementById('ov-quiz-punteggio').textContent = avgScore !== '—' ? avgScore + '/3' : '—';
-
-    const utTot = parseInt(document.getElementById('ut-tot').textContent.replace(/\D/g,'')) || 0;
-    if (utTot > 0 && totPart > 0) {
-      document.getElementById('ov-quiz-pct').textContent = ((totPart/utTot)*100).toFixed(1) + '%';
-    } else {
-      document.getElementById('ov-quiz-pct').textContent = '—';
+    const utTot = parseInt(document.getElementById('ut-tot').textContent.replace(/[^0-9]/g,'')) || 0;
+    if (utTot > 0) {
+      document.getElementById('ov-quiz-pct').textContent = ((oggiN/utTot)*100).toFixed(1) + '%';
     }
   } catch(e) { console.error('loadQuizOverview:', e); }
 }
