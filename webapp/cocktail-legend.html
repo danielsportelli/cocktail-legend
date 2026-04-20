@@ -7473,6 +7473,16 @@ function showInstallPWAModal() {
         var _hdrBot2 = _hdr2 ? _hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
         if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot2);
       });
+      // Riattacca focus listener — se l'utente ri-tocca l'input, ricongela
+      var inp = document.getElementById('srch');
+      if (inp && srchOpen) {
+        inp.addEventListener('focus', function _onReFocus() {
+          inp.removeEventListener('focus', _onReFocus);
+          setTimeout(function() {
+            if (srchOpen) _freezeBars();
+          }, 50);
+        }, { once: true });
+      }
     }
   }
   if (window.visualViewport) {
