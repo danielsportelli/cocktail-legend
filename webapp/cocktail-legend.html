@@ -4227,11 +4227,14 @@ var SCROLL_THRESHOLD = 500; // px da scrollare prima di triggerare
 
 // Flag globale: non più usato, mantenuto per compatibilità
 window._searchFrozen = false;
+// Flag: input search ha il focus — blocca tutti i ricalcoli di posizione
+window._inputFocused = false;
 
 // Loop rAF che sincronizza pills e filter-bar all'header frame per frame
 function _startSyncLoop() {
   if (_syncRafId) return; // già in corso
   function loop() {
+    if (window._inputFocused) { _syncRafId = null; return; } // barre congelate
     var hdr = document.querySelector('.hdr');
     if (!hdr) { _syncRafId = null; return; }
     var bottom = hdr.getBoundingClientRect().bottom;
@@ -4250,6 +4253,7 @@ function _startSyncLoop() {
 }
 
 function _applyBarsTop(hdrBottom) {
+  if (window._inputFocused) return; // input attivo — barre congelate
   var pills = document.getElementById('pills-bar');
   var pillsH = pills ? pills.offsetHeight : 40;
   // pills-bar e filter-bar posizione gestita da CSS transform — non impostare top via JS
@@ -4265,6 +4269,7 @@ function _applyBarsTop(hdrBottom) {
 function updateHeaderVisibility() {
   var hdr = document.querySelector('.hdr');
   if (!hdr) return;
+  if (window._inputFocused) return; // input attivo — header congelato
   // Tastiera aperta: NON aggiornare nulla. Così alla chiusura tastiera
   // lo stato (_lastScrollY, _scrollDelta, _hdrHidden) è identico a prima
   // dell'apertura — nessun falso trigger.
@@ -4302,6 +4307,7 @@ function updateHeaderVisibility() {
 window.addEventListener('scroll', function(){ updateHeaderVisibility(); }, {passive: true});
 
 function updateFbH(){
+  if (window._inputFocused) return; // input attivo — barre congelate
   var fb = document.getElementById('filter-bar');
   if (!fb) return;
   void fb.offsetHeight;
@@ -4314,6 +4320,7 @@ function updateFbH(){
 }
 
 function _updatePillsVars() {
+  if (window._inputFocused) return; // input attivo — barre congelate
   var pillsBar = document.getElementById('pills-bar');
   var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
   document.documentElement.style.setProperty('--pills-h-px', pillsH + 'px');
@@ -7420,35 +7427,63 @@ function showInstallPWAModal() {
   window.addEventListener('resize', _updateOverlay);
 
   function _openSearch() {
-    console.log('[OPEN SEARCH] scrollY='+window.scrollY);
-    // 1. Porta la pagina in cima — viewport sempre stabile per la tastiera
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    // 2. Mostra header se era nascosto — siamo in cima, è corretto
-    var hdr = document.querySelector('.hdr');
-    if (hdr && _hdrHidden) {
-      _hdrHidden = false;
-      _scrollDelta = 0;
-      hdr.classList.remove('hdr--hidden');
-      _startSyncLoop();
-    }
-    // 3. Mostra filter-bar
+    console.log('[OPEN SEARCH] scrollY='+window.scrollY+' hdrHidden='+_hdrHidden);
+    // Mostra filter-bar nella posizione corrente — nessuno scrollTo, header resta dove sta
     filterBar.style.transition = 'none';
     filterBar.classList.remove('hidden');
     var fbH = filterBar.offsetHeight;
     if (typeof _cachedFbH !== 'undefined') _cachedFbH = fbH;
+    var hdr = document.querySelector('.hdr');
     var hdrBot = hdr ? hdr.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
     if (typeof _applyBarsTop === 'function') _applyBarsTop(hdrBot);
     requestAnimationFrame(function() { filterBar.style.transition = ''; });
     pillsSrchBtn.classList.add('active');
     srchOpen = true;
-    // 4. Focus → tastiera si apre → overlay appare via _updateOverlay
+
     var inp = document.getElementById('srch');
-    if (inp) inp.focus();
+    if (inp) {
+      // Focus: congela immediatamente tutte le barre
+      inp.addEventListener('focus', function _onFocus() {
+        inp.removeEventListener('focus', _onFocus);
+        window._inputFocused = true;
+        console.log('[INPUT FOCUS] congelato');
+        srchOverlay.style.display = 'block';
+      }, { once: true });
+
+      // Blur: sblocca e ricalcola
+      inp.addEventListener('blur', function _onBlur() {
+        inp.removeEventListener('blur', _onBlur);
+        window._inputFocused = false;
+        srchOverlay.style.display = 'none';
+        console.log('[INPUT BLUR] sbloccato');
+        // Ricalcola posizioni ora che tastiera è chiusa
+        requestAnimationFrame(function() {
+          var hdr2 = document.querySelector('.hdr');
+          var hdrBot2 = hdr2 ? hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
+          if (typeof _applyBarsTop === 'function') _applyBarsTop(hdrBot2);
+          if (typeof updateFbH === 'function') updateFbH();
+        });
+        // Se search è ancora aperta (es. dopo Invio) riattacca il blur listener
+        setTimeout(function() {
+          if (srchOpen && inp === document.activeElement === false) {
+            inp.addEventListener('focus', function _onFocus2() {
+              inp.removeEventListener('focus', _onFocus2);
+              window._inputFocused = true;
+              srchOverlay.style.display = 'block';
+              console.log('[INPUT FOCUS2] ricongelato');
+            }, { once: true });
+          }
+        }, 100);
+      }, { once: true });
+
+      inp.focus();
+    }
   }
 
   function _closeSearch(clearQuery) {
     console.log('[CLOSE SEARCH]');
     srchOpen = false;
+    window._inputFocused = false;
     srchOverlay.style.display = 'none';
     if (typeof _cachedFbH !== 'undefined') _cachedFbH = 0;
     var hdr = document.querySelector('.hdr');
