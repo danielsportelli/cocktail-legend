@@ -4368,7 +4368,7 @@ updateFbH();
     var kb = isKeyboardOpen();
     if (kb === _kbOpen) return; // nessun cambiamento reale
     _kbOpen = kb;
-    // Aggiorna stato freeze search
+    // Aggiorna stato freeze search (solo chiusura tastiera)
     if (typeof _updateSearchFrozen === 'function') _updateSearchFrozen();
     if (kb) return; // tastiera aperta — ignora
     // Tastiera chiusa: ricalcola
@@ -7405,8 +7405,8 @@ function showInstallPWAModal() {
   var filterBar = document.getElementById('filter-bar');
   var pillsBar = document.getElementById('pills-bar');
   var srchOpen = false;
-  var _snapPillsTop = null; // snapshot top pills al momento apertura search
-  var _snapFbTop = null;    // snapshot top filter-bar al momento apertura search
+  var _frozenPillsTop = null;
+  var _frozenFbTop = null;
 
   // Overlay semitrasparente sotto search bar
   var srchOverlay = document.createElement('div');
@@ -7417,45 +7417,56 @@ function showInstallPWAModal() {
     if (srchOpen) pillsSrchBtn.click();
   });
 
-  // Congela pills e filter-bar alle posizioni snapshot — immune al viewport resize
-  function _freezeBars() {
-    if (_snapPillsTop === null || _snapFbTop === null) return;
-    console.log('[FREEZE] pillsTop='+_snapPillsTop+' fbTop='+_snapFbTop);
-    if (pillsBar) { pillsBar.style.top = _snapPillsTop + 'px'; pillsBar.style.transform = 'none'; }
-    if (filterBar) { filterBar.style.top = _snapFbTop + 'px'; filterBar.style.transform = 'none'; }
+  // Calcola geometricamente le posizioni corrette di pills e filter-bar
+  // in base allo stato interno — immune a getBoundingClientRect() negativo
+  function _calcBarPositions() {
+    var hdrH = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
+    var pillsH = pillsBar ? pillsBar.offsetHeight : 40;
+    var fbH = filterBar && !filterBar.classList.contains('hidden') ? filterBar.offsetHeight : 0;
+    // Se header nascosto: barre traslate di -hdrH rispetto alla posizione normale
+    var pillsTop = _hdrHidden ? 0 : hdrH;
+    var fbTop = pillsTop + pillsH;
+    return { pillsTop: pillsTop, fbTop: fbTop };
   }
 
-  // Rimuove il freeze — torna al sistema CSS/rAF normale
+  // Applica freeze con posizioni calcolate geometricamente
+  function _freezeBars() {
+    var pos = _calcBarPositions();
+    _frozenPillsTop = pos.pillsTop;
+    _frozenFbTop = pos.fbTop;
+    console.log('[FREEZE] pillsTop='+_frozenPillsTop+' fbTop='+_frozenFbTop+' hdrHidden='+_hdrHidden);
+    if (pillsBar) { pillsBar.style.top = _frozenPillsTop + 'px'; pillsBar.style.transform = 'none'; }
+    if (filterBar) { filterBar.style.top = _frozenFbTop + 'px'; filterBar.style.transform = 'none'; }
+    window._searchFrozen = true;
+    srchOverlay.style.display = 'block';
+  }
+
+  // Rimuove freeze e torna al sistema CSS/rAF
   function _unfreezeBars() {
     console.log('[UNFREEZE]');
+    window._searchFrozen = false;
+    _frozenPillsTop = null;
+    _frozenFbTop = null;
     if (pillsBar) { pillsBar.style.top = ''; pillsBar.style.transform = ''; }
     if (filterBar) { filterBar.style.top = ''; filterBar.style.transform = ''; }
-    _snapPillsTop = null;
-    _snapFbTop = null;
-    window._searchFrozen = false;
+    srchOverlay.style.display = 'none';
   }
 
-  // Listener visualViewport: gestisce freeze/unfreeze e overlay in base alla tastiera
+  // Chiamato da visualViewport resize: gestisce solo la chiusura tastiera (unfreeze)
   function _updateSearchFrozen() {
-    if (!srchOpen) { _unfreezeBars(); return; }
+    if (!srchOpen || !window._searchFrozen) return;
     var vvH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
     var ref = window._initialViewportH || window.innerHeight;
     var kbOpen = vvH < ref * 0.75;
-    console.log('[UPDATE_FROZEN] srchOpen='+srchOpen+' kbOpen='+kbOpen+' vvH='+vvH+' ref='+ref);
-    if (kbOpen) {
-      // Tastiera aperta: congela posizioni
-      window._searchFrozen = true;
-      _freezeBars();
-      srchOverlay.style.display = 'block';
-    } else {
-      // Tastiera chiusa (Invio o blur): sblocca posizioni, togli overlay
-      window._searchFrozen = false;
+    console.log('[VV_RESIZE] kbOpen='+kbOpen+' vvH='+Math.round(vvH)+' ref='+Math.round(ref));
+    if (!kbOpen) {
+      // Tastiera chiusa: unfreeze e ricalcola
       _unfreezeBars();
-      // Ricalcola posizioni con rAF ora che tastiera è chiusa
-      var _hdr2 = document.querySelector('.hdr');
-      var _hdrBot2 = _hdr2 ? _hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
-      if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot2);
-      srchOverlay.style.display = 'none';
+      requestAnimationFrame(function() {
+        var _hdr2 = document.querySelector('.hdr');
+        var _hdrBot2 = _hdr2 ? _hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
+        if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot2);
+      });
     }
   }
   if (window.visualViewport) {
@@ -7467,32 +7478,31 @@ function showInstallPWAModal() {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
-        // Mostra filter-bar senza transizione per poter leggere le dimensioni reali
+        // Mostra filter-bar senza transizione per misurare altezza reale
         filterBar.style.transition = 'none';
         filterBar.classList.remove('hidden');
         var fbH = filterBar.offsetHeight;
         if (typeof _cachedFbH !== 'undefined') _cachedFbH = fbH;
-
-        // Snapshot posizioni REALI prima che la tastiera riduca il viewport
-        var pillsRect = pillsBar ? pillsBar.getBoundingClientRect() : null;
-        var fbRect = filterBar.getBoundingClientRect();
-        _snapPillsTop = pillsRect ? pillsRect.top : 0;
-        _snapFbTop = fbRect.top;
-        console.log('[SEARCH OPEN] scrollY='+window.scrollY+' snapPills='+_snapPillsTop+' snapFb='+_snapFbTop+' hdrHidden='+_hdrHidden);
-
-        // Ricalcola padding main
         var _hdr2 = document.querySelector('.hdr');
         var _hdrBot2 = _hdr2 ? _hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
         if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot2);
-
         requestAnimationFrame(function() { filterBar.style.transition = ''; });
         pillsSrchBtn.classList.add('active');
-        // Overlay parte nascosto — appare solo quando tastiera si apre (via _updateSearchFrozen)
-        srchOverlay.style.display = 'none';
+
+        // Freeze immediato al focus — non aspettare visualViewport resize
         var inp = document.getElementById('srch');
-        if (inp) inp.focus();
+        if (inp) {
+          inp.addEventListener('focus', function onSrchFocus() {
+            inp.removeEventListener('focus', onSrchFocus);
+            // Piccolo delay per dare tempo al browser di aggiornare lo stato
+            setTimeout(function() {
+              if (srchOpen) _freezeBars();
+            }, 50);
+          }, { once: true });
+          inp.focus();
+        }
       } else {
-        // Chiusura search: unfreeze completo
+        // Chiusura search
         _unfreezeBars();
         if (typeof _cachedFbH !== 'undefined') _cachedFbH = 0;
         var _hdr = document.querySelector('.hdr');
@@ -7500,7 +7510,6 @@ function showInstallPWAModal() {
         if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot);
         filterBar.classList.add('hidden');
         pillsSrchBtn.classList.remove('active');
-        srchOverlay.style.display = 'none';
         var inp = document.getElementById('srch');
         if (inp) { inp.blur(); if (inp.value) { inp.value = ''; Q = ''; render(); } }
       }
