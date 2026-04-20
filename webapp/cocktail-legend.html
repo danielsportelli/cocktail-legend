@@ -4198,7 +4198,7 @@ function updateAllCounts() {
 }
 
 // ── BANNER COMUNICAZIONI (real-time da Firebase) ────────
-(function(){
+window.addEventListener('fb-auth-ready', function(){
   var fn = window._fbFunctions;
   var db = window._fbDb;
   if(!fn || !db) return;
@@ -4208,7 +4208,7 @@ function updateAllCounts() {
   var bannerEl = document.getElementById('cl-banner');
   var bannerTxt = document.getElementById('cl-banner-text');
   onSnapshot(docFn(db, 'config', 'banner'), function(snap){
-    if(!snap.exists || !snap.exists()) {
+    if(!snap || !snap.exists()) {
       bannerEl.classList.remove('active');
       document.documentElement.style.setProperty('--banner-h', '0px');
       return;
@@ -4218,7 +4218,6 @@ function updateAllCounts() {
     var attivo = data && data.attivo === true && testo.length > 0;
     if(attivo){
       bannerTxt.textContent = testo;
-      // Adatta durata animazione alla lunghezza del testo
       var duration = Math.max(12, testo.length * 0.22);
       bannerTxt.style.animationDuration = duration + 's';
       bannerEl.classList.add('active');
@@ -4228,7 +4227,7 @@ function updateAllCounts() {
       document.documentElement.style.setProperty('--banner-h', '0px');
     }
   }, function(e){ console.warn('banner snapshot err', e); });
-})();
+}, {once: true});
 
 // ── SCROLL HIDE/SHOW HEADER ─────────────────────────
 // Strategia: pills-bar e filter-bar seguono l'header pixel per pixel via rAF loop.
