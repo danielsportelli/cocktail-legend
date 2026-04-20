@@ -30,7 +30,40 @@
   --bg:#0a0f1e;--surf:#1e293b;--surf2:#334155;
   --txt:#f1f5f9;--txt2:#cbd5e1;--brd:rgba(255,255,255,.08);--dim:#64748b
 }
-:root{--hdr-h:73px;--pills-h:36px;}
+:root{--hdr-h:73px;--pills-h:36px;--banner-h:0px;}
+
+/* ── BANNER COMUNICAZIONI ──────────────────────────────── */
+#cl-banner{
+  position:fixed;top:0;left:0;right:0;
+  z-index:1101;
+  height:0;
+  overflow:hidden;
+  background:linear-gradient(90deg,#1e293b 0%,#0f172a 100%);
+  border-bottom:1px solid rgba(245,158,11,.2);
+  transition:transform .28s cubic-bezier(.4,0,.2,1), height .28s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+  display:flex;align-items:center;
+}
+#cl-banner.active{height:28px;}
+#cl-banner.hdr--hidden{transform:translateY(-100%);}
+.cl-banner-track{
+  display:flex;align-items:center;
+  width:100%;overflow:hidden;height:100%;
+  position:relative;
+}
+.cl-banner-text{
+  white-space:nowrap;
+  font-size:.65rem;font-weight:600;letter-spacing:.04em;
+  color:var(--amber);
+  position:absolute;
+  animation:banner-scroll 18s linear infinite;
+  padding-left:100%;
+}
+@keyframes banner-scroll{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-200%);}
+}
+/* Se il testo è corto — adattato via JS */
 body{font-family:"Inter",sans-serif;background:#0a0f1e;color:var(--txt);-webkit-font-smoothing:antialiased;}
 /* Notch iPhone PWA — copri safe area con stesso colore header */
 body::before{
@@ -46,13 +79,13 @@ body::before{
 
 /* HEADER */
 .hdr{
-  position:fixed;top:0;left:0;right:0;
+  position:fixed;top:var(--banner-h);left:0;right:0;
   z-index:1100;
   height:var(--hdr-h);
   padding:0 4%;
   background:#0a0f1e;
   display:flex;align-items:center;justify-content:space-between;
-  transition:transform .28s cubic-bezier(.4,0,.2,1);
+  transition:transform .28s cubic-bezier(.4,0,.2,1), top .28s cubic-bezier(.4,0,.2,1);
   will-change:transform;
 }
 .hdr.hdr--hidden{
@@ -2004,6 +2037,12 @@ body.user-premium #sg-pdf-link > span:last-child {
       <button style="margin-top:1.25rem;width:100%;padding:.7rem;background:transparent;border:1px solid var(--brd);border-radius:10px;color:var(--txt2);font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s;" onclick="switchAuthTab('register')">← Modifica dati</button>
     </div>
 
+  </div>
+</div>
+
+<div id="cl-banner">
+  <div class="cl-banner-track">
+    <span class="cl-banner-text" id="cl-banner-text"></span>
   </div>
 </div>
 
@@ -4158,6 +4197,39 @@ function updateAllCounts() {
   });
 }
 
+// ── BANNER COMUNICAZIONI (real-time da Firebase) ────────
+(function(){
+  var fn = window._fbFunctions;
+  var db = window._fbDb;
+  if(!fn || !db) return;
+  var onSnapshot = fn.onSnapshot;
+  var docFn = fn.doc;
+  if(!onSnapshot || !docFn) return;
+  var bannerEl = document.getElementById('cl-banner');
+  var bannerTxt = document.getElementById('cl-banner-text');
+  onSnapshot(docFn(db, 'config', 'banner'), function(snap){
+    if(!snap.exists || !snap.exists()) {
+      bannerEl.classList.remove('active');
+      document.documentElement.style.setProperty('--banner-h', '0px');
+      return;
+    }
+    var data = snap.data();
+    var testo = (data && data.testo) ? data.testo.trim() : '';
+    var attivo = data && data.attivo === true && testo.length > 0;
+    if(attivo){
+      bannerTxt.textContent = testo;
+      // Adatta durata animazione alla lunghezza del testo
+      var duration = Math.max(12, testo.length * 0.22);
+      bannerTxt.style.animationDuration = duration + 's';
+      bannerEl.classList.add('active');
+      document.documentElement.style.setProperty('--banner-h', '28px');
+    } else {
+      bannerEl.classList.remove('active');
+      document.documentElement.style.setProperty('--banner-h', '0px');
+    }
+  }, function(e){ console.warn('banner snapshot err', e); });
+})();
+
 // ── SCROLL HIDE/SHOW HEADER ─────────────────────────
 // Strategia: pills-bar e filter-bar seguono l'header pixel per pixel via rAF loop.
 // Nessuna CSS transition separata per il movimento scroll — zero gap garantito.
@@ -4295,12 +4367,14 @@ function updateHeaderVisibility() {
     _hdrHidden = true;
     _scrollDelta = 0;
     hdr.classList.add('hdr--hidden');
+    var bn=document.getElementById('cl-banner');if(bn)bn.classList.add('hdr--hidden');
     _startSyncLoop();
   // Mostra header: scroll verso l'alto di almeno SCROLL_THRESHOLD px
   } else if (_scrollDelta <= -SCROLL_THRESHOLD && _hdrHidden) {
     _hdrHidden = false;
     _scrollDelta = 0;
     hdr.classList.remove('hdr--hidden');
+    var bn=document.getElementById('cl-banner');if(bn)bn.classList.remove('hdr--hidden');
     _startSyncLoop();
   }
 

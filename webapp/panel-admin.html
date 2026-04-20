@@ -239,6 +239,37 @@ textarea::placeholder { color:var(--surface2); }
       <strong>📋 Dati per sponsor</strong> — questa sezione mostra i KPI principali dell'app aggiornati in tempo reale. Utile per presentazioni e partnership commerciali.
     </div>
 
+    <!-- BANNER COMUNICAZIONI -->
+    <div class="card" style="margin-bottom:1.5rem;border-color:rgba(245,158,11,0.25)">
+      <div class="card-title">📢 Banner comunicazioni in-app</div>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <label style="font-size:0.78rem;color:var(--muted);flex-shrink:0">Stato:</label>
+          <label class="toggle" style="flex-shrink:0">
+            <input type="checkbox" id="banner-toggle" onchange="saveBanner()">
+            <span class="toggle-slider"></span>
+          </label>
+          <span id="banner-stato-label" style="font-size:0.75rem;color:var(--muted)">OFF — banner nascosto</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0.4rem;">
+          <label style="font-size:0.78rem;color:var(--muted)">Testo del banner (scorrevole):</label>
+          <div style="display:flex;gap:0.5rem;align-items:stretch;">
+            <input type="text" id="banner-input" placeholder="es. 🆕 Nuova funzione disponibile — scopri il Food Pairing!"
+              style="flex:1;background:var(--bg);border:1.5px solid var(--border);color:var(--text);padding:0.6rem 0.9rem;border-radius:8px;font-size:0.82rem;font-family:inherit;outline:none;"
+              oninput="updateBannerPreview()">
+            <button class="btn btn-primary" onclick="saveBanner()" style="flex-shrink:0;padding:0.6rem 1rem;">Salva</button>
+          </div>
+        </div>
+        <div id="banner-preview" style="display:none;overflow:hidden;height:28px;background:linear-gradient(90deg,#1e293b,#0f172a);border:1px solid rgba(245,158,11,.2);border-radius:8px;position:relative;">
+          <span id="banner-preview-text" style="white-space:nowrap;font-size:.65rem;font-weight:600;color:#f59e0b;position:absolute;animation:banner-scroll 18s linear infinite;padding-left:100%;"></span>
+        </div>
+        <div id="banner-log" style="font-size:0.72rem;color:var(--muted);min-height:1rem;"></div>
+      </div>
+    </div>
+    <style>
+    @keyframes banner-scroll{0%{transform:translateX(0);}100%{transform:translateX(-200%);}}
+    </style>
+
     <div class="kpi-grid">
       <div class="kpi-box" style="border-color:rgba(96,165,250,0.25)">
         <div class="kpi-label">Utenti registrati totali</div>
@@ -526,7 +557,61 @@ async function initAll() {
     caricaStatoAttivazione(),
     loadAIStats(),
     loadUtenti(),
+    loadBanner(),
   ]);
+}
+
+// ── BANNER ────────────────────────────────────────────────
+async function loadBanner() {
+  try {
+    const snap = await getDoc(doc(db, 'config', 'banner'));
+    if (snap.exists()) {
+      const d = snap.data();
+      const testo = d.testo || '';
+      const attivo = d.attivo === true;
+      document.getElementById('banner-input').value = testo;
+      document.getElementById('banner-toggle').checked = attivo;
+      updateBannerStato(attivo);
+      updateBannerPreview();
+    }
+  } catch(e) { console.error('loadBanner:', e); }
+}
+
+window.saveBanner = async function() {
+  const testo = document.getElementById('banner-input').value.trim();
+  const attivo = document.getElementById('banner-toggle').checked;
+  const log = document.getElementById('banner-log');
+  try {
+    await setDoc(doc(db, 'config', 'banner'), { testo, attivo });
+    log.textContent = '✓ Banner aggiornato — visibile in app in tempo reale';
+    log.style.color = 'var(--ok)';
+    updateBannerStato(attivo);
+    updateBannerPreview();
+    setTimeout(() => { log.textContent = ''; }, 4000);
+  } catch(e) {
+    log.textContent = '✗ Errore: ' + e.message;
+    log.style.color = 'var(--err)';
+  }
+};
+
+window.updateBannerPreview = function() {
+  const testo = document.getElementById('banner-input').value.trim();
+  const preview = document.getElementById('banner-preview');
+  const previewText = document.getElementById('banner-preview-text');
+  if (testo) {
+    previewText.textContent = testo;
+    const duration = Math.max(12, testo.length * 0.22);
+    previewText.style.animationDuration = duration + 's';
+    preview.style.display = 'block';
+  } else {
+    preview.style.display = 'none';
+  }
+};
+
+function updateBannerStato(attivo) {
+  const label = document.getElementById('banner-stato-label');
+  if (label) label.textContent = attivo ? '✓ ON — banner visibile in app' : 'OFF — banner nascosto';
+  label.style.color = attivo ? 'var(--ok)' : 'var(--muted)';
 }
 
 // ── TABS ──────────────────────────────────────────────────
