@@ -7428,55 +7428,54 @@ function showInstallPWAModal() {
 
   function _openSearch() {
     console.log('[OPEN SEARCH] scrollY='+window.scrollY+' hdrHidden='+_hdrHidden);
-    // Mostra filter-bar nella posizione corrente — nessuno scrollTo, header resta dove sta
+    // Congela SUBITO — prima di focus(), prima che viewport si riduca
+    window._inputFocused = true;
+    srchOverlay.style.display = 'block';
+
+    // Mostra filter-bar calcolando posizione direttamente (bypassa il flag)
     filterBar.style.transition = 'none';
     filterBar.classList.remove('hidden');
     var fbH = filterBar.offsetHeight;
     if (typeof _cachedFbH !== 'undefined') _cachedFbH = fbH;
     var hdr = document.querySelector('.hdr');
     var hdrBot = hdr ? hdr.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
-    if (typeof _applyBarsTop === 'function') _applyBarsTop(hdrBot);
+    var pills = document.getElementById('pills-bar');
+    var pillsH = pills ? pills.offsetHeight : 40;
+    var main = document.querySelector('.main');
+    if (main) main.style.paddingTop = (hdrBot + pillsH + fbH + 22) + 'px';
+    document.documentElement.style.setProperty('--hdr-offset', hdrBot + 'px');
+    document.documentElement.style.setProperty('--pills-bottom', (hdrBot + pillsH) + 'px');
     requestAnimationFrame(function() { filterBar.style.transition = ''; });
     pillsSrchBtn.classList.add('active');
     srchOpen = true;
 
     var inp = document.getElementById('srch');
     if (inp) {
-      // Focus: congela immediatamente tutte le barre
-      inp.addEventListener('focus', function _onFocus() {
-        inp.removeEventListener('focus', _onFocus);
-        window._inputFocused = true;
-        console.log('[INPUT FOCUS] congelato');
-        srchOverlay.style.display = 'block';
-      }, { once: true });
-
-      // Blur: sblocca e ricalcola
-      inp.addEventListener('blur', function _onBlur() {
-        inp.removeEventListener('blur', _onBlur);
-        window._inputFocused = false;
-        srchOverlay.style.display = 'none';
-        console.log('[INPUT BLUR] sbloccato');
-        // Ricalcola posizioni ora che tastiera è chiusa
-        requestAnimationFrame(function() {
-          var hdr2 = document.querySelector('.hdr');
-          var hdrBot2 = hdr2 ? hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
-          if (typeof _applyBarsTop === 'function') _applyBarsTop(hdrBot2);
-          if (typeof updateFbH === 'function') updateFbH();
-        });
-        // Se search è ancora aperta (es. dopo Invio) riattacca il blur listener
-        setTimeout(function() {
-          if (srchOpen && inp === document.activeElement === false) {
-            inp.addEventListener('focus', function _onFocus2() {
-              inp.removeEventListener('focus', _onFocus2);
+      inp.focus();
+      // Blur listener persistente — si riattacca ogni volta
+      function _attachBlur() {
+        inp.addEventListener('blur', function() {
+          window._inputFocused = false;
+          srchOverlay.style.display = 'none';
+          console.log('[INPUT BLUR] sbloccato');
+          requestAnimationFrame(function() {
+            if (!srchOpen) return;
+            var hdr2 = document.querySelector('.hdr');
+            var hdrBot2 = hdr2 ? hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
+            if (typeof _applyBarsTop === 'function') _applyBarsTop(hdrBot2);
+            if (typeof updateFbH === 'function') updateFbH();
+          });
+          if (srchOpen) {
+            inp.addEventListener('focus', function() {
               window._inputFocused = true;
               srchOverlay.style.display = 'block';
-              console.log('[INPUT FOCUS2] ricongelato');
+              console.log('[INPUT FOCUS] ricongelato');
+              _attachBlur();
             }, { once: true });
           }
-        }, 100);
-      }, { once: true });
-
-      inp.focus();
+        }, { once: true });
+      }
+      _attachBlur();
     }
   }
 
