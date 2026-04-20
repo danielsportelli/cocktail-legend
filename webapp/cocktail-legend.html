@@ -4228,10 +4228,14 @@ var SCROLL_THRESHOLD = 500; // px da scrollare prima di triggerare
   window.addEventListener('wheel', preventWheel, { passive: false });
 })();
 
+// Flag globale: true quando search è aperta con tastiera visibile — congela posizioni
+window._searchFrozen = false;
+
 // Loop rAF che sincronizza pills e filter-bar all'header frame per frame
 function _startSyncLoop() {
   if (_syncRafId) return; // già in corso
   function loop() {
+    if (window._searchFrozen) { _syncRafId = null; return; } // posizioni congelate
     var hdr = document.querySelector('.hdr');
     if (!hdr) { _syncRafId = null; return; }
     var bottom = hdr.getBoundingClientRect().bottom;
@@ -4250,6 +4254,7 @@ function _startSyncLoop() {
 }
 
 function _applyBarsTop(hdrBottom) {
+  if (window._searchFrozen) return; // posizioni congelate — non toccare nulla
   var pills = document.getElementById('pills-bar');
   var pillsH = pills ? pills.offsetHeight : 40;
   // pills-bar e filter-bar posizione gestita da CSS transform — non impostare top via JS
@@ -4265,6 +4270,8 @@ function _applyBarsTop(hdrBottom) {
 function updateHeaderVisibility() {
   var hdr = document.querySelector('.hdr');
   if (!hdr) return;
+  // Search aperta con tastiera: congela tutto
+  if (window._searchFrozen) return;
   // Tastiera aperta: NON aggiornare nulla. Così alla chiusura tastiera
   // lo stato (_lastScrollY, _scrollDelta, _hdrHidden) è identico a prima
   // dell'apertura — nessun falso trigger.
@@ -4357,6 +4364,8 @@ updateFbH();
     var kb = isKeyboardOpen();
     if (kb === _kbOpen) return; // nessun cambiamento reale
     _kbOpen = kb;
+    // Aggiorna stato freeze search
+    if (typeof _updateSearchFrozen === 'function') _updateSearchFrozen();
     if (kb) return; // tastiera aperta — ignora
     // Tastiera chiusa: ricalcola
     _initialHeight = window.innerHeight;
@@ -7391,10 +7400,34 @@ function showInstallPWAModal() {
   var pillsSrchBtn = document.getElementById('pills-srch-btn');
   var filterBar = document.getElementById('filter-bar');
   var srchOpen = false;
+
+  // Overlay semitrasparente sotto search bar
+  var srchOverlay = document.createElement('div');
+  srchOverlay.id = 'srch-overlay';
+  srchOverlay.style.cssText = 'position:fixed;inset:0;z-index:49;display:none;background:rgba(0,0,0,0.45);';
+  document.body.appendChild(srchOverlay);
+  srchOverlay.addEventListener('click', function() {
+    if (srchOpen) pillsSrchBtn.click();
+  });
+
+  // Listener visualViewport per aggiornare _searchFrozen in tempo reale
+  function _updateSearchFrozen() {
+    if (!srchOpen) { window._searchFrozen = false; return; }
+    var vvH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    var ref = window._initialViewportH || window.innerHeight;
+    window._searchFrozen = vvH < ref * 0.75;
+  }
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', _updateSearchFrozen);
+  }
+  window.addEventListener('resize', _updateSearchFrozen);
+
   if (pillsSrchBtn && filterBar) {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
+        // Scroll to top prima che la tastiera apra — previene salti di viewport
+        window.scrollTo({ top: 0, behavior: 'instant' });
         // La search-bar scende da sotto le pills senza toccare lo stato scroll:
         // se header era nascosto resta nascosto, se visibile resta visibile.
         // Pre-calcola altezza: rimuovi hidden, forza layout, applica padding — tutto prima del paint
@@ -7410,9 +7443,12 @@ function showInstallPWAModal() {
           filterBar.style.transition = '';
         });
         pillsSrchBtn.classList.add('active');
+        srchOverlay.style.display = 'block';
         var inp = document.getElementById('srch');
         if (inp) inp.focus();
       } else {
+        // Disattiva freeze
+        window._searchFrozen = false;
         // Azzera cache PRIMA di aggiungere .hidden — padding-top scende in sincronia
         if (typeof _cachedFbH !== 'undefined') _cachedFbH = 0;
         var _hdr = document.querySelector('.hdr');
@@ -7420,8 +7456,9 @@ function showInstallPWAModal() {
         if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot);
         filterBar.classList.add('hidden');
         pillsSrchBtn.classList.remove('active');
+        srchOverlay.style.display = 'none';
         var inp = document.getElementById('srch');
-        if (inp && inp.value) { inp.value = ''; Q = ''; render(); }
+        if (inp) { inp.blur(); if (inp.value) { inp.value = ''; Q = ''; render(); } }
       }
     });
   }
