@@ -762,7 +762,7 @@ body::before{
 .m-sd{color:rgba(255,255,255,.35);font-size:.48rem}
 .m-body{padding:1.4rem}
 .m-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.9rem}
-.m-name-row{display:flex;align-items:center;justify-content:space-between;gap:.75rem;}
+.m-name-row{display:flex;align-items:center;justify-content:space-between;gap:.75rem;width:100%;}
 .m-name{font-size:1.45rem;font-weight:900;letter-spacing:-.03em;line-height:1.1;flex:1;}
 .m-video-btn{
   flex-shrink:0;
@@ -5059,10 +5059,10 @@ function closeVideo(){
   // Non resettare overflow — la scheda è ancora aperta
 }
 
-document.getElementById('video-close-btn').addEventListener('click', closeVideo);
-document.getElementById('video-overlay').addEventListener('click', function(e){
-  if(e.target === this) closeVideo();
-});
+var _vcb = document.getElementById('video-close-btn');
+if(_vcb) _vcb.addEventListener('click', closeVideo);
+var _vov = document.getElementById('video-overlay');
+if(_vov) _vov.addEventListener('click', function(e){ if(e.target === this) closeVideo(); });
 
 function closeModal(){var st=document.getElementById("tab-bar");if(st)st.style.display="";
   closeVideo();
