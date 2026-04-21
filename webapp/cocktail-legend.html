@@ -3746,11 +3746,11 @@ window._isRegistering = false;
             // ── Traccia referral se presente ──────────────
             if(_refCode) {
               var BADGE_THRESHOLDS = [
-                { key:'starter',    num:5,   credits:20  },
-                { key:'junior',     num:10,  credits:40  },
-                { key:'senior',     num:25,  credits:100 },
-                { key:'ambassador', num:50,  credits:200 },
-                { key:'legend',     num:100, credits:500 }
+                { key:'starter',    num:5,   credits:10  },
+                { key:'junior',     num:10,  credits:20  },
+                { key:'senior',     num:25,  credits:50 },
+                { key:'ambassador', num:50,  credits:50 },
+                { key:'legend',     num:100, credits:250 }
               ];
               // Trova l'utente con quel codice referral
               fns.getDocs(fns.query(
@@ -8091,12 +8091,12 @@ function showInstallPWAModal() {
     };
 
     var REF_BADGES = [
-      { key:'starter',    num:5,   label:'Starter',    color:CLR.blu,     credits:20  },
-      { key:'junior',     num:10,  label:'Junior',     color:CLR.verde,   credits:40  },
-      { key:'senior',     num:25,  label:'Senior',     color:CLR.giallo,  credits:100 },
-      { key:'ambassador', num:50,  label:'Ambassador', color:CLR.arancio, credits:200 },
-      { key:'master',     num:75,  label:'Master',     color:CLR.rosso,   credits:350 },
-      { key:'legend',     num:100, label:'Legend',     color:CLR.viola,   credits:500 }
+      { key:'starter',    num:5,   label:'Starter',    color:CLR.blu,     credits:10  },
+      { key:'junior',     num:10,  label:'Junior',     color:CLR.verde,   credits:20  },
+      { key:'senior',     num:25,  label:'Senior',     color:CLR.giallo,  credits:50 },
+      { key:'ambassador', num:50,  label:'Ambassador', color:CLR.arancio, credits:50 },
+      { key:'master',     num:75,  label:'Master',     color:CLR.rosso,   credits:175 },
+      { key:'legend',     num:100, label:'Legend',     color:CLR.viola,   credits:250 }
     ];
 
     var STREAK_BADGES = [
@@ -8229,7 +8229,7 @@ function showInstallPWAModal() {
         +'<span style="'+sectionLabelStyle+'">🏆 Badge Referral</span>'
         +'<div style="display:flex;align-items:flex-start;gap:.5rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.65rem .75rem;margin-bottom:1rem;font-size:.68rem;color:var(--txt2);line-height:1.5;">'
           +'<svg style="flex-shrink:0;margin-top:1px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
-          +'Invita amici e colleghi bartender. Per ogni traguardo guadagni <strong style="color:var(--amber)">crediti AI gratuiti</strong> utilizzabili anche senza Premium.'
+          +'Invita amici e colleghi bartender. Per ogni traguardo raggiungi un badge e guadagni crediti AI gratuiti, utilizzabili anche senza piano Premium.'
         +'</div>'
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
           +'<span style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">Invitati</span>'
@@ -8298,7 +8298,7 @@ function showInstallPWAModal() {
 
       // ── CARD CORRETTEZZA ───────────────────────────
       var pctHtml = '<div style="'+cardStyle+'">'
-        +'<span style="'+sectionLabelStyle+'">⭐ Badge Correttezza Quiz</span>'
+        +'<span style="'+sectionLabelStyle+'">⭐ Badge % risposte esatte quiz</span>'
         +'<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
           +'Riflette la tua % di risposte corrette attuale. Sale e scende dinamicamente con ogni risposta.'
         +'</div>'
@@ -8308,14 +8308,12 @@ function showInstallPWAModal() {
         )
         +'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;">';
       PCT_BADGES.slice().reverse().forEach(function(b){
-        var unlocked = pctBadge && pct>=b.min;
         var isCurrent = pctBadge && pctBadge.min===b.min;
         pctHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.5rem .3rem;border-radius:10px;'
-          +(isCurrent?'background:rgba('+hexToRgb(b.color===CLR_platino?'226,232,240':b.color)+',0.12);border:1.5px solid '+b.color+';'
-            :unlocked?'opacity:.6;':'opacity:.3;')
+          +(isCurrent?'background:rgba('+hexToRgb(b.color===CLR_platino?'226,232,240':b.color)+',0.12);border:1.5px solid '+b.color+';':'opacity:.25;')
           +'">'
           +'<div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;">'+getBadgeSvg(b,24)+'</div>'
-          +'<span style="font-size:.47rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+(unlocked||isCurrent?b.color:'var(--dim)')+';">'+b.label+'</span>'
+          +'<span style="font-size:.47rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+(isCurrent?b.color:'var(--dim)')+';">'+b.label+'</span>'
           +'<span style="font-size:.45rem;color:var(--dim);">'+(b.min===91?'91-100':b.min+'-'+(PCT_BADGES[PCT_BADGES.indexOf(b)-1]?PCT_BADGES[PCT_BADGES.indexOf(b)-1].min-1:100))+'%</span>'
           +'</div>';
       });
