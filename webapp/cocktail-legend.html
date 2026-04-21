@@ -8284,8 +8284,8 @@ function showInstallPWAModal() {
           return keys.indexOf(data.streak_badge) >= keys.indexOf(b.key);
         })();
         streakHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;flex:1;">'
-          +'<div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;'
-          +(unlocked?'background:rgba('+hexToRgb(b.color)+',0.15);border:1.5px solid '+b.color+';':'background:var(--surf2);border:1px solid var(--brd);opacity:.4;')
+          +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'
+          +(unlocked?'background:rgba('+hexToRgb(b.color)+',0.12);border:2px solid '+b.color+';':'background:var(--surf2);border:1.5px solid rgba(100,116,139,0.2);opacity:.3;')
           +'">'+flameSvg(unlocked?b.color:'#475569', 24)+'</div>'
           +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+(unlocked?b.color:'var(--dim)')+';">'+b.label+'</span>'
           +'</div>';
@@ -8310,10 +8310,10 @@ function showInstallPWAModal() {
       PCT_BADGES.slice().reverse().forEach(function(b){
         var isCurrent = pctBadge && pctBadge.min===b.min;
         pctHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.5rem .3rem;border-radius:10px;'
-          +(isCurrent?'background:rgba('+hexToRgb(b.color===CLR_platino?'226,232,240':b.color)+',0.12);border:1.5px solid '+b.color+';':'opacity:.25;')
+          +(isCurrent?'background:rgba('+hexToRgb(b.color===CLR_platino?'226,232,240':b.color)+',0.12);border:1.5px solid '+b.color+';':'border:1.5px solid rgba(100,116,139,0.2);opacity:.3;')
           +'">'
-          +'<div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;">'+getBadgeSvg(b,24)+'</div>'
-          +'<span style="font-size:.47rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+(isCurrent?b.color:'var(--dim)')+';">'+b.label+'</span>'
+          +'<div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;filter:'+(isCurrent?'none':'grayscale(1)')+';">'+(isCurrent?getBadgeSvg(b,24):getBadgeSvg({...b,color:'#475569'},24))+'</div>'
+          +'<span style="font-size:.47rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+(isCurrent?b.color:'#475569')+';">'+b.label+'</span>'
           +'<span style="font-size:.45rem;color:var(--dim);">'+(b.min===91?'91-100':b.min+'-'+(PCT_BADGES[PCT_BADGES.indexOf(b)-1]?PCT_BADGES[PCT_BADGES.indexOf(b)-1].min-1:100))+'%</span>'
           +'</div>';
       });
