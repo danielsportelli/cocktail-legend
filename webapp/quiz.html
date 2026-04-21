@@ -190,9 +190,14 @@ body::after{
 .lb-streak-badge,.lb-pct-badge{
   display:inline-flex;align-items:center;justify-content:center;
   vertical-align:middle;margin-left:3px;flex-shrink:0;
-  border-radius:6px;padding:2px 3px;
-  border:1.5px solid currentColor;
-  background:rgba(0,0,0,0.2);
+  width:20px;height:20px;
+  border-radius:50%;
+  border:1px solid currentColor;
+  background:rgba(0,0,0,0.25);
+  box-sizing:border-box;
+}
+.lb-streak-badge svg,.lb-pct-badge svg{
+  display:block;flex-shrink:0;
 }
 .lb-ref-badge{
   display:inline-flex;align-items:center;justify-content:center;
