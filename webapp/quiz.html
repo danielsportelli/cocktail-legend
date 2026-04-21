@@ -1064,7 +1064,15 @@ function badgeHtml(badge) {
 // Badge composito: referral + streak + correttezza
 function allBadgesHtml(userData) {
   var ref = badgeHtml(userData && userData.referral && userData.referral.badge);
-  var streak = streakBadgeSvg(userData && userData.streak_badge);
+  // Calcola streak badge da streak attuale (fallback se streak_badge non ancora su Firestore)
+  var curStreak = (userData && userData.streak) || 0;
+  var computedKey = calcStreakBadgeKey(curStreak);
+  var savedKey = userData && userData.streak_badge;
+  var skeys = ['s7','s14','s30','s90','s180','s365'];
+  var savedIdx = savedKey ? skeys.indexOf(savedKey) : 999;
+  var compIdx  = computedKey ? skeys.indexOf(computedKey) : 999;
+  var effectiveKey = (compIdx <= savedIdx) ? computedKey : savedKey;
+  var streak = streakBadgeSvg(effectiveKey);
   var pct = pctBadgeSvg(userData && userData.pct_correttezza || 0, userData && userData.tot_risposte || 0);
   return ref + streak + pct;
 }
