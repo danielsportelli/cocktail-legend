@@ -8100,12 +8100,12 @@ function showInstallPWAModal() {
     ];
 
     var STREAK_BADGES = [
-      { key:'s3',   days:3,   label:'3 giorni',   color:CLR.blu     },
-      { key:'s7',   days:7,   label:'7 giorni',   color:CLR.verde   },
-      { key:'s14',  days:14,  label:'14 giorni',  color:CLR.giallo  },
-      { key:'s30',  days:30,  label:'1 mese',     color:CLR.arancio },
-      { key:'s100', days:100, label:'100 giorni', color:CLR.rosso   },
-      { key:'s365', days:365, label:'1 anno',     color:CLR.viola   },
+      { key:'s7',   days:7,   label:'7 giorni',  color:CLR.blu     },
+      { key:'s14',  days:14,  label:'14 giorni', color:CLR.verde   },
+      { key:'s30',  days:30,  label:'1 mese',    color:CLR.giallo  },
+      { key:'s90',  days:90,  label:'3 mesi',    color:CLR.arancio },
+      { key:'s180', days:180, label:'6 mesi',    color:CLR.rosso   },
+      { key:'s365', days:365, label:'1 anno',    color:CLR.viola   },
     ];
 
     var PCT_BADGES = [
@@ -8210,8 +8210,18 @@ function showInstallPWAModal() {
     function buildUI(data) {
       var refCount   = (data.referral && data.referral.count) || 0;
       var curRefBadge = (data.referral && data.referral.badge) || null;
-      var streakBadge = getStreakBadge(data.streak_badge || null);
       var curStreak   = data.streak || 0;
+      // Calcola streak badge dal valore attuale (fallback per utenti pre-aggiornamento)
+      var computedStreakKey = null;
+      for(var _si=0;_si<STREAK_BADGES.length;_si++){
+        if(curStreak >= STREAK_BADGES[_si].days){ computedStreakKey=STREAK_BADGES[_si].key; break; }
+      }
+      var _savedKey = data.streak_badge || null;
+      // Prendi il più alto tra quello salvato e quello calcolato ora
+      var _savedIdx = _savedKey ? STREAK_BADGES.findIndex(function(b){return b.key===_savedKey;}) : 999;
+      var _compIdx  = computedStreakKey ? STREAK_BADGES.findIndex(function(b){return b.key===computedStreakKey;}) : 999;
+      var effectiveStreakKey = (_compIdx <= _savedIdx) ? computedStreakKey : _savedKey;
+      var streakBadge = getStreakBadge(effectiveStreakKey);
       var pctBadge    = getPctBadge(data.pct_correttezza||0, data.tot_risposte||0);
       var pct         = data.pct_correttezza || 0;
       var tot         = data.tot_risposte || 0;
@@ -8280,8 +8290,8 @@ function showInstallPWAModal() {
         +'<div style="display:flex;justify-content:space-between;gap:.3rem;">';
       STREAK_BADGES.forEach(function(b){
         var unlocked = data.streak_badge && (function(){
-          var keys=['s3','s7','s14','s30','s100','s365'];
-          return keys.indexOf(data.streak_badge) >= keys.indexOf(b.key);
+          var keys=['s7','s14','s30','s90','s180','s365'];
+          return keys.indexOf(effectiveStreakKey) >= keys.indexOf(b.key);
         })();
         streakHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;flex:1;">'
           +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'
@@ -8292,7 +8302,7 @@ function showInstallPWAModal() {
       });
       streakHtml+='</div>'
         +'<div style="margin-top:.75rem;font-size:.65rem;color:var(--dim);">Streak attuale: <strong style="color:var(--txt);">'+curStreak+' giorni</strong>'
-          +(streakBadge?' · Badge: <strong style="color:'+streakBadge.color+';">'+streakBadge.label+'</strong>':'')
+          +(streakBadge?' · Badge sbloccato: <strong style="color:'+streakBadge.color+';">'+streakBadge.label+'</strong>':' · Nessun badge ancora')
         +'</div>'
         +'</div>';
 

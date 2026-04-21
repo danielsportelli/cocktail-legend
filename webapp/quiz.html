@@ -942,11 +942,11 @@ const CLR = {
 // ── STREAK BADGE CONFIG ────────────────────────────
 const STREAK_BADGES = [
   { key:'s365', days:365, label:'1 anno',    color:CLR.viola   },
-  { key:'s100', days:100, label:'100 giorni', color:CLR.rosso   },
-  { key:'s30',  days:30,  label:'1 mese',    color:CLR.arancio },
-  { key:'s14',  days:14,  label:'14 giorni', color:CLR.giallo  },
-  { key:'s7',   days:7,   label:'7 giorni',  color:CLR.verde   },
-  { key:'s3',   days:3,   label:'3 giorni',  color:CLR.blu     },
+  { key:'s180', days:180, label:'6 mesi',    color:CLR.rosso   },
+  { key:'s90',  days:90,  label:'3 mesi',    color:CLR.arancio },
+  { key:'s30',  days:30,  label:'1 mese',    color:CLR.giallo  },
+  { key:'s14',  days:14,  label:'14 giorni', color:CLR.verde   },
+  { key:'s7',   days:7,   label:'7 giorni',  color:CLR.blu     },
 ];
 
 // ── CORRETTEZZA BADGE CONFIG ───────────────────────
@@ -1050,7 +1050,8 @@ function streakBadgeSvg(streakBadgeKey) {
 // ── CALCOLA STREAK BADGE KEY ──────────────────────
 function calcStreakBadgeKey(streak) {
   var key = null;
-  for(var i=STREAK_BADGES.length-1;i>=0;i--){
+  // STREAK_BADGES è ordinato dal più alto al più basso — trova il massimo sbloccato
+  for(var i=0;i<STREAK_BADGES.length;i++){
     if(streak >= STREAK_BADGES[i].days){ key=STREAK_BADGES[i].key; break; }
   }
   return key;
@@ -1157,12 +1158,12 @@ async function saveRisposta(uid, quizId, isCorrect, ptsEarned, oggi) {
     // Calcola streak_badge (max storico)
     var newStreakBadgeKey = calcStreakBadgeKey(streak);
     var oldStreakBadgeKey = userData.streak_badge || null;
-    // Aggiorna solo se più alto del precedente
+    // Aggiorna solo se più alto del precedente (indice più basso = livello più alto)
     var streakBadgeUpdate = oldStreakBadgeKey;
     if(newStreakBadgeKey) {
       var newIdx = STREAK_BADGES.findIndex(function(b){return b.key===newStreakBadgeKey;});
-      var oldIdx = oldStreakBadgeKey ? STREAK_BADGES.findIndex(function(b){return b.key===oldStreakBadgeKey;}) : -1;
-      if(newIdx < oldIdx || oldIdx === -1) streakBadgeUpdate = newStreakBadgeKey; // indice più basso = livello più alto
+      var oldIdx = oldStreakBadgeKey ? STREAK_BADGES.findIndex(function(b){return b.key===oldStreakBadgeKey;}) : 999;
+      if(newIdx < oldIdx) streakBadgeUpdate = newStreakBadgeKey;
     }
 
     await setDoc(userRef, {
