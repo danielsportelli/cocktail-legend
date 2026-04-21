@@ -3750,19 +3750,8 @@ window._isRegistering = false;
                 { key:'junior',     num:10,  credits:40  },
                 { key:'senior',     num:25,  credits:100 },
                 { key:'ambassador', num:50,  credits:200 },
-                { key:'master',     num:75,  credits:350 },
                 { key:'legend',     num:100, credits:500 }
               ];
-
-              // ── Rate limit: max 5 referral per giorno ──
-              var _inviterDailyDate = (inviterData.referral && inviterData.referral.dailyDate) || '';
-              var _inviterDailyCount = (inviterData.referral && inviterData.referral.dailyCount) || 0;
-              var _todayStr = new Date().toISOString().split('T')[0];
-              if(_inviterDailyDate === _todayStr && _inviterDailyCount >= 5){
-                console.warn('Rate limit referral raggiunto per oggi — skip.');
-                return;
-              }
-              var _newDailyCount = _inviterDailyDate === _todayStr ? _inviterDailyCount + 1 : 1;
               // Trova l'utente con quel codice referral
               fns.getDocs(fns.query(
                 fns.collection(db, 'users'),
@@ -3795,9 +3784,7 @@ window._isRegistering = false;
                     code: inviterData.referral ? inviterData.referral.code : inviterDoc.id.substring(0,8),
                     count: newCount,
                     badge: newBadge,
-                    earnedCredits: oldEarned + creditsToAdd,
-                    dailyDate: _todayStr,
-                    dailyCount: _newDailyCount
+                    earnedCredits: oldEarned + creditsToAdd
                   },
                   aiUsage: {
                     monthlyCount: (inviterData.aiUsage && inviterData.aiUsage.monthlyCount) || 0,
@@ -4060,20 +4047,6 @@ window.addEventListener('fb-auth-ready', function(e) {
     }
     refreshAllHearts();
   }).catch(function(e){ console.warn('loadFavs err', e); _favsCache = []; });
-
-  // ── Traccia last_seen + access_type ──────────────
-  try {
-    var setDoc = window._fbFunctions && window._fbFunctions.setDoc;
-    var userDocRef = _getUserDoc();
-    if(setDoc && userDocRef){
-      var isPwa = window.matchMedia('(display-mode: standalone)').matches
-                  || window.navigator.standalone === true;
-      setDoc(userDocRef, {
-        last_seen: new Date().toISOString().split('T')[0],
-        access_type: isPwa ? 'pwa' : 'browser'
-      }, { merge: true }).catch(function(){});
-    }
-  } catch(ex){}
 });
 
 function refreshAllHearts(){
@@ -8256,7 +8229,7 @@ function showInstallPWAModal() {
         +'<span style="'+sectionLabelStyle+'">🏆 Badge Referral</span>'
         +'<div style="display:flex;align-items:flex-start;gap:.5rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.65rem .75rem;margin-bottom:1rem;font-size:.68rem;color:var(--txt2);line-height:1.5;">'
           +'<svg style="flex-shrink:0;margin-top:1px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
-          +'Invita amici e colleghi bartender. Per ogni traguardo raggiungi un badge e guadagni crediti AI gratuiti, utilizzabili anche senza piano Premium.'
+          +'Invita amici e colleghi bartender. Per ogni traguardo guadagni <strong style="color:var(--amber)">crediti AI gratuiti</strong> utilizzabili anche senza Premium.'
         +'</div>'
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
           +'<span style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">Invitati</span>'
