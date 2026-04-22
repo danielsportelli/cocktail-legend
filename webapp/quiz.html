@@ -174,6 +174,7 @@ body::after{
 }
 .lb-row:last-child{border-bottom:none;}
 .lb-row.me{background:rgba(37,99,235,.07);border-left:2px solid var(--blue);}
+.lb-row.me:last-child{border-radius:0 0 18px 16px;}
 .lb-row.lb-loading{
   justify-content:center;display:flex;
   padding:1.5rem;color:var(--dim);font-size:.78rem;
@@ -204,13 +205,15 @@ body::after{
   width:20px;height:20px;border-radius:50%;
   margin-left:.3rem;vertical-align:middle;
   flex-shrink:0;box-sizing:border-box;
+  border:1px solid currentColor;
+  background:rgba(0,0,0,0.25);
 }
-.lb-ref-badge.connesso   {background:rgba(59,130,246,0.15);border:1.5px solid #3b82f6;}
-.lb-ref-badge.promoter   {background:rgba(34,197,94,0.15);border:1.5px solid #22c55e;}
-.lb-ref-badge.ambassador {background:rgba(234,179,8,0.15);border:1.5px solid #eab308;}
-.lb-ref-badge.influencer {background:rgba(249,115,22,0.15);border:1.5px solid #f97316;}
-.lb-ref-badge.leader     {background:rgba(239,68,68,0.15);border:1.5px solid #ef4444;}
-.lb-ref-badge.icon       {background:rgba(168,85,247,0.15);border:1.5px solid #a855f7;}
+.lb-ref-badge.connesso   {color:#3b82f6;}
+.lb-ref-badge.promoter   {color:#22c55e;}
+.lb-ref-badge.ambassador {color:#eab308;}
+.lb-ref-badge.influencer {color:#f97316;}
+.lb-ref-badge.leader     {color:#ef4444;}
+.lb-ref-badge.icon       {color:#a855f7;}
 
 /* Riga "Tu" sticky sotto la classifica */
 .lb-sticky-me{
