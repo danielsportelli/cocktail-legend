@@ -1,9 +1,6 @@
 <!doctype html>
 <html lang="it">
 <head>
-<!-- ERUDA DEBUG — RIMUOVERE PRIMA DEL DEPLOY -->
-<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no, email=no">
@@ -4040,6 +4037,20 @@ window.addEventListener('fb-auth-ready', function(e) {
   if (!e.detail.user) return;
   var userDoc = _getUserDoc();
   if (!userDoc) return;
+  // ── Tracking accesso: last_seen + access_type ──
+  (function(){
+    try {
+      var _updateDoc = window._fbFunctions && window._fbFunctions.updateDoc;
+      if(_updateDoc && userDoc) {
+        var _isPWA = window.matchMedia('(display-mode: standalone)').matches
+                  || window.navigator.standalone === true;
+        _updateDoc(userDoc, {
+          last_seen: new Date().toISOString().split('T')[0],
+          access_type: _isPWA ? 'pwa' : 'browser'
+        }).catch(function(){});
+      }
+    } catch(_){}
+  })();
   var getDoc = window._fbFunctions.getDoc;
   getDoc(userDoc).then(function(snap) {
     if (snap.exists()) {
@@ -8287,12 +8298,11 @@ function showInstallPWAModal() {
 
       var refHtml = '<div style="'+cardStyle+'">'
         +'<span style="'+sectionLabelStyle+'">📣 Badge Network</span>'
-        +'<div style="display:flex;align-items:flex-start;gap:.5rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.65rem .75rem;margin-bottom:1rem;font-size:.68rem;color:var(--txt2);line-height:1.5;">'
-          +'<svg style="flex-shrink:0;margin-top:1px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
+        +'<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
           +'Invita colleghi bartender con il tuo link personale. Per ogni traguardo di iscritti guadagni un badge e crediti AI gratuiti — utilizzabili anche senza piano Premium.'
         +'</div>'
-          +'<span style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">Invitati</span>'
-          +'<span style="font-size:.75rem;font-weight:700;color:var(--txt);">'+refCount+(nextRef?' / '+nextNum:'')+'</span>'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
+          +'<span style="font-size:.65rem;color:var(--dim);">Invitati: <strong style="color:var(--txt);">'+(nextRef?refCount+' / '+nextNum:refCount)+'</strong></span>'
         +'</div>'
         +'<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin-bottom:.35rem;">'
           +'<div style="height:100%;width:'+progressPct+'%;background:'+(curRefObj?curRefObj.color:'var(--dim)')+';border-radius:99px;transition:width .4s;"></div>'
@@ -8326,7 +8336,7 @@ function showInstallPWAModal() {
           +'<span style="font-size:.7rem;font-weight:700;color:'+(unlocked?'var(--amber)':'var(--dim)')+';">+'+b.credits+' crediti</span>'
           +'</div>';
       });
-      refHtml+='</div></div>'
+      refHtml+='</div>'
         +'<button id="badge-invite-btn" style="width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:12px;padding:.75rem;font-family:inherit;font-size:.82rem;font-weight:800;cursor:pointer;margin-top:.75rem;">'
           +'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>'
           +'Invita un amico'
@@ -8335,7 +8345,7 @@ function showInstallPWAModal() {
           +'Il link è personale. Ogni iscrizione tramite il tuo link viene conteggiata automaticamente. '
           +'Fino a 5 iscritti al giorno vengono registrati in tempo reale — dal 6° in poi vengono conteggiati il giorno successivo.'
         +'</div>'
-        +'</div>';
+        +'</div></div>';
 
       // ── CARD STREAK ────────────────────────────────
       var streakHtml = '<div style="'+cardStyle+'margin-top:1.2rem;">'
@@ -8369,7 +8379,7 @@ function showInstallPWAModal() {
           +'Fotografa la tua precisione media su tutte le risposte date. Sale quando rispondi bene, scende quando sbagli — è dinamico e cambia ad ogni partita.'
         +'</div>'
         +(tot>0
-          ?'<div style="font-size:.68rem;color:var(--txt2);margin-bottom:.85rem;">Risposte: <strong style="color:var(--txt);">'+tot+'</strong> · Correttezza: <strong style="color:'+(pctBadge?pctBadge.color:'var(--txt)')+';">'+pct+'%</strong>'+(pctBadge?' · <strong style="color:'+pctBadge.color+';">'+pctBadge.label+'</strong>':'')+'</div>'
+          ?'<div style="margin-bottom:.85rem;font-size:.65rem;color:var(--dim);">Risposte esatte: <strong style="color:var(--txt);">'+(pctBadge?pct+'% · '+pctBadge.label:pct+'%')+'</strong></div>'
           :'<div style="font-size:.68rem;color:var(--dim);margin-bottom:.85rem;">Inizia a giocare al quiz per sbloccare il tuo badge!</div>'
         )
         +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;">'; 
