@@ -5066,10 +5066,12 @@ function closeVideo(){
   // Non resettare overflow — la scheda è ancora aperta
 }
 
-var _vcb = document.getElementById('video-close-btn');
-if(_vcb) _vcb.addEventListener('click', closeVideo);
-var _vov = document.getElementById('video-overlay');
-if(_vov) _vov.addEventListener('click', function(e){ if(e.target === this) closeVideo(); });
+document.addEventListener('DOMContentLoaded', function(){
+  var _vcb = document.getElementById('video-close-btn');
+  if(_vcb) _vcb.addEventListener('click', closeVideo);
+  var _vov = document.getElementById('video-overlay');
+  if(_vov) _vov.addEventListener('click', function(e){ if(e.target === this) closeVideo(); });
+});
 
 function closeModal(){var st=document.getElementById("tab-bar");if(st)st.style.display="";
   closeVideo();
@@ -8308,28 +8310,28 @@ function showInstallPWAModal() {
 
       // ── CARD STREAK ────────────────────────────────
       var streakHtml = '<div style="'+cardStyle+'">'
-        +'<span style="'+sectionLabelStyle+'">🔥 Badge Streak Quiz</span>'
+        +'<span style="'+sectionLabelStyle+'">🔥 Badge Costanza Quiz</span>'
         +'<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
           +'Gioca al quiz ogni giorno senza interruzioni. Il badge si conquista una volta e non si perde, anche se rompi lo streak.'
         +'</div>'
+        +'<div style="margin-bottom:.65rem;font-size:.65rem;color:var(--dim);">Streak attuale: <strong style="color:var(--txt);">'+curStreak+' giorni</strong></div>'
         +'<div style="display:flex;justify-content:space-between;gap:.3rem;">';
       STREAK_BADGES.forEach(function(b){
         var _skeys=['s7','s14','s30','s90','s180','s365'];
         var unlocked = effectiveStreakKey && _skeys.indexOf(effectiveStreakKey) >= _skeys.indexOf(b.key);
         streakHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;flex:1;">'
           +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'
-          +(unlocked?'background:rgba('+hexToRgb(b.color)+',0.12);border:2px solid '+b.color+';':'background:var(--surf2);border:1.5px solid rgba(100,116,139,0.2);opacity:.3;')
+          +(unlocked?'background:rgba('+hexToRgb(b.color)+',0.12);border:2px solid '+b.color+';':'background:var(--surf2);border:1.5px solid rgba(100,116,139,0.2);opacity:.10;')
           +'">'+flameSvg(unlocked?b.color:'#475569', 24)+'</div>'
           +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+(unlocked?b.color:'var(--dim)')+';">'+b.label+'</span>'
           +'</div>';
       });
       streakHtml+='</div>'
-        +'<div style="margin-top:.75rem;font-size:.65rem;color:var(--dim);">Streak attuale: <strong style="color:var(--txt);">'+curStreak+' giorni</strong></div>'
         +'</div>';
 
       // ── CARD CORRETTEZZA ───────────────────────────
       var pctHtml = '<div style="'+cardStyle+'">'
-        +'<span style="'+sectionLabelStyle+'">⭐ Badge risposte esatte quiz</span>'
+        +'<span style="'+sectionLabelStyle+'">⭐ Badge Precisione Quiz</span>'
         +'<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
           +'Riflette la tua % di risposte corrette attuale. Sale e scende dinamicamente con ogni risposta.'
         +'</div>'
@@ -8347,9 +8349,9 @@ function showInstallPWAModal() {
           +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'
           +(isCurrent
             ?'background:rgba('+hexToRgb(b.color)+',0.15);border:2px solid '+b.color+';'
-            :'background:rgba('+hexToRgb(b.color)+',0.04);border:1.5px solid '+b.color+';opacity:.25;')
+            :'background:rgba('+hexToRgb(b.color)+',0.04);border:1.5px solid '+b.color+';opacity:.10;')
           +'">'+starSingleSvg(b.color,20)+'</div>'
-          +'<span style="font-size:.47rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(isCurrent?'1':'.25')+';">'+b.label+'</span>'
+          +'<span style="font-size:.47rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(isCurrent?'1':'.10')+';">'+b.label+'</span>'
           +'<span style="font-size:.44rem;color:var(--dim);">'+rangeStr+'</span>'
           +'</div>';
       });
