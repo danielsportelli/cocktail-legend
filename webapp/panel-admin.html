@@ -170,6 +170,9 @@ textarea::placeholder { color:var(--surface2); }
 /* UTENTI */
 .utenti-row { display:flex; align-items:center; justify-content:space-between; padding:0.75rem 0; border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.82rem; }
 .utenti-row:last-child { border-bottom:none; }
+.ac-period-btn { flex:1; padding:0.45rem 0.5rem; border:none; border-radius:7px; background:transparent; color:var(--muted); font-size:0.78rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all 0.2s; }
+.ac-period-btn.active { background:var(--surface2); color:var(--text); }
+.ac-period-btn:hover:not(.active) { color:var(--text); }
 .utenti-email { color:var(--text); font-weight:600; }
 .utenti-meta { color:var(--muted); font-size:0.72rem; }
 
@@ -228,6 +231,7 @@ textarea::placeholder { color:var(--surface2); }
     <button class="tab-btn" onclick="switchTab('barman')">🤖 Barman AI</button>
     <button class="tab-btn" onclick="switchTab('utenti')">👥 Utenti</button>
     <button class="tab-btn" onclick="switchTab('quiz')">🎯 Quiz</button>
+    <button class="tab-btn" onclick="switchTab('accessi')">📱 Accessi</button>
   </div>
 
   <!-- ══════════════════════════════════════════════════════ -->
@@ -335,6 +339,25 @@ textarea::placeholder { color:var(--surface2); }
             <span id="ov-ai-top" style="font-weight:700;color:var(--primary-l)">—</span>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- CARD ACCESSI OVERVIEW -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+      <div class="kpi-box" style="border-color:rgba(20,184,166,0.25)">
+        <div class="kpi-label">Accessi oggi</div>
+        <div class="kpi-val" id="ov-accessi-oggi">—</div>
+        <div class="kpi-sub" id="ov-accessi-oggi-sub">utenti unici</div>
+      </div>
+      <div class="kpi-box" style="border-color:rgba(96,165,250,0.25)">
+        <div class="kpi-label">PWA installata</div>
+        <div class="kpi-val" id="ov-accessi-pwa">—</div>
+        <div class="kpi-sub" id="ov-accessi-pwa-sub">% utenti totali</div>
+      </div>
+      <div class="kpi-box" style="border-color:rgba(245,158,11,0.25)">
+        <div class="kpi-label">Quiz / Accessi oggi</div>
+        <div class="kpi-val" id="ov-accessi-quiz-pct">—</div>
+        <div class="kpi-sub">% chi accede e gioca</div>
       </div>
     </div>
 
@@ -507,6 +530,110 @@ textarea::placeholder { color:var(--surface2); }
 </div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════ -->
+  <!-- TAB: ACCESSI                                           -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div id="tab-accessi" class="tab-panel">
+
+    <!-- SELECTOR PERIODO -->
+    <div style="display:flex;gap:0.5rem;margin-bottom:1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:4px;">
+      <button class="ac-period-btn active" data-period="7"   onclick="setAcPeriod(this,7)"  >7 giorni</button>
+      <button class="ac-period-btn"        data-period="30"  onclick="setAcPeriod(this,30)" >30 giorni</button>
+      <button class="ac-period-btn"        data-period="90"  onclick="setAcPeriod(this,90)" >Trimestre</button>
+      <button class="ac-period-btn"        data-period="365" onclick="setAcPeriod(this,365)">Anno</button>
+    </div>
+
+    <!-- KPI PERIODO -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.25rem;">
+      <div class="card" style="margin-bottom:0;text-align:center">
+        <div class="kpi-label">Accessi periodo</div>
+        <div class="kpi-val" id="ac-kpi-accessi">—</div>
+        <div class="kpi-sub" id="ac-kpi-accessi-sub">utenti unici</div>
+      </div>
+      <div class="card" style="margin-bottom:0;text-align:center">
+        <div class="kpi-label">Quiz giocati</div>
+        <div class="kpi-val" id="ac-kpi-quiz">—</div>
+        <div class="kpi-sub">nel periodo</div>
+      </div>
+      <div class="card" style="margin-bottom:0;text-align:center">
+        <div class="kpi-label">Tasso quiz/accessi</div>
+        <div class="kpi-val" id="ac-kpi-pct" style="color:var(--accent)">—</div>
+        <div class="kpi-sub">% chi gioca</div>
+      </div>
+      <div class="card" style="margin-bottom:0;text-align:center">
+        <div class="kpi-label">Media accessi/giorno</div>
+        <div class="kpi-val" id="ac-kpi-media">—</div>
+        <div class="kpi-sub">nel periodo</div>
+      </div>
+    </div>
+
+    <!-- PWA vs BROWSER + QUIZ ENGAGEMENT -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem;">
+      <div class="card" style="margin-bottom:0">
+        <div class="card-title">📱 PWA vs Browser</div>
+        <div style="display:flex;flex-direction:column;gap:0.65rem;margin-top:0.5rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+            <span style="color:var(--muted)">📱 PWA installata</span>
+            <span id="ac-pwa-n" style="font-weight:700;color:#60a5fa">—</span>
+          </div>
+          <div style="height:6px;background:var(--border);border-radius:99px;overflow:hidden;">
+            <div id="ac-pwa-bar" style="height:100%;width:0%;background:#60a5fa;border-radius:99px;transition:width 0.6s;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;">
+            <span style="color:var(--muted)">🌐 Solo browser</span>
+            <span id="ac-browser-n" style="font-weight:700;color:#f59e0b">—</span>
+          </div>
+          <div style="height:6px;background:var(--border);border-radius:99px;overflow:hidden;">
+            <div id="ac-browser-bar" style="height:100%;width:0%;background:#f59e0b;border-radius:99px;transition:width 0.6s;"></div>
+          </div>
+          <div style="font-size:0.7rem;color:var(--muted);border-top:1px solid var(--border);padding-top:0.5rem;margin-top:0.1rem;">Basato su ultimo accesso nel periodo</div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:0">
+        <div class="card-title">🎯 Engagement quiz</div>
+        <div style="display:flex;flex-direction:column;gap:0.65rem;margin-top:0.5rem;">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;">
+            <span style="color:var(--muted)">Hanno giocato</span>
+            <span id="ac-eng-quiz" style="font-weight:700">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;">
+            <span style="color:var(--muted)">Non hanno giocato</span>
+            <span id="ac-eng-noquiz" style="font-weight:700">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;">
+            <span style="color:var(--muted)">Tasso quiz/accessi</span>
+            <span id="ac-eng-pct" style="font-weight:700;color:var(--accent)">—</span>
+          </div>
+          <div style="height:6px;background:var(--border);border-radius:99px;overflow:hidden;">
+            <div id="ac-eng-bar" style="height:100%;width:0%;background:var(--accent);border-radius:99px;transition:width 0.6s;"></div>
+          </div>
+          <div style="font-size:0.7rem;color:var(--muted);border-top:1px solid var(--border);padding-top:0.5rem;margin-top:0.1rem;">% utenti che accedono e giocano al quiz</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAFICO ACCESSI NEL PERIODO -->
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+        <div class="card-title" style="margin-bottom:0" id="ac-chart-title">📅 Accessi ultimi 7 giorni</div>
+        <div style="display:flex;gap:0.75rem;font-size:0.72rem;">
+          <span style="color:#60a5fa">■ PWA</span>
+          <span style="color:#f59e0b">■ Browser</span>
+          <span style="color:#22c55e">■ Quiz</span>
+        </div>
+      </div>
+      <div id="ac-chart-bars" style="display:flex;align-items:flex-end;gap:3px;height:110px;padding-top:10px;"></div>
+      <div id="ac-chart-labels" style="display:flex;gap:3px;margin-top:4px;"></div>
+    </div>
+
+    <!-- TABELLA DETTAGLIO PERIODO -->
+    <div class="card">
+      <div class="card-title" id="ac-split-title">📊 Dettaglio per giorno</div>
+      <div id="ac-chart-split" style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem;max-height:300px;overflow-y:auto;"></div>
+    </div>
+
+  </div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, doc, setDoc, getDoc, getDocs, collection, query, where, orderBy, limit, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -558,6 +685,7 @@ async function initAll() {
     loadAIStats(),
     loadUtenti(),
     loadBanner(),
+    loadAccessi(),
   ]);
 }
 
@@ -617,7 +745,7 @@ function updateBannerStato(attivo) {
 // ── TABS ──────────────────────────────────────────────────
 window.switchTab = function(tab) {
   document.querySelectorAll('.tab-btn').forEach((b,i) => {
-    const tabs = ['overview','barman','utenti','quiz'];
+    const tabs = ['overview','barman','utenti','quiz','accessi'];
     b.classList.toggle('active', tabs[i] === tab);
   });
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -695,6 +823,190 @@ window.loadAIStats = async function() {
   } catch(e) { console.error('loadAIStats:', e); }
 };
 
+// ── ACCESSI (Firebase last_seen + access_type) ──────────────
+// Cache dati accessi per cambio periodo senza ri-fetch
+let _acCache = null;
+
+async function loadAccessi() {
+  const snap = await getDocs(collection(db, 'users'));
+  _acCache = [];
+  snap.forEach(d => {
+    const u = d.data();
+    if (u.last_seen) _acCache.push({ ls: u.last_seen, at: u.access_type || 'browser', lp: u.last_played || '' });
+  });
+  renderAccessi(7); // default 7 giorni
+}
+
+function setAcPeriod(btn, days) {
+  document.querySelectorAll('.ac-period-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (_acCache) renderAccessi(days);
+}
+
+function renderAccessi(days) {
+  const oggi = new Date().toISOString().split('T')[0];
+  const startD = new Date(); startD.setDate(startD.getDate() - (days - 1));
+  const keyStart = startD.toISOString().split('T')[0];
+
+  // Costruisci bucket temporali
+  // Per 7gg → giornaliero; 30gg → giornaliero; 90gg → settimanale; 365gg → mensile
+  const useWeekly  = days === 90;
+  const useMonthly = days === 365;
+
+  // Genera array di bucket
+  const buckets = []; // [{key, label, start, end}]
+  if (useMonthly) {
+    for (let i = 11; i >= 0; i--) {
+      const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - i);
+      const y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0');
+      const end = new Date(y, d.getMonth()+1, 0);
+      buckets.push({
+        key: y+'-'+m,
+        label: ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'][d.getMonth()],
+        start: y+'-'+m+'-01',
+        end: end.getFullYear()+'-'+String(end.getMonth()+1).padStart(2,'0')+'-'+String(end.getDate()).padStart(2,'0')
+      });
+    }
+  } else if (useWeekly) {
+    for (let i = 12; i >= 0; i--) {
+      const dStart = new Date(); dStart.setDate(dStart.getDate() - i*7 - 6);
+      const dEnd   = new Date(); dEnd.setDate(dEnd.getDate() - i*7);
+      const ks = dStart.toISOString().split('T')[0];
+      const ke = dEnd.toISOString().split('T')[0];
+      buckets.push({ key: ks, label: ks.slice(5), start: ks, end: ke });
+    }
+  } else {
+    for (let i = days-1; i >= 0; i--) {
+      const d = new Date(); d.setDate(d.getDate() - i);
+      const key = d.toISOString().split('T')[0];
+      const shortDays = ['D','L','M','M','G','V','S'];
+      const label = days <= 7 ? ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'][d.getDay()] : (i===0?'Oggi':key.slice(5));
+      buckets.push({ key, label, start: key, end: key });
+    }
+  }
+
+  // Aggrega dati per bucket
+  const byBucket = {};
+  buckets.forEach(b => { byBucket[b.key] = { pwa: 0, browser: 0, quiz: 0 }; });
+
+  let totAccessi = 0, pwaCount = 0, brCount = 0, quizCount = 0;
+
+  _acCache.forEach(u => {
+    const ls = u.ls, at = u.at, lp = u.lp;
+    if (ls < keyStart) return;
+
+    totAccessi++;
+    if (at === 'pwa') pwaCount++; else brCount++;
+    if (lp >= keyStart) quizCount++;
+
+    // Assegna a bucket
+    for (const b of buckets) {
+      if (ls >= b.start && ls <= b.end) {
+        if (at === 'pwa') byBucket[b.key].pwa++;
+        else byBucket[b.key].browser++;
+        if (lp >= b.start && lp <= b.end) byBucket[b.key].quiz++;
+        break;
+      }
+    }
+  });
+
+  const totPwaBr = pwaCount + brCount;
+  const pwaBar = totPwaBr > 0 ? Math.round(pwaCount/totPwaBr*100) : 0;
+  const brBar  = totPwaBr > 0 ? Math.round(brCount/totPwaBr*100) : 0;
+  const quizPct = totAccessi > 0 ? Math.round(quizCount/totAccessi*100) : 0;
+  const mediaGiorno = days > 0 ? (totAccessi/days).toFixed(1) : '—';
+
+  const periodLabels = { 7:'7 giorni', 30:'30 giorni', 90:'trimestre', 365:'anno' };
+  const pl = periodLabels[days] || days+'gg';
+
+  // ── KPI ──
+  document.getElementById('ac-kpi-accessi').textContent     = totAccessi;
+  document.getElementById('ac-kpi-accessi-sub').textContent = 'nel '+pl;
+  document.getElementById('ac-kpi-quiz').textContent        = quizCount;
+  document.getElementById('ac-kpi-pct').textContent         = quizPct + '%';
+  document.getElementById('ac-kpi-media').textContent       = mediaGiorno;
+
+  // ── PWA vs Browser ──
+  document.getElementById('ac-pwa-n').textContent      = pwaCount + ' (' + pwaBar + '%)';
+  document.getElementById('ac-browser-n').textContent  = brCount  + ' (' + brBar  + '%)';
+  document.getElementById('ac-pwa-bar').style.width    = pwaBar + '%';
+  document.getElementById('ac-browser-bar').style.width= brBar  + '%';
+
+  // ── Quiz engagement ──
+  document.getElementById('ac-eng-quiz').textContent   = quizCount;
+  document.getElementById('ac-eng-noquiz').textContent = totAccessi - quizCount;
+  document.getElementById('ac-eng-pct').textContent    = quizPct + '%';
+  document.getElementById('ac-eng-bar').style.width    = quizPct + '%';
+
+  // ── Grafico barre ──
+  const chartTitles = { 7:'📅 Accessi per giorno', 30:'📅 Accessi per giorno', 90:'📅 Accessi per settimana', 365:'📅 Accessi per mese' };
+  document.getElementById('ac-chart-title').textContent = chartTitles[days] || '📅 Accessi';
+
+  // Mostra solo un sottoinsieme di bucket nel grafico se troppi
+  const visibleBuckets = days <= 30 ? buckets : buckets.slice(-13);
+  const maxVal = Math.max(...visibleBuckets.map(b => (byBucket[b.key]?.pwa||0)+(byBucket[b.key]?.browser||0)), 1);
+
+  document.getElementById('ac-chart-bars').innerHTML = visibleBuckets.map(b => {
+    const pwa = byBucket[b.key]?.pwa || 0;
+    const br  = byBucket[b.key]?.browser || 0;
+    const qz  = byBucket[b.key]?.quiz || 0;
+    const tot = pwa + br;
+    const hTot  = Math.max(Math.round(tot/maxVal*100), tot>0?4:1);
+    const hPwa  = tot > 0 ? Math.round(pwa/tot*hTot) : 0;
+    const hBr   = hTot - hPwa;
+    const isOggi = b.end === oggi || b.start === oggi;
+    const hQz = maxVal > 0 ? Math.max(Math.round(qz/maxVal*100), qz>0?2:0) : 0;
+    return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;height:100%;justify-content:flex-end;" title="${b.start}${b.start!==b.end?' – '+b.end:''}: ${tot} accessi, ${qz} quiz">
+      <div style="width:100%;display:flex;flex-direction:column;justify-content:flex-end;height:${hTot}%;">
+        <div style="height:${Math.round(hBr/hTot*100)||0}%;background:${isOggi?'rgba(245,158,11,0.8)':'rgba(245,158,11,0.4)'};"></div>
+        <div style="height:${Math.round(hPwa/hTot*100)||0}%;background:${isOggi?'rgba(96,165,250,0.9)':'rgba(96,165,250,0.5)'};border-radius:2px 2px 0 0;"></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('ac-chart-labels').innerHTML = visibleBuckets.map((b,i) => {
+    const isOggi = b.end === oggi;
+    const showLabel = visibleBuckets.length <= 14 || i % Math.ceil(visibleBuckets.length/10) === 0 || isOggi;
+    return `<div style="flex:1;text-align:center;font-size:0.58rem;color:${isOggi?'var(--text)':'var(--muted)'};">${showLabel?b.label:''}</div>`;
+  }).join('');
+
+  // ── Tabella dettaglio ──
+  const splitTitles = { 7:'📊 Dettaglio per giorno', 30:'📊 Dettaglio per giorno', 90:'📊 Dettaglio per settimana', 365:'📊 Dettaglio per mese' };
+  document.getElementById('ac-split-title').textContent = splitTitles[days] || '📊 Dettaglio';
+
+  const detailBuckets = [...buckets].reverse(); // più recenti prima
+  document.getElementById('ac-chart-split').innerHTML = detailBuckets.map(b => {
+    const pwa = byBucket[b.key]?.pwa || 0;
+    const br  = byBucket[b.key]?.browser || 0;
+    const qz  = byBucket[b.key]?.quiz || 0;
+    const tot = pwa + br;
+    const pwaW = tot > 0 ? Math.round(pwa/tot*100) : 0;
+    const qzPct = tot > 0 ? Math.round(qz/tot*100) : 0;
+    const isOggi = b.end === oggi;
+    return `<div style="display:flex;align-items:center;gap:0.5rem;font-size:0.75rem;padding:0.3rem 0;border-bottom:1px solid var(--border);">
+      <div style="width:52px;color:${isOggi?'var(--text)':'var(--muted)'};flex-shrink:0;font-weight:${isOggi?700:400}">${b.label}</div>
+      <div style="flex:1;height:12px;background:var(--border);border-radius:99px;overflow:hidden;display:flex;">
+        <div style="width:${pwaW}%;background:#60a5fa;"></div>
+        <div style="width:${100-pwaW}%;background:#f59e0b;opacity:0.55;"></div>
+      </div>
+      <div style="width:28px;text-align:center;color:#22c55e;font-size:0.68rem;" title="Quiz">${qz>0?qzPct+'%':''}</div>
+      <div style="width:70px;text-align:right;color:var(--muted);">
+        <span style="color:#60a5fa">${pwa}</span><span style="color:var(--muted);"> / </span><span style="color:#f59e0b">${br}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  // ── Overview KPI ──
+  const oggi2 = new Date().toISOString().split('T')[0];
+  const oggiAc = _acCache.filter(u => u.ls === oggi2).length;
+  const oggiQz = _acCache.filter(u => u.lp === oggi2).length;
+  const oggiPwaN = _acCache.filter(u => u.ls === oggi2 && u.at === 'pwa').length;
+  document.getElementById('ov-accessi-oggi').textContent     = oggiAc;
+  document.getElementById('ov-accessi-oggi-sub').textContent = 'utenti unici oggi';
+  document.getElementById('ov-accessi-pwa').textContent      = pwaBar + '%';
+  document.getElementById('ov-accessi-pwa-sub').textContent  = pwaCount + ' su ' + totPwaBr + ' ('+pl+')';
+  document.getElementById('ov-accessi-quiz-pct').textContent = quizPct + '%';
+}
 // ── UTENTI (Firebase) ─────────────────────────────────────
 window.loadUtenti = async function() {
   try {
