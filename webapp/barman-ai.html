@@ -842,7 +842,12 @@ var MIXOLOGY_RULES = '\n\n=== REGOLE TECNICHE OBBLIGATORIE (MIXOLOGY AVANZATA) =
 'REGOLA FORMATTAZIONE PREPARAZIONI: per ogni prep homemade in PREPARAZIONI, se la procedura ha 3 o più passaggi distinti (es. macerazione, scaldatura, filtraggio, conservazione) presentala come lista numerata con "1.", "2.", "3." e vai a capo tra uno step e l\'altro. Se la procedura è semplice (1-2 passaggi) mantieni la prosa. La numerazione deve aiutare il bartender a seguire la preparazione al banco senza rileggere.\n\n'+
 'REGOLA GARNISH NON STANDARD: se il garnish richiede una preparazione (disidratazione, fermentazione, candito, essiccato, dust, foglia stampata, ecc.) la preparazione va riportata in PREPARAZIONI come le altre prep.\n\n'+
 'REGOLA NOMI DRINK (cruciale per il branding): il nome del drink deve essere EVOCATIVO, AUTONOMO e MEMORABILE — non descrittivo. Un nome forte vende il drink da solo. Ispirati a: immagini poetiche (MOONRISE, GOLDEN HOUR, EMBER), luoghi reali o inventati (HAVANA NIGHTS, LISBOA, MONTEROSSO), personaggi mitologici o storici (ORFEO, PENELOPE, GIANO), parole singole di forte carattere (GRAVITY, VELVET, MIRAGE, DYNASTY), composizioni di 2-3 parole (SILK ROAD, PAPER MOON, LAST WORD). Lunghezza ideale 1-3 parole. VIETATO: nomi che citano direttamente l\'ingrediente principale ("Fragola Sour", "Glicine Highball" → NO), aggettivi sensoriali banali ("Fresh Summer", "Winter Kiss", "Spring Breeze" → NO), nomi di classici già codificati (Negroni, Martini, Daiquiri, Manhattan, ecc. → NO), marchi registrati, titoli di libri o film protetti da copyright. Il nome deve poter vivere autonomo nel menu di un bar di alto livello — un cliente deve poterlo ordinare solo avendolo letto.\n\n'+
-'REGOLA BILANCIAMENTO: rispetta le proporzioni canoniche per categoria di drink (sour, spirit-forward, highball, tiki, ecc.). Ogni ricetta deve essere tecnicamente eseguibile al primo colpo da un bartender professionista.';
+'REGOLA BILANCIAMENTO: rispetta le proporzioni canoniche per categoria di drink (sour, spirit-forward, highball, tiki, ecc.). Ogni ricetta deve essere tecnicamente eseguibile al primo colpo da un bartender professionista.\n\n'+
+'REGOLA BICCHIERI (obbligatoria — nessuna eccezione): usa ESCLUSIVAMENTE questi 3 nomi di bicchiere, senza varianti:\n'+
+'• Coppetta — per tutti i drink serviti in coppa (martini, daiquiri, margarita, sour senza ghiaccio, ecc.)\n'+
+'• Tumbler basso — per drink on the rocks, spirit-forward e short drinks (negroni, old fashioned, boulevardier, smash, ecc.)\n'+
+'• Highball — per longdrink e drink con top (gin tonic, mojito, paloma, mule, soda, spritz, ecc.)\n'+
+'VIETATO usare: coupette, Nick & Nora, rocks glass, lowball, Collins, flute, stemless, tumbler alto, o qualsiasi altro nome diverso dai 3 sopra. Se il drink è idealmente servito in un bicchiere diverso, scegli il più vicino tra i 3 e specifica la tecnica nel **Bicchiere:** field (es. **Bicchiere:** Highball con ghiaccio pilé).';
 
 // ─── STRUTTURA OUTPUT COMUNE PER SINGOLO DRINK ────────────────────
 // Riutilizzata nei 4 prompt per garantire consistenza di formato.
@@ -851,7 +856,7 @@ var DRINK_STRUCTURE_BASE = '## NOME DRINK\n'+
 '## RICETTA\n'+
 '- dose ml Ingrediente (lista completa con dosi in ml)\n'+
 '**Tecnica:** descrizione precisa\n'+
-'**Bicchiere:** specificare\n'+
+'**Bicchiere:** Coppetta / Tumbler basso / Highball (usa SOLO uno di questi 3 nomi)\n'+
 '**Garnish:** specificare con tecnica di preparazione se non standard\n'+
 '## PREPARAZIONI\n'+
 'Per OGNI preparazione homemade citata nella ricetta, scrivi: **Nome prep:** procedimento completo con pesi in grammi, tempi, metodo. Ometti l\'intera sezione SOLO se la ricetta non contiene nessuna prep homemade.\n'+
@@ -941,7 +946,7 @@ var PROMPTS = {
       '## RICETTA\n'+
       '- dose ml Ingrediente (lista completa con dosi in ml)\n'+
       '**Tecnica:** descrizione precisa\n'+
-      '**Bicchiere:** specificare\n'+
+      '**Bicchiere:** Coppetta / Tumbler basso / Highball (usa SOLO uno di questi 3 nomi)\n'+
       '**Garnish:** specificare con tecnica se non standard\n'+
       '## PREPARAZIONI\n'+
       'Per OGNI preparazione homemade citata nella ricetta, scrivi: **Nome prep:** procedimento completo con pesi in grammi, tempi, metodo. Per ASSONANZA ometti sempre questa sezione. Per il secondo drink ometti solo se non ci sono prep homemade.\n'+
@@ -984,7 +989,7 @@ var PROMPTS = {
       '## RICETTA\n'+
       '- dose ml Ingrediente (lista completa con dosi in ml)\n'+
       '**Tecnica:** descrizione precisa\n'+
-      '**Bicchiere:** specificare\n'+
+      '**Bicchiere:** Coppetta / Tumbler basso / Highball (usa SOLO uno di questi 3 nomi)\n'+
       '**Garnish:** specificare con tecnica se non standard\n'+
       '## PREPARAZIONI\n'+
       'Per OGNI preparazione homemade citata nella ricetta, scrivi: **Nome prep:** procedimento completo con pesi in grammi, tempi, metodo.\n'+
