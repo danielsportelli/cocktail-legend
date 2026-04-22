@@ -837,11 +837,12 @@ async function loadAccessi() {
   renderAccessi(7); // default 7 giorni
 }
 
-function setAcPeriod(btn, days) {
+window.setAcPeriod = function(btn, days) {
   document.querySelectorAll('.ac-period-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  if (_acCache) renderAccessi(days);
-}
+  if (_acCache !== null) renderAccessi(days);
+  else loadAccessi().then(() => renderAccessi(days));
+};
 
 function renderAccessi(days) {
   const oggi = new Date().toISOString().split('T')[0];
