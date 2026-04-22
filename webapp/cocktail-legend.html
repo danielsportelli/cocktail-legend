@@ -8278,11 +8278,12 @@ function showInstallPWAModal() {
         +'<div style="display:flex;justify-content:space-between;gap:.35rem;margin-bottom:1rem;">';
       REF_BADGES.forEach(function(b){
         var unlocked = refCount>=b.num;
+        var bgStyle = unlocked
+          ? 'background:rgba('+hexToRgb(b.color)+',0.12);border:2px solid '+b.color+';'
+          : 'background:rgba('+hexToRgb(b.color)+',0.04);border:1.5px solid '+b.color+';opacity:.28;';
         refHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;flex:1;">'
-          +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'
-          +(unlocked?'background:rgba('+hexToRgb(b.color)+',0.12);border:2px solid '+b.color+";':" +
-            "'background:rgba('"+hexToRgb(b.color)+"',0.04);border:1.5px solid '"+b.color+"';opacity:.28;")
-          +'">'+megaphoneSvg(b.color,18)+'</div>'
+          +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'+bgStyle+'">'
+          +megaphoneSvg(b.color,18)+'</div>'
           +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+b.color+';opacity:'+(unlocked?'1':'.3')+';">'+b.label+'</span>'
           +'</div>';
       });
