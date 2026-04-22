@@ -3378,6 +3378,8 @@ function mdToHtml(md){
     if (typeof _applyBarsTop === 'function') {
       _applyBarsTop(typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
     }
+    // Inizializza banner dopo login (nel caso non fosse già attivo)
+    if (typeof _initBanner === 'function') { _initBanner(); }
   }
 
   // Precompila email da parametro URL (es. dopo reset password)
@@ -4243,7 +4245,9 @@ function updateAllCounts() {
 
 // ── BANNER COMUNICAZIONI (real-time da Firebase) ────────
 // Non richiede autenticazione — si avvia appena Firebase è disponibile
+var _bannerSnapshotActive = false;
 function _initBanner() {
+  if(_bannerSnapshotActive) return true; // già attivo, non duplicare
   var fn = window._fbFunctions;
   var db = window._fbDb;
   if(!fn || !db) return false;
@@ -4253,6 +4257,7 @@ function _initBanner() {
   var bannerEl = document.getElementById('cl-banner');
   var bannerTxt = document.getElementById('cl-banner-text');
   if(!bannerEl || !bannerTxt) return false;
+  _bannerSnapshotActive = true;
   onSnapshot(docFn(db, 'config', 'banner'), function(snap){
     if(!snap || !snap.exists()) {
       bannerEl.classList.remove('active');
