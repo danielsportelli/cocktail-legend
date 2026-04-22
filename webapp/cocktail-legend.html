@@ -4246,6 +4246,7 @@ function updateAllCounts() {
 // ── BANNER COMUNICAZIONI (real-time da Firebase) ────────
 // Non richiede autenticazione — si avvia appena Firebase è disponibile
 var _bannerSnapshotActive = false;
+var _bannerUnsubscribe = null;
 function _initBanner() {
   if(_bannerSnapshotActive) return true; // già attivo, non duplicare
   var fn = window._fbFunctions;
@@ -4258,7 +4259,7 @@ function _initBanner() {
   var bannerTxt = document.getElementById('cl-banner-text');
   if(!bannerEl || !bannerTxt) return false;
   _bannerSnapshotActive = true;
-  onSnapshot(docFn(db, 'config', 'banner'), function(snap){
+  _bannerUnsubscribe = onSnapshot(docFn(db, 'config', 'banner'), function(snap){
     if(!snap || !snap.exists()) {
       bannerEl.classList.remove('active');
       return;
@@ -4274,27 +4275,31 @@ function _initBanner() {
     } else {
       bannerEl.classList.remove('active');
     }
-  }, function(e){ console.warn('banner snapshot err', e); });
+  }, function(e){
+    // onSnapshot fallito (es. permessi Firestore) — reset flag e riprova dopo login
+    console.warn('banner snapshot err:', e.code || e);
+    _bannerSnapshotActive = false;
+    if(_bannerUnsubscribe) { try{ _bannerUnsubscribe(); }catch(_){} _bannerUnsubscribe = null; }
+  });
   return true;
 }
-// Prova subito, poi retry con polling se Firebase non ancora pronto
+// Prova subito, poi retry su fb-auth-ready (che scatta ad ogni cambio auth)
 (function(){
-  var _bannerInit = false;
+  // _tryBanner senza flag bloccante: se _initBanner fallisce per permessi,
+  // _bannerSnapshotActive viene resettato dall'error handler e si riprova
   function _tryBanner(){
-    if(_bannerInit) return;
-    if(_initBanner()){ _bannerInit = true; return; }
+    if(_bannerSnapshotActive) return;
+    _initBanner();
   }
-  _tryBanner();
-  if(!_bannerInit){
-    window.addEventListener('fb-auth-ready', function(){ _tryBanner(); }, {once: true});
-    // Fallback polling: riprova ogni 300ms per max 5 secondi
-    var _attempts = 0;
-    var _interval = setInterval(function(){
-      _attempts++;
-      _tryBanner();
-      if(_bannerInit || _attempts >= 17) clearInterval(_interval);
-    }, 300);
-  }
+  // Retry su ogni evento fb-auth-ready (login, logout, cambio utente)
+  window.addEventListener('fb-auth-ready', _tryBanner);
+  // Polling iniziale finché firebase-init.js non ha settato _fbDb (defer)
+  var _attempts = 0;
+  var _interval = setInterval(function(){
+    _attempts++;
+    _tryBanner();
+    if(_bannerSnapshotActive || _attempts >= 30) clearInterval(_interval);
+  }, 200);
 })();
 
 // ── SCROLL HIDE/SHOW HEADER ─────────────────────────
