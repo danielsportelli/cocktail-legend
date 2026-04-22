@@ -201,17 +201,16 @@ body::after{
 }
 .lb-ref-badge{
   display:inline-flex;align-items:center;justify-content:center;
-  width:18px;height:18px;border-radius:50%;
-  font-size:.55rem;font-weight:900;
+  width:20px;height:20px;border-radius:50%;
   margin-left:.3rem;vertical-align:middle;
-  flex-shrink:0;
+  flex-shrink:0;box-sizing:border-box;
 }
-.lb-ref-badge.connesso   {background:#3b82f6;color:#fff;}
-.lb-ref-badge.promoter   {background:#22c55e;color:#fff;}
-.lb-ref-badge.ambassador {background:#eab308;color:#0a0f1e;}
-.lb-ref-badge.influencer {background:#f97316;color:#fff;}
-.lb-ref-badge.leader     {background:#ef4444;color:#fff;}
-.lb-ref-badge.icon       {background:#a855f7;color:#fff;}
+.lb-ref-badge.connesso   {background:rgba(59,130,246,0.15);border:1.5px solid #3b82f6;}
+.lb-ref-badge.promoter   {background:rgba(34,197,94,0.15);border:1.5px solid #22c55e;}
+.lb-ref-badge.ambassador {background:rgba(234,179,8,0.15);border:1.5px solid #eab308;}
+.lb-ref-badge.influencer {background:rgba(249,115,22,0.15);border:1.5px solid #f97316;}
+.lb-ref-badge.leader     {background:rgba(239,68,68,0.15);border:1.5px solid #ef4444;}
+.lb-ref-badge.icon       {background:rgba(168,85,247,0.15);border:1.5px solid #a855f7;}
 
 /* Riga "Tu" sticky sotto la classifica */
 .lb-sticky-me{
@@ -1055,9 +1054,25 @@ function calcStreakBadgeKey(streak) {
   }
   return key;
 }
+function megaphoneSvg(color, size) {
+  size = size || 12;
+  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">'
+    +'<path d="M11 5L6 9H2v6h4l5 4V5z" fill="'+color+'" fill-opacity="0.3"/>'
+    +'<path d="M11 5L6 9H2v6h4l5 4V5z"/>'
+    +'<path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>'
+    +'<path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>'
+    +'</svg>';
+}
+
+const BADGE_COLORS = {
+  connesso:'#3b82f6', promoter:'#22c55e', ambassador:'#eab308',
+  influencer:'#f97316', leader:'#ef4444', icon:'#a855f7'
+};
+
 function badgeHtml(badge) {
   if (!badge || !BADGE_NUMS[badge]) return '';
-  return `<span class="lb-ref-badge ${badge}" title="Referral: ${BADGE_NUMS[badge]} invitati">${BADGE_NUMS[badge]}</span>`;
+  var color = BADGE_COLORS[badge] || '#94a3b8';
+  return '<span class="lb-ref-badge '+badge+'" title="Referral: '+BADGE_NUMS[badge]+' invitati">'+megaphoneSvg(color, 11)+'</span>';
 }
 
 // Badge composito: referral + streak + correttezza
