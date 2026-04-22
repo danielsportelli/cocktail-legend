@@ -250,12 +250,19 @@ exports.onNewUserReferral = onDocumentCreated(
       const oldEarned = (inviterData.referral && inviterData.referral.earnedCredits) || 0;
       const oldReferralCredits = (inviterData.aiUsage && inviterData.aiUsage.referralCredits) || 0;
 
-      // ── Rate limit: max 5 referral per giorno ──
+      // ── Rate limit: max 5 referral per giorno — eccesso va in coda ──
       const todayStr = oggi_roma();
       const dailyDate = (inviterData.referral && inviterData.referral.dailyDate) || '';
       const dailyCount = (inviterData.referral && inviterData.referral.dailyCount) || 0;
       if (dailyDate === todayStr && dailyCount >= 5) {
-        console.log('Rate limit referral — invitante ha già 5 referral oggi. Skip.');
+        // Limite giornaliero raggiunto — salva in coda per essere processato domani
+        await db.collection('referral_queue').add({
+          inviterCode: refCode,
+          newUserId: event.params.userId,
+          createdAt: todayStr,
+          processed: false,
+        });
+        console.log('Rate limit referral — referral messo in coda per domani.');
         return null;
       }
       const newDailyCount = dailyDate === todayStr ? dailyCount + 1 : 1;
@@ -297,5 +304,109 @@ exports.onNewUserReferral = onDocumentCreated(
       console.error("Errore onNewUserReferral:", err);
       return null;
     }
+  }
+);
+
+// ═══════════════════════════════════════════════════
+// PROCESSA CODA REFERRAL — ogni notte alle 03:00 (Roma)
+// Elabora i referral in eccesso messi in coda il giorno prima
+// ═══════════════════════════════════════════════════
+exports.processReferralQueue = onSchedule(
+  {
+    schedule: "0 3 * * *",
+    timeZone: "Europe/Rome",
+    region: "europe-west1",
+  },
+  async () => {
+    const db = getFirestore();
+    const todayStr = oggi_roma();
+
+    // Prendi tutti i referral in coda non ancora processati
+    const queueSnap = await db.collection('referral_queue')
+      .where('processed', '==', false)
+      .get();
+
+    if (queueSnap.empty) {
+      console.log('Coda referral vuota — nulla da processare.');
+      return;
+    }
+
+    console.log(`Referral in coda da processare: ${queueSnap.size}`);
+
+    for (const qDoc of queueSnap.docs) {
+      const q = qDoc.data();
+      const refCode = q.inviterCode;
+
+      try {
+        // Trova l'invitante
+        const snap = await db.collection('users')
+          .where('referral.code', '==', refCode)
+          .limit(1)
+          .get();
+
+        if (snap.empty) {
+          console.log(`Codice referral non trovato in coda: ${refCode}`);
+          await qDoc.ref.update({ processed: true, error: 'inviter_not_found' });
+          continue;
+        }
+
+        const inviterDoc = snap.docs[0];
+        const inviterData = inviterDoc.data();
+        const inviterRef = inviterDoc.ref;
+
+        const oldCount = (inviterData.referral && inviterData.referral.count) || 0;
+        const newCount = oldCount + 1;
+        const oldBadge = (inviterData.referral && inviterData.referral.badge) || null;
+        const oldEarned = (inviterData.referral && inviterData.referral.earnedCredits) || 0;
+        const oldReferralCredits = (inviterData.aiUsage && inviterData.aiUsage.referralCredits) || 0;
+
+        // Controlla rate limit anche oggi (max 5/giorno)
+        const dailyDate = (inviterData.referral && inviterData.referral.dailyDate) || '';
+        const dailyCount = (inviterData.referral && inviterData.referral.dailyCount) || 0;
+        if (dailyDate === todayStr && dailyCount >= 5) {
+          // Ancora limite raggiunto oggi — rimanda a domani (lascia in coda)
+          console.log(`Rate limit ancora raggiunto oggi per ${refCode} — rimane in coda.`);
+          continue;
+        }
+        const newDailyCount = dailyDate === todayStr ? dailyCount + 1 : 1;
+
+        // Calcola badge e crediti
+        let newBadge = oldBadge;
+        let creditsToAdd = 0;
+        for (const b of BADGE_THRESHOLDS) {
+          if (newCount >= b.num && oldCount < b.num) {
+            newBadge = b.key;
+            creditsToAdd += b.credits;
+          }
+        }
+
+        // Aggiorna invitante
+        await inviterRef.set({
+          referral: {
+            code: inviterData.referral ? inviterData.referral.code : refCode,
+            count: newCount,
+            badge: newBadge,
+            earnedCredits: oldEarned + creditsToAdd,
+            dailyDate: todayStr,
+            dailyCount: newDailyCount,
+          },
+          aiUsage: {
+            monthlyCount: (inviterData.aiUsage && inviterData.aiUsage.monthlyCount) || 0,
+            extraCredits: (inviterData.aiUsage && inviterData.aiUsage.extraCredits) || 0,
+            referralCredits: oldReferralCredits + creditsToAdd,
+            periodStart: (inviterData.aiUsage && inviterData.aiUsage.periodStart) || new Date().toISOString().split("T")[0],
+          }
+        }, { merge: true });
+
+        // Marca come processato
+        await qDoc.ref.update({ processed: true, processedAt: todayStr });
+        console.log(`Referral coda processato — invitante: ${inviterDoc.id}, count: ${newCount}, badge: ${newBadge}`);
+
+      } catch (err) {
+        console.error(`Errore processando referral in coda ${qDoc.id}:`, err.message);
+      }
+    }
+
+    console.log('processReferralQueue completato.');
   }
 );
