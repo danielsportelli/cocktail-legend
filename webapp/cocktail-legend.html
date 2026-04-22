@@ -4272,10 +4272,25 @@ function _initBanner() {
   }, function(e){ console.warn('banner snapshot err', e); });
   return true;
 }
-// Prova subito, poi fallback su fb-auth-ready se Firebase non ancora pronto
-if(!_initBanner()) {
-  window.addEventListener('fb-auth-ready', _initBanner, {once: true});
-}
+// Prova subito, poi retry con polling se Firebase non ancora pronto
+(function(){
+  var _bannerInit = false;
+  function _tryBanner(){
+    if(_bannerInit) return;
+    if(_initBanner()){ _bannerInit = true; return; }
+  }
+  _tryBanner();
+  if(!_bannerInit){
+    window.addEventListener('fb-auth-ready', function(){ _tryBanner(); }, {once: true});
+    // Fallback polling: riprova ogni 300ms per max 5 secondi
+    var _attempts = 0;
+    var _interval = setInterval(function(){
+      _attempts++;
+      _tryBanner();
+      if(_bannerInit || _attempts >= 17) clearInterval(_interval);
+    }, 300);
+  }
+})();
 
 // ── SCROLL HIDE/SHOW HEADER ─────────────────────────
 // Strategia: pills-bar e filter-bar seguono l'header pixel per pixel via rAF loop.
@@ -8315,15 +8330,17 @@ function showInstallPWAModal() {
           +'Gioca al quiz ogni giorno senza interruzioni. Il badge si conquista una volta e non si perde, anche se rompi lo streak.'
         +'</div>'
         +'<div style="margin-bottom:.65rem;font-size:.65rem;color:var(--dim);">Streak attuale: <strong style="color:var(--txt);">'+curStreak+' giorni</strong></div>'
-        +'<div style="display:flex;justify-content:space-between;gap:.3rem;">';
+        +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;">';
       STREAK_BADGES.forEach(function(b){
         var _skeys=['s7','s14','s30','s90','s180','s365'];
         var unlocked = effectiveStreakKey && _skeys.indexOf(effectiveStreakKey) >= _skeys.indexOf(b.key);
-        streakHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;flex:1;">'
+        streakHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:.4rem .2rem;">'
           +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'
-          +(unlocked?'background:rgba('+hexToRgb(b.color)+',0.12);border:2px solid '+b.color+';':'background:var(--surf2);border:1.5px solid rgba(100,116,139,0.2);opacity:.10;')
-          +'">'+flameSvg(unlocked?b.color:'#475569', 24)+'</div>'
-          +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+(unlocked?b.color:'var(--dim)')+';">'+b.label+'</span>'
+          +(unlocked
+            ?'background:rgba('+hexToRgb(b.color)+',0.12);border:2px solid '+b.color+';'
+            :'background:rgba('+hexToRgb(b.color)+',0.04);border:1.5px solid '+b.color+';opacity:.10;')
+          +'">'+flameSvg(b.color, 24)+'</div>'
+          +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';">'+ b.label+'</span>'
           +'</div>';
       });
       streakHtml+='</div>'
