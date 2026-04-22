@@ -204,12 +204,12 @@ exports.cleanUnverifiedUsers = onSchedule(
 // Incrementa il contatore di chi ha invitato e assegna badge + crediti
 // ═══════════════════════════════════════════════════
 const BADGE_THRESHOLDS = [
-  { key: 'starter',    num: 5,   credits: 10  },
-  { key: 'junior',     num: 10,  credits: 20  },
-  { key: 'senior',     num: 25,  credits: 50 },
-  { key: 'ambassador', num: 50,  credits: 50 },
-  { key: 'master',     num: 75,  credits: 175 },
-  { key: 'legend',     num: 100, credits: 250 },
+  { key: 'connesso',   num: 5,   credits: 10  },
+  { key: 'promoter',   num: 10,  credits: 20  },
+  { key: 'ambassador', num: 25,  credits: 50  },
+  { key: 'influencer', num: 50,  credits: 100 },
+  { key: 'leader',     num: 75,  credits: 175 },
+  { key: 'icon',       num: 100, credits: 250 },
 ];
 
 exports.onNewUserReferral = onDocumentCreated(

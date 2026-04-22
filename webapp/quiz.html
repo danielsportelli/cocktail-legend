@@ -206,12 +206,12 @@ body::after{
   margin-left:.3rem;vertical-align:middle;
   flex-shrink:0;
 }
-.lb-ref-badge.starter    {background:#3b82f6;color:#fff;}
-.lb-ref-badge.junior     {background:#22c55e;color:#fff;}
-.lb-ref-badge.senior     {background:#eab308;color:#0a0f1e;}
-.lb-ref-badge.ambassador {background:#f97316;color:#fff;}
-.lb-ref-badge.master     {background:#ef4444;color:#fff;}
-.lb-ref-badge.legend     {background:#a855f7;color:#fff;}
+.lb-ref-badge.connesso   {background:#3b82f6;color:#fff;}
+.lb-ref-badge.promoter   {background:#22c55e;color:#fff;}
+.lb-ref-badge.ambassador {background:#eab308;color:#0a0f1e;}
+.lb-ref-badge.influencer {background:#f97316;color:#fff;}
+.lb-ref-badge.leader     {background:#ef4444;color:#fff;}
+.lb-ref-badge.icon       {background:#a855f7;color:#fff;}
 
 /* Riga "Tu" sticky sotto la classifica */
 .lb-sticky-me{
@@ -930,7 +930,7 @@ function escHtml(s) {
 }
 
 // Badge referral in classifica
-const BADGE_NUMS = { starter:5, junior:10, senior:25, ambassador:50, master:75, legend:100 };
+const BADGE_NUMS = { connesso:5, promoter:10, ambassador:25, influencer:50, leader:75, icon:100 };
 
 // ── Colori universali ──────────────────────────────
 const CLR = {
@@ -941,27 +941,35 @@ const CLR = {
 
 // ── STREAK BADGE CONFIG ────────────────────────────
 const STREAK_BADGES = [
-  { key:'s365', days:365, label:'1 anno',    color:CLR.viola   },
-  { key:'s180', days:180, label:'6 mesi',    color:CLR.rosso   },
-  { key:'s90',  days:90,  label:'3 mesi',    color:CLR.arancio },
-  { key:'s30',  days:30,  label:'1 mese',    color:CLR.giallo  },
-  { key:'s14',  days:14,  label:'14 giorni', color:CLR.verde   },
-  { key:'s7',   days:7,   label:'7 giorni',  color:CLR.blu     },
+  { key:'s365', days:365, label:'Leggendario',   color:CLR.viola   },
+  { key:'s180', days:180, label:'Dominante',      color:CLR.rosso   },
+  { key:'s90',  days:90,  label:'Inarrestabile',  color:CLR.arancio },
+  { key:'s30',  days:30,  label:'Determinato',    color:CLR.giallo  },
+  { key:'s14',  days:14,  label:'Costante',       color:CLR.verde   },
+  { key:'s7',   days:7,   label:'Acceso',         color:CLR.blu     },
 ];
 
 // ── CORRETTEZZA BADGE CONFIG ───────────────────────
 const PCT_BADGES = [
-  { key:'legend',   min:91,  label:'Legend',            symbol:'rooster', color:CLR.platino },
-  { key:'barman',   min:85,  label:'Bar Manager',       symbol:'crown',   color:CLR.oro     },
-  { key:'mix',      min:75,  label:'Mixologist',        symbol:'star3',   color:CLR.viola   },
-  { key:'hbar',     min:65,  label:'Head Bartender',    symbol:'star2',   color:CLR.rosso   },
-  { key:'bar',      min:55,  label:'Bartender',         symbol:'star1',   color:CLR.arancio },
-  { key:'bast',     min:45,  label:'Bartender Ass.',    symbol:'chev3',   color:CLR.giallo  },
-  { key:'back',     min:35,  label:'Barback',           symbol:'chev2',   color:CLR.verde   },
-  { key:'stag',     min:25,  label:'Stagista',          symbol:'chev1',   color:CLR.blu     },
+  { key:'perfetto',  min:97, label:'Perfetto',  color:CLR.viola   },
+  { key:'elite',     min:92, label:'Elite',     color:CLR.rosso   },
+  { key:'avanzato',  min:85, label:'Avanzato',  color:CLR.arancio },
+  { key:'esperto',   min:75, label:'Esperto',   color:CLR.giallo  },
+  { key:'preciso',   min:65, label:'Preciso',   color:CLR.verde   },
+  { key:'novizio',   min:50, label:'Novizio',   color:CLR.blu     },
 ];
 
 // ── SVG FIAMMA (streak) ────────────────────────────
+function starSingleSvg(color, label) {
+  var size=12, cx=6, cy=6, r1=5.5, r2=2.2, pts='';
+  for(var j=0;j<10;j++){
+    var r=j%2===0?r1:r2, a=(j*36-90)*Math.PI/180;
+    pts+=(cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1)+' ';
+  }
+  return '<span class="lb-pct-badge" style="color:'+color+';border-color:'+color+';" title="'+label+'">'
+    +'<svg width="10" height="10" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="'+pts.trim()+'" fill="'+color+'"/></svg>'
+    +'</span>';
+}
 function flameSvg(color, label) {
   return '<span class="lb-streak-badge" style="color:'+color+';border-color:'+color+';" title="Streak: '+label+'">'
     +'<svg width="10" height="12" viewBox="0 0 14 18" xmlns="http://www.w3.org/2000/svg">'
@@ -1020,19 +1028,10 @@ function roosterSvg(label) {
 
 // ── BADGE CORRETTEZZA SVG ─────────────────────────
 function pctBadgeSvg(pct, tot) {
-  if(!tot || tot < 1 || pct < 25) return '';
+  if(!tot || tot < 1 || pct < 50) return '';
   for(var i=0;i<PCT_BADGES.length;i++){
     var b = PCT_BADGES[i];
-    if(pct >= b.min){
-      if(b.symbol==='rooster')  return roosterSvg(b.label);
-      if(b.symbol==='crown')    return crownSvg(b.color, b.label);
-      if(b.symbol==='star3')    return starSvg(3, b.color, b.label);
-      if(b.symbol==='star2')    return starSvg(2, b.color, b.label);
-      if(b.symbol==='star1')    return starSvg(1, b.color, b.label);
-      if(b.symbol==='chev3')    return chevronSvg(3, b.color, b.label);
-      if(b.symbol==='chev2')    return chevronSvg(2, b.color, b.label);
-      if(b.symbol==='chev1')    return chevronSvg(1, b.color, b.label);
-    }
+    if(pct >= b.min) return starSingleSvg(b.color, b.label);
   }
   return '';
 }

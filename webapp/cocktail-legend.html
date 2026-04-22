@@ -3746,11 +3746,12 @@ window._isRegistering = false;
             // ── Traccia referral se presente ──────────────
             if(_refCode) {
               var BADGE_THRESHOLDS = [
-                { key:'starter',    num:5,   credits:10  },
-                { key:'junior',     num:10,  credits:20  },
-                { key:'senior',     num:25,  credits:50 },
-                { key:'ambassador', num:50,  credits:50 },
-                { key:'legend',     num:100, credits:250 }
+                { key:'connesso',   num:5,   credits:10  },
+                { key:'promoter',   num:10,  credits:20  },
+                { key:'ambassador', num:25,  credits:50  },
+                { key:'influencer', num:50,  credits:100 },
+                { key:'leader',     num:75,  credits:175 },
+                { key:'icon',       num:100, credits:250 }
               ];
               // Trova l'utente con quel codice referral
               fns.getDocs(fns.query(
@@ -8095,35 +8096,37 @@ function showInstallPWAModal() {
     };
 
     var REF_BADGES = [
-      { key:'starter',    num:5,   label:'Starter',    color:CLR.blu,     credits:10  },
-      { key:'junior',     num:10,  label:'Junior',     color:CLR.verde,   credits:20  },
-      { key:'senior',     num:25,  label:'Senior',     color:CLR.giallo,  credits:50 },
-      { key:'ambassador', num:50,  label:'Ambassador', color:CLR.arancio, credits:50 },
-      { key:'master',     num:75,  label:'Master',     color:CLR.rosso,   credits:175 },
-      { key:'legend',     num:100, label:'Legend',     color:CLR.viola,   credits:250 }
+      { key:'connesso',   num:5,   label:'Connesso',   color:CLR.blu,     credits:10  },
+      { key:'promoter',   num:10,  label:'Promoter',   color:CLR.verde,   credits:20  },
+      { key:'ambassador', num:25,  label:'Ambassador', color:CLR.giallo,  credits:50  },
+      { key:'influencer', num:50,  label:'Influencer', color:CLR.arancio, credits:100 },
+      { key:'leader',     num:75,  label:'Leader',     color:CLR.rosso,   credits:175 },
+      { key:'icon',       num:100, label:'Icon',       color:CLR.viola,   credits:250 }
     ];
 
     var STREAK_BADGES = [
-      { key:'s7',   days:7,   label:'7 giorni',  color:CLR.blu     },
-      { key:'s14',  days:14,  label:'14 giorni', color:CLR.verde   },
-      { key:'s30',  days:30,  label:'1 mese',    color:CLR.giallo  },
-      { key:'s90',  days:90,  label:'3 mesi',    color:CLR.arancio },
-      { key:'s180', days:180, label:'6 mesi',    color:CLR.rosso   },
-      { key:'s365', days:365, label:'1 anno',    color:CLR.viola   },
+      { key:'s7',   days:7,   label:'Acceso',        color:CLR.blu     },
+      { key:'s14',  days:14,  label:'Costante',       color:CLR.verde   },
+      { key:'s30',  days:30,  label:'Determinato',    color:CLR.giallo  },
+      { key:'s90',  days:90,  label:'Inarrestabile',  color:CLR.arancio },
+      { key:'s180', days:180, label:'Dominante',      color:CLR.rosso   },
+      { key:'s365', days:365, label:'Leggendario',    color:CLR.viola   },
     ];
 
     var PCT_BADGES = [
-      { min:91, label:'Legend',          symbol:'rooster', color:CLR.platino },
-      { min:85, label:'Bar Manager',     symbol:'crown',   color:CLR.oro     },
-      { min:75, label:'Mixologist',      symbol:'star3',   color:CLR.viola   },
-      { min:65, label:'Head Bartender',  symbol:'star2',   color:CLR.rosso   },
-      { min:55, label:'Bartender',       symbol:'star1',   color:CLR.arancio },
-      { min:45, label:'Bartender Ass.',  symbol:'chev3',   color:CLR.giallo  },
-      { min:35, label:'Barback',         symbol:'chev2',   color:CLR.verde   },
-      { min:25, label:'Stagista',        symbol:'chev1',   color:CLR.blu     },
+      { min:97, label:'Perfetto',  color:CLR.viola   },
+      { min:92, label:'Elite',     color:CLR.rosso   },
+      { min:85, label:'Avanzato',  color:CLR.arancio },
+      { min:75, label:'Esperto',   color:CLR.giallo  },
+      { min:65, label:'Preciso',   color:CLR.verde   },
+      { min:50, label:'Novizio',   color:CLR.blu     },
     ];
 
     // ── SVG helpers ──────────────────────────────────
+    function megaphoneSvg(color, size) {
+      size = size || 24;
+      return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">'        +'<path d="M11 5L6 9H2v6h4l5 4V5z" fill="'+color+'" fill-opacity="0.3"/>'        +'<path d="M11 5L6 9H2v6h4l5 4V5z"/>'        +'<path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>'        +'<path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>'        +'</svg>';
+    }
     function flameSvg(color, size) {
       size = size || 32;
       var s = size, h = Math.round(s*1.15);
@@ -8181,6 +8184,15 @@ function showInstallPWAModal() {
         +'<circle cx="16" cy="26" r="2.5" fill="rgba(255,255,255,0.4)"/>'
         +'</svg>';
     }
+    function starSingleSvg(color, size) {
+      size = size || 20;
+      var cx=size/2, cy=size/2, r1=size/2-1, r2=size*0.22, pts='';
+      for(var j=0;j<10;j++){
+        var r=j%2===0?r1:r2, a=(j*36-90)*Math.PI/180;
+        pts+=(cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1)+' ';
+      }
+      return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" xmlns="http://www.w3.org/2000/svg"><polygon points="'+pts.trim()+'" fill="'+color+'"/></svg>';
+    }
     function getBadgeSvg(b, sz) {
       if(b.symbol==='rooster') return roosterSvg(sz);
       if(b.symbol==='crown')   return crownSvg(b.color, sz);
@@ -8193,7 +8205,7 @@ function showInstallPWAModal() {
       return '';
     }
     function getPctBadge(pct, tot) {
-      if(!tot || tot<1 || pct<25) return null;
+      if(!tot || tot<1 || pct<50) return null;
       for(var i=0;i<PCT_BADGES.length;i++){
         if(pct>=PCT_BADGES[i].min) return PCT_BADGES[i];
       }
@@ -8240,7 +8252,7 @@ function showInstallPWAModal() {
       var curRefObj = REF_BADGES.find(function(b){return b.key===curRefBadge;}) || null;
 
       var refHtml = '<div style="'+cardStyle+'">'
-        +'<span style="'+sectionLabelStyle+'">🏆 Badge Referral</span>'
+        +'<span style="'+sectionLabelStyle+'">📣 Badge Network</span>'
         +'<div style="display:flex;align-items:flex-start;gap:.5rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.65rem .75rem;margin-bottom:1rem;font-size:.68rem;color:var(--txt2);line-height:1.5;">'
           +'<svg style="flex-shrink:0;margin-top:1px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
           +'Invita amici e colleghi bartender. Per ogni traguardo raggiungi un badge e guadagni crediti AI gratuiti, utilizzabili anche senza piano Premium.'
@@ -8259,11 +8271,12 @@ function showInstallPWAModal() {
         +'<div style="display:flex;justify-content:space-between;gap:.35rem;margin-bottom:1rem;">';
       REF_BADGES.forEach(function(b){
         var unlocked = refCount>=b.num;
-        refHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.3rem;flex:1;">'
-          +'<div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:900;'
-          +(unlocked?'background:'+b.color+';color:#fff;box-shadow:0 0 12px '+b.color+'55;':'background:var(--surf2);color:var(--dim);border:1px solid var(--brd);')
-          +'">'+b.num+'</div>'
-          +'<span style="font-size:.5rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:'+(unlocked?b.color:'var(--dim)')+';">'+b.label+'</span>'
+        refHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;flex:1;">'
+          +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'
+          +(unlocked?'background:rgba('+hexToRgb(b.color)+',0.12);border:2px solid '+b.color+";':" +
+            "'background:rgba('"+hexToRgb(b.color)+"',0.04);border:1.5px solid '"+b.color+"';opacity:.28;")
+          +'">'+megaphoneSvg(b.color,18)+'</div>'
+          +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+b.color+';opacity:'+(unlocked?'1':'.3')+';">'+b.label+'</span>'
           +'</div>';
       });
       refHtml+='</div>';
@@ -8316,15 +8329,23 @@ function showInstallPWAModal() {
           ?'<div style="font-size:.68rem;color:var(--txt2);margin-bottom:.85rem;">Risposte: <strong style="color:var(--txt);">'+tot+'</strong> · Correttezza: <strong style="color:'+(pctBadge?pctBadge.color:'var(--txt)')+';">'+pct+'%</strong>'+(pctBadge?' · <strong style="color:'+pctBadge.color+';">'+pctBadge.label+'</strong>':'')+'</div>'
           :'<div style="font-size:.68rem;color:var(--dim);margin-bottom:.85rem;">Inizia a giocare al quiz per sbloccare il tuo badge!</div>'
         )
-        +'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;">';
-      PCT_BADGES.slice().reverse().forEach(function(b){
+        +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;">'; 
+      var _pctArr = PCT_BADGES.slice().reverse();
+      _pctArr.forEach(function(b){
         var isCurrent = pctBadge && pctBadge.min===b.min;
-        pctHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.5rem .3rem;border-radius:10px;'
-          +(isCurrent?'background:rgba('+hexToRgb(b.color===CLR_platino?'226,232,240':b.color)+',0.12);border:1.5px solid '+b.color+';':'border:1.5px solid rgba(100,116,139,0.2);opacity:.3;')
-          +'">'
-          +'<div style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;filter:'+(isCurrent?'none':'grayscale(1)')+';">'+(isCurrent?getBadgeSvg(b,24):getBadgeSvg({...b,color:'#475569'},24))+'</div>'
-          +'<span style="font-size:.47rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+(isCurrent?b.color:'#475569')+';">'+b.label+'</span>'
-          +'<span style="font-size:.45rem;color:var(--dim);">'+(b.min===91?'91-100':b.min+'-'+(PCT_BADGES[PCT_BADGES.indexOf(b)-1]?PCT_BADGES[PCT_BADGES.indexOf(b)-1].min-1:100))+'%</span>'
+        var isUnlocked = pctBadge && pct>=b.min;
+        var nextB = PCT_BADGES[PCT_BADGES.indexOf(b)-1];
+        var rangeStr = b.min+'–'+(nextB?nextB.min-1:100)+'%';
+        pctHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.4rem .2rem;">'
+          +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'
+          +(isCurrent
+            ?'background:rgba('+hexToRgb(b.color)+',0.15);border:2px solid '+b.color+';'
+            :isUnlocked
+              ?'background:rgba('+hexToRgb(b.color)+',0.08);border:1.5px solid '+b.color+';opacity:.55;'
+              :'background:rgba('+hexToRgb(b.color)+',0.04);border:1.5px solid '+b.color+';opacity:.25;')
+          +'">'+starSingleSvg(b.color,20)+'</div>'
+          +'<span style="font-size:.47rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(isCurrent?'1':isUnlocked?'.55':'.3')+';">'+b.label+'</span>'
+          +'<span style="font-size:.44rem;color:var(--dim);">'+rangeStr+'</span>'
           +'</div>';
       });
       pctHtml+='</div></div>';
@@ -8346,6 +8367,15 @@ function showInstallPWAModal() {
         +'<path d="M12 1C8 7 5 12 5 17a7 7 0 0 0 14 0c0-5-3-10-7-16z" fill="'+color+'"/>'
         +'<path d="M12 9C10 12 9 15 9 18a3 3 0 0 0 6 0c0-3-1-6-3-9z" fill="rgba(255,255,255,0.3)"/>'
         +'</svg>';
+    }
+    function starSingleSvg(color, size) {
+      size = size || 20;
+      var cx=size/2, cy=size/2, r1=size/2-1, r2=size*0.22, pts='';
+      for(var j=0;j<10;j++){
+        var r=j%2===0?r1:r2, a=(j*36-90)*Math.PI/180;
+        pts+=(cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1)+' ';
+      }
+      return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" xmlns="http://www.w3.org/2000/svg"><polygon points="'+pts.trim()+'" fill="'+color+'"/></svg>';
     }
     function getBadgeSvg(b, sz) {
       if(b.symbol==='rooster'){
