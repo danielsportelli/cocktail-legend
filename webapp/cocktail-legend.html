@@ -8287,9 +8287,8 @@ function showInstallPWAModal() {
 
       var refHtml = '<div style="'+cardStyle+'">'
         +'<span style="'+sectionLabelStyle+'">📣 Badge Network</span>'
-        +'<div style="display:flex;align-items:flex-start;gap:.5rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.65rem .75rem;margin-bottom:1rem;font-size:.68rem;color:var(--txt2);line-height:1.5;">'
-          +'<svg style="flex-shrink:0;margin-top:1px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
-          +'Invita amici e colleghi bartender. Per ogni traguardo raggiungi un badge e guadagni crediti AI gratuiti, utilizzabili anche senza piano Premium.'
+        '<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
+          +'Invita colleghi bartender usando il tuo link personale. Per ogni nuovo iscritto il contatore sale e, al raggiungimento delle soglie, guadagni un badge e crediti AI gratuiti — utilizzabili anche senza piano Premium.'
         +'</div>'
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
           +'<span style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">Invitati</span>'
@@ -8311,7 +8310,8 @@ function showInstallPWAModal() {
         refHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;flex:1;">'
           +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'+bgStyle+'">'
           +megaphoneSvg(b.color,18)+'</div>'
-          +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+b.color+';opacity:'+(unlocked?'1':'.3')+';">'+b.label+'</span>'
+          +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';">'+b.label+'</span>'
+          +'<span style="font-size:.44rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +' inv.</span>'
           +'</div>';
       });
       refHtml+='</div>';
@@ -8331,19 +8331,24 @@ function showInstallPWAModal() {
           +'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>'
           +'Invita un amico'
         +'</button>'
+        +'<div style="font-size:.6rem;color:var(--dim);line-height:1.5;margin-top:.6rem;text-align:center;">'
+          +'Il link è personale. Ogni iscrizione tramite il tuo link viene conteggiata automaticamente. '
+          +'Fino a 5 iscritti al giorno vengono registrati in tempo reale — dal 6° in poi vengono conteggiati il giorno successivo.'
+        +'</div>'
         +'</div>';
 
       // ── CARD STREAK ────────────────────────────────
       var streakHtml = '<div style="'+cardStyle+'">'
         +'<span style="'+sectionLabelStyle+'">🔥 Badge Costanza Quiz</span>'
         +'<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
-          +'Gioca al quiz ogni giorno senza interruzioni. Il badge si conquista una volta e non si perde, anche se rompi lo streak.'
+          +'Gioca ogni giorno senza saltare. Ogni badge si conquista una volta sola e rimane per sempre — anche se perdi lo streak in seguito. Più a lungo vai, più raro diventa il badge.'
         +'</div>'
         +'<div style="margin-bottom:.65rem;font-size:.65rem;color:var(--dim);">Streak attuale: <strong style="color:var(--txt);">'+curStreak+' giorni</strong></div>'
         +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;">';
       STREAK_BADGES.forEach(function(b){
         var _skeys=['s7','s14','s30','s90','s180','s365'];
         var unlocked = effectiveStreakKey && _skeys.indexOf(effectiveStreakKey) >= _skeys.indexOf(b.key);
+        var _sdayLabel = b.days < 30 ? b.days+'gg' : b.days < 365 ? Math.round(b.days/30)+'mesi' : '1 anno';
         streakHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:.4rem .2rem;">'
           +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'
           +(unlocked
@@ -8351,6 +8356,7 @@ function showInstallPWAModal() {
             :'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';opacity:.10;')
           +'">'+flameSvg(b.color, 24)+'</div>'
           +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';">'+ b.label+'</span>'
+          +'<span style="font-size:.44rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+_sdayLabel+'</span>'
           +'</div>';
       });
       streakHtml+='</div>'
@@ -8360,7 +8366,7 @@ function showInstallPWAModal() {
       var pctHtml = '<div style="'+cardStyle+'">'
         +'<span style="'+sectionLabelStyle+'">⭐ Badge Precisione Quiz</span>'
         +'<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
-          +'Riflette la tua % di risposte corrette attuale. Sale e scende dinamicamente con ogni risposta.'
+          +'Fotografa la tua precisione media su tutte le risposte date. Sale quando rispondi bene, scende quando sbagli — è dinamico e cambia ad ogni partita.'
         +'</div>'
         +(tot>0
           ?'<div style="font-size:.68rem;color:var(--txt2);margin-bottom:.85rem;">Risposte: <strong style="color:var(--txt);">'+tot+'</strong> · Correttezza: <strong style="color:'+(pctBadge?pctBadge.color:'var(--txt)')+';">'+pct+'%</strong>'+(pctBadge?' · <strong style="color:'+pctBadge.color+';">'+pctBadge.label+'</strong>':'')+'</div>'
