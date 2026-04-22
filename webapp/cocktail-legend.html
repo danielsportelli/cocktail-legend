@@ -1510,14 +1510,15 @@ button, a, input, textarea, select, .tab-btn, .ai-cmd-btn, .sig-pill, .ai-pill, 
   right: 8px;
   background: var(--amber);
   color: #0d1117;
-  font-size: .55rem;
+  font-size: .62rem;
   font-weight: 800;
-  letter-spacing: .1em;
-  padding: 3px 7px;
-  border-radius: 4px;
+  letter-spacing: .08em;
+  padding: 4px 8px;
+  border-radius: 5px;
   text-transform: uppercase;
   pointer-events: none;
   z-index: 3;
+  line-height: 1;
 }
 
 /* ── Badge IBA scheda completa ── */
@@ -2516,7 +2517,7 @@ body.user-premium #sg-pdf-link > span:last-child {
         <strong style="color:var(--txt2);display:block;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.1em;">Principi chiave</strong>
         ❄️ Freddo → meno molecole aromatiche → profumo debole<br>
         🔥 Calore → aromi si liberano, ma troppo fa dominare l'alcol<br>
-        🍹 Più il distillato è complesso, più richiede temperatura elevata
+        Più il distillato è complesso, più richiede temperatura elevata
       </div>
     </div>
 
@@ -7244,7 +7245,7 @@ function showPremiumModal() {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <div style="font-size:1rem;font-weight:800;color:#f1f5f9;margin-bottom:.5rem;letter-spacing:.01em;">Disponibile a breve</div>
-        <div style="font-size:.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1.5rem;">Stiamo raccogliendo i primi utenti.<br>Quando raggiungiamo <span style="color:#f59e0b;font-weight:700;">250 iscritti</span>, il piano Premium si sblocca per tutti.</div>
+        <div style="font-size:.82rem;color:#94a3b8;line-height:1.6;margin-bottom:1.5rem;">Il piano Premium sarà disponibile a breve.<br>Ti avviseremo tramite il banner in-app non appena sarà attivo.</div>
         <button id="stripe-coming-ok" style="width:100%;padding:.72rem;background:linear-gradient(135deg,#f59e0b,#d97706);color:#0f172a;font-weight:800;font-size:.88rem;border:none;border-radius:12px;cursor:pointer;font-family:inherit;letter-spacing:.01em;">Ho capito</button>
       </div>
     `;
@@ -8051,7 +8052,7 @@ function showInstallPWAModal() {
         var refHtml = '<span style="color:'+cRef+';">'+refVal+'</span>';
 
         return '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
-          '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Crediti AI</div>'+
+          '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Riepilogo crediti AI</div>'+
           // 3 card
           '<div style="display:flex;border:1px solid var(--brd);border-radius:12px;overflow:hidden;">'+
             card('Mensili', mensiliHtml, null)+
@@ -8062,10 +8063,19 @@ function showInstallPWAModal() {
           '</div>'+
           // info rimando
           '<div style="margin-top:.65rem;display:flex;align-items:center;gap:.45rem;padding:.5rem .65rem;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.18);border-radius:9px;">'+
-            '<svg style="flex-shrink:0;" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
-            '<span style="font-size:.65rem;color:#94a3b8;line-height:1.45;">Per gestire i crediti entra nella sezione <strong style="color:#60a5fa;">Barman AI</strong> dal menù generale.</span>'+
+          '<div style="margin-top:.65rem;padding:.55rem .65rem;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.18);border-radius:9px;">'+
+            '<div style="font-size:.58rem;color:var(--dim);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.4rem;">Per gestire i crediti</div>'+
+            '<div style="display:flex;align-items:center;gap:.3rem;font-size:.7rem;color:#94a3b8;flex-wrap:wrap;">'+
+              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>'+
+              '<span>Menù</span>'+
+              '<span style="color:var(--dim);">&#8250;</span>'+
+              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+
+              '<span style="color:#60a5fa;font-weight:700;">Barman AI</span>'+
+              '<span style="color:var(--dim);">&#8250;</span>'+
+              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>'+
+              '<span>Wallet</span>'+
+            '</div>'+
           '</div>'+
-        '</div>';
       })()+
       '<div style="padding-top:1.2rem;text-align:center;">'+
         '<button id="acc-logout-btn" style="display:inline-flex;align-items:center;background:transparent;border:1px solid var(--dim);color:var(--dim);font-size:.62rem;font-weight:600;font-family:inherit;cursor:pointer;padding:.35rem .65rem;border-radius:6px;letter-spacing:.05em;text-transform:uppercase;transition:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">LOGOUT</button>'+
@@ -8321,7 +8331,7 @@ function showInstallPWAModal() {
           +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'+bgStyle+'">'
           +megaphoneSvg(b.color,18)+'</div>'
           +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';">'+b.label+'</span>'
-          +'<span style="font-size:.48rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +' inv.</span>'
+          +'<span style="font-size:.48rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +' iscritti</span>'
           +'</div>';
       });
       refHtml+='</div>';
