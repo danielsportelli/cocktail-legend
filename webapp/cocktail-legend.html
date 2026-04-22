@@ -8287,10 +8287,10 @@ function showInstallPWAModal() {
 
       var refHtml = '<div style="'+cardStyle+'">'
         +'<span style="'+sectionLabelStyle+'">📣 Badge Network</span>'
-        '<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
-          +'Invita colleghi bartender usando il tuo link personale. Per ogni nuovo iscritto il contatore sale e, al raggiungimento delle soglie, guadagni un badge e crediti AI gratuiti — utilizzabili anche senza piano Premium.'
+        +'<div style="display:flex;align-items:flex-start;gap:.5rem;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.65rem .75rem;margin-bottom:1rem;font-size:.68rem;color:var(--txt2);line-height:1.5;">'
+          +'<svg style="flex-shrink:0;margin-top:1px" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
+          +'Invita colleghi bartender con il tuo link personale. Per ogni traguardo di iscritti guadagni un badge e crediti AI gratuiti — utilizzabili anche senza piano Premium.'
         +'</div>'
-        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
           +'<span style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">Invitati</span>'
           +'<span style="font-size:.75rem;font-weight:700;color:var(--txt);">'+refCount+(nextRef?' / '+nextNum:'')+'</span>'
         +'</div>'
@@ -8301,17 +8301,17 @@ function showInstallPWAModal() {
           ?'<div style="font-size:.63rem;color:var(--dim);margin-bottom:.9rem;">Ancora <strong style="color:var(--txt);">'+(nextNum-refCount)+'</strong> per sbloccare <strong style="color:'+nextRef.color+';">'+nextRef.label+'</strong></div>'
           :'<div style="font-size:.63rem;color:var(--amber);font-weight:700;margin-bottom:.9rem;">🏆 Hai raggiunto tutti i badge referral!</div>'
         )
-        +'<div style="display:flex;justify-content:space-between;gap:.35rem;margin-bottom:1rem;">';
+        +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1rem;">';
       REF_BADGES.forEach(function(b){
         var unlocked = refCount>=b.num;
         var bgStyle = unlocked
           ? 'background:rgba(0,0,0,0.25);border:2px solid '+b.color+';'
           : 'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';opacity:.10;';
-        refHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;flex:1;">'
+        refHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:.4rem .2rem;">'
           +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'+bgStyle+'">'
           +megaphoneSvg(b.color,18)+'</div>'
           +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';">'+b.label+'</span>'
-          +'<span style="font-size:.44rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +' inv.</span>'
+          +'<span style="font-size:.48rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +' inv.</span>'
           +'</div>';
       });
       refHtml+='</div>';
@@ -8338,7 +8338,7 @@ function showInstallPWAModal() {
         +'</div>';
 
       // ── CARD STREAK ────────────────────────────────
-      var streakHtml = '<div style="'+cardStyle+'">'
+      var streakHtml = '<div style="'+cardStyle+'margin-top:1.2rem;">'
         +'<span style="'+sectionLabelStyle+'">🔥 Badge Costanza Quiz</span>'
         +'<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
           +'Gioca ogni giorno senza saltare. Ogni badge si conquista una volta sola e rimane per sempre — anche se perdi lo streak in seguito. Più a lungo vai, più raro diventa il badge.'
@@ -8356,7 +8356,7 @@ function showInstallPWAModal() {
             :'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';opacity:.10;')
           +'">'+flameSvg(b.color, 24)+'</div>'
           +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';">'+ b.label+'</span>'
-          +'<span style="font-size:.44rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+_sdayLabel+'</span>'
+          +'<span style="font-size:.48rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+_sdayLabel+'</span>'
           +'</div>';
       });
       streakHtml+='</div>'
