@@ -3914,7 +3914,22 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
 
     inp.addEventListener('focus', function(){
       // Scroll istantaneo a top — evita tremolio viewport Android quando tastiera apre
-      if (window.scrollY > 0) window.scrollTo(0, 0);
+      if (window.scrollY > 0) {
+          window.scrollTo(0, 0);
+          // Aggiorna subito il padding-top del main tenendo conto
+          // dell'altezza reale di tutte le barre (inclusa filter-bar aperta)
+          // Bypassa il guard _searchFrozen perché aggiorniamo solo il layout, non le barre
+          var _mainEl = document.querySelector('.main');
+          var _pillsEl = document.getElementById('pills-bar');
+          var _fbEl = document.getElementById('filter-bar');
+          var _hdrEl = document.querySelector('.hdr');
+          if (_mainEl && _pillsEl && _hdrEl) {
+            var _hdrBot = _hdrEl.getBoundingClientRect().bottom;
+            var _pillsH = _pillsEl.offsetHeight;
+            var _fbH = (_fbEl && !_fbEl.classList.contains('hidden')) ? _fbEl.offsetHeight : 0;
+            _mainEl.style.paddingTop = (_hdrBot + _pillsH + _fbH + 22) + 'px';
+          }
+        }
       if(Q.length >= 1) showSuggestions(Q);
     });
     // tasto cerca/invio su tastiera mobile
@@ -7710,7 +7725,22 @@ function showInstallPWAModal() {
       srchOpen = !srchOpen;
       if (srchOpen) {
         // Scroll istantaneo a top prima di aprire — evita tremolio viewport Android
-        if (window.scrollY > 0) window.scrollTo(0, 0);
+        if (window.scrollY > 0) {
+          window.scrollTo(0, 0);
+          // Aggiorna subito il padding-top del main tenendo conto
+          // dell'altezza reale di tutte le barre (inclusa filter-bar aperta)
+          // Bypassa il guard _searchFrozen perché aggiorniamo solo il layout, non le barre
+          var _mainEl = document.querySelector('.main');
+          var _pillsEl = document.getElementById('pills-bar');
+          var _fbEl = document.getElementById('filter-bar');
+          var _hdrEl = document.querySelector('.hdr');
+          if (_mainEl && _pillsEl && _hdrEl) {
+            var _hdrBot = _hdrEl.getBoundingClientRect().bottom;
+            var _pillsH = _pillsEl.offsetHeight;
+            var _fbH = (_fbEl && !_fbEl.classList.contains('hidden')) ? _fbEl.offsetHeight : 0;
+            _mainEl.style.paddingTop = (_hdrBot + _pillsH + _fbH + 22) + 'px';
+          }
+        }
         // Apre search — overlay ON subito (non aspetta tastiera)
         filterBar.style.transition = 'none';
         filterBar.classList.remove('hidden');
