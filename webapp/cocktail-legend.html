@@ -7951,6 +7951,50 @@ function showInstallPWAModal() {
     }
   });
 
+  function _buildCreditiHtml(isPrem, monthlyRem, extra, ref, MAX) {
+    var rawExtra = (_usageCache && _usageCache.extraCredits) ? _usageCache.extraCredits : (extra || 0);
+    var extraCongelati = !isPrem && rawExtra > 0;
+    var mensiliVal = isPrem ? monthlyRem : null;
+    var extraVal   = rawExtra;
+    var refVal     = ref;
+    var cMensili = isPrem ? 'var(--blue-l)' : 'var(--dim)';
+    var cExtra   = isPrem && extraVal > 0 ? 'var(--amber)' : 'var(--dim)';
+    var cRef     = refVal > 0 ? '#4ade80' : 'var(--dim)';
+    var card = function(label, valueHtml) {
+      return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.6rem .3rem;gap:.15rem;">' +
+        '<div style="font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.1rem;">' + label + '</div>' +
+        '<div style="font-size:1.2rem;font-weight:900;line-height:1;text-align:center;">' + valueHtml + '</div>' +
+        '</div>';
+    };
+    var lockSvgSm = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+    var mensiliHtml = isPrem ? '<span style="color:' + cMensili + ';">' + mensiliVal + '</span><span style="font-size:.65rem;color:var(--dim);font-weight:500;">/' + MAX + '</span>' : lockSvgSm;
+    var extraHtml   = isPrem ? '<span style="color:' + cExtra + ';">' + extraVal + '</span>' : lockSvgSm;
+    var refHtml     = '<span style="color:' + cRef + ';">' + refVal + '</span>';
+    return '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">' +
+      '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Riepilogo crediti AI</div>' +
+      '<div style="display:flex;border:1px solid var(--brd);border-radius:12px;overflow:hidden;">' +
+        card('Mensili', mensiliHtml) +
+        '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>' +
+        card('Extra', extraHtml) +
+        '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>' +
+        card('Referral', refHtml) +
+      '</div>' +
+      '<div style="margin-top:.65rem;padding:.55rem .65rem;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.18);border-radius:9px;">' +
+        '<div style="font-size:.58rem;color:var(--dim);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.4rem;">Per gestire i crediti</div>' +
+        '<div style="display:flex;align-items:center;gap:.3rem;font-size:.7rem;color:#94a3b8;flex-wrap:wrap;">' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>' +
+          '<span>Men\u00f9</span>' +
+          '<span style="color:var(--dim);">&#8250;</span>' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+          '<span style="color:#60a5fa;font-weight:700;">Barman AI</span>' +
+          '<span style="color:var(--dim);">&#8250;</span>' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>' +
+          '<span>Wallet</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
   function renderAccountTab(){
     var el = document.getElementById('acc-content');
     if(!el) return;
@@ -8019,64 +8063,7 @@ function showInstallPWAModal() {
       )+
       '<div style="margin-bottom:1.4rem;"></div>'+
       // ── RIEPILOGO CREDITI AI ─────────────────────────────────
-      (function(){
-        var isPrem = window._userPlan === 'premium';
-        var rawExtra = (_usageCache && _usageCache.extraCredits) ? _usageCache.extraCredits : (extra || 0);
-        var extraCongelati = !isPrem && rawExtra > 0;
-
-        // valori visualizzati
-        var mensiliVal  = isPrem ? monthlyRem : null;
-        var extraVal    = rawExtra;
-        var refVal      = ref;
-
-        // colori
-        var cMensili = isPrem ? 'var(--blue-l)' : 'var(--dim)';
-        var cExtra   = isPrem && extraVal > 0 ? 'var(--amber)' : extraCongelati ? 'var(--dim)' : 'var(--dim)';
-        var cRef     = refVal > 0 ? '#4ade80' : 'var(--dim)';
-
-        var card = function(label, valueHtml, sub){
-          return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.6rem .3rem;gap:.15rem;">'+
-            '<div style="font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.1rem;">'+label+'</div>'+
-            '<div style="font-size:1.2rem;font-weight:900;line-height:1;text-align:center;">'+valueHtml+'</div>'+
-            (sub ? '<div style="font-size:.58rem;color:var(--dim);margin-top:.15rem;text-align:center;line-height:1.3;">'+sub+'</div>' : '')+
-          '</div>';
-        };
-
-        var lockSvgSm = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
-        var mensiliHtml = isPrem
-          ? '<span style="color:'+cMensili+';">'+mensiliVal+'</span><span style="font-size:.65rem;color:var(--dim);font-weight:500;">/'+ MAX +'</span>'
-          : lockSvgSm;
-        var extraHtml = isPrem
-          ? '<span style="color:'+cExtra+';">'+extraVal+'</span>'
-          : lockSvgSm;
-        var refHtml = '<span style="color:'+cRef+';">'+refVal+'</span>';
-
-        return '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
-          '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Riepilogo crediti AI</div>'+
-          // 3 card
-          '<div style="display:flex;border:1px solid var(--brd);border-radius:12px;overflow:hidden;">'+
-            card('Mensili', mensiliHtml, null)+
-            '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
-            card('Extra', extraHtml, null)+
-            '<div style="width:1px;background:var(--brd);flex-shrink:0;"></div>'+
-            card('Referral', refHtml, null)+
-          '</div>'+
-          // info rimando
-          '<div style="margin-top:.65rem;display:flex;align-items:center;gap:.45rem;padding:.5rem .65rem;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.18);border-radius:9px;">'+
-          '<div style="margin-top:.65rem;padding:.55rem .65rem;background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.18);border-radius:9px;">'+
-            '<div style="font-size:.58rem;color:var(--dim);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.4rem;">Per gestire i crediti</div>'+
-            '<div style="display:flex;align-items:center;gap:.3rem;font-size:.7rem;color:#94a3b8;flex-wrap:wrap;">'+
-              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>'+
-              '<span>Menù</span>'+
-              '<span style="color:var(--dim);">&#8250;</span>'+
-              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+
-              '<span style="color:#60a5fa;font-weight:700;">Barman AI</span>'+
-              '<span style="color:var(--dim);">&#8250;</span>'+
-              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>'+
-              '<span>Wallet</span>'+
-            '</div>'+
-          '</div>'+
-      })()+
+      _buildCreditiHtml(isPrem, monthlyRem, extra, ref, MAX)+
       '<div style="padding-top:1.2rem;text-align:center;">'+
         '<button id="acc-logout-btn" style="display:inline-flex;align-items:center;background:transparent;border:1px solid var(--dim);color:var(--dim);font-size:.62rem;font-weight:600;font-family:inherit;cursor:pointer;padding:.35rem .65rem;border-radius:6px;letter-spacing:.05em;text-transform:uppercase;transition:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">LOGOUT</button>'+
       '</div>';
