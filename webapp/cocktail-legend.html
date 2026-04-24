@@ -3916,6 +3916,7 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
 
     inp.addEventListener('focus', function(){
       // Scroll istantaneo a top — evita tremolio viewport Android quando tastiera apre
+      console.log('[INP FOCUS] scrollY='+window.scrollY+' _searchFrozen='+window._searchFrozen+' vp='+window.innerWidth+'x'+window.innerHeight+(window.visualViewport?' vvp='+window.visualViewport.width.toFixed(0)+'x'+window.visualViewport.height.toFixed(0):''));
       if (window.scrollY > 0) {
           window.scrollTo(0, 0);
           // Aggiorna subito il padding-top del main tenendo conto
@@ -3929,7 +3930,15 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
             var _hdrBot = _hdrEl.getBoundingClientRect().bottom;
             var _pillsH = _pillsEl.offsetHeight;
             var _fbH = (_fbEl && !_fbEl.classList.contains('hidden')) ? _fbEl.offsetHeight : 0;
-            _mainEl.style.paddingTop = (_hdrBot + _pillsH + _fbH + 22) + 'px';
+            var _newPt = (_hdrBot + _pillsH + _fbH + 22);
+            _mainEl.style.paddingTop = _newPt + 'px';
+            console.log('[AFTER SCROLL] scrollY='+window.scrollY+' hdrBot='+_hdrBot.toFixed(1)+' pillsH='+_pillsH+' fbH='+_fbH+' newPaddingTop='+_newPt+' vp='+window.innerWidth+'x'+window.innerHeight+(window.visualViewport?' vvp='+window.visualViewport.width.toFixed(0)+'x'+window.visualViewport.height.toFixed(0):''));
+            // First card position after layout
+            requestAnimationFrame(function(){
+              var fc=document.querySelector('.main .card, .main [class*="card-wrap"], .main .cocktail-card');
+              if(!fc) fc=document.querySelector('.main > *:nth-child(2)');
+              if(fc) console.log('[FIRST CARD] top='+fc.getBoundingClientRect().top.toFixed(1)+' paddingTop='+_mainEl.style.paddingTop);
+            });
           }
         }
       if(Q.length >= 1) showSuggestions(Q);
@@ -7726,6 +7735,11 @@ function showInstallPWAModal() {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
+        // DEBUG
+        (function(){
+          var _m=document.querySelector('.main'),_p=document.getElementById('pills-bar'),_f=document.getElementById('filter-bar'),_h=document.querySelector('.hdr');
+          console.log('[SEARCH OPEN] scrollY='+window.scrollY+' hdrBot='+(_h?_h.getBoundingClientRect().bottom.toFixed(1):'-')+' pillsH='+(_p?_p.offsetHeight:'-')+' fbH='+(_f?_f.offsetHeight:'-')+' fbHidden='+(_f?_f.classList.contains('hidden'):'-')+' paddingTop='+(_m?_m.style.paddingTop||getComputedStyle(_m).paddingTop:'-')+' vp='+window.innerWidth+'x'+window.innerHeight+(window.visualViewport?' vvp='+window.visualViewport.width.toFixed(0)+'x'+window.visualViewport.height.toFixed(0):''));
+        })();
         // Scroll istantaneo a top prima di aprire — evita tremolio viewport Android
         if (window.scrollY > 0) {
           window.scrollTo(0, 0);
