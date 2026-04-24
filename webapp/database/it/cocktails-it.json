@@ -1083,7 +1083,7 @@
   "distillato": ["Rye whiskey", "Bourbon whiskey"],
   "categoria": "After dinner",
   "abv": "Alto",
-  "sapori": ["Speziato", "Caramellato", "Complesso"],
+  "sapori": ["Speziato", "Deciso", "Complesso"],
   "garnish": "Zest di arancia",
   "ingredienti": [
     ["30 ml", "Whiskey rye"],
@@ -2263,7 +2263,7 @@
   "distillato": ["Liquore all'amaretto"],
   "categoria": "All day",
   "abv": "Medio basso",
-  "sapori": ["Mandorlato", "Acidulo", "Goloso"],
+  "sapori": ["Mandorlato", "Dolce", "Goloso"],
   "garnish": "Fetta di arancia + ciliegia",
   "ingredienti": [
     ["50 ml", "Disaronno"],
@@ -2280,9 +2280,7 @@
   "frizzante": false,
   "bicchiere": "Tumbler basso",
   "img": "https://danielsportelli.github.io/cocktail-legend/immagini/amaretto_sour.webp",
-  "varianti": [
-    {"nome": "Whiskey Amaretto Sour", "note": "Versione di Jeffrey Morgenthaler (Clyde Common, Portland) con aggiunta di bourbon, che ne ha ridefinito lo standard nel 2012"}
-  ],
+  "varianti": [],
   "iba": false,
   "video": null
 },
@@ -2293,7 +2291,7 @@
   "categoria": "All day",
   "abv": "Medio",
   "sapori": ["Dolce", "Agrumato", "Vivace"],
-  "garnish": "Zest di limone",
+  "garnish": "Zest di arancia",
   "ingredienti": [
     ["45 ml", "Vodka"],
     ["15 ml", "Blue curaçao"],
@@ -2318,12 +2316,12 @@
   "distillato": ["Calvados"],
   "categoria": "Pre dinner",
   "abv": "Medio alto",
-  "sapori": ["Fruttato", "Caldo", "Speziato"],
-  "garnish": "Zest di arancia",
+  "sapori": ["Dolce", "Speziato", "Aromatico"],
+  "garnish": "Fetta di mela",
   "ingredienti": [
     ["50 ml", "Calvados"],
-    ["20 ml", "Vermouth rosso"],
-    ["10 ml", "Sciroppo di zucchero"],
+    ["22,5 ml", "Vermouth rosso"],
+    ["15 ml", "Sciroppo di zucchero"],
     ["2 dash", "Angostura bitters"]
   ],
   "prep": [
@@ -2347,7 +2345,7 @@
   "distillato": ["Gin"],
   "categoria": "Pre dinner",
   "abv": "Medio alto",
-  "sapori": ["Amaro", "Agrumato", "Aromatico"],
+  "sapori": ["Dolce", "Agrumato", "Secco"],
   "garnish": "Zest di arancia",
   "ingredienti": [
     ["50 ml", "Gin"],
@@ -3917,7 +3915,7 @@
   "distillato": ["Gin"],
   "categoria": "Pre dinner",
   "abv": "Molto alto",
-  "sapori": ["Erbaceo", "Fresco", "Aromatico"],
+  "sapori": ["Erbaceo","Aromatico", "Intenso"],
   "garnish": "Zest di limone",
   "ingredienti": [
     ["45 ml", "Gin"],
@@ -3971,7 +3969,7 @@
   "distillato": ["Campari", "Vermouth rosso"],
   "categoria": "Pre dinner",
   "abv": "Medio basso",
-  "sapori": ["Amaro", "Effervescente", "Classico"],
+  "sapori": ["Amaro", "Aromatico", "Classico"],
   "garnish": "Zest di limone + Fetta di arancia",
   "ingredienti": [
     ["30 ml", "Campari"],
@@ -3996,8 +3994,8 @@
   "distillato": ["Gin"],
   "categoria": "All day",
   "abv": "Molto alto",
-  "sapori": ["Fruttato", "Intenso", "Raffinato"],
-  "garnish": "Nessuna",
+  "sapori": ["Fruttato", "Mandorlato", "Intenso"],
+  "garnish": "Fetta di mela",
   "ingredienti": [
     ["30 ml", "Gin"],
     ["30 ml", "Apricot brandy"],
@@ -4021,7 +4019,7 @@
   "distillato": ["Vodka"],
   "categoria": "All day",
   "abv": "Medio",
-  "sapori": ["Fresco", "Fruttato", "Vivace"],
+  "sapori": ["Dolce", "Fruttato", "Vivace"],
   "garnish": "Fetta di mela",
   "ingredienti": [
     ["45 ml", "Vodka"],
