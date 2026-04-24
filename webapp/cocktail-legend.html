@@ -3915,34 +3915,27 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
     });
 
     inp.addEventListener('focus', function(){
-      // Scroll istantaneo a top — evita tremolio viewport Android quando tastiera apre
-      console.log('[INP FOCUS] scrollY='+window.scrollY+' _searchFrozen='+window._searchFrozen+' vp='+window.innerWidth+'x'+window.innerHeight+(window.visualViewport?' vvp='+window.visualViewport.width.toFixed(0)+'x'+window.visualViewport.height.toFixed(0):''));
       if (window.scrollY > 0) {
-          window.scrollTo(0, 0);
-          // Aggiorna subito il padding-top del main tenendo conto
-          // dell'altezza reale di tutte le barre (inclusa filter-bar aperta)
-          // Bypassa il guard _searchFrozen perché aggiorniamo solo il layout, non le barre
-          var _mainEl = document.querySelector('.main');
-          var _pillsEl = document.getElementById('pills-bar');
-          var _fbEl = document.getElementById('filter-bar');
-          var _hdrEl = document.querySelector('.hdr');
-          if (_mainEl && _pillsEl && _hdrEl) {
-            var _hdrBot = _hdrEl.getBoundingClientRect().bottom;
-            // Se header è nascosto (scrollato fuori), usa l'altezza cached
-            if (_hdrBot < 1 && typeof _cachedHdrH !== 'undefined') _hdrBot = _cachedHdrH;
-            var _pillsH = _pillsEl.offsetHeight;
-            var _fbH = (_fbEl && !_fbEl.classList.contains('hidden')) ? _fbEl.offsetHeight : 0;
-            var _newPt = (_hdrBot + _pillsH + _fbH + 22);
-            _mainEl.style.paddingTop = _newPt + 'px';
-            console.log('[AFTER SCROLL] scrollY='+window.scrollY+' hdrBot='+_hdrBot.toFixed(1)+' pillsH='+_pillsH+' fbH='+_fbH+' newPaddingTop='+_newPt+' vp='+window.innerWidth+'x'+window.innerHeight+(window.visualViewport?' vvp='+window.visualViewport.width.toFixed(0)+'x'+window.visualViewport.height.toFixed(0):''));
-            // First card position after layout
-            requestAnimationFrame(function(){
-              var fc=document.querySelector('.main .card, .main [class*="card-wrap"], .main .cocktail-card');
-              if(!fc) fc=document.querySelector('.main > *:nth-child(2)');
-              if(fc) console.log('[FIRST CARD] top='+fc.getBoundingClientRect().top.toFixed(1)+' paddingTop='+_mainEl.style.paddingTop);
-            });
-          }
-        }
+        // Blocca transition, ripristina header, aggiorna layout, scrolla — tutto sincrono
+        var _hdrF = document.querySelector('.hdr');
+        var _hdrHF = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
+        document.body.classList.add('hdr-animating');
+        if (_hdrF) { _hdrF.style.transition = 'none'; _hdrF.classList.remove('hdr--hidden'); _hdrF.style.transform = ''; }
+        if (pillsBar) { pillsBar.style.transition = 'none'; pillsBar.style.transform = ''; pillsBar.style.top = ''; }
+        filterBar.style.transition = 'none'; filterBar.style.transform = ''; filterBar.style.top = '';
+        if (typeof _hdrHidden !== 'undefined') _hdrHidden = false;
+        var _mainF  = document.querySelector('.main');
+        var _pillsHF = pillsBar ? pillsBar.offsetHeight : 40;
+        var _fbHF   = filterBar.classList.contains('hidden') ? 0 : filterBar.offsetHeight;
+        if (_mainF) _mainF.style.paddingTop = (_hdrHF + _pillsHF + _fbHF + 22) + 'px';
+        window.scrollTo(0, 0);
+        requestAnimationFrame(function() {
+          document.body.classList.remove('hdr-animating');
+          if (_hdrF) _hdrF.style.transition = '';
+          if (pillsBar) pillsBar.style.transition = '';
+          filterBar.style.transition = '';
+        });
+      }
       if(Q.length >= 1) showSuggestions(Q);
     });
     // tasto cerca/invio su tastiera mobile
@@ -7737,51 +7730,48 @@ function showInstallPWAModal() {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
-        // DEBUG
-        (function(){
-          var _m=document.querySelector('.main'),_p=document.getElementById('pills-bar'),_f=document.getElementById('filter-bar'),_h=document.querySelector('.hdr');
-          console.log('[SEARCH OPEN] scrollY='+window.scrollY+' hdrBot='+(_h?_h.getBoundingClientRect().bottom.toFixed(1):'-')+' pillsH='+(_p?_p.offsetHeight:'-')+' fbH='+(_f?_f.offsetHeight:'-')+' fbHidden='+(_f?_f.classList.contains('hidden'):'-')+' paddingTop='+(_m?_m.style.paddingTop||getComputedStyle(_m).paddingTop:'-')+' vp='+window.innerWidth+'x'+window.innerHeight+(window.visualViewport?' vvp='+window.visualViewport.width.toFixed(0)+'x'+window.visualViewport.height.toFixed(0):''));
-        })();
-        // Scroll istantaneo a top prima di aprire — evita tremolio viewport Android
-        if (window.scrollY > 0) {
-          window.scrollTo(0, 0);
-          // Aggiorna subito il padding-top del main tenendo conto
-          // dell'altezza reale di tutte le barre (inclusa filter-bar aperta)
-          // Bypassa il guard _searchFrozen perché aggiorniamo solo il layout, non le barre
-          var _mainEl = document.querySelector('.main');
-          var _pillsEl = document.getElementById('pills-bar');
-          var _fbEl = document.getElementById('filter-bar');
-          var _hdrEl = document.querySelector('.hdr');
-          if (_mainEl && _pillsEl && _hdrEl) {
-            var _hdrBot = _hdrEl.getBoundingClientRect().bottom;
-            var _pillsH = _pillsEl.offsetHeight;
-            var _fbH = (_fbEl && !_fbEl.classList.contains('hidden')) ? _fbEl.offsetHeight : 0;
-            _mainEl.style.paddingTop = (_hdrBot + _pillsH + _fbH + 22) + 'px';
-          }
-        }
-        // Apre search
-        // Prima: ripristina header visibile (rimuove hdr--hidden) e scroll a 0
-        var _hdrEl2 = document.querySelector('.hdr');
-        if (_hdrEl2) {
-          _hdrEl2.classList.remove('hdr--hidden');
-          if (typeof _hdrHidden !== 'undefined') _hdrHidden = false;
-        }
-        // Mostra filter-bar senza transizione
+        // ── Apre search: tutto in un blocco sincrono per evitare flash/gap ──
+        var _hdrS  = document.querySelector('.hdr');
+        var _mainS = document.querySelector('.main');
+        var _hdrH  = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
+
+        // 1. Blocca TUTTE le transition prima di toccare qualsiasi cosa
+        document.body.classList.add('hdr-animating');
+        if (_hdrS)   _hdrS.style.transition   = 'none';
+        if (pillsBar) pillsBar.style.transition = 'none';
         filterBar.style.transition = 'none';
-        filterBar.classList.remove('hidden');
-        // Ricalcola tutto con hdrH reale (usa _cachedHdrH che è sempre aggiornato)
-        var _hdrH = (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
-        var _pillsH2 = pillsBar ? pillsBar.offsetHeight : 40;
-        var _fbH2 = filterBar.offsetHeight;
-        if (typeof _cachedFbH !== 'undefined') _cachedFbH = _fbH2;
-        // Aggiorna padding-top del main con valori corretti
-        var _mainEl2 = document.querySelector('.main');
-        if (_mainEl2) _mainEl2.style.paddingTop = (_hdrH + _pillsH2 + _fbH2 + 22) + 'px';
-        // Aggiorna posizione barre (bypassa guard _searchFrozen)
-        if (_hdrEl2) { _hdrEl2.style.transform = ''; }
+
+        // 2. Ripristina header visibile (rimuove hdr--hidden e transform)
+        if (_hdrS) {
+          _hdrS.classList.remove('hdr--hidden');
+          _hdrS.style.transform = '';
+        }
+        if (typeof _hdrHidden !== 'undefined') _hdrHidden = false;
+
+        // 3. Reset transform/top barre
         if (pillsBar) { pillsBar.style.transform = ''; pillsBar.style.top = ''; }
-        if (filterBar) { filterBar.style.top = ''; filterBar.style.transform = ''; }
-        requestAnimationFrame(function() { filterBar.style.transition = ''; });
+        filterBar.style.transform = ''; filterBar.style.top = '';
+
+        // 4. Mostra filter-bar e misura altezza
+        filterBar.classList.remove('hidden');
+        var _fbH2   = filterBar.offsetHeight; // forza reflow
+        var _pillsH2 = pillsBar ? pillsBar.offsetHeight : 40;
+        if (typeof _cachedFbH !== 'undefined') _cachedFbH = _fbH2;
+
+        // 5. Aggiorna padding-top con valori corretti
+        if (_mainS) _mainS.style.paddingTop = (_hdrH + _pillsH2 + _fbH2 + 22) + 'px';
+
+        // 6. Scroll a top istantaneo
+        if (window.scrollY > 0) window.scrollTo(0, 0);
+
+        // 7. Riabilita transition nel prossimo frame (dopo il repaint)
+        requestAnimationFrame(function() {
+          document.body.classList.remove('hdr-animating');
+          if (_hdrS)    _hdrS.style.transition    = '';
+          if (pillsBar)  pillsBar.style.transition  = '';
+          filterBar.style.transition = '';
+        });
+
         pillsSrchBtn.classList.add('active');
         var inp = document.getElementById('srch');
         if (inp) inp.focus();
