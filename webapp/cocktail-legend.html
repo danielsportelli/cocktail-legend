@@ -94,7 +94,7 @@ body::before{
     padding-top:env(safe-area-inset-top, 0px);
   }
   .pills-bar{
-    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px) - 1px);
+    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));
   }
 }
 .hdr-inner{
@@ -337,7 +337,7 @@ body::before{
 
 .pills-bar{
   position:fixed;
-  top:calc(var(--hdr-h) - 1px);
+  top:calc(var(--hdr-h));
   left:0;right:0;
   z-index:97;
   background:var(--surf);
@@ -353,7 +353,7 @@ body::before{
 }
 @media (display-mode: standalone) {
   .pills-bar{
-    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px) - 1px);
+    top:calc(var(--hdr-h) + env(safe-area-inset-top, 0px));
   }
   .hdr.hdr--hidden ~ .pills-bar{
     transform:translateY(calc(-1 * (var(--hdr-h) + env(safe-area-inset-top, 0px))));
