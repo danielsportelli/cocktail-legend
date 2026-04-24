@@ -7611,18 +7611,40 @@ function showInstallPWAModal() {
   var _frozenFbTop = null;
 
   // Overlay — intercetta tap sulle card mentre tastiera è aperta
-  // z-index:49 = sopra card (z:auto) ma sotto pills (z:97) e filter-bar (z:1047)
+  // Stesso stile dei drawer overlay: blur + sfondo semitrasparente
+  // z-index:96 = sopra card ma sotto pills-bar (z:97) e filter-bar (z:1047)
   var srchOverlay = document.createElement('div');
   srchOverlay.id = 'srch-overlay';
-  srchOverlay.style.cssText = 'position:fixed;inset:0;z-index:49;display:none;background:rgba(0,0,0,0.01);touch-action:none;';
+  srchOverlay.style.cssText = 'position:fixed;inset:0;z-index:96;display:none;background:rgba(0,0,0,0.45);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;transition:opacity .2s ease;touch-action:none;pointer-events:none;';
   document.body.appendChild(srchOverlay);
-  // pointerdown + preventDefault: intercetta il touch prima che raggiunga le card
+
+  function _showSrchOverlay() {
+    srchOverlay.style.display = 'block';
+    srchOverlay.style.pointerEvents = 'auto';
+    requestAnimationFrame(function() { srchOverlay.style.opacity = '1'; });
+  }
+  function _hideSrchOverlay() {
+    srchOverlay.style.opacity = '0';
+    srchOverlay.style.pointerEvents = 'none';
+    setTimeout(function() {
+      if (srchOverlay.style.opacity === '0') srchOverlay.style.display = 'none';
+    }, 200);
+  }
+
+  // touchstart per intercettare prima che il sistema OS processi il tap
+  srchOverlay.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }, { passive: false });
+  srchOverlay.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var inp = document.getElementById('srch');
+    if (inp) inp.blur();
+  }, { passive: false });
   srchOverlay.addEventListener('pointerdown', function(e) {
     e.preventDefault();
     e.stopPropagation();
-    // Chiude solo la tastiera — search bar rimane aperta
-    var inp = document.getElementById('srch');
-    if (inp) inp.blur();
   });
 
   // Calcola posizioni corrette geometricamente dallo stato interno
@@ -7645,7 +7667,7 @@ function showInstallPWAModal() {
     if (pillsBar) { pillsBar.style.transition = 'none'; pillsBar.style.top = _frozenPillsTop + 'px'; pillsBar.style.transform = 'none'; }
     if (filterBar) { filterBar.style.transition = 'none'; filterBar.style.top = _frozenFbTop + 'px'; filterBar.style.transform = 'none'; }
     window._searchFrozen = true;
-    srchOverlay.style.display = 'block';
+    _showSrchOverlay();
   }
 
   // Unfreeze: ripristina sistema CSS/rAF
@@ -7657,7 +7679,7 @@ function showInstallPWAModal() {
     _frozenFbTop = null;
     if (pillsBar) { pillsBar.style.transition = ''; pillsBar.style.top = ''; pillsBar.style.transform = ''; }
     if (filterBar) { filterBar.style.transition = ''; filterBar.style.top = ''; filterBar.style.transform = ''; }
-    srchOverlay.style.display = 'none';
+    _hideSrchOverlay();
     // Ricalcola posizioni ora che tastiera è chiusa
     requestAnimationFrame(function() {
       if (!srchOpen) return;
@@ -7699,7 +7721,7 @@ function showInstallPWAModal() {
         if (inp) inp.focus();
       } else {
         // Chiude search — overlay OFF
-        srchOverlay.style.display = 'none';
+        _hideSrchOverlay();
         _unfreezeBars();
         if (typeof _cachedFbH !== 'undefined') _cachedFbH = 0;
         var _hdr = document.querySelector('.hdr');
