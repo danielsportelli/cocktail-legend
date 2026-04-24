@@ -3927,7 +3927,10 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
         var _mainF  = document.querySelector('.main');
         var _pillsHF = pillsBar ? pillsBar.offsetHeight : 40;
         var _fbHF   = filterBar.classList.contains('hidden') ? 0 : filterBar.offsetHeight;
-        if (_mainF) _mainF.style.paddingTop = (_hdrHF + _pillsHF + _fbHF + 22) + 'px';
+        var _ptF = (_hdrHF + _pillsHF + _fbHF + 22);
+        if (_mainF) _mainF.style.paddingTop = _ptF + 'px';
+        console.log('[FOCUS PT] hdrH='+_hdrHF+' pillsH='+_pillsHF+' fbH='+_fbHF+' pt='+_ptF+' vp='+window.innerWidth+'x'+window.innerHeight);
+        requestAnimationFrame(function(){ var fc=document.querySelector('.main>*:nth-child(2)'); if(fc) console.log('[FOCUS FC] top='+fc.getBoundingClientRect().top.toFixed(1)); });
         window.scrollTo(0, 0);
         requestAnimationFrame(function() {
           document.body.classList.remove('hdr-animating');
@@ -7759,7 +7762,10 @@ function showInstallPWAModal() {
         if (typeof _cachedFbH !== 'undefined') _cachedFbH = _fbH2;
 
         // 5. Aggiorna padding-top con valori corretti
-        if (_mainS) _mainS.style.paddingTop = (_hdrH + _pillsH2 + _fbH2 + 22) + 'px';
+        var _ptS = (_hdrH + _pillsH2 + _fbH2 + 22);
+        if (_mainS) _mainS.style.paddingTop = _ptS + 'px';
+        console.log('[OPEN PT] hdrH='+_hdrH+' pillsH='+_pillsH2+' fbH='+_fbH2+' pt='+_ptS+' vp='+window.innerWidth+'x'+window.innerHeight);
+        requestAnimationFrame(function(){ var fc=document.querySelector('.main>*:nth-child(2)'); if(fc) console.log('[OPEN FC] top='+fc.getBoundingClientRect().top.toFixed(1)); });
 
         // 6. Scroll a top istantaneo
         if (window.scrollY > 0) window.scrollTo(0, 0);
