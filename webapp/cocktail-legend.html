@@ -7668,6 +7668,19 @@ function showInstallPWAModal() {
     });
   }
 
+  // Chiamata dal listener visualViewport: freeze solo se search aperta E tastiera aperta
+  window._updateSearchFrozen = function() {
+    if (!srchOpen) return;
+    var h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    var ref = window._initialViewportH || window.innerHeight;
+    var kbOpen = h < ref * 0.75;
+    if (kbOpen) {
+      _freezeBars();
+    } else {
+      _unfreezeBars();
+    }
+  };
+
   if (pillsSrchBtn && filterBar) {
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
@@ -7682,8 +7695,6 @@ function showInstallPWAModal() {
         if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot2);
         requestAnimationFrame(function() { filterBar.style.transition = ''; });
         pillsSrchBtn.classList.add('active');
-        srchOverlay.style.display = 'block'; // overlay sempre ON quando search è aperta
-        _freezeBars(); // congela posizioni barre
         var inp = document.getElementById('srch');
         if (inp) inp.focus();
       } else {
