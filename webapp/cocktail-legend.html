@@ -8003,6 +8003,7 @@ function showInstallPWAModal() {
     var extra = getExtraCredits();
     var monthlyRem = getMonthlyRemaining();
     var ref = typeof getReferralCredits === 'function' ? getReferralCredits() : (_usageCache.referralCredits||0);
+    var isPrem = window._userPlan === 'premium';
 
     // Sezione nickname (asincrona) — inserisce placeholder e poi popola
     var nickPlaceholder =
