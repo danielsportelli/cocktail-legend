@@ -3928,6 +3928,8 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
           var _hdrEl = document.querySelector('.hdr');
           if (_mainEl && _pillsEl && _hdrEl) {
             var _hdrBot = _hdrEl.getBoundingClientRect().bottom;
+            // Se header è nascosto (scrollato fuori), usa l'altezza cached
+            if (_hdrBot < 1 && typeof _cachedHdrH !== 'undefined') _hdrBot = _cachedHdrH;
             var _pillsH = _pillsEl.offsetHeight;
             var _fbH = (_fbEl && !_fbEl.classList.contains('hidden')) ? _fbEl.offsetHeight : 0;
             var _newPt = (_hdrBot + _pillsH + _fbH + 22);
@@ -7757,14 +7759,28 @@ function showInstallPWAModal() {
             _mainEl.style.paddingTop = (_hdrBot + _pillsH + _fbH + 22) + 'px';
           }
         }
-        // Apre search — overlay ON subito (non aspetta tastiera)
+        // Apre search
+        // Prima: ripristina header visibile (rimuove hdr--hidden) e scroll a 0
+        var _hdrEl2 = document.querySelector('.hdr');
+        if (_hdrEl2) {
+          _hdrEl2.classList.remove('hdr--hidden');
+          if (typeof _hdrHidden !== 'undefined') _hdrHidden = false;
+        }
+        // Mostra filter-bar senza transizione
         filterBar.style.transition = 'none';
         filterBar.classList.remove('hidden');
-        var fbH = filterBar.offsetHeight;
-        if (typeof _cachedFbH !== 'undefined') _cachedFbH = fbH;
-        var _hdr2 = document.querySelector('.hdr');
-        var _hdrBot2 = _hdr2 ? _hdr2.getBoundingClientRect().bottom : (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
-        if (typeof _applyBarsTop === 'function') _applyBarsTop(_hdrBot2);
+        // Ricalcola tutto con hdrH reale (usa _cachedHdrH che è sempre aggiornato)
+        var _hdrH = (typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73);
+        var _pillsH2 = pillsBar ? pillsBar.offsetHeight : 40;
+        var _fbH2 = filterBar.offsetHeight;
+        if (typeof _cachedFbH !== 'undefined') _cachedFbH = _fbH2;
+        // Aggiorna padding-top del main con valori corretti
+        var _mainEl2 = document.querySelector('.main');
+        if (_mainEl2) _mainEl2.style.paddingTop = (_hdrH + _pillsH2 + _fbH2 + 22) + 'px';
+        // Aggiorna posizione barre (bypassa guard _searchFrozen)
+        if (_hdrEl2) { _hdrEl2.style.transform = ''; }
+        if (pillsBar) { pillsBar.style.transform = ''; pillsBar.style.top = ''; }
+        if (filterBar) { filterBar.style.top = ''; filterBar.style.transform = ''; }
         requestAnimationFrame(function() { filterBar.style.transition = ''; });
         pillsSrchBtn.classList.add('active');
         var inp = document.getElementById('srch');
