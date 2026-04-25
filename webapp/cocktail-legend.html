@@ -1299,12 +1299,12 @@ body::before{
 /* ── Micro-animazione flash FATTO ─────────────────────────────────
    Sfondo blu → bianco → blu, fill-mode:none per non persistere */
 @keyframes btnFlashDone{
-  0%  { background:var(--blue); color:#fff; box-shadow:none; }
-  25% { background:#fff;        color:var(--blue); box-shadow:0 0 0 2px rgba(255,255,255,.6); }
-  100%{ background:var(--blue); color:#fff; box-shadow:none; }
+  0%  { background:var(--blue); }
+  40% { background:#60a5fa; }
+  100%{ background:var(--blue); }
 }
 .fsheet-done.btn-flash{
-  animation:btnFlashDone .25s ease-out none;
+  animation:btnFlashDone .15s ease-out none;
 }
 .drawer{ scrollbar-width:none; }
 .drawer::-webkit-scrollbar{ display:none; }
@@ -4630,6 +4630,7 @@ function getOptsForKey(key) {
 }
 
 function openFsheet(key) {
+  console.log('[FSHEET OPEN] key=' + key + ' t=' + Date.now());
   _fsheetKey = key;
   var fsheet  = document.getElementById('fsheet');
   var overlay = document.getElementById('fsheet-overlay');
@@ -4690,6 +4691,7 @@ function openFsheet(key) {
 }
 
 function closeFsheet() {
+  console.log('[FSHEET CLOSE] t=' + Date.now());
   var fsheet  = document.getElementById('fsheet');
   var overlay = document.getElementById('fsheet-overlay');
   if (fsheet)  fsheet.classList.remove('open');
@@ -4762,12 +4764,22 @@ function reorderPills() {
 }
 
 function initF() {
-  // Listener pills
-  document.querySelectorAll('.fpill[data-key]').forEach(function(pill) {
-    pill.addEventListener('click', function() {
-      openFsheet(this.dataset.key);
+  // Event delegation sul container — sopravvive a reorderPills()
+  var pillsScroll = document.getElementById('pills-scroll');
+  if (pillsScroll) {
+    pillsScroll.addEventListener('click', function(e) {
+      var pill = e.target.closest('.fpill[data-key]');
+      if (pill) {
+        console.log('[PILL CLICK] key=' + pill.dataset.key + ' t=' + Date.now());
+        openFsheet(pill.dataset.key);
+      }
     });
-  });
+    // touchstart per responsività immediata su mobile
+    pillsScroll.addEventListener('touchstart', function(e) {
+      var pill = e.target.closest('.fpill[data-key]');
+      if (pill) console.log('[PILL TOUCH] key=' + pill.dataset.key + ' t=' + Date.now());
+    }, { passive: true });
+  }
 
   // Pill reset
   var resetPill = document.getElementById('fpill-reset');
@@ -4797,6 +4809,7 @@ function initF() {
     }
 
     function _fsheetDoneAction() {
+      console.log('[FATTO ACTION] t=' + Date.now());
       // Chiude immediatamente senza aspettare il flash
       closeFsheet();
       // Il render e update pills avvengono dopo che la transizione di chiusura
@@ -4815,7 +4828,7 @@ function initF() {
     // Un solo evento coerente invece di gestire touch + mouse separatamente
     if (window.PointerEvent) {
       fsheetDone.addEventListener('pointerdown', function(e) {
-        // Flash visivo immediato al tocco
+        console.log('[FATTO POINTERDOWN] t=' + Date.now());
         _fsheetDoneFlash();
       });
       fsheetDone.addEventListener('pointerup', function(e) {
