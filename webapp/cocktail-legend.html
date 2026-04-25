@@ -482,20 +482,20 @@ body::before{
   left:0;right:0;
   z-index:1049;
   background:var(--surf);
-  border-radius:20px;
+  border-radius:0 0 20px 20px;
   border-bottom:1px solid rgba(255,255,255,.08);
   max-height:70vh;
   display:flex;flex-direction:column;
   transform:translateY(-110%);
-  transition:transform .18s cubic-bezier(.4,0,.2,1), visibility 0s .18s;
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
   box-shadow:none;
-  visibility:hidden;
+  pointer-events:none;
 }
 .fsheet.open{
   transform:translateY(var(--pills-h-px, 40px));
   box-shadow:0 8px 40px rgba(0,0,0,.5);
-  visibility:visible;
-  transition:transform .18s cubic-bezier(.4,0,.2,1), visibility 0s 0s;
+  pointer-events:auto;
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
 }
 /* header fsheet in cima */
 .fsheet-header{
@@ -3830,6 +3830,47 @@ window._isRegistering = false;
   });
 })();
 
+// Listener pills — attaccati SUBITO al DOM, prima del fetch
+// così IBA funziona anche mentre il JSON è ancora in caricamento
+(function initPillListeners() {
+  var pillsScroll = document.getElementById('pills-scroll');
+  if (!pillsScroll) return;
+  var _pillTouchStartX = 0, _pillTouchStartY = 0, _pillTouchTarget = null;
+
+  pillsScroll.addEventListener('touchstart', function(e) {
+    var pill = e.target.closest('.fpill[data-key]');
+    _pillTouchTarget = pill || null;
+    if (pill) {
+      _pillTouchStartX = e.touches[0].clientX;
+      _pillTouchStartY = e.touches[0].clientY;
+      console.log('[PILL TOUCH] key=' + pill.dataset.key + ' t=' + Date.now());
+    }
+  }, { passive: true });
+
+  pillsScroll.addEventListener('touchend', function(e) {
+    if (!_pillTouchTarget) return;
+    var pill = _pillTouchTarget;
+    _pillTouchTarget = null;
+    var dx = Math.abs(e.changedTouches[0].clientX - _pillTouchStartX);
+    var dy = Math.abs(e.changedTouches[0].clientY - _pillTouchStartY);
+    if (dx < 8 && dy < 8) {
+      e.preventDefault();
+      console.log('[PILL TAP] key=' + pill.dataset.key + ' t=' + Date.now());
+      openFsheet(pill.dataset.key);
+    }
+  }, { passive: false });
+
+  // Fallback click per desktop/mouse
+  pillsScroll.addEventListener('click', function(e) {
+    if (e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
+    var pill = e.target.closest('.fpill[data-key]');
+    if (pill) {
+      console.log('[PILL CLICK] key=' + pill.dataset.key + ' t=' + Date.now());
+      openFsheet(pill.dataset.key);
+    }
+  });
+})();
+
 var DATA = [];
 fetch("database/it/cocktails-it.json")
   .then(function(res){ return res.json(); })
@@ -4764,48 +4805,8 @@ function reorderPills() {
 }
 
 function initF() {
-  // Event delegation sul container — sopravvive a reorderPills()
-  var pillsScroll = document.getElementById('pills-scroll');
-  if (pillsScroll) {
-    // Usiamo touchstart+touchend invece di click:
-    // su container scroll orizzontale, Android "ruba" i touch per lo scroll
-    // e non genera mai il click — touchend viene sempre fired
-    var _pillTouchStartX = 0, _pillTouchStartY = 0, _pillTouchTarget = null;
-
-    pillsScroll.addEventListener('touchstart', function(e) {
-      var pill = e.target.closest('.fpill[data-key]');
-      _pillTouchTarget = pill || null;
-      if (pill) {
-        _pillTouchStartX = e.touches[0].clientX;
-        _pillTouchStartY = e.touches[0].clientY;
-        console.log('[PILL TOUCH] key=' + pill.dataset.key + ' t=' + Date.now());
-      }
-    }, { passive: true });
-
-    pillsScroll.addEventListener('touchend', function(e) {
-      if (!_pillTouchTarget) return;
-      var pill = _pillTouchTarget;
-      _pillTouchTarget = null;
-      var dx = Math.abs(e.changedTouches[0].clientX - _pillTouchStartX);
-      var dy = Math.abs(e.changedTouches[0].clientY - _pillTouchStartY);
-      // Solo se non era uno scroll (movimento < 8px)
-      if (dx < 8 && dy < 8) {
-        e.preventDefault();
-        console.log('[PILL TAP] key=' + pill.dataset.key + ' t=' + Date.now());
-        openFsheet(pill.dataset.key);
-      }
-    }, { passive: false });
-
-    // Fallback click per desktop/mouse
-    pillsScroll.addEventListener('click', function(e) {
-      if (e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
-      var pill = e.target.closest('.fpill[data-key]');
-      if (pill) {
-        console.log('[PILL CLICK] key=' + pill.dataset.key + ' t=' + Date.now());
-        openFsheet(pill.dataset.key);
-      }
-    });
-  }
+  // initF ora contiene solo la parte data-dipendente
+  // I listener sulle pills sono già attaccati da initPillListeners() al DOM ready
 
   // Pill reset
   var resetPill = document.getElementById('fpill-reset');
