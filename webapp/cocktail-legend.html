@@ -395,7 +395,7 @@ body::before{
   display:inline-flex;align-items:center;gap:.25rem;
   background:transparent;border:none;
   color:var(--dim);font-family:inherit;font-size:.72rem;font-weight:500;
-  padding:.28rem .5rem;border-radius:6px;
+  padding:.35rem .75rem;border-radius:6px;
   cursor:pointer;white-space:nowrap;
   transition:color .15s;
   -webkit-tap-highlight-color:transparent;
@@ -3853,7 +3853,7 @@ window._isRegistering = false;
     _pillTouchTarget = null;
     var dx = Math.abs(e.changedTouches[0].clientX - _pillTouchStartX);
     var dy = Math.abs(e.changedTouches[0].clientY - _pillTouchStartY);
-    if (dx < 20 && dy < 20) {
+    if (dx < 12 && dy < 25) {
       e.preventDefault();
       console.log('[PILL TAP] key=' + pill.dataset.key + ' t=' + Date.now());
       openFsheet(pill.dataset.key);
@@ -4841,11 +4841,7 @@ function initF() {
       requestAnimationFrame(function(){
         updateBadges();
         render();
-        // reorderPills ritardato di 220ms — aspetta fine transition fsheet (.18s)
-        // così le pills non si spostano mentre l'utente vuole toccarne un'altra
-        setTimeout(function() {
-          if (typeof updatePills === 'function') updatePills();
-        }, 220);
+        if (typeof updatePills === 'function') updatePills();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
