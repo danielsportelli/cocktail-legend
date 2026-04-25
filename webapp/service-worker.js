@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════
-// SERVICE WORKER — Cocktail Legend PWA v3.1.2
+// SERVICE WORKER — Cocktail Legend PWA v3.1.3
 // ═══════════════════════════════════════════════════
-const CACHE_NAME = 'cocktail-legend-v3.1.2';
+const CACHE_NAME = 'cocktail-legend-v3.1.3';
 
 // ── File da pre-cachare all'installazione ──────────
 const PRECACHE_FILES = [

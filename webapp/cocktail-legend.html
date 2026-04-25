@@ -403,10 +403,7 @@ body::before{
   touch-action:manipulation;
 }
 .fpill::after{
-  content:'▾';
-  font-size:.65rem;
-  opacity:.5;
-  margin-left:.1rem;
+  content:none;
 }
 .fpill.active{
   color:var(--blue-l);
@@ -472,12 +469,17 @@ body::before{
 
 /* FILTER BOTTOM SHEET */
 .fsheet-overlay{
-  display:none;position:fixed;inset:0;
+  position:fixed;inset:0;
   z-index:1048;
   background:rgba(0,0,0,.5);
-  opacity:0;transition:opacity .15s;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
 }
-.fsheet-overlay.open{display:block;opacity:1;}
+.fsheet-overlay.open{
+  opacity:1;
+  pointer-events:auto;
+}
 .fsheet{
   position:fixed;
   top:0;
@@ -2182,12 +2184,12 @@ body.user-premium #sg-pdf-link > span:last-child {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
   </button>
   <div class="pills-scroll" id="pills-scroll">
-    <button class="fpill" id="fpill-iba" data-key="iba">IBA</button>
-    <button class="fpill" id="fpill-cat" data-key="cat">Categoria</button>
-    <button class="fpill" id="fpill-abv" data-key="abv">ABV</button>
-    <button class="fpill" id="fpill-frz" data-key="frz">Frizzante</button>
-    <button class="fpill" id="fpill-dis" data-key="dis">Ingredienti</button>
-    <button class="fpill" id="fpill-bic" data-key="bic">Bicchieri</button>
+    <button class="fpill" id="fpill-iba" data-key="iba">IBA<span aria-hidden="true" style="font-size:.6rem;opacity:.5;pointer-events:none;">▾</span></button>
+    <button class="fpill" id="fpill-cat" data-key="cat">Categoria<span aria-hidden="true" style="font-size:.6rem;opacity:.5;pointer-events:none;">▾</span></button>
+    <button class="fpill" id="fpill-abv" data-key="abv">ABV<span aria-hidden="true" style="font-size:.6rem;opacity:.5;pointer-events:none;">▾</span></button>
+    <button class="fpill" id="fpill-frz" data-key="frz">Frizzante<span aria-hidden="true" style="font-size:.6rem;opacity:.5;pointer-events:none;">▾</span></button>
+    <button class="fpill" id="fpill-dis" data-key="dis">Ingredienti<span aria-hidden="true" style="font-size:.6rem;opacity:.5;pointer-events:none;">▾</span></button>
+    <button class="fpill" id="fpill-bic" data-key="bic">Bicchieri<span aria-hidden="true" style="font-size:.6rem;opacity:.5;pointer-events:none;">▾</span></button>
     <button class="fpill fpill--reset hidden" id="fpill-reset">✕ Reset</button>
   </div>
 </div>
@@ -6759,11 +6761,10 @@ function populateRisGlass(){
 
         // Visualizzazione nickname attuale
         '<div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;">' +
-          '<div style="font-size:.88rem;font-weight:700;color:var(--txt);">@' + (nickname || '—') + '</div>' +
-          '<button id="nick-edit-btn" style="background:transparent;border:1px solid var(--brd);border-radius:7px;' +
-          'color:var(--dim);font-size:.62rem;font-weight:700;font-family:inherit;cursor:pointer;' +
-          'padding:.2rem .55rem;letter-spacing:.05em;text-transform:uppercase;transition:all .2s;">' +
-            'Modifica' +
+          '<div style="font-size:.85rem;font-weight:700;color:var(--txt);">@' + (nickname || '—') + '</div>' +
+          '<button id="nick-edit-btn" style="background:transparent;border:none;padding:.2rem;cursor:pointer;' +
+          'color:var(--dim);display:flex;align-items:center;transition:color .15s;-webkit-tap-highlight-color:transparent;">' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>' +
           '</button>' +
         '</div>' +
 
@@ -8176,7 +8177,7 @@ function showInstallPWAModal() {
       nickPlaceholder +
       '<div style="margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--brd);">'+
         '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.35rem;">Accesso effettuato con</div>'+
-        '<div style="font-size:.8rem;color:var(--txt2);font-weight:600;">'+user.email+'</div>'+
+        '<div style="font-size:.85rem;color:var(--txt2);font-weight:600;">'+user.email+'</div>'+
       '</div>'+
       '<div style="margin-bottom:0;padding-bottom:1.2rem;">'+
         '<div style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;">Piano attuale</div>'+
