@@ -370,12 +370,12 @@ body::before{
   flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
   background:none;border:none;cursor:pointer;
-  padding:.25rem .55rem .25rem .8rem;
+  padding:.25rem .4rem .25rem .6rem;
   color:var(--dim);
   -webkit-tap-highlight-color:transparent;
   transition:color .15s;
   border-right:1px solid var(--brd);
-  margin-right:.3rem;
+  margin-right:.2rem;
 }
 .pills-srch-btn.active{color:var(--amber);}
 .pills-srch-btn svg{display:block;}
@@ -1709,7 +1709,6 @@ body.user-premium #sg-pdf-link > span:last-child {
 
 </style>
 <script>
-  console.log("[BUILD] 2026-04-25 14:13");
   if(localStorage.getItem('cl_logged')==='1'){document.write('<style>#login-overlay{display:none!important}</style>');}
   (function(){
     var p = new URLSearchParams(window.location.search);
@@ -3859,7 +3858,7 @@ window._isRegistering = false;
     var dx = Math.abs(e.changedTouches[0].clientX - _pillTouchStartX);
     var dy = Math.abs(e.changedTouches[0].clientY - _pillTouchStartY);
     console.log('[TE] key=' + pill.dataset.key + ' dx=' + dx.toFixed(1) + ' dy=' + dy.toFixed(1) + ' ok=' + (dx<12&&dy<25));
-    if (dx < 12 && dy < 25) {
+    if (dx < 20 && dy < 30) {
       e.preventDefault();
       console.log('[PILL TAP] key=' + pill.dataset.key + ' t=' + Date.now());
       openFsheet(pill.dataset.key);
@@ -8230,7 +8229,7 @@ function showInstallPWAModal() {
       '<div style="margin-bottom:1.4rem;"></div>'+
       // ── RIEPILOGO CREDITI AI ─────────────────────────────────
       _buildCreditiHtml(isPrem, monthlyRem, extra, ref, MAX)+
-      '<div style="padding-top:.5rem;text-align:center;">'+
+      '<div style="padding-top:.3rem;padding-bottom:.3rem;text-align:center;">'+
         '<button id="acc-logout-btn" style="display:inline-flex;align-items:center;background:transparent;border:1px solid var(--dim);color:var(--dim);font-size:.62rem;font-weight:600;font-family:inherit;cursor:pointer;padding:.35rem .65rem;border-radius:6px;letter-spacing:.05em;text-transform:uppercase;transition:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">LOGOUT</button>'+
       '</div>';
 
