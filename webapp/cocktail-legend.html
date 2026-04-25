@@ -387,6 +387,7 @@ body::before{
   scrollbar-width:none;
   -webkit-overflow-scrolling:touch;
   padding-right:5%;
+  touch-action:pan-x;
 }
 .pills-scroll::-webkit-scrollbar{display:none;}
 .fpill{
@@ -472,8 +473,6 @@ body::before{
   display:none;position:fixed;inset:0;
   z-index:1048;
   background:rgba(0,0,0,.5);
-  backdrop-filter:blur(3px);
-  -webkit-backdrop-filter:blur(3px);
   opacity:0;transition:opacity .15s;
 }
 .fsheet-overlay.open{display:block;opacity:1;}
@@ -4768,18 +4767,44 @@ function initF() {
   // Event delegation sul container — sopravvive a reorderPills()
   var pillsScroll = document.getElementById('pills-scroll');
   if (pillsScroll) {
+    // Usiamo touchstart+touchend invece di click:
+    // su container scroll orizzontale, Android "ruba" i touch per lo scroll
+    // e non genera mai il click — touchend viene sempre fired
+    var _pillTouchStartX = 0, _pillTouchStartY = 0, _pillTouchTarget = null;
+
+    pillsScroll.addEventListener('touchstart', function(e) {
+      var pill = e.target.closest('.fpill[data-key]');
+      _pillTouchTarget = pill || null;
+      if (pill) {
+        _pillTouchStartX = e.touches[0].clientX;
+        _pillTouchStartY = e.touches[0].clientY;
+        console.log('[PILL TOUCH] key=' + pill.dataset.key + ' t=' + Date.now());
+      }
+    }, { passive: true });
+
+    pillsScroll.addEventListener('touchend', function(e) {
+      if (!_pillTouchTarget) return;
+      var pill = _pillTouchTarget;
+      _pillTouchTarget = null;
+      var dx = Math.abs(e.changedTouches[0].clientX - _pillTouchStartX);
+      var dy = Math.abs(e.changedTouches[0].clientY - _pillTouchStartY);
+      // Solo se non era uno scroll (movimento < 8px)
+      if (dx < 8 && dy < 8) {
+        e.preventDefault();
+        console.log('[PILL TAP] key=' + pill.dataset.key + ' t=' + Date.now());
+        openFsheet(pill.dataset.key);
+      }
+    }, { passive: false });
+
+    // Fallback click per desktop/mouse
     pillsScroll.addEventListener('click', function(e) {
+      if (e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
       var pill = e.target.closest('.fpill[data-key]');
       if (pill) {
         console.log('[PILL CLICK] key=' + pill.dataset.key + ' t=' + Date.now());
         openFsheet(pill.dataset.key);
       }
     });
-    // touchstart per responsività immediata su mobile
-    pillsScroll.addEventListener('touchstart', function(e) {
-      var pill = e.target.closest('.fpill[data-key]');
-      if (pill) console.log('[PILL TOUCH] key=' + pill.dataset.key + ' t=' + Date.now());
-    }, { passive: true });
   }
 
   // Pill reset
