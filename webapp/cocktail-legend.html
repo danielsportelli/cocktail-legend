@@ -473,7 +473,7 @@ body::before{
   background:rgba(0,0,0,.5);
   backdrop-filter:blur(3px);
   -webkit-backdrop-filter:blur(3px);
-  opacity:0;transition:opacity .25s;
+  opacity:0;transition:opacity .15s;
 }
 .fsheet-overlay.open{display:block;opacity:1;}
 .fsheet{
@@ -487,7 +487,7 @@ body::before{
   max-height:70vh;
   display:flex;flex-direction:column;
   transform:translateY(-110%);
-  transition:transform .32s cubic-bezier(.4,0,.2,1), visibility 0s .32s;
+  transition:transform .18s cubic-bezier(.4,0,.2,1), visibility 0s .18s;
   box-shadow:none;
   visibility:hidden;
 }
@@ -495,7 +495,7 @@ body::before{
   transform:translateY(var(--pills-h-px, 40px));
   box-shadow:0 8px 40px rgba(0,0,0,.5);
   visibility:visible;
-  transition:transform .32s cubic-bezier(.4,0,.2,1), visibility 0s 0s;
+  transition:transform .18s cubic-bezier(.4,0,.2,1), visibility 0s 0s;
 }
 /* header fsheet in cima */
 .fsheet-header{
@@ -4686,7 +4686,7 @@ function openFsheet(key) {
 
   overlay.classList.add('open');
   fsheet.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  // Non bloccare overflow body — causa problemi con pills e scroll
 }
 
 function closeFsheet() {
@@ -4694,7 +4694,6 @@ function closeFsheet() {
   var overlay = document.getElementById('fsheet-overlay');
   if (fsheet)  fsheet.classList.remove('open');
   if (overlay) overlay.classList.remove('open');
-  document.body.style.overflow = '';
   _fsheetKey = null;
 }
 
@@ -4794,12 +4793,11 @@ function initF() {
       fsheetDone.classList.remove('btn-flash');
       void fsheetDone.offsetWidth;
       fsheetDone.classList.add('btn-flash');
-      setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); fsheetDone.blur(); }, 300);
+      setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); fsheetDone.blur(); }, 150);
     }
 
     function _fsheetDoneAction() {
-      // NB: il flash viene fatto a pointerdown/touchstart, non qui —
-      // rifarlo ritardava la chiusura (setTimeout 300ms si resettava).
+      // Chiude immediatamente senza aspettare il flash
       closeFsheet();
       // Il render e update pills avvengono dopo che la transizione di chiusura
       // è iniziata, così la tendina scompare istantaneamente dal punto di vista utente.
@@ -7711,7 +7709,6 @@ function showInstallPWAModal() {
   // Unfreeze: ripristina sistema CSS/rAF
   function _unfreezeBars() {
     if (!window._searchFrozen) return; // già scongelato
-    console.log('[UNFREEZE]');
     window._searchFrozen = false;
     _frozenPillsTop = null;
     _frozenFbTop = null;
@@ -7774,19 +7771,15 @@ function showInstallPWAModal() {
         // 5. Applica padding: usa il valore salvato se disponibile
         if (_srchSavedPt) {
           if (_mainS) _mainS.style.paddingTop = _srchSavedPt + 'px';
-          console.log('[OPEN] using saved pt='+_srchSavedPt);
         } else {
           var _hdrH = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
           var _ptS  = (_hdrH + _pillsH2 + _fbH2 + 22);
           if (_mainS) _mainS.style.paddingTop = _ptS + 'px';
           // Prima apertura a scrollY=0: salva il padding come riferimento
-          if (window.scrollY === 0) { _srchSavedPt = _ptS; console.log('[OPEN] saved pt='+_srchSavedPt); }
-          else console.log('[OPEN] calculated pt='+_ptS+' scrollY='+window.scrollY+' NOT saved');
         }
 
         // 6. Forza reflow + scroll
         void (_mainS && _mainS.offsetHeight);
-        console.log('[OPEN] before scrollTo: scrollY='+window.scrollY+' pt='+(_mainS?_mainS.style.paddingTop:'?'));
         if (window.scrollY > 0) window.scrollTo(0, 0);
 
         // 7. Riabilita transition
@@ -7795,7 +7788,6 @@ function showInstallPWAModal() {
           if (_hdrS)    _hdrS.style.transition    = '';
           if (pillsBar)  pillsBar.style.transition  = '';
           filterBar.style.transition = '';
-          var fc=document.querySelector('.main>*:nth-child(2)'); if(fc) console.log('[OPEN rAF] FC top='+fc.getBoundingClientRect().top.toFixed(1)+' scrollY='+window.scrollY);
         });
 
         pillsSrchBtn.classList.add('active');
@@ -7806,12 +7798,10 @@ function showInstallPWAModal() {
           setTimeout(function() {
             if (srchOpen) {
               window.scrollTo(0, 0);
-              var fc=document.querySelector('.main>*:nth-child(2)'); if(fc) console.log('[OPEN 80ms] FC top='+fc.getBoundingClientRect().top.toFixed(1)+' scrollY='+window.scrollY);
             }
           }, 80);
           setTimeout(function() {
             if (srchOpen) {
-              var fc=document.querySelector('.main>*:nth-child(2)'); if(fc) console.log('[OPEN 300ms] FC top='+fc.getBoundingClientRect().top.toFixed(1)+' scrollY='+window.scrollY);
             }
           }, 300);
         }
