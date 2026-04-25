@@ -3915,7 +3915,35 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
     });
 
     inp.addEventListener('focus', function(){
-      if (window.scrollY > 0) _applySearchLayout();
+      if (window.scrollY > 0) {
+        var _hdrF  = document.querySelector('.hdr');
+        var _mainF = document.querySelector('.main');
+        var _hdrHF = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
+        // 1. Blocca transition
+        document.body.classList.add('hdr-animating');
+        if (_hdrF)    _hdrF.style.transition    = 'none';
+        if (pillsBar) pillsBar.style.transition  = 'none';
+        filterBar.style.transition = 'none';
+        // 2. Ripristina stato header e barre
+        if (_hdrF) { _hdrF.classList.remove('hdr--hidden'); _hdrF.style.transform = ''; }
+        if (typeof _hdrHidden !== 'undefined') _hdrHidden = false;
+        if (pillsBar) { pillsBar.style.transform = ''; pillsBar.style.top = ''; }
+        filterBar.style.transform = ''; filterBar.style.top = '';
+        // 3. Aggiorna padding con valori corretti
+        var _pillsHF = pillsBar ? pillsBar.offsetHeight : 40;
+        var _fbHF    = filterBar.classList.contains('hidden') ? 0 : filterBar.offsetHeight;
+        if (_mainF) _mainF.style.paddingTop = (_hdrHF + _pillsHF + _fbHF + 22) + 'px';
+        // 4. Scroll a top — DOPO il padding, forza reflow leggendo offsetHeight
+        void _mainF.offsetHeight;
+        window.scrollTo(0, 0);
+        // 5. Riabilita transition
+        requestAnimationFrame(function() {
+          document.body.classList.remove('hdr-animating');
+          if (_hdrF)    _hdrF.style.transition    = '';
+          if (pillsBar) pillsBar.style.transition  = '';
+          filterBar.style.transition = '';
+        });
+      }
       if(Q.length >= 1) showSuggestions(Q);
     });
     // tasto cerca/invio su tastiera mobile
@@ -7707,66 +7735,53 @@ function showInstallPWAModal() {
   };
 
   if (pillsSrchBtn && filterBar) {
-    // ── Padding di riferimento con search aperta a scrollY=0 ──────────
-    // Catturato una volta sola dalla posizione "pulita" e riusato sempre
-    var _srchRefPt = null;
-
-    function _applySearchLayout() {
-      var _hdr  = document.querySelector('.hdr');
-      var _main = document.querySelector('.main');
-
-      // Blocca tutte le transition
-      document.body.classList.add('hdr-animating');
-      if (_hdr)    _hdr.style.transition    = 'none';
-      if (pillsBar) pillsBar.style.transition = 'none';
-      filterBar.style.transition = 'none';
-
-      // Ripristina header e barre alla posizione visibile
-      if (_hdr) { _hdr.classList.remove('hdr--hidden'); _hdr.style.transform = ''; }
-      if (typeof _hdrHidden !== 'undefined') _hdrHidden = false;
-      if (pillsBar) { pillsBar.style.transform = ''; pillsBar.style.top = ''; }
-      filterBar.style.transform = ''; filterBar.style.top = '';
-
-      // Applica padding: usa il valore di riferimento se disponibile, altrimenti calcola
-      if (_srchRefPt && _main) {
-        _main.style.paddingTop = _srchRefPt + 'px';
-      } else {
-        var _hdrH    = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
-        var _pillsH  = pillsBar ? pillsBar.offsetHeight : 40;
-        var _fbH     = filterBar.classList.contains('hidden') ? 0 : filterBar.offsetHeight;
-        if (typeof _cachedFbH !== 'undefined') _cachedFbH = _fbH;
-        if (_main) _main.style.paddingTop = (_hdrH + _pillsH + _fbH + 22) + 'px';
-      }
-
-      // Scroll a top
-      if (window.scrollY > 0) window.scrollTo(0, 0);
-
-      // Riabilita transition nel frame successivo
-      requestAnimationFrame(function() {
-        document.body.classList.remove('hdr-animating');
-        if (_hdr)    _hdr.style.transition    = '';
-        if (pillsBar) pillsBar.style.transition = '';
-        filterBar.style.transition = '';
-      });
-    }
-
     pillsSrchBtn.addEventListener('click', function() {
       srchOpen = !srchOpen;
       if (srchOpen) {
-        // Mostra filter-bar
+        // ── Apre search: tutto in un blocco sincrono per evitare flash/gap ──
+        var _hdrS  = document.querySelector('.hdr');
+        var _mainS = document.querySelector('.main');
+        var _hdrH  = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
+
+        // 1. Blocca TUTTE le transition prima di toccare qualsiasi cosa
+        document.body.classList.add('hdr-animating');
+        if (_hdrS)   _hdrS.style.transition   = 'none';
+        if (pillsBar) pillsBar.style.transition = 'none';
+        filterBar.style.transition = 'none';
+
+        // 2. Ripristina header visibile (rimuove hdr--hidden e transform)
+        if (_hdrS) {
+          _hdrS.classList.remove('hdr--hidden');
+          _hdrS.style.transform = '';
+        }
+        if (typeof _hdrHidden !== 'undefined') _hdrHidden = false;
+
+        // 3. Reset transform/top barre
+        if (pillsBar) { pillsBar.style.transform = ''; pillsBar.style.top = ''; }
+        filterBar.style.transform = ''; filterBar.style.top = '';
+
+        // 4. Mostra filter-bar e misura altezza
         filterBar.classList.remove('hidden');
-        var _fbH2 = filterBar.offsetHeight;
+        var _fbH2   = filterBar.offsetHeight; // forza reflow
+        var _pillsH2 = pillsBar ? pillsBar.offsetHeight : 40;
         if (typeof _cachedFbH !== 'undefined') _cachedFbH = _fbH2;
 
-        _applySearchLayout();
+        // 5. Aggiorna padding-top con valori corretti
+        var _ptS = (_hdrH + _pillsH2 + _fbH2 + 22);
+        if (_mainS) _mainS.style.paddingTop = _ptS + 'px';
 
-        // Se partivamo già da scrollY=0, cattura il padding come riferimento
-        if (window.scrollY === 0) {
-          requestAnimationFrame(function() {
-            var _m = document.querySelector('.main');
-            if (_m) _srchRefPt = parseInt(_m.style.paddingTop || getComputedStyle(_m).paddingTop);
-          });
-        }
+        // 6. Forza reflow poi scroll a top — l'ordine garantisce che
+        //    il browser veda padding corretto prima di posizionare il contenuto
+        void (_mainS && _mainS.offsetHeight);
+        if (window.scrollY > 0) window.scrollTo(0, 0);
+
+        // 7. Riabilita transition nel prossimo frame (dopo il repaint)
+        requestAnimationFrame(function() {
+          document.body.classList.remove('hdr-animating');
+          if (_hdrS)    _hdrS.style.transition    = '';
+          if (pillsBar)  pillsBar.style.transition  = '';
+          filterBar.style.transition = '';
+        });
 
         pillsSrchBtn.classList.add('active');
         var inp = document.getElementById('srch');
