@@ -333,6 +333,7 @@ body::before{
   padding-bottom:0;
   pointer-events:none;
   overflow:hidden;
+  z-index:0;
 }
 
 .pills-bar{
@@ -4810,15 +4811,15 @@ function initF() {
 
     function _fsheetDoneAction() {
       console.log('[FATTO ACTION] t=' + Date.now());
-      // Chiude immediatamente senza aspettare il flash
       closeFsheet();
-      // Il render e update pills avvengono dopo che la transizione di chiusura
-      // è iniziata, così la tendina scompare istantaneamente dal punto di vista utente.
       requestAnimationFrame(function(){
         updateBadges();
         render();
-        if (typeof updatePills === 'function') updatePills();
-        // Scroll in cima: lista filtrata visibile dall'inizio
+        // reorderPills ritardato di 220ms — aspetta fine transition fsheet (.18s)
+        // così le pills non si spostano mentre l'utente vuole toccarne un'altra
+        setTimeout(function() {
+          if (typeof updatePills === 'function') updatePills();
+        }, 220);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
