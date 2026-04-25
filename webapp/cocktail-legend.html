@@ -7771,16 +7771,19 @@ function showInstallPWAModal() {
         // 5. Applica padding: usa il valore salvato se disponibile
         if (_srchSavedPt) {
           if (_mainS) _mainS.style.paddingTop = _srchSavedPt + 'px';
+          console.log('[OPEN] using saved pt='+_srchSavedPt);
         } else {
           var _hdrH = typeof _cachedHdrH !== 'undefined' ? _cachedHdrH : 73;
           var _ptS  = (_hdrH + _pillsH2 + _fbH2 + 22);
           if (_mainS) _mainS.style.paddingTop = _ptS + 'px';
           // Prima apertura a scrollY=0: salva il padding come riferimento
-          if (window.scrollY === 0) _srchSavedPt = _ptS;
+          if (window.scrollY === 0) { _srchSavedPt = _ptS; console.log('[OPEN] saved pt='+_srchSavedPt); }
+          else console.log('[OPEN] calculated pt='+_ptS+' scrollY='+window.scrollY+' NOT saved');
         }
 
         // 6. Forza reflow + scroll
         void (_mainS && _mainS.offsetHeight);
+        console.log('[OPEN] before scrollTo: scrollY='+window.scrollY+' pt='+(_mainS?_mainS.style.paddingTop:'?'));
         if (window.scrollY > 0) window.scrollTo(0, 0);
 
         // 7. Riabilita transition
@@ -7789,6 +7792,7 @@ function showInstallPWAModal() {
           if (_hdrS)    _hdrS.style.transition    = '';
           if (pillsBar)  pillsBar.style.transition  = '';
           filterBar.style.transition = '';
+          var fc=document.querySelector('.main>*:nth-child(2)'); if(fc) console.log('[OPEN rAF] FC top='+fc.getBoundingClientRect().top.toFixed(1)+' scrollY='+window.scrollY);
         });
 
         pillsSrchBtn.classList.add('active');
@@ -7796,7 +7800,17 @@ function showInstallPWAModal() {
         if (inp) {
           inp.focus();
           // Android fa scroll automatico dopo focus — lo annulliamo
-          setTimeout(function() { if (srchOpen) window.scrollTo(0, 0); }, 80);
+          setTimeout(function() {
+            if (srchOpen) {
+              window.scrollTo(0, 0);
+              var fc=document.querySelector('.main>*:nth-child(2)'); if(fc) console.log('[OPEN 80ms] FC top='+fc.getBoundingClientRect().top.toFixed(1)+' scrollY='+window.scrollY);
+            }
+          }, 80);
+          setTimeout(function() {
+            if (srchOpen) {
+              var fc=document.querySelector('.main>*:nth-child(2)'); if(fc) console.log('[OPEN 300ms] FC top='+fc.getBoundingClientRect().top.toFixed(1)+' scrollY='+window.scrollY);
+            }
+          }, 300);
         }
       } else {
         // Chiude search — overlay OFF
