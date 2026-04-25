@@ -7698,11 +7698,14 @@ function showInstallPWAModal() {
     var pos = _calcBarPositions();
     _frozenPillsTop = pos.pillsTop;
     _frozenFbTop = pos.fbTop;
-    console.log('[FREEZE] pillsTop='+_frozenPillsTop+' fbTop='+_frozenFbTop+' hdrHidden='+_hdrHidden);
     if (pillsBar) { pillsBar.style.transition = 'none'; pillsBar.style.top = _frozenPillsTop + 'px'; pillsBar.style.transform = 'none'; }
     if (filterBar) { filterBar.style.transition = 'none'; filterBar.style.top = _frozenFbTop + 'px'; filterBar.style.transform = 'none'; }
     window._searchFrozen = true;
     _showSrchOverlay();
+    // Forza scroll a 0 dopo il freeze — il reflow delle barre può causare uno scroll spurio
+    requestAnimationFrame(function() {
+      if (window._searchFrozen && window.scrollY > 0) window.scrollTo(0, 0);
+    });
   }
 
   // Unfreeze: ripristina sistema CSS/rAF
