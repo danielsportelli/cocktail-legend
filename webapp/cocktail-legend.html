@@ -3853,7 +3853,7 @@ window._isRegistering = false;
     _pillTouchTarget = null;
     var dx = Math.abs(e.changedTouches[0].clientX - _pillTouchStartX);
     var dy = Math.abs(e.changedTouches[0].clientY - _pillTouchStartY);
-    if (dx < 8 && dy < 8) {
+    if (dx < 20 && dy < 20) {
       e.preventDefault();
       console.log('[PILL TAP] key=' + pill.dataset.key + ' t=' + Date.now());
       openFsheet(pill.dataset.key);
