@@ -386,7 +386,8 @@ body::before{
   overflow-y:hidden;
   scrollbar-width:none;
   -webkit-overflow-scrolling:touch;
-  padding-right:5%;
+  padding-left:.5rem;
+  padding-right:.5rem;
   touch-action:pan-x;
 }
 .pills-scroll::-webkit-scrollbar{display:none;}
@@ -1708,7 +1709,7 @@ body.user-premium #sg-pdf-link > span:last-child {
 
 </style>
 <script>
-  console.log("[BUILD] 2026-04-25 13:31");
+  console.log("[BUILD] 2026-04-25 14:13");
   if(localStorage.getItem('cl_logged')==='1'){document.write('<style>#login-overlay{display:none!important}</style>');}
   (function(){
     var p = new URLSearchParams(window.location.search);
@@ -8203,7 +8204,7 @@ function showInstallPWAModal() {
       '<div class="drawer-cmd-list" style="margin-bottom:0;">'+
         '<button id="acc-badge-btn" class="calc-cmd-btn">'+
           '<div style="width:40px;height:40px;background:rgba(255,255,255,.07);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'+
-            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><circle cx="12" cy="8" r="4"/><path d="M8 12l-3 9 7-3 7 3-3-9"/></svg>'+
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--txt2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><path d="M6 9H4a2 2 0 0 0-2 2v1a4 4 0 0 0 4 4h1"/><path d="M18 9h2a2 2 0 0 1 2 2v1a4 4 0 0 1-4 4h-1"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M6 3h12v9a6 6 0 0 1-12 0V3z"/></svg>'+
           '</div>'+
           '<span style="flex:1;font-size:.95rem;font-weight:600;color:var(--txt);letter-spacing:-.01em;pointer-events:none;">I tuoi badge</span>'+
           '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><polyline points="9 18 15 12 9 6"/></svg>'+
@@ -8229,7 +8230,7 @@ function showInstallPWAModal() {
       '<div style="margin-bottom:1.4rem;"></div>'+
       // ── RIEPILOGO CREDITI AI ─────────────────────────────────
       _buildCreditiHtml(isPrem, monthlyRem, extra, ref, MAX)+
-      '<div style="padding-top:1.2rem;text-align:center;">'+
+      '<div style="padding-top:.5rem;text-align:center;">'+
         '<button id="acc-logout-btn" style="display:inline-flex;align-items:center;background:transparent;border:1px solid var(--dim);color:var(--dim);font-size:.62rem;font-weight:600;font-family:inherit;cursor:pointer;padding:.35rem .65rem;border-radius:6px;letter-spacing:.05em;text-transform:uppercase;transition:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">LOGOUT</button>'+
       '</div>';
 
