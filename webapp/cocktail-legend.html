@@ -478,7 +478,7 @@ body::before{
 .fsheet-overlay.open{display:block;opacity:1;}
 .fsheet{
   position:fixed;
-  top:var(--hdr-offset, var(--hdr-h));
+  top:0;
   left:0;right:0;
   z-index:1049;
   background:var(--surf);
@@ -486,13 +486,15 @@ body::before{
   border-bottom:1px solid rgba(255,255,255,.08);
   max-height:70vh;
   display:flex;flex-direction:column;
-  transform:translateY(-110%);
+  /* -200% garantisce che sia sempre fuori dal viewport in alto */
+  transform:translateY(-200%);
   transition:transform .28s cubic-bezier(.4,0,.2,1);
   box-shadow:none;
   pointer-events:none;
 }
 .fsheet.open{
-  transform:translateY(var(--pills-h-px, 40px));
+  /* aperto: hdr-h + pills-h */
+  transform:translateY(calc(var(--hdr-offset, var(--hdr-h)) + var(--pills-h-px, 40px)));
   box-shadow:0 8px 40px rgba(0,0,0,.5);
   pointer-events:auto;
   transition:transform .28s cubic-bezier(.4,0,.2,1);
@@ -1708,6 +1710,7 @@ body.user-premium #sg-pdf-link > span:last-child {
 
 </style>
 <script>
+  console.log("[BUILD] 2026-04-25 13:07");
   if(localStorage.getItem('cl_logged')==='1'){document.write('<style>#login-overlay{display:none!important}</style>');}
   (function(){
     var p = new URLSearchParams(window.location.search);
