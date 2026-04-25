@@ -3840,8 +3840,10 @@ window._isRegistering = false;
   var _pillTouchStartX = 0, _pillTouchStartY = 0, _pillTouchTarget = null;
 
   pillsScroll.addEventListener('touchstart', function(e) {
-    var pill = e.target.closest('.fpill[data-key]');
+    var t = e.target;
+    var pill = t.closest('.fpill[data-key]');
     _pillTouchTarget = pill || null;
+    console.log('[TS] target=' + t.tagName + '.' + (t.className||'') + ' pill=' + (pill ? pill.dataset.key : 'null'));
     if (pill) {
       _pillTouchStartX = e.touches[0].clientX;
       _pillTouchStartY = e.touches[0].clientY;
@@ -3855,6 +3857,7 @@ window._isRegistering = false;
     _pillTouchTarget = null;
     var dx = Math.abs(e.changedTouches[0].clientX - _pillTouchStartX);
     var dy = Math.abs(e.changedTouches[0].clientY - _pillTouchStartY);
+    console.log('[TE] key=' + pill.dataset.key + ' dx=' + dx.toFixed(1) + ' dy=' + dy.toFixed(1) + ' ok=' + (dx<12&&dy<25));
     if (dx < 12 && dy < 25) {
       e.preventDefault();
       console.log('[PILL TAP] key=' + pill.dataset.key + ' t=' + Date.now());
@@ -6761,7 +6764,7 @@ function populateRisGlass(){
 
         // Visualizzazione nickname attuale
         '<div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem;">' +
-          '<div style="font-size:.85rem;font-weight:700;color:var(--txt);">@' + (nickname || '—') + '</div>' +
+          '<div style="font-size:.85rem;font-weight:600;color:var(--txt2);">@' + (nickname || '—') + '</div>' +
           '<button id="nick-edit-btn" style="background:transparent;border:none;padding:.2rem;cursor:pointer;' +
           'color:var(--dim);display:flex;align-items:center;transition:color .15s;-webkit-tap-highlight-color:transparent;">' +
             '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>' +
