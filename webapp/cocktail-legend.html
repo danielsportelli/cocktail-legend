@@ -3935,6 +3935,8 @@ var LABELS = {cat:"Categoria", dis:"Ingredienti", abv:"Tenore ABV", frz:"Frizzan
         if (_mainF) _mainF.style.paddingTop = (_hdrHF + _pillsHF + _fbHF + 22) + 'px';
         // 4. Scroll a top — DOPO il padding, forza reflow leggendo offsetHeight
         void _mainF.offsetHeight;
+        console.log('[FOCUS PT] hdrH='+_hdrHF+' pillsH='+_pillsHF+' fbH='+_fbHF+' pt='+(_hdrHF+_pillsHF+_fbHF+22)+' scrollY='+window.scrollY);
+        requestAnimationFrame(function(){ var fc=document.querySelector('.main>*:nth-child(2)'); if(fc) console.log('[FOCUS FC] top='+fc.getBoundingClientRect().top.toFixed(1)); });
         window.scrollTo(0, 0);
         // 5. Riabilita transition
         requestAnimationFrame(function() {
@@ -7773,6 +7775,8 @@ function showInstallPWAModal() {
         // 6. Forza reflow poi scroll a top — l'ordine garantisce che
         //    il browser veda padding corretto prima di posizionare il contenuto
         void (_mainS && _mainS.offsetHeight);
+        console.log('[OPEN PT] hdrH='+_hdrH+' pillsH='+_pillsH2+' fbH='+_fbH2+' pt='+_ptS+' scrollY='+window.scrollY);
+        requestAnimationFrame(function(){ var fc=document.querySelector('.main>*:nth-child(2)'); if(fc) console.log('[OPEN FC] top='+fc.getBoundingClientRect().top.toFixed(1)); });
         if (window.scrollY > 0) window.scrollTo(0, 0);
 
         // 7. Riabilita transition nel prossimo frame (dopo il repaint)
