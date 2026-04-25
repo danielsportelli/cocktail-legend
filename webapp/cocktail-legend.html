@@ -393,11 +393,12 @@ body::before{
 .fpill{
   flex-shrink:0;
   display:inline-flex;align-items:center;gap:.25rem;
-  background:transparent;border:none;
+  background:transparent;
+  border:1px solid var(--brd);
   color:var(--dim);font-family:inherit;font-size:.72rem;font-weight:500;
-  padding:.35rem .75rem;border-radius:6px;
+  padding:.35rem .75rem;border-radius:20px;
   cursor:pointer;white-space:nowrap;
-  transition:color .15s;
+  transition:color .15s, border-color .15s;
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
 }
@@ -410,6 +411,7 @@ body::before{
 .fpill.active{
   color:var(--blue-l);
   font-weight:700;
+  border-color:var(--blue-l);
 }
 .fpill.active::after{
   opacity:1;
