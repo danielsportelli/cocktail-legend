@@ -1300,14 +1300,8 @@ body::before{
 
 /* ── Micro-animazione flash FATTO ─────────────────────────────────
    Sfondo blu → bianco → blu, fill-mode:none per non persistere */
-@keyframes btnFlashDone{
-  0%  { background:var(--blue); }
-  40% { background:#60a5fa; }
-  100%{ background:var(--blue); }
-}
-.fsheet-done.btn-flash{
-  animation:btnFlashDone .15s ease-out none;
-}
+/* flash FATTO rimosso — chiusura istantanea */
+.fsheet-done.btn-flash{ background:var(--blue); }
 .drawer{ scrollbar-width:none; }
 .drawer::-webkit-scrollbar{ display:none; }
 /* overlay scuro dietro drawer — copre schermata + header + bsheet */
@@ -1710,7 +1704,7 @@ body.user-premium #sg-pdf-link > span:last-child {
 
 </style>
 <script>
-  console.log("[BUILD] 2026-04-25 13:07");
+  console.log("[BUILD] 2026-04-25 13:31");
   if(localStorage.getItem('cl_logged')==='1'){document.write('<style>#login-overlay{display:none!important}</style>');}
   (function(){
     var p = new URLSearchParams(window.location.search);
@@ -2921,6 +2915,7 @@ body.user-premium #sg-pdf-link > span:last-child {
       <span class="acc-legal-sep">·</span>
       <a href="privacy-policy.html" class="acc-legal-link">Privacy Policy</a>
     </div>
+    <div id="app-version" style="text-align:center;padding:.4rem 0 .2rem;font-size:.58rem;color:var(--dim);opacity:.5;letter-spacing:.05em;"></div>
   </div>
 </div>
 
@@ -4832,10 +4827,8 @@ function initF() {
   if (fsheetDone) {
 
     function _fsheetDoneFlash() {
-      fsheetDone.classList.remove('btn-flash');
-      void fsheetDone.offsetWidth;
-      fsheetDone.classList.add('btn-flash');
-      setTimeout(function(){ fsheetDone.classList.remove('btn-flash'); fsheetDone.blur(); }, 150);
+      // Flash rimosso — risposta istantanea
+      fsheetDone.blur();
     }
 
     function _fsheetDoneAction() {
@@ -4890,14 +4883,21 @@ function initF() {
   if (fsheetOvl)  fsheetOvl.addEventListener('click', closeFsheet);
   // Tap + swipe up solo dal footer (fascia del trattino)
   if (fsheetFooter) {
-    var _fsY = 0;
+    var _fsY = 0, _fsScrolling = false;
     fsheetFooter.addEventListener('click', closeFsheet);
     fsheetFooter.addEventListener('touchstart', function(e){
       _fsY = e.touches[0].clientY;
+      _fsScrolling = false;
     }, {passive:true});
+    fsheetFooter.addEventListener('touchmove', function(e){
+      // Blocca lo scroll delle schede durante lo swipe sul footer
+      e.preventDefault();
+      e.stopPropagation();
+      _fsScrolling = true;
+    }, {passive:false});
     fsheetFooter.addEventListener('touchend', function(e){
       var dy = _fsY - e.changedTouches[0].clientY;
-      if (dy > 30) closeFsheet(); // swipe up
+      if (dy > 20) closeFsheet(); // swipe up
     }, {passive:true});
   }
 
@@ -8720,5 +8720,29 @@ if ('serviceWorker' in navigator) {
       src=""></iframe>
   </div>
 </div>
+<script>
+// Legge versione dal Service Worker e la mostra nel drawer account
+(function() {
+  function showVersion(v) {
+    var el = document.getElementById('app-version');
+    if (el) el.textContent = v;
+  }
+  if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+    // SW attivo — leggi il cache name tramite message
+    var ch = new MessageChannel();
+    ch.port1.onmessage = function(e) {
+      if (e.data && e.data.version) showVersion(e.data.version);
+    };
+    navigator.serviceWorker.controller.postMessage({ type: 'GET_VERSION' }, [ch.port2]);
+  }
+  // Fallback: leggi da caches API
+  if ('caches' in window) {
+    caches.keys().then(function(keys) {
+      var cl = keys.find(function(k) { return k.startsWith('cocktail-legend-'); });
+      if (cl) showVersion(cl.replace('cocktail-legend-', 'v'));
+    });
+  }
+})();
+</script>
 </body>
 </html>
