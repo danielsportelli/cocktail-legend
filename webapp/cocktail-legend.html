@@ -8309,6 +8309,48 @@ function showInstallPWAModal() {
   }
 
 
+  // Popup informativo per le card badge
+  function showBadgeInfoPopup(infoKey){
+    var TEXTS = {
+      referral: {
+        title: 'Badge Referral',
+        body: 'Invita colleghi bartender con il tuo link personale. Per ogni traguardo di iscritti guadagni un badge e crediti AI gratuiti, utilizzabili anche senza piano Premium.'
+      },
+      streak: {
+        title: 'Badge Streak Quiz',
+        body: 'Gioca ogni giorno senza interruzioni per costruire la tua streak. Ogni badge si sblocca una sola volta e rimane tuo per sempre, anche se interrompi la sequenza. Più a lungo mantieni la costanza, più il badge diventa raro e prestigioso.'
+      },
+      master: {
+        title: 'Badge Quiz Master',
+        body: 'Misura la tua accuratezza complessiva su tutte le risposte. Aumenta quando rispondi correttamente, diminuisce in caso di errore: è un indicatore dinamico che si aggiorna dopo ogni partita.'
+      }
+    };
+    var info = TEXTS[infoKey];
+    if(!info) return;
+
+    var old = document.getElementById('badge-info-modal');
+    if(old) old.remove();
+
+    var modal = document.createElement('div');
+    modal.id = 'badge-info-modal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:1rem;animation:fadeIn .2s ease;';
+
+    var box = document.createElement('div');
+    box.style.cssText = 'background:var(--surf);border:1px solid var(--brd);border-radius:16px;max-width:380px;width:100%;padding:1.4rem 1.2rem 1.2rem;box-shadow:0 8px 40px rgba(0,0,0,.5);';
+    box.innerHTML =
+      '<div style="font-size:.95rem;font-weight:800;color:var(--txt);margin-bottom:.7rem;">'+info.title+'</div>'+
+      '<div style="font-size:.78rem;color:var(--txt2);line-height:1.55;margin-bottom:1.1rem;">'+info.body+'</div>'+
+      '<button id="badge-info-close" style="width:100%;background:var(--blue);color:#fff;border:none;border-radius:10px;padding:.65rem;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;">Ho capito</button>';
+
+    modal.appendChild(box);
+    document.body.appendChild(modal);
+
+    function close(){ modal.remove(); }
+    document.getElementById('badge-info-close').addEventListener('click', close);
+    modal.addEventListener('click', function(e){ if(e.target === modal) close(); });
+  }
+
+
   function renderBadgeDrawer(){
     var el = document.getElementById('badge-content');
     if(!el) return;
@@ -8324,7 +8366,7 @@ function showInstallPWAModal() {
     };
 
     var REF_BADGES = [
-      { key:'connesso',   num:5,   label:'Connesso',   color:CLR.blu,     credits:10  },
+      { key:'connesso',   num:5,   label:'Starter',    color:CLR.blu,     credits:10  },
       { key:'promoter',   num:10,  label:'Promoter',   color:CLR.verde,   credits:20  },
       { key:'ambassador', num:25,  label:'Ambassador', color:CLR.giallo,  credits:50  },
       { key:'influencer', num:50,  label:'Influencer', color:CLR.arancio, credits:100 },
@@ -8456,7 +8498,21 @@ function showInstallPWAModal() {
 
     // ── Stile card comune ─────────────────────────────
     var cardStyle = 'background:var(--surf);border:1px solid var(--brd);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1rem;';
-    var sectionLabelStyle = 'font-size:.55rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:.85rem;display:block;';
+    var sectionLabelStyle = 'font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);';
+
+    // Helper per card-header con titolo + icona info
+    function cardHeader(emoji, title, infoKey) {
+      return '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;">'
+        +'<span style="'+sectionLabelStyle+'">'+emoji+' '+title+'</span>'
+        +'<button class="badge-info-btn" data-info="'+infoKey+'" aria-label="Info" style="background:transparent;border:none;color:var(--dim);cursor:pointer;padding:.2rem;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;">'
+          +'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'
+        +'</button>'
+      +'</div>';
+    }
+
+    // Stile cella badge per layout 6-colonne
+    var cellStyle = 'display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:.2rem 0;min-width:0;';
+    var iconBoxBase = 'width:38px;height:38px;display:flex;align-items:center;justify-content:center;';
 
     function buildUI(data) {
       var refCount   = (data.referral && data.referral.count) || 0;
@@ -8487,10 +8543,7 @@ function showInstallPWAModal() {
       var curRefObj = REF_BADGES.find(function(b){return b.key===curRefBadge;}) || null;
 
       var refHtml = '<div style="'+cardStyle+'">'
-        +'<span style="'+sectionLabelStyle+'">📣 Badge Network</span>'
-        +'<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
-          +'Invita colleghi bartender con il tuo link personale. Per ogni traguardo di iscritti guadagni un badge e crediti AI gratuiti — utilizzabili anche senza piano Premium.'
-        +'</div>'
+        +cardHeader('📣','Badge Referral','referral')
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
           +'<span style="font-size:.65rem;color:var(--dim);">Invitati: <strong style="color:var(--txt);">'+(nextRef?refCount+' / '+nextNum:refCount)+'</strong></span>'
         +'</div>'
@@ -8499,19 +8552,19 @@ function showInstallPWAModal() {
         +'</div>'
         +(nextRef
           ?'<div style="font-size:.63rem;color:var(--dim);margin-bottom:.9rem;">Ancora <strong style="color:var(--txt);">'+(nextNum-refCount)+'</strong> per sbloccare <strong style="color:'+nextRef.color+';">'+nextRef.label+'</strong></div>'
-          :'<div style="font-size:.63rem;color:var(--amber);font-weight:700;margin-bottom:.9rem;">🏆 Hai raggiunto tutti i badge referral!</div>'
+          :'<div style="font-size:.63rem;color:var(--amber);font-weight:700;margin-bottom:.9rem;">🏆 Hai raggiunto tutti i badge!</div>'
         )
-        +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1rem;">';
+        +'<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;margin-bottom:1rem;">';
       REF_BADGES.forEach(function(b){
         var unlocked = refCount>=b.num;
         var bgStyle = unlocked
-          ? 'background:rgba(0,0,0,0.25);border:2px solid '+b.color+';'
-          : 'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';opacity:.10;';
-        refHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:.4rem .2rem;">'
-          +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'+bgStyle+'">'
-          +megaphoneSvg(b.color,18)+'</div>'
-          +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';">'+b.label+'</span>'
-          +'<span style="font-size:.48rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +' iscritti</span>'
+          ? 'background:rgba(0,0,0,0.25);border:2px solid '+b.color+';border-radius:50%;'
+          : 'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';border-radius:50%;opacity:.10;';
+        refHtml+='<div style="'+cellStyle+'">'
+          +'<div style="'+iconBoxBase+bgStyle+'">'
+          +megaphoneSvg(b.color,15)+'</div>'
+          +'<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';text-align:center;line-height:1.1;">'+b.label+'</span>'
+          +'<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +'</span>'
           +'</div>';
       });
       refHtml+='</div>';
@@ -8532,32 +8585,27 @@ function showInstallPWAModal() {
           +'Invita un amico'
         +'</button>'
         +'<div style="font-size:.6rem;color:var(--dim);line-height:1.5;margin-top:.6rem;text-align:center;">'
-          +'Il tuo link è personale. Ogni iscrizione viene conteggiata automaticamente.'
-          +'C’è un limite giornaliero di 5 iscrizioni conteggiate in tempo reale. Dalla 6ª in poi vengono conteggiate il giorno successivo.'
-          +'Questo limite serve a prevenire iscrizioni non autentiche. Le attività vengono monitorate anche tramite sistemi di analisi automatica: in caso di comportamenti sospetti o iscrizioni false, sono previste sanzioni fino alla chiusura immediata dell’account.'
+          +'Limite di 5 iscrizioni al giorno per prevenire abusi. Le attività sono monitorate.'
         +'</div>'
         +'</div></div>';
 
       // ── CARD STREAK ────────────────────────────────
       var streakHtml = '<div style="'+cardStyle+'margin-top:1.2rem;">'
-        +'<span style="'+sectionLabelStyle+'">🔥 Badge Costanza Quiz</span>'
-        +'<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
-          +'Gioca ogni giorno senza interruzioni per costruire la tua streak. Ogni badge si sblocca una sola volta e rimane tuo per sempre, anche se interrompi la sequenza. Più a lungo mantieni la costanza, più il badge diventa raro e prestigioso.'
-        +'</div>'
+        +cardHeader('🔥','Badge Streak Quiz','streak')
         +'<div style="margin-bottom:.65rem;font-size:.65rem;color:var(--dim);">Streak attuale: <strong style="color:var(--txt);">'+curStreak+' giorni</strong></div>'
-        +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;">';
+        +'<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;">';
       STREAK_BADGES.forEach(function(b){
         var _skeys=['s7','s14','s30','s90','s180','s365'];
         var unlocked = effectiveStreakKey && _skeys.indexOf(effectiveStreakKey) >= _skeys.indexOf(b.key);
-        var _sdayLabel = b.days < 30 ? b.days+'gg' : b.days < 365 ? Math.round(b.days/30)+'mesi' : '1 anno';
-        streakHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:.4rem .2rem;">'
-          +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'
+        var _sdayLabel = b.days < 30 ? b.days+'gg' : b.days < 365 ? Math.round(b.days/30)+'m' : '1a';
+        streakHtml+='<div style="'+cellStyle+'">'
+          +'<div style="'+iconBoxBase
           +(unlocked
-            ?'background:rgba(0,0,0,0.25);border:2px solid '+b.color+';'
-            :'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';opacity:.10;')
-          +'">'+flameSvg(b.color, 24)+'</div>'
-          +'<span style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';">'+ b.label+'</span>'
-          +'<span style="font-size:.48rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+_sdayLabel+'</span>'
+            ?'background:rgba(0,0,0,0.25);border:2px solid '+b.color+';border-radius:50%;'
+            :'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';border-radius:50%;opacity:.10;')
+          +'">'+flameSvg(b.color, 18)+'</div>'
+          +'<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';text-align:center;line-height:1.1;">'+ b.label+'</span>'
+          +'<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+_sdayLabel+'</span>'
           +'</div>';
       });
       streakHtml+='</div>'
@@ -8565,28 +8613,25 @@ function showInstallPWAModal() {
 
       // ── CARD CORRETTEZZA ───────────────────────────
       var pctHtml = '<div style="'+cardStyle+'">'
-        +'<span style="'+sectionLabelStyle+'">⭐ Badge Precisione Quiz</span>'
-        +'<div style="font-size:.68rem;color:var(--txt2);line-height:1.5;margin-bottom:.9rem;">'
-          +'Misura la tua accuratezza complessiva su tutte le risposte. Aumenta quando rispondi correttamente, diminuisce in caso di errore: è un indicatore dinamico che si aggiorna dopo ogni partita.'
-        +'</div>'
+        +cardHeader('⭐','Badge Quiz Master','master')
         +(tot>0
           ?'<div style="margin-bottom:.85rem;font-size:.65rem;color:var(--dim);">Risposte esatte: <strong style="color:var(--txt);">'+(pctBadge?pct+'% · '+pctBadge.label:pct+'%')+'</strong></div>'
           :'<div style="font-size:.68rem;color:var(--dim);margin-bottom:.85rem;">Inizia a giocare al quiz per sbloccare il tuo badge!</div>'
         )
-        +'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;">'; 
+        +'<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;">';
       var _pctArr = PCT_BADGES.slice().reverse();
       _pctArr.forEach(function(b){
         var isCurrent = pctBadge && pctBadge.min===b.min;
         var nextB = PCT_BADGES[PCT_BADGES.indexOf(b)-1];
         var rangeStr = b.min+'–'+(nextB?nextB.min-1:100)+'%';
-        pctHtml+='<div style="display:flex;flex-direction:column;align-items:center;gap:.3rem;padding:.4rem .2rem;">'
-          +'<div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;'
+        pctHtml+='<div style="'+cellStyle+'">'
+          +'<div style="'+iconBoxBase
           +(isCurrent
-            ?'background:rgba(0,0,0,0.25);border:2px solid '+b.color+';'
-            :'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';opacity:.10;')
-          +'">'+starSingleSvg(b.color,20)+'</div>'
-          +'<span style="font-size:.47rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(isCurrent?'1':'.10')+';">'+b.label+'</span>'
-          +'<span style="font-size:.44rem;color:var(--dim);">'+rangeStr+'</span>'
+            ?'background:rgba(0,0,0,0.25);border:2px solid '+b.color+';border-radius:50%;'
+            :'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';border-radius:50%;opacity:.10;')
+          +'">'+starSingleSvg(b.color,16)+'</div>'
+          +'<span style="font-size:.42rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(isCurrent?'1':'.10')+';line-height:1.1;">'+b.label+'</span>'
+          +'<span style="font-size:.4rem;color:var(--dim);">'+rangeStr+'</span>'
           +'</div>';
       });
       pctHtml+='</div></div>';
@@ -8595,6 +8640,15 @@ function showInstallPWAModal() {
 
       var inviteBtn = document.getElementById('badge-invite-btn');
       if(inviteBtn) inviteBtn.addEventListener('click', showInviteModal);
+
+      // Click su info icon → apre popup descrizione
+      var infoBtns = el.querySelectorAll('.badge-info-btn');
+      infoBtns.forEach(function(btn){
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          showBadgeInfoPopup(btn.dataset.info);
+        });
+      });
     }
 
     if(user && db && fns){
