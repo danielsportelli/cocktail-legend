@@ -8385,12 +8385,12 @@ function showInstallPWAModal() {
     ];
 
     var PCT_BADGES = [
-      { min:97, label:'Perfetto',  color:CLR.viola   },
-      { min:92, label:'Elite',     color:CLR.rosso   },
-      { min:85, label:'Avanzato',  color:CLR.arancio },
-      { min:75, label:'Esperto',   color:CLR.giallo  },
-      { min:65, label:'Preciso',   color:CLR.verde   },
-      { min:50, label:'Novizio',   color:CLR.blu     },
+      { min:95, label:'Perfetto',  color:CLR.viola   },
+      { min:88, label:'Elite',     color:CLR.rosso   },
+      { min:75, label:'Avanzato',  color:CLR.arancio },
+      { min:60, label:'Esperto',   color:CLR.giallo  },
+      { min:40, label:'Preciso',   color:CLR.verde   },
+      { min:20, label:'Novizio',   color:CLR.blu     },
     ];
 
     // ── SVG helpers ──────────────────────────────────
@@ -8483,7 +8483,7 @@ function showInstallPWAModal() {
       return '';
     }
     function getPctBadge(pct, tot) {
-      if(!tot || tot<1 || pct<50) return null;
+      if(!tot || tot<1 || pct<20) return null;
       for(var i=0;i<PCT_BADGES.length;i++){
         if(pct>=PCT_BADGES[i].min) return PCT_BADGES[i];
       }
@@ -8547,7 +8547,7 @@ function showInstallPWAModal() {
         +cardHeader('📣','Badge Referral','referral')
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
           +'<span style="font-size:.65rem;color:var(--dim);">Iscritti: <strong style="color:var(--txt);">'+refCount+' '+(refCount===1?'persona':'persone')+'</strong>'
-          +(nextRef?' · prossimo: <strong style="color:'+nextRef.color+';">'+nextRef.label+'</strong> ('+nextNum+')':'')
+          +(nextRef?' · prossimo: <strong style="color:'+nextRef.color+';">'+nextRef.label+'</strong> ('+nextNum+' isc)':'')
           +'</span>'
         +'</div>'
         +'<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin-bottom:.9rem;">'
