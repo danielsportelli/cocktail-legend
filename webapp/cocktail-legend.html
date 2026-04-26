@@ -1740,6 +1740,43 @@ body.user-premium #sg-pdf-link > span:last-child {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>
+<script>
+/* === DIAGNOSTICA TAP — RIMUOVERE DOPO IL DEBUG === */
+(function(){
+  const fmt = (n) => {
+    if (!n) return 'null';
+    const tag = n.tagName || '?';
+    const id = n.id ? '#' + n.id : '';
+    const cls = n.className && typeof n.className === 'string'
+      ? '.' + n.className.trim().split(/\s+/).slice(0,3).join('.')
+      : '';
+    const rect = n.getBoundingClientRect ? n.getBoundingClientRect() : null;
+    const size = rect ? ` [${Math.round(rect.width)}x${Math.round(rect.height)} @${Math.round(rect.left)},${Math.round(rect.top)}]` : '';
+    return tag + id + cls + size;
+  };
+
+  // Usa pointerdown in CAPTURE per intercettare anche i tap "morti"
+  document.addEventListener('pointerdown', (e) => {
+    const x = e.clientX, y = e.clientY;
+    const stack = document.elementsFromPoint(x, y);
+    console.group('%c TAP @ ' + Math.round(x) + ',' + Math.round(y), 'background:#ff3366;color:#fff;padding:2px 6px;border-radius:3px;');
+    console.log('Target evento :', fmt(e.target));
+    console.log('Top elemento  :', fmt(stack[0]));
+    console.log('Stack completo:');
+    stack.forEach((n, i) => {
+      const cs = getComputedStyle(n);
+      console.log(`  [${i}] ${fmt(n)}  | pe:${cs.pointerEvents} vis:${cs.visibility} disp:${cs.display} z:${cs.zIndex} pos:${cs.position}`);
+    });
+    console.log('--hdr-h:', getComputedStyle(document.documentElement).getPropertyValue('--hdr-h'));
+    console.log('--rbar-top:', getComputedStyle(document.documentElement).getPropertyValue('--rbar-top'));
+    console.log('scrollY:', window.scrollY);
+    console.groupEnd();
+  }, true);
+
+  console.log('%c[DIAG] Tap diagnostics attivo. Tappa nelle zone morte e guarda lo stack.', 'color:#0a0;font-weight:bold;');
+})();
+/* === FINE DIAGNOSTICA === */
+</script>
 </head>
 <body>
 
