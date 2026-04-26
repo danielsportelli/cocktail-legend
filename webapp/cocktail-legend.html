@@ -1212,16 +1212,21 @@ body::before{
   overscroll-behavior:none;
   -webkit-overflow-scrolling:touch;
   transform:translateY(110%);
-  transition:transform .32s cubic-bezier(.4,0,.2,1);
+  transition:transform .32s cubic-bezier(.4,0,.2,1),
+             visibility 0s linear .32s;
   box-shadow:none;
   will-change:transform;
   pointer-events:none;
+  visibility:hidden;
   padding-bottom:env(safe-area-inset-bottom, 0px);
 }
 .drawer.open{
   transform:translateY(0);
   pointer-events:auto;
+  visibility:visible;
   box-shadow:0 -8px 40px rgba(0,0,0,.6);
+  transition:transform .32s cubic-bezier(.4,0,.2,1),
+             visibility 0s linear 0s;
 }
 .drawer.keyboard-open{
   max-height:60vh;
