@@ -7697,6 +7697,7 @@ function showInstallPWAModal() {
   document.body.appendChild(srchOverlay);
 
   function _showSrchOverlay() {
+    srchOverlay.style.visibility = 'visible';
     srchOverlay.style.display = 'block';
     srchOverlay.style.pointerEvents = 'auto';
     requestAnimationFrame(function() { srchOverlay.style.opacity = '1'; });
@@ -7705,7 +7706,10 @@ function showInstallPWAModal() {
     srchOverlay.style.opacity = '0';
     srchOverlay.style.pointerEvents = 'none';
     setTimeout(function() {
-      if (srchOverlay.style.opacity === '0') srchOverlay.style.display = 'none';
+      if (srchOverlay.style.opacity === '0') {
+        srchOverlay.style.display = 'none';
+        srchOverlay.style.visibility = 'hidden'; // doppia sicurezza: nessun ghost tap
+      }
     }, 200);
   }
 
@@ -7772,10 +7776,15 @@ function showInstallPWAModal() {
 
   // Chiamata dal listener visualViewport: freeze solo se search aperta E tastiera aperta
   window._updateSearchFrozen = function() {
-    if (!srchOpen) return;
     var h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
     var ref = window._initialViewportH || window.innerHeight;
     var kbOpen = h < ref * 0.75;
+    if (!srchOpen) {
+      // Search chiusa: se il freeze è rimasto attivo (es. lente premuta mentre tastiera aperta)
+      // lo rimuoviamo comunque per non lasciare style.top/transform inline sulle barre
+      if (window._searchFrozen) _unfreezeBars();
+      return;
+    }
     if (kbOpen) {
       _freezeBars();
     } else {
