@@ -8310,7 +8310,7 @@ function showInstallPWAModal() {
 
 
   // Popup informativo per le card badge
-  function showBadgeInfoPopup(infoKey){
+  function showBadgeInfoPopup(infoKey, extraHtml){
     var TEXTS = {
       referral: {
         title: 'Badge Referral',
@@ -8336,11 +8336,12 @@ function showInstallPWAModal() {
     modal.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:1rem;animation:fadeIn .2s ease;';
 
     var box = document.createElement('div');
-    box.style.cssText = 'background:var(--surf);border:1px solid var(--brd);border-radius:16px;max-width:380px;width:100%;padding:1.4rem 1.2rem 1.2rem;box-shadow:0 8px 40px rgba(0,0,0,.5);';
+    box.style.cssText = 'background:var(--surf);border:1px solid var(--brd);border-radius:16px;max-width:380px;width:100%;padding:1.4rem 1.2rem 1.2rem;box-shadow:0 8px 40px rgba(0,0,0,.5);max-height:85vh;overflow-y:auto;scrollbar-width:none;';
     box.innerHTML =
       '<div style="font-size:.95rem;font-weight:800;color:var(--txt);margin-bottom:.7rem;">'+info.title+'</div>'+
-      '<div style="font-size:.78rem;color:var(--txt2);line-height:1.55;margin-bottom:1.1rem;">'+info.body+'</div>'+
-      '<button id="badge-info-close" style="width:100%;background:var(--blue);color:#fff;border:none;border-radius:10px;padding:.65rem;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;">Ho capito</button>';
+      '<div style="font-size:.78rem;color:var(--txt2);line-height:1.55;margin-bottom:'+(extraHtml?'1rem':'1.1rem')+';">'+info.body+'</div>'+
+      (extraHtml || '')+
+      '<button id="badge-info-close" style="width:100%;background:var(--blue);color:#fff;border:none;border-radius:10px;padding:.65rem;font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;margin-top:'+(extraHtml?'1rem':'0')+';">Ho capito</button>';
 
     modal.appendChild(box);
     document.body.appendChild(modal);
@@ -8545,16 +8546,18 @@ function showInstallPWAModal() {
       var refHtml = '<div style="'+cardStyle+'">'
         +cardHeader('📣','Badge Referral','referral')
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
-          +'<span style="font-size:.65rem;color:var(--dim);">Invitati: <strong style="color:var(--txt);">'+(nextRef?refCount+' / '+nextNum:refCount)+'</strong></span>'
+          +'<span style="font-size:.65rem;color:var(--dim);">Iscritti: <strong style="color:var(--txt);">'+refCount+' '+(refCount===1?'persona':'persone')+'</strong>'
+          +(nextRef?' · prossimo: <strong style="color:'+nextRef.color+';">'+nextRef.label+'</strong> ('+nextNum+')':'')
+          +'</span>'
         +'</div>'
-        +'<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin-bottom:.35rem;">'
+        +'<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin-bottom:.9rem;">'
           +'<div style="height:100%;width:'+progressPct+'%;background:'+(curRefObj?curRefObj.color:'var(--dim)')+';border-radius:99px;transition:width .4s;"></div>'
         +'</div>'
         +(nextRef
-          ?'<div style="font-size:.63rem;color:var(--dim);margin-bottom:.9rem;">Ancora <strong style="color:var(--txt);">'+(nextNum-refCount)+'</strong> per sbloccare <strong style="color:'+nextRef.color+';">'+nextRef.label+'</strong></div>'
+          ? ''
           :'<div style="font-size:.63rem;color:var(--amber);font-weight:700;margin-bottom:.9rem;">🏆 Hai raggiunto tutti i badge!</div>'
         )
-        +'<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;margin-bottom:1rem;">';
+        +'<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;margin-bottom:1.1rem;">';
       REF_BADGES.forEach(function(b){
         var unlocked = refCount>=b.num;
         var bgStyle = unlocked
@@ -8564,35 +8567,46 @@ function showInstallPWAModal() {
           +'<div style="'+iconBoxBase+bgStyle+'">'
           +megaphoneSvg(b.color,15)+'</div>'
           +'<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';text-align:center;line-height:1.1;">'+b.label+'</span>'
-          +'<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +'</span>'
-          +'</div>';
-      });
-      refHtml+='</div>';
-      // Legenda crediti
-      refHtml+='<div style="padding:.6rem .7rem;background:var(--bg);border-radius:10px;border:1px solid var(--brd);">'
-        +'<div style="font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.4rem;">Crediti per badge</div>'
-        +'<div style="display:flex;flex-direction:column;gap:.25rem;">';
-      REF_BADGES.forEach(function(b){
-        var unlocked = refCount>=b.num;
-        refHtml+='<div style="display:flex;justify-content:space-between;">'
-          +'<span style="font-size:.7rem;color:'+(unlocked?b.color:'var(--dim)')+';">'+b.label+'</span>'
-          +'<span style="font-size:.7rem;font-weight:700;color:'+(unlocked?'var(--amber)':'var(--dim)')+';">+'+b.credits+' crediti</span>'
+          +'<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +' isc</span>'
           +'</div>';
       });
       refHtml+='</div>'
-        +'<button id="badge-invite-btn" style="width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:12px;padding:.75rem;font-family:inherit;font-size:.82rem;font-weight:800;cursor:pointer;margin-top:.75rem;">'
+        +'<button id="badge-invite-btn" style="width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:12px;padding:.75rem;font-family:inherit;font-size:.82rem;font-weight:800;cursor:pointer;">'
           +'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>'
           +'Invita un amico'
         +'</button>'
         +'<div style="font-size:.6rem;color:var(--dim);line-height:1.5;margin-top:.6rem;text-align:center;">'
           +'Limite di 5 iscrizioni al giorno per prevenire abusi. Le attività sono monitorate.'
         +'</div>'
-        +'</div></div>';
+      +'</div>';
 
       // ── CARD STREAK ────────────────────────────────
+      // Calcola prossimo traguardo streak
+      var nextStreak = null;
+      for(var _ns=0; _ns<STREAK_BADGES.length; _ns++){
+        if(curStreak < STREAK_BADGES[_ns].days){ nextStreak = STREAK_BADGES[_ns]; break; }
+      }
+      var streakProgressPct = 100;
+      var streakPrevDays = 0;
+      if(nextStreak){
+        // Trova soglia precedente per calcolare progressione tra i due livelli
+        var _prevIdx = STREAK_BADGES.indexOf(nextStreak) - 1;
+        streakPrevDays = _prevIdx >= 0 ? STREAK_BADGES[_prevIdx].days : 0;
+        streakProgressPct = Math.min(100, Math.round(((curStreak - streakPrevDays) / (nextStreak.days - streakPrevDays)) * 100));
+      }
+      var streakColor = streakBadge ? streakBadge.color : (nextStreak ? nextStreak.color : 'var(--dim)');
+
       var streakHtml = '<div style="'+cardStyle+'margin-top:1.2rem;">'
         +cardHeader('🔥','Badge Streak Quiz','streak')
-        +'<div style="margin-bottom:.65rem;font-size:.65rem;color:var(--dim);">Streak attuale: <strong style="color:var(--txt);">'+curStreak+' giorni</strong></div>'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
+          +'<span style="font-size:.65rem;color:var(--dim);">Streak: <strong style="color:var(--txt);">'+curStreak+' '+(curStreak===1?'giorno':'giorni')+'</strong>'
+          +(nextStreak?' · prossimo: <strong style="color:'+nextStreak.color+';">'+nextStreak.label+'</strong> ('+nextStreak.days+'gg)':'')
+          +'</span>'
+        +'</div>'
+        +'<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin-bottom:.9rem;">'
+          +'<div style="height:100%;width:'+streakProgressPct+'%;background:'+streakColor+';border-radius:99px;transition:width .4s;"></div>'
+        +'</div>'
+        +(!nextStreak?'<div style="font-size:.63rem;color:var(--amber);font-weight:700;margin-bottom:.9rem;">🏆 Hai raggiunto tutti i badge!</div>':'')
         +'<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;">';
       STREAK_BADGES.forEach(function(b){
         var _skeys=['s7','s14','s30','s90','s180','s365'];
@@ -8612,13 +8626,39 @@ function showInstallPWAModal() {
         +'</div>';
 
       // ── CARD CORRETTEZZA ───────────────────────────
+      // Calcola prossimo traguardo precisione (PCT_BADGES è ordinato dal massimo al minimo)
+      var _pctAsc = PCT_BADGES.slice().reverse(); // dal min al max: Novizio → Perfetto
+      var nextPct = null;
+      var prevMin = 0;
+      for(var _np=0; _np<_pctAsc.length; _np++){
+        if(pct < _pctAsc[_np].min){
+          nextPct = _pctAsc[_np];
+          prevMin = _np > 0 ? _pctAsc[_np-1].min : 0;
+          break;
+        }
+      }
+      var pctProgressPct = 100;
+      if(nextPct){
+        pctProgressPct = Math.min(100, Math.round(((pct - prevMin) / (nextPct.min - prevMin)) * 100));
+      }
+      var pctColor = pctBadge ? pctBadge.color : (nextPct ? nextPct.color : 'var(--dim)');
+
       var pctHtml = '<div style="'+cardStyle+'">'
-        +cardHeader('⭐','Badge Quiz Master','master')
-        +(tot>0
-          ?'<div style="margin-bottom:.85rem;font-size:.65rem;color:var(--dim);">Risposte esatte: <strong style="color:var(--txt);">'+(pctBadge?pct+'% · '+pctBadge.label:pct+'%')+'</strong></div>'
-          :'<div style="font-size:.68rem;color:var(--dim);margin-bottom:.85rem;">Inizia a giocare al quiz per sbloccare il tuo badge!</div>'
-        )
-        +'<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;">';
+        +cardHeader('⭐','Badge Quiz Master','master');
+      if(tot>0){
+        pctHtml += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
+          +'<span style="font-size:.65rem;color:var(--dim);">Risposte esatte: <strong style="color:var(--txt);">'+pct+'%</strong>'
+          +(nextPct?' · prossimo: <strong style="color:'+nextPct.color+';">'+nextPct.label+'</strong> ('+nextPct.min+'%)':'')
+          +'</span>'
+        +'</div>'
+        +'<div style="height:4px;background:var(--brd);border-radius:99px;overflow:hidden;margin-bottom:.9rem;">'
+          +'<div style="height:100%;width:'+pctProgressPct+'%;background:'+pctColor+';border-radius:99px;transition:width .4s;"></div>'
+        +'</div>'
+        +(!nextPct?'<div style="font-size:.63rem;color:var(--amber);font-weight:700;margin-bottom:.9rem;">🏆 Hai raggiunto tutti i badge!</div>':'');
+      } else {
+        pctHtml += '<div style="font-size:.65rem;color:var(--dim);margin-bottom:.9rem;">Inizia a giocare al quiz per sbloccare il tuo badge!</div>';
+      }
+      pctHtml += '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;">';
       var _pctArr = PCT_BADGES.slice().reverse();
       _pctArr.forEach(function(b){
         var isCurrent = pctBadge && pctBadge.min===b.min;
@@ -8642,11 +8682,29 @@ function showInstallPWAModal() {
       if(inviteBtn) inviteBtn.addEventListener('click', showInviteModal);
 
       // Click su info icon → apre popup descrizione
+      // Per referral, allega anche la tabella crediti dentro il popup
+      var creditsTableHtml = '<div style="padding:.6rem .7rem;background:var(--bg);border-radius:10px;border:1px solid var(--brd);">'
+        +'<div style="font-size:.55rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.5rem;">Crediti per badge</div>'
+        +'<div style="display:flex;flex-direction:column;gap:.3rem;">';
+      REF_BADGES.forEach(function(b){
+        var unlocked = refCount>=b.num;
+        creditsTableHtml+='<div style="display:flex;justify-content:space-between;">'
+          +'<span style="font-size:.72rem;color:'+(unlocked?b.color:'var(--dim)')+';">'+b.label+'</span>'
+          +'<span style="font-size:.72rem;font-weight:700;color:'+(unlocked?'var(--amber)':'var(--dim)')+';">+'+b.credits+' crediti</span>'
+          +'</div>';
+      });
+      creditsTableHtml+='</div></div>';
+
       var infoBtns = el.querySelectorAll('.badge-info-btn');
       infoBtns.forEach(function(btn){
         btn.addEventListener('click', function(e){
           e.stopPropagation();
-          showBadgeInfoPopup(btn.dataset.info);
+          var key = btn.dataset.info;
+          if(key === 'referral'){
+            showBadgeInfoPopup(key, creditsTableHtml);
+          } else {
+            showBadgeInfoPopup(key);
+          }
         });
       });
     }
