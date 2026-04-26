@@ -390,6 +390,10 @@ body::before{
   padding-left:.5rem;
   padding-right:.5rem;
   touch-action:pan-x;
+  /* FIX Chrome Android edge-swipe: impedisce al browser di
+     consumare i touch ai bordi sinistro/destro per gesture di navigazione.
+     Senza questo, IBA (prima pill) e Bicchieri (ultima) hanno zone morte. */
+  overscroll-behavior-x:contain;
 }
 .pills-scroll::-webkit-scrollbar{display:none;}
 .fpill{
@@ -1748,56 +1752,6 @@ body.user-premium #sg-pdf-link > span:last-child {
       });
     }
   })();
-</script>
-<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>
-<script>
-/* === DIAGNOSTICA TOUCH PILL v4 === */
-(function(){
-  let _ts = 0;
-  document.addEventListener('touchstart', (e) => {
-    _ts = Date.now();
-    const t = e.target;
-    const inPills = t.closest && t.closest('#pills-bar');
-    if (inPills) {
-      const pill = t.closest('.fpill[data-key]');
-      const tch = e.touches[0];
-      console.log(
-        '%c[TS]%c target=' + t.tagName + (t.id?'#'+t.id:'') + '.' + ((t.className||'').toString().split(' ')[0]) +
-        ' pill=' + (pill ? pill.dataset.key : 'NULL!') +
-        ' xy=' + Math.round(tch.clientX) + ',' + Math.round(tch.clientY),
-        'background:#06f;color:#fff;padding:1px 4px;', ''
-      );
-    }
-  }, true);
-
-  document.addEventListener('touchend', (e) => {
-    const t = e.target;
-    const inPills = t.closest && t.closest('#pills-bar');
-    if (inPills) {
-      const tch = e.changedTouches[0];
-      const dt = Date.now() - _ts;
-      console.log(
-        '%c[TE]%c target=' + t.tagName + (t.id?'#'+t.id:'') + '.' + ((t.className||'').toString().split(' ')[0]) +
-        ' xy=' + Math.round(tch.clientX) + ',' + Math.round(tch.clientY) +
-        ' dt=' + dt + 'ms',
-        'background:#0a0;color:#fff;padding:1px 4px;', ''
-      );
-    }
-  }, true);
-
-  document.addEventListener('click', (e) => {
-    const t = e.target;
-    const inPills = t.closest && t.closest('#pills-bar');
-    if (inPills) {
-      console.log('%c[CLICK]%c target=' + t.tagName + (t.id?'#'+t.id:'') + '.' + ((t.className||'').toString().split(' ')[0]),
-        'background:#f60;color:#fff;padding:1px 4px;', '');
-    }
-  }, true);
-
-  console.log('%c[DIAG v4] Monitor touch attivo. Tappa zone morte e zone funzionanti.', 'color:#0a0;font-weight:bold;');
-})();
-/* === FINE DIAGNOSTICA === */
 </script>
 </head>
 <body>
