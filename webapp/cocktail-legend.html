@@ -4862,14 +4862,10 @@ function initF() {
     }
 
     function _fsheetDoneAction() {
-      console.log('[FATTO ACTION] t=' + Date.now());
+      // Render, badges e pills sono già aggiornati ad ogni tap su opzione filtro.
+      // Lo smooth scroll causava percezione di lentezza. Ora chiudiamo e basta,
+      // identico al comportamento del tap fuori dalla tendina (istantaneo).
       closeFsheet();
-      requestAnimationFrame(function(){
-        updateBadges();
-        render();
-        if (typeof updatePills === 'function') updatePills();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
     }
 
     // ── Pointer Events API: il metodo più affidabile cross-platform ──
