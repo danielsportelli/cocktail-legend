@@ -1741,6 +1741,74 @@ body.user-premium #sg-pdf-link > span:last-child {
 <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>
 <script>
+/* === DIAGNOSTICA PILLS v2 — RIMUOVERE DOPO IL DEBUG === */
+(function(){
+  const fmt = (n) => {
+    if (!n) return 'null';
+    if (n.id === 'eruda') return null; // skip eruda
+    const tag = n.tagName || '?';
+    const id = n.id ? '#' + n.id : '';
+    const cls = n.className && typeof n.className === 'string'
+      ? '.' + n.className.trim().split(/\s+/).slice(0,3).join('.')
+      : '';
+    const r = n.getBoundingClientRect ? n.getBoundingClientRect() : null;
+    const size = r ? ` [${Math.round(r.width)}x${Math.round(r.height)} @${Math.round(r.left)},${Math.round(r.top)}]` : '';
+    return tag + id + cls + size;
+  };
+
+  // Tap diagnostic, escluso eruda
+  document.addEventListener('pointerdown', (e) => {
+    const x = e.clientX, y = e.clientY;
+    const stack = document.elementsFromPoint(x, y).filter(n => n.id !== 'eruda' && !n.closest('#eruda'));
+    console.group('%c TAP @ ' + Math.round(x) + ',' + Math.round(y), 'background:#ff3366;color:#fff;padding:2px 6px;border-radius:3px;');
+    console.log('Target:', fmt(e.target));
+    console.log('Stack (eruda escluso):');
+    stack.forEach((n, i) => {
+      const cs = getComputedStyle(n);
+      console.log(`  [${i}] ${fmt(n)}  | pe:${cs.pointerEvents} vis:${cs.visibility} z:${cs.zIndex} pos:${cs.position}`);
+    });
+    console.groupEnd();
+  }, true);
+
+  // SCAN AUTOMATICO PILL — al click di questo bottone
+  window.scanPills = function(){
+    const pills = ['fpill-iba','fpill-cat','fpill-abv','fpill-frz','fpill-dis','fpill-bic'];
+    pills.forEach(pid => {
+      const p = document.getElementById(pid);
+      if(!p){ console.warn(pid+' NOT FOUND'); return; }
+      const r = p.getBoundingClientRect();
+      console.group('%c PILL #'+pid+' rect: '+Math.round(r.left)+','+Math.round(r.top)+' '+Math.round(r.width)+'x'+Math.round(r.height), 'background:#0a84ff;color:#fff;padding:2px 6px;');
+      // Test 5 punti: 4 angoli + centro
+      const pts = [
+        {n:'TL', x:r.left+3, y:r.top+3},
+        {n:'TR', x:r.right-3, y:r.top+3},
+        {n:'BL', x:r.left+3, y:r.bottom-3},
+        {n:'BR', x:r.right-3, y:r.bottom-3},
+        {n:'CC', x:(r.left+r.right)/2, y:(r.top+r.bottom)/2},
+        {n:'CL', x:r.left+10, y:(r.top+r.bottom)/2},
+        {n:'CR', x:r.right-10, y:(r.top+r.bottom)/2},
+      ];
+      pts.forEach(pt => {
+        const stack = document.elementsFromPoint(pt.x, pt.y).filter(n => n.id !== 'eruda' && !n.closest('#eruda'));
+        const top = stack[0];
+        const isOwn = top === p || (top && p.contains(top));
+        const marker = isOwn ? '✅' : '❌';
+        console.log(`  ${marker} ${pt.n} @${Math.round(pt.x)},${Math.round(pt.y)} → ${fmt(top)}`);
+        if(!isOwn){
+          // Stampa l'intero stack quando il top NON è la pill stessa
+          console.log('     STACK:');
+          stack.slice(0,5).forEach((n,i)=>console.log(`       [${i}] ${fmt(n)}`));
+        }
+      });
+      console.groupEnd();
+    });
+  };
+
+  console.log('%c[DIAG v2] Pronto. Esegui "scanPills()" nella console eruda per vedere chi copre ogni pill.', 'color:#0a0;font-weight:bold;');
+})();
+/* === FINE DIAGNOSTICA === */
+</script>
+<script>
 /* === DIAGNOSTICA TAP — RIMUOVERE DOPO IL DEBUG === */
 (function(){
   const fmt = (n) => {
