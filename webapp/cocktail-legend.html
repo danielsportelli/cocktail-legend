@@ -409,12 +409,14 @@ body::before{
   touch-action:manipulation;
   position:relative;
 }
-/* FIX zone morte tap: lo pseudo-elemento ::before estendeva l'area
-   cliccabile oltre i bordi (-3px laterali, -6px verticali) ma causava
-   sovrapposizioni nei gap tra pill adiacenti su Chrome Android,
-   creando zone morte fisse lungo la barra. Rimosso. */
+/* FIX zone morte tap: estende l'area cliccabile della pill oltre i suoi bordi
+   visibili, coprendo le bande di pills-scroll che intercettavano i tap.
+   Funziona solo sull'hit-testing, non altera il layout visivo. */
 .fpill::before{
-  content:none;
+  content:"";
+  position:absolute;
+  top:-6px; bottom:-6px; left:-3px; right:-3px;
+  z-index:-1;
 }
 .fpill::after{
   content:none;
@@ -3858,59 +3860,42 @@ window._isRegistering = false;
   });
 })();
 
-// Listener pills — usa Pointer Events su document in capture phase per
-// aggirare il bug Chrome Android dove gli edge-swipe consumano i touch
-// events sulle prime/ultime pill (IBA, Bicchieri).
+// Listener pills — attaccati SUBITO al DOM, prima del fetch
+// così IBA funziona anche mentre il JSON è ancora in caricamento
 (function initPillListeners() {
   var pillsScroll = document.getElementById('pills-scroll');
   if (!pillsScroll) return;
-  var _pillStartX = 0, _pillStartY = 0, _pillTarget = null, _pillPointerId = null;
+  var _pillTouchStartX = 0, _pillTouchStartY = 0, _pillTouchTarget = null;
 
-  document.addEventListener('pointerdown', function(e) {
-    if (!pillsScroll.contains(e.target)) return;
-    var pill = e.target.closest('.fpill[data-key]');
-    if (!pill) { _pillTarget = null; return; }
-    _pillTarget = pill;
-    _pillPointerId = e.pointerId;
-    _pillStartX = e.clientX;
-    _pillStartY = e.clientY;
-  }, true);
+  pillsScroll.addEventListener('touchstart', function(e) {
+    var t = e.target;
+    var pill = t.closest('.fpill[data-key]');
+    _pillTouchTarget = pill || null;
+    if (pill) {
+      _pillTouchStartX = e.touches[0].clientX;
+      _pillTouchStartY = e.touches[0].clientY;
+    }
+  }, { passive: true });
 
-  document.addEventListener('pointerup', function(e) {
-    if (!_pillTarget || e.pointerId !== _pillPointerId) return;
-    var pill = _pillTarget;
-    _pillTarget = null;
-    _pillPointerId = null;
-    var dx = Math.abs(e.clientX - _pillStartX);
-    var dy = Math.abs(e.clientY - _pillStartY);
-    // Se il movimento è sotto soglia, considera tap valido
+  pillsScroll.addEventListener('touchend', function(e) {
+    if (!_pillTouchTarget) return;
+    var pill = _pillTouchTarget;
+    _pillTouchTarget = null;
+    var dx = Math.abs(e.changedTouches[0].clientX - _pillTouchStartX);
+    var dy = Math.abs(e.changedTouches[0].clientY - _pillTouchStartY);
     if (dx < 20 && dy < 30) {
-      // Verifica che il pointerup sia ancora sopra la stessa pill
-      // (gestisce caso dove il dito si sposta su un'altra pill)
-      var releasePill = document.elementFromPoint(e.clientX, e.clientY);
-      if (releasePill && pill.contains(releasePill) || releasePill === pill) {
-        openFsheet(pill.dataset.key);
-      } else {
-        // Se il release è fuori, apri comunque la pill di partenza
-        // (più tollerante, evita tap mancati per micro-movimenti)
-        openFsheet(pill.dataset.key);
-      }
+      e.preventDefault();
+      openFsheet(pill.dataset.key);
     }
-  }, true);
+  }, { passive: false });
 
-  document.addEventListener('pointercancel', function(e) {
-    if (e.pointerId === _pillPointerId) {
-      _pillTarget = null;
-      _pillPointerId = null;
-    }
-  }, true);
-
-  // Fallback click per desktop/mouse senza pointer events
+  // Fallback click per desktop/mouse
   pillsScroll.addEventListener('click', function(e) {
     if (e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
-    if (window.PointerEvent) return; // pointerup ha già gestito
     var pill = e.target.closest('.fpill[data-key]');
-    if (pill) openFsheet(pill.dataset.key);
+    if (pill) {
+      openFsheet(pill.dataset.key);
+    }
   });
 })();
 
