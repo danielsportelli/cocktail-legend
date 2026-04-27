@@ -8498,7 +8498,7 @@ function showInstallPWAModal() {
     }
 
     // ── Stile card comune ─────────────────────────────
-    var cardStyle = 'background:var(--surf);border:1px solid var(--brd);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1rem;';
+    var cardStyle = 'background:var(--surf);border:1px solid rgba(96,165,250,.35);border-radius:16px;padding:1.1rem 1rem;margin-bottom:1rem;box-shadow:0 0 0 1px rgba(96,165,250,.06) inset;';
     var sectionLabelStyle = 'font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);';
 
     // Helper per card-header con titolo + icona info
@@ -8517,12 +8517,14 @@ function showInstallPWAModal() {
 
     // Helper: clip-path per forme badge (esagono e scudo)
     // Cerchio = border-radius:50% (gestito inline)
-    // Esagono = clip-path 6 lati (per Streak)
-    // Scudo = clip-path forma scudo (per Master)
+    // Esagono regolare orientato con punte in alto/basso (forma "honeycomb")
+    // Scudo classico medievale con base appuntita
     var SHAPES = {
       circle: 'border-radius:50%;',
-      hexagon: 'clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);',
-      shield: 'clip-path:polygon(50% 0%, 100% 15%, 100% 65%, 50% 100%, 0% 65%, 0% 15%);'
+      // Esagono con orientamento "pointy-top" (più riconoscibile come gaming)
+      hexagon: 'clip-path:polygon(50% 4%, 95% 28%, 95% 72%, 50% 96%, 5% 72%, 5% 28%);',
+      // Scudo: bordi rettilinei in alto, curve laterali, punta in basso
+      shield: 'clip-path:polygon(15% 8%, 85% 8%, 95% 18%, 95% 55%, 75% 88%, 50% 100%, 25% 88%, 5% 55%, 5% 18%);'
     };
 
     // Costruisce lo stile completo per il box-icona di un badge
@@ -8531,26 +8533,24 @@ function showInstallPWAModal() {
     // level: 1..6 — livelli 5 e 6 hanno glow
     // color: colore hex del livello
     function badgeBoxStyle(shape, unlocked, level, color){
-      var base = iconBoxBase;
+      // Per esagono e scudo box leggermente più grande così la forma respira
+      var size = (shape === 'circle') ? '38px' : '42px';
+      var base = 'width:'+size+';height:'+size+';display:flex;align-items:center;justify-content:center;';
       var shapeCss = SHAPES[shape] || SHAPES.circle;
-      // Per esagono/scudo serve uno sfondo solido (clip-path non tollera bordo trasparente)
       var bgFill;
       if(shape === 'circle'){
         // Cerchio: bordo classico, glow con box-shadow
         bgFill = 'background:rgba(0,0,0,0.25);'
           + (unlocked ? 'border:2px solid '+color+';' : 'border:1.5px solid '+color+';');
       } else {
-        // Esagono/scudo: clip-path taglia il box-shadow, quindi:
-        // - sfondo tintato per richiamare il colore
-        // - bordo simulato con outline interno
+        // Esagono/scudo: clip-path taglia il bordo, simulato con outline interno
+        // Sfondo sempre tintato per dare corpo alla forma (anche senza bordo visibile)
         bgFill = unlocked
-          ? 'background:rgba('+hexToRgb(color)+',0.18);outline:2px solid '+color+';outline-offset:-2px;'
-          : 'background:rgba(0,0,0,0.25);outline:1.5px solid '+color+';outline-offset:-1.5px;';
+          ? 'background:rgba('+hexToRgb(color)+',0.22);outline:2.5px solid '+color+';outline-offset:-2.5px;'
+          : 'background:rgba('+hexToRgb(color)+',0.08);outline:2px solid '+color+';outline-offset:-2px;';
       }
       var opacity = unlocked ? '' : 'opacity:.10;';
       // Glow per livelli alti (5 e 6) sbloccati
-      // Cerchio: box-shadow funziona normale
-      // Esagono/scudo: filter drop-shadow segue il clip-path
       var glow = '';
       if(unlocked && level >= 5){
         var intensity = level === 6 ? '.55' : '.35';
@@ -8622,7 +8622,7 @@ function showInstallPWAModal() {
           +'Invita un amico'
         +'</button>'
         +'<div style="font-size:.6rem;color:var(--dim);line-height:1.5;margin-top:.6rem;text-align:center;">'
-          +'Limite di 5 iscrizioni al giorno per prevenire abusi. Le attività sono monitorate.'
+          +'Limite di 5 iscrizioni al giorno per prevenire abusi.<br>Le attività sono monitorate.'
         +'</div>'
       +'</div>';
 
@@ -8713,7 +8713,7 @@ function showInstallPWAModal() {
           +'<div style="'+badgeBoxStyle('shield', isCurrent, level, b.color)+'">'
           +starSingleSvg(b.color,16)+'</div>'
           +'<span style="font-size:.42rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(isCurrent?'1':'.10')+';line-height:1.1;">'+b.label+'</span>'
-          +'<span style="font-size:.4rem;color:var(--dim);">'+rangeStr+'</span>'
+          +'<span style="font-size:.4rem;color:var(--dim);opacity:'+(isCurrent?'1':'.4')+';">'+rangeStr+'</span>'
           +'</div>';
       });
       pctHtml+='</div></div>';
