@@ -8322,7 +8322,7 @@ function showInstallPWAModal() {
       },
       master: {
         title: 'Badge Quiz Master',
-        body: 'Misura la tua accuratezza complessiva su tutte le risposte. Aumenta quando rispondi correttamente, diminuisce in caso di errore: è un indicatore dinamico che si aggiorna dopo ogni partita.'
+        body: 'Misura la tua accuratezza complessiva su tutte le risposte. Aumenta quando rispondi correttamente, diminuisce in caso di errore: è un indicatore dinamico che si aggiorna dopo ogni partita. Il badge si attiva dopo almeno 20 risposte e riflette sempre la tua precisione attuale.'
       }
     };
     var info = TEXTS[infoKey];
@@ -8456,12 +8456,12 @@ function showInstallPWAModal() {
           { key:'s365', days:365, label:'Eternal',   color:CLR.viola   }
         ],
         PCT_BADGES: [
-          { min:95, label:'Perfetto',  color:CLR.viola   },
-          { min:88, label:'Elite',     color:CLR.rosso   },
-          { min:75, label:'Avanzato',  color:CLR.arancio },
-          { min:60, label:'Esperto',   color:CLR.giallo  },
-          { min:40, label:'Preciso',   color:CLR.verde   },
-          { min:20, label:'Novizio',   color:CLR.blu     }
+          { min:95, label:'Master',  color:CLR.viola   },
+          { min:88, label:'Oracolo',     color:CLR.rosso   },
+          { min:75, label:'Guru',  color:CLR.arancio },
+          { min:60, label:'Conoscitore',   color:CLR.giallo  },
+          { min:40, label:'Intenditore',   color:CLR.verde   },
+          { min:20, label:'Curioso',   color:CLR.blu     }
         ]
       };
     }
@@ -8506,7 +8506,7 @@ function showInstallPWAModal() {
     modal.id = 'badge-unlock-modal';
     modal.style.cssText = ''
       + 'position:fixed;inset:0;z-index:99999;'
-      + 'background:radial-gradient(circle at center, rgba(0,0,0,.92), rgba(0,0,0,.97));'
+      + 'background:#0a0f1e;'
       + 'display:flex;align-items:center;justify-content:center;padding:1.5rem;'
       + 'animation:bu-fade-in .35s ease;'
       + '--bu-glow:'+color+';'
@@ -8628,7 +8628,7 @@ function showInstallPWAModal() {
   // testBadge('referral', 1)  → mostra Starter
   // testBadge('referral', 6)  → mostra Icon
   // testBadge('streak', 3)    → mostra Wildfire
-  // testBadge('master', 5)    → mostra Elite
+  // testBadge('master', 5)    → mostra Oracolo
   window.testBadge = function(family, level){
     var extra = {};
     if(family === 'referral') extra.count = level === 1 ? 5 : level === 2 ? 10 : level === 3 ? 25 : level === 4 ? 50 : level === 5 ? 75 : 100;
@@ -8671,12 +8671,12 @@ function showInstallPWAModal() {
     ];
 
     var PCT_BADGES = [
-      { min:95, label:'Perfetto',  color:CLR.viola   },
-      { min:88, label:'Elite',     color:CLR.rosso   },
-      { min:75, label:'Avanzato',  color:CLR.arancio },
-      { min:60, label:'Esperto',   color:CLR.giallo  },
-      { min:40, label:'Preciso',   color:CLR.verde   },
-      { min:20, label:'Novizio',   color:CLR.blu     },
+      { min:95, label:'Master',  color:CLR.viola   },
+      { min:88, label:'Oracolo',     color:CLR.rosso   },
+      { min:75, label:'Guru',  color:CLR.arancio },
+      { min:60, label:'Conoscitore',   color:CLR.giallo  },
+      { min:40, label:'Intenditore',   color:CLR.verde   },
+      { min:20, label:'Curioso',   color:CLR.blu     },
     ];
 
     // Esporto su window per accesso da showBadgeUnlockModal (scope diverso)
@@ -8979,7 +8979,7 @@ function showInstallPWAModal() {
 
       // ── CARD CORRETTEZZA ───────────────────────────
       // Calcola prossimo traguardo precisione (PCT_BADGES è ordinato dal massimo al minimo)
-      var _pctAsc = PCT_BADGES.slice().reverse(); // dal min al max: Novizio → Perfetto
+      var _pctAsc = PCT_BADGES.slice().reverse(); // dal min al max: Curioso → Master
       var nextPct = null;
       var prevMin = 0;
       for(var _np=0; _np<_pctAsc.length; _np++){
@@ -8997,7 +8997,7 @@ function showInstallPWAModal() {
 
       var pctHtml = '<div style="'+cardStyle+'">'
         +cardHeader('⭐','Badge Quiz Master','master');
-      if(tot>0){
+      if(tot>=20){
         pctHtml += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
           +'<span style="font-size:.65rem;color:var(--dim);">Risposte esatte: <strong style="color:var(--txt);">'+pct+'%</strong>'
           +(nextPct?' · prossimo: <strong style="color:'+nextPct.color+';">'+nextPct.label+'</strong> ('+nextPct.min+'%)':'')
@@ -9008,7 +9008,7 @@ function showInstallPWAModal() {
         +'</div>'
         +(!nextPct?'<div style="font-size:.63rem;color:var(--amber);font-weight:700;margin-bottom:.9rem;">🏆 Hai raggiunto tutti i badge!</div>':'');
       } else {
-        pctHtml += '<div style="font-size:.65rem;color:var(--dim);margin-bottom:.9rem;">Inizia a giocare al quiz per sbloccare il tuo badge!</div>';
+        pctHtml += '<div style="font-size:.65rem;color:var(--dim);margin-bottom:.9rem;">Rispondi ad almeno 20 domande per sbloccare il tuo badge!</div>';
       }
       pctHtml += '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;">';
       var _pctArr = PCT_BADGES.slice().reverse();
