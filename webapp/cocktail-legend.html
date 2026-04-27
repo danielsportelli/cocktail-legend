@@ -8525,18 +8525,7 @@ function showInstallPWAModal() {
     var glowAlpha = MODAL_GLOW_ALPHA[level-1] || '.55';
 
     // Ali decorative SOLO al livello 6 (più grandi rispetto alle card)
-    var modalWings = '';
-    if(level === 6){
-      modalWings = ''
-        + '<span style="position:absolute;left:-58px;top:50%;transform:translateY(-50%);width:64px;height:80px;'
-          + 'background:linear-gradient(135deg,'+color+'dd,'+color+'66);'
-          + 'clip-path:polygon(100% 50%, 0% 8%, 28% 50%, 0% 92%);'
-          + 'filter:drop-shadow(0 0 14px '+color+');"></span>'
-        + '<span style="position:absolute;right:-58px;top:50%;transform:translateY(-50%);width:64px;height:80px;'
-          + 'background:linear-gradient(225deg,'+color+'dd,'+color+'66);'
-          + 'clip-path:polygon(0% 50%, 100% 8%, 72% 50%, 100% 92%);'
-          + 'filter:drop-shadow(0 0 14px '+color+');"></span>';
-    }
+    var modalWings = ''; // ali rimosse
 
     var detailLine = '';
     if(family === 'referral' && extra.count != null){
@@ -8828,8 +8817,8 @@ function showInstallPWAModal() {
 
     // Scala dimensione (più aggressiva per impatto gamification)
     // index 0..5 corrisponde a livelli 1..6
-    var BADGE_SIZES_CARD = ['1.05rem','1.18rem','1.32rem','1.48rem','1.65rem','1.85rem'];
-    var BADGE_SIZES_MODAL = ['3.8rem','4.4rem','5rem','5.6rem','6.4rem','7.2rem'];
+    var BADGE_SIZES_CARD = ['1.0rem','1.05rem','1.1rem','1.15rem','1.2rem','1.25rem'];
+    var BADGE_SIZES_MODAL = ['3.2rem','3.6rem','4.0rem','4.4rem','4.8rem','5.2rem'];
 
     // Glow intensity per livello (alpha e raggio)
     // Livelli 1-2: glow tenue, 3-4: medio, 5: forte, 6: intenso
@@ -8856,9 +8845,7 @@ function showInstallPWAModal() {
       var glow = BADGE_GLOW[level-1];
       var border = BADGE_BORDER[level-1];
 
-      var glowCss = unlocked
-        ? 'box-shadow:0 0 '+glow.spread+' rgba('+hexToRgb(color)+','+glow.alpha+'), inset 0 0 12px rgba('+hexToRgb(color)+',.15);'
-        : '';
+      var glowCss = ''; // glow rimosso dalle card
 
       // Box base: 42x42, cerchio, bordo colore
       var boxStyle = 'width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;'
@@ -8867,21 +8854,7 @@ function showInstallPWAModal() {
         + glowCss
         + (unlocked ? '' : 'opacity:.25;filter:grayscale(.7);');
 
-      // Ali decorative SOLO al livello 6 (e solo se unlocked)
-      var wings = '';
-      if(level === 6 && unlocked){
-        wings = ''
-          // ala sinistra
-          + '<span style="position:absolute;left:-10px;top:50%;transform:translateY(-50%);width:14px;height:18px;'
-          + 'background:linear-gradient(135deg,'+color+'cc,'+color+'66);'
-          + 'clip-path:polygon(100% 50%, 0% 10%, 30% 50%, 0% 90%);'
-          + 'filter:drop-shadow(0 0 4px '+color+');"></span>'
-          // ala destra
-          + '<span style="position:absolute;right:-10px;top:50%;transform:translateY(-50%);width:14px;height:18px;'
-          + 'background:linear-gradient(225deg,'+color+'cc,'+color+'66);'
-          + 'clip-path:polygon(0% 50%, 100% 10%, 70% 50%, 100% 90%);'
-          + 'filter:drop-shadow(0 0 4px '+color+');"></span>';
-      }
+      var wings = ''; // ali rimosse
 
       // Emoji con scala graduale; al livello 6 leggera animazione pulse
       var emojiStyle = 'font-size:'+size+';line-height:1;'
