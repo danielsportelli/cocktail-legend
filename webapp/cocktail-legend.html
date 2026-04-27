@@ -8427,29 +8427,63 @@ function showInstallPWAModal() {
     _ensureBadgeUnlockStyles();
     extra = extra || {};
 
+    // Costanti badge: prendile da window._BADGE_CONST (popolate da renderBadgeDrawer)
+    // Se non ancora popolate (es. drawer mai aperto), fallback con definizioni minime
+    if(!window._BADGE_CONST){
+      var CLR = {blu:'#3b82f6',verde:'#22c55e',giallo:'#eab308',arancio:'#f97316',rosso:'#ef4444',viola:'#a855f7'};
+      window._BADGE_CONST = {
+        CLR: CLR,
+        REF_BADGES: [
+          { key:'connesso',   num:5,   label:'Starter',    color:CLR.blu,     credits:10  },
+          { key:'promoter',   num:10,  label:'Promoter',   color:CLR.verde,   credits:20  },
+          { key:'ambassador', num:25,  label:'Ambassador', color:CLR.giallo,  credits:50  },
+          { key:'influencer', num:50,  label:'Influencer', color:CLR.arancio, credits:100 },
+          { key:'leader',     num:75,  label:'Leader',     color:CLR.rosso,   credits:175 },
+          { key:'icon',       num:100, label:'Icon',       color:CLR.viola,   credits:250 }
+        ],
+        STREAK_BADGES: [
+          { key:'s7',   days:7,   label:'Spark',     color:CLR.blu     },
+          { key:'s14',  days:14,  label:'Blaze',     color:CLR.verde   },
+          { key:'s30',  days:30,  label:'Wildfire',  color:CLR.giallo  },
+          { key:'s90',  days:90,  label:'Comet',     color:CLR.arancio },
+          { key:'s180', days:180, label:'Phoenix',   color:CLR.rosso   },
+          { key:'s365', days:365, label:'Eternal',   color:CLR.viola   }
+        ],
+        PCT_BADGES: [
+          { min:95, label:'Perfetto',  color:CLR.viola   },
+          { min:88, label:'Elite',     color:CLR.rosso   },
+          { min:75, label:'Avanzato',  color:CLR.arancio },
+          { min:60, label:'Esperto',   color:CLR.giallo  },
+          { min:40, label:'Preciso',   color:CLR.verde   },
+          { min:20, label:'Novizio',   color:CLR.blu     }
+        ]
+      };
+    }
+    var BC = window._BADGE_CONST;
+
     // Dati badge in base a famiglia/livello
     var DATA = {
       referral: {
         title: 'Badge Referral',
-        levels: REF_BADGES, // [{key,num,label,color,credits}]
+        levels: BC.REF_BADGES,
         emoji: '📣'
       },
       streak: {
         title: 'Badge Streak Quiz',
-        levels: STREAK_BADGES, // [{key,days,label,color}]
+        levels: BC.STREAK_BADGES,
         emoji: '🔥'
       },
       master: {
         title: 'Badge Quiz Master',
         // PCT_BADGES è ordinato dal max al min: invertiamo per indici 1..6
-        levels: PCT_BADGES.slice().reverse(),
+        levels: BC.PCT_BADGES.slice().reverse(),
         emoji: '⭐'
       }
     };
     var fam = DATA[family];
-    if(!fam) return;
+    if(!fam){ console.warn('[badge unlock] famiglia sconosciuta:', family); return; }
     var badge = fam.levels[level - 1];
-    if(!badge) return;
+    if(!badge){ console.warn('[badge unlock] livello sconosciuto:', family, level); return; }
 
     // Rimuovi eventuali precedenti
     var old = document.getElementById('badge-unlock-modal');
@@ -8645,6 +8679,9 @@ function showInstallPWAModal() {
       { min:20, label:'Novizio',   color:CLR.blu     },
     ];
 
+    // Esporto su window per accesso da showBadgeUnlockModal (scope diverso)
+    window._BADGE_CONST = { CLR: CLR, REF_BADGES: REF_BADGES, STREAK_BADGES: STREAK_BADGES, PCT_BADGES: PCT_BADGES };
+
     // ── SVG helpers ──────────────────────────────────
 
     // Helper: hexToRgb semplice
@@ -8767,6 +8804,18 @@ function showInstallPWAModal() {
     var cellStyle = 'display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:.2rem 0;min-width:0;';
     var iconBoxBase = 'width:38px;height:38px;display:flex;align-items:center;justify-content:center;';
 
+    // Helper: tag immagine badge con fallback SVG inline se l'immagine non carica.
+    // family: 'referral'|'streak'|'master', level: 1..6, fallbackSvg: stringa SVG da mostrare se img fallisce
+    // unlocked: bool — controlla l'opacità del fallback
+    function badgeImg(family, level, fallbackSvg, unlocked){
+      var path = 'https://danielsportelli.github.io/cocktail-legend/webapp/badge/badge-'+family+'-'+level+'.webp';
+      // L'img usa onerror per nascondersi e mostrare il fallback SVG
+      // Quando l'immagine carica con successo, lei ha display:block e copre il fallback
+      var imgStyle = 'width:100%;height:100%;object-fit:contain;'+(unlocked?'':'opacity:.15;filter:grayscale(.7);');
+      return '<img src="'+path+'" alt="" style="'+imgStyle+'" onerror="this.style.display=\'none\';if(this.nextElementSibling)this.nextElementSibling.style.display=\'flex\';" />'
+        + '<div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">'+fallbackSvg+'</div>';
+    }
+
     // Helper: clip-path per forme badge (esagono e scudo)
     // Cerchio = border-radius:50% (gestito inline)
     // Esagono regolare orientato con punte in alto/basso (forma "honeycomb")
@@ -8861,10 +8910,14 @@ function showInstallPWAModal() {
       REF_BADGES.forEach(function(b, idx){
         var unlocked = refCount>=b.num;
         var level = idx + 1;
+        // Container 42x42 che ospita immagine WebP (o fallback SVG nel cerchio CSS)
         refHtml+='<div style="'+cellStyle+'">'
-          +'<div style="'+badgeBoxStyle('circle', unlocked, level, b.color)+'">'
-          +megaphoneSvg(b.color,15)+'</div>'
-          +'<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';text-align:center;line-height:1.1;">'+b.label+'</span>'
+          +'<div style="width:42px;height:42px;position:relative;'+(unlocked?'':'opacity:.25;filter:grayscale(.6);')+'">'
+            + badgeImg('referral', level,
+                '<div style="'+badgeBoxStyle('circle', unlocked, level, b.color)+'">'+megaphoneSvg(b.color,15)+'</div>',
+                unlocked)
+          +'</div>'
+          +'<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.30')+';text-align:center;line-height:1.1;margin-top:.15rem;">'+b.label+'</span>'
           +'<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +' isc</span>'
           +'</div>';
       });
@@ -8912,9 +8965,12 @@ function showInstallPWAModal() {
         var level = idx + 1;
         var _sdayLabel = b.days < 30 ? b.days+'gg' : b.days < 365 ? Math.round(b.days/30)+'m' : '1a';
         streakHtml+='<div style="'+cellStyle+'">'
-          +'<div style="'+badgeBoxStyle('hexagon', unlocked, level, b.color)+'">'
-          +flameSvg(b.color, 18)+'</div>'
-          +'<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';text-align:center;line-height:1.1;">'+ b.label+'</span>'
+          +'<div style="width:42px;height:42px;position:relative;'+(unlocked?'':'opacity:.25;filter:grayscale(.6);')+'">'
+            + badgeImg('streak', level,
+                '<div style="'+badgeBoxStyle('hexagon', unlocked, level, b.color)+'">'+flameSvg(b.color, 18)+'</div>',
+                unlocked)
+          +'</div>'
+          +'<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.30')+';text-align:center;line-height:1.1;margin-top:.15rem;">'+ b.label+'</span>'
           +'<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+_sdayLabel+'</span>'
           +'</div>';
       });
@@ -8962,9 +9018,12 @@ function showInstallPWAModal() {
         var nextB = PCT_BADGES[PCT_BADGES.indexOf(b)-1];
         var rangeStr = b.min+'–'+(nextB?nextB.min-1:100)+'%';
         pctHtml+='<div style="'+cellStyle+'">'
-          +'<div style="'+badgeBoxStyle('shield', isCurrent, level, b.color)+'">'
-          +starSingleSvg(b.color,16)+'</div>'
-          +'<span style="font-size:.42rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(isCurrent?'1':'.10')+';line-height:1.1;">'+b.label+'</span>'
+          +'<div style="width:42px;height:42px;position:relative;'+(isCurrent?'':'opacity:.25;filter:grayscale(.6);')+'">'
+            + badgeImg('master', level,
+                '<div style="'+badgeBoxStyle('shield', isCurrent, level, b.color)+'">'+starSingleSvg(b.color,16)+'</div>',
+                isCurrent)
+          +'</div>'
+          +'<span style="font-size:.42rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(isCurrent?'1':'.30')+';line-height:1.1;margin-top:.15rem;">'+b.label+'</span>'
           +'<span style="font-size:.4rem;color:var(--dim);opacity:'+(isCurrent?'1':'.4')+';">'+rangeStr+'</span>'
           +'</div>';
       });
