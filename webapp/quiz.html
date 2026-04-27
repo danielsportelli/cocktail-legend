@@ -943,22 +943,22 @@ const CLR = {
 
 // ── STREAK BADGE CONFIG ────────────────────────────
 const STREAK_BADGES = [
-  { key:'s365', days:365, label:'Leggendario',   color:CLR.viola   },
-  { key:'s180', days:180, label:'Dominante',      color:CLR.rosso   },
-  { key:'s90',  days:90,  label:'Inarrestabile',  color:CLR.arancio },
-  { key:'s30',  days:30,  label:'Determinato',    color:CLR.giallo  },
-  { key:'s14',  days:14,  label:'Costante',       color:CLR.verde   },
-  { key:'s7',   days:7,   label:'Acceso',         color:CLR.blu     },
+  { key:'s365', days:365, label:'Eternal',   color:CLR.viola   },
+  { key:'s180', days:180, label:'Phoenix',   color:CLR.rosso   },
+  { key:'s90',  days:90,  label:'Comet',     color:CLR.arancio },
+  { key:'s30',  days:30,  label:'Wildfire',  color:CLR.giallo  },
+  { key:'s14',  days:14,  label:'Blaze',     color:CLR.verde   },
+  { key:'s7',   days:7,   label:'Spark',     color:CLR.blu     },
 ];
 
 // ── CORRETTEZZA BADGE CONFIG ───────────────────────
 const PCT_BADGES = [
-  { key:'perfetto',  min:97, label:'Perfetto',  color:CLR.viola   },
-  { key:'elite',     min:92, label:'Elite',     color:CLR.rosso   },
-  { key:'avanzato',  min:85, label:'Avanzato',  color:CLR.arancio },
-  { key:'esperto',   min:75, label:'Esperto',   color:CLR.giallo  },
-  { key:'preciso',   min:65, label:'Preciso',   color:CLR.verde   },
-  { key:'novizio',   min:50, label:'Novizio',   color:CLR.blu     },
+  { key:'master',       min:95, label:'Master',       color:CLR.viola   },
+  { key:'oracolo',      min:88, label:'Oracolo',      color:CLR.rosso   },
+  { key:'guru',         min:75, label:'Guru',         color:CLR.arancio },
+  { key:'conoscitore',  min:60, label:'Conoscitore',  color:CLR.giallo  },
+  { key:'intenditore',  min:40, label:'Intenditore',  color:CLR.verde   },
+  { key:'curioso',      min:20, label:'Curioso',      color:CLR.blu     },
 ];
 
 // ── SVG FIAMMA (streak) ────────────────────────────
@@ -1030,7 +1030,7 @@ function roosterSvg(label) {
 
 // ── BADGE CORRETTEZZA SVG ─────────────────────────
 function pctBadgeSvg(pct, tot) {
-  if(!tot || tot < 1 || pct < 50) return '';
+  if(!tot || tot < 20 || pct < 20) return '';
   for(var i=0;i<PCT_BADGES.length;i++){
     var b = PCT_BADGES[i];
     if(pct >= b.min) return starSingleSvg(b.color, b.label);
