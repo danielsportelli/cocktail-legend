@@ -180,10 +180,9 @@ ABV (scegli 1):
 Analcolico, Basso, Medio basso, Medio, Medio alto, Alto, Molto alto
 
 SAPORI (scegli esattamente 3 valori):
-Acidulo, Affumicato, Agrumato, Amaro, Anisato, Aromatico, Avvolgente, Balsamico, Bilanciato, Brillante, Caffeinico, Caldo, Caramellato, Classico, Complesso,
-Corposo, Cremoso, Deciso, Dissetante, Dolce, Elegante, Erbaceo, Esotico, Floreale, Fresco, Fruttato, Goloso, Intenso, Leggero, Mandorlato,
-Mentolato, Morbido, Piccante, Potente, Profondo, Raffinato, Ricco, Rinfrescante, Robusto, Rotondo, Rustico, Secco, Setoso, Speziato, Strutturato, Tostato,
-Tropicale, Vanigliato, Vellutato, Vivace
+Acidulo, Affumicato, Agrumato, Amaro, Anisato, Aromatico, Balsamico, Bilanciato, Caffeinico, Caramellato, Complesso,
+Corposo, Cremoso, Deciso, Dissetante, Dolce, Erbaceo, Esotico, Floreale, Fresco, Fruttato, Goloso, Intenso, Mandorlato,
+Mentolato, Morbido, Piccante, Rotondo, Secco, Speziato, Strutturato, Tostato, Vanigliato, Vellutato
 
 BICCHIERE (scegli 1):
 Calice, Cocotte, Collins, Coppetta, Flûte, Highball, Hurricane, Tazza con manico, Julep cup, Tazza di rame, Shot, Sling, Tumbler basso
