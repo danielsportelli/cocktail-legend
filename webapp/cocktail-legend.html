@@ -8508,7 +8508,31 @@ function showInstallPWAModal() {
       + '--bu-glow-soft:'+color+'40;';
 
     // Costruzione contenuto
-    var imgPath = BADGE_IMG_BASE + 'badge-' + family + '-' + level + '.webp';
+    // Tabella scale modale (deve corrispondere a BADGE_SIZES_MODAL della card)
+    var MODAL_SIZES = ['3.8rem','4.4rem','5rem','5.6rem','6.4rem','7.2rem'];
+    var MODAL_BORDERS = ['2px','2.5px','3px','3.5px','4px','4.5px'];
+    var MODAL_GLOW_SPREAD = ['12px','18px','26px','36px','50px','70px'];
+    var MODAL_GLOW_ALPHA = ['.35','.45','.55','.65','.75','.85'];
+    var emoji = (family === 'referral') ? '📣' : (family === 'streak') ? '🔥' : '⭐';
+    var emojiSize = MODAL_SIZES[level-1] || '5rem';
+    var borderW = MODAL_BORDERS[level-1] || '3px';
+    var glowSpread = MODAL_GLOW_SPREAD[level-1] || '30px';
+    var glowAlpha = MODAL_GLOW_ALPHA[level-1] || '.55';
+
+    // Ali decorative SOLO al livello 6 (più grandi rispetto alle card)
+    var modalWings = '';
+    if(level === 6){
+      modalWings = ''
+        + '<span style="position:absolute;left:-58px;top:50%;transform:translateY(-50%);width:64px;height:80px;'
+          + 'background:linear-gradient(135deg,'+color+'dd,'+color+'66);'
+          + 'clip-path:polygon(100% 50%, 0% 8%, 28% 50%, 0% 92%);'
+          + 'filter:drop-shadow(0 0 14px '+color+');"></span>'
+        + '<span style="position:absolute;right:-58px;top:50%;transform:translateY(-50%);width:64px;height:80px;'
+          + 'background:linear-gradient(225deg,'+color+'dd,'+color+'66);'
+          + 'clip-path:polygon(0% 50%, 100% 8%, 72% 50%, 100% 92%);'
+          + 'filter:drop-shadow(0 0 14px '+color+');"></span>';
+    }
+
     var detailLine = '';
     if(family === 'referral' && extra.count != null){
       detailLine = 'Hai raggiunto <strong style="color:'+color+'">'+extra.count+' iscritti</strong>';
@@ -8538,16 +8562,23 @@ function showInstallPWAModal() {
           + 'background-size:200% 100%;-webkit-background-clip:text;background-clip:text;'
           + '-webkit-text-fill-color:transparent;color:transparent;'
           + 'animation:bu-header-shine 2s linear infinite, bu-text-rise .5s ease .2s both;'
-          + 'margin-bottom:1.3rem;">'
+          + 'margin-bottom:1.8rem;">'
           + '✨ Nuovo badge sbloccato ✨'
         + '</div>'
-        // Badge wrapper con glow + sparks
-        + '<div class="bu-badge-wrap" id="bu-badge-wrap">'
-          + '<img class="bu-badge-img" id="bu-badge-img" src="'+imgPath+'" alt="'+badge.label+'" '
-          + 'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';" />'
-          // Fallback se l'immagine non si carica
-          + '<div class="bu-badge-fallback" style="display:none;background:radial-gradient(circle, '+color+'40, '+color+'15);border:3px solid '+color+';">'
-            + fam.emoji
+        // Badge wrapper con glow + sparks + ali (lv6)
+        + '<div class="bu-badge-wrap" id="bu-badge-wrap" style="position:relative;width:200px;height:200px;display:flex;align-items:center;justify-content:center;">'
+          + modalWings
+          // Cerchio badge con emoji
+          + '<div id="bu-badge-circle" style="width:140px;height:140px;border-radius:50%;'
+            + 'background:radial-gradient(circle, rgba('+hexToRgb(color)+',.15), rgba(0,0,0,.6));'
+            + 'border:'+borderW+' solid '+color+';'
+            + 'display:flex;align-items:center;justify-content:center;'
+            + 'box-shadow:0 0 '+glowSpread+' rgba('+hexToRgb(color)+','+glowAlpha+'),inset 0 0 30px rgba('+hexToRgb(color)+',.2);'
+            + 'animation:bu-badge-pop 1s cubic-bezier(.34,1.56,.64,1) forwards, bu-glow-pulse 2.5s ease-in-out 1s infinite;'
+            + '--bu-glow:'+color+';--bu-glow-soft:'+color+'40;">'
+            + '<span style="font-size:'+emojiSize+';line-height:1;'
+              + (level === 6 ? 'animation:badge-shine 2.5s ease-in-out infinite;' : '')
+              + '">'+emoji+'</span>'
           + '</div>'
         + '</div>'
         // Nome livello
@@ -8803,65 +8834,90 @@ function showInstallPWAModal() {
     // Stile cella badge per layout 6-colonne
     var cellStyle = 'display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:.2rem 0;min-width:0;';
     var iconBoxBase = 'width:38px;height:38px;display:flex;align-items:center;justify-content:center;';
-
-    // Helper: tag immagine badge con fallback SVG inline se l'immagine non carica.
-    // family: 'referral'|'streak'|'master', level: 1..6, fallbackSvg: stringa SVG da mostrare se img fallisce
-    // unlocked: bool — controlla l'opacità del fallback
-    function badgeImg(family, level, fallbackSvg, unlocked){
-      var path = 'https://danielsportelli.github.io/cocktail-legend/webapp/badge/badge-'+family+'-'+level+'.webp';
-      // L'img usa onerror per nascondersi e mostrare il fallback SVG
-      // Quando l'immagine carica con successo, lei ha display:block e copre il fallback
-      var imgStyle = 'width:100%;height:100%;object-fit:contain;'+(unlocked?'':'opacity:.15;filter:grayscale(.7);');
-      return '<img src="'+path+'" alt="" style="'+imgStyle+'" onerror="this.style.display=\'none\';if(this.nextElementSibling)this.nextElementSibling.style.display=\'flex\';" />'
-        + '<div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">'+fallbackSvg+'</div>';
-    }
-
-    // Helper: clip-path per forme badge (esagono e scudo)
-    // Cerchio = border-radius:50% (gestito inline)
-    // Esagono regolare orientato con punte in alto/basso (forma "honeycomb")
-    // Scudo classico medievale con base appuntita
-    var SHAPES = {
-      circle: 'border-radius:50%;',
-      // Esagono con orientamento "pointy-top" (più riconoscibile come gaming)
-      hexagon: 'clip-path:polygon(50% 4%, 95% 28%, 95% 72%, 50% 96%, 5% 72%, 5% 28%);',
-      // Scudo: bordi rettilinei in alto, curve laterali, punta in basso
-      shield: 'clip-path:polygon(15% 8%, 85% 8%, 95% 18%, 95% 55%, 75% 88%, 50% 100%, 25% 88%, 5% 55%, 5% 18%);'
+    // ─────────────────────────────────────────────────────────
+    // SISTEMA BADGE EMOJI UNIFICATO
+    // Stessa emoji per famiglia, scala dimensione progressiva,
+    // colore progressivo blu→viola, glow crescente, ali al lv 6
+    // ─────────────────────────────────────────────────────────
+    var BADGE_EMOJI = {
+      referral: '📣',
+      streak: '🔥',
+      master: '⭐'
     };
 
-    // Costruisce lo stile completo per il box-icona di un badge
-    // shape: 'circle' | 'hexagon' | 'shield'
-    // unlocked: bool — se true mostra colorato, altrimenti smorzato
-    // level: 1..6 — livelli 5 e 6 hanno glow
-    // color: colore hex del livello
-    function badgeBoxStyle(shape, unlocked, level, color){
-      // Per esagono e scudo box leggermente più grande così la forma respira
-      var size = (shape === 'circle') ? '38px' : '42px';
-      var base = 'width:'+size+';height:'+size+';display:flex;align-items:center;justify-content:center;';
-      var shapeCss = SHAPES[shape] || SHAPES.circle;
-      var bgFill;
-      if(shape === 'circle'){
-        // Cerchio: bordo classico, glow con box-shadow
-        bgFill = 'background:rgba(0,0,0,0.25);'
-          + (unlocked ? 'border:2px solid '+color+';' : 'border:1.5px solid '+color+';');
-      } else {
-        // Esagono/scudo: clip-path taglia il bordo, simulato con outline interno
-        // Sfondo sempre tintato per dare corpo alla forma (anche senza bordo visibile)
-        bgFill = unlocked
-          ? 'background:rgba('+hexToRgb(color)+',0.22);outline:2.5px solid '+color+';outline-offset:-2.5px;'
-          : 'background:rgba('+hexToRgb(color)+',0.08);outline:2px solid '+color+';outline-offset:-2px;';
+    // Scala dimensione (più aggressiva per impatto gamification)
+    // index 0..5 corrisponde a livelli 1..6
+    var BADGE_SIZES_CARD = ['1.05rem','1.18rem','1.32rem','1.48rem','1.65rem','1.85rem'];
+    var BADGE_SIZES_MODAL = ['3.8rem','4.4rem','5rem','5.6rem','6.4rem','7.2rem'];
+
+    // Glow intensity per livello (alpha e raggio)
+    // Livelli 1-2: glow tenue, 3-4: medio, 5: forte, 6: intenso
+    var BADGE_GLOW = [
+      { spread:'4px',  alpha:'.25' }, // lv1
+      { spread:'6px',  alpha:'.35' }, // lv2
+      { spread:'10px', alpha:'.45' }, // lv3
+      { spread:'14px', alpha:'.55' }, // lv4
+      { spread:'20px', alpha:'.7'  }, // lv5
+      { spread:'28px', alpha:'.85' }  // lv6
+    ];
+
+    // Bordo cerchio: spessore crescente
+    var BADGE_BORDER = ['1.5px','1.5px','2px','2px','2.5px','3px'];
+
+    // Costruisce HTML completo del cerchio badge per CARD (drawer)
+    // family: 'referral'|'streak'|'master'
+    // level: 1..6
+    // color: hex color
+    // unlocked: bool — se false, applica grayscale + opacity
+    function buildBadgeCard(family, level, color, unlocked){
+      var emoji = BADGE_EMOJI[family] || '🏅';
+      var size = BADGE_SIZES_CARD[level-1];
+      var glow = BADGE_GLOW[level-1];
+      var border = BADGE_BORDER[level-1];
+
+      var glowCss = unlocked
+        ? 'box-shadow:0 0 '+glow.spread+' rgba('+hexToRgb(color)+','+glow.alpha+'), inset 0 0 12px rgba('+hexToRgb(color)+',.15);'
+        : '';
+
+      // Box base: 42x42, cerchio, bordo colore
+      var boxStyle = 'width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;'
+        + 'background:rgba(0,0,0,0.3);'
+        + 'border:'+border+' solid '+color+';'
+        + glowCss
+        + (unlocked ? '' : 'opacity:.25;filter:grayscale(.7);');
+
+      // Ali decorative SOLO al livello 6 (e solo se unlocked)
+      var wings = '';
+      if(level === 6 && unlocked){
+        wings = ''
+          // ala sinistra
+          + '<span style="position:absolute;left:-10px;top:50%;transform:translateY(-50%);width:14px;height:18px;'
+          + 'background:linear-gradient(135deg,'+color+'cc,'+color+'66);'
+          + 'clip-path:polygon(100% 50%, 0% 10%, 30% 50%, 0% 90%);'
+          + 'filter:drop-shadow(0 0 4px '+color+');"></span>'
+          // ala destra
+          + '<span style="position:absolute;right:-10px;top:50%;transform:translateY(-50%);width:14px;height:18px;'
+          + 'background:linear-gradient(225deg,'+color+'cc,'+color+'66);'
+          + 'clip-path:polygon(0% 50%, 100% 10%, 70% 50%, 100% 90%);'
+          + 'filter:drop-shadow(0 0 4px '+color+');"></span>';
       }
-      var opacity = unlocked ? '' : 'opacity:.10;';
-      // Glow per livelli alti (5 e 6) sbloccati
-      var glow = '';
-      if(unlocked && level >= 5){
-        var intensity = level === 6 ? '.55' : '.35';
-        if(shape === 'circle'){
-          glow = 'box-shadow:0 0 12px rgba('+hexToRgb(color)+','+intensity+'),0 0 4px rgba('+hexToRgb(color)+',.6);';
-        } else {
-          glow = 'filter:drop-shadow(0 0 6px rgba('+hexToRgb(color)+','+intensity+')) drop-shadow(0 0 2px rgba('+hexToRgb(color)+',.7));';
-        }
-      }
-      return base + shapeCss + bgFill + opacity + glow;
+
+      // Emoji con scala graduale; al livello 6 leggera animazione pulse
+      var emojiStyle = 'font-size:'+size+';line-height:1;'
+        + (level === 6 && unlocked ? 'animation:badge-shine 2.5s ease-in-out infinite;' : '');
+
+      return '<div style="'+boxStyle+'">'
+        + wings
+        + '<span style="'+emojiStyle+'">'+emoji+'</span>'
+      + '</div>';
+    }
+
+    // Inietta keyframes CSS per badge livello 6
+    if(!document.getElementById('badge-card-styles')){
+      var _bcs = document.createElement('style');
+      _bcs.id = 'badge-card-styles';
+      _bcs.textContent = '@keyframes badge-shine{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.08);filter:brightness(1.25)}}';
+      document.head.appendChild(_bcs);
     }
 
     function buildUI(data) {
@@ -8910,16 +8966,11 @@ function showInstallPWAModal() {
       REF_BADGES.forEach(function(b, idx){
         var unlocked = refCount>=b.num;
         var level = idx + 1;
-        // Container 42x42 che ospita immagine WebP (o fallback SVG nel cerchio CSS)
         refHtml+='<div style="'+cellStyle+'">'
-          +'<div style="width:42px;height:42px;position:relative;'+(unlocked?'':'opacity:.25;filter:grayscale(.6);')+'">'
-            + badgeImg('referral', level,
-                '<div style="'+badgeBoxStyle('circle', unlocked, level, b.color)+'">'+megaphoneSvg(b.color,15)+'</div>',
-                unlocked)
-          +'</div>'
-          +'<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.30')+';text-align:center;line-height:1.1;margin-top:.15rem;">'+b.label+'</span>'
-          +'<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +' isc</span>'
-          +'</div>';
+          + buildBadgeCard('referral', level, b.color, unlocked)
+          + '<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.30')+';text-align:center;line-height:1.1;margin-top:.3rem;">'+b.label+'</span>'
+          + '<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +' isc</span>'
+          + '</div>';
       });
       refHtml+='</div>'
         +'<button id="badge-invite-btn" style="width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,var(--amber),#d97706);color:#0a0f1e;border:none;border-radius:12px;padding:.75rem;font-family:inherit;font-size:.82rem;font-weight:800;cursor:pointer;">'
@@ -8965,14 +9016,10 @@ function showInstallPWAModal() {
         var level = idx + 1;
         var _sdayLabel = b.days < 30 ? b.days+'gg' : b.days < 365 ? Math.round(b.days/30)+'m' : '1a';
         streakHtml+='<div style="'+cellStyle+'">'
-          +'<div style="width:42px;height:42px;position:relative;'+(unlocked?'':'opacity:.25;filter:grayscale(.6);')+'">'
-            + badgeImg('streak', level,
-                '<div style="'+badgeBoxStyle('hexagon', unlocked, level, b.color)+'">'+flameSvg(b.color, 18)+'</div>',
-                unlocked)
-          +'</div>'
-          +'<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.30')+';text-align:center;line-height:1.1;margin-top:.15rem;">'+ b.label+'</span>'
-          +'<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+_sdayLabel+'</span>'
-          +'</div>';
+          + buildBadgeCard('streak', level, b.color, unlocked)
+          + '<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.30')+';text-align:center;line-height:1.1;margin-top:.3rem;">'+ b.label+'</span>'
+          + '<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+_sdayLabel+'</span>'
+          + '</div>';
       });
       streakHtml+='</div>'
         +'</div>';
@@ -9018,14 +9065,10 @@ function showInstallPWAModal() {
         var nextB = PCT_BADGES[PCT_BADGES.indexOf(b)-1];
         var rangeStr = b.min+'–'+(nextB?nextB.min-1:100)+'%';
         pctHtml+='<div style="'+cellStyle+'">'
-          +'<div style="width:42px;height:42px;position:relative;'+(isCurrent?'':'opacity:.25;filter:grayscale(.6);')+'">'
-            + badgeImg('master', level,
-                '<div style="'+badgeBoxStyle('shield', isCurrent, level, b.color)+'">'+starSingleSvg(b.color,16)+'</div>',
-                isCurrent)
-          +'</div>'
-          +'<span style="font-size:.42rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(isCurrent?'1':'.30')+';line-height:1.1;margin-top:.15rem;">'+b.label+'</span>'
-          +'<span style="font-size:.4rem;color:var(--dim);opacity:'+(isCurrent?'1':'.4')+';">'+rangeStr+'</span>'
-          +'</div>';
+          + buildBadgeCard('master', level, b.color, isCurrent)
+          + '<span style="font-size:.42rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(isCurrent?'1':'.30')+';line-height:1.1;margin-top:.3rem;">'+b.label+'</span>'
+          + '<span style="font-size:.4rem;color:var(--dim);opacity:'+(isCurrent?'1':'.4')+';">'+rangeStr+'</span>'
+          + '</div>';
       });
       pctHtml+='</div></div>';
 
