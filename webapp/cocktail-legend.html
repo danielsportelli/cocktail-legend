@@ -8376,12 +8376,12 @@ function showInstallPWAModal() {
     ];
 
     var STREAK_BADGES = [
-      { key:'s7',   days:7,   label:'Acceso',        color:CLR.blu     },
-      { key:'s14',  days:14,  label:'Costante',       color:CLR.verde   },
-      { key:'s30',  days:30,  label:'Determinato',    color:CLR.giallo  },
-      { key:'s90',  days:90,  label:'Inarrestabile',  color:CLR.arancio },
-      { key:'s180', days:180, label:'Dominante',      color:CLR.rosso   },
-      { key:'s365', days:365, label:'Leggendario',    color:CLR.viola   },
+      { key:'s7',   days:7,   label:'Spark',     color:CLR.blu     },
+      { key:'s14',  days:14,  label:'Blaze',     color:CLR.verde   },
+      { key:'s30',  days:30,  label:'Wildfire',  color:CLR.giallo  },
+      { key:'s90',  days:90,  label:'Inferno',   color:CLR.arancio },
+      { key:'s180', days:180, label:'Phoenix',   color:CLR.rosso   },
+      { key:'s365', days:365, label:'Eternal',   color:CLR.viola   },
     ];
 
     var PCT_BADGES = [
@@ -8515,6 +8515,54 @@ function showInstallPWAModal() {
     var cellStyle = 'display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:.2rem 0;min-width:0;';
     var iconBoxBase = 'width:38px;height:38px;display:flex;align-items:center;justify-content:center;';
 
+    // Helper: clip-path per forme badge (esagono e scudo)
+    // Cerchio = border-radius:50% (gestito inline)
+    // Esagono = clip-path 6 lati (per Streak)
+    // Scudo = clip-path forma scudo (per Master)
+    var SHAPES = {
+      circle: 'border-radius:50%;',
+      hexagon: 'clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);',
+      shield: 'clip-path:polygon(50% 0%, 100% 15%, 100% 65%, 50% 100%, 0% 65%, 0% 15%);'
+    };
+
+    // Costruisce lo stile completo per il box-icona di un badge
+    // shape: 'circle' | 'hexagon' | 'shield'
+    // unlocked: bool — se true mostra colorato, altrimenti smorzato
+    // level: 1..6 — livelli 5 e 6 hanno glow
+    // color: colore hex del livello
+    function badgeBoxStyle(shape, unlocked, level, color){
+      var base = iconBoxBase;
+      var shapeCss = SHAPES[shape] || SHAPES.circle;
+      // Per esagono/scudo serve uno sfondo solido (clip-path non tollera bordo trasparente)
+      var bgFill;
+      if(shape === 'circle'){
+        // Cerchio: bordo classico, glow con box-shadow
+        bgFill = 'background:rgba(0,0,0,0.25);'
+          + (unlocked ? 'border:2px solid '+color+';' : 'border:1.5px solid '+color+';');
+      } else {
+        // Esagono/scudo: clip-path taglia il box-shadow, quindi:
+        // - sfondo tintato per richiamare il colore
+        // - bordo simulato con outline interno
+        bgFill = unlocked
+          ? 'background:rgba('+hexToRgb(color)+',0.18);outline:2px solid '+color+';outline-offset:-2px;'
+          : 'background:rgba(0,0,0,0.25);outline:1.5px solid '+color+';outline-offset:-1.5px;';
+      }
+      var opacity = unlocked ? '' : 'opacity:.10;';
+      // Glow per livelli alti (5 e 6) sbloccati
+      // Cerchio: box-shadow funziona normale
+      // Esagono/scudo: filter drop-shadow segue il clip-path
+      var glow = '';
+      if(unlocked && level >= 5){
+        var intensity = level === 6 ? '.55' : '.35';
+        if(shape === 'circle'){
+          glow = 'box-shadow:0 0 12px rgba('+hexToRgb(color)+','+intensity+'),0 0 4px rgba('+hexToRgb(color)+',.6);';
+        } else {
+          glow = 'filter:drop-shadow(0 0 6px rgba('+hexToRgb(color)+','+intensity+')) drop-shadow(0 0 2px rgba('+hexToRgb(color)+',.7));';
+        }
+      }
+      return base + shapeCss + bgFill + opacity + glow;
+    }
+
     function buildUI(data) {
       var refCount   = (data.referral && data.referral.count) || 0;
       var curRefBadge = (data.referral && data.referral.badge) || null;
@@ -8558,13 +8606,11 @@ function showInstallPWAModal() {
           :'<div style="font-size:.63rem;color:var(--amber);font-weight:700;margin-bottom:.9rem;">🏆 Hai raggiunto tutti i badge!</div>'
         )
         +'<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;margin-bottom:1.1rem;">';
-      REF_BADGES.forEach(function(b){
+      REF_BADGES.forEach(function(b, idx){
         var unlocked = refCount>=b.num;
-        var bgStyle = unlocked
-          ? 'background:rgba(0,0,0,0.25);border:2px solid '+b.color+';border-radius:50%;'
-          : 'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';border-radius:50%;opacity:.10;';
+        var level = idx + 1;
         refHtml+='<div style="'+cellStyle+'">'
-          +'<div style="'+iconBoxBase+bgStyle+'">'
+          +'<div style="'+badgeBoxStyle('circle', unlocked, level, b.color)+'">'
           +megaphoneSvg(b.color,15)+'</div>'
           +'<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';text-align:center;line-height:1.1;">'+b.label+'</span>'
           +'<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+ b.num +' isc</span>'
@@ -8608,16 +8654,14 @@ function showInstallPWAModal() {
         +'</div>'
         +(!nextStreak?'<div style="font-size:.63rem;color:var(--amber);font-weight:700;margin-bottom:.9rem;">🏆 Hai raggiunto tutti i badge!</div>':'')
         +'<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;">';
-      STREAK_BADGES.forEach(function(b){
+      STREAK_BADGES.forEach(function(b, idx){
         var _skeys=['s7','s14','s30','s90','s180','s365'];
         var unlocked = effectiveStreakKey && _skeys.indexOf(effectiveStreakKey) >= _skeys.indexOf(b.key);
+        var level = idx + 1;
         var _sdayLabel = b.days < 30 ? b.days+'gg' : b.days < 365 ? Math.round(b.days/30)+'m' : '1a';
         streakHtml+='<div style="'+cellStyle+'">'
-          +'<div style="'+iconBoxBase
-          +(unlocked
-            ?'background:rgba(0,0,0,0.25);border:2px solid '+b.color+';border-radius:50%;'
-            :'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';border-radius:50%;opacity:.10;')
-          +'">'+flameSvg(b.color, 18)+'</div>'
+          +'<div style="'+badgeBoxStyle('hexagon', unlocked, level, b.color)+'">'
+          +flameSvg(b.color, 18)+'</div>'
           +'<span style="font-size:.42rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(unlocked?'1':'.10')+';text-align:center;line-height:1.1;">'+ b.label+'</span>'
           +'<span style="font-size:.42rem;color:var(--dim);opacity:'+(unlocked?'1':'.4')+';">'+_sdayLabel+'</span>'
           +'</div>';
@@ -8660,16 +8704,14 @@ function showInstallPWAModal() {
       }
       pctHtml += '<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:.25rem;">';
       var _pctArr = PCT_BADGES.slice().reverse();
-      _pctArr.forEach(function(b){
+      _pctArr.forEach(function(b, idx){
         var isCurrent = pctBadge && pctBadge.min===b.min;
+        var level = idx + 1;
         var nextB = PCT_BADGES[PCT_BADGES.indexOf(b)-1];
         var rangeStr = b.min+'–'+(nextB?nextB.min-1:100)+'%';
         pctHtml+='<div style="'+cellStyle+'">'
-          +'<div style="'+iconBoxBase
-          +(isCurrent
-            ?'background:rgba(0,0,0,0.25);border:2px solid '+b.color+';border-radius:50%;'
-            :'background:rgba(0,0,0,0.25);border:1.5px solid '+b.color+';border-radius:50%;opacity:.10;')
-          +'">'+starSingleSvg(b.color,16)+'</div>'
+          +'<div style="'+badgeBoxStyle('shield', isCurrent, level, b.color)+'">'
+          +starSingleSvg(b.color,16)+'</div>'
           +'<span style="font-size:.42rem;font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.02em;color:'+b.color+';opacity:'+(isCurrent?'1':'.10')+';line-height:1.1;">'+b.label+'</span>'
           +'<span style="font-size:.4rem;color:var(--dim);">'+rangeStr+'</span>'
           +'</div>';
