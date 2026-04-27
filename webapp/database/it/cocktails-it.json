@@ -1134,7 +1134,7 @@
     "abv": "Medio",
     "sapori": [
       "Fruttato",
-      "Cremoso",
+      "Morbido",
       "Dolce"
     ],
     "garnish": "Gardenia",
@@ -1677,7 +1677,7 @@
     "sapori": [
       "Bilanciato",
       "Agrumato",
-      "Effervescente"
+      "Amaro"
     ],
     "garnish": "Rondella di lime",
     "ingredienti": [
@@ -3746,7 +3746,7 @@
     "sapori": [
       "Complesso",
       "Speziato",
-      "Cremoso"
+      "Vellutato"
     ],
     "garnish": "Zest di arancia",
     "ingredienti": [
@@ -4313,7 +4313,7 @@
     "abv": "Medio",
     "sapori": [
       "Corposo",
-      "Cremoso",
+      "Vellutato",
       "Agrumato"
     ],
     "garnish": "Zest di arancia + Ciliegia",
@@ -4803,7 +4803,7 @@
     "sapori": [
       "Dolce",
       "Agrumato",
-      "Effervescente"
+      "Speaziato"
     ],
     "garnish": "Fetta di arancia + Ciliegia",
     "ingredienti": [
@@ -5075,7 +5075,7 @@
     "sapori": [
       "Amaro",
       "Fresco",
-      "Effervescente"
+      "Dissetante"
     ],
     "garnish": "Fetta di arancia",
     "ingredienti": [
@@ -5449,8 +5449,8 @@
     "abv": "Medio",
     "sapori": [
       "Esotico",
-      "Cremoso",
-      "Effervescente"
+      "Morbido",
+      "Vanigliato"
     ],
     "garnish": "1/2 Passion fruit",
     "ingredienti": [
@@ -5544,7 +5544,7 @@
     "sapori": [
       "Speziato",
       "Erbaceo",
-      "Cremoso"
+      "Aromatico"
     ],
     "garnish": "Zest di arancia",
     "ingredienti": [
@@ -5694,7 +5694,7 @@
     "categoria": "After dinner",
     "abv": "Medio",
     "sapori": [
-      "Cremoso",
+      "Vellutato",
       "Speziato",
       "Intenso"
     ],
@@ -5895,9 +5895,9 @@
     "categoria": "Pre dinner",
     "abv": "Alto",
     "sapori": [
-      "Bilanciato",
+      "Aromatico",
       "Speziato",
-      "Cremoso"
+      "Intenso"
     ],
     "garnish": "Ciliegia",
     "ingredienti": [
@@ -6135,7 +6135,7 @@
     "sapori": [
       "Speziato",
       "Intenso",
-      "Cremoso"
+      "Deciso"
     ],
     "garnish": "Zest di arancia",
     "ingredienti": [
@@ -6214,7 +6214,7 @@
     "sapori": [
       "Intenso",
       "Speziato",
-      "Cremoso"
+      "Aromatico"
     ],
     "garnish": "Zest di limone",
     "ingredienti": [
@@ -6482,7 +6482,7 @@
     "sapori": [
       "Fresco",
       "Esotico",
-      "Effervescente"
+      "Bilanciato"
     ],
     "garnish": "Nessuna",
     "ingredienti": [
@@ -6527,7 +6527,7 @@
     "sapori": [
       "Dolce",
       "Fruttato",
-      "Cremoso"
+      "Mandorlato"
     ],
     "garnish": "Fetta di arancia + Ciliegia",
     "ingredienti": [
@@ -6918,7 +6918,7 @@
     "abv": "Medio basso",
     "sapori": [
       "Speziato",
-      "Effervescente",
+      "Piccante",
       "Fresco"
     ],
     "garnish": "Zest di limone",
@@ -7221,7 +7221,7 @@
     "sapori": [
       "Fresco",
       "Floreale",
-      "Cremoso"
+      "Vellutato"
     ],
     "garnish": "Zest di limone + Uva",
     "ingredienti": [
@@ -7538,8 +7538,8 @@
     "abv": "Medio basso",
     "sapori": [
       "Esotico",
-      "Effervescente",
-      "Cremoso"
+      "Fruttato",
+      "Vanigliato"
     ],
     "garnish": "Fetta di ananas + Ciliegia",
     "ingredienti": [
@@ -7588,7 +7588,7 @@
     "abv": "Medio basso",
     "sapori": [
       "Fresco",
-      "Effervescente",
+      "Dissetante",
       "Bilanciato"
     ],
     "garnish": "Spicchio di lime",
@@ -7759,7 +7759,7 @@
     "abv": "Alto",
     "sapori": [
       "Intenso",
-      "Cremoso",
+      "Morbido",
       "Caffeinico"
     ],
     "garnish": "Nessuna",
@@ -7796,7 +7796,7 @@
     "sapori": [
       "Fruttato",
       "Morbido",
-      "Cremoso"
+      "Dolce"
     ],
     "garnish": "Zest di arancia",
     "ingredienti": [
@@ -7937,7 +7937,7 @@
     "sapori": [
       "Corposo",
       "Aromatico",
-      "Cremoso"
+      "Intenso"
     ],
     "garnish": "Zest di arancia",
     "ingredienti": [
@@ -8359,7 +8359,7 @@
     "sapori": [
       "Morbido",
       "Tostato",
-      "Cremoso"
+      "Vellutato"
     ],
     "garnish": "Zest di arancia",
     "ingredienti": [
@@ -8571,7 +8571,7 @@
     "categoria": "Pre dinner",
     "abv": "Medio basso",
     "sapori": [
-      "Effervescente",
+      "Speziato",
       "Bilanciato",
       "Complesso"
     ],
@@ -8749,7 +8749,7 @@
     "abv": "Medio",
     "sapori": [
       "Fruttato",
-      "Cremoso",
+      "Vellutato",
       "Fresco"
     ],
     "garnish": "Lamponi",
@@ -8886,7 +8886,7 @@
     "abv": "Medio basso",
     "sapori": [
       "Fresco",
-      "Effervescente",
+      "Morbido",
       "Dissetante"
     ],
     "garnish": "Fetta di lime",
@@ -9424,7 +9424,7 @@
     "sapori": [
       "Amaro",
       "Erbaceo",
-      "Effervescente"
+      "Deciso"
     ],
     "garnish": "Fetta di limone",
     "ingredienti": [
@@ -9459,7 +9459,7 @@
     "abv": "Medio basso",
     "sapori": [
       "Agrumato",
-      "Effervescente",
+      "Acidulo",
       "Floreale"
     ],
     "garnish": "Fiore edibile",
@@ -9665,7 +9665,7 @@
     "sapori": [
       "Fresco",
       "Agrumato",
-      "Effervescente"
+      "Dissetante"
     ],
     "garnish": "Zest di limone",
     "ingredienti": [
@@ -9710,7 +9710,7 @@
     "sapori": [
       "Corposo",
       "Dolce",
-      "Cremoso"
+      "Mandorlato"
     ],
     "garnish": "Nessuna",
     "ingredienti": [
@@ -10043,7 +10043,7 @@
     "categoria": "After dinner",
     "abv": "Molto alto",
     "sapori": [
-      "Cremoso",
+      "Mandorlato",
       "Dolce",
       "Intenso"
     ],
@@ -10453,7 +10453,7 @@
     "abv": "Medio basso",
     "sapori": [
       "Tostato",
-      "Cremoso",
+      "Morbido",
       "Speziato"
     ],
     "garnish": "Fetta di limone + Cannella",
@@ -10494,7 +10494,7 @@
     "sapori": [
       "Floreale",
       "Dolce",
-      "Effervescente"
+      "Morbido"
     ],
     "garnish": "Ciuffo di menta + Rondella di lime",
     "ingredienti": [
@@ -11414,7 +11414,7 @@
     "sapori": [
       "Fruttato",
       "Strutturato",
-      "Cremoso"
+      "Mandorlato"
     ],
     "garnish": "Ciuffo di menta",
     "ingredienti": [
@@ -11461,9 +11461,9 @@
     "categoria": "Pre dinner",
     "abv": "Alto",
     "sapori": [
-      "Bilanciato",
+      "Aromatico",
       "Speziato",
-      "Cremoso"
+      "Intenso"
     ],
     "garnish": "Ciliegia",
     "ingredienti": [
@@ -11960,7 +11960,7 @@
     "sapori": [
       "Fresco",
       "Agrumato",
-      "Effervescente"
+      "Morbido"
     ],
     "garnish": "Nessuna",
     "ingredienti": [
@@ -12177,7 +12177,7 @@
     "sapori": [
       "Affumicato",
       "Agrumato",
-      "Cremoso"
+      "Vellutato"
     ],
     "garnish": "Zest di limone",
     "ingredienti": [
@@ -12488,7 +12488,7 @@
     "sapori": [
       "Vellutato",
       "Agrumato",
-      "Cremoso"
+      "Bilanciato"
     ],
     "garnish": "Zest di limone + amarena",
     "ingredienti": [
@@ -12538,7 +12538,7 @@
     "sapori": [
       "Fresco",
       "Dissetante",
-      "Effervescente"
+      "Mentolato"
     ],
     "garnish": "Ciuffo di menta",
     "ingredienti": [
@@ -12722,7 +12722,7 @@
     "abv": "Medio basso",
     "sapori": [
       "Fruttato",
-      "Cremoso",
+      "Morbido",
       "Vellutato"
     ],
     "garnish": "Fetta di ananas + Noce moscata",
@@ -12983,7 +12983,7 @@
     "categoria": "All day",
     "abv": "Medio basso",
     "sapori": [
-      "Cremoso",
+      "Esotico",
       "Fruttato",
       "Fresco"
     ],
@@ -13198,7 +13198,7 @@
     "sapori": [
       "Fresco",
       "Fruttato",
-      "Cremoso"
+      "Morbido"
     ],
     "garnish": "Fragola",
     "ingredienti": [

@@ -8563,12 +8563,11 @@ function showInstallPWAModal() {
         + '<div class="bu-badge-wrap" id="bu-badge-wrap" style="position:relative;width:200px;height:200px;display:flex;align-items:center;justify-content:center;">'
           + modalWings
           // Cerchio badge con emoji
-          + '<div id="bu-badge-circle" style="width:140px;height:140px;border-radius:50%;'
-            + 'background:radial-gradient(circle, rgba('+hexToRgb(color)+',.15), rgba(0,0,0,.6));'
+          + '<div id="bu-badge-circle" style="width:185px;height:185px;border-radius:50%;'
+            + 'background:radial-gradient(circle at 40% 35%, rgba('+hexToRgb(color)+',.18), rgba(0,0,0,.75));'
             + 'border:'+borderW+' solid '+color+';'
             + 'display:flex;align-items:center;justify-content:center;'
-            + 'box-shadow:0 0 '+glowSpread+' rgba('+hexToRgb(color)+','+glowAlpha+'),inset 0 0 30px rgba('+hexToRgb(color)+',.2);'
-            + 'animation:bu-badge-pop 1s cubic-bezier(.34,1.56,.64,1) forwards, bu-glow-pulse 2.5s ease-in-out 1s infinite;'
+            + 'animation:bu-badge-pop 1s cubic-bezier(.34,1.56,.64,1) forwards;'
             + '--bu-glow:'+color+';--bu-glow-soft:'+color+'40;">'
             + '<span style="font-size:'+emojiSize+';line-height:1;'
               + (level === 6 ? 'animation:badge-shine 2.5s ease-in-out infinite;' : '')
