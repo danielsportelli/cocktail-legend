@@ -8603,6 +8603,42 @@ function showInstallPWAModal() {
 
     document.body.appendChild(modal);
 
+    // ── Suono badge unlock (Fanfare C) ──────────────────
+    (function(){
+      try {
+        var AC = new (window.AudioContext || window.webkitAudioContext)();
+        var t = AC.currentTime + 0.05;
+        function makeMaster(vol) {
+          var g = AC.createGain();
+          var comp = AC.createDynamicsCompressor();
+          comp.threshold.value = -18; comp.knee.value = 6;
+          comp.ratio.value = 4; comp.attack.value = 0.003; comp.release.value = 0.25;
+          g.gain.setValueAtTime(vol, AC.currentTime);
+          g.connect(comp); comp.connect(AC.destination);
+          return g;
+        }
+        function tone(freq, start, dur, type, vol, dest) {
+          var osc = AC.createOscillator(); var g = AC.createGain();
+          osc.type = type; osc.frequency.setValueAtTime(freq, start);
+          g.gain.setValueAtTime(0.001, start);
+          g.gain.linearRampToValueAtTime(vol, start + 0.015);
+          g.gain.setValueAtTime(vol, start + dur * 0.3);
+          g.gain.exponentialRampToValueAtTime(0.001, start + dur);
+          osc.connect(g); g.connect(dest);
+          osc.start(start); osc.stop(start + dur + 0.1);
+        }
+        var m = makeMaster(0.36);
+        tone(130.81, t+0.00, 0.5, 'triangle', 0.45, m);
+        tone(261.63, t+0.00, 0.4, 'triangle', 0.30, m);
+        tone(392.00, t+0.18, 3.0, 'sine',     0.50, m);
+        tone(523.25, t+0.25, 2.8, 'sine',     0.45, m);
+        tone(659.25, t+0.35, 2.6, 'sine',     0.38, m);
+        tone(783.99, t+0.45, 2.4, 'sine',     0.30, m);
+        tone(1046.5, t+0.58, 2.2, 'sine',     0.20, m);
+        tone(2093.0, t+1.20, 1.8, 'sine',     0.10, m);
+      } catch(e) { /* audio non supportato */ }
+    })();
+
     // Spawna scintille dopo che il badge è apparso
     setTimeout(function(){
       var wrap = document.getElementById('bu-badge-wrap');
@@ -8816,7 +8852,7 @@ function showInstallPWAModal() {
 
     // Scala dimensione (più aggressiva per impatto gamification)
     // index 0..5 corrisponde a livelli 1..6
-    var BADGE_SIZES_CARD = ['0.75rem','0.95rem','1.15rem','1.38rem','1.65rem','2.0rem'];
+    var BADGE_SIZES_CARD = ['0.75rem','0.95rem','1.15rem','1.35rem','1.55rem','1.85rem'];
     var BADGE_SIZES_MODAL = ['3.2rem','3.6rem','4.0rem','4.4rem','4.8rem','5.2rem'];
 
     // Glow intensity per livello (alpha e raggio)

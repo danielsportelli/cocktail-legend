@@ -963,21 +963,10 @@ const PCT_BADGES = [
 
 // ── SVG FIAMMA (streak) ────────────────────────────
 function starSingleSvg(color, label) {
-  var size=12, cx=6, cy=6, r1=5.5, r2=2.2, pts='';
-  for(var j=0;j<10;j++){
-    var r=j%2===0?r1:r2, a=(j*36-90)*Math.PI/180;
-    pts+=(cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1)+' ';
-  }
-  return '<span class="lb-pct-badge" style="color:'+color+';border-color:'+color+';" title="'+label+'">'
-    +'<svg width="10" height="10" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="'+pts.trim()+'" fill="'+color+'"/></svg>'
-    +'</span>';
+  return '<span style="display:inline-flex;align-items:center;justify-content:center;'    +'width:20px;height:20px;border-radius:50%;border:1.5px solid '+color+';'    +'background:radial-gradient(circle at 40% 35%, '+color+'30, rgba(0,0,0,0.5));'    +'margin-left:.3rem;vertical-align:middle;flex-shrink:0;box-sizing:border-box;'    +'font-size:11px;line-height:1;" title="'+label+'">⭐</span>';
 }
 function flameSvg(color, label) {
-  return '<span class="lb-streak-badge" style="color:'+color+';border-color:'+color+';" title="Streak: '+label+'">'
-    +'<svg width="10" height="12" viewBox="0 0 14 18" xmlns="http://www.w3.org/2000/svg">'
-    +'<path d="M7 1C4 5 2 8 2 12a5 5 0 0 0 10 0c0-4-2-7-5-11z" fill="'+color+'"/>'
-    +'<path d="M7 7C5.5 9 5 11 5 13a2 2 0 0 0 4 0c0-2-.5-4-2-6z" fill="rgba(255,255,255,0.35)"/>'
-    +'</svg></span>';
+  return '<span style="display:inline-flex;align-items:center;justify-content:center;'    +'width:20px;height:20px;border-radius:50%;border:1.5px solid '+color+';'    +'background:radial-gradient(circle at 40% 35%, '+color+'30, rgba(0,0,0,0.5));'    +'margin-left:.3rem;vertical-align:middle;flex-shrink:0;box-sizing:border-box;'    +'font-size:11px;line-height:1;" title="'+label+'">🔥</span>';
 }
 
 // ── SVG CHEVRON (1-2-3) ────────────────────────────
@@ -1058,13 +1047,7 @@ function calcStreakBadgeKey(streak) {
   return key;
 }
 function megaphoneSvg(color, size) {
-  size = size || 12;
-  return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">'
-    +'<path d="M11 5L6 9H2v6h4l5 4V5z" fill="'+color+'" fill-opacity="0.3"/>'
-    +'<path d="M11 5L6 9H2v6h4l5 4V5z"/>'
-    +'<path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>'
-    +'<path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>'
-    +'</svg>';
+  return '<span style="font-size:'+(size||12)+'px;line-height:1;">📣</span>';
 }
 
 const BADGE_COLORS = {
