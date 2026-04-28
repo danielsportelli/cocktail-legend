@@ -3773,7 +3773,11 @@ window._isRegistering = false;
             createdAt:   (function(){ var pad=function(n){return n<10?'0'+n:''+n;}; var d=new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds()); })(),
             aiUsage:     { monthlyCount: 0, extraCredits: 0, referralCredits: 0, periodStart: _nowStr },
             referredBy:  _refCode || null,
-            referral:    { code: user.uid.substring(0,8), count: 0, badge: null, earnedCredits: 0 }
+            referral:    { code: user.uid.substring(0,8), count: 0, badge: null, earnedCredits: 0 },
+            status_xp:   0,
+            status_level: 0,
+            streak_freezes: 2,
+            streak_freezes_used: 0
           }).then(function() {
             // ── Traccia referral se presente ──────────────
             if(_refCode) {
@@ -8312,13 +8316,17 @@ function showInstallPWAModal() {
   // Popup informativo per le card badge
   function showBadgeInfoPopup(infoKey, extraHtml){
     var TEXTS = {
+      status: {
+        title: 'Il tuo status',
+        body: 'Il tuo status rappresenta il tuo percorso da Stagista a Legend (9 livelli). Ad ogni risposta corretta al quiz guadagni XP che vanno ad accumularsi nel tuo status. I tuoi badge attivi (Streak, Master, Referral) agiscono da moltiplicatori: più badge hai, più XP guadagni ogni giorno. Lo status non si resetta mai e non interferisce con le classifiche del quiz.'
+      },
       referral: {
         title: 'Badge Referral',
         body: 'Invita colleghi bartender con il tuo link personale. Per ogni traguardo di iscritti guadagni un badge e crediti AI gratuiti, utilizzabili anche senza piano Premium.'
       },
       streak: {
         title: 'Badge Streak Quiz',
-        body: 'Gioca ogni giorno senza interruzioni per costruire la tua streak. Ogni badge si sblocca una sola volta e rimane tuo per sempre, anche se interrompi la sequenza. Più a lungo mantieni la costanza, più il badge diventa raro e prestigioso.'
+        body: 'Gioca ogni giorno senza interruzioni per costruire la tua streak. Ogni badge si sblocca una sola volta e rimane tuo per sempre, anche se interrompi la sequenza. Più a lungo mantieni la costanza, più il badge diventa raro e prestigioso.<br><br><strong style="color:#60a5fa;">❄️ Streak Freeze:</strong> ricevi 2 freeze al mese (5 con Premium) che si attivano in automatico se salti 1 giorno, salvando la tua streak. Massimo accumulabile: 3 freeze (5 con Premium). Se salti 2+ giorni di fila, la streak si rompe comunque.'
       },
       master: {
         title: 'Badge Quiz Master',
@@ -8947,6 +8955,100 @@ function showInstallPWAModal() {
       var pct         = data.pct_correttezza || 0;
       var tot         = data.tot_risposte || 0;
 
+      // ═══════════════════════════════════════════════════
+      // CARD STATUS (sopra a tutte le altre)
+      // ═══════════════════════════════════════════════════
+      var STATUS_LEVELS_UI = [
+        { idx: 1, name: 'Stagista',            xp:    500, color: '#a16207' },
+        { idx: 2, name: 'Barback',             xp:   1500, color: '#ca8a04' },
+        { idx: 3, name: 'Bartender Assistant', xp:   4000, color: '#94a3b8' },
+        { idx: 4, name: 'Bartender',           xp:   9000, color: '#cbd5e1' },
+        { idx: 5, name: 'Senior Bartender',    xp:  18000, color: '#f59e0b' },
+        { idx: 6, name: 'Head Bartender',      xp:  30000, color: '#fbbf24' },
+        { idx: 7, name: 'Mixologist',          xp:  45000, color: '#f97316' },
+        { idx: 8, name: 'Bar Manager',         xp:  65000, color: '#ea580c' },
+        { idx: 9, name: 'Legend',              xp:  90000, color: '#a855f7' }
+      ];
+      var statusXp     = data.status_xp || 0;
+      var statusLvIdx  = 0;
+      for(var _li=0; _li<STATUS_LEVELS_UI.length; _li++){
+        if(statusXp >= STATUS_LEVELS_UI[_li].xp) statusLvIdx = STATUS_LEVELS_UI[_li].idx;
+        else break;
+      }
+      var curLv  = statusLvIdx > 0 ? STATUS_LEVELS_UI[statusLvIdx-1] : null;
+      var nextLv = statusLvIdx < 9 ? STATUS_LEVELS_UI[statusLvIdx]   : null;
+      // XP del livello base (soglia precedente) per calcolare la barra di progresso
+      var prevSoglia = curLv ? curLv.xp : 0;
+      var nextSoglia = nextLv ? nextLv.xp : statusXp;
+      var deltaTot   = nextLv ? (nextSoglia - prevSoglia) : 1;
+      var deltaCur   = nextLv ? (statusXp - prevSoglia)   : 1;
+      var statusProgressPct = nextLv ? Math.min(100, Math.round((deltaCur/deltaTot)*100)) : 100;
+      var xpToNext = nextLv ? Math.max(0, nextSoglia - statusXp) : 0;
+
+      var statusColor = curLv ? curLv.color : '#64748b';
+      var statusLabel = curLv ? curLv.name  : 'Nessun livello';
+      var nextLabel   = nextLv ? nextLv.name : null;
+      // Effetto "shine" per Legend (lv9)
+      var isLegend = statusLvIdx === 9;
+      // Glow crescente per livelli alti (5+)
+      var glowIntensity = statusLvIdx >= 5 ? '0 0 16px ' + statusColor + '60' : 'none';
+
+      var statusHtml = '<div style="'+cardStyle.replace('rgba(96,165,250,.35)','rgba('+(isLegend?'168,85,247':'245,158,11')+',.45)')+'">'
+        +cardHeader('🍸','Il tuo status','status')
+        // Badge nome livello — testuale, con bordo colorato
+        +'<div style="display:flex;flex-direction:column;align-items:center;gap:.55rem;margin-bottom:1rem;">'
+          +'<div style="font-size:.55rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);">Liv. '+(statusLvIdx||'—')+' / 9</div>'
+          +'<div style="display:inline-flex;align-items:center;justify-content:center;padding:.65rem 1.2rem;'
+            +'background:radial-gradient(circle at 30% 20%, rgba('+hexToRgb(statusColor)+',.22), rgba(0,0,0,.55));'
+            +'border:2px solid '+statusColor+';border-radius:14px;'
+            +'font-size:1.05rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;'
+            +'color:'+statusColor+';text-shadow:0 0 12px '+statusColor+'70;'
+            +'box-shadow:'+glowIntensity+';'
+            +(isLegend?'animation:status-legend-shine 2.8s ease-in-out infinite;':'')
+            +'">'
+            +statusLabel
+          +'</div>'
+        +'</div>'
+        // Barra di progresso XP
+        +(nextLv
+          ? '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;font-size:.65rem;color:var(--dim);">'
+              +'<span><strong style="color:var(--txt);">'+statusXp.toLocaleString('it-IT')+'</strong> XP</span>'
+              +'<span>prossimo: <strong style="color:'+nextLv.color+';">'+nextLabel+'</strong></span>'
+            +'</div>'
+            +'<div style="height:6px;background:var(--brd);border-radius:99px;overflow:hidden;margin-bottom:.5rem;">'
+              +'<div style="height:100%;width:'+statusProgressPct+'%;background:linear-gradient(90deg, '+statusColor+', '+nextLv.color+');border-radius:99px;transition:width .6s ease;"></div>'
+            +'</div>'
+            +'<div style="font-size:.62rem;color:var(--dim);text-align:center;margin-bottom:.6rem;">Mancano <strong style="color:var(--amber);">'+xpToNext.toLocaleString('it-IT')+' XP</strong> al prossimo livello</div>'
+          : '<div style="display:flex;justify-content:center;align-items:center;margin-bottom:.4rem;font-size:.65rem;color:var(--dim);">'
+              +'<span><strong style="color:var(--txt);">'+statusXp.toLocaleString('it-IT')+'</strong> XP totali</span>'
+            +'</div>'
+            +'<div style="font-size:.65rem;color:'+statusColor+';font-weight:700;text-align:center;margin-bottom:.6rem;">🏆 Livello massimo raggiunto — sei una leggenda</div>'
+        )
+        // Mini-roadmap: 9 puntini livelli
+        +'<div style="display:grid;grid-template-columns:repeat(9,1fr);gap:.2rem;margin-top:.8rem;">';
+      STATUS_LEVELS_UI.forEach(function(lv){
+        var unlocked = statusLvIdx >= lv.idx;
+        var isCurrent = statusLvIdx === lv.idx;
+        statusHtml += '<div style="display:flex;flex-direction:column;align-items:center;gap:.2rem;">'
+          +'<div style="width:'+(isCurrent?'14px':'10px')+';height:'+(isCurrent?'14px':'10px')+';border-radius:50%;'
+            +'background:'+(unlocked?lv.color:'transparent')+';'
+            +'border:'+(isCurrent?'2px':'1.5px')+' solid '+lv.color+';'
+            +'opacity:'+(unlocked?'1':'.35')+';'
+            +(isCurrent?'box-shadow:0 0 8px '+lv.color+';':'')
+            +'transition:all .3s;"></div>'
+          +'<span style="font-size:.42rem;color:'+lv.color+';opacity:'+(unlocked?'1':'.4')+';font-weight:700;">'+lv.idx+'</span>'
+        +'</div>';
+      });
+      statusHtml += '</div></div>';
+
+      // Inietta keyframe per Legend shine (una sola volta)
+      if(!document.getElementById('status-legend-styles')){
+        var _sls = document.createElement('style');
+        _sls.id = 'status-legend-styles';
+        _sls.textContent = '@keyframes status-legend-shine{0%,100%{filter:brightness(1)}50%{filter:brightness(1.4) drop-shadow(0 0 18px '+statusColor+')}}';
+        document.head.appendChild(_sls);
+      }
+
       // ── CARD REFERRAL ──────────────────────────────
       var nextRef = null, nextNum = 0;
       REF_BADGES.forEach(function(b){
@@ -9006,8 +9108,30 @@ function showInstallPWAModal() {
       }
       var streakColor = streakBadge ? streakBadge.color : (nextStreak ? nextStreak.color : 'var(--dim)');
 
+      // Streak Freeze: contatore + spiegazione breve
+      var freezeCount = data.streak_freezes != null ? data.streak_freezes : 0;
+      var isPremium = data.plan === 'premium';
+      var freezeCap = isPremium ? 5 : 3;
+      var freezeColor = freezeCount >= 2 ? '#22c55e' : freezeCount === 1 ? '#f59e0b' : '#64748b';
+      var freezeBg = freezeCount > 0 ? 'rgba('+(freezeCount>=2?'34,197,94':'245,158,11')+',.08)' : 'rgba(100,116,139,.06)';
+      var freezeBorder = freezeCount > 0 ? 'rgba('+(freezeCount>=2?'34,197,94':'245,158,11')+',.3)' : 'rgba(100,116,139,.2)';
+      var freezeBlock = '<div style="display:flex;align-items:center;gap:.6rem;padding:.55rem .7rem;margin-bottom:.85rem;'
+        +'background:'+freezeBg+';border:1px solid '+freezeBorder+';border-radius:10px;">'
+        +'<span style="font-size:1.1rem;line-height:1;">❄️</span>'
+        +'<div style="flex:1;min-width:0;">'
+          +'<div style="font-size:.7rem;font-weight:700;color:var(--txt);line-height:1.3;">'
+            +'<span style="color:'+freezeColor+';">'+freezeCount+'</span> / '+freezeCap+' Streak Freeze'
+            +(isPremium?' <span style="color:var(--amber);font-size:.55rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-left:.3rem;">Premium</span>':'')
+          +'</div>'
+          +'<div style="font-size:.6rem;color:var(--dim);line-height:1.4;margin-top:.1rem;">'
+            +(freezeCount > 0 ? 'Ti salva se salti un giorno' : 'Esauriti — ricaricano il 1° del mese')
+          +'</div>'
+        +'</div>'
+      +'</div>';
+
       var streakHtml = '<div style="'+cardStyle+'margin-top:1.2rem;">'
         +cardHeader('🔥','Badge Streak Quiz','streak')
+        +freezeBlock
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">'
           +'<span style="font-size:.65rem;color:var(--dim);">Streak: <strong style="color:var(--txt);">'+curStreak+' '+(curStreak===1?'giorno':'giorni')+'</strong>'
           +(nextStreak?' · prossimo: <strong style="color:'+nextStreak.color+';">'+nextStreak.label+'</strong> ('+nextStreak.days+'gg)':'')
@@ -9080,7 +9204,7 @@ function showInstallPWAModal() {
       });
       pctHtml+='</div></div>';
 
-      el.innerHTML = refHtml + streakHtml + pctHtml
+      el.innerHTML = statusHtml + refHtml + streakHtml + pctHtml
         // ── ZONA TEST TEMPORANEA — RIMUOVERE DOPO VALIDAZIONE ─────────
         + '<div style="margin-top:1.5rem;padding:.9rem;background:rgba(245,158,11,.08);border:1px dashed rgba(245,158,11,.4);border-radius:12px;">'
           + '<div style="font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:.6rem;text-align:center;">🧪 Test animazione unlock</div>'

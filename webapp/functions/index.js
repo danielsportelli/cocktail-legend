@@ -141,12 +141,31 @@ exports.resetMensile = onSchedule(
     const snapshot = await db.collection("users").get();
     if (snapshot.empty) return;
 
+    // Configurazione ricarica Streak Freeze
+    const FREEZE_RECHARGE_FREE = 2;
+    const FREEZE_RECHARGE_PREMIUM = 5;
+    const FREEZE_CAP_FREE = 3;
+    const FREEZE_CAP_PREMIUM = 5;
+
     const batch = db.batch();
+    let freezesGiven = 0;
     snapshot.forEach((doc) => {
-      batch.update(doc.ref, { pts_month: 0 });
+      const userData = doc.data();
+      const isPremium = userData.plan === "premium";
+      const recharge = isPremium ? FREEZE_RECHARGE_PREMIUM : FREEZE_RECHARGE_FREE;
+      const cap = isPremium ? FREEZE_CAP_PREMIUM : FREEZE_CAP_FREE;
+      const currentFreezes = userData.streak_freezes || 0;
+      const newFreezes = Math.min(currentFreezes + recharge, cap);
+      const delta = newFreezes - currentFreezes;
+      if (delta > 0) freezesGiven += delta;
+
+      batch.update(doc.ref, {
+        pts_month: 0,
+        streak_freezes: newFreezes,
+      });
     });
     await batch.commit();
-    console.log("Reset mensile completato — " + snapshot.size + " utenti");
+    console.log("Reset mensile completato — " + snapshot.size + " utenti, ricaricati " + freezesGiven + " streak freeze totali");
   }
 );
 
