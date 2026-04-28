@@ -1329,25 +1329,53 @@ async function saveRisposta(uid, quizId, isCorrect, ptsEarned, oggi) {
   function _playFanfare(){
     try {
       var AC = new (window.AudioContext || window.webkitAudioContext)();
-      var t = AC.currentTime + 0.05;
-      function makeMaster(vol){
-        var g=AC.createGain(), comp=AC.createDynamicsCompressor();
-        comp.threshold.value=-18; comp.knee.value=6; comp.ratio.value=4;
-        comp.attack.value=0.003; comp.release.value=0.25;
-        g.gain.setValueAtTime(vol,AC.currentTime); g.connect(comp); comp.connect(AC.destination); return g;
+      var t = AC.currentTime + 0.08;
+
+      function trp(freq, start, dur, vol){
+        var o1=AC.createOscillator(), o2=AC.createOscillator(), o3=AC.createOscillator();
+        var fi=AC.createBiquadFilter(), g=AC.createGain();
+        o1.type="sawtooth"; o1.frequency.setValueAtTime(freq, start);
+        o2.type="sawtooth"; o2.frequency.setValueAtTime(freq*1.005, start);
+        o3.type="sawtooth"; o3.frequency.setValueAtTime(freq*0.995, start);
+        fi.type="bandpass"; fi.frequency.setValueAtTime(freq*2.8, start); fi.Q.value=0.6;
+        g.gain.setValueAtTime(0, start);
+        g.gain.linearRampToValueAtTime(vol, start+0.015);
+        g.gain.setValueAtTime(vol*0.85, start+0.05);
+        g.gain.setValueAtTime(vol*0.80, start+dur*0.35);
+        g.gain.exponentialRampToValueAtTime(0.001, start+dur);
+        o1.connect(fi); o2.connect(fi); o3.connect(fi); fi.connect(g); g.connect(AC.destination);
+        o1.start(start); o1.stop(start+dur+0.1);
+        o2.start(start); o2.stop(start+dur+0.1);
+        o3.start(start); o3.stop(start+dur+0.1);
       }
-      function tone(freq,start,dur,type,vol,dest){
-        var osc=AC.createOscillator(), g=AC.createGain();
-        osc.type=type; osc.frequency.setValueAtTime(freq,start);
-        g.gain.setValueAtTime(0.001,start); g.gain.linearRampToValueAtTime(vol,start+0.015);
-        g.gain.setValueAtTime(vol,start+dur*0.3); g.gain.exponentialRampToValueAtTime(0.001,start+dur);
-        osc.connect(g); g.connect(dest); osc.start(start); osc.stop(start+dur+0.1);
+
+      function tuba(freq, start, dur, vol){
+        var o=AC.createOscillator(), g=AC.createGain();
+        o.type="triangle"; o.frequency.setValueAtTime(freq, start);
+        g.gain.setValueAtTime(0, start);
+        g.gain.linearRampToValueAtTime(vol, start+0.025);
+        g.gain.exponentialRampToValueAtTime(0.001, start+dur);
+        o.connect(g); g.connect(AC.destination);
+        o.start(start); o.stop(start+dur+0.1);
       }
-      var m=makeMaster(0.36);
-      tone(130.81,t+0.00,0.5,'triangle',0.45,m); tone(261.63,t+0.00,0.4,'triangle',0.30,m);
-      tone(392.00,t+0.18,3.0,'sine',0.50,m); tone(523.25,t+0.25,2.8,'sine',0.45,m);
-      tone(659.25,t+0.35,2.6,'sine',0.38,m); tone(783.99,t+0.45,2.4,'sine',0.30,m);
-      tone(1046.5,t+0.58,2.2,'sine',0.20,m); tone(2093.0,t+1.20,1.8,'sine',0.10,m);
+
+      // TA — breve
+      trp(523.25, t+0.00, 0.20, 0.70);
+      trp(523.25, t+0.00, 0.20, 0.65);
+      trp(261.63, t+0.00, 0.20, 0.60);
+      tuba(130.81, t+0.00, 0.20, 0.55);
+
+      // TAAAAA — esplode in accordo pieno
+      trp(523.25, t+0.26, 2.70, 0.85);
+      trp(523.25, t+0.26, 2.70, 0.80);
+      trp(659.25, t+0.28, 2.60, 0.65);
+      trp(659.25, t+0.29, 2.55, 0.55);
+      trp(783.99, t+0.32, 2.40, 0.45);
+      trp(1046.5, t+0.36, 2.20, 0.28);
+      tuba(130.81, t+0.26, 2.60, 0.70);
+      tuba(261.63, t+0.26, 2.40, 0.45);
+      tuba(196.00, t+0.26, 2.50, 0.35);
+
     } catch(e){}
   }
 
