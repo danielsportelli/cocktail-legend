@@ -1058,7 +1058,13 @@ const BADGE_COLORS = {
 function badgeHtml(badge) {
   if (!badge || !BADGE_NUMS[badge]) return '';
   var color = BADGE_COLORS[badge] || '#94a3b8';
-  return '<span class="lb-ref-badge '+badge+'" title="Referral: '+BADGE_NUMS[badge]+' invitati">'+megaphoneSvg(color, 11)+'</span>';
+  var r=parseInt(color.slice(1,3),16), g=parseInt(color.slice(3,5),16), b=parseInt(color.slice(5,7),16);
+  var rgb = r+','+g+','+b;
+  return '<span style="display:inline-flex;align-items:center;justify-content:center;'
+    +'width:20px;height:20px;border-radius:50%;border:1.5px solid '+color+';'
+    +'background:radial-gradient(circle at 40% 35%, rgba('+rgb+',.25), rgba(0,0,0,0.5));'
+    +'margin-left:.3rem;vertical-align:middle;flex-shrink:0;box-sizing:border-box;'
+    +'font-size:11px;line-height:1;" title="Referral: '+BADGE_NUMS[badge]+' invitati">📣</span>';
 }
 
 // Badge composito: referral + streak + correttezza
@@ -1203,12 +1209,263 @@ async function saveRisposta(uid, quizId, isCorrect, ptsEarned, oggi) {
       pts_month: (userData.pts_month || 0) + ptsEarned,
       pct_correttezza: pctCorrettezza
     };
+
+    // ── Controlla e mostra modali badge (streak + master) ──────────
+    (function checkBadgeUnlocks(){
+      // Calcola livello streak badge (1..6)
+      var STREAK_KEYS = ['s7','s14','s30','s90','s180','s365'];
+      var newStreakIdx = STREAK_KEYS.indexOf(newStreakBadgeKey);  // -1 se null
+      var oldStreakIdx = STREAK_KEYS.indexOf(oldStreakBadgeKey);  // -1 se null
+
+      // Calcola livello pct badge nuovo e vecchio
+      var PCT_MINS = [20, 40, 60, 75, 88, 95]; // lv1..lv6
+      function pctLevel(pct, tot){
+        if(!tot || tot < 20 || pct < 20) return 0;
+        var lv = 0;
+        for(var i=0; i<PCT_MINS.length; i++){
+          if(pct >= PCT_MINS[i]) lv = i+1;
+        }
+        return lv;
+      }
+      var oldPct = userData.pct_correttezza || 0;
+      var oldTot = userData.tot_risposte || 0;
+      var newPctLv = pctLevel(pctCorrettezza, totRisposte);
+      var oldPctLv = pctLevel(oldPct, oldTot);
+
+      // Coda di modali da mostrare in sequenza
+      var queue = [];
+
+      // Streak: mostra se nuovo badge più alto del vecchio
+      if(newStreakBadgeKey && newStreakIdx > oldStreakIdx){
+        queue.push(function(next){
+          window.showBadgeUnlockModal('streak', newStreakIdx+1, { days: streak }, next);
+        });
+      }
+
+      // Master: mostra se livello aumentato O se è la prima volta (tot raggiunge 20)
+      if(newPctLv > 0 && newPctLv > oldPctLv){
+        queue.push(function(next){
+          window.showBadgeUnlockModal('master', newPctLv, { pct: pctCorrettezza }, next);
+        });
+      }
+
+      // Mostra in sequenza
+      function runNext(){
+        if(queue.length === 0) return;
+        queue.shift()(runNext);
+      }
+      if(queue.length > 0){
+        setTimeout(runNext, 400); // piccolo delay dopo la risposta
+      }
+    })();
+
     loadLeaderboard(currentLbTab);
 
   } catch(e) {
     console.error('Errore salvataggio risposta:', e);
   }
 }
+
+
+// ══════════════════════════════════════════════════════════════
+// BADGE UNLOCK MODAL — copiato da cocktail-legend
+// ══════════════════════════════════════════════════════════════
+(function(){
+  var BADGE_IMG_BASE = 'https://danielsportelli.github.io/cocktail-legend/webapp/badge/';
+
+  function _ensureBadgeUnlockStyles(){
+    if(document.getElementById('badge-unlock-styles')) return;
+    var s = document.createElement('style');
+    s.id = 'badge-unlock-styles';
+    s.textContent = ''
+      + '@keyframes bu-fade-in{from{opacity:0}to{opacity:1}}'
+      + '@keyframes bu-badge-pop{'
+      +   '0%{transform:scale(.2) rotate(-180deg);opacity:0;filter:blur(8px)}'
+      +   '60%{transform:scale(1.15) rotate(10deg);opacity:1;filter:blur(0)}'
+      +   '80%{transform:scale(.95) rotate(-3deg)}'
+      +   '100%{transform:scale(1) rotate(0);opacity:1;filter:blur(0)}'
+      + '}'
+      + '@keyframes bu-glow-pulse{'
+      +   '0%,100%{box-shadow:0 0 30px var(--bu-glow),0 0 60px var(--bu-glow-soft)}'
+      +   '50%{box-shadow:0 0 50px var(--bu-glow),0 0 100px var(--bu-glow-soft)}'
+      + '}'
+      + '@keyframes bu-text-rise{'
+      +   '0%{opacity:0;transform:translateY(15px)}'
+      +   '100%{opacity:1;transform:translateY(0)}'
+      + '}'
+      + '@keyframes bu-spark{'
+      +   '0%{transform:translate(0,0) scale(0);opacity:1}'
+      +   '100%{transform:translate(var(--bu-tx),var(--bu-ty)) scale(1.2);opacity:0}'
+      + '}'
+      + '@keyframes bu-header-shine{'
+      +   '0%{background-position:-200% 0}'
+      +   '100%{background-position:200% 0}'
+      + '}'
+      + '.bu-spark{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--bu-glow);pointer-events:none;animation:bu-spark .9s ease-out forwards;box-shadow:0 0 8px var(--bu-glow)}'
+      + '.bu-badge-wrap{position:relative;width:200px;height:200px;display:flex;align-items:center;justify-content:center;border-radius:50%;animation:bu-glow-pulse 2.5s ease-in-out infinite;animation-delay:1s}'
+      ;
+    document.head.appendChild(s);
+  }
+
+  function _spawnSparks(container, color, count){
+    for(var i=0;i<count;i++){
+      (function(idx){
+        setTimeout(function(){
+          var sp = document.createElement('div');
+          sp.className = 'bu-spark';
+          var angle = Math.random() * Math.PI * 2;
+          var dist = 80 + Math.random() * 100;
+          sp.style.setProperty('--bu-tx', Math.cos(angle)*dist+'px');
+          sp.style.setProperty('--bu-ty', Math.sin(angle)*dist+'px');
+          sp.style.left = '50%'; sp.style.top = '50%';
+          sp.style.background = color; sp.style.boxShadow = '0 0 8px '+color;
+          container.appendChild(sp);
+          setTimeout(function(){ if(sp.parentNode) sp.remove(); }, 1000);
+        }, idx * 60);
+      })(i);
+    }
+  }
+
+  function _playFanfare(){
+    try {
+      var AC = new (window.AudioContext || window.webkitAudioContext)();
+      var t = AC.currentTime + 0.05;
+      function makeMaster(vol){
+        var g=AC.createGain(), comp=AC.createDynamicsCompressor();
+        comp.threshold.value=-18; comp.knee.value=6; comp.ratio.value=4;
+        comp.attack.value=0.003; comp.release.value=0.25;
+        g.gain.setValueAtTime(vol,AC.currentTime); g.connect(comp); comp.connect(AC.destination); return g;
+      }
+      function tone(freq,start,dur,type,vol,dest){
+        var osc=AC.createOscillator(), g=AC.createGain();
+        osc.type=type; osc.frequency.setValueAtTime(freq,start);
+        g.gain.setValueAtTime(0.001,start); g.gain.linearRampToValueAtTime(vol,start+0.015);
+        g.gain.setValueAtTime(vol,start+dur*0.3); g.gain.exponentialRampToValueAtTime(0.001,start+dur);
+        osc.connect(g); g.connect(dest); osc.start(start); osc.stop(start+dur+0.1);
+      }
+      var m=makeMaster(0.36);
+      tone(130.81,t+0.00,0.5,'triangle',0.45,m); tone(261.63,t+0.00,0.4,'triangle',0.30,m);
+      tone(392.00,t+0.18,3.0,'sine',0.50,m); tone(523.25,t+0.25,2.8,'sine',0.45,m);
+      tone(659.25,t+0.35,2.6,'sine',0.38,m); tone(783.99,t+0.45,2.4,'sine',0.30,m);
+      tone(1046.5,t+0.58,2.2,'sine',0.20,m); tone(2093.0,t+1.20,1.8,'sine',0.10,m);
+    } catch(e){}
+  }
+
+  window.showBadgeUnlockModal = function(family, level, extra, onClose){
+    _ensureBadgeUnlockStyles();
+    extra = extra || {};
+
+    function hexToRgb(hex){
+      var r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
+      return r+','+g+','+b;
+    }
+
+    var CLR = {blu:'#3b82f6',verde:'#22c55e',giallo:'#eab308',arancio:'#f97316',rosso:'#ef4444',viola:'#a855f7'};
+    var FAMILIES = {
+      streak: {
+        title: 'Badge Streak Quiz',
+        emoji: '🔥',
+        levels: [
+          {key:'s7',   days:7,   label:'Spark',    color:CLR.blu    },
+          {key:'s14',  days:14,  label:'Blaze',    color:CLR.verde  },
+          {key:'s30',  days:30,  label:'Wildfire', color:CLR.giallo },
+          {key:'s90',  days:90,  label:'Comet',    color:CLR.arancio},
+          {key:'s180', days:180, label:'Phoenix',  color:CLR.rosso  },
+          {key:'s365', days:365, label:'Eternal',  color:CLR.viola  }
+        ]
+      },
+      master: {
+        title: 'Badge Quiz Master',
+        emoji: '⭐',
+        levels: [
+          {min:20, label:'Curioso',      color:CLR.blu    },
+          {min:40, label:'Intenditore',  color:CLR.verde  },
+          {min:60, label:'Conoscitore',  color:CLR.giallo },
+          {min:75, label:'Guru',         color:CLR.arancio},
+          {min:88, label:'Oracolo',      color:CLR.rosso  },
+          {min:95, label:'Master',       color:CLR.viola  }
+        ]
+      }
+    };
+
+    var fam = FAMILIES[family];
+    if(!fam){ console.warn('[badge] famiglia sconosciuta:', family); return; }
+    var badge = fam.levels[level-1];
+    if(!badge){ console.warn('[badge] livello sconosciuto:', family, level); return; }
+
+    var old = document.getElementById('badge-unlock-modal');
+    if(old) old.remove();
+    if(navigator.vibrate){ try{ navigator.vibrate([100,50,150]); }catch(e){} }
+
+    var color = badge.color;
+    var MODAL_SIZES   = ['3.2rem','3.6rem','4.0rem','4.4rem','4.8rem','5.2rem'];
+    var MODAL_BORDERS = ['2px','2.5px','3px','3.5px','4px','4.5px'];
+    var emoji = fam.emoji;
+    var emojiSize = MODAL_SIZES[level-1] || '4rem';
+    var borderW   = MODAL_BORDERS[level-1] || '3px';
+
+    var detailLine = '';
+    if(family==='streak' && extra.days!=null)
+      detailLine = 'Hai raggiunto <strong style="color:'+color+'">'+extra.days+' giorni</strong> di streak';
+    else if(family==='master' && extra.pct!=null)
+      detailLine = 'Hai raggiunto <strong style="color:'+color+'">'+extra.pct+'%</strong> di precisione';
+
+    var modal = document.createElement('div');
+    modal.id = 'badge-unlock-modal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:99999;background:#0a0f1e;'
+      +'display:flex;align-items:center;justify-content:center;padding:1.5rem;'
+      +'animation:bu-fade-in .35s ease;--bu-glow:'+color+';--bu-glow-soft:'+color+'40;';
+
+    modal.innerHTML = ''
+      +'<button id="bu-close-x" aria-label="Chiudi" style="position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#f1f5f9;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;">'
+        +'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+      +'</button>'
+      +'<div style="display:flex;flex-direction:column;align-items:center;text-align:center;max-width:380px;width:100%;">'
+        +'<div style="font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;'
+          +'background:linear-gradient(90deg,'+color+'40,'+color+','+color+'40);'
+          +'background-size:200% 100%;-webkit-background-clip:text;background-clip:text;'
+          +'-webkit-text-fill-color:transparent;color:transparent;'
+          +'animation:bu-header-shine 2s linear infinite,bu-text-rise .5s ease .2s both;margin-bottom:1.8rem;">'
+          +'✨ Nuovo badge sbloccato ✨'
+        +'</div>'
+        +'<div class="bu-badge-wrap" id="bu-badge-wrap" style="position:relative;width:200px;height:200px;display:flex;align-items:center;justify-content:center;">'
+          +'<div id="bu-badge-circle" style="width:185px;height:185px;border-radius:50%;'
+            +'background:radial-gradient(circle at 40% 35%,rgba('+hexToRgb(color)+',.18),rgba(0,0,0,.75));'
+            +'border:'+borderW+' solid '+color+';'
+            +'display:flex;align-items:center;justify-content:center;'
+            +'animation:bu-badge-pop 1s cubic-bezier(.34,1.56,.64,1) forwards;'
+            +'--bu-glow:'+color+';--bu-glow-soft:'+color+'40;">'
+            +'<span style="font-size:'+emojiSize+';line-height:1;">'+emoji+'</span>'
+          +'</div>'
+        +'</div>'
+        +'<div style="font-size:1.6rem;font-weight:900;color:'+color+';letter-spacing:.05em;text-transform:uppercase;margin-top:1.5rem;animation:bu-text-rise .5s ease .8s both;text-shadow:0 0 20px '+color+'80;">'
+          +badge.label
+        +'</div>'
+        +'<div style="font-size:.78rem;color:#94a3b8;margin-top:.3rem;font-weight:600;animation:bu-text-rise .5s ease 1s both;">'
+          +fam.title
+        +'</div>'
+        +(detailLine ? '<div style="font-size:.88rem;color:#cbd5e1;margin-top:1.3rem;line-height:1.5;animation:bu-text-rise .5s ease 1.2s both;">'+detailLine+'</div>' : '')
+        +'<div style="display:flex;gap:.6rem;margin-top:2rem;width:100%;animation:bu-text-rise .5s ease 1.5s both;">'
+          +'<button id="bu-ok" style="flex:1;background:linear-gradient(135deg,'+color+','+color+'cc);color:#fff;border:none;border-radius:12px;padding:.85rem;font-family:inherit;font-size:.95rem;font-weight:800;letter-spacing:.05em;cursor:pointer;text-transform:uppercase;-webkit-tap-highlight-color:transparent;box-shadow:0 4px 16px '+color+'40;">'
+            +'Fantastico'
+          +'</button>'
+        +'</div>'
+      +'</div>';
+
+    document.body.appendChild(modal);
+    _playFanfare();
+
+    setTimeout(function(){ var w=document.getElementById('bu-badge-wrap'); if(w) _spawnSparks(w,color,14); }, 600);
+    setTimeout(function(){ var w=document.getElementById('bu-badge-wrap'); if(w) _spawnSparks(w,color,10); }, 1500);
+
+    function close(){
+      modal.style.animation = 'bu-fade-in .25s ease reverse';
+      setTimeout(function(){ if(modal.parentNode) modal.remove(); if(onClose) onClose(); }, 240);
+    }
+    document.getElementById('bu-close-x').addEventListener('click', close);
+    document.getElementById('bu-ok').addEventListener('click', close);
+  };
+})();
 
 // ── MAIN QUIZ LOADER ───────────────────────────────────
 // Imposta il contenuto dello state-none in base all'orario
